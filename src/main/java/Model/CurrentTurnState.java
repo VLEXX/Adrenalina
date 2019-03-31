@@ -7,7 +7,7 @@ public class CurrentTurnState {
         this.PlayerTurn=null;
     }
 
-    public Player getPlayeTurn(){
+    public Player getPlayerTurn(){
         return PlayerTurn;
     }
 

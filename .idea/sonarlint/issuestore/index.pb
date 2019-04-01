@@ -37,3 +37,11 @@ U
 -src/test/java/Model/StateSelectedMapTest.java,6\b\6b355717cc11787f5614c5faca41bf8850248639
 ^
 .src/test/java/Model/StateSelectedModeTest.java,e\1\e18e8c812539c46f59b1a07fb54d443382a90916
+S
+#src/main/java/Model/ChartScore.java,8\d\8d7fc283f40c13afc828947ed1999325ca1299e6
+W
+'src/test/java/Model/ChartScoreTest.java,2\7\2714c9079c98cafc27493580a20ff58638c30879
+P
+ src/main/java/Model/VoteMap.java,1\4\1423495e7314779a8253210b67806c1623087ade
+T
+$src/test/java/Model/VoteMapTest.java,9\e\9eadcb04963a012259698e6af6ac8a4794037094

@@ -1,11 +1,9 @@
 package Model;
 
 public class ChartScore {
-    private Player[] Chart;
     private int[] Score;
 
     public ChartScore(){
-        this.Chart = new Player[]{null, null, null, null, null};
         this.Score = new int[]{0,0,0,0,0};
     }
 
@@ -13,15 +11,21 @@ public class ChartScore {
         return this.Score;
     }
 
-    public void setScore(int[] score) {
-        this.Score = score;
-    }
-
-    public Player[] getChart() {
-        return this.Chart;
-    }
-
-    public void setChart(Player[] chart) {
-        this.Chart = chart;
+    public void setScore(Player p, int score) {
+        if(p == Player.Yellow){
+            this.Score[0]= this.Score[0]+score;
+        }
+        if(p == Player.Purple){
+            this.Score[1]= this.Score[1]+score;
+        }
+        if(p == Player.Green){
+            this.Score[2]= this.Score[2]+score;
+        }
+        if(p == Player.Blue){
+            this.Score[3]= this.Score[3]+score;
+        }
+        if(p == Player.Black){
+            this.Score[4]= this.Score[4]+score;
+        }
     }
 }

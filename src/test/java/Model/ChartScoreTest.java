@@ -19,26 +19,15 @@ class ChartScoreTest {
     @Test
     void setScore() {
         ChartScore cs = new ChartScore();
-        int[] t = new int[]{0,0,0,0,0};
-        cs.setScore(t);
-        assertEquals(cs.getScore(), t);
-    }
-
-    @Test
-    void getChart() {
-        ChartScore cs = new ChartScore();
-        assertEquals(cs.getChart()[0],null );
-        assertEquals(cs.getChart()[1],null );
-        assertEquals(cs.getChart()[2],null );
-        assertEquals(cs.getChart()[3],null );
-        assertEquals(cs.getChart()[4],null );
-    }
-
-    @Test
-    void setChart() {
-        ChartScore cs = new ChartScore();
-        Player[] t = new Player[]{Player.Yellow, Player.Purple, Player.Green, Player.Blue, Player.Black};
-        cs.setChart(t);
-        assertEquals(cs.getChart(), t);
+        cs.setScore(Player.Yellow, 5);
+        assertEquals(cs.getScore()[0], 5);
+        cs.setScore(Player.Purple, 5);
+        assertEquals(cs.getScore()[1], 5);
+        cs.setScore(Player.Green, 5);
+        assertEquals(cs.getScore()[2], 5);
+        cs.setScore(Player.Blue, 5);
+        assertEquals(cs.getScore()[3], 5);
+        cs.setScore(Player.Black, 5);
+        assertEquals(cs.getScore()[4], 5);
     }
 }

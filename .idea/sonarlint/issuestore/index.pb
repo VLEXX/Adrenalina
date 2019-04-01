@@ -45,3 +45,15 @@ P
  src/main/java/Model/VoteMap.java,1\4\1423495e7314779a8253210b67806c1623087ade
 T
 $src/test/java/Model/VoteMapTest.java,9\e\9eadcb04963a012259698e6af6ac8a4794037094
+Y
+)src/test/java/Model/IDClientListTest.java,a\d\ad4aa743fa00d35f78ea96a4940f3145807d0bbf
+`
+0src/test/java/Model/TurnChooseCharacterTest.java,6\5\65778fffc603a459ab9d782bb2648c2e8602e3cb
+U
+%src/main/java/Model/IDClientList.java,3\b\3b953b19b8eb3cb1fed8176f35197fbd5d0ac9fe
+\
+,src/main/java/Model/TurnChooseCharacter.java,3\8\38ba77bbb8cdb7e1de4f1e19bc397dd9540771a4
+Q
+!src/main/java/Model/VoteMode.java,4\c\4c876bd6fe4f0dcf4e9725ecbf5a993c9ab70497
+U
+%src/test/java/Model/VoteModeTest.java,6\f\6fa783ddfd38939d1ae908748565fc1ed95821e9

@@ -6,11 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class CurrentTurnStateTest {
 
     @Test
-    void CurrentTurnState(){
-        CurrentTurnState c = new CurrentTurnState();
-        assertNotNull(c);
-    }
-    @Test
     void getPlayeTurn() {
         CurrentTurnState c = new CurrentTurnState();
         c.setPlayerTurn(Player.Yellow);

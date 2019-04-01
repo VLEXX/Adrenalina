@@ -7,3 +7,5 @@ O
 src/main/java/Model/Player.java,2\8\285b8b080b9fe8d5de16eed4c91696f3df3fd398
 ]
 -src/test/java/Model/CurrentTurnStateTest.java,f\9\f9393ce2035c43dfd548c24a7dd55a4a9a210e46
+A
+ing-sw-2019-3.iml,a\2\a27e87775e2b0746c14dacc8acaaefc0fbfacfee

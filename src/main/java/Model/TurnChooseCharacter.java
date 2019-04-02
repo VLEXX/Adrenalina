@@ -1,3 +1,4 @@
+//Author: Federico Scatà
 package Model;
 
 public class TurnChooseCharacter {

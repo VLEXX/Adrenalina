@@ -3,6 +3,7 @@ package Model;
 
 public class SpawnPoint {
 
+
     public SpawnPoint(){}       //costruttore
 
 }

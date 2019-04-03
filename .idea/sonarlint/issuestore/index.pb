@@ -57,3 +57,10 @@ Q
 !src/main/java/Model/VoteMode.java,4\c\4c876bd6fe4f0dcf4e9725ecbf5a993c9ab70497
 U
 %src/test/java/Model/VoteModeTest.java,6\f\6fa783ddfd38939d1ae908748565fc1ed95821e9
+T
+$src/test/java/Model/PowerUpTest.java,0\1\01eadd93489aa66db593319b124610e396dd5d94
+P
+ src/main/java/Model/PowerUp.java,8\2\82ba0785e0a6a474ccc62a23f0854b8b96f865b1
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302

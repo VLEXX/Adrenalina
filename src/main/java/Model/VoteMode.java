@@ -1,27 +1,27 @@
 package Model;
 
 public class VoteMode {
-    private int[] VoteResult;
-    private int FinalResult;
+    private int[] VoteResultMode;
+    private int FinalResultMode;
 
     public VoteMode(){
-        VoteResult = new int[]{0,0,0,0};
-        FinalResult=-1;
+        VoteResultMode = new int[]{0,0,0,0};
+        FinalResultMode=-1;
     }
 
     public int getFinalResult() {
-        return FinalResult;
+        return FinalResultMode;
     }
 
     public void setFinalResult(int finalResult) {
-        FinalResult = finalResult;
+        FinalResultMode = finalResult;
     }
 
     public int[] getVoteResult() {
-        return VoteResult;
+        return VoteResultMode;
     }
 
     public void setVoteResult(int index) {
-        VoteResult[index] = VoteResult[index]+1;
+        VoteResultMode[index] = VoteResultMode[index]+1;
     }
 }

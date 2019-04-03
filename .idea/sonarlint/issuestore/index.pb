@@ -57,3 +57,5 @@ Q
 !src/main/java/Model/VoteMode.java,4\c\4c876bd6fe4f0dcf4e9725ecbf5a993c9ab70497
 U
 %src/test/java/Model/VoteModeTest.java,6\f\6fa783ddfd38939d1ae908748565fc1ed95821e9
+Q
+!src/test/java/Model/CellTest.java,b\2\b2655549ae50840b38c2ce6f395ab27bbb30cbee

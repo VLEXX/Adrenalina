@@ -1,9 +1,10 @@
 //Author: Federico Scatà
 package Model;
 
+//enum che identifica i tipi di stati "azione" in cui può trovarsi il giocatore
 public enum Action {
-    PickUp,
-    Shoot,
-    Move,
-    Wait
+    PickUp, //raccogli
+    Shoot,  //Spara
+    Move,   //Spostati
+    Wait    //Attendi
 }

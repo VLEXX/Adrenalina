@@ -11,7 +11,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.language>java</sonar.language>
+        <sonar.projectKey>test </sonar.projectKey>
         <sonar.host.url> http://localhost:9000/ </sonar.host.url>
+        <sonar.login>64f7fd53b72d4682518e6d907875ae752056e6c8</sonar.login>
         <junit.jupiter.version>5.4.1</junit.jupiter.version>
     </properties>
     <dependencies>

@@ -1,14 +1,12 @@
 //Author: Federico Scatà
 package Model;
 
-public class PowerUp {
-    private String PowerUpName;
-
-    public PowerUp(String name){
-        this.PowerUpName=name;
-    }
-
-    public String getPowerUpName() {
-        return PowerUpName;
-    }
+//Enum che identifica i vari potenziamenti
+public enum PowerUp {
+    TargetingScope, //Mirino
+    Newton,         //Raggio Cinetico
+    TagbackGrenade, //Granata Venom
+    Teleporter      //Teletraporto
 }
+
+//Coverage nullo per ora. In attesa di classe PlayerBoard (CANCELLARE QUESTO COMMENTO QUANDO OK)

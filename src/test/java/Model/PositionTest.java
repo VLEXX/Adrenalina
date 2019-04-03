@@ -15,7 +15,7 @@ class PositionTest {
     @Test
     void setCurrentCell() {
         Position p = new Position();
-        Cell c = new Cell();
+        Cell c = new Cell(1);
         p.setCurrentCell(c);
         assertEquals(p.getCurrentCell(), c);
     }

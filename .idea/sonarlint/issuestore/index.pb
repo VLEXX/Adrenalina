@@ -61,8 +61,8 @@ P
 M
 src/main/java/Model/Ammo.java,a\b\abfce2591abb6dc8d1827b4a05b0707953c9e25d
 P
- src/main/java/Model/Weapons.java,7\9\79fb6936b6b098ad01e4ebf0f05498f15f7d4986
-X
-(src/test/java/Model/PlayerBoardTest.java,3\5\35bfedb1060f79a58f5117f5ab35344a1f2f815e
-R
-"src/main/java/Model/DamageBox.java,b\9\b916a982abaa701c4de80be36812c0a47a400c50
+ src/test/java/Model/MapTest.java,5\8\588a98d307b8667351db1d8d4ef40e24304b193a
+Q
+!src/test/java/Model/CellTest.java,b\2\b2655549ae50840b38c2ce6f395ab27bbb30cbee
+S
+#src/main/java/Model/SpawnPoint.java,0\7\07580eefda1f8d108d5120298ffca385a5a23f7d

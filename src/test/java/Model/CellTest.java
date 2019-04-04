@@ -1,4 +1,4 @@
-//Autore: Alex Salette
+//Author: Alex Salette
 package Model;
 
 import org.junit.jupiter.api.Test;

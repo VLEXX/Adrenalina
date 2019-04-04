@@ -5,40 +5,40 @@ import java.util.ArrayList;
 
 //Classe che inizializza la plancia giocatore
 public class PlayerBoard {
-    private boolean firstPlayerCard;              //Carta primo giocatore
-    private ArrayList <Weapons> weaponsList;      //Armi giocatore
-    private ArrayList <PowerUp> powerupList;      //Potenziamenti giocatore
+    private boolean FirstPlayerCard;              //Carta primo giocatore
+    private ArrayList <Weapons> WeaponsList;      //Armi giocatore
+    private ArrayList <PowerUp> PowerUpList;      //Potenziamenti giocatore
 
     //Costruttore che setta tutti gli attributi a null e imposta "false" per la prima carta giocatore
     public PlayerBoard(){
-        this.firstPlayerCard = false;
-        this.weaponsList = new ArrayList<>();
-        this.powerupList = new ArrayList<>();
+        this.FirstPlayerCard = false;
+        this.WeaponsList = new ArrayList<>();
+        this.PowerUpList = new ArrayList<>();
     }
 
     //Ritorna la lista delle armi
     public ArrayList<Weapons> getWeaponsList() {
-        return weaponsList;
+        return WeaponsList;
     }
 
     //Ritorna "true" se il giocatore ha preso la prima carta, "false" altrimenti
     public boolean getFirtsPlayerCard(){
-        return firstPlayerCard;
+        return FirstPlayerCard;
     }
 
     //Ritorna la lista dei potenziamenti
     public ArrayList<PowerUp> getPowerupList(){
-        return powerupList;
+        return PowerUpList;
     }
 
     //Setta la lista dei potenziamenti
     public void setPowerupList(ArrayList<PowerUp> powerupList) {
-        this.powerupList = powerupList;
+        this.PowerUpList = powerupList;
     }
 
     //Setta la lista delle armi
     public void setWeaponsList(ArrayList<Weapons> weaponsList) {
-        this.weaponsList = weaponsList;
+        this.WeaponsList = weaponsList;
     }
 
     //Setta a "true" la prima carta giocatore quando la pesca, "false" altrimenti

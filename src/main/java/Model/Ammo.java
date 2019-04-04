@@ -3,5 +3,4 @@ package Model;
 
 public class Ammo {
 
-    public Ammo(){ }
 }

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ing-sw-2019-3" />
+        <module name="Progetto" />
         <module name="progettoAdrenalina" />
       </profile>
     </annotationProcessing>

@@ -2,43 +2,43 @@
 package Model;
 
 //Classe in cui viene memorizzata la classifica corrente del gioco con i relativi punteggi.
-//Ogni cella dell'array "Score" corrisponde ad un personaggio
-//Score[0] => Yellow
-//Score[1] => Purple
-//Score[2] => Green
-//Score[3] => Blue
-//Score[4] => Black
+//Ogni cella dell'array "score" corrisponde ad un personaggio
+//score[0] => Yellow
+//score[1] => Purple
+//score[2] => Green
+//score[3] => Blue
+//score[4] => Black
 
 public class ChartScore {
-    private int[] Score;
+    private int[] score;
 
     //Costruttore che inizializza l'array con tutti 0
     public ChartScore(){
-        this.Score = new int[]{0,0,0,0,0};
+        this.score = new int[]{0,0,0,0,0};
     }
 
-    //Restituisce l'array "Score"
+    //Restituisce l'array "score"
     public int[] getScore() {
-        return this.Score;
+        return this.score;
     }
 
     //A seconda del Player "p" in ingresso aggiunge punti "score" al giocatore, nella cella
     //  dell'array corrispondente
     public void setScore(Player p, int score) {
         if(p == Player.Yellow){
-            this.Score[0]= this.Score[0]+score;
+            this.score[0]= this.score[0]+score;
         }
         if(p == Player.Purple){
-            this.Score[1]= this.Score[1]+score;
+            this.score[1]= this.score[1]+score;
         }
         if(p == Player.Green){
-            this.Score[2]= this.Score[2]+score;
+            this.score[2]= this.score[2]+score;
         }
         if(p == Player.Blue){
-            this.Score[3]= this.Score[3]+score;
+            this.score[3]= this.score[3]+score;
         }
         if(p == Player.Black){
-            this.Score[4]= this.Score[4]+score;
+            this.score[4]= this.score[4]+score;
         }
     }
 }

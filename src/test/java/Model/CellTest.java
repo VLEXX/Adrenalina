@@ -10,34 +10,34 @@ class CellTest {
     @Test
     void getUpCell() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getUpCell(),null);
+        assertEquals(testcellA.getUpcell(),null);
 
     }
 
     @Test
     void getDownCell() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getDownCell(),null);
+        assertEquals(testcellA.getDowncell(),null);
     }
 
     @Test
     void getLeftCell() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getLeftCell(),null);
+        assertEquals(testcellA.getLeftcell(),null);
     }
 
     @Test
     void getRightCell() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getRightCell(),null);
+        assertEquals(testcellA.getRightcell(),null);
     }
 
     @Test
     void setUpCell() {
         Cell testcellA = new Cell(1);
         Cell testcellB = new Cell(2);
-        testcellA.setUpCell(testcellB);
-        assertEquals(testcellA.getUpCell(),testcellB);
+        testcellA.setUpcell(testcellB);
+        assertEquals(testcellA.getUpcell(),testcellB);
 
     }
 
@@ -45,24 +45,24 @@ class CellTest {
     void setDownCell() {
         Cell testcellA = new Cell(1);
         Cell testcellB = new Cell(2);
-        testcellA.setDownCell(testcellB);
-        assertEquals(testcellA.getDownCell(),testcellB);
+        testcellA.setDowncell(testcellB);
+        assertEquals(testcellA.getDowncell(),testcellB);
     }
 
     @Test
     void setLeftCell() {
         Cell testcellA = new Cell(1);
         Cell testcellB = new Cell(2);
-        testcellA.setLeftCell(testcellB);
-        assertEquals(testcellA.getLeftCell(),testcellB);
+        testcellA.setLeftcell(testcellB);
+        assertEquals(testcellA.getLeftcell(),testcellB);
     }
 
     @Test
     void setRightCell() {
         Cell testcellA = new Cell(1);
         Cell testcellB = new Cell(2);
-        testcellA.setRightCell(testcellB);
-        assertEquals(testcellA.getRightCell(),testcellB);
+        testcellA.setRightcell(testcellB);
+        assertEquals(testcellA.getRightcell(),testcellB);
     }
 
     @Test
@@ -81,7 +81,7 @@ class CellTest {
     @Test
     void getAmmoHere() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getAmmoHere(),null);
+        assertEquals(testcellA.getAmmohere(),null);
 
     }
 
@@ -89,15 +89,15 @@ class CellTest {
     void setAmmoHere() {
         Cell testcellA = new Cell(1);
         Ammo testAmmo = new Ammo();
-        testcellA.setAmmoHere(testAmmo);
-        assertEquals(testcellA.getAmmoHere(),testAmmo);
+        testcellA.setAmmohere(testAmmo);
+        assertEquals(testcellA.getAmmohere(),testAmmo);
 
     }
 
     @Test
     void getSpawnPointColor() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getSpawnPointZone(),null);
+        assertEquals(testcellA.getSpawnpointzone(),null);
 
     }
 
@@ -105,8 +105,8 @@ class CellTest {
     void setSpawnPointColor() {
         Cell testcellA = new Cell(1);
         SpawnPoint spawntest = new SpawnPoint();
-        testcellA.setSpawnPointZone(spawntest);
-        assertEquals(testcellA.getSpawnPointZone(),spawntest);
+        testcellA.setSpawnpointzone(spawntest);
+        assertEquals(testcellA.getSpawnpointzone(),spawntest);
 
     }
 }

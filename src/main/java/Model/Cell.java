@@ -3,92 +3,92 @@ package Model;
 
 public class Cell {
     //tipo di munizioni presenti nella cella, NULL se assenti
-    private Ammo AmmoHere;
+    private Ammo ammohere;
     //tipo di spawn presente, NULL se assente
-    private SpawnPoint SpawnPointZone;
+    private SpawnPoint spawnpointzone;
     //cella presente in alto, NULL se c'è il muro
-    private Cell UpCell;
+    private Cell upcell;
     //cella presente in basso, NULL se c'è il muro
-    private Cell DownCell;
+    private Cell downcell;
     //cella presente a sinistra, NULL se c'è il muro
-    private Cell LeftCell;
+    private Cell leftcell;
     //cella presente a destra, NULL se c'è il muro
-    private Cell RightCell;
+    private Cell rightcell;
     //id della cella
-    private int CellId;
+    private int cellid;
 
 
     //costruttore
     public Cell(int id){
-        this.CellId=id;
-        this.AmmoHere=null;
-        this.DownCell=null;
-        this.LeftCell=null;
-        this.UpCell=null;
-        this.RightCell=null;
-        this.SpawnPointZone=null;
+        this.cellid=id;
+        this.ammohere =null;
+        this.downcell =null;
+        this.leftcell =null;
+        this.upcell =null;
+        this.rightcell =null;
+        this.spawnpointzone =null;
     }
 
     //metodi che restituiscono le celle adiacenti
-    public Cell getUpCell() {
-        return UpCell;
+    public Cell getUpcell() {
+        return upcell;
     }
 
-    public Cell getDownCell() {
-        return DownCell;
+    public Cell getDowncell() {
+        return downcell;
     }
 
-    public Cell getLeftCell() {
-        return LeftCell;
+    public Cell getLeftcell() {
+        return leftcell;
     }
 
-    public Cell getRightCell() {
-        return RightCell;
+    public Cell getRightcell() {
+        return rightcell;
     }
 
     //metodi che settano le celle adiacenti
-    public void setUpCell(Cell upCell) {
-        UpCell = upCell;
+    public void setUpcell(Cell upcell) {
+        this.upcell = upcell;
     }
 
-    public void setDownCell(Cell downCell) {
-        DownCell = downCell;
+    public void setDowncell(Cell downcell) {
+        this.downcell = downcell;
     }
 
-    public void setLeftCell(Cell leftCell) {
-        LeftCell = leftCell;
+    public void setLeftcell(Cell leftcell) {
+        this.leftcell = leftcell;
     }
 
-    public void setRightCell(Cell rightCell) {
-        RightCell = rightCell;
+    public void setRightcell(Cell rightcell) {
+        this.rightcell = rightcell;
     }
 
     //restituisce l'ID della cella
     public int getCellId() {
-        return CellId;
+        return cellid;
     }
 
     //setta l'ID della cella
-    public void setCellId(int cellId) {
-        CellId = cellId;
+    public void setCellId(int id) {
+        cellid = id;
     }
 
     //restituisce il tipo di munizioni presenti, NULL se assenti
-    public Ammo getAmmoHere() {
-        return AmmoHere;
+    public Ammo getAmmohere() {
+        return ammohere;
     }
 
     //setta il tipo di munizioni presenti
-    public void setAmmoHere(Ammo ammoHere) {
-        AmmoHere = ammoHere;
+    public void setAmmohere(Ammo ammohere) {
+        this.ammohere = ammohere;
     }
 
     //restituisce l'oggetto spawn, NULL se assente
-    public SpawnPoint getSpawnPointZone() { return SpawnPointZone; }
+    public SpawnPoint getSpawnpointzone() { return spawnpointzone; }
 
     //setta l'oggetto dello spawn
-    public void setSpawnPointZone(SpawnPoint spawnPointZone) {
-        SpawnPointZone = spawnPointZone;
+    public void setSpawnpointzone(SpawnPoint spawnpointzone) {
+        this.spawnpointzone = spawnpointzone;
     }
 
 }

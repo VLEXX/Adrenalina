@@ -12,47 +12,47 @@ class ViewCurrentPlayerStateTest {
     @Test
     void isViewTurn() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.isViewTurn(), false);
+        assertEquals(p.isViewturn(), false);
     }
 
     @Test
     void setViewTurn() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        p.setViewTurn(true);
-        assertEquals(p.isViewTurn(), true);
+        p.setViewturn(true);
+        assertEquals(p.isViewturn(), true);
     }
 
     @Test
     void getActionState() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.getActionState(), null);
+        assertEquals(p.getActionstate(), null);
     }
 
     @Test
     void setActionState() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        p.setActionState(Action.SHOOT);
-        assertEquals(p.getActionState(), Action.SHOOT);
+        p.setActionstate(Action.SHOOT);
+        assertEquals(p.getActionstate(), Action.SHOOT);
     }
 
     @Test
     void getPlayerPosition() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.getPlayerPosition(), null);
+        assertEquals(p.getPlayerposition(), null);
     }
 
     @Test
     void setPlayerPosition() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
         Position pos = new Position();
-        p.setPlayerPosition(pos);
-        assertEquals(p.getPlayerPosition(), pos);
+        p.setPlayerposition(pos);
+        assertEquals(p.getPlayerposition(), pos);
     }
 
     @Test
     void getActionCunter() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.getActionCunter(), 2);
+        assertEquals(p.getActioncounter(), 2);
     }
 
     @Test
@@ -60,16 +60,16 @@ class ViewCurrentPlayerStateTest {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
         p.decreaseActionCounter();
         p.resetActionCunter();
-        assertEquals(p.getActionCunter(), 2);
+        assertEquals(p.getActioncounter(), 2);
     }
 
     @Test
     void decreaseActionCounter() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
         p.decreaseActionCounter();
-        assertEquals(p.getActionCunter(), 1);
+        assertEquals(p.getActioncounter(), 1);
         p.decreaseActionCounter();
-        assertEquals(p.getActionCunter(), 0);
+        assertEquals(p.getActioncounter(), 0);
     }
 
     @Test

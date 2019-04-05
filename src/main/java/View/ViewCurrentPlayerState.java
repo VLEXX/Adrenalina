@@ -7,72 +7,72 @@ import Model.Position;
 
 //Classe che mantiene lo stato attuale del giocatore per la View
 public class ViewCurrentPlayerState {
-    private boolean ViewTurn;           //"true" se è il turno del giocatore(this), "false" altrimenti
-    private int ActionCunter;           //contatore delle azioni (max 2)
-    private Action ActionState;         //indica lo stato azione in cui si trova il giocatore(this), esempio "spara", "spostati",...
-    private Position PlayerPosition;    //indica la posizione del giocatore
-    private PlayerBoard Board;          //memorizza lo stato della plancia giocatore per la view
+    private boolean viewturn;           //"true" se è il turno del giocatore(this), "false" altrimenti
+    private int actioncounter;           //contatore delle azioni (max 2)
+    private Action actionstate;         //indica lo stato azione in cui si trova il giocatore(this), esempio "spara", "spostati",...
+    private Position playerposition;    //indica la posizione del giocatore
+    private PlayerBoard board;          //memorizza lo stato della plancia giocatore per la view
 
     //Costruttore
     public ViewCurrentPlayerState(){
-        this.ViewTurn=false;
-        this.ActionCunter=2;
-        this.ActionState=null;
-        this.PlayerPosition=null;
+        this.viewturn =false;
+        this.actioncounter =2;
+        this.actionstate =null;
+        this.playerposition =null;
     }
 
     //ritorna lo stato del turno ("true" se attivo)
-    public boolean isViewTurn() {
-        return ViewTurn;
+    public boolean isViewturn() {
+        return viewturn;
     }
 
     //setta lo stato del turno
-    public void setViewTurn(boolean viewTurn) {
-        ViewTurn = viewTurn;
+    public void setViewturn(boolean viewturn) {
+        this.viewturn = viewturn;
     }
 
     //ritorna lo stato azion (spara, spostati, ecc...)
-    public Action getActionState() {
-        return ActionState;
+    public Action getActionstate() {
+        return actionstate;
     }
 
     //setta lo stato azione
-    public void setActionState(Action actionState) {
-        ActionState = actionState;
+    public void setActionstate(Action actionstate) {
+        this.actionstate = actionstate;
     }
 
     //ritorna la posizione del giocatore
-    public Position getPlayerPosition() {
-        return PlayerPosition;
+    public Position getPlayerposition() {
+        return playerposition;
     }
 
     //setta la posizione del giocatore
-    public void setPlayerPosition(Position playerPosition) {
-        PlayerPosition = playerPosition;
+    public void setPlayerposition(Position playerposition) {
+        this.playerposition = playerposition;
     }
 
     //ritorna il contatore delle azioni rimanenti
-    public int getActionCunter() {
-        return ActionCunter;
+    public int getActioncounter() {
+        return actioncounter;
     }
 
     //resetta il contatore a 2
     public void resetActionCunter() {
-        ActionCunter = 2;
+        actioncounter = 2;
     }
 
     //decresce il contatore di 1
     public void decreaseActionCounter(){
-        this.ActionCunter = this.ActionCunter -1;
+        this.actioncounter = this.actioncounter -1;
     }
 
     //ritorna lo stato della plancia giocatore
     public PlayerBoard getBoard() {
-        return Board;
+        return board;
     }
 
     //setta lo stato della plancia giocatore
     public void setBoard(PlayerBoard board) {
-        Board = board;
+        this.board = board;
     }
 }

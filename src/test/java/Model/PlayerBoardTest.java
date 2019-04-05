@@ -13,9 +13,9 @@ class PlayerBoardTest {
     void getWeaponList() {
         PlayerBoard p = new PlayerBoard();
         ArrayList<Weapons> weaponsTest = new ArrayList<>();
-        weaponsTest.add(Weapons.Cyberblade);
+        weaponsTest.add(Weapons.CYBERBLADE);
         p.setWeaponsList(weaponsTest);
-        assertEquals(p.getWeaponsList().get(0), Weapons.Cyberblade);
+        assertEquals(p.getWeaponsList().get(0), Weapons.CYBERBLADE);
     }
 
     @Test
@@ -29,9 +29,9 @@ class PlayerBoardTest {
     void getPowerupList() {
         PlayerBoard p = new PlayerBoard();
         ArrayList<PowerUp> powerupTest = new ArrayList<>();
-        powerupTest.add(PowerUp.TagbackGrenade);
+        powerupTest.add(PowerUp.TAGBACK_GRENADE);
         p.setPowerupList(powerupTest);
-        assertEquals(p.getPowerupList().get(0), PowerUp.TagbackGrenade);
+        assertEquals(p.getPowerupList().get(0), PowerUp.TAGBACK_GRENADE);
     }
 
     @Test

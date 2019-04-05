@@ -31,8 +31,8 @@ class ViewCurrentPlayerStateTest {
     @Test
     void setActionState() {
         ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        p.setActionState(Action.Shoot);
-        assertEquals(p.getActionState(), Action.Shoot);
+        p.setActionState(Action.SHOOT);
+        assertEquals(p.getActionState(), Action.SHOOT);
     }
 
     @Test

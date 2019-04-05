@@ -3,11 +3,11 @@ package Model;
 
 //Classe in cui viene memorizzata la classifica corrente del gioco con i relativi punteggi.
 //Ogni cella dell'array "score" corrisponde ad un personaggio
-//score[0] => Yellow
-//score[1] => Purple
-//score[2] => Green
-//score[3] => Blue
-//score[4] => Black
+//score[0] => YELLOW
+//score[1] => PURPLE
+//score[2] => GREEN
+//score[3] => BLUE
+//score[4] => BLACK
 
 public class ChartScore {
     private int[] score;
@@ -25,19 +25,19 @@ public class ChartScore {
     //A seconda del Player "p" in ingresso aggiunge punti "score" al giocatore, nella cella
     //  dell'array corrispondente
     public void setScore(Player p, int score) {
-        if(p == Player.Yellow){
+        if(p == Player.YELLOW){
             this.score[0]= this.score[0]+score;
         }
-        if(p == Player.Purple){
+        if(p == Player.PURPLE){
             this.score[1]= this.score[1]+score;
         }
-        if(p == Player.Green){
+        if(p == Player.GREEN){
             this.score[2]= this.score[2]+score;
         }
-        if(p == Player.Blue){
+        if(p == Player.BLUE){
             this.score[3]= this.score[3]+score;
         }
-        if(p == Player.Black){
+        if(p == Player.BLACK){
             this.score[4]= this.score[4]+score;
         }
     }

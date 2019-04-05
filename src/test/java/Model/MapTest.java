@@ -9,13 +9,13 @@ class MapTest {
     @Test
     void getMapname() {
         Map Maptest = new Map();
-        assertEquals(Maptest.getMapName(),null);
+        assertEquals(Maptest.getMapname(),null);
     }
 
     @Test
     void setMapname() {
         Map Maptest = new Map();
-        Maptest.setMapName("testmapname");
-        assertEquals(Maptest.getMapName(),"testmapname");
+        Maptest.setMapname("testmapname");
+        assertEquals(Maptest.getMapname(),"testmapname");
     }
 }

@@ -9,14 +9,14 @@ class StateSelectedMapTest {
     @Test
     void getSelectedMap() {
         StateSelectedMap m = new StateSelectedMap();
-        assertEquals(m.getSelectedMap(), null);
+        assertEquals(m.getSelectedmap(), null);
     }
 
     @Test
     void setSelectedMap() {
         StateSelectedMap m = new StateSelectedMap();
         Map n = new Map();
-        m.setSelectedMap(n);
-        assertEquals(m.getSelectedMap(),n);
+        m.setSelectedmap(n);
+        assertEquals(m.getSelectedmap(),n);
     }
 }

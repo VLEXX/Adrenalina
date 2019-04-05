@@ -3,10 +3,10 @@ package Model;
 
 //Enum che identifica i vari potenziamenti
 public enum PowerUp {
-    TargetingScope, //Mirino
-    Newton,         //Raggio Cinetico
-    TagbackGrenade, //Granata Venom
-    Teleporter      //Teletraporto
+    TARGETING_SCOPE, //Mirino
+    NEWTON,         //Raggio Cinetico
+    TAGBACK_GRENADE, //Granata Venom
+    TELEPORTER      //Teletraporto
 }
 
 //Coverage nullo per ora. In attesa di classe PlayerBoard (CANCELLARE QUESTO COMMENTO QUANDO OK)

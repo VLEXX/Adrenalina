@@ -20,15 +20,15 @@ class ViewChartScoreTest {
     @Test
     void setScore() {
         ViewChartScore cs = new ViewChartScore();
-        cs.setScore(Player.Yellow, 5);
+        cs.setScore(Player.YELLOW, 5);
         assertEquals(cs.getScore()[0], 5);
-        cs.setScore(Player.Purple, 5);
+        cs.setScore(Player.PURPLE, 5);
         assertEquals(cs.getScore()[1], 5);
-        cs.setScore(Player.Green, 5);
+        cs.setScore(Player.GREEN, 5);
         assertEquals(cs.getScore()[2], 5);
-        cs.setScore(Player.Blue, 5);
+        cs.setScore(Player.BLUE, 5);
         assertEquals(cs.getScore()[3], 5);
-        cs.setScore(Player.Black, 5);
+        cs.setScore(Player.BLACK, 5);
         assertEquals(cs.getScore()[4], 5);
     }
 }

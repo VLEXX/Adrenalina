@@ -10,14 +10,14 @@ class StateSelectedModeTest {
     @Test
     void getSelectedMode() {
         StateSelectedMode m = new StateSelectedMode();
-        m.setSelectedMode(Mode.Base);
-        assertEquals(m.getSelectedMode(), Mode.Base);
+        m.setSelectedmode(Mode.BASE);
+        assertEquals(m.getSelectedmode(), Mode.BASE);
     }
 
     @Test
     void setSelectedMode() {
         StateSelectedMode m = new StateSelectedMode();
-        m.setSelectedMode(Mode.Base);
-        assertEquals(m.getSelectedMode(), Mode.Base);
+        m.setSelectedmode(Mode.BASE);
+        assertEquals(m.getSelectedmode(), Mode.BASE);
     }
 }

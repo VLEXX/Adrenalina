@@ -3,25 +3,25 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RoomTest {
 
     @Test
     void setCellslistElem() {
-       Room TestRoom = new Room();
-       Cell testcellA = new Cell(1);
-       for(int i=0;i<4;i++){
-           TestRoom.setCellslistElem( testcellA , i);
-           assertEquals(TestRoom.getCellslistElem(i), testcellA);
-       }
+       Room testroom = new Room();
+       ArrayList<Cell> cell = new ArrayList<>();
+       Cell c = new Cell(23);
+       cell.add(c);
+       testroom.setCellslistElem(cell);
+       assertEquals(testroom.getCellslist().get(0).getCellId(), 23 );
     }
 
     @Test
-    void getCellslistElem() {
+    void getCelllist() {
         Room TestRoom = new Room();
-        for (int i=0;i<4;i++) {
-            assertEquals(TestRoom.getCellslistElem(i), null);
-        }
+        assertEquals(TestRoom.getCellslist(), null);
     }
 }

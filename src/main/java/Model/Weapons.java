@@ -5,33 +5,33 @@ package Model;
 public enum Weapons {
     //Armi Blu
 
-    LockRifle,          //Distruttore
-    MachineGun,         //Mitragliatrice
-    Thor,               //Torpedine
-    PlasmaGun,          //Fucile al Plasma
-    Whisper,            //Fucile di Precisione
-    Electroscythe,      //Falce Protonica
-    TractorBeam,        //Raggio Traente
+    LOCK_RIFLE,          //Distruttore
+    MACHINE_GUN,         //Mitragliatrice
+    THOR,               //Torpedine
+    PLASMA_GUN,          //Fucile al Plasma
+    WHISPER,            //Fucile di Precisione
+    ELECTROSCYTHE,      //Falce Protonica
+    TRACTOR_BEAM,        //Raggio Traente
 
     //Armi Rosse
 
-    VortexCannon,       //Cannone Vortex
-    Furnace,            //Vulcanizzatore
-    HeatSeeker,         //Razzo Termico
-    Hellion,            //Raggio Solare
-    FlameThrower,       //Lanciafiamme
-    GrenadeLauncher,    //Lanciagranate
-    RocketLauncher,     //Lanciarazzi
+    VORTEX_CANNON,       //Cannone Vortex
+    FURNACE,            //Vulcanizzatore
+    HEAT_SEEKER,         //Razzo Termico
+    HELLION,            //Raggio Solare
+    FLAME_THROWER,       //Lanciafiamme
+    GRENADE_LAUNCHER,    //Lanciagranate
+    ROCKET_LAUNCHER,     //Lanciarazzi
 
     //Armi Gialle
 
-    Railgun,            //Fucile Laser
-    Cyberblade,         //Spada Fotonica
+    RAILGUN,            //Fucile Laser
+    CYBERBLADE,         //Spada Fotonica
     ZX2,                //ZX-2
-    Shotgun,            //Fucile a Pompa
-    Powerglove,         //Cyberguanto
-    Shockwave,          //Onda d'Urto
-    Sledgehammer        //Martello Ionico
+    SHOTGUN,            //Fucile a Pompa
+    POWERGLOVE,         //Cyberguanto
+    SHOCKWAVE,          //Onda d'Urto
+    SLEDGEHAMMER        //Martello Ionico
 }
 
 //Coverage nullo per ora. In attesa di classe PlayerBoard (CANCELLARE QUESTO COMMENTO QUANDO OK)

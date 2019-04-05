@@ -3,21 +3,21 @@ package Model;
 
 //Classe che memorizza la mappa corrente selezionata del gioco
 public class StateSelectedMap {
-    private Map SelectedMap;    //mappa selezionata
+    private Map selectedmap;    //mappa selezionata
 
     //Costruttore che inizializza la mappa selezionata a "null"
     public StateSelectedMap(){
-        SelectedMap=null;
+        selectedmap =null;
     }
 
     //Ritorna la mappa selezionata
-    public Map getSelectedMap() {
-        return SelectedMap;
+    public Map getSelectedmap() {
+        return selectedmap;
     }
 
     //Setta la mappa selezionata
-    public void setSelectedMap(Map selectedMap) {
-        SelectedMap = selectedMap;
+    public void setSelectedmap(Map selectedmap) {
+        this.selectedmap = selectedmap;
     }
 }
 

@@ -9,28 +9,28 @@ class CurrentPlayerStateTest {
     @Test
     void getPlayerPosition() {
         CurrentPlayerState p = new CurrentPlayerState();
-        assertEquals(p.getPlayerPosition(), null);
+        assertEquals(p.getPlayerposition(), null);
     }
 
     @Test
     void setPlayerPosition() {
         CurrentPlayerState p = new CurrentPlayerState();
         Position pos = new Position();
-        p.setPlayerPosition(pos);
-        assertEquals(p.getPlayerPosition(), pos);
+        p.setPlayerposition(pos);
+        assertEquals(p.getPlayerposition(), pos);
     }
 
     @Test
     void isActiveTurn() {
         CurrentPlayerState p = new CurrentPlayerState();
-        assertEquals(p.isActiveTurn(), false);
+        assertEquals(p.isActiveturn(), false);
     }
 
     @Test
     void setActiveTurn() {
         CurrentPlayerState p = new CurrentPlayerState();
-        p.setActiveTurn(true);
-        assertEquals(p.isActiveTurn(), true);
+        p.setActiveturn(true);
+        assertEquals(p.isActiveturn(), true);
     }
 
     @Test
@@ -50,20 +50,20 @@ class CurrentPlayerStateTest {
     @Test
     void getActionState() {
         CurrentPlayerState p = new CurrentPlayerState();
-        assertEquals(p.getActionState(), null);
+        assertEquals(p.getActionstate(), null);
     }
 
     @Test
     void setActionState() {
         CurrentPlayerState p = new CurrentPlayerState();
-        p.setActionState(Action.Move);
-        assertEquals(p.getActionState(), Action.Move);
+        p.setActionstate(Action.MOVE);
+        assertEquals(p.getActionstate(), Action.MOVE);
     }
 
     @Test
     void getActionCounter() {
         CurrentPlayerState p = new CurrentPlayerState();
-        assertEquals(p.getActionCounter(), 2);
+        assertEquals(p.getActioncounter(), 2);
     }
 
     @Test
@@ -71,26 +71,26 @@ class CurrentPlayerStateTest {
         CurrentPlayerState p = new CurrentPlayerState();
         p.decreaseActionCounter();
         p.resetActionCounter();
-        assertEquals(p.getActionCounter(), 2);
+        assertEquals(p.getActioncounter(), 2);
     }
 
     @Test
     void decreaseActionCounter() {
         CurrentPlayerState p = new CurrentPlayerState();
         p.decreaseActionCounter();
-        assertEquals(p.getActionCounter(),1);
+        assertEquals(p.getActioncounter(),1);
     }
 
     @Test
     void getActivePlayer() {
         CurrentPlayerState p = new CurrentPlayerState();
-        assertEquals(p.getActivePlayer(), null);
+        assertEquals(p.getActiveplayer(), null);
     }
 
     @Test
     void setActivePlayer() {
         CurrentPlayerState p = new CurrentPlayerState();
-        p.setActivePlayer(Player.Black);
-        assertEquals(p.getActivePlayer(), Player.Black);
+        p.setActiveplayer(Player.BLACK);
+        assertEquals(p.getActiveplayer(), Player.BLACK);
     }
 }

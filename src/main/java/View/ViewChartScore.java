@@ -14,19 +14,19 @@ public class ViewChartScore {
     }
 
     public void setScore(Player p, int score) {
-        if(p == Player.Yellow){
+        if(p == Player.YELLOW){
             this.Score[0]= this.Score[0]+score;
         }
-        if(p == Player.Purple){
+        if(p == Player.PURPLE){
             this.Score[1]= this.Score[1]+score;
         }
-        if(p == Player.Green){
+        if(p == Player.GREEN){
             this.Score[2]= this.Score[2]+score;
         }
-        if(p == Player.Blue){
+        if(p == Player.BLUE){
             this.Score[3]= this.Score[3]+score;
         }
-        if(p == Player.Black){
+        if(p == Player.BLACK){
             this.Score[4]= this.Score[4]+score;
         }
     }

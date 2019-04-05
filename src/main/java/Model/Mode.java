@@ -3,7 +3,7 @@ package Model;
 
 //Enum che identifica le varie modalità di gioco
 public enum Mode {
-    Base,           //Modalità Base
-    Domination,     //Modalità Dominazione
-    Turret          //Modalità Torrette
+    BASE,           //Modalità BASE
+    DOMINATION,     //Modalità Dominazione
+    TURRET          //Modalità Torrette
 }

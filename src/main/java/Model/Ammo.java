@@ -2,5 +2,5 @@
 package Model;
 
 public class Ammo {
-
+    //TODO
 }

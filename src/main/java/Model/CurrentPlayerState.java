@@ -3,85 +3,85 @@ package Model;
 
 //Classe che memorizza lo stato attuale del giocatore
 public class CurrentPlayerState {
-    private Position PlayerPosition;    //Posizione attuale del giocatore
-    private boolean ActiveTurn;         //"true" se è il proprio turno "false" altrimenti
-    private PlayerBoard Board;          //PlanciaGiocatore
-    private Action ActionState;         //Memorizza lo stato in cui si trova il giocatore (spara, spostati,...)
-    private int ActionCounter;          //Contatore di azioni rimanenti che può compiere il giocatore (max 2 per turno)
-    private Player ActivePlayer;        //Memorizza il colore/personaggio scelto dal giocatore
+    private Position playerposition;    //Posizione attuale del giocatore
+    private boolean activeturn;         //"true" se è il proprio turno "false" altrimenti
+    private PlayerBoard board;          //PlanciaGiocatore
+    private Action actionstate;         //Memorizza lo stato in cui si trova il giocatore (spara, spostati,...)
+    private int actioncounter;          //Contatore di azioni rimanenti che può compiere il giocatore (max 2 per turno)
+    private Player activeplayer;        //Memorizza il colore/personaggio scelto dal giocatore
 
     //Costruttore che setta tutti gli attributi a "null" e il contatore al massimo (cioè 2)
     public CurrentPlayerState(){
-        this.PlayerPosition=null;
-        this.ActiveTurn=false;
-        this.Board=null;
-        this.ActionState=null;
-        this.ActionCounter=2;
-        this.ActivePlayer=null;
+        this.playerposition =null;
+        this.activeturn =false;
+        this.board =null;
+        this.actionstate =null;
+        this.actioncounter =2;
+        this.activeplayer =null;
     }
 
     //Ritorna la Posizione
-    public Position getPlayerPosition() {
-        return this.PlayerPosition;
+    public Position getPlayerposition() {
+        return this.playerposition;
     }
 
     //Setta la Posizione
-    public void setPlayerPosition(Position playerPosition) {
-        this.PlayerPosition = playerPosition;
+    public void setPlayerposition(Position playerposition) {
+        this.playerposition = playerposition;
     }
 
     //Ritorna boolean "true" se è il turno del giocatore(this), "false" altrimenti
-    public boolean isActiveTurn() {
-        return this.ActiveTurn;
+    public boolean isActiveturn() {
+        return this.activeturn;
     }
 
-    //Cambia lo stato del boolean "ActiveTurn"
-    public void setActiveTurn(boolean activeTurn) {
-        this.ActiveTurn = activeTurn;
+    //Cambia lo stato del boolean "activeturn"
+    public void setActiveturn(boolean activeturn) {
+        this.activeturn = activeturn;
     }
 
     //Ritorna la PlanciaGiocatore
     public PlayerBoard getBoard() {
-        return this.Board;
+        return this.board;
     }
 
     //Setta la PlanciaGiocatore
     public void setBoard(PlayerBoard board) {
-        this.Board = board;
+        this.board = board;
     }
 
     //Ritorna lo stato "azione" del giocatore
-    public Action getActionState() {
-        return this.ActionState;
+    public Action getActionstate() {
+        return this.actionstate;
     }
 
     //Setta lo stato "azione" del giocatore
-    public void setActionState(Action actionState) {
-        this.ActionState = actionState;
+    public void setActionstate(Action actionstate) {
+        this.actionstate = actionstate;
     }
 
     //Ritorna il contantore delle azioni rimanenti
-    public int getActionCounter() {
-        return this.ActionCounter;
+    public int getActioncounter() {
+        return this.actioncounter;
     }
 
     //Resetta (riporta a 2) il contatore delle azioni rimanenti
     public void resetActionCounter() {
-        this.ActionCounter = 2;
+        this.actioncounter = 2;
     }
 
     //Fa decrescere di 1 il contatore delle azioni rimanenti
     public void decreaseActionCounter() {
-        this.ActionCounter = ActionCounter-1;
+        this.actioncounter = actioncounter -1;
     }
 
     //Ritorna il colore/personaggio scelto dal giocatore
-    public Player getActivePlayer() {
-        return this.ActivePlayer;
+    public Player getActiveplayer() {
+        return this.activeplayer;
     }
 
     //Setta il colore/personaggio scelto dal giocatore
-    public void setActivePlayer(Player activePlayer) {
-        this.ActivePlayer = activePlayer;
+    public void setActiveplayer(Player activeplayer) {
+        this.activeplayer = activeplayer;
     }
 }

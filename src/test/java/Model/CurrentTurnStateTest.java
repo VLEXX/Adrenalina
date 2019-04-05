@@ -9,14 +9,14 @@ class CurrentTurnStateTest {
     @Test
     void getPlayeTurn() {
         CurrentTurnState c = new CurrentTurnState();
-        c.setPlayerTurn(Player.Yellow);
-        assertEquals(Player.Yellow,c.getPlayerTurn());
+        c.setPlayerturn(Player.YELLOW);
+        assertEquals(Player.YELLOW,c.getPlayerturn());
     }
 
     @Test
     void setPlayerTurn() {
         CurrentTurnState c = new CurrentTurnState();
-        c.setPlayerTurn(Player.Blue);
-        assertEquals(Player.Blue,c.getPlayerTurn());
+        c.setPlayerturn(Player.BLUE);
+        assertEquals(Player.BLUE,c.getPlayerturn());
     }
 }

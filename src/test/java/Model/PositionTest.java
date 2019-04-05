@@ -10,28 +10,28 @@ class PositionTest {
     @Test
     void getCurrentCell() {
         Position p = new Position();
-        assertEquals(p.getCurrentCell(), null);
+        assertEquals(p.getCurrentcell(), null);
     }
 
     @Test
     void setCurrentCell() {
         Position p = new Position();
         Cell c = new Cell(1);
-        p.setCurrentCell(c);
-        assertEquals(p.getCurrentCell(), c);
+        p.setCurrentcell(c);
+        assertEquals(p.getCurrentcell(), c);
     }
 
     @Test
     void getCurrentRoom() {
         Position p = new Position();
-        assertEquals(p.getCurrentRoom(), null);
+        assertEquals(p.getCurrentroom(), null);
     }
 
     @Test
     void setCurrentRoom() {
         Position p = new Position();
         Room r = new Room();
-        p.setCurrentRoom(r);
-        assertEquals(p.getCurrentRoom(), r);
+        p.setCurrentroom(r);
+        assertEquals(p.getCurrentroom(), r);
     }
 }

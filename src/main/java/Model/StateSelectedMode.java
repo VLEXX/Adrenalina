@@ -3,20 +3,20 @@ package Model;
 
 //Classe che memorizza la modalità corrente selezionata del gioco
 public class StateSelectedMode {
-    private Mode SelectedMode;  //modalità selezionata del gioco
+    private Mode selectedmode;  //modalità selezionata del gioco
 
     //Costruttore che inizializza la modalità a "null"
     public StateSelectedMode(){
-        SelectedMode=null;
+        selectedmode =null;
     }
 
     //Ritorna la mappa selezionata
-    public Mode getSelectedMode() {
-        return SelectedMode;
+    public Mode getSelectedmode() {
+        return selectedmode;
     }
 
     //Setta la modalità selezionata
-    public void setSelectedMode(Mode selectedMode) {
-        SelectedMode = selectedMode;
+    public void setSelectedmode(Mode selectedmode) {
+        this.selectedmode = selectedmode;
     }
 }

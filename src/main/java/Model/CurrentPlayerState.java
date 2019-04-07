@@ -2,7 +2,7 @@
 package Model;
 
 //Classe che memorizza lo stato attuale del giocatore
-public class CurrentPlayerState {
+public class CurrentPlayerState implements Observer{
     private Position playerposition;    //Posizione attuale del giocatore
     private boolean activeturn;         //"true" se è il proprio turno "false" altrimenti
     private PlayerBoard board;          //PlanciaGiocatore
@@ -83,5 +83,12 @@ public class CurrentPlayerState {
     //Setta il colore/personaggio scelto dal giocatore
     public void setActiveplayer(Player activeplayer) {
         this.activeplayer = activeplayer;
+    }
+
+    @Override
+    public void update(Player p) {
+        if(p == this.activeplayer){
+            this.setActiveturn(true);
+        }
     }
 }

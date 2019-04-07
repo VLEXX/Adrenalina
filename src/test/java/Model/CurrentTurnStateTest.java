@@ -19,4 +19,15 @@ class CurrentTurnStateTest {
         c.setPlayerturn(Player.BLUE);
         assertEquals(Player.BLUE,c.getPlayerturn());
     }
+
+    @Test
+    void notifyObserver(){
+        CurrentTurnState c = new CurrentTurnState();
+        CurrentPlayerState s = new CurrentPlayerState();
+        s.setActiveplayer(Player.YELLOW);
+        c.addObserver(s);
+        c.setPlayerturn(Player.YELLOW);
+        c.notifyObserver();
+        assertEquals(s.isActiveturn(), true);
+    }
 }

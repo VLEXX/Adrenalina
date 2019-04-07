@@ -93,4 +93,15 @@ class CurrentPlayerStateTest {
         p.setActiveplayer(Player.BLACK);
         assertEquals(p.getActiveplayer(), Player.BLACK);
     }
+
+    @Test
+    void update(){
+        CurrentTurnState c = new CurrentTurnState();
+        CurrentPlayerState s = new CurrentPlayerState();
+        s.setActiveplayer(Player.YELLOW);
+        c.addObserver(s);
+        c.setPlayerturn(Player.YELLOW);
+        c.notifyObserver();
+        assertEquals(s.isActiveturn(), true);
+    }
 }

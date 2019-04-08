@@ -5,15 +5,15 @@ import java.util.HashMap;
 
 //Classe che tiene conto del riquadro danni della plancia giocatore
 public class DamageBox {
-    private HashMap<Player, Integer> myDamageMap;       //Mappa per tenere conto del colore del danno e del numero di danni
-    private int damageTot;                              //Totale dei danni subiti
-    private boolean pickUp;                             //Potenziamento per l'aver subito i danni: due mosse prima di raccogliere
-    private boolean shootUp;                            //Potenziamento per aver subito danni: una mossa prima di sparare
-    private int maxPointIndex;                          //Indice del punteggio massimo, a seconda di quante volte un pg è morto si parte da un tot di punti minore da distribuire
-    private final int[] maxPointArray = {8,6,4,2,1,1};  //Punti per chi contribuisce al danno quando viene contegguata la plancia
-    private final int[] finalFrenzyArray = {2,1,1,1};   //Punti per chi contribuisce al danno quando viene conteggiata la plancia in frenesia finale
-    private boolean activeFrenzy;                       //Settato a "false" se la modalità frenesia non si attiva, "true" il contrario
-    private int deathCounter;                           //Contatore delle morti del giocatore
+    private HashMap<Player, Integer> myDamageMap;               //Mappa per tenere conto del colore del danno e del numero di danni
+    private int damageTot;                                      //Totale dei danni subiti
+    private boolean pickUp;                                     //Potenziamento per l'aver subito i danni: due mosse prima di raccogliere
+    private boolean shootUp;                                    //Potenziamento per aver subito danni: una mossa prima di sparare
+    private int maxPointIndex;                                  //Indice del punteggio massimo, a seconda di quante volte un pg è morto si parte da un tot di punti minore da distribuire
+    private final static int[] maxPointArray = {8,6,4,2,1,1};   //Punti per chi contribuisce al danno quando viene contegguata la plancia
+    private final static int[] finalFrenzyArray = {2,1,1,1};    //Punti per chi contribuisce al danno quando viene conteggiata la plancia in frenesia finale
+    private boolean activeFrenzy;                               //Settato a "false" se la modalità frenesia non si attiva, "true" il contrario
+    private int deathCounter;                                   //Contatore delle morti del giocatore
 
     //Costruttore che imposta la plancia dei danni del giocatore
     public DamageBox(){

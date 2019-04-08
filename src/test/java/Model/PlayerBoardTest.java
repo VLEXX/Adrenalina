@@ -59,19 +59,30 @@ class PlayerBoardTest {
         assertEquals(p.setFirstPlayerCard(true), true);
     }
 
-    //TODO
     @Test
-    void getDamageBox(){
-
+    void setDamageBox(){
+        DamageBox d = new DamageBox();
+        d.setPickUp(true);
+        PlayerBoard p = new PlayerBoard();
+        p.setDamageBox(d);
+        assertEquals(p.getDamageBox().isPickUp(), true);
     }
 
     @Test
-    void getMarksBox(){
-
+    void setMarksBox(){
+        MarksBox m = new MarksBox();
+        m.setMyMarksMap(Player.BLACK, 2);
+        PlayerBoard p = new PlayerBoard();
+        p.setMarksBox(m);
+        assertEquals(p.getMarksBox().getMyMarksMap().get(Player.BLACK).intValue(), 2);
     }
 
     @Test
-    void getMunitionsBox(){
-
+    void setMunitionsBox(){
+        MunitionsBox m = new MunitionsBox();
+        m.setMyMunitionsMap(Player.BLACK, 4);
+        PlayerBoard p = new PlayerBoard();
+        p.setMunitionsBox(m);
+        assertEquals(p.getMunitionsBox().getMyMunitionsMap().get(Player.BLACK).intValue(), 4);
     }
 }

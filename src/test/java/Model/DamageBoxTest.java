@@ -61,15 +61,26 @@ class DamageBoxTest {
         assertEquals(d.getMaxPointIndex(), 4);
     }
 
-    //TODO
     @Test
     void getMaxPointArray() {
-
+        DamageBox d = new DamageBox();
+        assertEquals(d.getMaxPointArray().length, 6);
+        assertEquals(d.getMaxPointArray()[0], 8);
+        assertEquals(d.getMaxPointArray()[1], 6);
+        assertEquals(d.getMaxPointArray()[2], 4);
+        assertEquals(d.getMaxPointArray()[3], 2);
+        assertEquals(d.getMaxPointArray()[4], 1);
+        assertEquals(d.getMaxPointArray()[5], 1);
     }
-    //TODO
+
     @Test
     void getFinalFrenzyArray() {
-
+        DamageBox d = new DamageBox();
+        assertEquals(d.getFinalFrenzyArray().length, 4);
+        assertEquals(d.getFinalFrenzyArray()[0], 2);
+        assertEquals(d.getFinalFrenzyArray()[1], 1);
+        assertEquals(d.getFinalFrenzyArray()[1], 1);
+        assertEquals(d.getFinalFrenzyArray()[3], 1);
     }
 
     //TODO

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CurrentTurnStateTest {
 
     @Test
-    void getPlayeTurn() {
+    void getPlayerTurn() {
         CurrentTurnState c = new CurrentTurnState();
         c.setPlayerturn(Player.YELLOW);
         assertEquals(Player.YELLOW,c.getPlayerturn());
@@ -29,5 +29,33 @@ class CurrentTurnStateTest {
         c.setPlayerturn(Player.YELLOW);
         c.notifyObserver();
         assertEquals(s.isActiveturn(), true);
+    }
+
+    @Test
+    void removeObserver() {
+        CurrentTurnState c = new CurrentTurnState();
+        CurrentPlayerState s = new CurrentPlayerState();
+        s.setActiveplayer(Player.YELLOW);
+        c.setPlayerturn(Player.YELLOW);
+        c.addObserver(s);
+        assertEquals(c.getObservers().isEmpty(), false);
+        c.removeObserver(s);
+        assertEquals(c.getObservers().isEmpty(), true);
+    }
+
+    @Test
+    void addObserver(){
+        CurrentTurnState c = new CurrentTurnState();
+        CurrentPlayerState s = new CurrentPlayerState();
+        s.setActiveplayer(Player.YELLOW);
+        c.setPlayerturn(Player.YELLOW);
+        c.addObserver(s);
+        assertEquals(c.getObservers().isEmpty(), false);
+    }
+
+    @Test
+    void getObservers(){
+        CurrentTurnState c = new CurrentTurnState();
+        assertEquals(c.getObservers().isEmpty(), true);
     }
 }

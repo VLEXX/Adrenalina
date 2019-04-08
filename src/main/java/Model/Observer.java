@@ -1,5 +1,6 @@
 package Model;
 
 public interface Observer {
-    void update(Player p);
+    public void update(Player p);
+
 }

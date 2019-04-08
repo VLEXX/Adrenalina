@@ -2,21 +2,13 @@ package Model;
 
 import java.util.ArrayList;
 
-public abstract class Subject {
-    private ArrayList<Observer> observers = new ArrayList<>();
+public interface Subject {
 
-    public void addObserver(Model.Observer e){
-        observers.add(e);
-    }
+    public void addObserver(Model.Observer e);
 
-    public void removeObserver(Model.Observer e){
-        observers.remove(e);
-    }
+    public void removeObserver(Model.Observer e);
 
-    public void notifyObserver(){
-    }
+    public void notifyObserver();
 
-    public ArrayList<Observer> getObservers(){
-        return this.observers;
-    }
+    public ArrayList<Observer> getObservers();
 }

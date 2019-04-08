@@ -58,4 +58,20 @@ class PlayerBoardTest {
         }
         assertEquals(p.setFirstPlayerCard(true), true);
     }
+
+    //TODO
+    @Test
+    void getDamageBox(){
+
+    }
+
+    @Test
+    void getMarksBox(){
+
+    }
+
+    @Test
+    void getMunitionsBox(){
+
+    }
 }

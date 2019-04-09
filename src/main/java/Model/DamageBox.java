@@ -113,21 +113,21 @@ public class DamageBox {
         return finalFrenzyArray;
     }
 
-    //TODO
+
     //Tiene traccia del primo sangue, ossia
     public void getFirtsBlood(){
-
+        //TODO
     }
 
-    //TODO
+
     //Tiene traccia del colpo mortale
     public void getMortalDamage(){
-
+        //TODO
     }
 
-    //TODO
+
     //Tiene traccia del infierire, ossia il danno 12
     public void getRage(){
-
+        //TODO
     }
 }

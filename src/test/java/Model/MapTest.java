@@ -8,8 +8,9 @@ class MapTest {
 
     @Test
     void getMapname() {
-        Map Maptest = new Map();
-        assertEquals(Maptest.getMapname(),null);
+        Map maptest = new Map();
+        maptest.setMapname("ciao");
+        assertEquals(maptest.getMapname(),"ciao");
     }
 
     @Test
@@ -17,5 +18,19 @@ class MapTest {
         Map Maptest = new Map();
         Maptest.setMapname("testmapname");
         assertEquals(Maptest.getMapname(),"testmapname");
+    }
+
+    @Test
+    void getRoomList() {
+        Map m = new Map();
+        assertEquals(m.getRoomList().isEmpty(), true);
+    }
+
+    @Test
+    void addRoom() {
+        Map m = new Map();
+        Room r = new Room();
+        m.addRoom(r);
+        assertEquals(m.getRoomList().get(0), r);
     }
 }

@@ -4,18 +4,18 @@ package Model;
 import java.util.ArrayList;
 
 public class Room {
-    private ArrayList<Cell> cellsList;    //elenco delle celle della stanza
+    private ArrayList<Cell> cellslist;    //elenco delle celle della stanza
 
 
     public Room(){
-        this.cellsList =null;
+        cellslist = new ArrayList<>();
     }     //costruttore
 
-    public void setCellslistElem(ArrayList<Cell> c) {     //funzione per settare gli elementi dell'array per n da 0 a 3, errore altrimenti
-        this.cellsList = c;
+    public void setCellsList(ArrayList<Cell> c) {     //funzione per settare gli elementi dell'array per n da 0 a 3, errore altrimenti
+        this.cellslist = c;
     }
 
     public ArrayList<Cell> getCellsList() {
-        return cellsList;
+        return cellslist;
     }
 }

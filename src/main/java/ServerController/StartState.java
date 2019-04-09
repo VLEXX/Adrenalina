@@ -3,7 +3,7 @@ package ServerController;
 public class StartState implements State{
 
     @Override
-    public void doAction(Context context) {
-
+    public void doAction(ContextState contextState) {
+        //TODO
     }
 }

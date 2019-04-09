@@ -1,9 +1,9 @@
 package ServerController;
 
-public class Context {
+public class ContextState {
     private State state;
 
-    public Context(){
+    public ContextState(){
         state = null;
     }
 

@@ -1,5 +1,5 @@
 package ServerController;
 
 public interface State {
-    void doAction(Context context);
+    void doAction(ContextState contextState);
 }

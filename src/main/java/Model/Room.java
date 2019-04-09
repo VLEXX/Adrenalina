@@ -11,8 +11,8 @@ public class Room {
         cellslist = new ArrayList<>();
     }     //costruttore
 
-    public void setCellsList(ArrayList<Cell> c) {     //funzione per settare gli elementi dell'array per n da 0 a 3, errore altrimenti
-        this.cellslist = c;
+    public void addCellsList(Cell c) {     //funzione per settare gli elementi dell'array per n da 0 a 3, errore altrimenti
+        cellslist.add(c);
     }
 
     public ArrayList<Cell> getCellsList() {

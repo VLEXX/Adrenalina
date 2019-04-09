@@ -8,15 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class DamageBoxTest {
 
     @Test
-    void setMyDamageMap() {
-        Player player = Player.BLACK;
-        int damage = 3;
-        DamageBox damageBox = new DamageBox();
-        damageBox.setMyDamageMap(player, damage);
-        assertEquals(damageBox.getMyDamageMap().size(), 1);
-        assertEquals(damageBox.getMyDamageMap().get(player).intValue(), 3);
-        damageBox.setMyDamageMap(player, 2);
-        assertEquals(damageBox.getMyDamageMap().get(player).intValue(), 5);
+    void setDamage() {
+        DamageBox d = new DamageBox();
+        d.setDamage(Player.YELLOW);
+        assertEquals(d.getDamage()[0], Player.YELLOW);
+        assertEquals(d.getDamageIndex(), 1);
     }
 
     @Test
@@ -83,21 +79,31 @@ class DamageBoxTest {
         assertEquals(d.getFinalFrenzyArray()[3], 1);
     }
 
-    //TODO
     @Test
     void getFirstBlood() {
-
+        DamageBox d = new DamageBox();
+        d.setFirstBlood(Player.BLACK);
+        assertEquals(d.getFirstBlood(), Player.BLACK);
     }
 
-    //TODO
     @Test
     void getMortalDamage() {
-
+        DamageBox d = new DamageBox();
+        d.setMortalDamage(Player.YELLOW);
+        assertEquals(d.getMortalDamage(), Player.YELLOW);
     }
 
-    //TODO
     @Test
     void getRage(){
+        DamageBox d = new DamageBox();
+        d.setRage(Player.BLUE);
+        assertEquals(d.getRage(), Player.BLUE);
+    }
 
+    @Test
+    void setDamageIndex(){
+        DamageBox d = new DamageBox();
+        d.setDamageIndex(3);
+        assertEquals(d.getDamageIndex(), 3);
     }
 }

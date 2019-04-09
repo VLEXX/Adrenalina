@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 //Classe che tiene conto del riquadro danni della plancia giocatore
 public class DamageBox {
-    private HashMap<Player, Integer> myDamageMap;               //Mappa per tenere conto del colore del danno e del numero di danni
+    private Player[] damage;                                    //Mappa per tenere conto del colore del danno e del numero di danni
     private int damageTot;                                      //Totale dei danni subiti
     private boolean pickUp;                                     //Potenziamento per l'aver subito i danni: due mosse prima di raccogliere
     private boolean shootUp;                                    //Potenziamento per aver subito danni: una mossa prima di sparare
@@ -14,33 +14,75 @@ public class DamageBox {
     private final static int[] finalFrenzyArray = {2,1,1,1};    //Punti per chi contribuisce al danno quando viene conteggiata la plancia in frenesia finale
     private boolean activeFrenzy;                               //Settato a "false" se la modalità frenesia non si attiva, "true" il contrario
     private int deathCounter;                                   //Contatore delle morti del giocatore
+    private int damageIndex;                                    //Indice per avere l'ultimo danno
+    private Player firstBlood;                                  //Giocatore che ha colpito per primo un avversario
+    private Player mortalDamage;                                //Giocatore che ha ucciso l'avversario
+    private Player rage;                                        //Infierire
 
     //Costruttore che imposta la plancia dei danni del giocatore
     public DamageBox(){
-        myDamageMap = new HashMap<>();
+        this.damage = new Player[] {null, null, null, null, null, null, null, null, null, null, null, null};
         this.damageTot = 0;
         this.pickUp = false;
         this.shootUp = false;
         this.maxPointIndex = 0;
         this.activeFrenzy = false;
         this.deathCounter = 0;
+        this.damageIndex = 0;
+        this.firstBlood = null;
+        this.mortalDamage = null;
+        this.rage = null;
     }
 
-    //Ritorna la mappa, ossia il numero danni corrispondente al colore
-    public HashMap<Player, Integer> getMyDamageMap() {
-        return myDamageMap;
+    //Ritorna i danni giocatore
+    public Player[] getDamage() {
+        return damage;
     }
 
-    //Setta la mappa, ossia il numero dei danni corrispondente al colore
-    public void setMyDamageMap(Player player, int damage) {
-        int i;
-        if (myDamageMap.get(player)!=null){
-            i = myDamageMap.get(player).intValue();
-            i = i + damage;
-            myDamageMap.replace(player, i);
-        } else {
-            myDamageMap.put(player, damage);
-        }
+    //Setta i danni giocatore
+    public void setDamage(Player damage) {
+        this.damage[damageIndex] = damage;
+        damageIndex++;
+    }
+
+    //Ritorna l'indice dei danni
+    public int getDamageIndex() {
+        return damageIndex;
+    }
+
+    //Aggiorna l'indice dei danni
+    public void setDamageIndex(int damageIndex) {
+        this.damageIndex = damageIndex;
+    }
+
+    //Ritorna il primo giocatore che ha colpito
+    public Player getFirstBlood() {
+        return firstBlood;
+    }
+
+    //Setta il primo giocatore che colpisce l'avversario
+    public void setFirstBlood(Player firstBlood) {
+        this.firstBlood = firstBlood;
+    }
+
+    //Ritorna il giocatore che ha ucciso l'avversario
+    public Player getMortalDamage() {
+        return mortalDamage;
+    }
+
+    //Indica chi ha ucciso l'avversario
+    public void setMortalDamage(Player mortalDamage) {
+        this.mortalDamage = mortalDamage;
+    }
+
+    //Ritorna chi ha infierito l'ultimo danno
+    public Player getRage() {
+        return rage;
+    }
+
+    //Imposta chi ha infierito l'ultimo danno
+    public void setRage(Player rage) {
+        this.rage = rage;
     }
 
     //Imposta la modalità frenesia mettendo "true", "false" altrimenti
@@ -111,23 +153,5 @@ public class DamageBox {
     //Restituisce il vettore con il valore dei punteggi nella frenesia finale
     public int[] getFinalFrenzyArray() {
         return finalFrenzyArray;
-    }
-
-
-    //Tiene traccia del primo sangue, ossia
-    public void getFirtsBlood(){
-        //TODO
-    }
-
-
-    //Tiene traccia del colpo mortale
-    public void getMortalDamage(){
-        //TODO
-    }
-
-
-    //Tiene traccia del infierire, ossia il danno 12
-    public void getRage(){
-        //TODO
     }
 }

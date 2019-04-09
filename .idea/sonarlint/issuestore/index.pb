@@ -70,5 +70,15 @@ P
  src/main/java/Model/Weapons.java,7\9\79fb6936b6b098ad01e4ebf0f05498f15f7d4986
 X
 (src/test/java/Model/PlayerBoardTest.java,3\5\35bfedb1060f79a58f5117f5ab35344a1f2f815e
-R
-"src/main/java/Model/DamageBox.java,b\9\b916a982abaa701c4de80be36812c0a47a400c50
+Q
+!src/test/java/Model/RoomTest.java,a\c\ac840fa40c7d1668f3fee2b97c5b42af6e5b31e1
+W
+'src/test/java/Model/SpawnPointTest.java,a\d\ad9ea52dde579159baf7bc6dfd18f1c760801fad
+Q
+!src/test/java/Model/AmmoTest.java,f\b\fb98fc4c6f48fe966bf83e17c03b9b96fa8dbd48
+Q
+!src/main/java/Model/Observer.java,f\5\f5052f17fd40e68f379e4d008b3e58ceaf58ebf6
+b
+2src/main/java/ServerController/InitializeMap4.java,f\3\f3cc8887aea6d6ce7c883022ff927881d33c7334
+\
+,src/main/java/ServerController/Strategy.java,1\b\1b6a703bd1f713d2d265d9f7cf377afb258eb660

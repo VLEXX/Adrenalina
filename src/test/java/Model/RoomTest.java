@@ -16,12 +16,12 @@ class RoomTest {
        Cell c = new Cell(23);
        cell.add(c);
        testroom.setCellslistElem(cell);
-       assertEquals(testroom.getCellslist().get(0).getCellId(), 23 );
+       assertEquals(testroom.getCellsList().get(0).getCellId(), 23 );
     }
 
     @Test
     void getCelllist() {
         Room TestRoom = new Room();
-        assertEquals(TestRoom.getCellslist(), null);
+        assertEquals(TestRoom.getCellsList(), null);
     }
 }

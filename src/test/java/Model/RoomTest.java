@@ -10,13 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class RoomTest {
 
     @Test
-    void setCellslist() {
+    void addCellslist() {
        Room testroom = new Room();
-       ArrayList<Cell> cell = new ArrayList<>();
-       Cell c = new Cell(23);
-       cell.add(c);
-       testroom.setCellsList(cell);
-       assertEquals(testroom.getCellsList().get(0).getCellId(), 23 );
+       Cell c = new Cell(1);
+       testroom.addCellsList(c);
+       assertEquals(testroom.getCellsList().get(0).getCellId(), 1);
     }
 
     @Test

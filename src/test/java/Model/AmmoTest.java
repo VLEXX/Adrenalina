@@ -26,13 +26,13 @@ class AmmoTest {
     @Test
     void getPossiblePowerUp() {
         Ammo TestAmmo = new Ammo();
-        assertEquals(TestAmmo.getPossiblePowerUp(),null);
+        assertEquals(TestAmmo.getPossiblePowerUp(),false);
     }
 
     @Test
     void setPossiblePowerUp() {
         Ammo TestAmmo = new Ammo();
-        TestAmmo.setPossiblePowerUp(PowerUp.NEWTON);
-        assertEquals(TestAmmo.getPossiblePowerUp(),PowerUp.NEWTON);
+        TestAmmo.setPossiblePowerUp(true);
+        assertEquals(TestAmmo.getPossiblePowerUp(),true);
     }
 }

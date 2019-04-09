@@ -11,12 +11,12 @@ package Model;
 public class Ammo {
     private int[] ammoList; //munizioni presenti
 
-    private PowerUp PossiblePowerUp; //powerup presente
+    private boolean PossiblePowerUp; //powerup presente
 
     //costruttore
     public Ammo(){
         this.ammoList = new int[]{0,0,0};
-        this.PossiblePowerUp = null;
+        this.PossiblePowerUp = false;
     }
 
     //restituisce l'array munizioni
@@ -30,12 +30,12 @@ public class Ammo {
     }
 
     //restituisce il potenziamento quando presente
-    public PowerUp getPossiblePowerUp() {
+    public boolean getPossiblePowerUp() {
         return PossiblePowerUp;
     }
 
     //setta il potenziamento
-    public void setPossiblePowerUp(PowerUp possiblePowerUp) {
+    public void setPossiblePowerUp(boolean possiblePowerUp) {
         PossiblePowerUp = possiblePowerUp;
     }
 }

@@ -30,38 +30,30 @@ public class Cell {
     }
 
     //metodi che restituiscono le celle adiacenti
-    public Cell getUpcell() {
+    public Cell getUpCell() {
         return upcell;
     }
 
-    public Cell getDowncell() {
+    public Cell getDownCell() {
         return downcell;
     }
 
-    public Cell getLeftcell() {
+    public Cell getLeftCell() {
         return leftcell;
     }
 
-    public Cell getRightcell() {
+    public Cell getRightCell() {
         return rightcell;
     }
 
-    //metodi che settano le celle adiacenti
-    public void setUpcell(Cell upcell) {
+    //metodo che setta le celle adiacenti
+    public void setCells(Cell upcell, Cell downcell, Cell leftcell, Cell rightcell) {
         this.upcell = upcell;
-    }
-
-    public void setDowncell(Cell downcell) {
         this.downcell = downcell;
-    }
-
-    public void setLeftcell(Cell leftcell) {
         this.leftcell = leftcell;
-    }
-
-    public void setRightcell(Cell rightcell) {
         this.rightcell = rightcell;
     }
+
 
     //restituisce l'ID della cella
     public int getCellId() {

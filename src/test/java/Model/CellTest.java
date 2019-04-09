@@ -10,60 +10,41 @@ class CellTest {
     @Test
     void getUpCell() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getUpcell(),null);
+        assertEquals(testcellA.getUpCell(),null);
 
     }
 
     @Test
     void getDownCell() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getDowncell(),null);
+        assertEquals(testcellA.getDownCell(),null);
     }
 
     @Test
     void getLeftCell() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getLeftcell(),null);
+        assertEquals(testcellA.getLeftCell(),null);
     }
 
     @Test
     void getRightCell() {
         Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getRightcell(),null);
+        assertEquals(testcellA.getRightCell(),null);
     }
 
     @Test
-    void setUpCell() {
+    void setCells() {
         Cell testcellA = new Cell(1);
-        Cell testcellB = new Cell(2);
-        testcellA.setUpcell(testcellB);
-        assertEquals(testcellA.getUpcell(),testcellB);
+        Cell testcellB = new Cell(1);
+        testcellA.setCells(testcellB,testcellB,testcellB,testcellB);
+        assertEquals(testcellA.getUpCell(),testcellB);
+        assertEquals(testcellA.getDownCell(),testcellB);
+        assertEquals(testcellA.getLeftCell(),testcellB);
+        assertEquals(testcellA.getRightCell(),testcellB);
 
     }
 
-    @Test
-    void setDownCell() {
-        Cell testcellA = new Cell(1);
-        Cell testcellB = new Cell(2);
-        testcellA.setDowncell(testcellB);
-        assertEquals(testcellA.getDowncell(),testcellB);
-    }
 
-    @Test
-    void setLeftCell() {
-        Cell testcellA = new Cell(1);
-        Cell testcellB = new Cell(2);
-        testcellA.setLeftcell(testcellB);
-        assertEquals(testcellA.getLeftcell(),testcellB);
-    }
-
-    @Test
-    void setRightCell() {
-        Cell testcellA = new Cell(1);
-        Cell testcellB = new Cell(2);
-        testcellA.setRightcell(testcellB);
-        assertEquals(testcellA.getRightcell(),testcellB);
-    }
 
     @Test
     void getCellId() {

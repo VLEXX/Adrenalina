@@ -12,9 +12,90 @@ public class CurrentDeckState {
 
     //costruttore
     public CurrentDeckState(){
-        this.ammodeck=null;
-        this.weaponsdeck=null;
-        this.powerupdeck=null;
+        this.ammodeck=new Stack<>();
+        for(int i=0; i<3; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{0,1,2});
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<3; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{2,1,0});
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<3; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{1,0,2});
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<3; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{1,2,0});
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<3; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{0,2,1});
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<3; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{2,0,1});
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<2; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{0,2,0});
+            a.setPossiblePowerUp(true);
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<2; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{2,0,0});
+            a.setPossiblePowerUp(true);
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<2; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{0,0,2});
+            a.setPossiblePowerUp(true);
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<2; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{0,2,0});
+            a.setPossiblePowerUp(true);
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<4; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{1,1,0});
+            a.setPossiblePowerUp(true);
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<4; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{0,1,1});
+            a.setPossiblePowerUp(true);
+            this.ammodeck.push(a);
+        }
+        for(int i=0; i<4; i++){
+            Ammo a = new Ammo();
+            a.setAmmoList(new int[]{1,0,1});
+            a.setPossiblePowerUp(true);
+            this.ammodeck.push(a);
+        }
+        this.weaponsdeck=new Stack<>();
+        for(Weapons weapons: Weapons.values()){
+            this.weaponsdeck.push(weapons);
+        }
+        this.powerupdeck = new Stack<>();
+        for(int i=0; i<2; i++) {
+            for (PowerUp powerup : PowerUp.values()) {
+                this.powerupdeck.push(powerup);
+            }
+        }
+
     }
 
     //ritorna il mazzo delle munizioni

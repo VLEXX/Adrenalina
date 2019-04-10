@@ -29,9 +29,9 @@ class PlayerBoardTest {
     void getPowerupList() {
         PlayerBoard p = new PlayerBoard();
         ArrayList<PowerUp> powerupTest = new ArrayList<>();
-        powerupTest.add(PowerUp.TAGBACK_GRENADE);
+        powerupTest.add(PowerUp.TAGBACK_GRENADE_BLUE);
         p.setPowerupList(powerupTest);
-        assertEquals(p.getPowerupList().get(0), PowerUp.TAGBACK_GRENADE);
+        assertEquals(p.getPowerupList().get(0), PowerUp.TAGBACK_GRENADE_BLUE);
     }
 
     @Test

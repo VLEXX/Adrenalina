@@ -11,19 +11,25 @@ class CurrentDeckStateTest {
     @Test
     void getAmmodeck() {
         CurrentDeckState c = new CurrentDeckState();
-        assertEquals(c.getAmmodeck(), null);
+        assertEquals(c.getAmmodeck().isEmpty(), false);
     }
 
     @Test
     void getWeaponsdeck() {
         CurrentDeckState c = new CurrentDeckState();
-        assertEquals(c.getWeaponsdeck(), null);
+        for(Weapons weapons: Weapons.values()){
+            assertEquals(c.getWeaponsdeck().contains(weapons), true);
+        }
     }
 
     @Test
     void getPowerupdeck() {
         CurrentDeckState c = new CurrentDeckState();
-        assertEquals(c.getPowerupdeck(), null);
+        for(int i=0; i<2; i++) {
+            for (PowerUp powerup : PowerUp.values()) {
+                assertEquals(c.getPowerupdeck().contains(powerup), true);
+            }
+        }
     }
 
 }

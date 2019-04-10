@@ -103,5 +103,9 @@ class CurrentPlayerStateTest {
         c.setPlayerturn(Player.YELLOW);
         c.notifyObserver();
         assertEquals(s.isActiveturn(), true);
+        s.setActiveturn(false);
+        c.setPlayerturn(Player.BLACK);
+        c.notifyObserver();
+        assertEquals(s.isActiveturn(), false);
     }
 }

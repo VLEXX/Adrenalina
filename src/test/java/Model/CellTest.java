@@ -41,7 +41,6 @@ class CellTest {
         assertEquals(testcellA.getDownCell(),testcellB);
         assertEquals(testcellA.getLeftCell(),testcellB);
         assertEquals(testcellA.getRightCell(),testcellB);
-
     }
 
 

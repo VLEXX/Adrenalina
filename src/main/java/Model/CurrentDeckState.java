@@ -31,19 +31,4 @@ public class CurrentDeckState {
     public Stack<PowerUp> getPowerupdeck() {
         return this.powerupdeck;
     }
-
-    //setta il mazzo delle munizioni
-    public void setAmmodeck(Stack<Ammo> ammodeck) {
-        this.ammodeck = ammodeck;
-    }
-
-    //setta il mazzo delle armi
-    public void setWeaponsdeck(Stack<Weapons> weaponsdeck) {
-        this.weaponsdeck = weaponsdeck;
-    }
-
-    //setta il mazzo dei potenziamenti
-    public void setPowerupdeck(Stack<PowerUp> powerupdeck) {
-        this.powerupdeck = powerupdeck;
-    }
 }

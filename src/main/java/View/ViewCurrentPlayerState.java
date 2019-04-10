@@ -8,7 +8,7 @@ import Model.Position;
 //Classe che mantiene lo stato attuale del giocatore per la View
 public class ViewCurrentPlayerState {
     private boolean viewturn;           //"true" se è il turno del giocatore(this), "false" altrimenti
-    private int actioncounter;           //contatore delle azioni (max 2)
+    private int actioncounter;          //contatore delle azioni (max 2)
     private Action actionstate;         //indica lo stato azione in cui si trova il giocatore(this), esempio "spara", "spostati",...
     private Position playerposition;    //indica la posizione del giocatore
     private PlayerBoard board;          //memorizza lo stato della plancia giocatore per la view

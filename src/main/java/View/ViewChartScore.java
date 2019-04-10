@@ -1,33 +1,20 @@
 package View;
 
 import Model.Player;
+import Model.ChartScore;
 
 public class ViewChartScore {
-    private int[] score;
+    private ChartScore c;
 
     public ViewChartScore(){
-        this.score = new int[]{0,0,0,0,0};
+        this.c = new ChartScore();
     }
 
-    public int[] getScore() {
-        return score;
+    public void setChartScore(ChartScore c) {
+        this.c = c;
     }
 
-    public void setScore(Player p, int score) {
-        if(p == Player.YELLOW){
-            this.score[0]= this.score[0]+score;
-        }
-        if(p == Player.PURPLE){
-            this.score[1]= this.score[1]+score;
-        }
-        if(p == Player.GREEN){
-            this.score[2]= this.score[2]+score;
-        }
-        if(p == Player.BLUE){
-            this.score[3]= this.score[3]+score;
-        }
-        if(p == Player.BLACK){
-            this.score[4]= this.score[4]+score;
-        }
+    public ChartScore getChartScore() {
+        return c;
     }
 }

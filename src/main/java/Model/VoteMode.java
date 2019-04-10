@@ -9,7 +9,7 @@ public class VoteMode {
     //Costruttore che inizialzza l'array a 0 e la modalità finale votata a -1 (le modalità vanno da 1 a 3)
     public VoteMode(){
         voteresultmode = new int[]{0,0,0,0};
-        finalresultmode =-1;
+        finalresultmode = -1;
     }
 
     //Ritorna la modalità finale votata

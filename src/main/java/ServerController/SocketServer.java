@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SocketServer {
+public class SocketServer extends Thread{
     private int port;
 
     public SocketServer(int port){
@@ -30,5 +30,13 @@ public class SocketServer {
             }
         }
         executor.shutdown();
+    }
+
+    public void run(){
+        try {
+            startSocketServer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

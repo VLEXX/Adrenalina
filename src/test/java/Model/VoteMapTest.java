@@ -3,6 +3,8 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class VoteMapTest {
@@ -30,7 +32,7 @@ class VoteMapTest {
     }
 
     @Test
-    void setVoteResult() {
+    void setVoteResult() throws RemoteException {
         VoteMap m = new VoteMap();
         m.setVoteresult(1);
         m.setVoteresult(1);

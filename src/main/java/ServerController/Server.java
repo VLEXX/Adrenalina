@@ -1,17 +1,21 @@
 package ServerController;
 
 import java.io.IOException;
+import java.rmi.AlreadyBoundException;
 
 public class Server {
 
-    private SocketServer socketServer;
+    private SocketServer socketserver;
+    private ServerRMI server_rmi;
 
     public Server(){
-        this.socketServer = new SocketServer(5858);
+        this.socketserver = new SocketServer(5858);
+        this.server_rmi = new ServerRMI();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, AlreadyBoundException {
         Server server = new Server();
-        server.socketServer.startSocketServer();
+        server.socketserver.start();
+        server.server_rmi.start();
     }
 }

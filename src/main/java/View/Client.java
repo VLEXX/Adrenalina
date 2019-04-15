@@ -1,37 +1,49 @@
 package View;
 
-import Model.DataPacket;
-import Model.Player;
-
-import java.io.*;
-import java.net.Socket;
-
+import java.io.IOException;
+import java.rmi.NotBoundException;
+import java.util.Scanner;
 
 public class Client {
-        private String ip;
-        private int port;
 
-        public Client(String ip, int port) {
-            this.ip = ip;
-            this.port = port;
+    private ClientStrategy clientstrategy;
+
+    public Client(){
+        clientstrategy = null;
+    }
+
+    public void setClientstrategy(ClientStrategy clientstrategy) {
+        this.clientstrategy = clientstrategy;
+    }
+
+    public static void main(String[] args){
+        System.out.println("Socket o RMI");
+        Scanner in = new Scanner(System.in);
+        String s = in.nextLine();
+        Client client = new Client();
+        if(s.equals("socket")){
+            client.clientstrategy = new ClientWithSocket("127.0.0.1", 5858);
+            try {
+                client.clientstrategy.startClient();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NotBoundException e) {
+                e.printStackTrace();
+            }
         }
-        public static void main(String[] args) throws IOException, ClassNotFoundException {
-            Client client = new Client("127.0.0.1", 5858);
-            client.startClient();
+        if(s.equals("rmi")){
+            client.clientstrategy = new ClientWithRMI();
+            try {
+                client.clientstrategy.startClient();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NotBoundException e) {
+                e.printStackTrace();
+            }
         }
-
-        private void startClient() throws IOException, ClassNotFoundException {
-            Socket socket = new Socket(ip, port);
-            System.out.println("Connection established");
-
-            InputStream inputStream = socket.getInputStream();
-
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-
-            DataPacket d = (DataPacket) objectInputStream.readObject();
-
-            System.out.println(d.getPlayerstatemap().get(Player.YELLOW).getActiveplayer().toString());
-
-            socket.close();
-        }
+    }
 }

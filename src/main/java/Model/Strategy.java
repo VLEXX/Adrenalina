@@ -1,4 +1,4 @@
-package ServerController;
+package Model;
 
 public interface Strategy {
 

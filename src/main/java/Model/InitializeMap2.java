@@ -1,6 +1,4 @@
-package ServerController;
-
-import Model.Map;
+package Model;
 
 public class InitializeMap2 implements Strategy {
     @Override

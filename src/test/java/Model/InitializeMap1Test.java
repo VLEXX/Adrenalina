@@ -1,9 +1,8 @@
 //Author: Alex Saletti
-package ServerController;
+package Model;
 
-import Model.Cell;
+import Model.InitializeMap1;
 import Model.Map;
-import Model.Room;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

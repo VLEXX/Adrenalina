@@ -1,5 +1,5 @@
 //Author: Federico Scatà e Giulia Rivara
-package ServerController;
+package Model;
 
 import Model.Ammo;
 import Model.PowerUp;

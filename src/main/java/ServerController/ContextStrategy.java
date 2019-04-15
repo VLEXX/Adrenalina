@@ -1,6 +1,7 @@
 package ServerController;
 
 import Model.Map;
+import Model.Strategy;
 
 public class ContextStrategy {
     private Strategy strategy;

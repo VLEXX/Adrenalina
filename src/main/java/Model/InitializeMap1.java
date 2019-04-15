@@ -1,9 +1,5 @@
 //Author: Alex Saletti
-package ServerController;
-
-import Model.Cell;
-import Model.Map;
-import Model.Room;
+package Model;
 
 public class InitializeMap1 implements Strategy {
 

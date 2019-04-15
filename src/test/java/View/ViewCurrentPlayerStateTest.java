@@ -1,88 +1,40 @@
 package View;
 
-import Model.Action;
-import Model.PlayerBoard;
-import Model.Position;
+import Model.CurrentPlayerState;
+import Model.Player;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.text.View;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ViewCurrentPlayerStateTest {
 
     @Test
-    void isViewTurn() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.isViewturn(), false);
+    void getCurrentPlayerState() {
+        ViewCurrentPlayerState v = new ViewCurrentPlayerState();
+        assertEquals(v.getCurrentPlayerState(), null);
     }
 
     @Test
-    void setViewTurn() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        p.setViewturn(true);
-        assertEquals(p.isViewturn(), true);
+    void getActiveplayer() {
+        ViewCurrentPlayerState v = new ViewCurrentPlayerState();
+        assertEquals(v.getActiveplayer(), null);
     }
 
     @Test
-    void getActionState() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.getActionstate(), null);
+    void setCurrentPlayerState() {
+        ViewCurrentPlayerState v = new ViewCurrentPlayerState();
+        CurrentPlayerState c = new CurrentPlayerState();
+        c.setActiveplayer(Player.BLACK);
+        v.setCurrentPlayerState(c);
+        assertEquals(v.getCurrentPlayerState().getActiveplayer(), Player.BLACK);
     }
 
     @Test
-    void setActionState() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        p.setActionstate(Action.SHOOT);
-        assertEquals(p.getActionstate(), Action.SHOOT);
-    }
-
-    @Test
-    void getPlayerPosition() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.getPlayerposition(), null);
-    }
-
-    @Test
-    void setPlayerPosition() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        Position pos = new Position();
-        p.setPlayerposition(pos);
-        assertEquals(p.getPlayerposition(), pos);
-    }
-
-    @Test
-    void getActionCunter() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.getActioncounter(), 2);
-    }
-
-    @Test
-    void resetActionCunter() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        p.decreaseActionCounter();
-        p.resetActionCunter();
-        assertEquals(p.getActioncounter(), 2);
-    }
-
-    @Test
-    void decreaseActionCounter() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        p.decreaseActionCounter();
-        assertEquals(p.getActioncounter(), 1);
-        p.decreaseActionCounter();
-        assertEquals(p.getActioncounter(), 0);
-    }
-
-    @Test
-    void getBoard() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        assertEquals(p.getBoard(), null);
-    }
-
-    @Test
-    void setBoard() {
-        ViewCurrentPlayerState p = new ViewCurrentPlayerState();
-        PlayerBoard b = new PlayerBoard();
-        p.setBoard(b);
-        assertEquals(p.getBoard(), b);
+    void setActiveplayer() {
+        ViewCurrentPlayerState v = new ViewCurrentPlayerState();
+        v.setActiveplayer(Player.YELLOW);
+        assertEquals(v.getActiveplayer(), Player.YELLOW);
     }
 }

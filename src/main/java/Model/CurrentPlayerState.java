@@ -1,8 +1,10 @@
 //Author: Federico Scatà
 package Model;
 
+import java.io.Serializable;
+
 //Classe che memorizza lo stato attuale del giocatore
-public class CurrentPlayerState implements Observer{
+public class CurrentPlayerState implements Observer, Serializable {
     private Position playerposition;    //Posizione attuale del giocatore
     private boolean activeturn;         //"true" se è il proprio turno "false" altrimenti
     private PlayerBoard board;          //PlanciaGiocatore

@@ -9,7 +9,7 @@ public class ViewMapState {
 
     //costruttore
     public ViewMapState(){
-        this.currentmap =null;
+        this.currentmap = null;
     }
 
     //ritorna lo stato della mappa

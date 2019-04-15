@@ -1,6 +1,5 @@
 package View;
 
-import Model.Player;
 import Model.ChartScore;
 
 public class ViewChartScore {

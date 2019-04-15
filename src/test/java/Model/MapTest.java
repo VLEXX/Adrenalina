@@ -29,7 +29,7 @@ class MapTest {
     @Test
     void addRoom() {
         Map m = new Map();
-        Room r = new Room();
+        Room r = new Room(3);
         m.addRoom(r);
         assertEquals(m.getRoomList().get(0), r);
     }

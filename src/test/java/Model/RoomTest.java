@@ -11,7 +11,7 @@ class RoomTest {
 
     @Test
     void addCellslist() {
-       Room testroom = new Room();
+       Room testroom = new Room(1);
        Cell c = new Cell(1);
        testroom.addCellsList(c);
        assertEquals(testroom.getCellsList().get(0).getCellId(), 1);
@@ -19,7 +19,13 @@ class RoomTest {
 
     @Test
     void getCelllist() {
-        Room TestRoom = new Room();
+        Room TestRoom = new Room(1);
         assertEquals(TestRoom.getCellsList().isEmpty(), true);
+    }
+
+    @Test
+    void getRoomId() {
+        Room TestRoom = new Room(1);
+        assertEquals(TestRoom.getRoomId(),1);
     }
 }

@@ -1,3 +1,4 @@
+//Author: Alex Saletti
 package ServerController;
 
 import Model.Cell;
@@ -10,11 +11,11 @@ public class InitializeMap1 implements Strategy {
     public Map initializeMap() {
         //creazione delle istanze mappa1, stanze e celle
         Map map1 = new Map();
-        Room room1 = new Room();
-        Room room2 = new Room();
-        Room room3 = new Room();
-        Room room4 = new Room();
-        Room room5 = new Room();;
+        Room room1 = new Room(1);
+        Room room2 = new Room(2);
+        Room room3 = new Room(3);
+        Room room4 = new Room(4);
+        Room room5 = new Room(5);
         Cell cell1 = new Cell(1);
         Cell cell2 = new Cell(2);
         Cell cell3 = new Cell(3);
@@ -62,6 +63,6 @@ public class InitializeMap1 implements Strategy {
 
 
 
-        return null;
+        return map1;
     }
 }

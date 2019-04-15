@@ -15,12 +15,12 @@ public class Cell {
     //cella presente a destra, NULL se c'è il muro
     private Cell rightcell;
     //id della cella
-    private int cellid;
+    private int id;
 
 
     //costruttore
     public Cell(int id){
-        this.cellid=id;
+        this.id =id;
         this.ammohere =null;
         this.downcell =null;
         this.leftcell =null;
@@ -57,12 +57,12 @@ public class Cell {
 
     //restituisce l'ID della cella
     public int getCellId() {
-        return cellid;
+        return id;
     }
 
     //setta l'ID della cella
     public void setCellId(int id) {
-        cellid = id;
+      this.id = id;
     }
 
     //restituisce il tipo di munizioni presenti, NULL se assenti

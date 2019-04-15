@@ -82,3 +82,7 @@ b
 2src/main/java/ServerController/InitializeMap4.java,f\3\f3cc8887aea6d6ce7c883022ff927881d33c7334
 \
 ,src/main/java/ServerController/Strategy.java,1\b\1b6a703bd1f713d2d265d9f7cf377afb258eb660
+b
+2src/main/java/ServerController/InitializeMap1.java,7\8\78b2570ef5473b8ce61ae6ed035fe6e115787def
+f
+6src/test/java/ServerController/InitializeMap1Test.java,f\a\fa0c29f60f64bdceae8eda16dd82577e8801b150

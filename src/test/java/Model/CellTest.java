@@ -47,15 +47,15 @@ class CellTest {
 
     @Test
     void getCellId() {
-        Cell testcellA = new Cell(1);
-        assertEquals(testcellA.getCellId(),1);
+        Cell TestCellA = new Cell(1);
+        assertEquals(TestCellA.getCellId(),1);
     }
 
     @Test
     void setCellId() {
-        Cell testcellA = new Cell(1);
-        testcellA.setCellId(6);
-        assertEquals(testcellA.getCellId(), 6);
+        Cell TestCellA = new Cell(1);
+        TestCellA.setCellId(6);
+        assertEquals(TestCellA.getCellId(), 6);
     }
 
     @Test

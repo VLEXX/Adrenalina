@@ -30,7 +30,7 @@ class PositionTest {
     @Test
     void setCurrentRoom() {
         Position p = new Position();
-        Room r = new Room();
+        Room r = new Room(1);
         p.setCurrentroom(r);
         assertEquals(p.getCurrentroom(), r);
     }

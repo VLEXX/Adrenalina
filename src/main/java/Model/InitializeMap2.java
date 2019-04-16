@@ -4,7 +4,7 @@ package Model;
 public class InitializeMap2 implements Strategy {
     @Override
     public Map initializeMap() {
-        //creazione delle istanze mappa1, stanze e celle
+        //creazione delle istanze mappa2, stanze e celle
         Map map2 = new Map();
         Room room1 = new Room(1);
         Room room2 = new Room(2);

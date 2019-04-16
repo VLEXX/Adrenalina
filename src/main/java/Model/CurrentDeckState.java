@@ -1,5 +1,4 @@
 //Author: Federico Scatà
-
 package Model;
 
 import java.util.Stack;

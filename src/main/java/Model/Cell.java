@@ -60,11 +60,6 @@ public class Cell {
         return id;
     }
 
-    //setta l'ID della cella
-    public void setCellId(int id) {
-      this.id = id;
-    }
-
     //restituisce il tipo di munizioni presenti, NULL se assenti
     public Ammo getAmmohere() {
         return ammohere;

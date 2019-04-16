@@ -86,3 +86,5 @@ b
 2src/main/java/ServerController/InitializeMap1.java,7\8\78b2570ef5473b8ce61ae6ed035fe6e115787def
 f
 6src/test/java/ServerController/InitializeMap1Test.java,f\a\fa0c29f60f64bdceae8eda16dd82577e8801b150
+b
+2src/main/java/ServerController/InitializeMap2.java,0\9\093e55880d1cc921796537420597d52a6ad7d275

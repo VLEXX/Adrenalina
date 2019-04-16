@@ -51,12 +51,6 @@ class CellTest {
         assertEquals(TestCellA.getCellId(),1);
     }
 
-    @Test
-    void setCellId() {
-        Cell TestCellA = new Cell(1);
-        TestCellA.setCellId(6);
-        assertEquals(TestCellA.getCellId(), 6);
-    }
 
     @Test
     void getAmmoHere() {

@@ -32,4 +32,15 @@ class CurrentDeckStateTest {
         }
     }
 
+    @Test
+    void getPlayers(){
+        CurrentDeckState c = new CurrentDeckState();
+        assertEquals(c.getPlayers().contains(Player.YELLOW), true);
+        assertEquals(c.getPlayers().contains(Player.PURPLE), true);
+        assertEquals(c.getPlayers().contains(Player.GREEN), true);
+        assertEquals(c.getPlayers().contains(Player.BLUE), true);
+        assertEquals(c.getPlayers().contains(Player.BLACK), true);
+    }
+
+
 }

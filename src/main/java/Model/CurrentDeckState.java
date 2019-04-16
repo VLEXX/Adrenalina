@@ -1,6 +1,7 @@
 //Author: Federico Scatà
 package Model;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 //Classe che memorizza lo stato corrente dei mazzi delle Armi, Munizioni e Potenziamenti
@@ -8,6 +9,7 @@ public class CurrentDeckState {
     private Stack<Ammo> ammodeck;           //Mazzo delle munizioni
     private Stack<Weapons> weaponsdeck;     //Mazzo delle armi
     private Stack<PowerUp> powerupdeck;     //Mazzo dei potenziamenti
+    private ArrayList<Player> players;      //Mazzo per gestire la scelta personaggi
 
     //costruttore
     public CurrentDeckState(){
@@ -95,6 +97,10 @@ public class CurrentDeckState {
             }
         }
 
+        this.players = new ArrayList<>();
+        for(Player player: Player.values()){
+            players.add(player);
+        }
     }
 
     //ritorna il mazzo delle munizioni
@@ -110,5 +116,9 @@ public class CurrentDeckState {
     //ritorna il mazzo dei potenziamenti
     public Stack<PowerUp> getPowerupdeck() {
         return this.powerupdeck;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }

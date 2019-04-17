@@ -5,7 +5,9 @@ import Model.Player;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class ClientManager {
 
@@ -36,12 +38,14 @@ public class ClientManager {
 
     public void manageChoice(Scanner inMessage, Scanner stdin, ObjectOutputStream objectOutputStream, ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
         System.out.println(inMessage.nextLine());
+        System.out.println("hooooola");
         for(int i = 0; i<5; i++) {
             System.out.println(inMessage.nextLine());
         }
         Boolean ok = false;
         while (true) {
             if(ok==false) {
+                System.out.println("hola");
                 Player player = this.chooseCharacter(stdin.nextLine());
                 objectOutputStream.writeObject(player);
                 System.out.println(inMessage.nextLine());

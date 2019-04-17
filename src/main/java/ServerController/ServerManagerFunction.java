@@ -15,6 +15,33 @@ public class ServerManagerFunction {
     public void chooseCharacterManager(PrintWriter printWriter, ObjectInputStream objectInputStream, CurrentDeckState deckState, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
         printWriter.println("Choose a character...");
         printWriter.flush();
+        if(deckState.getPlayers().size()==4){
+            printWriter.println("-------");
+        }
+        if(deckState.getPlayers().size()==3){
+            printWriter.println("-------");
+            printWriter.flush();
+            printWriter.println("-------");
+            printWriter.flush();
+        }
+        if(deckState.getPlayers().size()==2){
+            printWriter.println("-------");
+            printWriter.flush();
+            printWriter.println("-------");
+            printWriter.flush();
+            printWriter.println("-------");
+            printWriter.flush();
+        }
+        if(deckState.getPlayers().size()==1){
+            printWriter.println("-------");
+            printWriter.flush();
+            printWriter.println("-------");
+            printWriter.flush();
+            printWriter.println("-------");
+            printWriter.flush();
+            printWriter.println("-------");
+            printWriter.flush();
+        }
         for(Player player: deckState.getPlayers()) {
             printWriter.println(player);
             printWriter.flush();

@@ -1,6 +1,7 @@
 package ServerController;
 
 import Model.CurrentDeckState;
+import Model.InizializeAllPlay;
 
 import java.io.*;
 
@@ -8,9 +9,11 @@ import java.net.Socket;
 
 public class SocketClientHandler implements Runnable {
     private Socket socket;
+    private InizializeAllPlay allPlay;
 
-    public SocketClientHandler(Socket socket) {
+    public SocketClientHandler(Socket socket, InizializeAllPlay allPlay) {
         this.socket = socket;
+        this.allPlay = allPlay;
     }
 
     public void run() {
@@ -21,10 +24,8 @@ public class SocketClientHandler implements Runnable {
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             PrintWriter outMessage = new PrintWriter(this.socket.getOutputStream());
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
-            CurrentDeckState currentDeckState = new CurrentDeckState();
-            
-            serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, currentDeckState, objectOutputStream);
 
+            serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay.getCurrentDeckState(), objectOutputStream);
 
             socket.close();
 

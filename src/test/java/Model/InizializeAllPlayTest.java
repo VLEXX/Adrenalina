@@ -55,4 +55,10 @@ class InizializeAllPlayTest{
         InizializeAllPlay inizializeAllPlay = new InizializeAllPlay();
         assertEquals(inizializeAllPlay.getIdClientList().size(), 0);
     }
+
+    @Test
+    void getCurrentDeckState(){
+        InizializeAllPlay inizializeAllPlay = new InizializeAllPlay();
+        assertEquals(inizializeAllPlay.getCurrentDeckState().getPlayers().size(), 5);
+    }
 }

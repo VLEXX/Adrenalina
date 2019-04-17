@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class InizializeAllPlay {
     private ArrayList<CurrentTurnState> currentTurnState;
     private ArrayList<CurrentPlayerState> currentPlayerState;
+    private CurrentDeckState currentDeckState;
     private ArrayList<ChartScore> chartScore;
     private StateSelectedMap stateSelectedMap;
     private StateSelectedMode stateSelectedMode;
@@ -23,6 +24,7 @@ public class InizializeAllPlay {
         voteMap = new VoteMap();
         voteMode = new VoteMode();
         idClientList = new ArrayList<>();
+        currentDeckState = new CurrentDeckState();
     }
 
     public ArrayList<ChartScore> getChartScore() {
@@ -55,5 +57,9 @@ public class InizializeAllPlay {
 
     public ArrayList<IDClientList> getIdClientList() {
         return idClientList;
+    }
+
+    public CurrentDeckState getCurrentDeckState() {
+        return currentDeckState;
     }
 }

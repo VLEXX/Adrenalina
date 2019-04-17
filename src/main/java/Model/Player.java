@@ -7,5 +7,6 @@ public enum Player {
     PURPLE,
     GREEN,
     BLUE,
-    BLACK
+    BLACK,
+    FLAG
 }

@@ -16,6 +16,7 @@ public class ServerRMI extends Thread{
         Registry registry = LocateRegistry.createRegistry(8080);
         registry.bind("server_central", voteMap);
 
+
         System.out.println("Attendo invocazioni dal client...");
     }
 

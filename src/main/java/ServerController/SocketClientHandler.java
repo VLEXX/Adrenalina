@@ -1,8 +1,6 @@
 package ServerController;
 
-import Model.CurrentPlayerState;
-import Model.DataPacket;
-import Model.Player;
+import Model.CurrentDeckState;
 
 import java.io.*;
 
@@ -19,19 +17,19 @@ public class SocketClientHandler implements Runnable {
         try {
             OutputStream outputStream = this.socket.getOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            InputStream inputStream = this.socket.getInputStream();
+            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+            PrintWriter outMessage = new PrintWriter(this.socket.getOutputStream());
+            ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
+            CurrentDeckState currentDeckState = new CurrentDeckState();
+            
+            serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, currentDeckState, objectOutputStream);
 
-            DataPacket d = new DataPacket(Player.YELLOW, Player.BLACK, Player.BLUE);
-            CurrentPlayerState c = new CurrentPlayerState();
-            c.setActiveplayer(Player.YELLOW);
-            d.updatePlayerstate(Player.YELLOW, c);
-            objectOutputStream.writeObject(d);
-
-            System.out.println("inviato");
 
             socket.close();
 
         }
-        catch (IOException e) {
+        catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

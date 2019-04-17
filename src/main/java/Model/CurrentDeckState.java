@@ -98,9 +98,11 @@ public class CurrentDeckState {
         }
 
         this.players = new ArrayList<>();
-        for(Player player: Player.values()){
-            players.add(player);
-        }
+        players.add(Player.BLUE);
+        players.add(Player.BLACK);
+        players.add(Player.GREEN);
+        players.add(Player.PURPLE);
+        players.add(Player.YELLOW);
     }
 
     //ritorna il mazzo delle munizioni

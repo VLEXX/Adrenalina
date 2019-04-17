@@ -19,9 +19,11 @@ public class ClientWithRMI implements ClientStrategy {
         String[] e = registry.list();
 
         String remoteObject = "server_central";
-        VoteMapInterface voteMapInterface = (VoteMapInterface) registry.lookup(remoteObject);
 
-        voteMapInterface.setVoteresult(0);
-        System.out.println("Il voto è: " + voteMapInterface.getVoteresult()[0]);
+        System.out.println("Choose a character...");
+        System.out.println("Black | Blue | Green | Purple | Yellow");
+
+        ClientManager clientManager = new ClientManager();
+
     }
 }

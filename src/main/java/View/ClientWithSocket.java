@@ -5,6 +5,7 @@ import Model.Player;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 
 public class ClientWithSocket implements ClientStrategy{
@@ -21,13 +22,16 @@ public class ClientWithSocket implements ClientStrategy{
             Socket socket = new Socket(ip, port);
             System.out.println("Connection established");
 
+            ClientManager clientManager = new ClientManager();
+
             InputStream inputStream = socket.getInputStream();
-
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+            OutputStream outputStream = socket.getOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            Scanner stdin = new Scanner(System.in);
+            Scanner inMessage = new Scanner(socket.getInputStream());
 
-            DataPacket d = (DataPacket) objectInputStream.readObject();
-
-            System.out.println(d.getPlayerstatemap().get(Player.YELLOW).getActiveplayer().toString());
+            clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream);
 
             socket.close();
         }

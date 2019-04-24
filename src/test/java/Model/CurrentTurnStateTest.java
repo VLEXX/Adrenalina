@@ -23,7 +23,7 @@ class CurrentTurnStateTest {
     @Test
     void notifyObserver(){
         CurrentTurnState c = new CurrentTurnState();
-        CurrentPlayerState s = new CurrentPlayerState();
+        CurrentPlayerState s = new CurrentPlayerState(Player.YELLOW);
         s.setActiveplayer(Player.YELLOW);
         c.addObserver(s);
         c.setPlayerturn(Player.YELLOW);
@@ -34,7 +34,7 @@ class CurrentTurnStateTest {
     @Test
     void removeObserver() {
         CurrentTurnState c = new CurrentTurnState();
-        CurrentPlayerState s = new CurrentPlayerState();
+        CurrentPlayerState s = new CurrentPlayerState(Player.YELLOW);
         s.setActiveplayer(Player.YELLOW);
         c.setPlayerturn(Player.YELLOW);
         c.addObserver(s);
@@ -46,7 +46,7 @@ class CurrentTurnStateTest {
     @Test
     void addObserver(){
         CurrentTurnState c = new CurrentTurnState();
-        CurrentPlayerState s = new CurrentPlayerState();
+        CurrentPlayerState s = new CurrentPlayerState(Player.YELLOW);
         s.setActiveplayer(Player.YELLOW);
         c.setPlayerturn(Player.YELLOW);
         c.addObserver(s);

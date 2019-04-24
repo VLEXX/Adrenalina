@@ -25,7 +25,7 @@ class ViewCurrentPlayerStateTest {
     @Test
     void setCurrentPlayerState() {
         ViewCurrentPlayerState v = new ViewCurrentPlayerState();
-        CurrentPlayerState c = new CurrentPlayerState();
+        CurrentPlayerState c = new CurrentPlayerState(Player.BLACK);
         c.setActiveplayer(Player.BLACK);
         v.setCurrentPlayerState(c);
         assertEquals(v.getCurrentPlayerState().getActiveplayer(), Player.BLACK);

@@ -1,5 +1,6 @@
 package ServerController;
 
+import Model.InizializeAllPlay;
 import Model.VoteMap;
 
 import java.rmi.AlreadyBoundException;
@@ -8,6 +9,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class ServerRMI extends Thread{
+    private InizializeAllPlay allPlay;
+
+    public ServerRMI(InizializeAllPlay allPlay){
+        this.allPlay = allPlay;
+    }
 
     public void startServerRMI() throws RemoteException, AlreadyBoundException {
         VoteMap voteMap = new VoteMap();

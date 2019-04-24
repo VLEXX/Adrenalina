@@ -41,7 +41,7 @@ class DataPacketTest {
     @Test
     void updatePlayerstate() {
         DataPacket d = new DataPacket(Player.YELLOW, Player.BLACK, Player.BLUE);
-        CurrentPlayerState c = new CurrentPlayerState();
+        CurrentPlayerState c = new CurrentPlayerState(Player.YELLOW);
         c.setActiveplayer(Player.YELLOW);
         d.updatePlayerstate(Player.YELLOW,c);
         assertEquals(d.getPlayerstatemap().get(Player.YELLOW).getActiveplayer(), Player.YELLOW);

@@ -1,11 +1,11 @@
 package ServerController;
 
-import Model.CurrentDeckState;
 import Model.InizializeAllPlay;
 
 import java.io.*;
 
 import java.net.Socket;
+import java.util.Scanner;
 
 public class SocketClientHandler implements Runnable {
     private Socket socket;
@@ -23,10 +23,11 @@ public class SocketClientHandler implements Runnable {
             InputStream inputStream = this.socket.getInputStream();
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             PrintWriter outMessage = new PrintWriter(this.socket.getOutputStream());
+            Scanner inMessage = new Scanner(socket.getInputStream());
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
 
-            serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay.getCurrentDeckState(), objectOutputStream);
-
+            serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream);
+            serverManagerFunction.manageVoteMap(inMessage, allPlay);
             socket.close();
 
         }

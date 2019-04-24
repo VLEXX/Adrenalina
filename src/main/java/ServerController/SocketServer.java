@@ -11,11 +11,10 @@ import java.util.concurrent.Executors;
 public class SocketServer extends Thread{
     private int port;
     private InizializeAllPlay allPlay;
-    private int j;
 
-    public SocketServer(int port){
+    public SocketServer(int port, InizializeAllPlay allPlay){
         this.port = port;
-        this.allPlay = new InizializeAllPlay();
+        this.allPlay = allPlay;
     }
 
     public void startSocketServer() throws IOException {

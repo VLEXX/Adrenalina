@@ -1,19 +1,21 @@
 package ServerController;
 
-import java.io.IOException;
-import java.rmi.AlreadyBoundException;
+import Model.InizializeAllPlay;
 
 public class Server {
 
     private SocketServer socketserver;
     private ServerRMI server_rmi;
+    private InizializeAllPlay allPlay;
 
     public Server(){
-        this.socketserver = new SocketServer(5858);
-        this.server_rmi = new ServerRMI();
+        this.allPlay = new InizializeAllPlay();
+        System.out.println("Model Inizialized\n");
+        this.socketserver = new SocketServer(5858, this.allPlay);
+        this.server_rmi = new ServerRMI(this.allPlay);
     }
 
-    public static void main(String[] args) throws IOException, AlreadyBoundException {
+    public static void main(String[] args) {
         Server server = new Server();
         server.socketserver.start();
         server.server_rmi.start();

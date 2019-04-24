@@ -13,13 +13,13 @@ public class CurrentPlayerState implements Observer, Serializable {
     private Player activeplayer;        //Memorizza il colore/personaggio scelto dal giocatore
 
     //Costruttore che setta tutti gli attributi a "null" e il contatore al massimo (cioè 2)
-    public CurrentPlayerState(){
+    public CurrentPlayerState(Player player){
         this.playerposition =null;
         this.activeturn =false;
         this.board =null;
         this.actionstate =null;
         this.actioncounter =2;
-        this.activeplayer =null;
+        this.activeplayer = player;
     }
 
     //Ritorna la Posizione

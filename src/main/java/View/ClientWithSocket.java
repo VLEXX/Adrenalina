@@ -1,8 +1,5 @@
 package View;
 
-import Model.DataPacket;
-import Model.Player;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -20,7 +17,7 @@ public class ClientWithSocket implements ClientStrategy{
         public void startClient() throws IOException, ClassNotFoundException {
 
             Socket socket = new Socket(ip, port);
-            System.out.println("Connection established");
+            System.out.println("Connection established\n\n");
 
             ClientManager clientManager = new ClientManager();
 
@@ -30,8 +27,10 @@ public class ClientWithSocket implements ClientStrategy{
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             Scanner stdin = new Scanner(System.in);
             Scanner inMessage = new Scanner(socket.getInputStream());
+            PrintWriter outMessage = new PrintWriter(socket.getOutputStream());
 
             clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream);
+            clientManager.manageVote(outMessage, inMessage, stdin);
 
             socket.close();
         }

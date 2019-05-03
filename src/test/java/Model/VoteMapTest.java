@@ -18,8 +18,7 @@ class VoteMapTest {
     @Test
     void setFinalResult() {
         VoteMap m = new VoteMap();
-        m.setFinalresult(2);
-        assertEquals(m.getFinalresult(),2);
+
     }
 
     @Test
@@ -41,5 +40,42 @@ class VoteMapTest {
         assertEquals(m.getVoteresult()[1], 2);
         assertEquals(m.getVoteresult()[2], 1);
         assertEquals(m.getVoteresult()[3], 0);
+    }
+
+    @Test
+    void addPlayerCounter(){
+        VoteMap m = new VoteMap();
+        m.addPlayerCounter();
+        assertEquals(m.getPlayerCounter(),1);
+    }
+
+    @Test
+    void getPlayerCounter(){
+        VoteMap m = new VoteMap();
+        assertEquals(m.getPlayerCounter(), 0);
+    }
+
+    @Test
+    void decreasePlayerCounter(){
+        VoteMap m = new VoteMap();
+        m.addPlayerCounter();
+        m.addPlayerCounter();
+        m.decreasePlayerCounter();
+        assertEquals(m.getPlayerCounter(), 1);
+    }
+
+    @Test
+    void getInitMap(){
+        VoteMap m = new VoteMap();
+        assertEquals(m.getInitMap(), false);
+    }
+
+    @Test
+    void setInitMap(){
+        VoteMap m = new VoteMap();
+        m.setInitmap();
+        assertEquals(m.getInitMap(), true);
+        m.setInitmap();
+        assertEquals(m.getInitMap(), true);
     }
 }

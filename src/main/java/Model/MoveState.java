@@ -1,9 +1,9 @@
-package ServerController;
+package Model;
 
 public class MoveState implements State {
 
     @Override
-    public void doAction(ContextState contextState) {
+    public void doAction() {
         //TODO
     }
 }

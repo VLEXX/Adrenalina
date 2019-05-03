@@ -76,15 +76,22 @@ public class ServerManagerFunction {
         String s = inMessage.nextLine();
         if(s.equals("1")){
             allPlay.getVoteMap().setVoteresult(0);
+            allPlay.getVoteMap().decreasePlayerCounter();
+            if(allPlay.getVoteMap().getPlayerCounter()==0){
+                allPlay.getVoteMap().setFinalresult();
+            }
         }
         if(s.equals("2")){
             allPlay.getVoteMap().setVoteresult(1);
+            allPlay.getVoteMap().decreasePlayerCounter();
         }
         if(s.equals("3")){
             allPlay.getVoteMap().setVoteresult(2);
+            allPlay.getVoteMap().decreasePlayerCounter();
         }
         if(s.equals("4")){
             allPlay.getVoteMap().setVoteresult(3);
+            allPlay.getVoteMap().decreasePlayerCounter();
         }
     }
 }

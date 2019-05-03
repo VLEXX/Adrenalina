@@ -2,6 +2,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //Classe che inizializza la partita
 public class InizializeAllPlay {
@@ -14,6 +15,7 @@ public class InizializeAllPlay {
     private VoteMap voteMap;
     private VoteMode voteMode;
     private ArrayList<IDClientList> idClientList;
+    private HashMap<Player, State>  playerState;
 
     public InizializeAllPlay(){
         currentTurnState = new ArrayList<>();
@@ -25,6 +27,7 @@ public class InizializeAllPlay {
         voteMode = new VoteMode();
         idClientList = new ArrayList<>();
         currentDeckState = new CurrentDeckState();
+        playerState = new HashMap<>();
     }
 
     public ArrayList<ChartScore> getChartScore() {
@@ -61,5 +64,17 @@ public class InizializeAllPlay {
 
     public CurrentDeckState getCurrentDeckState() {
         return currentDeckState;
+    }
+
+    public void addPlayerState(Player player, State state){
+        playerState.put(player, state);
+    }
+
+    public void updatePlayerState(Player player, State state){
+        playerState.replace(player, state);
+    }
+
+    public State getPlayerState(Player player){
+        return playerState.get(player);
     }
 }

@@ -61,4 +61,31 @@ class InizializeAllPlayTest{
         InizializeAllPlay inizializeAllPlay = new InizializeAllPlay();
         assertEquals(inizializeAllPlay.getCurrentDeckState().getPlayers().size(), 5);
     }
+
+    @Test
+    void addPlayerState(){
+        InizializeAllPlay inizializeAllPlay = new InizializeAllPlay();
+        State state = new MoveState();
+        inizializeAllPlay.addPlayerState(Player.YELLOW, state);
+        assertEquals(inizializeAllPlay.getPlayerState(Player.YELLOW), state);
+    }
+
+    @Test
+    void updatePlayerState(){
+        InizializeAllPlay inizializeAllPlay = new InizializeAllPlay();
+        State state = new MoveState();
+        State state1 = new ShootState();
+        inizializeAllPlay.addPlayerState(Player.YELLOW, state);
+        inizializeAllPlay.updatePlayerState(Player.YELLOW, state1);
+        assertEquals(inizializeAllPlay.getPlayerState(Player.YELLOW), state1);
+    }
+
+    @Test
+    void getPlayerState(){
+        InizializeAllPlay inizializeAllPlay = new InizializeAllPlay();
+        State state = new MoveState();
+        inizializeAllPlay.addPlayerState(Player.YELLOW, state);
+        assertEquals(inizializeAllPlay.getPlayerState(Player.YELLOW), state);
+    }
+
 }

@@ -8,7 +8,6 @@ public class CurrentPlayerState implements Observer, Serializable {
     private Position playerposition;    //Posizione attuale del giocatore
     private boolean activeturn;         //"true" se è il proprio turno "false" altrimenti
     private PlayerBoard board;          //PlanciaGiocatore
-    private Action actionstate;         //Memorizza lo stato in cui si trova il giocatore (spara, spostati,...)
     private int actioncounter;          //Contatore di azioni rimanenti che può compiere il giocatore (max 2 per turno)
     private Player activeplayer;        //Memorizza il colore/personaggio scelto dal giocatore
 
@@ -17,7 +16,6 @@ public class CurrentPlayerState implements Observer, Serializable {
         this.playerposition =null;
         this.activeturn =false;
         this.board =null;
-        this.actionstate =null;
         this.actioncounter =2;
         this.activeplayer = player;
     }
@@ -50,16 +48,6 @@ public class CurrentPlayerState implements Observer, Serializable {
     //Setta la PlanciaGiocatore
     public void setBoard(PlayerBoard board) {
         this.board = board;
-    }
-
-    //Ritorna lo stato "azione" del giocatore
-    public Action getActionstate() {
-        return this.actionstate;
-    }
-
-    //Setta lo stato "azione" del giocatore
-    public void setActionstate(Action actionstate) {
-        this.actionstate = actionstate;
     }
 
     //Ritorna il contantore delle azioni rimanenti

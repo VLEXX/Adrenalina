@@ -48,19 +48,6 @@ class CurrentPlayerStateTest {
     }
 
     @Test
-    void getActionState() {
-        CurrentPlayerState p = new CurrentPlayerState(Player.YELLOW);
-        assertEquals(p.getActionstate(), null);
-    }
-
-    @Test
-    void setActionState() {
-        CurrentPlayerState p = new CurrentPlayerState(Player.YELLOW);
-        p.setActionstate(Action.MOVE);
-        assertEquals(p.getActionstate(), Action.MOVE);
-    }
-
-    @Test
     void getActionCounter() {
         CurrentPlayerState p = new CurrentPlayerState(Player.YELLOW);
         assertEquals(p.getActioncounter(), 2);

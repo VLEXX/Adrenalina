@@ -90,3 +90,7 @@ W
 'src/main/java/Model/InitializeMap3.java,5\5\5568e17524debc2761184d6c6865ab5fc48194c4
 [
 +src/test/java/Model/InitializeMap3Test.java,6\c\6c23285c86355fe795f6304409230529fef2a4f4
+[
++src/test/java/Model/InitializeMap4Test.java,e\4\e47578a0e39f69b249a74aef119dc31683a6daac
+W
+'src/main/java/Model/InitializeMap4.java,c\0\c0579a113db6e29c0d54fbe78c9aa5a004a3c967

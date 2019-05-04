@@ -55,6 +55,8 @@ public class InitializeMap1 implements Strategy {
         cell9.setCells(cell6,null,null,cell10);
         cell10.setCells(cell7,null,cell9,cell11);
         cell11.setCells(cell8,null,cell10,null);
+        //settaggio celle raggiungibili
+        map1.getRoomList().forEach(room -> room.getCellsList().forEach(cell -> cell.initializeReachableCells()));
         return map1;
     }
 }

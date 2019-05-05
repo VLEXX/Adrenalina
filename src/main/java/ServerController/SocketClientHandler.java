@@ -1,6 +1,6 @@
 package ServerController;
 
-import Model.InizializeAllPlay;
+import Model.InitializeAllPlay;
 
 import java.io.*;
 
@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class SocketClientHandler implements Runnable {
     private Socket socket;
-    private InizializeAllPlay allPlay;
+    private InitializeAllPlay allPlay;
 
-    public SocketClientHandler(Socket socket, InizializeAllPlay allPlay) {
+    public SocketClientHandler(Socket socket, InitializeAllPlay allPlay) {
         this.socket = socket;
         this.allPlay = allPlay;
     }
@@ -25,17 +25,25 @@ public class SocketClientHandler implements Runnable {
             PrintWriter outMessage = new PrintWriter(this.socket.getOutputStream());
             Scanner inMessage = new Scanner(socket.getInputStream());
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
+            allPlay.addPlayerCounter();
 
             serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream);
+            while(true){
+                if(allPlay.getPlayercountertemp()==0){
+                    break;
+                }
+            }
             allPlay.getVoteMap().addPlayerCounter();
-            serverManagerFunction.manageVoteMap(inMessage, allPlay);
+            serverManagerFunction.manageVoteMap(inMessage, allPlay, outMessage);
             while(true){
                 if(allPlay.getStateSelectedMap().getSelectedmap()!=null){
                     break;
                 }
             }
+            allPlay.resetPlayerCounterTemp();
+            outMessage.println("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname());
+            outMessage.flush();
             socket.close();
-
         }
         catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

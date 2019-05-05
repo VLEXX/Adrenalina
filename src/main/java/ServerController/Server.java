@@ -1,15 +1,15 @@
 package ServerController;
 
-import Model.InizializeAllPlay;
+import Model.InitializeAllPlay;
 
 public class Server {
 
     private SocketServer socketserver;
     private ServerRMI server_rmi;
-    private InizializeAllPlay allPlay;
+    private InitializeAllPlay allPlay;
 
     public Server(){
-        this.allPlay = new InizializeAllPlay();
+        this.allPlay = new InitializeAllPlay();
         System.out.println("Model Inizialized\n");
         this.socketserver = new SocketServer(5858, this.allPlay);
         this.server_rmi = new ServerRMI(this.allPlay);

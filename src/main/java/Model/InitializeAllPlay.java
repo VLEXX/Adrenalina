@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 //Classe che inizializza la partita
-public class InizializeAllPlay {
+public class InitializeAllPlay {
     private ArrayList<CurrentTurnState> currentTurnState;
     private ArrayList<CurrentPlayerState> currentPlayerState;
     private CurrentDeckState currentDeckState;
@@ -16,8 +16,10 @@ public class InizializeAllPlay {
     private VoteMode voteMode;
     private ArrayList<IDClientList> idClientList;
     private HashMap<Player, State>  playerState;
+    private int playercounter;
+    private int playercountertemp;
 
-    public InizializeAllPlay(){
+    public InitializeAllPlay(){
         currentTurnState = new ArrayList<>();
         currentPlayerState = new ArrayList<>();
         chartScore = new ArrayList<>();
@@ -28,6 +30,29 @@ public class InizializeAllPlay {
         idClientList = new ArrayList<>();
         currentDeckState = new CurrentDeckState();
         playerState = new HashMap<>();
+        playercounter = 0;
+        playercountertemp = 0;
+    }
+
+    public void resetPlayerCounterTemp(){
+        playercountertemp=playercounter;
+    }
+
+    public void decreasePlayerCounterTemp(){
+        playercountertemp--;
+    }
+
+    public synchronized int getPlayercountertemp(){
+        return playercountertemp;
+    }
+
+    public void addPlayerCounter(){
+        playercounter++;
+        playercountertemp++;
+    }
+
+    public int getPlayercounter(){
+        return playercounter;
     }
 
     public ArrayList<ChartScore> getChartScore() {

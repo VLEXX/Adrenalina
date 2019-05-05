@@ -1,6 +1,6 @@
 package ServerController;
 
-import Model.InizializeAllPlay;
+import Model.InitializeAllPlay;
 import Model.VoteMap;
 
 import java.rmi.AlreadyBoundException;
@@ -9,9 +9,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class ServerRMI extends Thread{
-    private InizializeAllPlay allPlay;
+    private InitializeAllPlay allPlay;
 
-    public ServerRMI(InizializeAllPlay allPlay){
+    public ServerRMI(InitializeAllPlay allPlay){
         this.allPlay = allPlay;
     }
 

@@ -1,6 +1,6 @@
 package ServerController;
 
-import Model.InizializeAllPlay;
+import Model.InitializeAllPlay;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,9 +10,9 @@ import java.util.concurrent.Executors;
 
 public class SocketServer extends Thread{
     private int port;
-    private InizializeAllPlay allPlay;
+    private InitializeAllPlay allPlay;
 
-    public SocketServer(int port, InizializeAllPlay allPlay){
+    public SocketServer(int port, InitializeAllPlay allPlay){
         this.port = port;
         this.allPlay = allPlay;
     }

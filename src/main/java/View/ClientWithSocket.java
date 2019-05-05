@@ -31,6 +31,7 @@ public class ClientWithSocket implements ClientStrategy{
 
             clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream);
             clientManager.manageVote(outMessage, inMessage, stdin);
+            System.out.println(inMessage.nextLine());
 
             socket.close();
         }

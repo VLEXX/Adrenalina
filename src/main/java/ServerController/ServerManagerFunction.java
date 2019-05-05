@@ -1,7 +1,7 @@
 package ServerController;
 
 import Model.CurrentPlayerState;
-import Model.InizializeAllPlay;
+import Model.InitializeAllPlay;
 import Model.Player;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class ServerManagerFunction {
 
     public ServerManagerFunction(){}
 
-    public synchronized void chooseCharacterManager(PrintWriter printWriter, ObjectInputStream objectInputStream, InizializeAllPlay allPlay, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
+    public synchronized void chooseCharacterManager(PrintWriter printWriter, ObjectInputStream objectInputStream, InitializeAllPlay allPlay, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
         printWriter.println("Choose a character...");
         printWriter.flush();
         if(allPlay.getCurrentDeckState().getPlayers().size()==4){
@@ -61,6 +61,9 @@ public class ServerManagerFunction {
                 ok = true;
                 objectOutputStream.writeObject(ok);
                 printWriter.flush();
+                System.out.println(allPlay.getPlayercountertemp());
+                allPlay.decreasePlayerCounterTemp();
+                System.out.println(allPlay.getPlayercountertemp());
                 break;
             }
             else{
@@ -72,7 +75,10 @@ public class ServerManagerFunction {
         }
     }
 
-    public synchronized void manageVoteMap(Scanner inMessage, InizializeAllPlay allPlay) throws RemoteException {
+    public synchronized void manageVoteMap(Scanner inMessage, InitializeAllPlay allPlay, PrintWriter printWriter) throws RemoteException {
+        printWriter.println("Vote Map: 1 | 2 | 3 | 4");
+        printWriter.flush();
+
         String s = inMessage.nextLine();
         if(s.equals("1")){
             allPlay.getVoteMap().setVoteresult(0);

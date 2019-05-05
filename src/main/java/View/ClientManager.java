@@ -54,10 +54,12 @@ public class ClientManager {
                 break;
             }
         }
+        System.out.println("Waiting the opponents...\n\n");
     }
 
     public synchronized void manageVote(PrintWriter outMessage, Scanner inMessage, Scanner stdin){
-        System.out.println("Vote Map: 1 | 2 | 3 | 4");
+        System.out.println(inMessage.nextLine());
+
         String s;
         while(true) {
             s=stdin.nextLine();
@@ -71,6 +73,7 @@ public class ClientManager {
                 System.out.println("WRONG INPUT\n\n Choose between 1 | 2 | 3 | 4");
             }
         }
+        System.out.println("Waiting the opponents...\n\n");
     }
 
 }

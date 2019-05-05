@@ -26,7 +26,15 @@ public class VoteMap implements VoteMapInterface, Serializable {
 
     //Setta la mappa votata finale
     public void setFinalresult() {
-        //TODO
+        if(initmap==true){
+            int k=-1;
+            for(int j=0; j<4;j++){
+                if(k<voteresult[j]){
+                    finalresult=j;
+                    k=voteresult[j];
+                }
+            }
+        }
     }
 
     //Ritorna l'array dei voti

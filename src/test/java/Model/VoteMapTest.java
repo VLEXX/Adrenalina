@@ -16,9 +16,16 @@ class VoteMapTest {
     }
 
     @Test
-    void setFinalResult() {
+    void setFinalResult() throws RemoteException {
         VoteMap m = new VoteMap();
-
+        m.setVoteresult(0);
+        m.setVoteresult(1);
+        m.setVoteresult(2);
+        m.setVoteresult(2);
+        m.setVoteresult(3);
+        m.setInitmap();
+        m.setFinalresult();
+        assertEquals(m.getFinalresult(), 2);
     }
 
     @Test

@@ -16,7 +16,17 @@ class StateSelectedMapTest {
     void setSelectedMap() {
         StateSelectedMap m = new StateSelectedMap();
         Map n = new Map();
-        m.setSelectedmap(n);
-        assertEquals(m.getSelectedmap(),n);
+        m.setStrategyMap(0);
+        m.setSelectedmap();
+        assertEquals(m.getSelectedmap().getMapname(), "1");
+        m.setStrategyMap(1);
+        m.setSelectedmap();
+        assertEquals(m.getSelectedmap().getMapname(), "2");
+        m.setStrategyMap(2);
+        m.setSelectedmap();
+        assertEquals(m.getSelectedmap().getMapname(), "3");
+        m.setStrategyMap(3);
+        m.setSelectedmap();
+        assertEquals(m.getSelectedmap().getMapname(), "4");
     }
 }

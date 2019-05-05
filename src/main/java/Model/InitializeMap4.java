@@ -1,12 +1,11 @@
 //Author: Alex Saletti
 package Model;
 
-import Model.Map;
-
-public class InitializeMap4 implements Strategy {
+public class InitializeMap4 implements StrategyMap {
     @Override
     public Map initializeMap() {
         Map map4 = new Map();
+        map4.setMapname("4");
         Room room1 = new Room(1);
         Room room2 = new Room(2);
         Room room3 = new Room(3);

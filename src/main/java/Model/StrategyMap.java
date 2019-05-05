@@ -1,6 +1,6 @@
 package Model;
 
-public interface Strategy {
+public interface StrategyMap {
 
     Model.Map initializeMap();
 }

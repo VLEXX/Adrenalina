@@ -1,13 +1,12 @@
 //Author: Alex Saletti
 package Model;
 
-import Model.Map;
-
-public class InitializeMap3 implements Strategy {
+public class InitializeMap3 implements StrategyMap {
     @Override
     public Map initializeMap() {
         //creazione delle istanze mappa2, stanze e celle
         Map map3 = new Map();
+        map3.setMapname("3");
         Room room1 = new Room(1);
         Room room2 = new Room(2);
         Room room3 = new Room(3);

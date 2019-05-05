@@ -1,11 +1,12 @@
 //Author: Alex Saletti
 package Model;
 
-public class InitializeMap2 implements Strategy {
+public class InitializeMap2 implements StrategyMap {
     @Override
     public Map initializeMap() {
         //creazione delle istanze mappa2, stanze e celle
         Map map2 = new Map();
+        map2.setMapname("2");
         Room room1 = new Room(1);
         Room room2 = new Room(2);
         Room room3 = new Room(3);

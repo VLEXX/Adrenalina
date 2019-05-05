@@ -3,12 +3,13 @@ package Model;
 
 import java.util.ArrayList;
 
-public class InitializeMap1 implements Strategy {
+public class InitializeMap1 implements StrategyMap {
 
     @Override
     public Map initializeMap() {
         //creazione delle istanze mappa1, stanze e celle
         Map map1 = new Map();
+        map1.setMapname("1");
         Room room1 = new Room(1);
         Room room2 = new Room(2);
         Room room3 = new Room(3);

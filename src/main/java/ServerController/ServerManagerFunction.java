@@ -78,20 +78,41 @@ public class ServerManagerFunction {
             allPlay.getVoteMap().setVoteresult(0);
             allPlay.getVoteMap().decreasePlayerCounter();
             if(allPlay.getVoteMap().getPlayerCounter()==0){
+                allPlay.getVoteMap().setInitmap();
                 allPlay.getVoteMap().setFinalresult();
+                allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
+                allPlay.getStateSelectedMap().setSelectedmap();
             }
         }
         if(s.equals("2")){
             allPlay.getVoteMap().setVoteresult(1);
             allPlay.getVoteMap().decreasePlayerCounter();
+            if(allPlay.getVoteMap().getPlayerCounter()==0){
+                allPlay.getVoteMap().setInitmap();
+                allPlay.getVoteMap().setFinalresult();
+                allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
+                allPlay.getStateSelectedMap().setSelectedmap();
+            }
         }
         if(s.equals("3")){
             allPlay.getVoteMap().setVoteresult(2);
             allPlay.getVoteMap().decreasePlayerCounter();
+            if(allPlay.getVoteMap().getPlayerCounter()==0){
+                allPlay.getVoteMap().setInitmap();
+                allPlay.getVoteMap().setFinalresult();
+                allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
+                allPlay.getStateSelectedMap().setSelectedmap();
+            }
         }
         if(s.equals("4")){
             allPlay.getVoteMap().setVoteresult(3);
             allPlay.getVoteMap().decreasePlayerCounter();
+            if(allPlay.getVoteMap().getPlayerCounter()==0){
+                allPlay.getVoteMap().setInitmap();
+                allPlay.getVoteMap().setFinalresult();
+                allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
+                allPlay.getStateSelectedMap().setSelectedmap();
+            }
         }
     }
 }

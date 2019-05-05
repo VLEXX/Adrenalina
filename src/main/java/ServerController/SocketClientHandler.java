@@ -27,7 +27,13 @@ public class SocketClientHandler implements Runnable {
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
 
             serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream);
+            allPlay.getVoteMap().addPlayerCounter();
             serverManagerFunction.manageVoteMap(inMessage, allPlay);
+            while(true){
+                if(allPlay.getStateSelectedMap().getSelectedmap()!=null){
+                    break;
+                }
+            }
             socket.close();
 
         }

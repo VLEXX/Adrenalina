@@ -9,6 +9,7 @@ public class StateSelectedMap {
     //Costruttore che inizializza la mappa selezionata a "null"
     public StateSelectedMap(){
         selectedmap =null;
+        strategyMap = null;
     }
 
     //Ritorna la mappa selezionata

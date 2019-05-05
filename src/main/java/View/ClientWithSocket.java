@@ -33,6 +33,10 @@ public class ClientWithSocket implements ClientStrategy{
             clientManager.manageVote(outMessage, inMessage, stdin);
             System.out.println(inMessage.nextLine());
 
-            socket.close();
+            InputMessage inputMessage = new InputMessage(inMessage);
+            InputStdin inputStdin = new InputStdin(stdin);
+            inputMessage.start();
+            inputStdin.start();
+
         }
 }

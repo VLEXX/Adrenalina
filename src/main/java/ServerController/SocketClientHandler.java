@@ -24,6 +24,7 @@ public class SocketClientHandler implements Runnable {
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             PrintWriter outMessage = new PrintWriter(this.socket.getOutputStream());
             Scanner inMessage = new Scanner(socket.getInputStream());
+            Scanner stdin = new Scanner(System.in);
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
             allPlay.addPlayerCounter();
 
@@ -41,8 +42,9 @@ public class SocketClientHandler implements Runnable {
                 }
             }
             allPlay.resetPlayerCounterTemp();
-            outMessage.println("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname());
+            outMessage.println("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
             outMessage.flush();
+
             socket.close();
         }
         catch (IOException | ClassNotFoundException e) {

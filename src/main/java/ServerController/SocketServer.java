@@ -3,6 +3,7 @@ package ServerController;
 import Model.InitializeAllPlay;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -24,7 +25,7 @@ public class SocketServer extends Thread{
         ServerSocket serverSocket = new ServerSocket(port);
 
         System.out.println("Server ready");
-        while(true) {
+        for(int i = 0; i<5;i++) {
             try {
                 Socket socket = serverSocket.accept();
                 executor.submit(new SocketClientHandler(socket, this.allPlay));
@@ -33,7 +34,9 @@ public class SocketServer extends Thread{
                 break;
             }
         }
+
         executor.shutdown();
+        serverSocket.close();
     }
 
     public void run(){

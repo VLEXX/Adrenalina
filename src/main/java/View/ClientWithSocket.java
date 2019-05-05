@@ -1,6 +1,7 @@
 package View;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -15,28 +16,31 @@ public class ClientWithSocket implements ClientStrategy{
         }
 
         public void startClient() throws IOException, ClassNotFoundException {
+            try {
+                Socket socket = new Socket(ip, port);
+                System.out.println("Connection established\n\n");
 
-            Socket socket = new Socket(ip, port);
-            System.out.println("Connection established\n\n");
+                ClientManager clientManager = new ClientManager();
 
-            ClientManager clientManager = new ClientManager();
+                InputStream inputStream = socket.getInputStream();
+                ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+                OutputStream outputStream = socket.getOutputStream();
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+                Scanner stdin = new Scanner(System.in);
+                Scanner inMessage = new Scanner(socket.getInputStream());
+                PrintWriter outMessage = new PrintWriter(socket.getOutputStream());
 
-            InputStream inputStream = socket.getInputStream();
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-            OutputStream outputStream = socket.getOutputStream();
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            Scanner stdin = new Scanner(System.in);
-            Scanner inMessage = new Scanner(socket.getInputStream());
-            PrintWriter outMessage = new PrintWriter(socket.getOutputStream());
+                clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream);
+                clientManager.manageVote(outMessage, inMessage, stdin);
+                System.out.println(inMessage.nextLine());
 
-            clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream);
-            clientManager.manageVote(outMessage, inMessage, stdin);
-            System.out.println(inMessage.nextLine());
-
-            InputMessage inputMessage = new InputMessage(inMessage);
-            InputStdin inputStdin = new InputStdin(stdin);
-            inputMessage.start();
-            inputStdin.start();
-
+                InputMessage inputMessage = new InputMessage(inMessage);
+                InputStdin inputStdin = new InputStdin(stdin);
+                inputMessage.start();
+                inputStdin.start();
+            }
+            catch (ConnectException e){
+                System.out.println("\n" + "\u001B[31m" + "Because the Server is dark and full of connections." + "\u001B[0m");
+            }
         }
 }

@@ -24,7 +24,6 @@ public class SocketClientHandler implements Runnable {
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             PrintWriter outMessage = new PrintWriter(this.socket.getOutputStream());
             Scanner inMessage = new Scanner(socket.getInputStream());
-            Scanner stdin = new Scanner(System.in);
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
             allPlay.addPlayerCounter();
 

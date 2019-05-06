@@ -94,3 +94,5 @@ W
 +src/test/java/Model/InitializeMap4Test.java,e\4\e47578a0e39f69b249a74aef119dc31683a6daac
 W
 'src/main/java/Model/InitializeMap4.java,c\0\c0579a113db6e29c0d54fbe78c9aa5a004a3c967
+R
+"src/main/java/Model/MoveState.java,3\c\3c162d344da526fb458b050f52e877c75b752dc4

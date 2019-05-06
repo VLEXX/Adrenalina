@@ -1,5 +1,5 @@
 package Model;
 
 public interface State {
-    void doAction();
+    public void doAction(InitializeAllPlay i, Cell c, Player p);
 }

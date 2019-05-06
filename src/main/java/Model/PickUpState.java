@@ -3,7 +3,7 @@ package Model;
 public class PickUpState implements State {
 
     @Override
-    public void doAction() {
+    public void doAction(InitializeAllPlay i, Cell c, Player p) {
         //TODO
     }
 }

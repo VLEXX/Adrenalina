@@ -33,5 +33,3 @@ public enum Weapons {
     SHOCKWAVE,          //Onda d'Urto
     SLEDGEHAMMER        //Martello Ionico
 }
-
-//Coverage nullo per ora. In attesa di classe PlayerBoard (CANCELLARE QUESTO COMMENTO QUANDO OK)

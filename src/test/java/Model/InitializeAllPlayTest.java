@@ -105,4 +105,5 @@ class InitializeAllPlayTest {
         initializeAllPlay.resetPlayerCounterTemp();
         assertEquals(initializeAllPlay.getPlayercountertemp(), 2);
     }
+
 }

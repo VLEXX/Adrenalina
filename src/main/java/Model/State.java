@@ -1,5 +1,8 @@
 package Model;
 
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public interface State {
-    void doAction(InitializeAllPlay i, Cell c, Player p);
+    void doAction(PrintWriter printWriter, Scanner scanner, InitializeAllPlay i, Player p);
 }

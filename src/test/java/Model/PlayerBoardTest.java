@@ -10,6 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerBoardTest {
 
     @Test
+    void getPlayer(){
+        PlayerBoard p = new PlayerBoard();
+        p.setPlayer(Player.YELLOW);
+        assertEquals(p.getPlayer(), Player.YELLOW);
+    }
+
+    @Test
     void getWeaponList() {
         PlayerBoard p = new PlayerBoard();
         ArrayList<Weapons> weaponsTest = new ArrayList<>();
@@ -79,10 +86,10 @@ class PlayerBoardTest {
 
     @Test
     void setMunitionsBox(){
-        MunitionsBox m = new MunitionsBox();
-        m.setMyMunitionsMap(Player.BLACK, 4);
+        MunitionsBox munitionsBox = new MunitionsBox();
         PlayerBoard p = new PlayerBoard();
-        p.setMunitionsBox(m);
-        assertEquals(p.getMunitionsBox().getMyMunitionsMap().get(Player.BLACK).intValue(), 4);
+        munitionsBox.increaseMyMunitionsBox(Munitions.BLUE, 2);
+        p.setMunitionsBox(munitionsBox);
+        assertEquals(p.getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE), 5);
     }
 }

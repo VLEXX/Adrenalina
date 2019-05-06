@@ -18,6 +18,5 @@ public class Server {
     public static void main(String[] args) {
         Server server = new Server();
         server.socketserver.start();
-        server.server_rmi.start();
     }
 }

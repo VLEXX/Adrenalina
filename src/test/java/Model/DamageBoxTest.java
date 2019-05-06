@@ -8,14 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class DamageBoxTest {
 
     @Test
-    void setDamage() {
-        DamageBox d = new DamageBox();
-        d.setDamage(Player.YELLOW);
-        assertEquals(d.getDamage()[0], Player.YELLOW);
-        assertEquals(d.getDamageIndex(), 1);
-    }
-
-    @Test
     void setDeathCounter() {
         DamageBox d = new DamageBox();
         d.setDeathCounter(3);
@@ -80,30 +72,7 @@ class DamageBoxTest {
     }
 
     @Test
-    void getFirstBlood() {
-        DamageBox d = new DamageBox();
-        d.setFirstBlood(Player.BLACK);
-        assertEquals(d.getFirstBlood(), Player.BLACK);
-    }
+    void increaseDamage() {
 
-    @Test
-    void getMortalDamage() {
-        DamageBox d = new DamageBox();
-        d.setMortalDamage(Player.YELLOW);
-        assertEquals(d.getMortalDamage(), Player.YELLOW);
-    }
-
-    @Test
-    void getRage(){
-        DamageBox d = new DamageBox();
-        d.setRage(Player.BLUE);
-        assertEquals(d.getRage(), Player.BLUE);
-    }
-
-    @Test
-    void setDamageIndex(){
-        DamageBox d = new DamageBox();
-        d.setDamageIndex(3);
-        assertEquals(d.getDamageIndex(), 3);
     }
 }

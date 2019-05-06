@@ -1,3 +1,4 @@
+//Author: Giulia Rivara
 package Model.Exceptions;
 
 public class PositionNotFound extends Exception{

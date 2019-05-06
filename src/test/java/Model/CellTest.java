@@ -56,7 +56,6 @@ class CellTest {
     void getAmmoHere() {
         Cell testcellA = new Cell(1);
         assertEquals(testcellA.getAmmohere(),null);
-
     }
 
     @Test
@@ -65,14 +64,12 @@ class CellTest {
         Ammo testAmmo = new Ammo();
         testcellA.setAmmohere(testAmmo);
         assertEquals(testcellA.getAmmohere(),testAmmo);
-
     }
 
     @Test
     void getSpawnPointColor() {
         Cell testcellA = new Cell(1);
         assertEquals(testcellA.getSpawnpointzone(),null);
-
     }
 
     @Test
@@ -81,7 +78,6 @@ class CellTest {
         SpawnPoint spawntest = new SpawnPoint();
         testcellA.setSpawnpointzone(spawntest);
         assertEquals(testcellA.getSpawnpointzone(),spawntest);
-
     }
 
     @Test
@@ -97,8 +93,6 @@ class CellTest {
         assertTrue(cell1.getReachableCells().contains(cell3));
         assertTrue(cell1.getReachableCells().contains(cell4));
         assertTrue(cell1.getReachableCells().contains(cell5));
-
-
     }
 
     @Test
@@ -128,6 +122,20 @@ class CellTest {
        testcell.initializeReachableCells();
        for (int j=0;j<52;j++)
            assertTrue(testcell.getReachableCells().contains(cellarray[j]));
+    }
+
+    @Test
+    public void getInCellPlayers() {
+
+    }
+
+    @Test
+    public void removeInCellPlayer() {
+
+    }
+
+    @Test
+    public void addInCellPlayer() {
 
     }
 }

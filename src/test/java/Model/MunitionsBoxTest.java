@@ -1,3 +1,6 @@
+/**
+ * @author Giulia Rivara
+ */
 package Model;
 
 import org.junit.jupiter.api.Test;
@@ -7,14 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class MunitionsBoxTest {
 
     @Test
-    void setMyMunitionsMap() {
-        Player player = Player.BLUE;
-        int munitions = 2;
-        MunitionsBox munitionsBox = new MunitionsBox();
-        munitionsBox.setMyMunitionsMap(player, munitions);
-        assertEquals(munitionsBox.getMyMunitionsMap().size(), 1);
-        assertEquals(munitionsBox.getMyMunitionsMap().get(player).intValue(), 2);
-        munitionsBox.setMyMunitionsMap(player, 2);
-        assertEquals(munitionsBox.getMyMunitionsMap().get(player).intValue(), 4);
+    void increaseMyMunitionsBox() {
+        MunitionsBox m = new MunitionsBox();
+        m.increaseMyMunitionsBox(Munitions.RED, 2);
+        assertEquals(m.getMyMunitionsMap().get(Munitions.RED), 5);
+    }
+
+    @Test
+    void decreaseMyMunitionsBox() {
+        MunitionsBox m = new MunitionsBox();
+        m.decreaseMyMunitionsBox(Munitions.YELLOW, 1);
+        assertEquals(m.getMyMunitionsMap().get(Munitions.YELLOW), 2);
     }
 }

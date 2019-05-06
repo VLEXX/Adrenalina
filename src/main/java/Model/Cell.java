@@ -1,5 +1,8 @@
-//Author: Alex Saletti
+//Author: Alex Saletti + Giulia Rivara
 package Model;
+
+import Model.Exceptions.PlayerAlreadyAdded;
+import Model.Exceptions.PlayerNotFound;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,8 @@ public class Cell {
     private int id;
     //celle dove è possibile spostarsi
     private ArrayList<Cell> reachableCells;
+    //giocatore presente nella cella
+    private ArrayList<Player> inCellPlayer;
 
 
     //costruttore
@@ -32,6 +37,42 @@ public class Cell {
         this.rightcell =null;
         this.spawnpointzone =null;
         this.reachableCells = new ArrayList<Cell>();
+        this.inCellPlayer = new ArrayList<Player>();
+    }
+
+    //metodo che ritorna i giocatori presenti nella cella
+    public ArrayList<Player> getInCellPlayer() {
+        return inCellPlayer;
+    }
+
+    //metodo che aggiunge un giocatore nella cella
+    public void addInCellPlayer(Player player) throws PlayerAlreadyAdded {
+        boolean found = false;
+        for(int i = 0; i < inCellPlayer.size(); i++){
+            if(inCellPlayer.get(i) == player){
+                found = true;
+                break;
+            }
+        }
+        if(found)
+            throw new PlayerAlreadyAdded("The " + player.toString() + "is already present");
+        else
+            inCellPlayer.add(player);
+    }
+
+    //metodo che rimuove un giocatore da una cella
+    public void removeInCellPlayer(Player player) throws PlayerNotFound{
+        boolean found = false;
+        for(int i = 0; i < inCellPlayer.size(); i++){
+            if(inCellPlayer.get(i) == player){
+                found = true;
+                break;
+            }
+        }
+        if(found)
+            throw new PlayerNotFound("The " + player.toString() + "is not present");
+        else
+            inCellPlayer.remove(player);
     }
 
     //metodi che restituiscono le celle adiacenti

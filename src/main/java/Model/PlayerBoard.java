@@ -1,10 +1,13 @@
-//Author: Giulia Rivara
+/**
+ * @author Giulia Rivara
+ */
 package Model;
 
 import java.util.ArrayList;
 
 //Classe che inizializza la plancia giocatore
 public class PlayerBoard {
+    private Player player;
     private boolean firstPlayerCard;             //Carta primo giocatore
     private ArrayList<Weapons> weaponsList;      //Armi giocatore
     private ArrayList<PowerUp> powerUpList;      //Potenziamenti giocatore
@@ -18,6 +21,16 @@ public class PlayerBoard {
         this.weaponsList = new ArrayList<>();
         this.powerUpList = new ArrayList<>();
         this.damageBox = new DamageBox();
+    }
+
+    //Ritorna il colore giocatore
+    public Player getPlayer() {
+        return player;
+    }
+
+    //Setta il colore giocatore
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     //Ritorna la lista delle armi

@@ -12,6 +12,10 @@ class MoveStateTest {
         i.getStateSelectedMap().setStrategyMap(1);
         i.getStateSelectedMap().setSelectedmap();
         CurrentPlayerState cps = new CurrentPlayerState(Player.BLUE);
+        Position p = new Position();
+        p.setCurrentroom(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
+        p.setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
+        cps.setPlayerposition(p);
         i.getCurrentPlayerState().add(cps);
         MoveState ms = new MoveState();
         assertEquals(ms.cellFinder(i,"1",Player.BLUE).getCellId(),i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).getCellId());
@@ -47,11 +51,11 @@ class MoveStateTest {
         CurrentPlayerState ps = new CurrentPlayerState(Player.BLUE);
         Position p = new Position();
         p.setCurrentroom(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
-        p.setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0));
+        p.setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
         ps.setPlayerposition(p);
         i.getCurrentPlayerState().add(ps);
         MoveState ms = new MoveState();
-        assertTrue(ms.cellIsReachable(i,Player.BLUE,i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1)));
+        assertTrue(ms.cellIsReachable(i,Player.BLUE,i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0)));
         assertFalse(ms.cellIsReachable(i,Player.BLUE,i.getStateSelectedMap().getSelectedmap().getRoomList().get(4).getCellsList().get(0)));
 
     }

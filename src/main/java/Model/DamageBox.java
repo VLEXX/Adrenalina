@@ -14,7 +14,7 @@ public class DamageBox {
     private final static int[] finalFrenzyArray = {2,1,1,1};    //Punti per chi contribuisce al danno quando viene conteggiata la plancia in frenesia finale
     private boolean activeFrenzy;                               //Settato a "false" se la modalità frenesia non si attiva, "true" il contrario
     private int deathCounter;                                   //Contatore delle morti del giocatore
-    private boolean dead;                                       //Giocatore morto se true
+    private boolean dead;                                       //Giocatore morto se "true", "false" altrimenti
 
     //Costruttore che imposta la plancia dei danni del giocatore
     public DamageBox(){
@@ -119,12 +119,12 @@ public class DamageBox {
         return finalFrenzyArray;
     }
 
-    //TODO test
+    //Ritorna false se il giocatore è vivo e true se morto
     public boolean isDead() {
         return dead;
     }
 
-    //TODO test
+    //Setta il giocatore in false se morto
     public void setDead(boolean dead) {
         this.dead = dead;
     }

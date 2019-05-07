@@ -1,4 +1,6 @@
-//Author: Giulia Rivara
+/**
+ * @author Giulia Rivara
+ */
 package Model;
 
 import org.junit.jupiter.api.Test;

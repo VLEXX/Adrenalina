@@ -36,25 +36,32 @@ class LockRifleTest {
         try {
             playerToAttack = lockRifle.attack(myposition, activeplayer, positionToAttack, playerToAttack);
         }
-        catch(PlayerNotFound p){System.out.println("Errore 1");}
-        catch(PositionNotFound ps){System.out.println("Errore 2");}
+        catch(PlayerNotFound p){System.out.println("Player not found");}
+        catch(PositionNotFound ps){System.out.println("Position not found");}
         assertEquals(playerToAttack.getDamageBox().getDamageTot(), 2);
         assertEquals(playerToAttack.getMarksBox().getMyMarksMap().get(Player.BLUE).intValue(), 1);
     }
 
     @Test
     void hooking() {
+
     }
 
     @Test
     void isFirstUse() {
+        LockRifle l = new LockRifle();
+        assertEquals(l.isFirstUse(), true);
     }
 
     @Test
     void getMunitionsToPay() {
+        LockRifle l = new LockRifle();
+        assertEquals(l.getMunitionsToPay(), Munitions.BLUE);
     }
 
     @Test
     void getPriceToPay() {
+        LockRifle l = new LockRifle();
+        assertEquals(l.getPriceToPay(), 2);
     }
 }

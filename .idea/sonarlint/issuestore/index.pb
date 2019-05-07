@@ -166,3 +166,5 @@ Z
 .src/test/java/Model/InitializeAllPlayTest.java,6\0\60fc3367da76ed3fd9f4df69824ec6704f90e21b
 U
 %src/test/java/Model/MarksBoxTest.java,d\c\dc0146fa65177e5fc3c676669df66e299e34b7c2
+V
+&src/test/java/Model/MoveStateTest.java,c\1\c159b9819cb1eca908d646b34fb91cd926e8b52f

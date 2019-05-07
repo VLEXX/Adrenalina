@@ -29,7 +29,7 @@ public class LockRifle {
     }
 
     //Funzione secondo aggancio
-    public PlayerBoard hooking(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack)throws PositionNotFound, PlayerNotFound{
+    public PlayerBoard hooking(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
         check(player,myPosition,positionToAttack,playerToAttack);
         playerToAttack.getMarksBox().setMyMarksMap(player, 1);
         return playerToAttack;

@@ -9,8 +9,6 @@ O
 -src/test/java/Model/CurrentTurnStateTest.java,f\9\f9393ce2035c43dfd548c24a7dd55a4a9a210e46
 A
 ing-sw-2019-3.iml,a\2\a27e87775e2b0746c14dacc8acaaefc0fbfacfee
-O
-src/main/java/Model/Action.java,c\d\cd87d3450d9c02f2f5f52d784f249a94ed034daa
 M
 src/main/java/Model/Cell.java,3\7\37a9865f62bff2b7cb9a084321b488982bbf5ec1
 [
@@ -96,3 +94,13 @@ W
 'src/main/java/Model/InitializeMap4.java,c\0\c0579a113db6e29c0d54fbe78c9aa5a004a3c967
 R
 "src/main/java/Model/MoveState.java,3\c\3c162d344da526fb458b050f52e877c75b752dc4
+Z
+*src/main/java/Model/InitializeAllPlay.java,2\5\25da143fed86a3c8b3263a41e02ab09bcc4370c1
+V
+&src/test/java/Model/MoveStateTest.java,c\1\c159b9819cb1eca908d646b34fb91cd926e8b52f
+S
+#src/main/java/Model/ShootState.java,6\0\602da3047ecda3d4aa25db239ff1c28223bd571c
+U
+%src/main/java/Model/EndTurnState.java,d\f\dfb8e444daef0de6df7fd24984793cf8ad22e9c5
+N
+src/main/java/Model/State.java,7\3\73d255d7850be0b6971cce5ce3c86a5da6d3f5a2

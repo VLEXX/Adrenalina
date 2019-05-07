@@ -18,7 +18,7 @@ public class MoveState implements State {
                 s = scanner.nextLine();
             }
             else{
-                c = this.cellFinder(i,s);
+                c = this.cellFinder(i,s,p);
                 if(c!=null){
                     break;
                 }
@@ -29,31 +29,22 @@ public class MoveState implements State {
             }
 
         }
-        setMove(i, printWriter, c, p);
+        setMove(i, c, p);
     }
 
-    public void setMove(InitializeAllPlay i, PrintWriter printWriter, Cell c, Player p){
-        if(c==null) {
-            printWriter.println("The selected cell doesn't exist!");
-        }
+    public int setMove(InitializeAllPlay i, Cell c, Player p){
         for(CurrentPlayerState ps : i.getCurrentPlayerState()) {
-            if(ps.isActiveturn() && ps.getActiveplayer()==p){
-                if (ps.getPlayerposition().getCurrentcell().getReachableCells().contains(c)){
+            if(ps.getActiveplayer()==p){
                     ps.getPlayerposition().setCurrentcell(c);
                     i.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> { if (room.getCellsList().contains(c)){ps.getPlayerposition().setCurrentroom(room);}});
+                    return 0;
                 }
-                else {
-                    printWriter.println("Selected cell too far! Action denied!\n\nChoose another cell...\n");
-                }
-                if(!ps.isActiveturn() && ps.getActiveplayer()==p){
-                    printWriter.println("NOT YOUR TURN!");
-                }
-            }
         }
+        return -1;
     }
 
     //metodo che restituisce la cella avente un dato id
-    public Cell cellFinder(InitializeAllPlay i, String id){
+    public Cell cellFinder(InitializeAllPlay i, String id, Player player){
         int intid;
 
         try{
@@ -65,11 +56,24 @@ public class MoveState implements State {
 
         for(Room room : i.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell cell : room.getCellsList()){
-                if (cell.getCellId()==intid)
-                    return cell;
+                if (cell.getCellId()==intid) {
+                    if(cellIsReachable(i,player,cell)) {
+                        return cell;
+                    }
+                    else
+                        return null;
+                }
             }
         }
         return null;
+    }
+
+    public boolean cellIsReachable(InitializeAllPlay i, Player p, Cell c){
+        for(CurrentPlayerState cps : i.getCurrentPlayerState()){
+            if (cps.getActiveplayer()==p && cps.getPlayerposition().getCurrentcell().getReachableCells().contains(c))
+                return true;
+        }
+        return false;
     }
 }
 

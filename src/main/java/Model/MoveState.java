@@ -29,10 +29,10 @@ public class MoveState implements State {
             }
 
         }
-        setMove(i, printWriter, c);
+        setMove(i, printWriter, c, p);
     }
 
-    public void setMove(InitializeAllPlay i, PrintWriter printWriter, Cell c){
+    public void setMove(InitializeAllPlay i, PrintWriter printWriter, Cell c, Player p){
         if(c==null) {
             printWriter.println("The selected cell doesn't exist!");
         }

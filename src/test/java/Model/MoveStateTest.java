@@ -38,7 +38,9 @@ class MoveStateTest {
         i.getStateSelectedMap().setStrategyMap(1);
         i.getStateSelectedMap().setSelectedmap();
         MoveState ms = new MoveState();
-        assertEquals(ms.cellFinder(i,1).getCellId(),i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).getCellId());
-        assertEquals(ms.cellFinder(i,22),null);
+        assertEquals(ms.cellFinder(i,"1").getCellId(),i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).getCellId());
+        assertEquals(ms.cellFinder(i,"22"),null);
+        assertEquals(ms.cellFinder(i, "aaajkg"), null);
+
     }
 }

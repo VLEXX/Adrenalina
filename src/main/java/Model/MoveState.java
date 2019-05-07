@@ -12,18 +12,29 @@ public class MoveState implements State {
     public void doAction(PrintWriter printWriter, Scanner scanner, InitializeAllPlay i, Player p) {
         printWriter.println("Choose a cell...");
         String s = new String();
+        Cell c;
         while(true){                    //Server attende ID della cella in cui spostarsi dal client.
-            if(s.isEmpty()) {
+            if(s.isEmpty()==true) {
                 s = scanner.nextLine();
             }
             else{
-                break;
+                c = this.cellFinder(i,s);
+                if(c!=null){
+                    break;
+                }
+                else{
+                    printWriter.println("Invalid cell! Please, insert another cell...\n");
+                    s=null;
+                }
             }
+
         }
-        Cell c = this.cellFinder(i,s);
+        setMove(i, printWriter, c, p);
+    }
+
+    public void setMove(InitializeAllPlay i, PrintWriter printWriter, Cell c, Player p){
         if(c==null) {
             printWriter.println("The selected cell doesn't exist!");
-            return;
         }
         for(CurrentPlayerState ps : i.getCurrentPlayerState()) {
             if(ps.isActiveturn() && ps.getActiveplayer()==p){
@@ -33,17 +44,13 @@ public class MoveState implements State {
                 }
                 else {
                     printWriter.println("Selected cell too far! Action denied!\n\nChoose another cell...\n");
-                    return;
                 }
-            if(!ps.isActiveturn() && ps.getActiveplayer()==p){
-                printWriter.println("NOT YOUR TURN!");
-                return;
-            }
+                if(!ps.isActiveturn() && ps.getActiveplayer()==p){
+                    printWriter.println("NOT YOUR TURN!");
+                }
             }
         }
-
     }
-
 
     //metodo che restituisce la cella avente un dato id
     public Cell cellFinder(InitializeAllPlay i, String id){
@@ -55,6 +62,7 @@ public class MoveState implements State {
         catch(NumberFormatException e){
             return null;
         }
+
         for(Room room : i.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell cell : room.getCellsList()){
                 if (cell.getCellId()==intid)

@@ -1,4 +1,6 @@
-//Author: Alex Saletti + Giulia Rivara
+/**
+ * @author Alex Saletti and Giulia Rivara
+ */
 package Model;
 
 import Model.Exceptions.PlayerAlreadyAdded;

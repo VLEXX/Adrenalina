@@ -48,6 +48,7 @@ public class MoveState implements State {
     //metodo che restituisce la cella avente un dato id
     public Cell cellFinder(InitializeAllPlay i, String id){
         int intid;
+
         try{
             intid=Integer.parseInt(id);
         }

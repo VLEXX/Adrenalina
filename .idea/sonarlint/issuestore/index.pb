@@ -158,3 +158,11 @@ R
 "src/main/java/Model/DamageBox.java,b\9\b916a982abaa701c4de80be36812c0a47a400c50
 V
 &src/test/java/Model/DamageBoxTest.java,b\2\b23a536d6bf1677ff3e1d9494fc0156f11b16b32
+U
+%src/main/java/Model/WaitingState.java,8\9\898439c082f9a5ce55504bf1a89fb6500a5ed417
+Z
+*src/main/java/Model/InitializeAllPlay.java,2\5\25da143fed86a3c8b3263a41e02ab09bcc4370c1
+^
+.src/test/java/Model/InitializeAllPlayTest.java,6\0\60fc3367da76ed3fd9f4df69824ec6704f90e21b
+U
+%src/test/java/Model/MarksBoxTest.java,d\c\dc0146fa65177e5fc3c676669df66e299e34b7c2

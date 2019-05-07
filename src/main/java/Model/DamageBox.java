@@ -1,4 +1,6 @@
-//Author: Giulia Rivara
+/**
+ * @author Giulia Rivara
+ */
 package Model;
 
 import java.util.HashMap;
@@ -86,7 +88,7 @@ public class DamageBox {
     //Funzione che gestisce i danni
     public void increaseDamage(int damagePoint, Player player){
         for(int i = damageTot; i < damageTot + damagePoint; i++)
-            damage[damageTot] = player;
+            damage[i] = player;
         damageTot = damagePoint + damageTot;
         if(damageTot >= 3){
             pickUp = true;
@@ -96,7 +98,6 @@ public class DamageBox {
             dead = true;
         }
         deathCounter++;
-        //TODO chiedere dove si gestisce le azioni da fare alla morte del giocatore
     }
 
     //Ritorna il punteggio da cui si parte per assegnare i punti a chi uccide

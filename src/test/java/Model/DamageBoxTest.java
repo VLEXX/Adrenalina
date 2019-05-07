@@ -89,7 +89,6 @@ class DamageBoxTest {
         assertEquals(d.getDamage()[9], null);
         assertEquals(d.getDamage()[10], null);
         assertEquals(d.getDamage()[11], null);
-        //TODO controllare coverage
     }
 
     @Test

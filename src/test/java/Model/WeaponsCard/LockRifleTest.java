@@ -45,11 +45,12 @@ class LockRifleTest {
         assertEquals(playerToAttack.getDamageBox().getDamageTot(), 2);
         assertEquals(playerToAttack.getMarksBox().getMyMarksMap().get(Player.BLUE), 1);
         //Caso giocatore colore sbagliato
-        try{
+        try {
             positionToAttack.getCurrentcell().removeInCellPlayer(Player.YELLOW);
             positionToAttack.getCurrentcell().addInCellPlayer(Player.GREEN);
-        } catch (PlayerNotFound p2){}
-        catch (PlayerAlreadyAdded p3){}
+        } catch (PlayerNotFound p2) {
+        } catch (PlayerAlreadyAdded p3) {
+        }
         try {
             playerToAttack = lockRifle.attack(myposition, activeplayer, positionToAttack, playerToAttack);
         } catch (PlayerNotFound p) {
@@ -62,7 +63,8 @@ class LockRifleTest {
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));
         try {
             positionToAttack.getCurrentcell().addInCellPlayer(Player.YELLOW);
-        } catch (PlayerAlreadyAdded p5){}
+        } catch (PlayerAlreadyAdded p5) {
+        }
         try {
             playerToAttack = lockRifle.attack(myposition, activeplayer, positionToAttack, playerToAttack);
         } catch (PlayerNotFound p) {
@@ -100,35 +102,5 @@ class LockRifleTest {
             System.out.println("Position not found");
         }
         assertEquals(playerToAttack.getMarksBox().getMyMarksMap().get(Player.BLUE), 1);
-    }
-
-    @Test
-    void isFirstUse() {
-        LockRifle l = new LockRifle();
-        assertEquals(l.isFirstUse(), true);
-    }
-
-    @Test
-    void getMunitionsToPay() {
-        LockRifle l = new LockRifle();
-        assertEquals(l.getMunitionsToPay(), Munitions.BLUE);
-    }
-
-    @Test
-    void getPriceToPayHooking() {
-        LockRifle l = new LockRifle();
-        assertEquals(l.getPriceToPayHooking(), 1);
-    }
-
-    @Test
-    void getMunitionsToPayHooking() {
-        LockRifle l = new LockRifle();
-        assertEquals(l.getMunitionsToPayHooking(), Munitions.RED);
-    }
-
-    @Test
-    void getPriceToPay() {
-        LockRifle l = new LockRifle();
-        assertEquals(l.getPriceToPay(), 2);
     }
 }

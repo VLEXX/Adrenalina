@@ -5,18 +5,13 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class TractorBeam {
-
-    private boolean firstUse;
-    private final int priceToPay = 1;
-    private final Munitions munitionsToPay = Munitions.BLUE;
-    private final int priceToPayPunisher1 = 1;
-    private final Munitions munitionsToPayPUnisher1 = Munitions.RED;
-    private final int priceToPayPunisher2 = 1;
-    private final Munitions munitionsToPayPUnisher2 = Munitions.YELLOW;
+public class TractorBeam extends WeaponsDad{
 
     //Costruttore
     private TractorBeam(){
-        firstUse = true;
+        super();
+        super.setFirstPrice(Munitions.BLUE, 1);
+        super.setSecondPrice(Munitions.YELLOW,1);
+        super.setSecondPrice(Munitions.RED, 1);
     }
 }

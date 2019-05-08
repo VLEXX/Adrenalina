@@ -5,16 +5,12 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class ShockWave {
-
-    private boolean firstUse;
-    private final int priceToPay = 1;
-    private final Munitions munitionsToPay = Munitions.YELLOW;
-    private final int priceToPayTsunami = 1;
-    private final Munitions munitionsToPayTsunami = Munitions.YELLOW;
+public class ShockWave extends WeaponsDad{
 
     //Costruttore
     private ShockWave(){
-        firstUse = true;
+        super();
+        super.setFirstPrice(Munitions.YELLOW, 1);
+        super.setSecondPrice(Munitions.YELLOW, 1);
     }
 }

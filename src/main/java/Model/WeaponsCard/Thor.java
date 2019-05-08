@@ -5,20 +5,14 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class Thor {
-
-    private boolean firstUse;
-    private final int priceToPay1 = 1;
-    private final Munitions munitionsToPay1 = Munitions.BLUE;
-    private final int priceToPay2 = 1;
-    private final Munitions munitionsToPay2 = Munitions.RED;
-    private final int priceToPayChain = 1;
-    private final Munitions munitionsToPayChain = Munitions.BLUE;
-    private final int priceToPayVoltage = 1;
-    private final Munitions munitionsToPayVoltage =  Munitions.BLUE;
+public class Thor extends WeaponsDad{
 
     //Costruttore
     private Thor(){
-        firstUse = true;
+        super();
+        super.setFirstPrice(Munitions.BLUE, 1);
+        super.setFirstPrice(Munitions.RED,1);
+        super.setSecondPrice(Munitions.BLUE, 1);
+        super.setThirdPrice(Munitions.BLUE, 1);
     }
 }

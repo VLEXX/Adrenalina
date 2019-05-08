@@ -5,16 +5,12 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class SledgeHammer {
-
-    private boolean firstUse;
-    private final int priceToPay = 1;
-    private final Munitions munitionsToPay = Munitions.YELLOW;
-    private final int priceToPayPolverize = 1;
-    private final Munitions munitionsToPayPolverize = Munitions.RED;
+public class SledgeHammer extends WeaponsDad{
 
     //Costruttore
     private SledgeHammer(){
-        firstUse = true;
+        super();
+        super.setFirstPrice(Munitions.YELLOW, 1);
+        super.setSecondPrice(Munitions.RED, 1);
     }
 }

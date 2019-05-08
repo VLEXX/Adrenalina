@@ -5,16 +5,12 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class RailGun {
-
-    private boolean firstUse;
-    private final int priceToPay1 = 2;
-    private final Munitions munitionsToPay1 = Munitions.YELLOW;
-    private final int priceToPay2 = 1;
-    private final Munitions munitionsToPay2 = Munitions.BLUE;
+public class RailGun extends WeaponsDad{
 
     //Costruttore
     private RailGun(){
-        firstUse = true;
+        super();
+        super.setFirstPrice(Munitions.YELLOW, 2);
+        super.setFirstPrice(Munitions.BLUE, 1);
     }
 }

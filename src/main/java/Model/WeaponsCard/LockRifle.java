@@ -7,24 +7,20 @@ import Model.*;
 import Model.Exceptions.PlayerNotFound;
 import Model.Exceptions.PositionNotFound;
 
-public class LockRifle {
-
-    private boolean firstUse;
-    private final int priceToPay = 2;
-    private final Munitions munitionsToPay = Munitions.BLUE;
-    private final int priceToPayHooking = 1;
-    private final Munitions munitionsToPayHooking = Munitions.RED;
+public class LockRifle extends WeaponsDad{
 
     //Costruttore
     public LockRifle() {
-        firstUse = true;
+        super();
+        super.setFirstPrice(Munitions.BLUE, 2);
+        super.setSecondPrice(Munitions.RED, 1);
     }
 
     //Funzione effetto base
     public PlayerBoard attack(Position myPosition, Player activePlayer, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         check(activePlayer,myPosition,positionToAttack,playerToAttack);
-        if(firstUse == true)
-            firstUse = false;
+        if(super.getFirstUse() == true)
+            super.setFirstUse(false);
         playerToAttack.getDamageBox().increaseDamage(2, activePlayer);
         playerToAttack.getMarksBox().setMyMarksMap(activePlayer, 1);
         return playerToAttack;
@@ -58,31 +54,6 @@ public class LockRifle {
         if (find == false) {
             throw new PlayerNotFound("In the selected cell player " + playerToAttack.getPlayer().toString() + " not found");
         }
-    }
-
-    //Funzione che controlla che la carta sia stata usata una volta
-    public boolean isFirstUse() {
-        return firstUse;
-    }
-
-    //Funzione che ritorna le munizioni da pagare
-    public Munitions getMunitionsToPay() {
-        return munitionsToPay;
-    }
-
-    //Funzione che ritorna il costo dell'arma
-    public int getPriceToPay() {
-        return priceToPay;
-    }
-
-    //Funzione che ritorna il costo da pagare per il secondo aggancio
-    public int getPriceToPayHooking() {
-        return priceToPayHooking;
-    }
-
-    //Funzione che ritorna le munizioni da pagare per il secondo aggancio
-    public Munitions getMunitionsToPayHooking() {
-        return munitionsToPayHooking;
     }
 }
 

@@ -71,7 +71,7 @@ public class Cell {
                 break;
             }
         }
-        if(found)
+        if(!found)
             throw new PlayerNotFound("The " + player.toString() + "is not present");
         else
             inCellPlayer.remove(player);

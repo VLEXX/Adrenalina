@@ -12,6 +12,8 @@ public class LockRifle {
     private boolean firstUse;
     private final int priceToPay = 2;
     private final Munitions munitionsToPay = Munitions.BLUE;
+    private final int priceToPayHooking = 1;
+    private final Munitions munitionsToPayHooking = Munitions.RED;
 
     //Costruttore
     public LockRifle() {
@@ -54,7 +56,7 @@ public class LockRifle {
             }
         }
         if (find == false) {
-            throw new PlayerNotFound("In the selected cell the player " + playerToAttack.getPlayer().toString() + " not found");
+            throw new PlayerNotFound("In the selected cell player " + playerToAttack.getPlayer().toString() + " not found");
         }
     }
 
@@ -71,6 +73,16 @@ public class LockRifle {
     //Funzione che ritorna il costo dell'arma
     public int getPriceToPay() {
         return priceToPay;
+    }
+
+    //Funzione che ritorna il costo da pagare per il secondo aggancio
+    public int getPriceToPayHooking() {
+        return priceToPayHooking;
+    }
+
+    //Funzione che ritorna le munizioni da pagare per il secondo aggancio
+    public Munitions getMunitionsToPayHooking() {
+        return munitionsToPayHooking;
     }
 }
 

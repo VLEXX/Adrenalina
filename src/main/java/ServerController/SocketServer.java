@@ -12,10 +12,12 @@ import java.util.concurrent.Executors;
 public class SocketServer extends Thread{
     private int port;
     private InitializeAllPlay allPlay;
+    private int counter;
 
-    public SocketServer(int port, InitializeAllPlay allPlay){
+    public SocketServer(int port, InitializeAllPlay allPlay, int i){
         this.port = port;
         this.allPlay = allPlay;
+        this.counter=i;
     }
 
     public void startSocketServer() throws IOException {
@@ -25,10 +27,11 @@ public class SocketServer extends Thread{
         ServerSocket serverSocket = new ServerSocket(port);
 
         System.out.println("Server ready");
-        for(int i = 0; i<5;i++) {
+        while(this.counter!=0) {
             try {
                 Socket socket = serverSocket.accept();
                 executor.submit(new SocketClientHandler(socket, this.allPlay));
+                counter--;
             }
             catch (IOException e){
                 break;

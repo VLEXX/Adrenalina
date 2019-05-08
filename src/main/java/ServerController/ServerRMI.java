@@ -10,9 +10,11 @@ import java.rmi.registry.Registry;
 
 public class ServerRMI extends Thread{
     private InitializeAllPlay allPlay;
+    private int counter;
 
-    public ServerRMI(InitializeAllPlay allPlay){
+    public ServerRMI(InitializeAllPlay allPlay, int i){
         this.allPlay = allPlay;
+        this.counter=i;
     }
 
     public void startServerRMI() throws RemoteException, AlreadyBoundException {

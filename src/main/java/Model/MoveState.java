@@ -11,7 +11,8 @@ public class MoveState implements State {
 
     //metodo che gestisce lo spostamento del player p
     @Override
-    public void doAction(PrintWriter printWriter, Scanner scanner, InitializeAllPlay i, Player p) {
+    public int doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
+        /**
         printWriter.println("Choose a cell...");
         String s = new String();
         Cell c;
@@ -31,7 +32,12 @@ public class MoveState implements State {
             }
 
         }
-        setMove(i, c, p);
+        */
+        int out = setMove(allPlay, dataPacket.getCell(), dataPacket.getPlayer());
+        if(out!=0){
+            return -1;
+        }
+        return 0;
     }
 
     public int setMove(InitializeAllPlay i, Cell c, Player p){

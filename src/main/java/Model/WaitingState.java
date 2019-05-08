@@ -1,20 +1,12 @@
 package Model;
 
 import Model.InitializeAllPlay;
-import Model.Player;
-import Model.State;
 
-import java.io.PrintWriter;
-import java.util.Scanner;
 
 public class WaitingState implements State {
 
     @Override
-    public void doAction(PrintWriter printWriter, Scanner scanner, InitializeAllPlay i, Player p) {
-        String s = new String();
-        s = scanner.nextLine();
-        if(s.isEmpty()==false) {
-            printWriter.println("NOT YOUR TURN!\nWAIT PLEASE...");
-        }
+    public int doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
+        return 0;
     }
 }

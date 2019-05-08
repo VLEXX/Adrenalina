@@ -10,7 +10,8 @@ import java.util.Scanner;
 public class ShootState implements State {
 
     @Override
-    public void doAction(PrintWriter printWriter, Scanner scanner, InitializeAllPlay i, Player p) {
+    public int doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
         //TODO
+        return 0;
     }
 }

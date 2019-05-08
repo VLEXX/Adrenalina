@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class MoveState implements State {
 
-
     //metodo che gestisce lo spostamento del player p
     @Override
     public int doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {

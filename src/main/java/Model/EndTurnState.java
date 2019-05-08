@@ -10,7 +10,8 @@ import java.util.Scanner;
 public class EndTurnState implements State {
 
     @Override
-    public void doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
+    public int doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
         //TODO
+        return 0;
     }
 }

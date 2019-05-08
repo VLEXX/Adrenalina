@@ -2,6 +2,7 @@ package ServerController;
 
 import Model.InitializeAllPlay;
 import Model.Message;
+import Model.Player;
 
 import java.io.*;
 
@@ -11,10 +12,12 @@ import java.util.Scanner;
 public class SocketClientHandler implements Runnable {
     private Socket socket;
     private InitializeAllPlay allPlay;
+    private Player player;
 
     public SocketClientHandler(Socket socket, InitializeAllPlay allPlay) {
         this.socket = socket;
         this.allPlay = allPlay;
+        this.player=null;
     }
 
     public void run() {
@@ -28,7 +31,7 @@ public class SocketClientHandler implements Runnable {
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
             allPlay.addPlayerCounter();
 
-            serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream);
+            player=serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream);
             while(true){
                 if(allPlay.getPlayercountertemp()==0){
                     boolean ok = true;
@@ -48,7 +51,7 @@ public class SocketClientHandler implements Runnable {
             allPlay.resetPlayerCounterTemp();
             Message message = new Message("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
             objectOutputStream.writeObject(message);
-
+            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream);
 
             socket.close();
         }

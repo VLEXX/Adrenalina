@@ -1,8 +1,10 @@
 //Author: Federico Scatà
 package Model;
 
+import java.io.Serializable;
+
 //Enum che identifica le varie armi
-public enum Weapons {
+public enum Weapons implements Serializable {
     //Armi Blu
 
     LOCK_RIFLE,          //Distruttore

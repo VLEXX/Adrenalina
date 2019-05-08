@@ -1,6 +1,7 @@
 package ServerController;
 
 import Model.InitializeAllPlay;
+import Model.Message;
 
 import java.io.*;
 
@@ -30,19 +31,23 @@ public class SocketClientHandler implements Runnable {
             serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream);
             while(true){
                 if(allPlay.getPlayercountertemp()==0){
+                    boolean ok = true;
+                    objectOutputStream.writeObject(ok);
                     break;
                 }
             }
             allPlay.getVoteMap().addPlayerCounter();
-            serverManagerFunction.manageVoteMap(inMessage, allPlay, outMessage);
+            serverManagerFunction.manageVoteMap(inMessage, allPlay, outMessage, objectInputStream, objectOutputStream);
             while(true){
                 if(allPlay.getStateSelectedMap().getSelectedmap()!=null){
+                    boolean ok = true;
+                    objectOutputStream.writeObject(ok);
                     break;
                 }
             }
             allPlay.resetPlayerCounterTemp();
-            outMessage.println("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
-            outMessage.flush();
+            Message message = new Message("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
+            objectOutputStream.writeObject(message);
 
             socket.close();
         }

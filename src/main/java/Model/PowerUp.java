@@ -1,8 +1,10 @@
 //Author: Federico Scatà
 package Model;
 
+import java.io.Serializable;
+
 //Enum che identifica i vari potenziamenti
-public enum PowerUp {
+public enum PowerUp implements Serializable {
     TARGETING_SCOPE_BLUE,   //Mirino
     TARGETING_SCOPE_RED,
     TARGETING_SCOPE_YELLOW,

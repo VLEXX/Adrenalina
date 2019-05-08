@@ -8,7 +8,9 @@ package Model;
 //ammolist[2] => Blu
 
 
-public class Ammo {
+import java.io.Serializable;
+
+public class Ammo implements Serializable {
     private int[] ammoList; //munizioni presenti
 
     private boolean PossiblePowerUp; //powerup presente

@@ -1,11 +1,12 @@
 //Author: Federico Scatà
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
 
 //Classe che memorizza lo stato corrente dei mazzi delle Armi, Munizioni e Potenziamenti
-public class CurrentDeckState {
+public class CurrentDeckState implements Serializable {
     private Stack<Ammo> ammodeck;           //Mazzo delle munizioni
     private Stack<Weapons> weaponsdeck;     //Mazzo delle armi
     private Stack<PowerUp> powerupdeck;     //Mazzo dei potenziamenti

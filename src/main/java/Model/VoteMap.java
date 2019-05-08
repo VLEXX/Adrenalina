@@ -47,7 +47,7 @@ public class VoteMap implements VoteMapInterface, Serializable {
         voteresult[index] = voteresult[index]+1;
     }
 
-    public void addPlayerCounter(){
+    public synchronized void addPlayerCounter(){
         i++;
     }
 

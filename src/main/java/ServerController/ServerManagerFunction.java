@@ -1,9 +1,8 @@
 package ServerController;
 
-import Model.CurrentPlayerState;
-import Model.InitializeAllPlay;
-import Model.Player;
+import Model.*;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,71 +15,37 @@ public class ServerManagerFunction {
     public ServerManagerFunction(){}
 
     public synchronized void chooseCharacterManager(PrintWriter printWriter, ObjectInputStream objectInputStream, InitializeAllPlay allPlay, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
-        printWriter.println("Choose a character...");
-        printWriter.flush();
-        if(allPlay.getCurrentDeckState().getPlayers().size()==4){
-            printWriter.println("-------");
-        }
-        if(allPlay.getCurrentDeckState().getPlayers().size()==3){
-            printWriter.println("-------");
-            printWriter.flush();
-            printWriter.println("-------");
-            printWriter.flush();
-        }
-        if(allPlay.getCurrentDeckState().getPlayers().size()==2){
-            printWriter.println("-------");
-            printWriter.flush();
-            printWriter.println("-------");
-            printWriter.flush();
-            printWriter.println("-------");
-            printWriter.flush();
-        }
-        if(allPlay.getCurrentDeckState().getPlayers().size()==1){
-            printWriter.println("-------");
-            printWriter.flush();
-            printWriter.println("-------");
-            printWriter.flush();
-            printWriter.println("-------");
-            printWriter.flush();
-            printWriter.println("-------");
-            printWriter.flush();
-        }
-        for(Player player: allPlay.getCurrentDeckState().getPlayers()) {
-            printWriter.println(player);
-            printWriter.flush();
-        }
+        objectOutputStream.writeObject(allPlay.getCurrentDeckState());
+
         Player player;
         Boolean ok;
         while(true) {
             player = (Player) objectInputStream.readObject();
             if (allPlay.getCurrentDeckState().getPlayers().contains(player)) {
-                printWriter.println("You choose: " + player.toString());
-                printWriter.flush();
+                Message message = new Message("You choose: " + player.toString());
+                objectOutputStream.writeObject(message);
                 allPlay.getCurrentPlayerState().add(new CurrentPlayerState(player));
                 allPlay.getCurrentDeckState().getPlayers().remove(player);
                 ok = true;
                 objectOutputStream.writeObject(ok);
-                printWriter.flush();
                 System.out.println(allPlay.getPlayercountertemp());
                 allPlay.decreasePlayerCounterTemp();
                 System.out.println(allPlay.getPlayercountertemp());
                 break;
             }
             else{
-                printWriter.println("Character not available");
-                printWriter.flush();
+                Message message = new Message("Character not available");
+                objectOutputStream.writeObject(message);
                 ok = false;
                 objectOutputStream.writeObject(ok);
             }
         }
     }
 
-    public synchronized void manageVoteMap(Scanner inMessage, InitializeAllPlay allPlay, PrintWriter printWriter) throws RemoteException {
-        printWriter.println("Vote Map: 1 | 2 | 3 | 4");
-        printWriter.flush();
+    public synchronized void manageVoteMap(Scanner inMessage, InitializeAllPlay allPlay, PrintWriter printWriter, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
+        Integer i = (Integer) objectInputStream.readObject();
 
-        String s = inMessage.nextLine();
-        if(s.equals("1")){
+        if(i==1){
             allPlay.getVoteMap().setVoteresult(0);
             allPlay.getVoteMap().decreasePlayerCounter();
             if(allPlay.getVoteMap().getPlayerCounter()==0){
@@ -90,7 +55,7 @@ public class ServerManagerFunction {
                 allPlay.getStateSelectedMap().setSelectedmap();
             }
         }
-        if(s.equals("2")){
+        if(i==2){
             allPlay.getVoteMap().setVoteresult(1);
             allPlay.getVoteMap().decreasePlayerCounter();
             if(allPlay.getVoteMap().getPlayerCounter()==0){
@@ -100,7 +65,7 @@ public class ServerManagerFunction {
                 allPlay.getStateSelectedMap().setSelectedmap();
             }
         }
-        if(s.equals("3")){
+        if(i==3){
             allPlay.getVoteMap().setVoteresult(2);
             allPlay.getVoteMap().decreasePlayerCounter();
             if(allPlay.getVoteMap().getPlayerCounter()==0){
@@ -110,7 +75,7 @@ public class ServerManagerFunction {
                 allPlay.getStateSelectedMap().setSelectedmap();
             }
         }
-        if(s.equals("4")){
+        if(i==4){
             allPlay.getVoteMap().setVoteresult(3);
             allPlay.getVoteMap().decreasePlayerCounter();
             if(allPlay.getVoteMap().getPlayerCounter()==0){

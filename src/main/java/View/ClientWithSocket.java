@@ -31,8 +31,7 @@ public class ClientWithSocket implements ClientStrategy{
                 PrintWriter outMessage = new PrintWriter(socket.getOutputStream());
 
                 clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream);
-                clientManager.manageVote(outMessage, inMessage, stdin);
-                System.out.println(inMessage.nextLine());
+                clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
 
                 InputMessage inputMessage = new InputMessage(inMessage);
                 InputStdin inputStdin = new InputStdin(stdin);

@@ -49,6 +49,7 @@ public class SocketClientHandler implements Runnable {
             Message message = new Message("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
             objectOutputStream.writeObject(message);
 
+
             socket.close();
         }
         catch (IOException | ClassNotFoundException e) {

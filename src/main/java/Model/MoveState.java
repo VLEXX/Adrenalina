@@ -1,16 +1,11 @@
 //Author: Alex Saletti
 package Model;
 
-import Model.*;
-
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 public class MoveState implements State {
 
     //metodo che gestisce lo spostamento del player p
     @Override
-    public int doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
+    public Message doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
         /**
         printWriter.println("Choose a cell...");
         String s = new String();
@@ -34,13 +29,13 @@ public class MoveState implements State {
         */
         int out = setMove(allPlay, dataPacket.getCell(), dataPacket.getPlayer());
         if(out!=0){
-            return -1;
+            return new Message("Invalid cell! Please, insert another cell...");
         }
-        return 0;
+        return new Message("ok");
     }
 
     public int setMove(InitializeAllPlay i, Cell c, Player p){
-        for(CurrentPlayerState ps : i.getCurrentPlayerState()) {
+        for(CurrentPlayerState ps : i.getCurrentPlayerState().values()) {
             if(ps.getActiveplayer()==p){
                     ps.getPlayerposition().setCurrentcell(c);
                     i.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> { if (room.getCellsList().contains(c)){ps.getPlayerposition().setCurrentroom(room);}});
@@ -76,7 +71,7 @@ public class MoveState implements State {
     }
 
     public boolean cellIsReachable(InitializeAllPlay i, Player p, Cell c){
-        for(CurrentPlayerState cps : i.getCurrentPlayerState()){
+        for(CurrentPlayerState cps : i.getCurrentPlayerState().values()){
             if (cps.getActiveplayer()==p && cps.getPlayerposition().getCurrentcell().getReachableCells().contains(c))
                 return true;
         }

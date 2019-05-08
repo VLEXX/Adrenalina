@@ -9,7 +9,7 @@ import java.util.HashMap;
 //Classe che inizializza la partita
 public class InitializeAllPlay {
     private ArrayList<CurrentTurnState> currentTurnState;
-    private ArrayList<CurrentPlayerState> currentPlayerState;
+    private HashMap<Player, CurrentPlayerState> currentPlayerState;
     private CurrentDeckState currentDeckState;
     private ArrayList<ChartScore> chartScore;
     private StateSelectedMap stateSelectedMap;
@@ -23,7 +23,7 @@ public class InitializeAllPlay {
 
     public InitializeAllPlay(){
         currentTurnState = new ArrayList<>();
-        currentPlayerState = new ArrayList<>();
+        currentPlayerState = new HashMap<>();
         chartScore = new ArrayList<>();
         stateSelectedMode = new StateSelectedMode();
         stateSelectedMap = new StateSelectedMap();
@@ -65,7 +65,7 @@ public class InitializeAllPlay {
         return voteMap;
     }
 
-    public ArrayList<CurrentPlayerState> getCurrentPlayerState() {
+    public HashMap<Player,CurrentPlayerState> getCurrentPlayerState() {
         return currentPlayerState;
     }
 
@@ -103,5 +103,9 @@ public class InitializeAllPlay {
 
     public State getPlayerState(Player player){
         return playerState.get(player);
+    }
+
+    public HashMap<Player, State> getHashMapState(){
+        return playerState;
     }
 }

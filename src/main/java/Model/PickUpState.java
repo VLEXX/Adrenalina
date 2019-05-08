@@ -1,17 +1,10 @@
 package Model;
 
-import Model.InitializeAllPlay;
-import Model.Player;
-import Model.State;
-
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 public class PickUpState implements State {
 
     @Override
-    public int doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
+    public Message doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
         //TODO
-        return 0;
+        return new Message("ok");
     }
 }

@@ -76,19 +76,24 @@ class DamageBoxTest {
     @Test
     void increaseDamage() {
         DamageBox d = new DamageBox();
+        DamageBox f = new DamageBox();
         d.increaseDamage(4, Player.BLACK);
+        f.increaseDamage(12, Player.YELLOW);
+        d.increaseDamage(3, Player.BLUE);
         assertEquals(d.getDamage()[0], Player.BLACK);
         assertEquals(d.getDamage()[1], Player.BLACK);
         assertEquals(d.getDamage()[2], Player.BLACK);
         assertEquals(d.getDamage()[3], Player.BLACK);
-        assertEquals(d.getDamage()[4], null);
-        assertEquals(d.getDamage()[5], null);
-        assertEquals(d.getDamage()[6], null);
+        assertEquals(d.getDamage()[4], Player.BLUE);
+        assertEquals(d.getDamage()[5], Player.BLUE);
+        assertEquals(d.getDamage()[6], Player.BLUE);
         assertEquals(d.getDamage()[7], null);
         assertEquals(d.getDamage()[8], null);
         assertEquals(d.getDamage()[9], null);
         assertEquals(d.getDamage()[10], null);
         assertEquals(d.getDamage()[11], null);
+        assertEquals(d.isShootUp(), true);
+        assertEquals(f.isDead(), true);
     }
 
     @Test

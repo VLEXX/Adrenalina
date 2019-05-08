@@ -1,6 +1,11 @@
 //Author: Federico Scatà
 package Model;
 
+import Model.Observer;
+import Model.Player;
+import Model.PlayerBoard;
+import Model.Position;
+
 import java.io.Serializable;
 
 //Classe che memorizza lo stato attuale del giocatore

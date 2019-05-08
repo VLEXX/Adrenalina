@@ -1,6 +1,11 @@
 //Author: Federico Scatà
 package Model;
 
+import Model.Ammo;
+import Model.Player;
+import Model.PowerUp;
+import Model.Weapons;
+
 import java.util.ArrayList;
 import java.util.Stack;
 

@@ -1,6 +1,8 @@
 //Author: Alex Saletti
 package Model;
 
+import Model.*;
+
 import java.io.PrintWriter;
 import java.util.Scanner;
 

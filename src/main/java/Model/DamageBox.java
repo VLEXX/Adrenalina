@@ -90,9 +90,9 @@ public class DamageBox {
         for(int i = damageTot; i < damageTot + damagePoint; i++)
             damage[i] = player;
         damageTot = damagePoint + damageTot;
-        if(damageTot >= 3){
+        if(damageTot > 2 && damageTot < 6){
             pickUp = true;
-        } else if(damageTot >= 6){
+        } else if(damageTot > 5 && damageTot < 11){
             shootUp = true;
         } else if(damageTot >= 11){
             dead = true;

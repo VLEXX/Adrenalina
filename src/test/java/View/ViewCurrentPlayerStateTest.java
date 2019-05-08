@@ -4,8 +4,6 @@ import Model.CurrentPlayerState;
 import Model.Player;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.View;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ViewCurrentPlayerStateTest {

@@ -1,6 +1,10 @@
 //Author: Federico Scatà
 package Model;
 
+import Model.Observer;
+import Model.Player;
+import Model.Subject;
+
 import java.util.ArrayList;
 
 //Classe che memorizza lo stato attuale della del turno della partita

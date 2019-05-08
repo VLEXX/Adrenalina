@@ -67,12 +67,12 @@ class LockRifleTest {
         @Test
         void getPriceToPayHooking() {
             LockRifle l = new LockRifle();
-            assertEquals(l.getPriceToPayHooking(), 1);
+            assertEquals(l.getPriceToPay(), 1);
         }
 
         @Test
         void getMunitionsToPayHooking() {
             LockRifle l = new LockRifle();
-            assertEquals(l.getMunitionsToPayHooking(), Munitions.RED);
+            assertEquals(l.getMunitionsToPay(), Munitions.RED);
         }
     }

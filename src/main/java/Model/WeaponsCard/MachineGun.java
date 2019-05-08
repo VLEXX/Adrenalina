@@ -57,7 +57,7 @@ public class MachineGun extends WeaponsDad {
     }
 
     //Controlla che la pposizione sia corretta e che il giocatore in quella posizione sia presente
-    public void check(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PositionNotFound, PlayerNotFound {
+    private void check(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PositionNotFound, PlayerNotFound {
         boolean find = false;
         //Controllo sul primo bersaglio
         if (playerToAttack1.getPlayer() != null) {

@@ -5,10 +5,10 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class TractorBeam extends WeaponsDad{
+public class TractorBeam extends Weapon {
 
     //Costruttore
-    private TractorBeam(){
+    public TractorBeam(){
         super();
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setSecondPrice(Munitions.YELLOW,1);

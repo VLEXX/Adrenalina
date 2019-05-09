@@ -5,10 +5,10 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class ShockWave extends WeaponsDad{
+public class ShockWave extends Weapon {
 
     //Costruttore
-    private ShockWave(){
+    public ShockWave(){
         super();
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setSecondPrice(Munitions.YELLOW, 1);

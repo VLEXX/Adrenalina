@@ -5,10 +5,10 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class Thor extends WeaponsDad{
+public class Thor extends Weapon {
 
     //Costruttore
-    private Thor(){
+    public Thor(){
         super();
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setFirstPrice(Munitions.RED,1);

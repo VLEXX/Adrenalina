@@ -3,6 +3,7 @@ package ServerController;
 import Model.InitializeAllPlay;
 import Model.Message;
 import Model.Player;
+import Model.UpdateThread;
 
 import java.io.*;
 
@@ -51,7 +52,11 @@ public class SocketClientHandler implements Runnable {
             allPlay.resetPlayerCounterTemp();
             Message message = new Message("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
             objectOutputStream.writeObject(message);
+
+            UpdateThread updateThread = new UpdateThread(allPlay, player, objectOutputStream);
+            updateThread.start();
             StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream);
+            startGame.start();
 
             socket.close();
         }

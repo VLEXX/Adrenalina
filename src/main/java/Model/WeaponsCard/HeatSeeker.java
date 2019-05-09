@@ -5,9 +5,7 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-import java.util.HashMap;
-
-public class HeatSeeker extends WeaponsDad{
+public class HeatSeeker extends Weapon {
 
     //Costruttore
     public HeatSeeker() {

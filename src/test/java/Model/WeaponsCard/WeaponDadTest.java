@@ -8,32 +8,32 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WeaponsDadTest {
+class WeaponDadTest {
 
     @Test
     void getFirstPrice() {
-        WeaponsDad w = new WeaponsDad();
+        Weapon w = new Weapon();
         w.setFirstPrice(Munitions.BLUE, 3);
         assertEquals(w.getFirstPrice().get(Munitions.BLUE), 3);
     }
 
     @Test
     void getSecondPrice() {
-        WeaponsDad w = new WeaponsDad();
+        Weapon w = new Weapon();
         w.setSecondPrice(Munitions.BLUE, 0);
         assertEquals(w.getSecondPrice().get(Munitions.BLUE), 0);
     }
 
     @Test
     void getThirdPrice() {
-        WeaponsDad w = new WeaponsDad();
+        Weapon w = new Weapon();
         w.setThirdPrice(Munitions.BLUE, 3);
         assertEquals(w.getThirdPrice().get(Munitions.BLUE), 3);
     }
 
     @Test
     void getFirstUse() {
-        WeaponsDad w = new WeaponsDad();
+        Weapon w = new Weapon();
         w.setFirstUse(false);
         assertEquals(w.getFirstUse(), false);
     }

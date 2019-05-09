@@ -7,7 +7,7 @@ import Model.*;
 import Model.Exceptions.PlayerNotFound;
 import Model.Exceptions.PositionNotFound;
 
-public class LockRifle extends WeaponsDad{
+public class LockRifle extends Weapon {
 
     //Costruttore
     public LockRifle() {

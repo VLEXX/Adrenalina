@@ -3,6 +3,8 @@
  */
 package Model;
 
+import Model.WeaponsCard.LockRifle;
+import Model.WeaponsCard.Weapon;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,10 +23,11 @@ class PlayerBoardTest {
     @Test
     void getWeaponList() {
         PlayerBoard p = new PlayerBoard();
-        ArrayList<Weapons> weaponsTest = new ArrayList<>();
-        weaponsTest.add(Weapons.CYBERBLADE);
+        ArrayList<Weapon> weaponsTest = new ArrayList<>();
+        LockRifle lockRifle = new LockRifle();
+        weaponsTest.add(lockRifle);
         p.setWeaponsList(weaponsTest);
-        assertEquals(p.getWeaponsList().get(0), Weapons.CYBERBLADE);
+        assertEquals(p.getWeaponsList().get(0), lockRifle);
     }
 
     @Test
@@ -54,7 +57,7 @@ class PlayerBoardTest {
     @Test
     void setWeaponsList() {
         PlayerBoard p = new PlayerBoard();
-        ArrayList<Weapons> weaponsTest = new ArrayList<>();
+        ArrayList<Weapon> weaponsTest = new ArrayList<>();
         p.setWeaponsList(weaponsTest);
         assertEquals(p.getWeaponsList().size(), 0);
     }

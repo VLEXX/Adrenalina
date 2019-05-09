@@ -5,7 +5,7 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class GrenadeLauncher extends WeaponsDad{
+public class GrenadeLauncher extends Weapon {
 
     //Costruttore
     public GrenadeLauncher() {

@@ -5,10 +5,10 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class VortexCannon extends WeaponsDad{
+public class VortexCannon extends Weapon {
 
     //Costruttore
-    private VortexCannon(){
+    public VortexCannon(){
         super();
         super.setFirstPrice(Munitions.RED, 1);
         super.setFirstPrice(Munitions.BLUE, 1);

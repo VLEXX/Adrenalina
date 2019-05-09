@@ -7,7 +7,7 @@ import Model.Munitions;
 
 import java.util.HashMap;
 
-public class WeaponsDad {
+public class Weapon {
 
     private HashMap<Munitions, Integer> firstPrice;
     private HashMap<Munitions, Integer> secondPrice;
@@ -15,7 +15,7 @@ public class WeaponsDad {
     private boolean firstUse;
 
     //Costruttore
-    public WeaponsDad(){
+    public Weapon(){
         firstPrice = new HashMap<>();
         secondPrice = new HashMap<>();
         thirdPrice = new HashMap<>();

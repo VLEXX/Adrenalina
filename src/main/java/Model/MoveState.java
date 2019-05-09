@@ -31,6 +31,16 @@ public class MoveState implements State {
         if(out!=0){
             return new Message("Invalid cell! Please, insert another cell...");
         }
+        else {
+            if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==1){
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), new MidState());
+                allPlay.notifyObserver();
+            }
+            if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==0) {
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), new EndTurnState());
+                allPlay.notifyObserver();
+            }
+        }
         return new Message("ok");
     }
 

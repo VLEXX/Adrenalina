@@ -9,7 +9,9 @@ package Model;
 //score[3] => BLUE
 //score[4] => BLACK
 
-public class ChartScore {
+import java.io.Serializable;
+
+public class ChartScore implements Serializable {
     private int[] score;
 
     //Costruttore che inizializza l'array con tutti 0

@@ -5,7 +5,7 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class Hellion extends WeaponsDad{
+public class Hellion extends Weapon {
 
     //Costruttore
     public Hellion(){

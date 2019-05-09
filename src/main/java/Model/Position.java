@@ -1,8 +1,10 @@
 //Author: Federico Scatà
 package Model;
 
+import java.io.Serializable;
+
 //Classe che memorizza e identifica la posizione di un giocatore
-public class Position {
+public class Position implements Serializable {
     private Cell currentcell;   //cella corrente
     private Room currentroom;   //stanza corrente
 

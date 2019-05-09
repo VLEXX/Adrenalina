@@ -5,10 +5,10 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class Furnace extends WeaponsDad{
+public class Furnace extends Weapon {
 
     //Costruttore
-    private Furnace() {
+    public Furnace() {
         super();
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setFirstPrice(Munitions.RED, 1);

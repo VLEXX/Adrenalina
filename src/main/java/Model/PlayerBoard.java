@@ -3,13 +3,16 @@
  */
 package Model;
 
+import Model.WeaponsCard.Weapon;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //Classe che inizializza la plancia giocatore
-public class PlayerBoard {
+public class PlayerBoard implements Serializable {
     private Player player;
     private boolean firstPlayerCard;             //Carta primo giocatore
-    private ArrayList<Weapons> weaponsList;      //Armi giocatore
+    private ArrayList<Weapon> weaponsList;      //Armi giocatore
     private ArrayList<PowerUp> powerUpList;      //Potenziamenti giocatore
     private DamageBox damageBox;                 //Plancia danni
     private MunitionsBox munitionsBox;           //Plancia munizioni
@@ -34,7 +37,7 @@ public class PlayerBoard {
     }
 
     //Ritorna la lista delle armi
-    public ArrayList<Weapons> getWeaponsList() {
+    public ArrayList<Weapon> getWeaponsList() {
         return weaponsList;
     }
 
@@ -54,7 +57,7 @@ public class PlayerBoard {
     }
 
     //Setta la lista delle armi
-    public void setWeaponsList(ArrayList<Weapons> weaponsList) {
+    public void setWeaponsList(ArrayList<Weapon> weaponsList) {
         this.weaponsList = weaponsList;
     }
 

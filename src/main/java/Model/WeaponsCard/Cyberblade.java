@@ -5,7 +5,7 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class Cyberblade extends WeaponsDad{
+public class Cyberblade extends Weapon {
 
     //Costruttore
     public Cyberblade(){

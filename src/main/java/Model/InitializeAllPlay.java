@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 //Classe che inizializza la partita
-public class InitializeAllPlay {
+public class InitializeAllPlay implements SubjectUpdate {
     private ArrayList<CurrentTurnState> currentTurnState;
     private HashMap<Player, CurrentPlayerState> currentPlayerState;
     private CurrentDeckState currentDeckState;
@@ -20,6 +20,8 @@ public class InitializeAllPlay {
     private HashMap<Player, State>  playerState;
     private int playercounter;
     private int playercountertemp;
+    private ArrayList<ObserverUpdate> observers;
+
 
     public InitializeAllPlay(){
         currentTurnState = new ArrayList<>();
@@ -107,5 +109,27 @@ public class InitializeAllPlay {
 
     public HashMap<Player, State> getHashMapState(){
         return playerState;
+    }
+
+    @Override
+    public void addObserver(ObserverUpdate e) {
+        observers.add(e);
+    }
+
+    @Override
+    public void removeObserver(ObserverUpdate e) {
+        observers.remove(e);
+    }
+
+    @Override
+    public void notifyObserver() {
+        for(ObserverUpdate observer: this.getObservers()){
+            observer.update(true);
+        }
+    }
+
+    @Override
+    public ArrayList<ObserverUpdate> getObservers() {
+        return observers;
     }
 }

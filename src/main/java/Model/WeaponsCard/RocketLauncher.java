@@ -5,10 +5,10 @@ package Model.WeaponsCard;
 
 import Model.Munitions;
 
-public class RocketLauncher extends WeaponsDad{
+public class RocketLauncher extends Weapon {
 
     //Costruttore
-    private RocketLauncher(){
+    public RocketLauncher(){
         super();
         super.setFirstPrice(Munitions.RED, 2);
         super.setSecondPrice(Munitions.BLUE, 1);

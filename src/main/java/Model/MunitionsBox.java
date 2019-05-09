@@ -3,10 +3,11 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 //Classe che gestisce le munizioni del giocatore
-public class MunitionsBox {
+public class MunitionsBox implements Serializable {
     private HashMap<Munitions, Integer> myMunitionsMap;
 
     //Costruttore delle munizioni

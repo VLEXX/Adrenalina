@@ -14,11 +14,6 @@ class ViewCurrentPlayerStateTest {
         assertEquals(v.getCurrentPlayerState(), null);
     }
 
-    @Test
-    void getActiveplayer() {
-        ViewCurrentPlayerState v = new ViewCurrentPlayerState();
-        assertEquals(v.getActiveplayer(), null);
-    }
 
     @Test
     void setCurrentPlayerState() {
@@ -27,12 +22,5 @@ class ViewCurrentPlayerStateTest {
         c.setActiveplayer(Player.BLACK);
         v.setCurrentPlayerState(c);
         assertEquals(v.getCurrentPlayerState().getActiveplayer(), Player.BLACK);
-    }
-
-    @Test
-    void setActiveplayer() {
-        ViewCurrentPlayerState v = new ViewCurrentPlayerState();
-        v.setActiveplayer(Player.YELLOW);
-        assertEquals(v.getActiveplayer(), Player.YELLOW);
     }
 }

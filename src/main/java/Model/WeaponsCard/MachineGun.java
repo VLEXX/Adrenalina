@@ -3,7 +3,6 @@
  */
 package Model.WeaponsCard;
 
-import Model.Exceptions.PlayerAlreadyAdded;
 import Model.Exceptions.PlayerNotFound;
 import Model.Exceptions.PositionNotFound;
 import Model.Munitions;
@@ -13,10 +12,10 @@ import Model.Position;
 
 import java.util.ArrayList;
 
-public class MachineGun extends WeaponsDad {
+public class MachineGun extends Weapon {
 
     //Costruttore
-    private MachineGun() {
+    public MachineGun() {
         super();
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setFirstPrice(Munitions.RED, 1);

@@ -3,11 +3,12 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 //Classe che gestisce i marchi giocatore tramite una mappa che tiene conto del numero dei marchi corrispondente al colore
-public class MarksBox {
+public class MarksBox implements Serializable {
     private HashMap<Player, Integer> myMarksMap;
 
     //Costruttore per il numero dei marchi

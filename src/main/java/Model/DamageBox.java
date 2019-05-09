@@ -3,10 +3,11 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 //Classe che tiene conto del riquadro danni della plancia giocatore
-public class DamageBox {
+public class DamageBox implements Serializable {
     private Player[] damage;                                    //Array per tener conto dell'ordine dei danni dei giocatori
     private int damageTot;                                      //Totale dei danni subiti
     private boolean pickUp;                                     //Potenziamento per l'aver subito i danni: due mosse prima di raccogliere

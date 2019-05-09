@@ -3,6 +3,8 @@
  */
 package Model.WeaponsCard;
 
+import Model.Exceptions.DontUseFocusedShot;
+import Model.Exceptions.IncorrectPlayer;
 import Model.Exceptions.PlayerNotFound;
 import Model.Exceptions.PositionNotFound;
 import Model.Munitions;
@@ -14,6 +16,9 @@ import java.util.ArrayList;
 
 public class MachineGun extends Weapon {
 
+    private PlayerBoard player1;
+    private PlayerBoard player2;
+
     //Costruttore
     public MachineGun() {
         super();
@@ -23,40 +28,51 @@ public class MachineGun extends Weapon {
         super.setThirdPrice(Munitions.BLUE, 1);
     }
 
+    //TODO ricontrollo funzioni
     //Funzione effetto base
-    public PlayerBoard attack(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound {
-        check(player, myPosition, positionToAttack1, playerToAttack1, positionToAttack2, playerToAttack2, positionToAttack3, playerToAttack3);
-        playerToAttack1.getDamageBox().increaseDamage(1, player);
-        playerToAttack2.getDamageBox().increaseDamage(1, player);
-        return playerToAttack1;
+    public ArrayList<PlayerBoard> attack(Player player, Position myPosition, Position positionToAttack1, Position positionToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound, DontUseFocusedShot {
+        ArrayList playerToAttack = new ArrayList();
+        playerToAttack.add(player1);
+        playerToAttack.add(player2);
+        check(myPosition, positionToAttack1, player1, positionToAttack2, player2, positionToAttack3, playerToAttack3);
+        if(player1.getPlayer() == null || player2.getPlayer() == null){
+            throw new DontUseFocusedShot ("You can't use focused shot for this weapon");
+        }
+        if(player1.getPlayer() != player2.getPlayer()) {
+            player1.getDamageBox().increaseDamage(1, player);
+            player2.getDamageBox().increaseDamage(1, player);
+        } else throw new DontUseFocusedShot ("You can't use focused shot for this weapon");
+        return playerToAttack;
     }
 
     //Funzione colpo focalizzato
-    public ArrayList<PlayerBoard> focusedShot(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound{
+    public ArrayList<PlayerBoard> focusedShot(Player player, Position myPosition, Position positionToAttack1, Position positionToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound{
         ArrayList<PlayerBoard> playerToAttack = new ArrayList<>();
-        playerToAttack.add(playerToAttack1);
-        playerToAttack.add(playerToAttack2);
-        check(player, myPosition, positionToAttack1, playerToAttack1, positionToAttack2, playerToAttack2, positionToAttack3, playerToAttack3);
-        playerToAttack1.getDamageBox().increaseDamage(1, player);
-        playerToAttack2.getDamageBox().increaseDamage(1, player);
+        playerToAttack.add(player1);
+        playerToAttack.add(player2);
+        check(myPosition, positionToAttack1, player1, positionToAttack2, player2, positionToAttack3, playerToAttack3);
+        player1.getDamageBox().increaseDamage(1, player);
+        player2.getDamageBox().increaseDamage(1, player);
         return playerToAttack;
     }
 
     //Funzione tripode di supporto
-    public ArrayList<PlayerBoard> tripod(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound{
+    public ArrayList<PlayerBoard> tripod(Player player, Position myPosition, Position positionToAttack1, Position positionToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound, IncorrectPlayer{
         ArrayList<PlayerBoard> playerToAttack = new ArrayList<>();
-        playerToAttack.add(playerToAttack1);
-        playerToAttack.add(playerToAttack2);
+        playerToAttack.add(player1);
+        playerToAttack.add(player2);
         playerToAttack.add(playerToAttack3);
-        check(player, myPosition, positionToAttack1, playerToAttack1, positionToAttack2, playerToAttack2, positionToAttack3, playerToAttack3);
-        playerToAttack1.getDamageBox().increaseDamage(1, player);
-        playerToAttack2.getDamageBox().increaseDamage(1, player);
-        playerToAttack3.getDamageBox().increaseDamage(1, player);
+        if(player1.getPlayer() != player2.getPlayer() && player1.getPlayer() != playerToAttack3.getPlayer() && player2.getPlayer() != playerToAttack3.getPlayer()){
+            check(myPosition, positionToAttack1, player1, positionToAttack2, player2, positionToAttack3, playerToAttack3);
+            player1.getDamageBox().increaseDamage(1, player);
+            player2.getDamageBox().increaseDamage(1, player);
+            playerToAttack3.getDamageBox().increaseDamage(1, player);
+        } else throw new IncorrectPlayer("You couldn't choose this player to attack");
         return playerToAttack;
     }
 
     //Controlla che la pposizione sia corretta e che il giocatore in quella posizione sia presente
-    private void check(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PositionNotFound, PlayerNotFound {
+    private void check(Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PositionNotFound, PlayerNotFound {
         boolean find = false;
         //Controllo sul primo bersaglio
         if (playerToAttack1.getPlayer() != null) {

@@ -18,7 +18,7 @@ public class LockRifle extends Weapon {
 
     //Funzione effetto base
     public PlayerBoard attack(Position myPosition, Player activePlayer, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
-        check(activePlayer,myPosition,positionToAttack,playerToAttack);
+        check(myPosition,positionToAttack,playerToAttack);
         if(super.getFirstUse() == true)
             super.setFirstUse(false);
         playerToAttack.getDamageBox().increaseDamage(2, activePlayer);
@@ -28,13 +28,13 @@ public class LockRifle extends Weapon {
 
     //Funzione secondo aggancio
     public PlayerBoard hooking(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
-        check(player,myPosition,positionToAttack,playerToAttack);
+        check(myPosition,positionToAttack,playerToAttack);
         playerToAttack.getMarksBox().setMyMarksMap(player, 1);
         return playerToAttack;
     }
 
-    //Controlla che la pposizione sia corretta e che il giocatore in quella posizione sia presente
-    private void check(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    //Controlla che la posizione sia corretta e che il giocatore in quella posizione sia presente
+    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {

@@ -59,13 +59,13 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void getCurrentDeckState(){
+    void getCurrentDeckState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getCurrentDeckState().getPlayers().size(), 5);
     }
 
     @Test
-    void addPlayerState(){
+    void addPlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         State state = new MoveState();
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
@@ -73,7 +73,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void updatePlayerState(){
+    void updatePlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         State state = new MoveState();
         State state1 = new ShootState();
@@ -83,7 +83,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void getPlayerState(){
+    void getPlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         State state = new MoveState();
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
@@ -91,7 +91,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void addPlayerCounter(){
+    void addPlayerCounter() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         initializeAllPlay.addPlayerCounter();
         assertEquals(initializeAllPlay.getPlayercounter(), 1);
@@ -99,7 +99,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void decreasePlayerCounterTemp(){
+    void decreasePlayerCounterTemp() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         initializeAllPlay.addPlayerCounter();
         initializeAllPlay.addPlayerCounter();
@@ -110,14 +110,14 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void getHashMapState(){
+    void getHashMapState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         initializeAllPlay.getHashMapState().put(Player.BLUE, null);
         assertEquals(initializeAllPlay.getHashMapState().containsKey(Player.BLUE), true);
     }
 
     @Test
-    void addObserver(){
+    void addObserver() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         UpdateThread updateThread = new UpdateThread(initializeAllPlay, Player.BLACK, null);
         initializeAllPlay.addObserver(updateThread);
@@ -125,27 +125,14 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void removeObserver(){
-        InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        UpdateThread updateThread = new UpdateThread(initializeAllPlay, Player.BLACK, null);
-        initializeAllPlay.addObserver(updateThread);
-        assertEquals(initializeAllPlay.getObservers().contains(updateThread), true);
-        initializeAllPlay.removeObserver(updateThread);
-        assertEquals(initializeAllPlay.getObservers().contains(updateThread), false);
-    }
-
-    @Test
-    void notifyObserver(){
+    void removeObserver() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         UpdateThread updateThread = new UpdateThread(initializeAllPlay, Player.BLACK, null);
         initializeAllPlay.addObserver(updateThread);
         assertEquals(initializeAllPlay.getObservers().contains(updateThread), true);
         initializeAllPlay.notifyObserver();
         assertEquals(updateThread.isActiveUpdate(), true);
-    }
-
-    @Test
-    void getObservers(){
-
+        initializeAllPlay.removeObserver(updateThread);
+        assertEquals(initializeAllPlay.getObservers().contains(updateThread), false);
     }
 }

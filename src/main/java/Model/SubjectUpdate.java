@@ -1,13 +1,15 @@
 package Model;
 
+import ServerController.ObserverUpdate;
+
 import java.util.ArrayList;
 
 public interface SubjectUpdate {
-    public void addObserver(ObserverUpdate e);
+    void addObserver(ObserverUpdate e);
 
-    public void removeObserver(ObserverUpdate e);
+    void removeObserver(ObserverUpdate e);
 
-    public void notifyObserver();
+    void notifyObserver();
 
-    public ArrayList<ObserverUpdate> getObservers();
+    ArrayList<ObserverUpdate> getObservers();
 }

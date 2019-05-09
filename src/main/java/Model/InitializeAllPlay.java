@@ -3,6 +3,8 @@
  */
 package Model;
 
+import ServerController.ObserverUpdate;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

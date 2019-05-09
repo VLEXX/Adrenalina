@@ -1,7 +1,6 @@
 package ServerController;
 
 import Model.InitializeAllPlay;
-import Model.ObserverUpdate;
 import Model.Player;
 import Model.UpdatePacket;
 
@@ -27,7 +26,7 @@ public class UpdateThread extends Thread implements ObserverUpdate {
         this.endgame = endgame;
     }
 
-    public void updateClient() throws IOException {
+    public synchronized void updateClient() throws IOException {
         UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap());
         objectOutputStream.writeObject(updatePacket);
     }

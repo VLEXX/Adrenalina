@@ -7,7 +7,6 @@ import Model.Observer;
 import Model.Player;
 import Model.PlayerBoard;
 import Model.Position;
-
 import java.io.Serializable;
 
 /**

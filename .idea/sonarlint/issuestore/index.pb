@@ -64,8 +64,6 @@ Q
 !src/test/java/Model/CellTest.java,b\2\b2655549ae50840b38c2ce6f395ab27bbb30cbee
 S
 #src/main/java/Model/SpawnPoint.java,0\7\07580eefda1f8d108d5120298ffca385a5a23f7d
-P
- src/main/java/Model/Weapons.java,7\9\79fb6936b6b098ad01e4ebf0f05498f15f7d4986
 X
 (src/test/java/Model/PlayerBoardTest.java,3\5\35bfedb1060f79a58f5117f5ab35344a1f2f815e
 Q
@@ -184,15 +182,5 @@ T
 $src/main/java/Model/PickUpState.java,2\7\27d5a2b82322a3b91b442dc82600292db0ba07dd
 U
 %src/main/java/Model/EndTurnState.java,d\f\dfb8e444daef0de6df7fd24984793cf8ad22e9c5
-c
-3src/test/java/Model/WeaponsCard/HeatSeekerTest.java,c\7\c7f3b58550f1d402cc732c82e285ff5705dae365
-h
-8src/test/java/Model/WeaponsCard/GrenadeLauncherTest.java,4\a\4aa3cd1a7466a091f35b07c4dac142f9cf2f771f
-`
-0src/test/java/Model/WeaponsCard/FurnaceTest.java,9\4\944b03ddfc814cc2e72198052de74abfb5502c73
-e
-5src/test/java/Model/WeaponsCard/FlameThrowerTest.java,e\c\ec8a28882b24a1257025fbd94ebe767e238c64ab
-f
-6src/test/java/Model/WeaponsCard/ElectroscytheTest.java,e\7\e7725b4079a8e980e29da1d27c5cc861b6c48b3c
-c
-3src/test/java/Model/WeaponsCard/CyberbladeTest.java,4\0\401ce8ae295a5b051fba19e18476532cabd319cb
+N
+src/main/java/Model/State.java,7\3\73d255d7850be0b6971cce5ce3c86a5da6d3f5a2

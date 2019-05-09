@@ -1,4 +1,4 @@
-package Model;
+package ServerController;
 
 import Model.InitializeAllPlay;
 import Model.ObserverUpdate;

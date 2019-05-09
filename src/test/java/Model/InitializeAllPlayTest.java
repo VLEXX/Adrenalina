@@ -3,6 +3,7 @@
  */
 package Model;
 
+import ServerController.UpdateThread;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -118,13 +119,9 @@ class InitializeAllPlayTest {
     @Test
     void addObserver(){
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        System.out.println("1");
         UpdateThread updateThread = new UpdateThread(initializeAllPlay, Player.BLACK, null);
-        System.out.println("2");
         initializeAllPlay.addObserver(updateThread);
-        System.out.println("3");
         assertEquals(initializeAllPlay.getObservers().contains(updateThread), true);
-        System.out.println("4");
     }
 
     @Test

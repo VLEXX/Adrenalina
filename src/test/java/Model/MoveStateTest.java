@@ -18,9 +18,9 @@ class MoveStateTest {
         cps.setPlayerposition(p);
         i.getCurrentPlayerState().put(Player.BLUE, cps);
         MoveState ms = new MoveState();
-        assertEquals(ms.cellFinder(i,"1",Player.BLUE).getCellId(),i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).getCellId());
-        assertEquals(ms.cellFinder(i,"22",Player.BLUE),null);
-        assertEquals(ms.cellFinder(i, "aaajkg",Player.BLUE), null);
+        assertEquals(ms.cellFinder(i,1,Player.BLUE).getCellId(),i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).getCellId());
+        assertEquals(ms.cellFinder(i,22,Player.BLUE),null);
+        assertEquals(ms.cellFinder(i,7,Player.BLUE),null);
 
     }
 
@@ -37,9 +37,8 @@ class MoveStateTest {
         i.getCurrentPlayerState().put(Player.BLUE, cps);
         MoveState ms = new MoveState();
         assertEquals(ms.setMove(i,i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1),Player.BLUE),0);
-
-
-
+        i.getCurrentPlayerState().get(Player.BLUE).setActiveplayer(Player.YELLOW);
+        assertEquals(ms.setMove(i,i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1),Player.BLUE),-1);
 
     }
 

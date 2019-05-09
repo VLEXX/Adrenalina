@@ -56,28 +56,19 @@ public class MoveState implements State {
     }
 
     //metodo che restituisce la cella avente un dato id
-    public Cell cellFinder(InitializeAllPlay i, String id, Player player){
-        int intid;
+    public Cell cellFinder(InitializeAllPlay i, int id, Player player){
 
-        try{
-            intid=Integer.parseInt(id);
-        }
-        catch(NumberFormatException e){
-            return null;
-        }
-
-        for(Room room : i.getStateSelectedMap().getSelectedmap().getRoomList()){
-            for(Cell cell : room.getCellsList()){
-                if (cell.getCellId()==intid) {
-                    if(cellIsReachable(i,player,cell)) {
-                        return cell;
+        for(Room room : i.getStateSelectedMap().getSelectedmap().getRoomList()) {
+                for (Cell cell : room.getCellsList()) {
+                    if (cell.getCellId() == id) {
+                        if (cellIsReachable(i, player, cell)) {
+                            return cell;
+                        } else
+                            return null;
                     }
-                    else
-                        return null;
                 }
             }
-        }
-        return null;
+        return  null;
     }
 
     public boolean cellIsReachable(InitializeAllPlay i, Player p, Cell c){

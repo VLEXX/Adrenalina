@@ -9,10 +9,10 @@ public class PickUpState implements State {
         //TODO
         return new Message("ok");
     }
-
+/*
 
     //metodo che permette al player di spostarsi nella cella vicina
-    public  void moveOne(InitializeAllPlay i, Player p, Cell c){
+    public void moveOne(InitializeAllPlay i, Player p, Cell c){
         CurrentPlayerState cps = i.getCurrentPlayerState().get(p);
             if (cps.getActiveplayer()==p && cps.isActiveturn()){
                 if(cps.getPlayerposition().getCurrentcell().getUpCell()==c || cps.getPlayerposition().getCurrentcell().getDownCell()==c || cps.getPlayerposition().getCurrentcell().getLeftCell()==c || cps.getPlayerposition().getCurrentcell().getRightCell()==c){
@@ -57,4 +57,5 @@ public class PickUpState implements State {
         }
 
     }
+    */
 }

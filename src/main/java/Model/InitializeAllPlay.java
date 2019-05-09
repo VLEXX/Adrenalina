@@ -36,6 +36,7 @@ public class InitializeAllPlay implements SubjectUpdate {
         playerState = new HashMap<>();
         playercounter = 0;
         playercountertemp = 0;
+        observers = new ArrayList<>();
     }
 
     public void resetPlayerCounterTemp(){

@@ -1,9 +1,14 @@
 package Model;
 
+import Model.InitializeAllPlay;
+import Model.ObserverUpdate;
+import Model.Player;
+import Model.UpdatePacket;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class UpdateThread extends Thread implements ObserverUpdate{
+public class UpdateThread extends Thread implements ObserverUpdate {
     private InitializeAllPlay allPlay;
     private boolean endgame;
     private Player player;
@@ -48,5 +53,9 @@ public class UpdateThread extends Thread implements ObserverUpdate{
     @Override
     public void update(boolean active) {
         this.activeUpdate=active;
+    }
+
+    public boolean isActiveUpdate() {
+        return activeUpdate;
     }
 }

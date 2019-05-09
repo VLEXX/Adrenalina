@@ -1,6 +1,9 @@
 package Model;
 
+import Model.WeaponsCard.Weapon;
 import org.junit.jupiter.api.Test;
+
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +18,8 @@ class CurrentDeckStateTest {
     @Test
     void getWeaponsdeck() {
         CurrentDeckState c = new CurrentDeckState();
-        //TODO
+        Stack<Weapon> deck = c.getWeaponsdeck();
+        assertEquals(deck, c.getWeaponsdeck());
     }
 
     @Test

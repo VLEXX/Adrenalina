@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package ServerController;
 
 public interface ObserverUpdate {

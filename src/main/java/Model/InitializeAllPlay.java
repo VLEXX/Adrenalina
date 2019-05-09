@@ -1,5 +1,5 @@
 /**
- * @author Giulia Rivara
+ * @author Giulia Rivara & Federico Scatà
  */
 package Model;
 
@@ -13,7 +13,7 @@ public class InitializeAllPlay implements SubjectUpdate {
     private ArrayList<CurrentTurnState> currentTurnState;
     private HashMap<Player, CurrentPlayerState> currentPlayerState;
     private CurrentDeckState currentDeckState;
-    private ArrayList<ChartScore> chartScore;
+    private ChartScore chartScore;
     private StateSelectedMap stateSelectedMap;
     private StateSelectedMode stateSelectedMode;
     private VoteMap voteMap;
@@ -28,7 +28,7 @@ public class InitializeAllPlay implements SubjectUpdate {
     public InitializeAllPlay(){
         currentTurnState = new ArrayList<>();
         currentPlayerState = new HashMap<>();
-        chartScore = new ArrayList<>();
+        chartScore = new ChartScore();
         stateSelectedMode = new StateSelectedMode();
         stateSelectedMap = new StateSelectedMap();
         voteMap = new VoteMap();
@@ -62,7 +62,7 @@ public class InitializeAllPlay implements SubjectUpdate {
         return playercounter;
     }
 
-    public ArrayList<ChartScore> getChartScore() {
+    public ChartScore getChartScore() {
         return chartScore;
     }
 

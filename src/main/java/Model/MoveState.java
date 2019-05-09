@@ -1,4 +1,6 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti & Federico Scatà
+ */
 package Model;
 
 public class MoveState implements State {

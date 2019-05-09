@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package Model;
 
 import java.io.Serializable;

@@ -27,7 +27,7 @@ public class UpdateThread extends Thread implements ObserverUpdate {
     }
 
     public synchronized void updateClient() throws IOException {
-        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap());
+        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore().getScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap());
         objectOutputStream.writeObject(updatePacket);
     }
     public void start(){

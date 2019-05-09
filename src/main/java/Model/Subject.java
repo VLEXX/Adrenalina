@@ -1,4 +1,6 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package Model;
 
 import java.util.ArrayList;

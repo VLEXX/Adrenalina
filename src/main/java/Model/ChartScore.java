@@ -1,4 +1,6 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package Model;
 
 //Classe in cui viene memorizzata la classifica corrente del gioco con i relativi punteggi.

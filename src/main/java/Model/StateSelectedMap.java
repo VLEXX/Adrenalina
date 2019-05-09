@@ -1,4 +1,6 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package Model;
 
 //Classe che memorizza la mappa corrente selezionata del gioco

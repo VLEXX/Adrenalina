@@ -1,4 +1,6 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package Model;
 
 //Classe che memorizza gli ID dei client che si collegano al server (da 3 a 5 client)

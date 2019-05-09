@@ -1,4 +1,6 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package Model;
 
 //Classe che gestisce la votazione per la scelta della modalità in cui giocare

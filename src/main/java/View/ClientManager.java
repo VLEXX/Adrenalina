@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package View;
 
 import Model.CurrentDeckState;

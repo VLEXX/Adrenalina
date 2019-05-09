@@ -13,7 +13,7 @@ class InitializeAllPlayTest {
     @Test
     void getChartScore() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        assertEquals(initializeAllPlay.getChartScore().size(), 0);
+        assertEquals(initializeAllPlay.getChartScore().getScore()[0], 0);
     }
 
     @Test

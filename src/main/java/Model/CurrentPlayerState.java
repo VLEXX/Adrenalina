@@ -89,26 +89,41 @@ public class CurrentPlayerState implements Observer, Serializable {
         return this.actioncounter;
     }
 
-    //Resetta (riporta a 2) il contatore delle azioni rimanenti
+    /**
+     * Resetta (riporta a 2) il contatore delle azioni rimanenti
+     */
     public void resetActionCounter() {
         this.actioncounter = 2;
     }
 
-    //Fa decrescere di 1 il contatore delle azioni rimanenti
+    /**
+     * Fa decrescere di 1 il contatore delle azioni rimanenti
+     */
     public void decreaseActionCounter() {
         this.actioncounter = actioncounter -1;
     }
 
-    //Ritorna il colore/personaggio scelto dal giocatore
+    /**
+     * Ritorna il colore/personaggio scelto dal giocatore
+     */
     public Player getActiveplayer() {
         return this.activeplayer;
     }
 
-    //Setta il colore/personaggio scelto dal giocatore
+    /**
+     * Setta il colore/personaggio scelto dal giocatore
+     *
+     * @param activeplayer
+     */
     public void setActiveplayer(Player activeplayer) {
         this.activeplayer = activeplayer;
     }
 
+    /**
+     * Aggiorna activeTurn se è il turno del giocatore this
+     *
+     * @param p
+     */
     @Override
     public void update(Player p) {
         if(p == this.activeplayer){

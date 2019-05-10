@@ -3,6 +3,9 @@
  */
 package Model;
 
+/**
+ *
+ */
 public class DataPacket {
     private Cell cell;
     private Player player;
@@ -13,6 +16,9 @@ public class DataPacket {
         this.player=null;
     }
 
+    /**
+     * @return
+     */
     public Cell getCell() {
         return cell;
     }
@@ -21,6 +27,9 @@ public class DataPacket {
         return player;
     }
 
+    /**
+     * @param cell
+     */
     public void setCell(Cell cell) {
         this.cell = cell;
     }

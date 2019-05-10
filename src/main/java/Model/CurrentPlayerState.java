@@ -10,7 +10,7 @@ import Model.Position;
 import java.io.Serializable;
 
 /**
- * Classe che memorizza lo stato attuale del giocatore
+ * Classe with player current state
  */
 public class CurrentPlayerState implements Observer, Serializable {
     private Position playerposition;    //Posizione attuale del giocatore
@@ -20,7 +20,7 @@ public class CurrentPlayerState implements Observer, Serializable {
     private Player activeplayer;        //Memorizza il colore/personaggio scelto dal giocatore
 
     /**
-     * Costruttore che setta tutti gli attributi a "null" e il contatore al massimo (cioè 2)
+     * Constructor
      */
     public CurrentPlayerState(Player player){
         this.playerposition =null;
@@ -31,30 +31,30 @@ public class CurrentPlayerState implements Observer, Serializable {
     }
 
     /**
-     * Metodo get che ritorna la posizione del giocatore
+     * @return player position
      */
     public Position getPlayerposition() {
         return this.playerposition;
     }
 
     /**
-     * Metodo set che setta la posizione del giocatore
+     * Set player position
      *
-     * @param playerposition di tipo Position
+     * @param playerposition
      */
     public void setPlayerposition(Position playerposition) {
         this.playerposition = playerposition;
     }
 
     /**
-     * Metodo get che ritorna boolean "true" se è il turno del giocatore(this), "false" altrimenti
+     * @return boolean activeturn
      */
     public boolean isActiveturn() {
         return this.activeturn;
     }
 
     /**
-     * Metodo set che setta il boolean ActiveTurn
+     * Get boolean activeturn
      *
      * @param activeturn
      */
@@ -63,55 +63,51 @@ public class CurrentPlayerState implements Observer, Serializable {
     }
 
     /**
-     * Metodo get che ritorna la PlanciaGiocatore
-     *
-     * @return oggetto di tipo PlayerBoard
+     * @return board
      */
     public PlayerBoard getBoard() {
         return this.board;
     }
 
     /**
-     * Metodo set che setta la PlanciaGiocatore del giocatore
+     * Set board
      *
-     * @param board di tipo PlayerBoard
+     * @param board
      */
     public void setBoard(PlayerBoard board) {
         this.board = board;
     }
 
     /**
-     * Metodo get che ritorna actioncounter
-     *
-     * @return oggetto di tipo intero
+     * @return int actioncounter
      */
     public int getActioncounter() {
         return this.actioncounter;
     }
 
     /**
-     * Resetta (riporta a 2) il contatore delle azioni rimanenti
+     * Reset actioncounter = 2
      */
     public void resetActionCounter() {
         this.actioncounter = 2;
     }
 
     /**
-     * Fa decrescere di 1 il contatore delle azioni rimanenti
+     * Decreases actioncounter -1
      */
     public void decreaseActionCounter() {
         this.actioncounter = actioncounter -1;
     }
 
     /**
-     * Ritorna il colore/personaggio scelto dal giocatore
+     * @return activeplayer
      */
     public Player getActiveplayer() {
         return this.activeplayer;
     }
 
     /**
-     * Setta il colore/personaggio scelto dal giocatore
+     * Set Player activeplayer
      *
      * @param activeplayer
      */
@@ -120,7 +116,7 @@ public class CurrentPlayerState implements Observer, Serializable {
     }
 
     /**
-     * Aggiorna activeTurn se è il turno del giocatore this
+     * Update activeturn, true if it's this.activeplayer turn
      *
      * @param p
      */

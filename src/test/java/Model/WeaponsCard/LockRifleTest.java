@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LockRifleTest {
 
     @Test
-    void attack() {
+    void firstAttack() {
         Position myposition = new Position();
         Player activeplayer = Player.BLUE;
         Position positionToAttack = new Position();
@@ -36,7 +36,7 @@ class LockRifleTest {
         LockRifle lockRifle = new LockRifle();
         //Caso corretto
         try {
-            playerToAttack = lockRifle.attack(myposition, activeplayer, positionToAttack, playerToAttack);
+            playerToAttack = lockRifle.firstAttack(myposition, activeplayer, positionToAttack, playerToAttack);
         } catch (PlayerNotFound p) {
             System.out.println("Player not found");
         } catch (PositionNotFound ps) {
@@ -52,7 +52,7 @@ class LockRifleTest {
         } catch (PlayerAlreadyAdded p3) {
         }
         try {
-            playerToAttack = lockRifle.attack(myposition, activeplayer, positionToAttack, playerToAttack);
+            playerToAttack = lockRifle.firstAttack(myposition, activeplayer, positionToAttack, playerToAttack);
         } catch (PlayerNotFound p) {
             System.out.println("Player not found");
         } catch (PositionNotFound ps) {
@@ -66,7 +66,7 @@ class LockRifleTest {
         } catch (PlayerAlreadyAdded p5) {
         }
         try {
-            playerToAttack = lockRifle.attack(myposition, activeplayer, positionToAttack, playerToAttack);
+            playerToAttack = lockRifle.firstAttack(myposition, activeplayer, positionToAttack, playerToAttack);
         } catch (PlayerNotFound p) {
             System.out.println("Player not found");
         } catch (PositionNotFound ps) {
@@ -75,7 +75,7 @@ class LockRifleTest {
     }
 
     @Test
-    void hooking() {
+    void secondAttack() {
         Position myposition = new Position();
         Player activeplayer = Player.BLUE;
         Position positionToAttack = new Position();
@@ -95,7 +95,7 @@ class LockRifleTest {
         playerToAttack.setMarksBox(new MarksBox());
         LockRifle lockRifle = new LockRifle();
         try {
-            playerToAttack = lockRifle.hooking(activeplayer, myposition, positionToAttack, playerToAttack);
+            playerToAttack = lockRifle.secondAttack(activeplayer, myposition, positionToAttack, playerToAttack);
         } catch (PlayerNotFound p) {
             System.out.println("Player not found");
         } catch (PositionNotFound ps) {

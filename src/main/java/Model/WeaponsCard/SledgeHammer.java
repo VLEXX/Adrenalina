@@ -18,5 +18,7 @@ public class SledgeHammer extends Weapon {
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setSecondPrice(Munitions.RED, 1);
         super.setCardColor(Munitions.YELLOW);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

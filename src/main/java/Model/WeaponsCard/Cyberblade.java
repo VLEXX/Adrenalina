@@ -19,5 +19,7 @@ public class Cyberblade extends Weapon {
         super.setFirstPrice(Munitions.RED, 1);
         super.setSecondPrice(Munitions.YELLOW, 1);
         super.setCardColor(Munitions.YELLOW);
+        super.setSecondAttack(true);
+        super.setThirdAttack(true);
     }
 }

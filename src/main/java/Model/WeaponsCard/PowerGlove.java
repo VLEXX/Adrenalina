@@ -19,5 +19,7 @@ public class PowerGlove extends Weapon {
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setSecondPrice(Munitions.BLUE, 1);
         super.setCardColor(Munitions.YELLOW);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

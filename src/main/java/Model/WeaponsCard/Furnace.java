@@ -18,5 +18,7 @@ public class Furnace extends Weapon {
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setFirstPrice(Munitions.RED, 1);
         super.setCardColor(Munitions.RED);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

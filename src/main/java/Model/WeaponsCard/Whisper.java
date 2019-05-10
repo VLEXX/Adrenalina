@@ -18,5 +18,7 @@ public class Whisper extends Weapon {
         super.setFirstPrice(Munitions.BLUE, 2);
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setCardColor(Munitions.BLUE);
+        super.setSecondAttack(false);
+        super.setThirdAttack(false);
     }
 }

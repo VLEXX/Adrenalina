@@ -19,5 +19,7 @@ public class VortexCannon extends Weapon {
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setSecondPrice(Munitions.RED, 1);
         super.setCardColor(Munitions.RED);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

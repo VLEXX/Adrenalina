@@ -15,7 +15,7 @@ import Model.Position;
 import java.util.ArrayList;
 
 /**
- * Weapon machinegun
+ * Weapon Machinegun
  */
 public class MachineGun extends Weapon {
 
@@ -34,10 +34,12 @@ public class MachineGun extends Weapon {
         super.setThirdPrice(Munitions.BLUE, 1);
         player1Attacked = false;
         super.setCardColor(Munitions.BLUE);
+        super.setSecondAttack(true);
+        super.setThirdAttack(true);
     }
 
     /**
-     * Function for the base attack
+     * Function first attack
      * @param player player who attack
      * @param myPosition position of the player who attack
      * @param positionToAttack1 position of the first player to attack
@@ -49,7 +51,7 @@ public class MachineGun extends Weapon {
      * @throws PositionNotFound
      * @author Giulia Rivara
      */
-    public ArrayList<PlayerBoard> attack(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound{
+    public ArrayList<PlayerBoard> firstAttack(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound{
         ArrayList<PlayerBoard> playerToAttacks = new ArrayList();
         player1 = playerToAttack1.getPlayer();
         player2 = playerToAttack2.getPlayer();
@@ -67,7 +69,7 @@ public class MachineGun extends Weapon {
     }
 
     /**
-     * Function focused shot attack
+     * Function focused shot
      * @param player player who attack
      * @param myPosition position of the player who attack
      * @param positionToAttack position of the player to attack
@@ -78,7 +80,7 @@ public class MachineGun extends Weapon {
      * @throws DontUseEffect
      * @author Giulia Rivara
      */
-    public PlayerBoard focusedShot(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound, DontUseEffect {
+    public PlayerBoard secondAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound, DontUseEffect {
         if(player1 == null || player2 == null){
             throw new DontUseEffect("You can't use this effect because there is only one player selected");
         }
@@ -94,20 +96,20 @@ public class MachineGun extends Weapon {
     }
 
     /**
-     * Function support tripods attack
+     * Function support tripods
      * @param player player who attack
      * @param myPosition position of the player who attack
      * @param positionToAttack position of the second player to attack
-     * @param playerToAttack first player to attack
+     * @param playerToAttack first player to firstAttack
      * @param positionToAttack2 position of the second player to attack
      * @param playerToAttack2 second player to attack
-     * @return playerboard
+     * @return playerboard of the player
      * @throws PlayerNotFound
      * @throws PositionNotFound
      * @throws DontUseEffect
      * @author Giulia Rivara
      */
-    public ArrayList<PlayerBoard> tripod(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound, DontUseEffect{
+    public ArrayList<PlayerBoard> thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound, DontUseEffect{
         ArrayList<PlayerBoard> playerToAttacks = new ArrayList<>();
         if(player1 == null || player2 == null){
             if(playerToAttack.getPlayer() == player1 || playerToAttack.getPlayer() == player2){

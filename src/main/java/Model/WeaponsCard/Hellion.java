@@ -19,5 +19,7 @@ public class Hellion extends Weapon {
         super.setFirstPrice(Munitions.RED, 1);
         super.setSecondPrice(Munitions.RED, 1);
         super.setCardColor(Munitions.RED);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

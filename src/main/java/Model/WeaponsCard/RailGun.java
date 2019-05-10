@@ -18,5 +18,7 @@ public class RailGun extends Weapon {
         super.setFirstPrice(Munitions.YELLOW, 2);
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setCardColor(Munitions.YELLOW);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

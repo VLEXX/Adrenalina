@@ -23,37 +23,39 @@ public class PlasmaGun extends Weapon {
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setThirdPrice(Munitions.BLUE, 1);
         super.setCardColor(Munitions.BLUE);
+        super.setSecondAttack(true);
+        super.setThirdAttack(true);
     }
 
     /**
-     * Funzione attacco base
-     * @param player giocatore
-     * @param myPosition
-     * @param positionToAttack
-     * @param playerToAttack
-     * @return plancia giocatore da attaccare
+     * Function first attack
+     * @param player player who attack
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @return playerboard of the player to attack
      * @throws PositionNotFound
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard attack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    public PlayerBoard firstAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
         check(myPosition, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(2, player);
         return playerToAttack;
     }
 
     /**
-     * Funzione slittamento di fase
-     * @param player giocatore che attacca
-     * @param myposition posizione giocatore che attacca
-     * @param positionToGo posizione dove il giocatore vuole andare
-     * @return mypPosition posizione dove il giocatore vuole spostarsi
+     * Function phase slip
+     * @param player player who attack
+     * @param myposition position of the player who attack
+     * @param positionToGo position where the player want to go
+     * @return position where the player want to go
      * @throws PositionUnreachable
      * @throws PlayerNotFound
      * @throws PlayerAlreadyAdded
      * @author Giulia Rivara
      */
-    public Position phaseSlip(Player player, Position myposition, Position positionToGo) throws PositionUnreachable, PlayerNotFound, PlayerAlreadyAdded {
+    public Position secondAttack(Player player, Position myposition, Position positionToGo) throws PositionUnreachable, PlayerNotFound, PlayerAlreadyAdded {
         if(checkPosition(myposition, positionToGo)) {
             myposition.getCurrentcell().removeInCellPlayer(player);
             myposition.setCurrentcell(positionToGo.getCurrentcell());
@@ -64,17 +66,17 @@ public class PlasmaGun extends Weapon {
     }
 
     /**
-     * Funzione colpo sovraccarico
-     * @param player giocatore che usa la carta
-     * @param myPosition posizione giocatore che usa la carta
-     * @param positionToAttack posizione del giocatore da attaccare
-     * @param playerToAttack giocatore da attaccare
-     * @return playerToAttack plancia giocatore attaccato
+     * Function overloaded shot
+     * @param player player who attack
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @return playerboard of the player to attack
      * @throws PositionNotFound
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard overloadedShot(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    public PlayerBoard thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
         check(myPosition, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(1, player);
         return playerToAttack;

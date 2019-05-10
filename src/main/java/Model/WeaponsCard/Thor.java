@@ -29,10 +29,22 @@ public class Thor extends Weapon {
         super.setSecondPrice(Munitions.BLUE, 1);
         super.setThirdPrice(Munitions.BLUE, 1);
         super.setCardColor(Munitions.BLUE);
+        super.setSecondAttack(true);
+        super.setThirdAttack(true);
     }
 
-    //Funzione effetto base
-    public PlayerBoard attack(Position myposition, Player player, Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound {
+    /**
+     * Function first attack
+     * @param myposition position of the player who attack
+     * @param player player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @return playerboard of the player to attack
+     * @throws PlayerNotFound
+     * @throws PositionNotFound
+     * @author Giulia Rivara
+     */
+    public PlayerBoard firstAttack(Position myposition, Player player, Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound {
         check(myposition, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(2, player);
         position1 = positionToAttack;
@@ -40,22 +52,46 @@ public class Thor extends Weapon {
         return playerToAttack;
     }
 
-    //Funzione reazione a catena
-    public PlayerBoard reactToChain(Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound{
+    /**
+     * Function react to chain
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attackk
+     * @return playerboard of the player to attack
+     * @throws PlayerNotFound
+     * @throws PositionNotFound
+     * @author Giulia Rivara
+     */
+    public PlayerBoard secondAttack(Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound{
         check(position1, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(1, myPlayer);
         position2 = positionToAttack;
         return playerToAttack;
     }
 
-    //Funzione alta tensione
-    public PlayerBoard highVoltage(Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound{
+    /**
+     * Function high voltage
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @return playerboard of the player to attack
+     * @throws PlayerNotFound
+     * @throws PositionNotFound
+     * @author Giulia Rivara
+     */
+    public PlayerBoard thirdAttack(Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound{
         check(position2, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(2, myPlayer);
         return playerToAttack;
     }
 
-    //Controlla che la pposizione sia corretta e che il giocatore in quella posizione sia presente
+    /**
+     * Function that check for correct position and correct player
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @throws PositionNotFound
+     * @throws PlayerNotFound
+     * @author Giulia Rivara
+     */
     private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {

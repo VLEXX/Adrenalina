@@ -19,5 +19,7 @@ public class Electroscythe extends Weapon {
         super.getSecondPrice().put(Munitions.BLUE, 1);
         super.getSecondPrice().put(Munitions.RED, 1);
         super.setCardColor(Munitions.BLUE);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

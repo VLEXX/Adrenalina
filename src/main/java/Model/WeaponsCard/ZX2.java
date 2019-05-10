@@ -18,5 +18,7 @@ public class ZX2 extends Weapon {
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setFirstPrice(Munitions.RED, 1);
         super.setCardColor(Munitions.YELLOW);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

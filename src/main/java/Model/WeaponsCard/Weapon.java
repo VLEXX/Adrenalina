@@ -17,6 +17,8 @@ public class Weapon {
     private HashMap<Munitions, Integer> thirdPrice;
     private boolean firstUse;
     private Munitions cardColor;
+    private boolean secondAttack;
+    private boolean thirdAttack;
 
     /**
      * Constructor that initializes the cost of the weapons
@@ -27,6 +29,8 @@ public class Weapon {
         thirdPrice = new HashMap<>();
         firstUse = true;
         cardColor = null;
+        secondAttack = false;
+        thirdAttack = false;
     }
 
     public HashMap<Munitions, Integer> getFirstPrice() {
@@ -79,5 +83,21 @@ public class Weapon {
 
     public Munitions getCardColor() {
         return cardColor;
+    }
+
+    public boolean hasSecondAttack() {
+        return secondAttack;
+    }
+
+    public boolean hasThirdAttack() {
+        return thirdAttack;
+    }
+
+    public void setSecondAttack(boolean secondAttack){
+        this.secondAttack = secondAttack;
+    }
+
+    public void setThirdAttack(boolean thirdAttack) {
+        this.thirdAttack = thirdAttack;
     }
 }

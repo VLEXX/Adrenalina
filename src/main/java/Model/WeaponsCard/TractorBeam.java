@@ -19,5 +19,7 @@ public class TractorBeam extends Weapon {
         super.setSecondPrice(Munitions.YELLOW,1);
         super.setSecondPrice(Munitions.RED, 1);
         super.setCardColor(Munitions.BLUE);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

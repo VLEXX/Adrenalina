@@ -18,5 +18,7 @@ public class HeatSeeker extends Weapon {
         super.setFirstPrice(Munitions.RED, 2);
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setCardColor(Munitions.RED);
+        super.setSecondAttack(false);
+        super.setThirdAttack(false);
     }
 }

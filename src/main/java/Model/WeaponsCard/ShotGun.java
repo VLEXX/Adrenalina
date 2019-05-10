@@ -17,5 +17,7 @@ public class ShotGun extends Weapon {
         super();
         super.setFirstPrice(Munitions.YELLOW, 2);
         super.setCardColor(Munitions.YELLOW);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

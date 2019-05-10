@@ -20,6 +20,8 @@ public class LockRifle extends Weapon {
         super.setFirstPrice(Munitions.BLUE, 2);
         super.setSecondPrice(Munitions.RED, 1);
         super.setCardColor(Munitions.BLUE);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 
     /**
@@ -33,7 +35,7 @@ public class LockRifle extends Weapon {
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard attack(Position myPosition, Player activePlayer, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
+    public PlayerBoard firstAttack(Position myPosition, Player activePlayer, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         check(myPosition,positionToAttack,playerToAttack);
         if(super.getFirstUse() == true)
             super.setFirstUse(false);
@@ -43,7 +45,7 @@ public class LockRifle extends Weapon {
     }
 
     /**
-     * Function for the second attack (hooking)
+     * Function for second hook
      * @param player player who attack
      * @param myPosition position of the player who attack
      * @param positionToAttack position of the player to attack
@@ -53,7 +55,7 @@ public class LockRifle extends Weapon {
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard hooking(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    public PlayerBoard secondAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
         check(myPosition,positionToAttack,playerToAttack);
         playerToAttack.getMarksBox().setMyMarksMap(player, 1);
         return playerToAttack;

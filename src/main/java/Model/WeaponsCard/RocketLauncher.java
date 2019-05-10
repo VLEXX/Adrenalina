@@ -19,5 +19,7 @@ public class RocketLauncher extends Weapon {
         super.setSecondPrice(Munitions.BLUE, 1);
         super.setThirdPrice(Munitions.YELLOW, 1);
         super.setCardColor(Munitions.RED);
+        super.setSecondAttack(true);
+        super.setThirdAttack(true);
     }
 }

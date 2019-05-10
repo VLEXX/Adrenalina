@@ -51,4 +51,18 @@ class WeaponTest {
         w.setCardColor(Munitions.BLUE);
         assertEquals(w.getCardColor(), Munitions.BLUE);
     }
+
+    @Test
+    void hasSecondAttack() {
+        Weapon w = new Weapon();
+        w.setSecondAttack(true);
+        assertEquals(w.hasSecondAttack(), true);
+    }
+
+    @Test
+    void hasThirdAttack() {
+        Weapon w = new Weapon();
+        w.setThirdAttack(true);
+        assertEquals(w.hasThirdAttack(), true);
+    }
 }

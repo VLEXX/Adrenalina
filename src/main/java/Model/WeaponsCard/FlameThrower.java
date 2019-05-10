@@ -18,5 +18,7 @@ public class FlameThrower extends Weapon {
         super.getFirstPrice().put(Munitions.RED, 1);
         super.getSecondPrice().put(Munitions.YELLOW, 2);
         super.setCardColor(Munitions.RED);
+        super.setSecondAttack(true);
+        super.setThirdAttack(false);
     }
 }

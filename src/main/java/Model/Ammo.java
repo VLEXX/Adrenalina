@@ -1,4 +1,6 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package Model;
 
 //Classe che rappresenta le carte munizioni

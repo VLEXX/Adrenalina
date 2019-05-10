@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 /**
- * Classe with weapons deck, ammo deck, powerup deck and available player deck
+ * Class with weapons deck, ammo deck, powerup deck and available player deck
  */
 
 public class CurrentDeckState implements Serializable {
@@ -141,7 +141,7 @@ public class CurrentDeckState implements Serializable {
         this.weaponsdeck.push(zx2);
         this.powerupdeck = new Stack<>();
         for(int i=0; i<2; i++) {
-            for (PowerUp powerup : PowerUp.values()) {
+            for (PowerUp powerup : PowerUp.values()) {    //powerup è diventata una classe quindi non so qui cosa ci vada
                 this.powerupdeck.push(powerup);
             }
         }

@@ -13,6 +13,7 @@ public class Weapon {
     private HashMap<Munitions, Integer> secondPrice;
     private HashMap<Munitions, Integer> thirdPrice;
     private boolean firstUse;
+    private Munitions CardColor;
 
     //Costruttore
     public Weapon(){
@@ -20,6 +21,7 @@ public class Weapon {
         secondPrice = new HashMap<>();
         thirdPrice = new HashMap<>();
         firstUse = true;
+        CardColor = null;
     }
 
     public HashMap<Munitions, Integer> getFirstPrice() {
@@ -52,5 +54,12 @@ public class Weapon {
 
     public boolean getFirstUse() {
         return firstUse;
+    }
+
+    public int munitionsChecker(Munitions m) {
+        if (this.CardColor == m)
+            return 1;
+        else
+            return 0;
     }
 }

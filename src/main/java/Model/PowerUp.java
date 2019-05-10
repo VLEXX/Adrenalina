@@ -5,20 +5,31 @@ package Model;
 
 import java.io.Serializable;
 
-//Enum che identifica i vari potenziamenti
-public enum PowerUp implements Serializable {
-    TARGETING_SCOPE_BLUE,   //Mirino
-    TARGETING_SCOPE_RED,
-    TARGETING_SCOPE_YELLOW,
-    NEWTON_BLUE,            //Raggio Cinetico
-    NEWTON_RED,
-    NEWTON_YELLOW,
-    TAGBACK_GRENADE_BLUE,   //Granata Venom
-    TAGBACK_GRENADE_RED,
-    TAGBACK_GRENADE_YELLOW,
-    TELEPORTER_BLUE,        //Teletraporto
-    TELEPORTER_RED,
-    TELEPORTER_YELLOW
+//Classe che identifica i vari potenziamenti
+public class PowerUp implements Serializable {
+    private final PowerUpId Id;
+    private final Munitions Color;
+
+    //costruttore
+    public PowerUp(PowerUpId Id,Munitions m){
+        this.Id=Id;
+        this.Color=m;
+    }
+
+    public PowerUpId getId() {
+        return Id;
+    }
+
+    public Munitions getColor() {
+        return Color;
+    }
+
+    public int munitionsChecker(Munitions m){
+        if(this.Color==m)
+            return 1;
+        else
+            return 0;
+    }
 }
 
 //Coverage nullo per ora. In attesa di classe PlayerBoard (CANCELLARE QUESTO COMMENTO QUANDO OK)

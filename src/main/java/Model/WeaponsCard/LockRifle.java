@@ -14,6 +14,7 @@ public class LockRifle extends Weapon {
         super();
         super.setFirstPrice(Munitions.BLUE, 2);
         super.setSecondPrice(Munitions.RED, 1);
+        super.setCardColor(Munitions.BLUE);
     }
 
     //Funzione effetto base

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WeaponDadTest {
+class WeaponTest {
 
     @Test
     void getFirstPrice() {
@@ -36,5 +36,19 @@ class WeaponDadTest {
         Weapon w = new Weapon();
         w.setFirstUse(false);
         assertEquals(w.getFirstUse(), false);
+    }
+
+    @Test
+    void munitionChecker(){
+        Weapon w = new Weapon();
+        Munitions m = Munitions.BLUE;
+        assertEquals(w.munitionsChecker(m), Munitions.BLUE);
+    }
+
+    @Test
+    void getCardColor(){
+        Weapon w = new Weapon();
+        w.setCardColor(Munitions.BLUE);
+        assertEquals(w.getCardColor(), Munitions.BLUE);
     }
 }

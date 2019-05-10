@@ -3,7 +3,7 @@
  */
 package Model.WeaponsCard;
 
-import Model.Exceptions.DontUseFocusedShot;
+import Model.Exceptions.DontUseEffect;
 import Model.Exceptions.IncorrectPlayer;
 import Model.Exceptions.PlayerNotFound;
 import Model.Exceptions.PositionNotFound;
@@ -16,8 +16,9 @@ import java.util.ArrayList;
 
 public class MachineGun extends Weapon {
 
-    private PlayerBoard player1;
-    private PlayerBoard player2;
+    private Player player1;
+    private Player player2;
+    boolean player1Attacked;
 
     //Costruttore
     public MachineGun() {
@@ -26,119 +27,111 @@ public class MachineGun extends Weapon {
         super.setFirstPrice(Munitions.RED, 1);
         super.setSecondPrice(Munitions.YELLOW, 1);
         super.setThirdPrice(Munitions.BLUE, 1);
+        player1Attacked = false;
     }
 
-    //TODO ricontrollo funzioni
     //Funzione effetto base
-    public ArrayList<PlayerBoard> attack(Player player, Position myPosition, Position positionToAttack1, Position positionToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound, DontUseFocusedShot {
-        ArrayList playerToAttack = new ArrayList();
-        playerToAttack.add(player1);
-        playerToAttack.add(player2);
-        check(myPosition, positionToAttack1, player1, positionToAttack2, player2, positionToAttack3, playerToAttack3);
-        if(player1.getPlayer() == null || player2.getPlayer() == null){
-            throw new DontUseFocusedShot ("You can't use focused shot for this weapon");
+    public ArrayList<PlayerBoard> attack(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound{
+        ArrayList<PlayerBoard> playerToAttacks = new ArrayList();
+        player1 = playerToAttack1.getPlayer();
+        player2 = playerToAttack2.getPlayer();
+        if(positionToAttack1 != null && playerToAttack1 != null) {
+            check(myPosition, positionToAttack1, playerToAttack1);
+            playerToAttack1.getDamageBox().increaseDamage(1, player);
+            playerToAttacks.add(playerToAttack1);
         }
-        if(player1.getPlayer() != player2.getPlayer()) {
-            player1.getDamageBox().increaseDamage(1, player);
-            player2.getDamageBox().increaseDamage(1, player);
-        } else throw new DontUseFocusedShot ("You can't use focused shot for this weapon");
-        return playerToAttack;
+        if(positionToAttack2 != null && playerToAttack2 != null) {
+            check(myPosition, positionToAttack2, playerToAttack2);
+            playerToAttack2.getDamageBox().increaseDamage(1, player);
+            playerToAttacks.add(playerToAttack2);
+        }
+        return playerToAttacks;
     }
 
     //Funzione colpo focalizzato
-    public ArrayList<PlayerBoard> focusedShot(Player player, Position myPosition, Position positionToAttack1, Position positionToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound{
-        ArrayList<PlayerBoard> playerToAttack = new ArrayList<>();
-        playerToAttack.add(player1);
-        playerToAttack.add(player2);
-        check(myPosition, positionToAttack1, player1, positionToAttack2, player2, positionToAttack3, playerToAttack3);
-        player1.getDamageBox().increaseDamage(1, player);
-        player2.getDamageBox().increaseDamage(1, player);
+    public PlayerBoard focusedShot(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound, DontUseEffect {
+        if(player1 == null || player2 == null){
+            throw new DontUseEffect("You can't use this effect because there is only one player selected");
+        }
+        if(playerToAttack.getPlayer() != player1 && playerToAttack.getPlayer() != player2){
+            throw new DontUseEffect("You can't use this effect because you have selected a wrong player");
+        }
+        check(myPosition,positionToAttack,playerToAttack);
+        playerToAttack.getDamageBox().increaseDamage(1, player);
+        if(playerToAttack.getPlayer() == player1)
+            player1Attacked = true;
+        else player1Attacked = false;
         return playerToAttack;
     }
 
     //Funzione tripode di supporto
-    public ArrayList<PlayerBoard> tripod(Player player, Position myPosition, Position positionToAttack1, Position positionToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PlayerNotFound, PositionNotFound, IncorrectPlayer{
-        ArrayList<PlayerBoard> playerToAttack = new ArrayList<>();
-        playerToAttack.add(player1);
-        playerToAttack.add(player2);
-        playerToAttack.add(playerToAttack3);
-        if(player1.getPlayer() != player2.getPlayer() && player1.getPlayer() != playerToAttack3.getPlayer() && player2.getPlayer() != playerToAttack3.getPlayer()){
-            check(myPosition, positionToAttack1, player1, positionToAttack2, player2, positionToAttack3, playerToAttack3);
-            player1.getDamageBox().increaseDamage(1, player);
-            player2.getDamageBox().increaseDamage(1, player);
-            playerToAttack3.getDamageBox().increaseDamage(1, player);
-        } else throw new IncorrectPlayer("You couldn't choose this player to attack");
-        return playerToAttack;
+    public ArrayList<PlayerBoard> tripod(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound, DontUseEffect{
+        ArrayList<PlayerBoard> playerToAttacks = new ArrayList<>();
+        if(player1 == null || player2 == null){
+            if(playerToAttack.getPlayer() == player1 || playerToAttack.getPlayer() == player2){
+                check(myPosition, positionToAttack, playerToAttack);
+                playerToAttack.getDamageBox().increaseDamage(1, player);
+                if(playerToAttack2 != null){
+                    check(myPosition, positionToAttack2, playerToAttack2);
+                    playerToAttack2.getDamageBox().increaseDamage(1, player);
+                }
+            }
+            else if(playerToAttack2.getPlayer() == player1 || playerToAttack2.getPlayer() == player2){
+                check(myPosition, positionToAttack2, playerToAttack2);
+                playerToAttack2.getDamageBox().increaseDamage(1, player);
+                if(playerToAttack != null){
+                    check(myPosition, positionToAttack, playerToAttack);
+                    playerToAttack.getDamageBox().increaseDamage(1, player);
+                }
+            }
+        }
+        else if((playerToAttack.getPlayer() == player1 && player1Attacked == false) || (playerToAttack.getPlayer() == player2 && player1Attacked == true)){
+            check(myPosition, positionToAttack, playerToAttack);
+            playerToAttack.getDamageBox().increaseDamage(1, player);
+            if(playerToAttack2 != null && playerToAttack2.getPlayer() != player1 && playerToAttack2.getPlayer() != player2){
+                check(myPosition, positionToAttack2, playerToAttack2);
+                playerToAttack2.getDamageBox().increaseDamage(1, player);
+            }
+        }
+        else if((playerToAttack2.getPlayer() == player1 && player1Attacked == false) || (playerToAttack2.getPlayer() == player2 && player1Attacked == true)) {
+            check(myPosition, positionToAttack2, playerToAttack2);
+            playerToAttack2.getDamageBox().increaseDamage(1, player);
+            if (playerToAttack != null && playerToAttack.getPlayer() != player1 && playerToAttack.getPlayer() != player2) {
+                check(myPosition, positionToAttack, playerToAttack);
+                playerToAttack.getDamageBox().increaseDamage(1, player);
+            }
+        }
+        else throw new DontUseEffect ("You can't use this effect");
+        if(playerToAttack != null)
+            playerToAttacks.add(playerToAttack);
+        if(playerToAttack2 != null)
+            playerToAttacks.add(playerToAttack2);
+        return playerToAttacks;
     }
 
     //Controlla che la pposizione sia corretta e che il giocatore in quella posizione sia presente
-    private void check(Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2, Position positionToAttack3, PlayerBoard playerToAttack3) throws PositionNotFound, PlayerNotFound {
+    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         boolean find = false;
-        //Controllo sul primo bersaglio
-        if (playerToAttack1.getPlayer() != null) {
+        if (playerToAttack.getPlayer() != null) {
             for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
-                if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack1.getCurrentcell().getCellId()) {
+                if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                     find = true;
                     break;
                 }
             }
             if (find = false) {
-                throw new PositionNotFound("Position not found for " + positionToAttack1.getCurrentcell().getCellId());
+                throw new PositionNotFound("Position not found for " + positionToAttack.getCurrentcell().getCellId());
             }
         }
         find = false;
-        for (int i = 0; i < positionToAttack1.getCurrentcell().getInCellPlayer().size(); i++) {
-            if (positionToAttack1.getCurrentcell().getInCellPlayer().get(i) == playerToAttack1.getPlayer()) {
+        for (int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++) {
+            if (positionToAttack.getCurrentcell().getInCellPlayer().get(i) == playerToAttack.getPlayer()) {
                 find = true;
                 break;
             }
         }
         if (find == false) {
-            throw new PlayerNotFound("In the selected cell player " + playerToAttack1.getPlayer().toString() + " not found");
-        }
-        //Controllo sul secondo bersaglio
-        if (playerToAttack2.getPlayer() != null) {
-            for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
-                if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack2.getCurrentcell().getCellId()) {
-                    find = true;
-                    break;
-                }
-            }
-            if (find = false) {
-                throw new PositionNotFound("Position not found for " + positionToAttack2.getCurrentcell().getCellId());
-            }
-        }
-        find = false;
-        for (int i = 0; i < positionToAttack2.getCurrentcell().getInCellPlayer().size(); i++) {
-            if (positionToAttack2.getCurrentcell().getInCellPlayer().get(i) == playerToAttack2.getPlayer()) {
-                find = true;
-                break;
-            }
-        }
-        if (find == false) {
-            throw new PlayerNotFound("In the selected cell player " + playerToAttack2.getPlayer().toString() + " not found");
-        }
-        //Controllo sul terzo bersaglio
-        if (playerToAttack3.getPlayer() != null) {
-            for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
-                if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack3.getCurrentcell().getCellId()) {
-                    find = true;
-                    break;
-                }
-            }
-            if (find = false) {
-                throw new PositionNotFound("Position not found for " + positionToAttack3.getCurrentcell().getCellId());
-            }
-        }
-        find = false;
-        for (int i = 0; i < positionToAttack3.getCurrentcell().getInCellPlayer().size(); i++) {
-            if (positionToAttack3.getCurrentcell().getInCellPlayer().get(i) == playerToAttack3.getPlayer()) {
-                find = true;
-                break;
-            }
-        }
-        if (find == false) {
-            throw new PlayerNotFound("In the selected cell player " + playerToAttack3.getPlayer().toString() + " not found");
+            throw new PlayerNotFound("In the selected cell player " + playerToAttack.getPlayer().toString() + " not found");
         }
     }
 }

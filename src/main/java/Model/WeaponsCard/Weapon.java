@@ -7,21 +7,26 @@ import Model.Munitions;
 
 import java.util.HashMap;
 
+/**
+ * Class with weapons cost
+ */
 public class Weapon {
 
     private HashMap<Munitions, Integer> firstPrice;
     private HashMap<Munitions, Integer> secondPrice;
     private HashMap<Munitions, Integer> thirdPrice;
     private boolean firstUse;
-    private Munitions CardColor;
+    private Munitions cardColor;
 
-    //Costruttore
+    /**
+     * Constructor that initializes the cost of the weapons
+     */
     public Weapon(){
         firstPrice = new HashMap<>();
         secondPrice = new HashMap<>();
         thirdPrice = new HashMap<>();
         firstUse = true;
-        CardColor = null;
+        cardColor = null;
     }
 
     public HashMap<Munitions, Integer> getFirstPrice() {
@@ -57,9 +62,17 @@ public class Weapon {
     }
 
     public int munitionsChecker(Munitions m) {
-        if (this.CardColor == m)
+        if (this.cardColor == m)
             return 1;
         else
             return 0;
+    }
+
+    public void setCardColor(Munitions cardColor) {
+        this.cardColor = cardColor;
+    }
+
+    public Munitions getCardColor() {
+        return cardColor;
     }
 }

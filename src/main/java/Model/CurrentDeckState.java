@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 /**
- * Classe che memorizza lo stato corrente dei mazzi delle Armi, Munizioni e Potenziamenti
+ * Classe with weapons deck, ammo deck, powerup deck and available player deck
  */
 
 public class CurrentDeckState implements Serializable {
@@ -20,8 +20,7 @@ public class CurrentDeckState implements Serializable {
     private ArrayList<Player> players;      //Mazzo per gestire la scelta personaggi
 
     /**
-     * Costruttore che inizializza ogni deck pushando
-     * i vari oggetti istanziati di armi, potenziamenti e munizioni
+     * Constructor that instantiates every deck and shuffle them
      */
     public CurrentDeckState(){
         this.ammodeck=new Stack<>();
@@ -160,37 +159,29 @@ public class CurrentDeckState implements Serializable {
     }
 
     /**
-     * Metodo get che ritorna il deck delle munizioni
-     *
-     * @return deck delle munizioni
+     * @return ammo deck
      */
     public Stack<Ammo> getAmmodeck() {
         return this.ammodeck;
     }
 
     /**
-     * Metodo get che ritorna il deck delle armi
-     *
-     * @return deck delle armi
+     * @return weapons deck
      */
     public Stack<Weapon> getWeaponsdeck() {
         return this.weaponsdeck;
     }
 
     /**
-     * Metodo get che ritorna il deck dei potenziamenti
-     *
-     * @return deck dei potenziamenti
+     * @return powerup deck
      */
     public Stack<PowerUp> getPowerupdeck() {
         return this.powerupdeck;
     }
 
     /**
-     * Metodo get che ritorna i personaggi disponibili per la scelta iniziale del personaggio
-     *
-     * @return ArrayList che contiene i personaggi disponibili
-     */
+     * @return ArrayList with available Player
+     * */
     public ArrayList<Player> getPlayers() {
         return players;
     }

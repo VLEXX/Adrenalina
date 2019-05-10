@@ -6,8 +6,7 @@ package Model;
 import java.io.Serializable;
 
 /**
- * Classe in cui viene memorizzata la classifica corrente del gioco con i relativi punteggi.
- * //Ogni cella dell'array "score" corrisponde ad un personaggio
+ * Class with current game chart. Every array cell corresponds to every Player
  * //score[0] => YELLOW
  * //score[1] => PURPLE
  * //score[2] => GREEN
@@ -18,27 +17,22 @@ public class ChartScore implements Serializable {
     private int[] score;
 
     /**
-     * Costruttore che inizializza l'array con tutti 0
+     * Constructor
      */
     public ChartScore(){
         this.score = new int[]{0,0,0,0,0};
     }
 
     /**
-     * Restituisce l'array "score"
-     *
-     * @return array score della classe
+     * @return array score
      */
     public int[] getScore() {
         return this.score;
     }
 
     /**
-     * A seconda del Player "p" in ingresso aggiunge punti
-     * "score" al giocatore, nella cella dell'array corrispondente:
-     *
-     * @param p di tipo Player, colore del giocatore
-     * @param score di tipo intero che viene sommato al punteggio attuale corrispondente al Player
+     * @param p is a Player
+     * @param score int summed to score Player
      */
     public void setScore(Player p, int score) {
         if(p == Player.YELLOW){

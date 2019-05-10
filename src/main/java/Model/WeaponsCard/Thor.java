@@ -10,19 +10,25 @@ import Model.Player;
 import Model.PlayerBoard;
 import Model.Position;
 
+/**
+ * Weapon Thor
+ */
 public class Thor extends Weapon {
 
     private Position position1;
     private Position position2;
     private Player myPlayer;
 
-    //Costruttore
+    /**
+     * Constructor that set the cost of this weapon
+     */
     public Thor(){
         super();
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setFirstPrice(Munitions.RED,1);
         super.setSecondPrice(Munitions.BLUE, 1);
         super.setThirdPrice(Munitions.BLUE, 1);
+        super.setCardColor(Munitions.BLUE);
     }
 
     //Funzione effetto base

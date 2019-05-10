@@ -61,6 +61,11 @@ public class Weapon {
         return firstUse;
     }
 
+    /**
+     * Function that control that the color of the card is the color selected
+     * @param m color
+     * @return 1 if the color is the same, 0 otherwise
+     */
     public int munitionsChecker(Munitions m) {
         if (this.cardColor == m)
             return 1;

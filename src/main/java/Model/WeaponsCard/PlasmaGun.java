@@ -9,13 +9,20 @@ import Model.Exceptions.PlayerNotFound;
 import Model.Exceptions.PositionNotFound;
 import Model.Exceptions.PositionUnreachable;
 
+/**
+ * Weapon Plasmagun
+ */
 public class PlasmaGun extends Weapon {
 
+    /**
+     * Constructor that set the cost of this weapon
+     */
     public PlasmaGun(){
         super();
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setFirstPrice(Munitions.BLUE, 1);
         super.setThirdPrice(Munitions.BLUE, 1);
+        super.setCardColor(Munitions.BLUE);
     }
 
     /**

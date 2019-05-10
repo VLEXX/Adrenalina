@@ -7,9 +7,14 @@ import Model.*;
 import Model.Exceptions.PlayerNotFound;
 import Model.Exceptions.PositionNotFound;
 
+/**
+ * Weapon Lockrifle
+ */
 public class LockRifle extends Weapon {
 
-    //Costruttore
+    /**
+     * Constructor that set the cost of this weapon
+     */
     public LockRifle() {
         super();
         super.setFirstPrice(Munitions.BLUE, 2);
@@ -17,7 +22,17 @@ public class LockRifle extends Weapon {
         super.setCardColor(Munitions.BLUE);
     }
 
-    //Funzione effetto base
+    /**
+     * Function for the first attack of the weapon
+     * @param myPosition position of the player who attack
+     * @param activePlayer player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @return playerboard of the player to attack
+     * @throws PositionNotFound
+     * @throws PlayerNotFound
+     * @author Giulia Rivara
+     */
     public PlayerBoard attack(Position myPosition, Player activePlayer, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         check(myPosition,positionToAttack,playerToAttack);
         if(super.getFirstUse() == true)
@@ -27,14 +42,32 @@ public class LockRifle extends Weapon {
         return playerToAttack;
     }
 
-    //Funzione secondo aggancio
+    /**
+     * Function for the second attack (hooking)
+     * @param player player who attack
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @return playerboard of the player to attack
+     * @throws PositionNotFound
+     * @throws PlayerNotFound
+     * @author Giulia Rivara
+     */
     public PlayerBoard hooking(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
         check(myPosition,positionToAttack,playerToAttack);
         playerToAttack.getMarksBox().setMyMarksMap(player, 1);
         return playerToAttack;
     }
 
-    //Controlla che la posizione sia corretta e che il giocatore in quella posizione sia presente
+    /**
+     * Function that check for correct position and correct player
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @throws PositionNotFound
+     * @throws PlayerNotFound
+     * @author Giulia Rivara
+     */
     private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {

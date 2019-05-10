@@ -14,13 +14,18 @@ import Model.Position;
 
 import java.util.ArrayList;
 
+/**
+ * Weapon machinegun
+ */
 public class MachineGun extends Weapon {
 
     private Player player1;
     private Player player2;
     boolean player1Attacked;
 
-    //Costruttore
+    /**
+     * Constructor that set the cost of this weapon
+     */
     public MachineGun() {
         super();
         super.setFirstPrice(Munitions.BLUE, 1);
@@ -28,9 +33,22 @@ public class MachineGun extends Weapon {
         super.setSecondPrice(Munitions.YELLOW, 1);
         super.setThirdPrice(Munitions.BLUE, 1);
         player1Attacked = false;
+        super.setCardColor(Munitions.BLUE);
     }
 
-    //Funzione effetto base
+    /**
+     * Function for the base attack
+     * @param player player who attack
+     * @param myPosition position of the player who attack
+     * @param positionToAttack1 position of the first player to attack
+     * @param playerToAttack1 first player to attack
+     * @param positionToAttack2 position of the second player to attack
+     * @param playerToAttack2 second player to attack
+     * @return playerboard of the player
+     * @throws PlayerNotFound
+     * @throws PositionNotFound
+     * @author Giulia Rivara
+     */
     public ArrayList<PlayerBoard> attack(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound{
         ArrayList<PlayerBoard> playerToAttacks = new ArrayList();
         player1 = playerToAttack1.getPlayer();
@@ -48,7 +66,18 @@ public class MachineGun extends Weapon {
         return playerToAttacks;
     }
 
-    //Funzione colpo focalizzato
+    /**
+     * Function focused shot attack
+     * @param player player who attack
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @return playerboard  of the player
+     * @throws PlayerNotFound
+     * @throws PositionNotFound
+     * @throws DontUseEffect
+     * @author Giulia Rivara
+     */
     public PlayerBoard focusedShot(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound, DontUseEffect {
         if(player1 == null || player2 == null){
             throw new DontUseEffect("You can't use this effect because there is only one player selected");
@@ -64,7 +93,20 @@ public class MachineGun extends Weapon {
         return playerToAttack;
     }
 
-    //Funzione tripode di supporto
+    /**
+     * Function support tripods attack
+     * @param player player who attack
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the second player to attack
+     * @param playerToAttack first player to attack
+     * @param positionToAttack2 position of the second player to attack
+     * @param playerToAttack2 second player to attack
+     * @return playerboard
+     * @throws PlayerNotFound
+     * @throws PositionNotFound
+     * @throws DontUseEffect
+     * @author Giulia Rivara
+     */
     public ArrayList<PlayerBoard> tripod(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound, DontUseEffect{
         ArrayList<PlayerBoard> playerToAttacks = new ArrayList<>();
         if(player1 == null || player2 == null){
@@ -109,7 +151,15 @@ public class MachineGun extends Weapon {
         return playerToAttacks;
     }
 
-    //Controlla che la pposizione sia corretta e che il giocatore in quella posizione sia presente
+    /**
+     * Function that check for correct position and correct player
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @param playerToAttack player to attack
+     * @throws PositionNotFound
+     * @throws PlayerNotFound
+     * @author Giulia Rivara
+     */
     private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         boolean find = false;
         if (playerToAttack.getPlayer() != null) {

@@ -14,6 +14,9 @@ public class DataPacket {
     private Weapon weapon;
     private Weapon replaceWeapon;
     private ArrayList<PowerUp> paymentPowerUp;
+    private ArrayList<Player> targetPlayers;
+    private boolean secondAttack;
+    private boolean thirdAttack;
 
     public DataPacket() {
         this.cell = null;
@@ -22,6 +25,9 @@ public class DataPacket {
         this.weapon = null;
         this.replaceWeapon = null;
         this.paymentPowerUp = new ArrayList<>();
+        this.targetPlayers = new ArrayList<>();
+        this.secondAttack = false;
+        this.thirdAttack = false;
     }
 
     /**
@@ -106,5 +112,25 @@ public class DataPacket {
      */
     public void setPaymentPowerUp(ArrayList<PowerUp> paymentPowerUp) {
         this.paymentPowerUp = paymentPowerUp;
+    }
+
+    public ArrayList<Player> getTargetPlayers() {
+        return targetPlayers;
+    }
+
+    public void setSecondAttack(boolean secondAttack) {
+        this.secondAttack = secondAttack;
+    }
+
+    public void setThirdAttack(boolean thirdAttack) {
+        this.thirdAttack = thirdAttack;
+    }
+
+    public boolean isSecondAttack() {
+        return secondAttack;
+    }
+
+    public boolean isThirdAttack() {
+        return thirdAttack;
     }
 }

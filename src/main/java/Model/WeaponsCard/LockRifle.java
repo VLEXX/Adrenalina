@@ -40,8 +40,8 @@ public class LockRifle extends Weapon {
      */
     public PlayerBoard firstAttack(Position myPosition, Player activePlayer, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         check(myPosition, positionToAttack, playerToAttack);
-        if (super.getFirstUse() == true)
-            super.setFirstUse(false);
+        if (super.getLoaded() == true)
+            super.setLoaded(false);
         playerToAttack.getDamageBox().increaseDamage(2, activePlayer);
         playerToAttack.getMarksBox().setMyMarksMap(activePlayer, 1);
         return playerToAttack;

@@ -107,4 +107,43 @@ class DataPacketTest {
         DataPacket dataPacket = new DataPacket();
         assertEquals(dataPacket.getPaymentPowerUp().isEmpty(), true);
     }
+
+    @Test
+    void getTargetPlayers() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.getTargetPlayers().isEmpty(), true);
+    }
+
+    @Test
+    void setTargetPlayers() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.getTargetPlayers().add(Player.BLUE);
+        assertEquals(dataPacket.getTargetPlayers().contains(Player.BLUE), true);
+    }
+
+    @Test
+    void setSecondAttack() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setSecondAttack(true);
+        assertEquals(dataPacket.isSecondAttack(), true);
+    }
+
+    @Test
+    void setThirdAttack() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setThirdAttack(true);
+        assertEquals(dataPacket.isThirdAttack(), true);
+    }
+
+    @Test
+    void isSecondAttack() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.isSecondAttack(), false);
+    }
+
+    @Test
+    void isThirdAttack() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.isThirdAttack(), false);
+    }
 }

@@ -8,5 +8,7 @@ public enum MessageEnum implements Serializable {
     AMMO_ERROR,
     WEAPON_ERROR,
     NOT_YOUR_TURN,
-    ACTION_ERROR
+    ACTION_ERROR,
+    EMPTY_WEAPON,
+    WEAPON_NOT_FOUND
 }

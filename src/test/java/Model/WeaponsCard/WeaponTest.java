@@ -32,10 +32,10 @@ class WeaponTest {
     }
 
     @Test
-    void getFirstUse() {
+    void getLoaded() {
         Weapon w = new Weapon();
-        w.setFirstUse(false);
-        assertEquals(w.getFirstUse(), false);
+        w.setLoaded(false);
+        assertEquals(w.getLoaded(), false);
     }
 
     @Test

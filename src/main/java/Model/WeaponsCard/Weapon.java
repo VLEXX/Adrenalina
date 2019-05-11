@@ -15,7 +15,7 @@ public class Weapon {
     private HashMap<Munitions, Integer> firstPrice;
     private HashMap<Munitions, Integer> secondPrice;
     private HashMap<Munitions, Integer> thirdPrice;
-    private boolean firstUse;
+    private boolean loaded;
     private Munitions cardColor;
     private boolean secondAttack;
     private boolean thirdAttack;
@@ -27,7 +27,7 @@ public class Weapon {
         firstPrice = new HashMap<>();
         secondPrice = new HashMap<>();
         thirdPrice = new HashMap<>();
-        firstUse = true;
+        loaded = true;
         cardColor = null;
         secondAttack = false;
         thirdAttack = false;
@@ -57,12 +57,12 @@ public class Weapon {
         thirdPrice.put(m3, p3);
     }
 
-    public boolean getFirstUse() {
-        return firstUse;
+    public boolean getLoaded() {
+        return loaded;
     }
 
-    public void setFirstUse(boolean firstUse) {
-        this.firstUse = firstUse;
+    public void setLoaded(boolean l) {
+        this.loaded = l;
     }
 
     /**

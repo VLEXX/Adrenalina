@@ -4,10 +4,6 @@
 package Model.WeaponsCard;
 
 import Model.*;
-import Model.Exceptions.PlayerAlreadyAdded;
-import Model.Exceptions.PlayerNotFound;
-import Model.Exceptions.PositionNotFound;
-import Model.Exceptions.PositionUnreachable;
 
 /**
  * Weapon Plasmagun
@@ -34,15 +30,13 @@ public class PlasmaGun extends Weapon {
      * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @return playerboard of the player to attack
-     * @throws PositionNotFound
-     * @throws PlayerNotFound
+     * @return OK
      * @author Giulia Rivara
      */
-    public PlayerBoard firstAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
+    public MessageEnum firstAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack){
         check(myPosition, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(2, player);
-        return playerToAttack;
+        return MessageEnum.OK;
     }
 
     /**
@@ -51,20 +45,17 @@ public class PlasmaGun extends Weapon {
      * @param player       player who attack
      * @param myposition   position of the player who attack
      * @param positionToGo position where the player want to go
-     * @return position where the player want to go
-     * @throws PositionUnreachable
-     * @throws PlayerNotFound
-     * @throws PlayerAlreadyAdded
+     * @return OK or POSITION_UNREACHABLE
      * @author Giulia Rivara
      */
-    public Position secondAttack(Player player, Position myposition, Position positionToGo) throws PositionUnreachable, PlayerNotFound, PlayerAlreadyAdded {
+    public MessageEnum secondAttack(Player player, Position myposition, Position positionToGo){
         if (checkPosition(myposition, positionToGo)) {
             myposition.getCurrentcell().removeInCellPlayer(player);
             myposition.setCurrentcell(positionToGo.getCurrentcell());
             myposition.getCurrentcell().addInCellPlayer(player);
         } else
-            throw new PositionUnreachable("Position with room ID " + positionToGo.getCurrentroom().getRoomId() + " and cell ID " + positionToGo.getCurrentcell().getCellId() + "unreachable");
-        return myposition;
+            return MessageEnum.POSITION_UNREACHABLE;
+        return MessageEnum.OK;
     }
 
     /**
@@ -74,26 +65,25 @@ public class PlasmaGun extends Weapon {
      * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @return playerboard of the player to attack
-     * @throws PositionNotFound
-     * @throws PlayerNotFound
+     * @return OK
      * @author Giulia Rivara
      */
-    public PlayerBoard thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
+    public MessageEnum thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack){
         check(myPosition, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(1, player);
-        return playerToAttack;
+        return MessageEnum.OK;
     }
 
     /**
-     * Controlla che la posizione sia corretta e che il giocatore in quella posizione sia presente
+     * Check that the position is correct
      *
-     * @param myPosition       posizione giocatore che gioca la carta
-     * @param playerToAttack   giocatore da attaccare
-     * @param positionToAttack posizione giocatore da attaccare
+     * @param myPosition       position of the player who attack
+     * @param playerToAttack   player to attack
+     * @param positionToAttack position to attack
+     * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
+    private MessageEnum check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack){
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
@@ -102,25 +92,15 @@ public class PlasmaGun extends Weapon {
             }
         }
         if (find == false)
-            throw new PositionNotFound("Position not found for " + positionToAttack.getCurrentcell().getCellId());
-        find = false;
-        for (int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++) {
-            if (positionToAttack.getCurrentcell().getInCellPlayer().get(i) == playerToAttack.getPlayer()) {
-                find = true;
-                break;
-            }
-        }
-        if (find == false) {
-            throw new PlayerNotFound("In the selected cell player " + playerToAttack.getPlayer().toString() + " not found");
-        }
+            return MessageEnum.POSITION_NOT_FOUND;
+        return MessageEnum.OK;
     }
 
     /**
-     * Controllo che la posizione dove voglio spostarmi sia raggiungibile
-     *
-     * @param myPosition   posizione del giocatore che attacca
-     * @param positionToGo posizione in cui il giocatore che attacca vuole spostarsi
-     * @return true se la posizione va bene
+     * Function that check the correct position to shot
+     * @param myPosition position of the player who shot
+     * @param positionToGo position to go
+     * @return true if correct
      * @author Giulia Rivara
      */
     private boolean checkPosition(Position myPosition, Position positionToGo) {
@@ -147,11 +127,10 @@ public class PlasmaGun extends Weapon {
     }
 
     /**
-     * Controlla che la posizione dove il giocatore vuole spostarsi sia accessibile
-     *
-     * @param current cella corrente
-     * @param go      cella dove voglio andare
-     * @return true se posso spostarmi
+     * Function that check the correct position to shot
+     * @param current current cell of the player
+     * @param go cell to go
+     * @return true if correct
      * @author Giulia Rivara
      */
     private boolean checkAround(Cell current, Cell go) {

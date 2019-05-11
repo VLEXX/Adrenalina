@@ -4,9 +4,6 @@
 package Model.WeaponsCard;
 
 import Model.*;
-import Model.Exceptions.PlayerNotFound;
-import Model.Exceptions.PlayerNotReachable;
-import Model.Exceptions.PositionNotFound;
 
 /**
  * Weapon Whisper
@@ -31,17 +28,16 @@ public class Whisper extends Weapon {
      * @param myPosition position of the player who shot
      * @param playerToShot player to shot
      * @param positionToShot position of the player to shot
-     * @return playerboard of the player to shot
-     * @throws PlayerNotReachable
+     * @return Ok or PLAYER_UNREACHABLE
      * @author Giulia Rivara
      */
-    public PlayerBoard firstAttack(Player player, Position myPosition, PlayerBoard playerToShot, Position positionToShot) throws PlayerNotReachable{
+    public MessageEnum firstAttack(Player player, Position myPosition, PlayerBoard playerToShot, Position positionToShot){
         if(checkPosition(myPosition, positionToShot)){
             playerToShot.getDamageBox().increaseDamage(3, player);
             playerToShot.getMarksBox().setMyMarksMap(player, 1);
         }
-        else throw new PlayerNotReachable("The player is not reachable");
-        return playerToShot;
+        else return MessageEnum.PLAYER_UNREACHABLE;
+        return MessageEnum.OK;
     }
 
     /**

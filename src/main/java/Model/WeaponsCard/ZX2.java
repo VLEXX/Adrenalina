@@ -3,13 +3,7 @@
  */
 package Model.WeaponsCard;
 
-import Model.Exceptions.DontUseEffect;
-import Model.Exceptions.PlayerNotFound;
-import Model.Exceptions.PositionNotFound;
-import Model.Munitions;
-import Model.Player;
-import Model.PlayerBoard;
-import Model.Position;
+import Model.*;
 
 /**
  * Weapon ZX2
@@ -39,16 +33,14 @@ public class ZX2 extends Weapon {
      * @param myPosition position of the player who attack
      * @param playerToAttack player to attack
      * @param positionToAttack position of the player to attack
-     * @return playerboard of the player to attack
-     * @throws PositionNotFound
-     * @throws PlayerNotFound
+     * @return OK
      * @author Giulia Rivara
      */
-    public PlayerBoard firstAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack) throws PositionNotFound, PlayerNotFound {
-        check(myPosition, positionToAttack, playerToAttack);
+    public MessageEnum firstAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack){
+        check(myPosition, positionToAttack);
         playerToAttack.getDamageBox().increaseDamage(1, player);
         playerToAttack.getMarksBox().setMyMarksMap(player, 2);
-        return playerToAttack;
+        return MessageEnum.OK;
     }
 
     /**
@@ -57,46 +49,42 @@ public class ZX2 extends Weapon {
      * @param myPosition position of the player who attack
      * @param playerToAttack player to attack
      * @param positionToAttack position of the player to attack
-     * @return playerboard of the player to attack
-     * @throws PositionNotFound
-     * @throws PlayerNotFound
-     * @throws DontUseEffect
+     * @return Ok or NOT_SHOT_AGAIN
      * @author Giulia Rivara
      */
-    public PlayerBoard secondAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack) throws PositionNotFound, PlayerNotFound, DontUseEffect {
+    public MessageEnum secondAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack){
         int cont = 0;
         do {
-            check(myPosition, positionToAttack, playerToAttack);
+            check(myPosition, positionToAttack);
             playerToAttack.getMarksBox().setMyMarksMap(player, 1);
             player1 = playerToAttack.getPlayer();
             cont++;
             if (playerToAttack.getPlayer() != player1) {
-                check(myPosition, positionToAttack, playerToAttack);
+                check(myPosition, positionToAttack);
                 playerToAttack.getMarksBox().setMyMarksMap(player, 1);
                 player2 = playerToAttack.getPlayer();
                 cont++;
             }
             if (playerToAttack.getPlayer() != player1 && playerToAttack.getPlayer() != player2) {
-                check(myPosition, positionToAttack, playerToAttack);
+                check(myPosition, positionToAttack);
                 playerToAttack.getMarksBox().setMyMarksMap(player, 1);
                 cont++;
             }
         } while (cont < 4);
-        if(cont > 3)
-            throw new DontUseEffect("You can't shot again");
-        return playerToAttack;
+        if(cont > 3) {
+            return MessageEnum.NOT_SHOT_AGAIN;
+        }
+        return MessageEnum.OK;
     }
 
     /**
      * Function that check for correct position and correct player
      * @param myPosition position of the player who attack
      * @param positionToAttack position of the player to attack
-     * @param playerToAttack player to attack
-     * @throws PositionNotFound
-     * @throws PlayerNotFound
+     * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    private MessageEnum check(Position myPosition, Position positionToAttack){
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
@@ -104,17 +92,9 @@ public class ZX2 extends Weapon {
                 break;
             }
         }
-        if (find == false)
-            throw new PositionNotFound("Position not found for " + positionToAttack.getCurrentcell().getCellId());
-        find = false;
-        for (int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++) {
-            if (positionToAttack.getCurrentcell().getInCellPlayer().get(i) == playerToAttack.getPlayer()) {
-                find = true;
-                break;
-            }
-        }
         if (find == false) {
-            throw new PlayerNotFound("In the selected cell player " + playerToAttack.getPlayer().toString() + " not found");
+            return MessageEnum.POSITION_NOT_FOUND;
         }
+        return MessageEnum.OK;
     }
 }

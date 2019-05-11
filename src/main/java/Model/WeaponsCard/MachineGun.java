@@ -3,13 +3,7 @@
  */
 package Model.WeaponsCard;
 
-import Model.Exceptions.DontUseEffect;
-import Model.Exceptions.PlayerNotFound;
-import Model.Exceptions.PositionNotFound;
-import Model.Munitions;
-import Model.Player;
-import Model.PlayerBoard;
-import Model.Position;
+import Model.*;
 
 import java.util.ArrayList;
 
@@ -46,26 +40,21 @@ public class MachineGun extends Weapon {
      * @param playerToAttack1   first player to attack
      * @param positionToAttack2 position of the second player to attack
      * @param playerToAttack2   second player to attack
-     * @return playerboard of the player
-     * @throws PlayerNotFound
-     * @throws PositionNotFound
+     * @return OK
      * @author Giulia Rivara
      */
-    public ArrayList<PlayerBoard> firstAttack(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound {
-        ArrayList<PlayerBoard> playerToAttacks = new ArrayList();
+    public MessageEnum firstAttack(Player player, Position myPosition, Position positionToAttack1, PlayerBoard playerToAttack1, Position positionToAttack2, PlayerBoard playerToAttack2){
         player1 = playerToAttack1.getPlayer();
         player2 = playerToAttack2.getPlayer();
         if (positionToAttack1 != null && playerToAttack1 != null) {
             check(myPosition, positionToAttack1, playerToAttack1);
             playerToAttack1.getDamageBox().increaseDamage(1, player);
-            playerToAttacks.add(playerToAttack1);
         }
         if (positionToAttack2 != null && playerToAttack2 != null) {
             check(myPosition, positionToAttack2, playerToAttack2);
             playerToAttack2.getDamageBox().increaseDamage(1, player);
-            playerToAttacks.add(playerToAttack2);
         }
-        return playerToAttacks;
+        return MessageEnum.OK;
     }
 
     /**
@@ -75,25 +64,22 @@ public class MachineGun extends Weapon {
      * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @return playerboard  of the player
-     * @throws PlayerNotFound
-     * @throws PositionNotFound
-     * @throws DontUseEffect
+     * @return OK or CANNOT_USE_THIS_EFFECT
      * @author Giulia Rivara
      */
-    public PlayerBoard secondAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound, DontUseEffect {
+    public MessageEnum secondAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack){
         if (player1 == null || player2 == null) {
-            throw new DontUseEffect("You can't use this effect because there is only one player selected");
+            return MessageEnum.CANNOT_USE_THIS_EFFECT;
         }
         if (playerToAttack.getPlayer() != player1 && playerToAttack.getPlayer() != player2) {
-            throw new DontUseEffect("You can't use this effect because you have selected a wrong player");
+            return  MessageEnum.CANNOT_USE_THIS_EFFECT;
         }
         check(myPosition, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(1, player);
         if (playerToAttack.getPlayer() == player1)
             player1Attacked = true;
         else player1Attacked = false;
-        return playerToAttack;
+        return MessageEnum.OK;
     }
 
     /**
@@ -105,14 +91,10 @@ public class MachineGun extends Weapon {
      * @param playerToAttack    first player to firstAttack
      * @param positionToAttack2 position of the second player to attack
      * @param playerToAttack2   second player to attack
-     * @return playerboard of the player
-     * @throws PlayerNotFound
-     * @throws PositionNotFound
-     * @throws DontUseEffect
+     * @return OK or CANNOT_USE_THIS_EFFECT
      * @author Giulia Rivara
      */
-    public ArrayList<PlayerBoard> thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack, Position positionToAttack2, PlayerBoard playerToAttack2) throws PlayerNotFound, PositionNotFound, DontUseEffect {
-        ArrayList<PlayerBoard> playerToAttacks = new ArrayList<>();
+    public MessageEnum thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack, Position positionToAttack2, PlayerBoard playerToAttack2){
         if (player1 == null || player2 == null) {
             if (playerToAttack.getPlayer() == player1 || playerToAttack.getPlayer() == player2) {
                 check(myPosition, positionToAttack, playerToAttack);
@@ -143,12 +125,8 @@ public class MachineGun extends Weapon {
                 check(myPosition, positionToAttack, playerToAttack);
                 playerToAttack.getDamageBox().increaseDamage(1, player);
             }
-        } else throw new DontUseEffect("You can't use this effect");
-        if (playerToAttack != null)
-            playerToAttacks.add(playerToAttack);
-        if (playerToAttack2 != null)
-            playerToAttacks.add(playerToAttack2);
-        return playerToAttacks;
+        } else return MessageEnum.CANNOT_USE_THIS_EFFECT;
+        return MessageEnum.OK;
     }
 
     /**
@@ -157,11 +135,10 @@ public class MachineGun extends Weapon {
      * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @throws PositionNotFound
-     * @throws PlayerNotFound
+     * @return Ok or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
+    private MessageEnum check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) {
         boolean find = false;
         if (playerToAttack.getPlayer() != null) {
             for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
@@ -171,18 +148,9 @@ public class MachineGun extends Weapon {
                 }
             }
             if (find = false) {
-                throw new PositionNotFound("Position not found for " + positionToAttack.getCurrentcell().getCellId());
+                return MessageEnum.POSITION_NOT_FOUND;
             }
         }
-        find = false;
-        for (int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++) {
-            if (positionToAttack.getCurrentcell().getInCellPlayer().get(i) == playerToAttack.getPlayer()) {
-                find = true;
-                break;
-            }
-        }
-        if (find == false) {
-            throw new PlayerNotFound("In the selected cell player " + playerToAttack.getPlayer().toString() + " not found");
-        }
+        return MessageEnum.OK;
     }
 }

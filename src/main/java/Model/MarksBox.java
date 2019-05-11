@@ -6,21 +6,33 @@ package Model;
 import java.io.Serializable;
 import java.util.HashMap;
 
-//Classe che gestisce i marchi giocatore tramite una mappa che tiene conto del numero dei marchi corrispondente al colore
+/**
+ * Class that manages the player marks through a map that takes into account the number of brands corresponding to the color
+ */
 public class MarksBox implements Serializable {
     private HashMap<Player, Integer> myMarksMap;
 
-    //Costruttore per il numero dei marchi
+    /**
+     * Constructor
+     */
     public MarksBox() {
         myMarksMap = new HashMap<>();
     }
 
-    //Ritorna la mappa marchi
+    /**
+     * @return marks map
+     * @author Giulia Rivara
+     */
     public HashMap<Player, Integer> getMyMarksMap() {
         return myMarksMap;
     }
 
-    //Setta la mappa marchi
+    /**
+     * set marks map
+     * @param player
+     * @param damage
+     * @author Giulia Rivara
+     */
     public void setMyMarksMap(Player player, int damage) {
         int i;
         if (myMarksMap.get(player) != null) {

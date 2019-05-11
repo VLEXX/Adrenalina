@@ -186,3 +186,9 @@ N
 src/main/java/Model/State.java,7\3\73d255d7850be0b6971cce5ce3c86a5da6d3f5a2
 S
 #src/main/java/Model/DataPacket.java,7\9\79c1488eb6433be83d952f111205cec6ba2fe57e
+a
+1src/main/java/Model/Exceptions/DontUseEffect.java,b\d\bdefc9dee881d2128ed0b9f0b7afa38ceda5965f
+[
++src/main/java/Model/WeaponsCard/Weapon.java,8\4\84b59ef7f248f31de57ca8977b395058e177cbeb
+_
+/src/test/java/Model/WeaponsCard/WeaponTest.java,8\b\8b46e6e410c1dd03db1d961aafdbe7fb087348b2

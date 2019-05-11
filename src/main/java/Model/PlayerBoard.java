@@ -8,7 +8,9 @@ import Model.WeaponsCard.Weapon;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-//Classe che inizializza la plancia giocatore
+/**
+ * Class that initialize the player board
+ */
 public class PlayerBoard implements Serializable {
     private Player player;
     private boolean firstPlayerCard;             //Carta primo giocatore
@@ -18,7 +20,9 @@ public class PlayerBoard implements Serializable {
     private MunitionsBox munitionsBox;           //Plancia munizioni
     private MarksBox marksBox;                   //Plancia marchi
 
-    //Costruttore che setta tutti gli attributi a null e imposta "false" per la prima carta giocatore
+    /**
+     * Constructor
+     */
     public PlayerBoard() {
         this.firstPlayerCard = false;
         this.weaponsList = new ArrayList<>();
@@ -26,72 +30,117 @@ public class PlayerBoard implements Serializable {
         this.damageBox = new DamageBox();
     }
 
-    //Ritorna il colore giocatore
+    /**
+     * @return the color of the player
+     * @author Giulia Rivara
+     */
     public Player getPlayer() {
         return player;
     }
 
-    //Setta il colore giocatore
+    /**
+     * Set the color of the player
+     * @param player
+     * @author Giulia Rivara
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
 
-    //Ritorna la lista delle armi
+    /**
+     * @return the arm list
+     * @author Giulia Rivara
+     */
     public ArrayList<Weapon> getWeaponsList() {
         return weaponsList;
     }
 
-    //Setta la lista delle armi
+    /**
+     * Set the arm list
+     * @param weaponsList
+     * @author Giulia Rivara
+     */
     public void setWeaponsList(ArrayList<Weapon> weaponsList) {
         this.weaponsList = weaponsList;
     }
 
-    //Ritorna "true" se il giocatore ha preso la prima carta, "false" altrimenti
+    /**
+     * @return true if the player took the first card
+     */
     public boolean getFirtsPlayerCard() {
         return firstPlayerCard;
     }
 
-    //Ritorna la lista dei potenziamenti
+    /**
+     * @return power up list
+     */
     public ArrayList<PowerUp> getPowerupList() {
         return powerUpList;
     }
 
-    //Setta la lista dei potenziamenti
+    /**
+     * Set the power up list
+     * @param powerupList
+     * @author Giulia Rivara
+     */
     public void setPowerupList(ArrayList<PowerUp> powerupList) {
         this.powerUpList = powerupList;
     }
 
-    //Setta a "true" la prima carta giocatore quando la pesca, "false" altrimenti
+    /**
+     * @param firstPlayerCard
+     * @return true if the player took the first card
+     * @author Giulia Rivara
+     */
     public boolean setFirstPlayerCard(boolean firstPlayerCard) {
         return firstPlayerCard;
     }
 
-    //Ritorna la damagebox
+    /**
+     * @return the damages box
+     */
     public DamageBox getDamageBox() {
         return damageBox;
     }
 
-    //Setta la damagebox
+    /**
+     * Set the damages box
+     * @param damageBox
+     * @author Giulia Rivara
+     */
     public void setDamageBox(DamageBox damageBox) {
         this.damageBox = damageBox;
     }
 
-    //Ritorna la marksBox
+    /**
+     * @return the marks box
+     */
     public MarksBox getMarksBox() {
         return marksBox;
     }
 
-    //Setta la marksBox
+    /**
+     * Set the marks box
+     * @param marksBox
+     * @author Giulia Rivara
+     */
     public void setMarksBox(MarksBox marksBox) {
         this.marksBox = marksBox;
     }
 
-    //Ritorna la munitionsBox
+    /**
+     * @return the munitions box
+     * @author Giulia Rivara
+     */
     public MunitionsBox getMunitionsBox() {
         return munitionsBox;
     }
 
-    //Setta la munitionsBox
+    /**
+     * Set the munitions box
+     * @param munitionsBox
+     * @author Giulia Rivara
+     */
     public void setMunitionsBox(MunitionsBox munitionsBox) {
         this.munitionsBox = munitionsBox;
     }

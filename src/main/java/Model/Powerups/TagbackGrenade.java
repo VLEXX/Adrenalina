@@ -5,7 +5,7 @@ import Model.PowerUp;
 import Model.PowerUpId;
 
 public class TagbackGrenade extends PowerUp {
-    public TagbackGrenade(PowerUpId Id, Munitions m) {
+    public TagbackGrenade(Munitions m) {
         super(PowerUpId.TAGBACK_GRENADE, m);
     }
 }

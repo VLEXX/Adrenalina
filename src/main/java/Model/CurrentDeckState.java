@@ -145,16 +145,16 @@ public class CurrentDeckState implements Serializable {
         this.weaponsdeck.push(zx2);
         this.powerupdeck = new Stack<>();
         for (Munitions munitions: Munitions.values()) {
-            this.powerupdeck.push(new Newton(PowerUpId.NEWTON, munitions));
+            this.powerupdeck.push(new Newton(munitions));
         }
         for (Munitions munitions: Munitions.values()) {
-            this.powerupdeck.push(new TagbackGrenade(PowerUpId.TAGBACK_GRENADE, munitions));
+            this.powerupdeck.push(new TagbackGrenade(munitions));
         }
         for (Munitions munitions: Munitions.values()) {
-            this.powerupdeck.push(new TargetingScope(PowerUpId.TARGETING_SCOPE, munitions));
+            this.powerupdeck.push(new TargetingScope(munitions));
         }
         for (Munitions munitions: Munitions.values()) {
-            this.powerupdeck.push(new Teleporter(PowerUpId.TELEPORTER, munitions));
+            this.powerupdeck.push(new Teleporter(munitions));
         }
         this.players = new ArrayList<>();
         players.add(Player.BLUE);

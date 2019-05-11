@@ -5,21 +5,35 @@ package Model;
 
 import java.io.Serializable;
 
-//Classe che identifica i vari potenziamenti
+/**
+ * Power-Up class with "id" as Power-Up name
+ *      and "color" as Power-Up type/color
+ */
 public class PowerUp implements Serializable {
     private final Munitions color;
     private final PowerUpId id;
 
-    //costruttore
+    /**
+     * Constructor
+     *
+     * @param i
+     * @param m
+     */
     public PowerUp(PowerUpId i, Munitions m){
         this.color=m;
         this.id=i;
     }
 
+    /**
+     * @return id
+     */
     public PowerUpId getId() {
         return id;
     }
 
+    /**
+     * @return color
+     */
     public Munitions getColor() {
         return color;
     }
@@ -31,5 +45,3 @@ public class PowerUp implements Serializable {
             return 0;
     }
 }
-
-//Coverage nullo per ora. In attesa di classe PlayerBoard (CANCELLARE QUESTO COMMENTO QUANDO OK)

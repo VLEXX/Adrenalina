@@ -42,7 +42,7 @@ class PlayerBoardTest {
     void getPowerupList() {
         PlayerBoard p = new PlayerBoard();
         ArrayList<PowerUp> powerupTest = new ArrayList<>();
-        PowerUp powerUp = new TagbackGrenade(PowerUpId.NEWTON, Munitions.BLUE);
+        PowerUp powerUp = new TagbackGrenade(Munitions.BLUE);
         powerupTest.add(powerUp);
         p.setPowerupList(powerupTest);
         assertEquals(p.getPowerupList().get(0), powerUp);

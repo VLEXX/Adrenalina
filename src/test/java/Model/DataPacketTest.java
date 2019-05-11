@@ -1,6 +1,12 @@
 package Model;
 
+import Model.Powerups.TagbackGrenade;
+import Model.WeaponsCard.Thor;
+import Model.WeaponsCard.Weapon;
 import org.junit.jupiter.api.Test;
+
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,5 +62,50 @@ class DataPacketTest {
         assertEquals(dataPacket.getStatesEnum(), StatesEnum.START);
         dataPacket.setStatesEnum(StatesEnum.WAIT);
         assertEquals(dataPacket.getStatesEnum(), StatesEnum.WAIT);
+    }
+
+
+    @Test
+    void setWeapon() {
+        DataPacket dataPacket = new DataPacket();
+        Weapon weapon = new Thor();
+        dataPacket.setWeapon(weapon);
+        assertEquals(dataPacket.getWeapon(), weapon);
+    }
+
+    @Test
+    void getWeapon() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.getWeapon(), null);
+    }
+
+    @Test
+    void setReplaceWeapon() {
+        DataPacket dataPacket = new DataPacket();
+        Weapon weapon = new Thor();
+        dataPacket.setReplaceWeapon(weapon);
+        assertEquals(dataPacket.getReplaceWeapon(), weapon);
+    }
+
+    @Test
+    void getReplaceWeapon() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.getReplaceWeapon(), null);
+    }
+
+    @Test
+    void setPaymentPowerUp() {
+        DataPacket dataPacket = new DataPacket();
+        ArrayList<PowerUp> arrayList = new ArrayList<>();
+        PowerUp powerUp = new TagbackGrenade(Munitions.RED);
+        arrayList.add(powerUp);
+        dataPacket.setPaymentPowerUp(arrayList);
+        assertEquals(dataPacket.getPaymentPowerUp().contains(powerUp), true);
+    }
+
+    @Test
+    void getPaymentPowerUp() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.getPaymentPowerUp().isEmpty(), true);
     }
 }

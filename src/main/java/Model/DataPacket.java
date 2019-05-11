@@ -26,12 +26,15 @@ public class DataPacket {
     }
 
     /**
-     * @return
+     * @return cell
      */
     public Cell getCell() {
         return cell;
     }
 
+    /**
+     * @return player
+     */
     public Player getPlayer() {
         return player;
     }
@@ -43,38 +46,65 @@ public class DataPacket {
         this.cell = cell;
     }
 
+    /**
+     * @param player
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
 
+    /**
+     * @return
+     */
     public StatesEnum getStatesEnum() {
         return statesEnum;
     }
 
+    /**
+     * @param statesEnum
+     */
     public void setStatesEnum(StatesEnum statesEnum) {
         this.statesEnum = statesEnum;
     }
 
+    /**
+     * @param weapon
+     */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 
+    /**
+     * @return weapon
+     */
     public Weapon getWeapon() {
         return weapon;
     }
 
+    /**
+     * @param replaceWeapon
+     */
     public void setReplaceWeapon(Weapon replaceWeapon) {
         this.replaceWeapon = replaceWeapon;
     }
 
+    /**
+     * @return replaceWeapon
+     */
     public Weapon getReplaceWeapon() {
         return replaceWeapon;
     }
 
+    /**
+     * @param paymentPowerUp
+     */
     public void setPaymentPowerUp(ArrayList<PowerUp> paymentPowerUp) {
         this.paymentPowerUp = paymentPowerUp;
     }
 
+    /**
+     * @return paymentPowerUp
+     */
     public ArrayList<PowerUp> getPaymentPowerUp() {
         return paymentPowerUp;
     }

@@ -6,7 +6,7 @@ import Model.PowerUpId;
 
 public class Newton extends PowerUp {
 
-    public Newton(PowerUpId i, Munitions m) {
-        super(i, m);
+    public Newton(Munitions m) {
+        super(PowerUpId.NEWTON, m);
     }
 }

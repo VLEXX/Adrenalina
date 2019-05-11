@@ -3,18 +3,16 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RoomTest {
 
     @Test
     void addCellslist() {
-       Room testroom = new Room(1);
-       Cell c = new Cell(1);
-       testroom.addCellsList(c);
-       assertEquals(testroom.getCellsList().get(0).getCellId(), 1);
+        Room testroom = new Room(1);
+        Cell c = new Cell(1);
+        testroom.addCellsList(c);
+        assertEquals(testroom.getCellsList().get(0).getCellId(), 1);
     }
 
     @Test
@@ -26,6 +24,6 @@ class RoomTest {
     @Test
     void getRoomId() {
         Room TestRoom = new Room(1);
-        assertEquals(TestRoom.getRoomId(),1);
+        assertEquals(TestRoom.getRoomId(), 1);
     }
 }

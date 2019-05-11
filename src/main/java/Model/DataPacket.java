@@ -6,7 +6,6 @@ package Model;
 import Model.WeaponsCard.Weapon;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DataPacket {
     private Cell cell;
@@ -16,12 +15,12 @@ public class DataPacket {
     private Weapon replaceWeapon;
     private ArrayList<PowerUp> paymentPowerUp;
 
-    public DataPacket(){
-        this.cell=null;
-        this.player=null;
-        this.statesEnum=null;
-        this.weapon=null;
-        this.replaceWeapon=null;
+    public DataPacket() {
+        this.cell = null;
+        this.player = null;
+        this.statesEnum = null;
+        this.weapon = null;
+        this.replaceWeapon = null;
         this.paymentPowerUp = new ArrayList<>();
     }
 
@@ -33,17 +32,17 @@ public class DataPacket {
     }
 
     /**
-     * @return player
-     */
-    public Player getPlayer() {
-        return player;
-    }
-
-    /**
      * @param cell
      */
     public void setCell(Cell cell) {
         this.cell = cell;
+    }
+
+    /**
+     * @return player
+     */
+    public Player getPlayer() {
+        return player;
     }
 
     /**
@@ -68,13 +67,6 @@ public class DataPacket {
     }
 
     /**
-     * @param weapon
-     */
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-
-    /**
      * @return weapon
      */
     public Weapon getWeapon() {
@@ -82,10 +74,10 @@ public class DataPacket {
     }
 
     /**
-     * @param replaceWeapon
+     * @param weapon
      */
-    public void setReplaceWeapon(Weapon replaceWeapon) {
-        this.replaceWeapon = replaceWeapon;
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 
     /**
@@ -96,10 +88,10 @@ public class DataPacket {
     }
 
     /**
-     * @param paymentPowerUp
+     * @param replaceWeapon
      */
-    public void setPaymentPowerUp(ArrayList<PowerUp> paymentPowerUp) {
-        this.paymentPowerUp = paymentPowerUp;
+    public void setReplaceWeapon(Weapon replaceWeapon) {
+        this.replaceWeapon = replaceWeapon;
     }
 
     /**
@@ -107,5 +99,12 @@ public class DataPacket {
      */
     public ArrayList<PowerUp> getPaymentPowerUp() {
         return paymentPowerUp;
+    }
+
+    /**
+     * @param paymentPowerUp
+     */
+    public void setPaymentPowerUp(ArrayList<PowerUp> paymentPowerUp) {
+        this.paymentPowerUp = paymentPowerUp;
     }
 }

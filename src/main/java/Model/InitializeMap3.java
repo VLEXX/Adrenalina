@@ -39,16 +39,16 @@ public class InitializeMap3 implements StrategyMap {
         room4.addCellsList(cell8);
         room4.addCellsList(cell9);
         //settaggio celle
-        cell1.setCells(null,cell4,null,cell2);
-        cell2.setCells(null,null,cell1,cell3);
-        cell3.setCells(null,cell6,cell2,null);
-        cell4.setCells(cell1,null,null,cell5);
-        cell5.setCells(null,cell8,cell4,cell6);
-        cell6.setCells(cell3,null,cell5,cell7);
-        cell7.setCells(null,cell10,cell6,null);
-        cell8.setCells(cell5,null,null,cell9);
-        cell9.setCells(null,null,cell8,cell10);
-        cell10.setCells(cell7,null,cell9,null);
+        cell1.setCells(null, cell4, null, cell2);
+        cell2.setCells(null, null, cell1, cell3);
+        cell3.setCells(null, cell6, cell2, null);
+        cell4.setCells(cell1, null, null, cell5);
+        cell5.setCells(null, cell8, cell4, cell6);
+        cell6.setCells(cell3, null, cell5, cell7);
+        cell7.setCells(null, cell10, cell6, null);
+        cell8.setCells(cell5, null, null, cell9);
+        cell9.setCells(null, null, cell8, cell10);
+        cell10.setCells(cell7, null, cell9, null);
         //settaggio celle raggiungibili
         map3.getRoomList().forEach(room -> room.getCellsList().forEach(cell -> cell.initializeReachableCells()));
         return map3;

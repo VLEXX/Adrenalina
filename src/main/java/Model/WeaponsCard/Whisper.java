@@ -13,7 +13,7 @@ public class Whisper extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public Whisper(){
+    public Whisper() {
         super();
         super.setFirstPrice(Munitions.BLUE, 2);
         super.setFirstPrice(Munitions.YELLOW, 1);

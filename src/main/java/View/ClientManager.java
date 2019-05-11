@@ -4,7 +4,7 @@
 package View;
 
 import Model.CurrentDeckState;
-import Model.Message;
+import Model.MessageString;
 import Model.Player;
 
 import java.io.IOException;
@@ -71,7 +71,7 @@ public class ClientManager {
                 Player player = this.chooseCharacter(stdin.nextLine());
                 objectOutputStream.writeObject(player);
                 System.out.println("\n");
-                Message message = (Message)objectInputStream.readObject();
+                MessageString message = (MessageString)objectInputStream.readObject();
                 System.out.println(message.getMessage());
                 System.out.println("\n\n");
                 ok = (Boolean) objectInputStream.readObject();
@@ -112,7 +112,7 @@ public class ClientManager {
                 break;
             }
         }
-        Message message = (Message)objectInputStream.readObject();
+        MessageString message = (MessageString)objectInputStream.readObject();
         System.out.println(message.getMessage());
     }
 

@@ -13,7 +13,7 @@ public class VortexCannon extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public VortexCannon(){
+    public VortexCannon() {
         super();
         super.setFirstPrice(Munitions.RED, 1);
         super.setFirstPrice(Munitions.BLUE, 1);

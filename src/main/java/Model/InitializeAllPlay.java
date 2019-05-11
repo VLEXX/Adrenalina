@@ -19,13 +19,13 @@ public class InitializeAllPlay implements SubjectUpdate {
     private VoteMap voteMap;
     private VoteMode voteMode;
     private ArrayList<IDClientList> idClientList;
-    private HashMap<Player, State>  playerState;
+    private HashMap<Player, State> playerState;
     private int playercounter;
     private int playercountertemp;
     private ArrayList<ObserverUpdate> observers;
 
 
-    public InitializeAllPlay(){
+    public InitializeAllPlay() {
         currentTurnState = new ArrayList<>();
         currentPlayerState = new HashMap<>();
         chartScore = new ChartScore();
@@ -41,24 +41,24 @@ public class InitializeAllPlay implements SubjectUpdate {
         observers = new ArrayList<>();
     }
 
-    public void resetPlayerCounterTemp(){
-        playercountertemp=playercounter;
+    public void resetPlayerCounterTemp() {
+        playercountertemp = playercounter;
     }
 
-    public void decreasePlayerCounterTemp(){
+    public void decreasePlayerCounterTemp() {
         playercountertemp--;
     }
 
-    public synchronized int getPlayercountertemp(){
+    public synchronized int getPlayercountertemp() {
         return playercountertemp;
     }
 
-    public void addPlayerCounter(){
+    public void addPlayerCounter() {
         playercounter++;
         playercountertemp++;
     }
 
-    public int getPlayercounter(){
+    public int getPlayercounter() {
         return playercounter;
     }
 
@@ -70,7 +70,7 @@ public class InitializeAllPlay implements SubjectUpdate {
         return voteMap;
     }
 
-    public HashMap<Player,CurrentPlayerState> getCurrentPlayerState() {
+    public HashMap<Player, CurrentPlayerState> getCurrentPlayerState() {
         return currentPlayerState;
     }
 
@@ -98,19 +98,19 @@ public class InitializeAllPlay implements SubjectUpdate {
         return currentDeckState;
     }
 
-    public void addPlayerState(Player player, State state){
+    public void addPlayerState(Player player, State state) {
         playerState.put(player, state);
     }
 
-    public void updatePlayerState(Player player, State state){
+    public void updatePlayerState(Player player, State state) {
         playerState.replace(player, state);
     }
 
-    public State getPlayerState(Player player){
+    public State getPlayerState(Player player) {
         return playerState.get(player);
     }
 
-    public HashMap<Player, State> getHashMapState(){
+    public HashMap<Player, State> getHashMapState() {
         return playerState;
     }
 
@@ -126,7 +126,7 @@ public class InitializeAllPlay implements SubjectUpdate {
 
     @Override
     public void notifyObserver() {
-        for(ObserverUpdate observer: this.getObservers()){
+        for (ObserverUpdate observer : this.getObservers()) {
             observer.update(true);
         }
     }

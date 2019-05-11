@@ -8,6 +8,7 @@ import Model.Powerups.TagbackGrenade;
 import Model.Powerups.TargetingScope;
 import Model.Powerups.Teleporter;
 import Model.WeaponsCard.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,81 +27,81 @@ public class CurrentDeckState implements Serializable {
     /**
      * Constructor that instantiates every deck and shuffle them
      */
-    public CurrentDeckState(){
-        this.ammodeck=new Stack<>();
-        for(int i=0; i<3; i++){
+    public CurrentDeckState() {
+        this.ammodeck = new Stack<>();
+        for (int i = 0; i < 3; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{0,1,2});
+            a.setAmmoList(new int[]{0, 1, 2});
             this.ammodeck.push(a);
         }
-        for(int i=0; i<3; i++){
+        for (int i = 0; i < 3; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{2,1,0});
+            a.setAmmoList(new int[]{2, 1, 0});
             this.ammodeck.push(a);
         }
-        for(int i=0; i<3; i++){
+        for (int i = 0; i < 3; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{1,0,2});
+            a.setAmmoList(new int[]{1, 0, 2});
             this.ammodeck.push(a);
         }
-        for(int i=0; i<3; i++){
+        for (int i = 0; i < 3; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{1,2,0});
+            a.setAmmoList(new int[]{1, 2, 0});
             this.ammodeck.push(a);
         }
-        for(int i=0; i<3; i++){
+        for (int i = 0; i < 3; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{0,2,1});
+            a.setAmmoList(new int[]{0, 2, 1});
             this.ammodeck.push(a);
         }
-        for(int i=0; i<3; i++){
+        for (int i = 0; i < 3; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{2,0,1});
+            a.setAmmoList(new int[]{2, 0, 1});
             this.ammodeck.push(a);
         }
-        for(int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{0,2,0});
+            a.setAmmoList(new int[]{0, 2, 0});
             a.setPossiblePowerUp(true);
             this.ammodeck.push(a);
         }
-        for(int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{2,0,0});
+            a.setAmmoList(new int[]{2, 0, 0});
             a.setPossiblePowerUp(true);
             this.ammodeck.push(a);
         }
-        for(int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{0,0,2});
+            a.setAmmoList(new int[]{0, 0, 2});
             a.setPossiblePowerUp(true);
             this.ammodeck.push(a);
         }
-        for(int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{0,2,0});
+            a.setAmmoList(new int[]{0, 2, 0});
             a.setPossiblePowerUp(true);
             this.ammodeck.push(a);
         }
-        for(int i=0; i<4; i++){
+        for (int i = 0; i < 4; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{1,1,0});
+            a.setAmmoList(new int[]{1, 1, 0});
             a.setPossiblePowerUp(true);
             this.ammodeck.push(a);
         }
-        for(int i=0; i<4; i++){
+        for (int i = 0; i < 4; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{0,1,1});
+            a.setAmmoList(new int[]{0, 1, 1});
             a.setPossiblePowerUp(true);
             this.ammodeck.push(a);
         }
-        for(int i=0; i<4; i++){
+        for (int i = 0; i < 4; i++) {
             Ammo a = new Ammo();
-            a.setAmmoList(new int[]{1,0,1});
+            a.setAmmoList(new int[]{1, 0, 1});
             a.setPossiblePowerUp(true);
             this.ammodeck.push(a);
         }
-        this.weaponsdeck=new Stack<>();
+        this.weaponsdeck = new Stack<>();
         Cyberblade cyberblade = new Cyberblade();
         this.weaponsdeck.push(cyberblade);
         Electroscythe electroscythe = new Electroscythe();
@@ -144,16 +145,16 @@ public class CurrentDeckState implements Serializable {
         ZX2 zx2 = new ZX2();
         this.weaponsdeck.push(zx2);
         this.powerupdeck = new Stack<>();
-        for (Munitions munitions: Munitions.values()) {
+        for (Munitions munitions : Munitions.values()) {
             this.powerupdeck.push(new Newton(munitions));
         }
-        for (Munitions munitions: Munitions.values()) {
+        for (Munitions munitions : Munitions.values()) {
             this.powerupdeck.push(new TagbackGrenade(munitions));
         }
-        for (Munitions munitions: Munitions.values()) {
+        for (Munitions munitions : Munitions.values()) {
             this.powerupdeck.push(new TargetingScope(munitions));
         }
-        for (Munitions munitions: Munitions.values()) {
+        for (Munitions munitions : Munitions.values()) {
             this.powerupdeck.push(new Teleporter(munitions));
         }
         this.players = new ArrayList<>();
@@ -191,7 +192,7 @@ public class CurrentDeckState implements Serializable {
 
     /**
      * @return ArrayList with available Player
-     * */
+     */
     public ArrayList<Player> getPlayers() {
         return players;
     }

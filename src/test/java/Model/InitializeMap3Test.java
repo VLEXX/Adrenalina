@@ -2,7 +2,7 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InitializeMap3Test {
 
@@ -41,7 +41,7 @@ class InitializeMap3Test {
         assertEquals(map3.getRoomList().get(0).getCellsList().get(2).getRightCell(), null);
 
         assertEquals(map3.getRoomList().get(1).getCellsList().get(0).getUpCell().getCellId(), 1);
-        assertEquals(map3.getRoomList().get(1).getCellsList().get(0).getDownCell(),null);
+        assertEquals(map3.getRoomList().get(1).getCellsList().get(0).getDownCell(), null);
         assertEquals(map3.getRoomList().get(1).getCellsList().get(0).getLeftCell(), null);
         assertEquals(map3.getRoomList().get(1).getCellsList().get(0).getRightCell().getCellId(), 5);
         assertEquals(map3.getRoomList().get(1).getCellsList().get(1).getUpCell(), null);
@@ -55,7 +55,7 @@ class InitializeMap3Test {
 
         assertEquals(map3.getRoomList().get(2).getCellsList().get(0).getUpCell(), null);
         assertEquals(map3.getRoomList().get(2).getCellsList().get(0).getDownCell().getCellId(), 10);
-        assertEquals(map3.getRoomList().get(2).getCellsList().get(0).getLeftCell().getCellId(),6 );
+        assertEquals(map3.getRoomList().get(2).getCellsList().get(0).getLeftCell().getCellId(), 6);
         assertEquals(map3.getRoomList().get(2).getCellsList().get(0).getRightCell(), null);
         assertEquals(map3.getRoomList().get(2).getCellsList().get(1).getUpCell().getCellId(), 7);
         assertEquals(map3.getRoomList().get(2).getCellsList().get(1).getDownCell(), null);
@@ -69,6 +69,6 @@ class InitializeMap3Test {
         assertEquals(map3.getRoomList().get(3).getCellsList().get(1).getUpCell(), null);
         assertEquals(map3.getRoomList().get(3).getCellsList().get(1).getDownCell(), null);
         assertEquals(map3.getRoomList().get(3).getCellsList().get(1).getLeftCell().getCellId(), 8);
-        assertEquals(map3.getRoomList().get(3).getCellsList().get(1).getRightCell().getCellId(),10);
+        assertEquals(map3.getRoomList().get(3).getCellsList().get(1).getRightCell().getCellId(), 10);
     }
 }

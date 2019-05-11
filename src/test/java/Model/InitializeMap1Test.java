@@ -1,11 +1,9 @@
 //Author: Alex Saletti
 package Model;
 
-import Model.InitializeMap1;
-import Model.Map;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InitializeMap1Test {
 
@@ -84,4 +82,4 @@ class InitializeMap1Test {
 
 
     }
-    }
+}

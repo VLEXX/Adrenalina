@@ -9,8 +9,8 @@ public class StateSelectedMap {
     private StrategyMap strategyMap;
 
     //Costruttore che inizializza la mappa selezionata a "null"
-    public StateSelectedMap(){
-        selectedmap =null;
+    public StateSelectedMap() {
+        selectedmap = null;
         strategyMap = null;
     }
 
@@ -25,17 +25,17 @@ public class StateSelectedMap {
     }
 
     //Setta la StrategyMap per l'inizializzazione della mappa
-    public void setStrategyMap(int i){
-        if(i==0){
+    public void setStrategyMap(int i) {
+        if (i == 0) {
             strategyMap = new InitializeMap1();
         }
-        if(i==1){
+        if (i == 1) {
             strategyMap = new InitializeMap2();
         }
-        if(i==2){
+        if (i == 2) {
             strategyMap = new InitializeMap3();
         }
-        if(i==3){
+        if (i == 3) {
             strategyMap = new InitializeMap4();
         }
     }

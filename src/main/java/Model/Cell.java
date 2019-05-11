@@ -30,14 +30,14 @@ public class Cell {
 
 
     //costruttore
-    public Cell(int id){
-        this.id =id;
-        this.ammohere =null;
-        this.downcell =null;
-        this.leftcell =null;
-        this.upcell =null;
-        this.rightcell =null;
-        this.spawnpointzone =null;
+    public Cell(int id) {
+        this.id = id;
+        this.ammohere = null;
+        this.downcell = null;
+        this.leftcell = null;
+        this.upcell = null;
+        this.rightcell = null;
+        this.spawnpointzone = null;
         this.reachableCells = new ArrayList<Cell>();
         this.inCellPlayer = new ArrayList<Player>();
     }
@@ -50,28 +50,28 @@ public class Cell {
     //metodo che aggiunge un giocatore nella cella
     public void addInCellPlayer(Player player) throws PlayerAlreadyAdded {
         boolean found = false;
-        for(int i = 0; i < inCellPlayer.size(); i++){
-            if(inCellPlayer.get(i) == player){
+        for (int i = 0; i < inCellPlayer.size(); i++) {
+            if (inCellPlayer.get(i) == player) {
                 found = true;
                 break;
             }
         }
-        if(found)
+        if (found)
             throw new PlayerAlreadyAdded("The " + player.toString() + "is already present");
         else
             inCellPlayer.add(player);
     }
 
     //metodo che rimuove un giocatore da una cella
-    public void removeInCellPlayer(Player player) throws PlayerNotFound{
+    public void removeInCellPlayer(Player player) throws PlayerNotFound {
         boolean found = false;
-        for(int i = 0; i < inCellPlayer.size(); i++){
-            if(inCellPlayer.get(i) == player){
+        for (int i = 0; i < inCellPlayer.size(); i++) {
+            if (inCellPlayer.get(i) == player) {
                 found = true;
                 break;
             }
         }
-        if(!found)
+        if (!found)
             throw new PlayerNotFound("The " + player.toString() + "is not present");
         else
             inCellPlayer.remove(player);
@@ -119,7 +119,9 @@ public class Cell {
     }
 
     //restituisce l'oggetto spawn, NULL se assente
-    public SpawnPoint getSpawnpointzone() { return spawnpointzone; }
+    public SpawnPoint getSpawnpointzone() {
+        return spawnpointzone;
+    }
 
     //setta l'oggetto dello spawn
     public void setSpawnpointzone(SpawnPoint spawnpointzone) {
@@ -132,75 +134,75 @@ public class Cell {
     }
 
     //inizializza la lista delle celle raggiungibili in 3 spostamenti
-    public void initializeReachableCells(){
-        if(this.getUpCell()!=null) {
-                reachableCells.add(this.getUpCell());
-            if(this.getUpCell().getUpCell()!=null) {
-                if(!reachableCells.contains(this.getUpCell().getUpCell()))
+    public void initializeReachableCells() {
+        if (this.getUpCell() != null) {
+            reachableCells.add(this.getUpCell());
+            if (this.getUpCell().getUpCell() != null) {
+                if (!reachableCells.contains(this.getUpCell().getUpCell()))
                     reachableCells.add(this.getUpCell().getUpCell());
-                if(this.getUpCell().getUpCell().getUpCell()!=null && !reachableCells.contains(this.getUpCell().getUpCell().getUpCell()))
+                if (this.getUpCell().getUpCell().getUpCell() != null && !reachableCells.contains(this.getUpCell().getUpCell().getUpCell()))
                     reachableCells.add(this.getUpCell().getUpCell().getUpCell());
-                if(this.getUpCell().getUpCell().getRightCell()!=null && !reachableCells.contains(this.getUpCell().getUpCell().getRightCell()))
+                if (this.getUpCell().getUpCell().getRightCell() != null && !reachableCells.contains(this.getUpCell().getUpCell().getRightCell()))
                     reachableCells.add(this.getUpCell().getUpCell().getRightCell());
-                if(this.getUpCell().getUpCell().getLeftCell()!=null && !reachableCells.contains(this.getUpCell().getUpCell().getLeftCell()))
+                if (this.getUpCell().getUpCell().getLeftCell() != null && !reachableCells.contains(this.getUpCell().getUpCell().getLeftCell()))
                     reachableCells.add(this.getUpCell().getUpCell().getLeftCell());
             }
-            if(this.getUpCell().getLeftCell()!=null){
+            if (this.getUpCell().getLeftCell() != null) {
                 if (!reachableCells.contains(this.getUpCell().getLeftCell()))
                     reachableCells.add(this.getUpCell().getLeftCell());
-                if(this.getUpCell().getLeftCell().getUpCell()!=null && !reachableCells.contains(this.getUpCell().getLeftCell().getUpCell()))
+                if (this.getUpCell().getLeftCell().getUpCell() != null && !reachableCells.contains(this.getUpCell().getLeftCell().getUpCell()))
                     reachableCells.add(this.getUpCell().getLeftCell().getUpCell());
-                if(this.getUpCell().getLeftCell().getDownCell()!=null && !reachableCells.contains(this.getUpCell().getLeftCell().getDownCell()))
+                if (this.getUpCell().getLeftCell().getDownCell() != null && !reachableCells.contains(this.getUpCell().getLeftCell().getDownCell()))
                     reachableCells.add(this.getUpCell().getLeftCell().getDownCell());
-                if(this.getUpCell().getLeftCell().getLeftCell()!=null && !reachableCells.contains(this.getUpCell().getLeftCell().getLeftCell()))
+                if (this.getUpCell().getLeftCell().getLeftCell() != null && !reachableCells.contains(this.getUpCell().getLeftCell().getLeftCell()))
                     reachableCells.add(this.getUpCell().getLeftCell().getLeftCell());
             }
-            if(this.getUpCell().getRightCell()!=null){
-                if(!reachableCells.contains(this.getUpCell().getRightCell()))
+            if (this.getUpCell().getRightCell() != null) {
+                if (!reachableCells.contains(this.getUpCell().getRightCell()))
                     reachableCells.add(this.getUpCell().getRightCell());
-                if(this.getUpCell().getRightCell().getUpCell()!=null && !reachableCells.contains(this.getUpCell().getRightCell().getUpCell()))
+                if (this.getUpCell().getRightCell().getUpCell() != null && !reachableCells.contains(this.getUpCell().getRightCell().getUpCell()))
                     reachableCells.add(this.getUpCell().getRightCell().getUpCell());
-                if(this.getUpCell().getRightCell().getDownCell()!=null && !reachableCells.contains(this.getUpCell().getRightCell().getDownCell()))
+                if (this.getUpCell().getRightCell().getDownCell() != null && !reachableCells.contains(this.getUpCell().getRightCell().getDownCell()))
                     reachableCells.add(this.getUpCell().getRightCell().getDownCell());
-                if(this.getUpCell().getRightCell().getRightCell()!=null && !reachableCells.contains(this.getUpCell().getRightCell().getRightCell()))
+                if (this.getUpCell().getRightCell().getRightCell() != null && !reachableCells.contains(this.getUpCell().getRightCell().getRightCell()))
                     reachableCells.add(this.getUpCell().getRightCell().getRightCell());
             }
         }
-        if(this.getDownCell()!=null) {
-            if(!reachableCells.contains(this.getDownCell()))
+        if (this.getDownCell() != null) {
+            if (!reachableCells.contains(this.getDownCell()))
                 reachableCells.add(this.getDownCell());
-            if(this.getDownCell().getDownCell()!=null) {
-                if(!reachableCells.contains(this.getDownCell().getDownCell()))
+            if (this.getDownCell().getDownCell() != null) {
+                if (!reachableCells.contains(this.getDownCell().getDownCell()))
                     reachableCells.add(this.getDownCell().getDownCell());
-                if(this.getDownCell().getDownCell().getDownCell()!=null && !reachableCells.contains(this.getDownCell().getDownCell().getDownCell()))
+                if (this.getDownCell().getDownCell().getDownCell() != null && !reachableCells.contains(this.getDownCell().getDownCell().getDownCell()))
                     reachableCells.add(this.getDownCell().getDownCell().getDownCell());
-                if(this.getDownCell().getDownCell().getRightCell()!=null && !reachableCells.contains(this.getDownCell().getDownCell().getRightCell()))
+                if (this.getDownCell().getDownCell().getRightCell() != null && !reachableCells.contains(this.getDownCell().getDownCell().getRightCell()))
                     reachableCells.add(this.getDownCell().getDownCell().getRightCell());
-                if(this.getDownCell().getDownCell().getLeftCell()!=null && !reachableCells.contains(this.getDownCell().getDownCell().getLeftCell()))
+                if (this.getDownCell().getDownCell().getLeftCell() != null && !reachableCells.contains(this.getDownCell().getDownCell().getLeftCell()))
                     reachableCells.add(this.getDownCell().getDownCell().getLeftCell());
             }
-            if(this.getDownCell().getLeftCell()!=null){
+            if (this.getDownCell().getLeftCell() != null) {
                 if (!reachableCells.contains(this.getDownCell().getLeftCell()))
                     reachableCells.add(this.getDownCell().getLeftCell());
-                if(this.getDownCell().getLeftCell().getUpCell()!=null && !reachableCells.contains(this.getDownCell().getLeftCell().getUpCell()))
+                if (this.getDownCell().getLeftCell().getUpCell() != null && !reachableCells.contains(this.getDownCell().getLeftCell().getUpCell()))
                     reachableCells.add(this.getDownCell().getLeftCell().getUpCell());
-                if(this.getDownCell().getLeftCell().getDownCell()!=null && !reachableCells.contains(this.getDownCell().getLeftCell().getDownCell()))
+                if (this.getDownCell().getLeftCell().getDownCell() != null && !reachableCells.contains(this.getDownCell().getLeftCell().getDownCell()))
                     reachableCells.add(this.getDownCell().getLeftCell().getDownCell());
-                if(this.getDownCell().getLeftCell().getLeftCell()!=null && !reachableCells.contains(this.getDownCell().getLeftCell().getLeftCell()))
+                if (this.getDownCell().getLeftCell().getLeftCell() != null && !reachableCells.contains(this.getDownCell().getLeftCell().getLeftCell()))
                     reachableCells.add(this.getDownCell().getLeftCell().getLeftCell());
             }
-            if(this.getDownCell().getRightCell()!=null){
-                if(!reachableCells.contains(this.getDownCell().getRightCell()))
+            if (this.getDownCell().getRightCell() != null) {
+                if (!reachableCells.contains(this.getDownCell().getRightCell()))
                     reachableCells.add(this.getDownCell().getRightCell());
-                if(this.getDownCell().getRightCell().getUpCell()!=null && !reachableCells.contains(this.getDownCell().getRightCell().getUpCell()))
+                if (this.getDownCell().getRightCell().getUpCell() != null && !reachableCells.contains(this.getDownCell().getRightCell().getUpCell()))
                     reachableCells.add(this.getDownCell().getRightCell().getUpCell());
-                if(this.getDownCell().getRightCell().getDownCell()!=null && !reachableCells.contains(this.getDownCell().getRightCell().getDownCell()))
+                if (this.getDownCell().getRightCell().getDownCell() != null && !reachableCells.contains(this.getDownCell().getRightCell().getDownCell()))
                     reachableCells.add(this.getDownCell().getRightCell().getDownCell());
-                if(this.getDownCell().getRightCell().getRightCell()!=null && !reachableCells.contains(this.getDownCell().getRightCell().getRightCell()))
+                if (this.getDownCell().getRightCell().getRightCell() != null && !reachableCells.contains(this.getDownCell().getRightCell().getRightCell()))
                     reachableCells.add(this.getDownCell().getRightCell().getRightCell());
             }
         }
-        if(this.getLeftCell()!=null) {
+        if (this.getLeftCell() != null) {
             if (!reachableCells.contains(this.getLeftCell()))
                 reachableCells.add(this.getLeftCell());
             if (this.getLeftCell().getDownCell() != null) {
@@ -234,7 +236,7 @@ public class Cell {
                     reachableCells.add(this.getLeftCell().getUpCell().getRightCell());
             }
         }
-        if(this.getRightCell()!=null) {
+        if (this.getRightCell() != null) {
             if (!reachableCells.contains(this.getRightCell()))
                 reachableCells.add(this.getRightCell());
             if (this.getRightCell().getDownCell() != null) {

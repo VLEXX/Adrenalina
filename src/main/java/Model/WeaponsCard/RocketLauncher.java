@@ -13,7 +13,7 @@ public class RocketLauncher extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public RocketLauncher(){
+    public RocketLauncher() {
         super();
         super.setFirstPrice(Munitions.RED, 2);
         super.setSecondPrice(Munitions.BLUE, 1);

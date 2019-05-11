@@ -45,18 +45,18 @@ public class InitializeMap4 implements StrategyMap {
         room6.addCellsList(cell9);
         room6.addCellsList(cell10);
         //settaggio celle
-        cell1.setCells(null,cell5,null,cell2);
-        cell2.setCells(null,cell6,cell1,cell3);
-        cell3.setCells(null,cell7,cell2,cell4);
-        cell4.setCells(null,cell8,cell3,null);
-        cell5.setCells(cell1,cell9,null,null);
-        cell6.setCells(cell2,cell10,null,null);
-        cell7.setCells(cell3,cell11,null,cell8);
-        cell8.setCells(cell4,cell12,cell7,null);
-        cell9.setCells(cell5,null,null,cell10);
-        cell10.setCells(cell6,null,cell9,cell11);
-        cell11.setCells(cell7,null,cell10,cell12);
-        cell12.setCells(cell8,null,cell11,null);
+        cell1.setCells(null, cell5, null, cell2);
+        cell2.setCells(null, cell6, cell1, cell3);
+        cell3.setCells(null, cell7, cell2, cell4);
+        cell4.setCells(null, cell8, cell3, null);
+        cell5.setCells(cell1, cell9, null, null);
+        cell6.setCells(cell2, cell10, null, null);
+        cell7.setCells(cell3, cell11, null, cell8);
+        cell8.setCells(cell4, cell12, cell7, null);
+        cell9.setCells(cell5, null, null, cell10);
+        cell10.setCells(cell6, null, cell9, cell11);
+        cell11.setCells(cell7, null, cell10, cell12);
+        cell12.setCells(cell8, null, cell11, null);
         //settaggio celle raggiungibili
         map4.getRoomList().forEach(room -> room.getCellsList().forEach(cell -> cell.initializeReachableCells()));
         return map4;

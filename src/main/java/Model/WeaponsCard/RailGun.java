@@ -13,7 +13,7 @@ public class RailGun extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public RailGun(){
+    public RailGun() {
         super();
         super.setFirstPrice(Munitions.YELLOW, 2);
         super.setFirstPrice(Munitions.BLUE, 1);

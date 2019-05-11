@@ -6,7 +6,7 @@ package Model.WeaponsCard;
 import Model.Munitions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WeaponTest {
 
@@ -39,7 +39,7 @@ class WeaponTest {
     }
 
     @Test
-    void munitionChecker(){
+    void munitionChecker() {
         Weapon w = new Weapon();
         w.setCardColor(Munitions.BLUE);
         assertEquals(w.munitionsChecker(Munitions.BLUE), 1);
@@ -47,7 +47,7 @@ class WeaponTest {
     }
 
     @Test
-    void getCardColor(){
+    void getCardColor() {
         Weapon w = new Weapon();
         w.setCardColor(Munitions.BLUE);
         assertEquals(w.getCardColor(), Munitions.BLUE);

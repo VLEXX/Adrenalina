@@ -2,13 +2,14 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MessageTest {
+class MessageStringTest {
 
     @Test
     void getMessage() {
-        Message message = new Message("ok");
+        MessageString message = new MessageString("ok");
         assertEquals(message.getMessage(), "ok");
     }
+
 }

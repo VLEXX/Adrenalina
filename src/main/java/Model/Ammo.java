@@ -18,8 +18,8 @@ public class Ammo implements Serializable {
     private boolean PossiblePowerUp; //powerup presente
 
     //costruttore
-    public Ammo(){
-        this.ammoList = new int[]{0,0,0};
+    public Ammo() {
+        this.ammoList = new int[]{0, 0, 0};
         this.PossiblePowerUp = false;
     }
 

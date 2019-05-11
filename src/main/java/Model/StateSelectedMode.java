@@ -8,8 +8,8 @@ public class StateSelectedMode {
     private Mode selectedmode;  //modalità selezionata del gioco
 
     //Costruttore che inizializza la modalità a "null"
-    public StateSelectedMode(){
-        selectedmode =null;
+    public StateSelectedMode() {
+        selectedmode = null;
     }
 
     //Ritorna la mappa selezionata

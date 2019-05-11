@@ -2,7 +2,7 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MapTest {
 
@@ -10,14 +10,14 @@ class MapTest {
     void getMapname() {
         Map maptest = new Map();
         maptest.setMapname("ciao");
-        assertEquals(maptest.getMapname(),"ciao");
+        assertEquals(maptest.getMapname(), "ciao");
     }
 
     @Test
     void setMapname() {
         Map Maptest = new Map();
         Maptest.setMapname("testmapname");
-        assertEquals(Maptest.getMapname(),"testmapname");
+        assertEquals(Maptest.getMapname(), "testmapname");
     }
 
     @Test

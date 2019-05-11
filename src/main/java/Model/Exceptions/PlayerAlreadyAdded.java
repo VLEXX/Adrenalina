@@ -2,5 +2,7 @@
 package Model.Exceptions;
 
 public class PlayerAlreadyAdded extends Exception {
-    public PlayerAlreadyAdded (String message) {super (message);}
+    public PlayerAlreadyAdded(String message) {
+        super(message);
+    }
 }

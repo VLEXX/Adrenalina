@@ -4,7 +4,7 @@
 package ServerController;
 
 import Model.InitializeAllPlay;
-import Model.Message;
+import Model.MessageString;
 import Model.Player;
 
 import java.io.*;
@@ -52,7 +52,7 @@ public class SocketClientHandler implements Runnable {
                 }
             }
             allPlay.resetPlayerCounterTemp();
-            Message message = new Message("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
+            MessageString message = new MessageString("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
             objectOutputStream.writeObject(message);
 
             UpdateThread updateThread = new UpdateThread(allPlay, player, objectOutputStream);

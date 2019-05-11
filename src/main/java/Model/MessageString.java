@@ -1,15 +1,12 @@
-/**
- * @author Federico Scatà
- */
 package Model;
 
 import java.io.Serializable;
 
-public class Message implements Serializable {
+public class MessageString implements Serializable {
     private String message;
 
-    public Message(String string){
-        this.message=string;
+    public MessageString(String s) {
+        this.message = s;
     }
 
     public String getMessage() {

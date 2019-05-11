@@ -4,5 +4,5 @@
 package Model;
 
 public interface State {
-    Message doAction(DataPacket dataPacket, InitializeAllPlay allPlay);
+    MessageEnum doAction(DataPacket dataPacket, InitializeAllPlay allPlay);
 }

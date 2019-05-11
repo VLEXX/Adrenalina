@@ -22,10 +22,10 @@ public class Thor extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public Thor(){
+    public Thor() {
         super();
         super.setFirstPrice(Munitions.BLUE, 1);
-        super.setFirstPrice(Munitions.RED,1);
+        super.setFirstPrice(Munitions.RED, 1);
         super.setSecondPrice(Munitions.BLUE, 1);
         super.setThirdPrice(Munitions.BLUE, 1);
         super.setCardColor(Munitions.BLUE);
@@ -35,10 +35,11 @@ public class Thor extends Weapon {
 
     /**
      * Function first attack
-     * @param myposition position of the player who attack
-     * @param player player who attack
+     *
+     * @param myposition       position of the player who attack
+     * @param player           player who attack
      * @param positionToAttack position of the player to attack
-     * @param playerToAttack player to attack
+     * @param playerToAttack   player to attack
      * @return playerboard of the player to attack
      * @throws PlayerNotFound
      * @throws PositionNotFound
@@ -54,14 +55,15 @@ public class Thor extends Weapon {
 
     /**
      * Function react to chain
+     *
      * @param positionToAttack position of the player to attack
-     * @param playerToAttack player to attackk
+     * @param playerToAttack   player to attackk
      * @return playerboard of the player to attack
      * @throws PlayerNotFound
      * @throws PositionNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard secondAttack(Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound{
+    public PlayerBoard secondAttack(Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound {
         check(position1, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(1, myPlayer);
         position2 = positionToAttack;
@@ -70,14 +72,15 @@ public class Thor extends Weapon {
 
     /**
      * Function high voltage
+     *
      * @param positionToAttack position of the player to attack
-     * @param playerToAttack player to attack
+     * @param playerToAttack   player to attack
      * @return playerboard of the player to attack
      * @throws PlayerNotFound
      * @throws PositionNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard thirdAttack(Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound{
+    public PlayerBoard thirdAttack(Position positionToAttack, PlayerBoard playerToAttack) throws PlayerNotFound, PositionNotFound {
         check(position2, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(2, myPlayer);
         return playerToAttack;
@@ -85,14 +88,15 @@ public class Thor extends Weapon {
 
     /**
      * Function that check for correct position and correct player
-     * @param myPosition position of the player who attack
+     *
+     * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
-     * @param playerToAttack player to attack
+     * @param playerToAttack   player to attack
      * @throws PositionNotFound
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {

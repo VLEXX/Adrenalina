@@ -5,7 +5,6 @@ package Model;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
 //Classe che gestisce i marchi giocatore tramite una mappa che tiene conto del numero dei marchi corrispondente al colore
 public class MarksBox implements Serializable {
@@ -24,7 +23,7 @@ public class MarksBox implements Serializable {
     //Setta la mappa marchi
     public void setMyMarksMap(Player player, int damage) {
         int i;
-        if (myMarksMap.get(player)!=null){
+        if (myMarksMap.get(player) != null) {
             i = myMarksMap.get(player).intValue();
             i = i + damage;
             myMarksMap.replace(player, i);

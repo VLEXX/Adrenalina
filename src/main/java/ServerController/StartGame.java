@@ -26,10 +26,8 @@ public class StartGame extends Thread {
         while(true){
             try {
                 DataPacket dataPacket = (DataPacket) objectInputStream.readObject();
-                Message message = allPlay.getPlayerState(player).doAction(dataPacket,allPlay);
-                if(!message.getMessage().equals("ok")){
-                    objectOutputStream.writeObject(message);
-                }
+                MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket,allPlay);
+                objectOutputStream.writeObject(messageEnum);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {

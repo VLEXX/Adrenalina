@@ -13,7 +13,7 @@ public class PowerGlove extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public PowerGlove(){
+    public PowerGlove() {
         super();
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setFirstPrice(Munitions.BLUE, 1);

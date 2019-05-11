@@ -25,7 +25,7 @@ public class Map {
         return roomlist;
     }
 
-    public void addRoom(Room r){        //aggiunge una stanza
+    public void addRoom(Room r) {        //aggiunge una stanza
         roomlist.add(r);
     }
 }

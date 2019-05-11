@@ -19,7 +19,7 @@ public class PlayerBoard implements Serializable {
     private MarksBox marksBox;                   //Plancia marchi
 
     //Costruttore che setta tutti gli attributi a null e imposta "false" per la prima carta giocatore
-    public PlayerBoard(){
+    public PlayerBoard() {
         this.firstPlayerCard = false;
         this.weaponsList = new ArrayList<>();
         this.powerUpList = new ArrayList<>();
@@ -41,24 +41,24 @@ public class PlayerBoard implements Serializable {
         return weaponsList;
     }
 
+    //Setta la lista delle armi
+    public void setWeaponsList(ArrayList<Weapon> weaponsList) {
+        this.weaponsList = weaponsList;
+    }
+
     //Ritorna "true" se il giocatore ha preso la prima carta, "false" altrimenti
-    public boolean getFirtsPlayerCard(){
+    public boolean getFirtsPlayerCard() {
         return firstPlayerCard;
     }
 
     //Ritorna la lista dei potenziamenti
-    public ArrayList<PowerUp> getPowerupList(){
+    public ArrayList<PowerUp> getPowerupList() {
         return powerUpList;
     }
 
     //Setta la lista dei potenziamenti
     public void setPowerupList(ArrayList<PowerUp> powerupList) {
         this.powerUpList = powerupList;
-    }
-
-    //Setta la lista delle armi
-    public void setWeaponsList(ArrayList<Weapon> weaponsList) {
-        this.weaponsList = weaponsList;
     }
 
     //Setta a "true" la prima carta giocatore quando la pesca, "false" altrimenti

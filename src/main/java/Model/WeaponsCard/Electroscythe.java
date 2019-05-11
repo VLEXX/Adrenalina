@@ -13,7 +13,7 @@ public class Electroscythe extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public Electroscythe(){
+    public Electroscythe() {
         super();
         super.getFirstPrice().put(Munitions.BLUE, 1);
         super.getSecondPrice().put(Munitions.BLUE, 1);

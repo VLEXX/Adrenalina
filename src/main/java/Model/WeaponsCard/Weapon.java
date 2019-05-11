@@ -23,7 +23,7 @@ public class Weapon {
     /**
      * Constructor that initializes the cost of the weapons
      */
-    public Weapon(){
+    public Weapon() {
         firstPrice = new HashMap<>();
         secondPrice = new HashMap<>();
         thirdPrice = new HashMap<>();
@@ -57,16 +57,17 @@ public class Weapon {
         thirdPrice.put(m3, p3);
     }
 
-    public void setFirstUse(boolean firstUse) {
-        this.firstUse = firstUse;
-    }
-
     public boolean getFirstUse() {
         return firstUse;
     }
 
+    public void setFirstUse(boolean firstUse) {
+        this.firstUse = firstUse;
+    }
+
     /**
      * Function that control that the color of the card is the color selected
+     *
      * @param m color
      * @return 1 if the color is the same, 0 otherwise
      */
@@ -77,12 +78,12 @@ public class Weapon {
             return 0;
     }
 
-    public void setCardColor(Munitions cardColor) {
-        this.cardColor = cardColor;
-    }
-
     public Munitions getCardColor() {
         return cardColor;
+    }
+
+    public void setCardColor(Munitions cardColor) {
+        this.cardColor = cardColor;
     }
 
     public boolean hasSecondAttack() {
@@ -93,7 +94,7 @@ public class Weapon {
         return thirdAttack;
     }
 
-    public void setSecondAttack(boolean secondAttack){
+    public void setSecondAttack(boolean secondAttack) {
         this.secondAttack = secondAttack;
     }
 

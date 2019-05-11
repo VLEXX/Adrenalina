@@ -11,11 +11,11 @@ public class MunitionsBox implements Serializable {
     private HashMap<Munitions, Integer> myMunitionsMap;
 
     //Costruttore delle munizioni
-    public MunitionsBox(){
+    public MunitionsBox() {
         myMunitionsMap = new HashMap<>();
-        myMunitionsMap.put(Munitions.YELLOW,3);
-        myMunitionsMap.put(Munitions.BLUE,3);
-        myMunitionsMap.put(Munitions.RED,3);
+        myMunitionsMap.put(Munitions.YELLOW, 3);
+        myMunitionsMap.put(Munitions.BLUE, 3);
+        myMunitionsMap.put(Munitions.RED, 3);
     }
 
     //Ritorna le munizioni gioatore
@@ -24,14 +24,14 @@ public class MunitionsBox implements Serializable {
     }
 
     //Setta le munizioni giocatore
-    public void increaseMyMunitionsBox(Munitions munitions, int cont){
+    public void increaseMyMunitionsBox(Munitions munitions, int cont) {
         int actual = myMunitionsMap.get(munitions);
         actual = cont + actual;
         myMunitionsMap.replace(munitions, actual);
     }
 
     //Elimina le munizioni giocatore
-    public void decreaseMyMunitionsBox(Munitions munitions, int cont){
+    public void decreaseMyMunitionsBox(Munitions munitions, int cont) {
         int actual = myMunitionsMap.get(munitions);
         actual = actual - cont;
         myMunitionsMap.replace(munitions, actual);

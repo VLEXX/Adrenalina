@@ -13,7 +13,7 @@ public class Cyberblade extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public Cyberblade(){
+    public Cyberblade() {
         super();
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setFirstPrice(Munitions.RED, 1);

@@ -13,7 +13,7 @@ public class ShotGun extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public ShotGun(){
+    public ShotGun() {
         super();
         super.setFirstPrice(Munitions.YELLOW, 2);
         super.setCardColor(Munitions.YELLOW);

@@ -1,8 +1,6 @@
 //Author: Alex Saletti
 package Model;
 
-import java.util.ArrayList;
-
 public class InitializeMap1 implements StrategyMap {
 
     @Override
@@ -45,17 +43,17 @@ public class InitializeMap1 implements StrategyMap {
         room4.addCellsList(cell11);
         room5.addCellsList(cell9);
         //settaggio porte
-        cell1.setCells(null,cell5,null,cell2);
-        cell2.setCells(null,null,cell1,cell3);
-        cell3.setCells(null,cell7,cell2,cell4);
-        cell4.setCells(null,cell8,cell3,null);
-        cell5.setCells(cell1,null,null,cell6);
-        cell6.setCells(null,cell9,cell5,null);
-        cell7.setCells(cell3,cell10,null,cell8);
-        cell8.setCells(cell4,cell11,cell7,null);
-        cell9.setCells(cell6,null,null,cell10);
-        cell10.setCells(cell7,null,cell9,cell11);
-        cell11.setCells(cell8,null,cell10,null);
+        cell1.setCells(null, cell5, null, cell2);
+        cell2.setCells(null, null, cell1, cell3);
+        cell3.setCells(null, cell7, cell2, cell4);
+        cell4.setCells(null, cell8, cell3, null);
+        cell5.setCells(cell1, null, null, cell6);
+        cell6.setCells(null, cell9, cell5, null);
+        cell7.setCells(cell3, cell10, null, cell8);
+        cell8.setCells(cell4, cell11, cell7, null);
+        cell9.setCells(cell6, null, null, cell10);
+        cell10.setCells(cell7, null, cell9, cell11);
+        cell11.setCells(cell8, null, cell10, null);
         //settaggio celle raggiungibili
         map1.getRoomList().forEach(room -> room.getCellsList().forEach(cell -> cell.initializeReachableCells()));
         return map1;

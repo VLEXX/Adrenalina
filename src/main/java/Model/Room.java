@@ -8,7 +8,7 @@ public class Room {
     private ArrayList<Cell> cellslist;    //elenco delle celle della stanza
 
 
-    public Room(int id){
+    public Room(int id) {
         this.id = id;
         cellslist = new ArrayList<>();
     }     //costruttore

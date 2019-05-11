@@ -1,15 +1,11 @@
 package Model;
 
-import Model.Powerups.Newton;
-import Model.Powerups.TagbackGrenade;
-import Model.Powerups.TargetingScope;
-import Model.Powerups.Teleporter;
 import Model.WeaponsCard.Weapon;
 import org.junit.jupiter.api.Test;
 
 import java.util.Stack;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CurrentDeckStateTest {
 
@@ -33,7 +29,7 @@ class CurrentDeckStateTest {
     }
 
     @Test
-    void getPlayers(){
+    void getPlayers() {
         CurrentDeckState c = new CurrentDeckState();
         assertEquals(c.getPlayers().contains(Player.YELLOW), true);
         assertEquals(c.getPlayers().contains(Player.PURPLE), true);

@@ -2,7 +2,8 @@
 package Model;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CurrentTurnStateTest {
 
@@ -10,18 +11,18 @@ class CurrentTurnStateTest {
     void getPlayerTurn() {
         CurrentTurnState c = new CurrentTurnState();
         c.setPlayerturn(Player.YELLOW);
-        assertEquals(Player.YELLOW,c.getPlayerturn());
+        assertEquals(Player.YELLOW, c.getPlayerturn());
     }
 
     @Test
     void setPlayerTurn() {
         CurrentTurnState c = new CurrentTurnState();
         c.setPlayerturn(Player.BLUE);
-        assertEquals(Player.BLUE,c.getPlayerturn());
+        assertEquals(Player.BLUE, c.getPlayerturn());
     }
 
     @Test
-    void notifyObserver(){
+    void notifyObserver() {
         CurrentTurnState c = new CurrentTurnState();
         CurrentPlayerState s = new CurrentPlayerState(Player.YELLOW);
         s.setActiveplayer(Player.YELLOW);
@@ -44,7 +45,7 @@ class CurrentTurnStateTest {
     }
 
     @Test
-    void addObserver(){
+    void addObserver() {
         CurrentTurnState c = new CurrentTurnState();
         CurrentPlayerState s = new CurrentPlayerState(Player.YELLOW);
         s.setActiveplayer(Player.YELLOW);
@@ -54,7 +55,7 @@ class CurrentTurnStateTest {
     }
 
     @Test
-    void getObservers(){
+    void getObservers() {
         CurrentTurnState c = new CurrentTurnState();
         assertEquals(c.getObservers().isEmpty(), true);
     }

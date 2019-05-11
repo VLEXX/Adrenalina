@@ -13,7 +13,7 @@ public class SledgeHammer extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public SledgeHammer(){
+    public SledgeHammer() {
         super();
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setSecondPrice(Munitions.RED, 1);

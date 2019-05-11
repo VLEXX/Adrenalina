@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * Power-Up class with "id" as Power-Up name
- *      and "color" as Power-Up type/color
+ * and "color" as Power-Up type/color
  */
 public class PowerUp implements Serializable {
     private final Munitions color;
@@ -19,9 +19,9 @@ public class PowerUp implements Serializable {
      * @param i
      * @param m
      */
-    public PowerUp(PowerUpId i, Munitions m){
-        this.color=m;
-        this.id=i;
+    public PowerUp(PowerUpId i, Munitions m) {
+        this.color = m;
+        this.id = i;
     }
 
     /**
@@ -38,8 +38,8 @@ public class PowerUp implements Serializable {
         return color;
     }
 
-    public int munitionsChecker(Munitions m){
-        if(this.color==m)
+    public int munitionsChecker(Munitions m) {
+        if (this.color == m)
             return 1;
         else
             return 0;

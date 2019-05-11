@@ -9,8 +9,8 @@ public class VoteMode {
     private int finalresultmode;    //Memorizza la modalità finale votata (da 1 a 3)
 
     //Costruttore che inizialzza l'array a 0 e la modalità finale votata a -1 (le modalità vanno da 1 a 3)
-    public VoteMode(){
-        voteresultmode = new int[]{0,0,0,0};
+    public VoteMode() {
+        voteresultmode = new int[]{0, 0, 0, 0};
         finalresultmode = -1;
     }
 
@@ -31,6 +31,6 @@ public class VoteMode {
 
     //Setta il voto per la modalità, a seconda dell'indice passato (che corrisponde alla modalità votata, 0,1,2)
     public void setVoteResult(int index) {
-        voteresultmode[index] = voteresultmode[index]+1;
+        voteresultmode[index] = voteresultmode[index] + 1;
     }
 }

@@ -3,21 +3,21 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VoteModeTest {
 
     @Test
     void getFinalResult() {
         VoteMode m = new VoteMode();
-        assertEquals(m.getFinalResult(),-1);
+        assertEquals(m.getFinalResult(), -1);
     }
 
     @Test
     void setFinalResult() {
         VoteMode m = new VoteMode();
         m.setFinalResult(2);
-        assertEquals(m.getFinalResult(),2);
+        assertEquals(m.getFinalResult(), 2);
     }
 
     @Test

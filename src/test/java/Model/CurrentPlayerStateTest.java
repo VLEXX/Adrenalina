@@ -2,7 +2,8 @@
 package Model;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CurrentPlayerStateTest {
 
@@ -65,7 +66,7 @@ class CurrentPlayerStateTest {
     void decreaseActionCounter() {
         CurrentPlayerState p = new CurrentPlayerState(Player.YELLOW);
         p.decreaseActionCounter();
-        assertEquals(p.getActioncounter(),1);
+        assertEquals(p.getActioncounter(), 1);
     }
 
     @Test
@@ -82,7 +83,7 @@ class CurrentPlayerStateTest {
     }
 
     @Test
-    void update(){
+    void update() {
         CurrentTurnState c = new CurrentTurnState();
         CurrentPlayerState s = new CurrentPlayerState(Player.YELLOW);
         s.setActiveplayer(Player.YELLOW);

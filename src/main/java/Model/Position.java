@@ -11,9 +11,9 @@ public class Position implements Serializable {
     private Room currentroom;   //stanza corrente
 
     //Costruttore che setta cella e stanza a "null"
-    public Position(){
-        this.currentcell =null;
-        this.currentroom =null;
+    public Position() {
+        this.currentcell = null;
+        this.currentroom = null;
     }
 
     //Ritorna la cella corrente

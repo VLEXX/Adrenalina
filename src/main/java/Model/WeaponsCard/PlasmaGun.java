@@ -17,7 +17,7 @@ public class PlasmaGun extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public PlasmaGun(){
+    public PlasmaGun() {
         super();
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setFirstPrice(Munitions.BLUE, 1);
@@ -29,16 +29,17 @@ public class PlasmaGun extends Weapon {
 
     /**
      * Function first attack
-     * @param player player who attack
-     * @param myPosition position of the player who attack
+     *
+     * @param player           player who attack
+     * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
-     * @param playerToAttack player to attack
+     * @param playerToAttack   player to attack
      * @return playerboard of the player to attack
      * @throws PositionNotFound
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard firstAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    public PlayerBoard firstAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         check(myPosition, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(2, player);
         return playerToAttack;
@@ -46,8 +47,9 @@ public class PlasmaGun extends Weapon {
 
     /**
      * Function phase slip
-     * @param player player who attack
-     * @param myposition position of the player who attack
+     *
+     * @param player       player who attack
+     * @param myposition   position of the player who attack
      * @param positionToGo position where the player want to go
      * @return position where the player want to go
      * @throws PositionUnreachable
@@ -56,27 +58,28 @@ public class PlasmaGun extends Weapon {
      * @author Giulia Rivara
      */
     public Position secondAttack(Player player, Position myposition, Position positionToGo) throws PositionUnreachable, PlayerNotFound, PlayerAlreadyAdded {
-        if(checkPosition(myposition, positionToGo)) {
+        if (checkPosition(myposition, positionToGo)) {
             myposition.getCurrentcell().removeInCellPlayer(player);
             myposition.setCurrentcell(positionToGo.getCurrentcell());
             myposition.getCurrentcell().addInCellPlayer(player);
-        }
-        else throw new PositionUnreachable("Position with room ID " + positionToGo.getCurrentroom().getRoomId() + " and cell ID "+ positionToGo.getCurrentcell().getCellId() + "unreachable");
+        } else
+            throw new PositionUnreachable("Position with room ID " + positionToGo.getCurrentroom().getRoomId() + " and cell ID " + positionToGo.getCurrentcell().getCellId() + "unreachable");
         return myposition;
     }
 
     /**
      * Function overloaded shot
-     * @param player player who attack
-     * @param myPosition position of the player who attack
+     *
+     * @param player           player who attack
+     * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
-     * @param playerToAttack player to attack
+     * @param playerToAttack   player to attack
      * @return playerboard of the player to attack
      * @throws PositionNotFound
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    public PlayerBoard thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         check(myPosition, positionToAttack, playerToAttack);
         playerToAttack.getDamageBox().increaseDamage(1, player);
         return playerToAttack;
@@ -84,8 +87,9 @@ public class PlasmaGun extends Weapon {
 
     /**
      * Controlla che la posizione sia corretta e che il giocatore in quella posizione sia presente
-     * @param myPosition posizione giocatore che gioca la carta
-     * @param playerToAttack giocatore da attaccare
+     *
+     * @param myPosition       posizione giocatore che gioca la carta
+     * @param playerToAttack   giocatore da attaccare
      * @param positionToAttack posizione giocatore da attaccare
      * @author Giulia Rivara
      */
@@ -112,29 +116,30 @@ public class PlasmaGun extends Weapon {
     }
 
     /**
-     *Controllo che la posizione dove voglio spostarmi sia raggiungibile
-     * @param myPosition posizione del giocatore che attacca
+     * Controllo che la posizione dove voglio spostarmi sia raggiungibile
+     *
+     * @param myPosition   posizione del giocatore che attacca
      * @param positionToGo posizione in cui il giocatore che attacca vuole spostarsi
      * @return true se la posizione va bene
      * @author Giulia Rivara
      */
-    private boolean checkPosition(Position myPosition, Position positionToGo){
-        if(myPosition.getCurrentcell().getUpCell() != null) {
+    private boolean checkPosition(Position myPosition, Position positionToGo) {
+        if (myPosition.getCurrentcell().getUpCell() != null) {
             if (checkAround(myPosition.getCurrentcell().getUpCell(), positionToGo.getCurrentcell()))
                 return true;
         }
-        if(myPosition.getCurrentcell().getDownCell() != null){
-            if(checkAround(myPosition.getCurrentcell().getDownCell(), positionToGo.getCurrentcell())){
+        if (myPosition.getCurrentcell().getDownCell() != null) {
+            if (checkAround(myPosition.getCurrentcell().getDownCell(), positionToGo.getCurrentcell())) {
                 return true;
             }
         }
-        if(myPosition.getCurrentcell().getLeftCell() != null){
-            if(checkAround(myPosition.getCurrentcell().getLeftCell(), positionToGo.getCurrentcell())){
+        if (myPosition.getCurrentcell().getLeftCell() != null) {
+            if (checkAround(myPosition.getCurrentcell().getLeftCell(), positionToGo.getCurrentcell())) {
                 return true;
             }
         }
-        if(myPosition.getCurrentcell().getRightCell() != null){
-            if(checkAround(myPosition.getCurrentcell().getRightCell(), positionToGo.getCurrentcell())){
+        if (myPosition.getCurrentcell().getRightCell() != null) {
+            if (checkAround(myPosition.getCurrentcell().getRightCell(), positionToGo.getCurrentcell())) {
                 return true;
             }
         }
@@ -143,32 +148,33 @@ public class PlasmaGun extends Weapon {
 
     /**
      * Controlla che la posizione dove il giocatore vuole spostarsi sia accessibile
+     *
      * @param current cella corrente
-     * @param go cella dove voglio andare
+     * @param go      cella dove voglio andare
      * @return true se posso spostarmi
      * @author Giulia Rivara
      */
-    private boolean checkAround(Cell current, Cell go){
-        if(current.getCellId() == go.getCellId()){
+    private boolean checkAround(Cell current, Cell go) {
+        if (current.getCellId() == go.getCellId()) {
             return true;
         }
-        if(current.getUpCell() != null) {
+        if (current.getUpCell() != null) {
             if (current.getUpCell().getCellId() == go.getCellId()) {
                 return true;
             }
         }
-        if(current.getDownCell() != null){
-            if(current.getDownCell().getCellId() == go.getCellId()){
+        if (current.getDownCell() != null) {
+            if (current.getDownCell().getCellId() == go.getCellId()) {
                 return true;
             }
         }
-        if(current.getLeftCell() != null){
-            if(current.getLeftCell().getCellId() == go.getCellId()){
+        if (current.getLeftCell() != null) {
+            if (current.getLeftCell().getCellId() == go.getCellId()) {
                 return true;
             }
         }
-        if(current.getRightCell() != null){
-            if(current.getRightCell().getCellId() == go.getCellId()){
+        if (current.getRightCell() != null) {
+            if (current.getRightCell().getCellId() == go.getCellId()) {
                 return true;
             }
         }

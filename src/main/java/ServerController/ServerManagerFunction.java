@@ -25,7 +25,7 @@ public class ServerManagerFunction {
         while(true) {
             player = (Player) objectInputStream.readObject();
             if (allPlay.getCurrentDeckState().getPlayers().contains(player)) {
-                Message message = new Message("You choose: " + player.toString());
+                MessageString message = new MessageString("You choose: " + player.toString());
                 objectOutputStream.writeObject(message);
                 allPlay.getCurrentPlayerState().put(player, new CurrentPlayerState(player));
                 allPlay.getCurrentDeckState().getPlayers().remove(player);
@@ -37,7 +37,7 @@ public class ServerManagerFunction {
                 break;
             }
             else{
-                Message message = new Message("Character not available");
+                MessageString message = new MessageString("Character not available");
                 objectOutputStream.writeObject(message);
                 ok = false;
                 objectOutputStream.writeObject(ok);

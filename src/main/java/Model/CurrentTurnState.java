@@ -3,10 +3,6 @@
  */
 package Model;
 
-import Model.Observer;
-import Model.Player;
-import Model.Subject;
-
 import java.util.ArrayList;
 
 //Classe che memorizza lo stato attuale della del turno della partita
@@ -15,20 +11,20 @@ public class CurrentTurnState implements Subject {
     private ArrayList<Observer> observers;
 
     //Costruttore che setta il turno a "null"
-    public CurrentTurnState(){
+    public CurrentTurnState() {
         this.playerturn = null;
-        this.observers= new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
     /**
      * @return playerturn
      */
-    public Player getPlayerturn(){
+    public Player getPlayerturn() {
         return playerturn;
     }
 
     //Setta il turno attuale
-    public void setPlayerturn(Player p){
+    public void setPlayerturn(Player p) {
         playerturn = p;
     }
 
@@ -43,8 +39,8 @@ public class CurrentTurnState implements Subject {
     }
 
     @Override
-    public void notifyObserver(){
-        for(Observer observer: this.getObservers()){
+    public void notifyObserver() {
+        for (Observer observer : this.getObservers()) {
             observer.update(this.getPlayerturn());
         }
     }

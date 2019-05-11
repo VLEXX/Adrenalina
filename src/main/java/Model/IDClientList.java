@@ -8,8 +8,8 @@ public class IDClientList {
     private int[] clientlist;   //Array che memorizza gli ID
 
     //Costruttore che inizializza l'array a 0 (gli ID assegnati sono diversi da 0)
-    public IDClientList(){
-        this.clientlist = new int[]{0,0,0,0,0};
+    public IDClientList() {
+        this.clientlist = new int[]{0, 0, 0, 0, 0};
     }
 
     //Ritorna l'array degli ID Client

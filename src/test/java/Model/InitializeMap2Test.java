@@ -3,7 +3,7 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InitializeMap2Test {
 
@@ -78,15 +78,6 @@ class InitializeMap2Test {
         assertEquals(map2.getRoomList().get(4).getCellsList().get(2).getDownCell(), null);
         assertEquals(map2.getRoomList().get(4).getCellsList().get(2).getLeftCell().getCellId(), 9);
         assertEquals(map2.getRoomList().get(4).getCellsList().get(2).getRightCell().getCellId(), 11);
-
-
-
-
-
-
-
-
-
 
 
     }

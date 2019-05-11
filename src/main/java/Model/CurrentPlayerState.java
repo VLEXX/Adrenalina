@@ -3,10 +3,6 @@
  */
 package Model;
 
-import Model.Observer;
-import Model.Player;
-import Model.PlayerBoard;
-import Model.Position;
 import java.io.Serializable;
 
 /**
@@ -22,11 +18,11 @@ public class CurrentPlayerState implements Observer, Serializable {
     /**
      * Constructor
      */
-    public CurrentPlayerState(Player player){
-        this.playerposition =null;
-        this.activeturn =false;
-        this.board =null;
-        this.actioncounter =2;
+    public CurrentPlayerState(Player player) {
+        this.playerposition = null;
+        this.activeturn = false;
+        this.board = null;
+        this.actioncounter = 2;
         this.activeplayer = player;
     }
 
@@ -96,7 +92,7 @@ public class CurrentPlayerState implements Observer, Serializable {
      * Decreases actioncounter -1
      */
     public void decreaseActionCounter() {
-        this.actioncounter = actioncounter -1;
+        this.actioncounter = actioncounter - 1;
     }
 
     /**
@@ -122,7 +118,7 @@ public class CurrentPlayerState implements Observer, Serializable {
      */
     @Override
     public void update(Player p) {
-        if(p == this.activeplayer){
+        if (p == this.activeplayer) {
             this.setActiveturn(true);
         }
     }

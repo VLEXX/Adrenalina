@@ -1,11 +1,14 @@
 /**
- *@author Giulia Rivara
+ * @author Giulia Rivara
  */
 package Model.WeaponsCard;
 
-import Model.*;
 import Model.Exceptions.PlayerNotFound;
 import Model.Exceptions.PositionNotFound;
+import Model.Munitions;
+import Model.Player;
+import Model.PlayerBoard;
+import Model.Position;
 
 /**
  * Weapon Lockrifle
@@ -36,8 +39,8 @@ public class LockRifle extends Weapon {
      * @author Giulia Rivara
      */
     public PlayerBoard firstAttack(Position myPosition, Player activePlayer, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
-        check(myPosition,positionToAttack,playerToAttack);
-        if(super.getFirstUse() == true)
+        check(myPosition, positionToAttack, playerToAttack);
+        if (super.getFirstUse() == true)
             super.setFirstUse(false);
         playerToAttack.getDamageBox().increaseDamage(2, activePlayer);
         playerToAttack.getMarksBox().setMyMarksMap(activePlayer, 1);
@@ -55,8 +58,8 @@ public class LockRifle extends Weapon {
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    public PlayerBoard secondAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
-        check(myPosition,positionToAttack,playerToAttack);
+    public PlayerBoard secondAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
+        check(myPosition, positionToAttack, playerToAttack);
         playerToAttack.getMarksBox().setMyMarksMap(player, 1);
         return playerToAttack;
     }
@@ -70,7 +73,7 @@ public class LockRifle extends Weapon {
      * @throws PlayerNotFound
      * @author Giulia Rivara
      */
-    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound{
+    private void check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack) throws PositionNotFound, PlayerNotFound {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {

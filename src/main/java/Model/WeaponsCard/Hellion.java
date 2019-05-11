@@ -13,7 +13,7 @@ public class Hellion extends Weapon {
     /**
      * Constructor that set the cost of this weapon
      */
-    public Hellion(){
+    public Hellion() {
         super();
         super.setFirstPrice(Munitions.YELLOW, 1);
         super.setFirstPrice(Munitions.RED, 1);

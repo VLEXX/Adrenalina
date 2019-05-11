@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerBoardTest {
 
     @Test
-    void getPlayer(){
+    void getPlayer() {
         PlayerBoard p = new PlayerBoard();
         p.setPlayer(Player.YELLOW);
         assertEquals(p.getPlayer(), Player.YELLOW);
@@ -67,14 +67,14 @@ class PlayerBoardTest {
     @Test
     void setFirstPlayerCard() {
         PlayerBoard p = new PlayerBoard();
-        if(p.setFirstPlayerCard(false)){
-            assertEquals(p.setFirstPlayerCard(false), false );
+        if (p.setFirstPlayerCard(false)) {
+            assertEquals(p.setFirstPlayerCard(false), false);
         }
         assertEquals(p.setFirstPlayerCard(true), true);
     }
 
     @Test
-    void setDamageBox(){
+    void setDamageBox() {
         DamageBox d = new DamageBox();
         d.setPickUp(true);
         PlayerBoard p = new PlayerBoard();
@@ -83,7 +83,7 @@ class PlayerBoardTest {
     }
 
     @Test
-    void setMarksBox(){
+    void setMarksBox() {
         MarksBox m = new MarksBox();
         m.setMyMarksMap(Player.BLACK, 2);
         PlayerBoard p = new PlayerBoard();
@@ -92,7 +92,7 @@ class PlayerBoardTest {
     }
 
     @Test
-    void setMunitionsBox(){
+    void setMunitionsBox() {
         MunitionsBox munitionsBox = new MunitionsBox();
         PlayerBoard p = new PlayerBoard();
         munitionsBox.increaseMyMunitionsBox(Munitions.BLUE, 2);

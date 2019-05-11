@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import java.rmi.RemoteException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VoteMapTest {
 
     @Test
     void getFinalResult() {
         VoteMap m = new VoteMap();
-        assertEquals(m.getFinalresult(),-1);
+        assertEquals(m.getFinalresult(), -1);
     }
 
     @Test
@@ -50,20 +50,20 @@ class VoteMapTest {
     }
 
     @Test
-    void addPlayerCounter(){
+    void addPlayerCounter() {
         VoteMap m = new VoteMap();
         m.addPlayerCounter();
-        assertEquals(m.getPlayerCounter(),1);
+        assertEquals(m.getPlayerCounter(), 1);
     }
 
     @Test
-    void getPlayerCounter(){
+    void getPlayerCounter() {
         VoteMap m = new VoteMap();
         assertEquals(m.getPlayerCounter(), 0);
     }
 
     @Test
-    void decreasePlayerCounter(){
+    void decreasePlayerCounter() {
         VoteMap m = new VoteMap();
         m.addPlayerCounter();
         m.addPlayerCounter();
@@ -72,13 +72,13 @@ class VoteMapTest {
     }
 
     @Test
-    void getInitMap(){
+    void getInitMap() {
         VoteMap m = new VoteMap();
         assertEquals(m.getInitMap(), false);
     }
 
     @Test
-    void setInitMap(){
+    void setInitMap() {
         VoteMap m = new VoteMap();
         m.setInitmap();
         assertEquals(m.getInitMap(), true);

@@ -3,6 +3,10 @@
  */
 package Model;
 
+import Model.Powerups.Newton;
+import Model.Powerups.TagbackGrenade;
+import Model.Powerups.TargetingScope;
+import Model.Powerups.Teleporter;
 import Model.WeaponsCard.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -140,12 +144,18 @@ public class CurrentDeckState implements Serializable {
         ZX2 zx2 = new ZX2();
         this.weaponsdeck.push(zx2);
         this.powerupdeck = new Stack<>();
-        for(int i=0; i<2; i++) {
-            for (PowerUp powerup : PowerUp.values()) {    //powerup è diventata una classe quindi non so qui cosa ci vada
-                this.powerupdeck.push(powerup);
-            }
+        for (Munitions munitions: Munitions.values()) {
+            this.powerupdeck.push(new Newton(PowerUpId.NEWTON, munitions));
         }
-
+        for (Munitions munitions: Munitions.values()) {
+            this.powerupdeck.push(new TagbackGrenade(PowerUpId.TAGBACK_GRENADE, munitions));
+        }
+        for (Munitions munitions: Munitions.values()) {
+            this.powerupdeck.push(new TargetingScope(PowerUpId.TARGETING_SCOPE, munitions));
+        }
+        for (Munitions munitions: Munitions.values()) {
+            this.powerupdeck.push(new Teleporter(PowerUpId.TELEPORTER, munitions));
+        }
         this.players = new ArrayList<>();
         players.add(Player.BLUE);
         players.add(Player.BLACK);

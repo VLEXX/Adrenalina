@@ -1,5 +1,9 @@
 package Model;
 
+import Model.Powerups.Newton;
+import Model.Powerups.TagbackGrenade;
+import Model.Powerups.TargetingScope;
+import Model.Powerups.Teleporter;
 import Model.WeaponsCard.Weapon;
 import org.junit.jupiter.api.Test;
 
@@ -25,11 +29,7 @@ class CurrentDeckStateTest {
     @Test
     void getPowerupdeck() {
         CurrentDeckState c = new CurrentDeckState();
-        for(int i=0; i<2; i++) {
-            for (PowerUp powerup : PowerUp.values()) {
-                assertEquals(c.getPowerupdeck().contains(powerup), true);
-            }
-        }
+        assertEquals(c.getPowerupdeck().empty(), false);
     }
 
     @Test

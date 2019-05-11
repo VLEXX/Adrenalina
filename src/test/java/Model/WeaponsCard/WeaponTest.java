@@ -41,8 +41,9 @@ class WeaponTest {
     @Test
     void munitionChecker(){
         Weapon w = new Weapon();
-        Munitions m = Munitions.BLUE;
-        assertEquals(w.munitionsChecker(m), Munitions.BLUE);
+        w.setCardColor(Munitions.BLUE);
+        assertEquals(w.munitionsChecker(Munitions.BLUE), 1);
+        assertEquals(w.munitionsChecker(Munitions.RED), 0);
     }
 
     @Test

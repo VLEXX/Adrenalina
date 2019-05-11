@@ -7,25 +7,25 @@ import java.io.Serializable;
 
 //Classe che identifica i vari potenziamenti
 public class PowerUp implements Serializable {
-    private final PowerUpId Id;
-    private final Munitions Color;
+    private final Munitions color;
+    private final PowerUpId id;
 
     //costruttore
-    public PowerUp(PowerUpId Id,Munitions m){
-        this.Id=Id;
-        this.Color=m;
+    public PowerUp(PowerUpId i, Munitions m){
+        this.color=m;
+        this.id=i;
     }
 
     public PowerUpId getId() {
-        return Id;
+        return id;
     }
 
     public Munitions getColor() {
-        return Color;
+        return color;
     }
 
     public int munitionsChecker(Munitions m){
-        if(this.Color==m)
+        if(this.color==m)
             return 1;
         else
             return 0;

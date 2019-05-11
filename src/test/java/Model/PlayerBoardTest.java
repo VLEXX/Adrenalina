@@ -3,6 +3,7 @@
  */
 package Model;
 
+import Model.Powerups.TagbackGrenade;
 import Model.WeaponsCard.LockRifle;
 import Model.WeaponsCard.Weapon;
 import org.junit.jupiter.api.Test;
@@ -41,9 +42,10 @@ class PlayerBoardTest {
     void getPowerupList() {
         PlayerBoard p = new PlayerBoard();
         ArrayList<PowerUp> powerupTest = new ArrayList<>();
-        powerupTest.add(PowerUp.TAGBACK_GRENADE_BLUE);
+        PowerUp powerUp = new TagbackGrenade(PowerUpId.NEWTON, Munitions.BLUE);
+        powerupTest.add(powerUp);
         p.setPowerupList(powerupTest);
-        assertEquals(p.getPowerupList().get(0), PowerUp.TAGBACK_GRENADE_BLUE);
+        assertEquals(p.getPowerupList().get(0), powerUp);
     }
 
     @Test

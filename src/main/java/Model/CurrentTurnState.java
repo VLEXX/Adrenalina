@@ -20,7 +20,9 @@ public class CurrentTurnState implements Subject {
         this.observers= new ArrayList<>();
     }
 
-    //Ritorna il turno attuale
+    /**
+     * @return playerturn
+     */
     public Player getPlayerturn(){
         return playerturn;
     }

@@ -30,15 +30,17 @@ public class PlasmaGun extends Weapon {
      * Function first attack
      *
      * @param player           player who attack
-     * @param myPosition       position of the player who attack
-     * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @return OK
+     * @param allPlay current state game
+     * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack){
-        check(myPosition, positionToAttack, playerToAttack);
-        playerToAttack.getDamageBox().increaseDamage(2, player);
+    public MessageEnum firstAttack(Player player, Player playerToAttack, InitializeAllPlay allPlay){
+        Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        if(check(position, positionToAttack))
+            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, player);
+        else return  MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }
 
@@ -51,7 +53,9 @@ public class PlasmaGun extends Weapon {
      * @return OK or POSITION_UNREACHABLE
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player player, Position myposition, Position positionToGo){
+    public MessageEnum secondAttack(Player player, InitializeAllPlay allPlay){
+        Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
+        PositionToGo?
         if (checkPosition(myposition, positionToGo)) {
             myposition.getCurrentcell().removeInCellPlayer(player);
             myposition.setCurrentcell(positionToGo.getCurrentcell());
@@ -65,15 +69,17 @@ public class PlasmaGun extends Weapon {
      * Function overloaded shot
      *
      * @param player           player who attack
-     * @param myPosition       position of the player who attack
-     * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @return OK
+     * @param allPlay current state game
+     * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum thirdAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack){
-        check(myPosition, positionToAttack, playerToAttack);
-        playerToAttack.getDamageBox().increaseDamage(1, player);
+    public MessageEnum thirdAttack(Player player, Player playerToAttack, InitializeAllPlay allPlay){
+        Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        if(check(position, positionToAttack))
+            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(1, player);
+        else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }
 
@@ -81,12 +87,11 @@ public class PlasmaGun extends Weapon {
      * Check that the position is correct
      *
      * @param myPosition       position of the player who attack
-     * @param playerToAttack   player to attack
      * @param positionToAttack position to attack
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    private MessageEnum check(Position myPosition, Position positionToAttack, PlayerBoard playerToAttack){
+    private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
@@ -95,8 +100,8 @@ public class PlasmaGun extends Weapon {
             }
         }
         if (find == false)
-            return MessageEnum.POSITION_NOT_FOUND;
-        return MessageEnum.OK;
+            return false;
+        return true;
     }
 
     /**

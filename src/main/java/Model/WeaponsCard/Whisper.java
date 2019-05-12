@@ -26,16 +26,17 @@ public class Whisper extends Weapon {
     /**
      * Function first attack
      * @param player player who shot
-     * @param myPosition position of the player who shot
      * @param playerToShot player to shot
-     * @param positionToShot position of the player to shot
+     * @param allPlay current state game
      * @return Ok or PLAYER_UNREACHABLE
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player player, Position myPosition, PlayerBoard playerToShot, Position positionToShot){
+    public MessageEnum firstAttack(Player player, Player playerToShot, InitializeAllPlay allPlay){
+        Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
+        Position positionToShot = allPlay.getCurrentPlayerState().get(playerToShot).getPlayerposition();
         if(checkPosition(myPosition, positionToShot)){
-            playerToShot.getDamageBox().increaseDamage(3, player);
-            playerToShot.getMarksBox().setMyMarksMap(player, 1);
+            allPlay.getCurrentPlayerState().get(playerToShot).getBoard().getDamageBox().increaseDamage(3, player);
+            allPlay.getCurrentPlayerState().get(playerToShot).getBoard().getMarksBox().setMyMarksMap(player, 1);
         }
         else return MessageEnum.PLAYER_UNREACHABLE;
         return MessageEnum.OK;

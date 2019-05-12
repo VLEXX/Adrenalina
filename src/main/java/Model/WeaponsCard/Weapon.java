@@ -3,8 +3,7 @@
  */
 package Model.WeaponsCard;
 
-import Model.Munitions;
-import Model.WeaponsMessage;
+import Model.*;
 import com.sun.tools.javac.util.ArrayUtils;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.HashMap;
 /**
  * Class with weapons cost
  */
-public class Weapon {
+public abstract class Weapon {
 
     private HashMap<Munitions, Integer> firstPrice;
     private HashMap<Munitions, Integer> secondPrice;
@@ -114,4 +113,10 @@ public class Weapon {
     public void setWeaponsMessage(WeaponsMessage weaponsMessage, int i) {
         this.weaponsMessage.add(i, weaponsMessage);
     }
+
+    public abstract MessageEnum firstAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay);
+
+    public abstract MessageEnum secondAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay);
+
+    public abstract boolean check(Position myPosition, Position positionToAttack);
 }

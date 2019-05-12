@@ -70,7 +70,7 @@ public class LockRifle extends Weapon {
      * @return true if ok
      * @author Giulia Rivara
      */
-    private boolean check(Position myPosition, Position positionToAttack) {
+    public boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {

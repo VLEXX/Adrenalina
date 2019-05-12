@@ -27,18 +27,19 @@ public class Electroscythe extends Weapon {
 
     /**
      * Function first attack
-     * @param player player who attack
-     * @param myPosition position of the player who attack
+     * @param myPlayer player who attack
      * @param playerToAttack player to attack
-     * @param positionToAttack position of the player to attack
-     * @return OK or Position_UNREACHABLE
+     * @param allPlay current state game
+     * @return OK or POSITION_UNREACHABLE
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack){
+    public MessageEnum firstAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
         for(int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
             if (myPosition.getCurrentcell().getInCellPlayer().get(i) == positionToAttack.getCurrentcell().getInCellPlayer().get(i)) {
                 if (myPosition.getCurrentcell().getCellId() == positionToAttack.getCurrentcell().getCellId()) {
-                    playerToAttack.getDamageBox().increaseDamage(1, player);
+                    allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(1, myPlayer);
                 }
             }
             else return MessageEnum.POSITION_UNREACHABLE;
@@ -48,18 +49,19 @@ public class Electroscythe extends Weapon {
 
     /**
      * Function for the reaper attack
-     * @param player player who attack
-     * @param myPosition position of the player who attack
+     * @param myPlayer player who attack
      * @param playerToAttack player to attack
-     * @param positionToAttack position of the player to attack
+     * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack){
+    public MessageEnum secondAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
         for(int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
             if (myPosition.getCurrentcell().getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 if (myPosition.getCurrentcell().getInCellPlayer() == positionToAttack.getCurrentcell().getInCellPlayer()) {
-                    playerToAttack.getDamageBox().increaseDamage(2, player);
+                    allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, myPlayer);
                 }
             }
             else return MessageEnum.POSITION_NOT_FOUND;

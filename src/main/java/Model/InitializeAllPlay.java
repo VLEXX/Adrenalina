@@ -8,7 +8,9 @@ import ServerController.ObserverUpdate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//Classe che inizializza la partita
+/**
+ * Class that initialize the player
+ */
 public class InitializeAllPlay implements SubjectUpdate {
     private ArrayList<CurrentTurnState> currentTurnState;
     private HashMap<Player, CurrentPlayerState> currentPlayerState;
@@ -24,7 +26,9 @@ public class InitializeAllPlay implements SubjectUpdate {
     private int playercountertemp;
     private ArrayList<ObserverUpdate> observers;
 
-
+    /**
+     * Constructor
+     */
     public InitializeAllPlay() {
         currentTurnState = new ArrayList<>();
         currentPlayerState = new HashMap<>();

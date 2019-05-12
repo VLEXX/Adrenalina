@@ -3,11 +3,7 @@
  */
 package Model.WeaponsCard;
 
-import Model.Exceptions.PositionUnreachable;
-import Model.Munitions;
-import Model.Player;
-import Model.PlayerBoard;
-import Model.Position;
+import Model.*;
 
 /**
  * Weapon Electroscythe
@@ -33,20 +29,19 @@ public class Electroscythe extends Weapon {
      * @param myPosition position of the player who attack
      * @param playerToAttack player to attack
      * @param positionToAttack position of the player to attack
-     * @return playerboard of the player to attack
-     * @throws PositionUnreachable
+     * @return OK or Position_UNREACHABLE
      * @author Giulia Rivara
      */
-    public PlayerBoard firstAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack) throws PositionUnreachable{
+    public MessageEnum firstAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack){
         for(int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
             if (myPosition.getCurrentcell().getInCellPlayer().get(i) == positionToAttack.getCurrentcell().getInCellPlayer().get(i)) {
                 if (myPosition.getCurrentcell().getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                     playerToAttack.getDamageBox().increaseDamage(1, player);
                 }
             }
-            else throw new PositionUnreachable("The player isn't in your cell");
+            else return MessageEnum.POSITION_UNREACHABLE;
         }
-        return playerToAttack;
+        return MessageEnum.OK;
     }
 
     /**
@@ -55,19 +50,18 @@ public class Electroscythe extends Weapon {
      * @param myPosition position of the player who attack
      * @param playerToAttack player to attack
      * @param positionToAttack position of the player to attack
-     * @return playerboard of the player to attack
-     * @throws PositionUnreachable
+     * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public PlayerBoard secondAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack) throws PositionUnreachable{
+    public MessageEnum secondAttack(Player player, Position myPosition, PlayerBoard playerToAttack, Position positionToAttack){
         for(int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
             if (myPosition.getCurrentcell().getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 if (myPosition.getCurrentcell().getInCellPlayer() == positionToAttack.getCurrentcell().getInCellPlayer()) {
                     playerToAttack.getDamageBox().increaseDamage(2, player);
                 }
             }
-            else throw new PositionUnreachable("The player isn't in your cell");
+            else return MessageEnum.POSITION_NOT_FOUND;
         }
-        return playerToAttack;
+        return MessageEnum.OK;
     }
 }

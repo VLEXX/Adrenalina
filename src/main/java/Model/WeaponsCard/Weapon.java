@@ -4,7 +4,10 @@
 package Model.WeaponsCard;
 
 import Model.Munitions;
+import Model.WeaponsMessage;
+import com.sun.tools.javac.util.ArrayUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -19,6 +22,7 @@ public class Weapon {
     private Munitions cardColor;
     private boolean secondAttack;
     private boolean thirdAttack;
+    private ArrayList<WeaponsMessage> weaponsMessage;
 
     /**
      * Constructor that initializes the cost of the weapons
@@ -31,6 +35,7 @@ public class Weapon {
         cardColor = null;
         secondAttack = false;
         thirdAttack = false;
+        weaponsMessage = new ArrayList<>();
     }
 
     public HashMap<Munitions, Integer> getFirstPrice() {
@@ -100,5 +105,13 @@ public class Weapon {
 
     public void setThirdAttack(boolean thirdAttack) {
         this.thirdAttack = thirdAttack;
+    }
+
+    public ArrayList<WeaponsMessage> getWeaponsMessage() {
+        return weaponsMessage;
+    }
+
+    public void setWeaponsMessage(WeaponsMessage weaponsMessage) {
+        this.weaponsMessage.add(weaponsMessage);
     }
 }

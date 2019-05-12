@@ -33,16 +33,18 @@ public class Thor extends Weapon {
 
     /**
      * Function first attack
-     * @param myposition       position of the player who attack
      * @param player           player who attack
-     * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @return OK
+     * @param allPlay current state game
+     * @return OK or PLAYER_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Position myposition, Player player, Position positionToAttack, PlayerBoard playerToAttack){
-        check(myposition, positionToAttack);
-        playerToAttack.getDamageBox().increaseDamage(2, player);
+    public MessageEnum firstAttack(Player player, Player playerToAttack, InitializeAllPlay allPlay){
+        Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        if(check(position, positionToAttack))
+            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, player);
+        else return MessageEnum.POSITION_NOT_FOUND;
         position1 = positionToAttack;
         myPlayer = player;
         return MessageEnum.OK;
@@ -50,28 +52,32 @@ public class Thor extends Weapon {
 
     /**
      * Function react to chain
-     * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @return OK
+     * @param allPlay current state game
+     * @return OK or PLAYER_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Position positionToAttack, PlayerBoard playerToAttack){
-        check(position1, positionToAttack);
-        playerToAttack.getDamageBox().increaseDamage(1, myPlayer);
+    public MessageEnum secondAttack(Player playerToAttack, InitializeAllPlay allPlay){
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        if(check(position1, positionToAttack))
+            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+        else return MessageEnum.POSITION_NOT_FOUND;
         position2 = positionToAttack;
         return MessageEnum.OK;
     }
 
     /**
      * Function high voltage
-     * @param positionToAttack position of the player to attack
      * @param playerToAttack   player to attack
-     * @return OK
+     * @param allPlay current state game
+     * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum thirdAttack(Position positionToAttack, PlayerBoard playerToAttack){
-        check(position2, positionToAttack);
-        playerToAttack.getDamageBox().increaseDamage(2, myPlayer);
+    public MessageEnum thirdAttack(Player playerToAttack, InitializeAllPlay allPlay){
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        if(check(position2, positionToAttack))
+            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+        else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }
 
@@ -82,7 +88,7 @@ public class Thor extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    private MessageEnum check(Position myPosition, Position positionToAttack){
+    private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
@@ -91,7 +97,7 @@ public class Thor extends Weapon {
             }
         }
         if (find == false)
-            return MessageEnum.POSITION_NOT_FOUND;
-        return MessageEnum.OK;
+            return false;
+        return true;
     }
 }

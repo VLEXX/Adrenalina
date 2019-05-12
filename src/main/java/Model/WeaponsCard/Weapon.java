@@ -111,7 +111,7 @@ public class Weapon {
         return weaponsMessage;
     }
 
-    public void setWeaponsMessage(WeaponsMessage weaponsMessage) {
-        this.weaponsMessage.add(weaponsMessage);
+    public void setWeaponsMessage(WeaponsMessage weaponsMessage, int i) {
+        this.weaponsMessage.add(i, weaponsMessage);
     }
 }

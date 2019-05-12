@@ -26,43 +26,51 @@ public class LockRifle extends Weapon {
 
     /**
      * Function for the first attack of the weapon
-     * @param myPosition       position of the player who attack
-     * @param activePlayer     player who attack
+     * @param allPlay       current game state
+     * @param myPlayer     player who attack
      * @param playerToAttack   player to attack
-     * @return OK
+     * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Position myPosition, Player activePlayer, Position positionToAttack, PlayerBoard playerToAttack){
-        check(myPosition, positionToAttack);
-        if (super.getLoaded() == true)
-            super.setLoaded(false);
-        playerToAttack.getDamageBox().increaseDamage(2, activePlayer);
-        playerToAttack.getMarksBox().setMyMarksMap(activePlayer, 1);
+    public MessageEnum firstAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        if(check(myPosition, positionToAttack)) {
+            if (super.getLoaded() == true) {
+                super.setLoaded(false);
+            }
+        }
+        else return MessageEnum.POSITION_NOT_FOUND;
+        allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+        allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
         return MessageEnum.OK;
     }
 
     /**
      * Function for second hook
-     * @param player           player who attack
-     * @param myPosition       position of the player who attack
+     * @param myPlayer           player who attack
+     * @param allPlay           current state game
      * @param playerToAttack   player to attack
-     * @return OK
+     * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player player, Position myPosition, Position positionToAttack, PlayerBoard playerToAttack){
-        check(myPosition, positionToAttack);
-        playerToAttack.getMarksBox().setMyMarksMap(player, 1);
+    public MessageEnum secondAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        if(check(myPosition, positionToAttack))
+            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+        else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }
 
     /**
-     * Function that check for correct position and correct player
+     * Function that check for correct position
      * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
-     * @return OK or POSITION_NOT_FOUND
+     * @return true if ok
      * @author Giulia Rivara
      */
-    private MessageEnum check(Position myPosition, Position positionToAttack) {
+    private boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
             if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
@@ -71,9 +79,9 @@ public class LockRifle extends Weapon {
             }
         }
         if (find == false) {
-            return MessageEnum.POSITION_NOT_FOUND;
+            return false;
         }
-        return MessageEnum.OK;
+        return true;
     }
 }
 

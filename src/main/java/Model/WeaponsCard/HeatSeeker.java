@@ -4,6 +4,7 @@
 package Model.WeaponsCard;
 
 import Model.Munitions;
+import Model.WeaponsMessage;
 
 /**
  * Weapon Heatseeker
@@ -20,5 +21,6 @@ public class HeatSeeker extends Weapon {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(false);
         super.setThirdAttack(false);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
     }
 }

@@ -20,6 +20,8 @@ public class LockRifle extends Weapon {
         super.setCardColor(Munitions.BLUE);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
     }
 
     /**

@@ -6,6 +6,7 @@ package Model.WeaponsCard;
 import Model.MessageEnum;
 import Model.Munitions;
 import Model.PlayerBoard;
+import Model.WeaponsMessage;
 
 /**
  * Weapon Tractorbeam
@@ -23,6 +24,8 @@ public class TractorBeam extends Weapon {
         super.setCardColor(Munitions.BLUE);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
     }
 
     public MessageEnum fisrtAttack(){

@@ -4,6 +4,7 @@
 package Model.WeaponsCard;
 
 import Model.Munitions;
+import Model.WeaponsMessage;
 
 /**
  * Weapon Hellion
@@ -21,5 +22,7 @@ public class Hellion extends Weapon {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
+        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 0);
+        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
     }
 }

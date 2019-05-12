@@ -4,6 +4,7 @@
 package Model.WeaponsCard;
 
 import Model.Munitions;
+import Model.WeaponsMessage;
 
 /**
  * Weapon Powerglove
@@ -21,5 +22,7 @@ public class PowerGlove extends Weapon {
         super.setCardColor(Munitions.YELLOW);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_PLAYER, 1);
     }
 }

@@ -4,6 +4,7 @@
 package Model.WeaponsCard;
 
 import Model.Munitions;
+import Model.WeaponsMessage;
 
 /**
  * Weapon Rocketlauncher
@@ -21,5 +22,8 @@ public class RocketLauncher extends Weapon {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(true);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MYPLAYER, 1);
+        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 2);
     }
 }

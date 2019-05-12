@@ -26,6 +26,9 @@ public class Thor extends Weapon {
         super.setCardColor(Munitions.BLUE);
         super.setSecondAttack(true);
         super.setThirdAttack(true);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 2);
     }
 
     /**

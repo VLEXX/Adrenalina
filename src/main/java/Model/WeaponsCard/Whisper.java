@@ -20,6 +20,7 @@ public class Whisper extends Weapon {
         super.setCardColor(Munitions.BLUE);
         super.setSecondAttack(false);
         super.setThirdAttack(false);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
     }
 
     /**

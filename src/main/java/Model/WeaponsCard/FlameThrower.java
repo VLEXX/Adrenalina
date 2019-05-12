@@ -4,6 +4,7 @@
 package Model.WeaponsCard;
 
 import Model.Munitions;
+import Model.WeaponsMessage;
 
 /**
  * Weapon Plamethrower
@@ -20,5 +21,7 @@ public class FlameThrower extends Weapon {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_FORCELL, 0);
+        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INTWOCELL, 1);
     }
 }

@@ -17,6 +17,7 @@ public class DataPacket {
     private ArrayList<Player> targetPlayers;
     private boolean secondAttack;
     private boolean thirdAttack;
+    private Action action;
 
     public DataPacket() {
         this.cell = null;
@@ -28,6 +29,15 @@ public class DataPacket {
         this.targetPlayers = new ArrayList<>();
         this.secondAttack = false;
         this.thirdAttack = false;
+        this.action=null;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public Action getAction() {
+        return action;
     }
 
     /**

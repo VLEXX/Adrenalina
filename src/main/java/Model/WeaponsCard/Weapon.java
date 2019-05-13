@@ -4,6 +4,7 @@
 package Model.WeaponsCard;
 
 import Model.*;
+import com.sun.tools.javac.util.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,9 +114,9 @@ public abstract class Weapon {
         this.weaponsMessage.add(i, weaponsMessage);
     }
 
-    public abstract MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
+    public abstract MessageEnum firstAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay);
 
-    public abstract MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
+    public abstract MessageEnum secondAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay);
 
-    public abstract MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
+    private abstract boolean check(Position myPosition, Position positionToAttack);
 }

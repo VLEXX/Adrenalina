@@ -3,10 +3,9 @@
  */
 package Model.WeaponsCard;
 
-import Model.MessageEnum;
-import Model.Munitions;
-import Model.PlayerBoard;
-import Model.WeaponsMessage;
+import Model.*;
+
+import java.util.ArrayList;
 
 /**
  * Weapon Tractorbeam
@@ -28,7 +27,15 @@ public class TractorBeam extends Weapon {
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
     }
 
-    public MessageEnum fisrtAttack(){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         return MessageEnum.OK;
+    }
+
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.OK;
+    }
+
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
     }
 }

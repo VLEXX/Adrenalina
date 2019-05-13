@@ -5,6 +5,8 @@ package Model.WeaponsCard;
 
 import Model.*;
 
+import java.util.ArrayList;
+
 /**
  * Weapon Electroscythe
  */
@@ -33,13 +35,13 @@ public class Electroscythe extends Weapon {
      * @return OK or POSITION_UNREACHABLE
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         for(int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
             if (myPosition.getCurrentcell().getInCellPlayer().get(i) == positionToAttack.getCurrentcell().getInCellPlayer().get(i)) {
                 if (myPosition.getCurrentcell().getCellId() == positionToAttack.getCurrentcell().getCellId()) {
-                    allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
                 }
             }
             else return MessageEnum.POSITION_UNREACHABLE;
@@ -55,17 +57,21 @@ public class Electroscythe extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         for(int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
             if (myPosition.getCurrentcell().getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 if (myPosition.getCurrentcell().getInCellPlayer() == positionToAttack.getCurrentcell().getInCellPlayer()) {
-                    allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
                 }
             }
             else return MessageEnum.POSITION_NOT_FOUND;
         }
         return MessageEnum.OK;
+    }
+
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
     }
 }

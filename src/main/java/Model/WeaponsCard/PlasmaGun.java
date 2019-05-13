@@ -5,6 +5,8 @@ package Model.WeaponsCard;
 
 import Model.*;
 
+import java.util.ArrayList;
+
 /**
  * Weapon Plasmagun
  */
@@ -35,11 +37,11 @@ public class PlasmaGun extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player player, Player playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(position, positionToAttack))
-            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, player);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, player);
         else return  MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }
@@ -48,13 +50,11 @@ public class PlasmaGun extends Weapon {
      * Function phase slip
      *
      * @param player       player who attack
-     * @param myposition   position of the player who attack
-     * @param positionToGo position where the player want to go
      * @return OK or POSITION_UNREACHABLE
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player player, InitializeAllPlay allPlay){
-        Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
+    public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        /*Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         PositionToGo?
         if (checkPosition(myposition, positionToGo)) {
             myposition.getCurrentcell().removeInCellPlayer(player);
@@ -62,7 +62,7 @@ public class PlasmaGun extends Weapon {
             myposition.getCurrentcell().addInCellPlayer(player);
         } else
             return MessageEnum.POSITION_UNREACHABLE;
-        return MessageEnum.OK;
+        */return MessageEnum.OK;
     }
 
     /**
@@ -74,11 +74,11 @@ public class PlasmaGun extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum thirdAttack(Player player, Player playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum thirdAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(position, positionToAttack))
-            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(1, player);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
         else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }

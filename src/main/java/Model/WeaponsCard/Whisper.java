@@ -5,6 +5,8 @@ package Model.WeaponsCard;
 
 import Model.*;
 
+import java.util.ArrayList;
+
 /**
  * Weapon Whisper
  */
@@ -31,17 +33,24 @@ public class Whisper extends Weapon {
      * @return Ok or PLAYER_UNREACHABLE
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player player, Player playerToShot, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player player, ArrayList<Player> playerToShot, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
-        Position positionToShot = allPlay.getCurrentPlayerState().get(playerToShot).getPlayerposition();
+        Position positionToShot = allPlay.getCurrentPlayerState().get(playerToShot.get(0)).getPlayerposition();
         if(checkPosition(myPosition, positionToShot)){
-            allPlay.getCurrentPlayerState().get(playerToShot).getBoard().getDamageBox().increaseDamage(3, player);
-            allPlay.getCurrentPlayerState().get(playerToShot).getBoard().getMarksBox().setMyMarksMap(player, 1);
+            allPlay.getCurrentPlayerState().get(playerToShot.get(0)).getBoard().getDamageBox().increaseDamage(3, player);
+            allPlay.getCurrentPlayerState().get(playerToShot.get(0)).getBoard().getMarksBox().setMyMarksMap(player, 1);
         }
         else return MessageEnum.PLAYER_UNREACHABLE;
         return MessageEnum.OK;
     }
 
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
+    }
+
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
+    }
     /**
      * Function that check the correct position to shot
      * @param myPosition position of the player who shot

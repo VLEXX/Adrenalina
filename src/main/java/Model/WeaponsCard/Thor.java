@@ -5,6 +5,8 @@ package Model.WeaponsCard;
 
 import Model.*;
 
+import java.util.ArrayList;
+
 /**
  * Weapon Thor
  */
@@ -39,11 +41,11 @@ public class Thor extends Weapon {
      * @return OK or PLAYER_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player player, Player playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(position, positionToAttack))
-            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, player);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, player);
         else return MessageEnum.POSITION_NOT_FOUND;
         position1 = positionToAttack;
         myPlayer = player;
@@ -57,10 +59,10 @@ public class Thor extends Weapon {
      * @return OK or PLAYER_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player playerToAttack, InitializeAllPlay allPlay){
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(position1, positionToAttack))
-            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
         else return MessageEnum.POSITION_NOT_FOUND;
         position2 = positionToAttack;
         return MessageEnum.OK;
@@ -73,10 +75,10 @@ public class Thor extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum thirdAttack(Player playerToAttack, InitializeAllPlay allPlay){
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(position2, positionToAttack))
-            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
         else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }

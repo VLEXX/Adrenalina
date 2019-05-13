@@ -3,8 +3,9 @@
  */
 package Model.WeaponsCard;
 
-import Model.Munitions;
-import Model.WeaponsMessage;
+import Model.*;
+
+import java.util.ArrayList;
 
 /**
  * Weapon Railgun
@@ -23,5 +24,17 @@ public class RailGun extends Weapon {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_TWO_PLAYER, 1);
+    }
+
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.OK;
+    }
+
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.OK;
+    }
+
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
     }
 }

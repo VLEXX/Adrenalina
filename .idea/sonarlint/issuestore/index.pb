@@ -92,12 +92,6 @@ W
 'src/main/java/Model/InitializeMap4.java,c\0\c0579a113db6e29c0d54fbe78c9aa5a004a3c967
 R
 "src/main/java/Model/MoveState.java,3\c\3c162d344da526fb458b050f52e877c75b752dc4
-f
-6src/main/java/Model/Exceptions/PlayerAlreadyAdded.java,3\d\3d534e1c6ea36fe638b5594e2f4b73a1d1e8b525
-b
-2src/main/java/Model/Exceptions/PlayerNotFound.java,e\2\e2cc486a78958260f37228641af2f2d87fe1ff23
-d
-4src/main/java/Model/Exceptions/PositionNotFound.java,4\b\4b34590f4478342f7afcf37ab0a2794815bbe8ae
 _
 /src/main/java/Model/WeaponsCard/Cyberblade.java,8\a\8a13a5b4e8cf3b37d86c061a1ae00fbdbfe9a089
 b
@@ -186,9 +180,21 @@ N
 src/main/java/Model/State.java,7\3\73d255d7850be0b6971cce5ce3c86a5da6d3f5a2
 S
 #src/main/java/Model/DataPacket.java,7\9\79c1488eb6433be83d952f111205cec6ba2fe57e
-a
-1src/main/java/Model/Exceptions/DontUseEffect.java,b\d\bdefc9dee881d2128ed0b9f0b7afa38ceda5965f
 [
 +src/main/java/Model/WeaponsCard/Weapon.java,8\4\84b59ef7f248f31de57ca8977b395058e177cbeb
 _
 /src/test/java/Model/WeaponsCard/WeaponTest.java,8\b\8b46e6e410c1dd03db1d961aafdbe7fb087348b2
+X
+(src/main/java/Model/Powerups/Newton.java,e\b\ebc9666802469f864b0017ada567afbf9943e7bd
+`
+0src/main/java/Model/Powerups/TagbackGrenade.java,c\8\c8aa73db69d38136b5c1b0480beb8f48458dcf54
+V
+&src/main/java/Model/MessageString.java,8\9\890e0bb75d36d83b0b11dc485a746ab3c527bf8b
+V
+&src/main/java/Model/SubjectUpdate.java,9\5\957951eb1cf6417ab472eb19c1058c7067563db8
+S
+#src/main/java/Model/StatesEnum.java,2\e\2e88f17bf07dbd7744d5370aa6d35209735b21ee
+W
+'src/main/java/Model/WeaponsMessage.java,5\0\507fee493fed4cae0b7548dd22cb48ca68664576
+T
+$src/main/java/Model/MessageEnum.java,7\5\75a6636e903cd60d5300f57c46f06ab3f6d3fcd6

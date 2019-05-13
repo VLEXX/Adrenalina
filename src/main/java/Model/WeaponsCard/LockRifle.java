@@ -5,6 +5,8 @@ package Model.WeaponsCard;
 
 import Model.*;
 
+import java.util.ArrayList;
+
 /**
  * Weapon Lockrifle
  */
@@ -32,17 +34,17 @@ public class LockRifle extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(myPosition, positionToAttack)) {
             if (super.getLoaded() == true) {
                 super.setLoaded(false);
             }
         }
         else return MessageEnum.POSITION_NOT_FOUND;
-        allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(2, myPlayer);
-        allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
         return MessageEnum.OK;
     }
 
@@ -54,13 +56,17 @@ public class LockRifle extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(myPosition, positionToAttack))
-            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
         else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
+    }
+
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
     }
 
     /**

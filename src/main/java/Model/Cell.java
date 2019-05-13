@@ -3,9 +3,6 @@
  */
 package Model;
 
-import Model.Exceptions.PlayerAlreadyAdded;
-import Model.Exceptions.PlayerNotFound;
-
 import java.util.ArrayList;
 
 public class Cell {
@@ -48,7 +45,7 @@ public class Cell {
     }
 
     //metodo che aggiunge un giocatore nella cella
-    public void addInCellPlayer(Player player) throws PlayerAlreadyAdded {
+    public MessageEnum addInCellPlayer(Player player){
         boolean found = false;
         for (int i = 0; i < inCellPlayer.size(); i++) {
             if (inCellPlayer.get(i) == player) {
@@ -57,13 +54,14 @@ public class Cell {
             }
         }
         if (found)
-            throw new PlayerAlreadyAdded("The " + player.toString() + "is already present");
+            return MessageEnum.PLAYER_ALREADY_PRESENT;
         else
             inCellPlayer.add(player);
+        return MessageEnum.OK;
     }
 
     //metodo che rimuove un giocatore da una cella
-    public void removeInCellPlayer(Player player) throws PlayerNotFound {
+    public MessageEnum removeInCellPlayer(Player player){
         boolean found = false;
         for (int i = 0; i < inCellPlayer.size(); i++) {
             if (inCellPlayer.get(i) == player) {
@@ -72,9 +70,10 @@ public class Cell {
             }
         }
         if (!found)
-            throw new PlayerNotFound("The " + player.toString() + "is not present");
+            return MessageEnum.PLAYER_NOT_FOUND;
         else
             inCellPlayer.remove(player);
+        return MessageEnum.OK;
     }
 
     //metodi che restituiscono le celle adiacenti

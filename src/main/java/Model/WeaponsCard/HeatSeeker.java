@@ -3,8 +3,9 @@
  */
 package Model.WeaponsCard;
 
-import Model.Munitions;
-import Model.WeaponsMessage;
+import Model.*;
+
+import java.util.ArrayList;
 
 /**
  * Weapon Heatseeker
@@ -22,5 +23,17 @@ public class HeatSeeker extends Weapon {
         super.setSecondAttack(false);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+    }
+
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.OK;
+    }
+
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
+    }
+
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
     }
 }

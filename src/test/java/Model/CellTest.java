@@ -124,7 +124,7 @@ class CellTest {
     }
 
     @Test
-    public void removeInCellPlayer() {
+    public void removeInCellPlayer() { //TODO
         Cell c = new Cell(1);
         //Caso corretto
         try {

@@ -5,6 +5,8 @@ package Model.WeaponsCard;
 
 import Model.*;
 
+import java.util.ArrayList;
+
 /**
  * Weapon ZX2
  */
@@ -32,12 +34,12 @@ public class ZX2 extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum firstAttack(Player myPlayer, Player playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(myPosition, positionToAttack)) {
-            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getDamageBox().increaseDamage(1, myPlayer);
-            allPlay.getCurrentPlayerState().get(playerToAttack).getBoard().getMarksBox().setMyMarksMap(myPlayer, 2);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 2);
         }
         else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
@@ -46,33 +48,34 @@ public class ZX2 extends Weapon {
     /**
      * Function scanner mode
      * @param myPlayer player who attack
-     * @param player1 player to attack
-     * @param player2 player to attack
-     * @param player3 player to attack
      * @param allPlay current state game
      * @return OK or POSITION_UNREACHABLE
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player myPlayer, Player player1, Player player2, Player player3, InitializeAllPlay allPlay) {
-        if (player1 != player2 && player2 != player3 && player1 != player3) {
-            if (player1 != null) {
-                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(player1).getPlayerposition()))
-                    allPlay.getCurrentPlayerState().get(player1).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
+        if (playerToAttack.get(0) != playerToAttack.get(1) && playerToAttack.get(1) != playerToAttack.get(2) && playerToAttack.get(0) != playerToAttack.get(2)) {
+            if (playerToAttack.get(0) != null) {
+                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()))
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
                 else return MessageEnum.POSITION_UNREACHABLE;
             }
-            if (player2 != null) {
-                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(player2).getPlayerposition()))
-                    allPlay.getCurrentPlayerState().get(player2).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+            if (playerToAttack.get(1) != null) {
+                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition()))
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
                 else return MessageEnum.POSITION_UNREACHABLE;
             }
-            if (player3 != null) {
-                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(player3).getPlayerposition()))
-                    allPlay.getCurrentPlayerState().get(player3).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+            if (playerToAttack.get(2) != null) {
+                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getPlayerposition()))
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
                 else return MessageEnum.POSITION_UNREACHABLE;
             }
         }
         else return MessageEnum.PLAYERS_NOT_VALID;
         return MessageEnum.OK;
+    }
+
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        return MessageEnum.ATTACK_NOT_PRESENT;
     }
 
     /**

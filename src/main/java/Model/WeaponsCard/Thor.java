@@ -31,6 +31,7 @@ public class Thor extends Weapon {
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 2);
+        super.setName("Thor");
     }
 
     /**

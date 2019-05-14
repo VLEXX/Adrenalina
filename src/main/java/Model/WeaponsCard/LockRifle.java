@@ -24,13 +24,14 @@ public class LockRifle extends Weapon {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
+        super.setName("Lockrifle");
     }
 
     /**
      * Function for the first attack of the weapon
-     * @param allPlay       current game state
      * @param myPlayer     player who attack
      * @param playerToAttack   player to attack
+     * @param allPlay       current game state
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */

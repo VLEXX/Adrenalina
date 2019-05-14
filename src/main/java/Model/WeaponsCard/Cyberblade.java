@@ -26,6 +26,7 @@ public class Cyberblade extends Weapon {
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MYPLAYER, 1);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 2);
+        super.setName("Cyberblade");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

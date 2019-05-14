@@ -3,7 +3,9 @@
  */
 package Model.WeaponsCard;
 
+import Model.MessageEnum;
 import Model.Munitions;
+import Model.WeaponsMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -65,5 +67,39 @@ class WeaponTest {
         Weapon w = new LockRifle();
         w.setThirdAttack(true);
         assertEquals(w.hasThirdAttack(), true);
+    }
+
+    @Test
+    void getWeaponsMessage() {
+        //TODO
+        Weapon w = new LockRifle();
+        w.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
+        w.setWeaponsMessage(WeaponsMessage.MYPLAYER, 2);
+        w.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 3);
+        assertEquals(w.getWeaponsMessage(), WeaponsMessage.MAX_ONE_PLAYER);
+        assertEquals(w.getWeaponsMessage(), WeaponsMessage.MYPLAYER);
+        assertEquals(w.getWeaponsMessage(), WeaponsMessage.ALL_PLAYER_INCELL);
+    }
+
+    @Test
+    void firstAttack() {
+        //TODO
+    }
+
+    @Test
+    void secondAttack() {
+        //TODO
+    }
+
+    @Test
+    void thirdAttack() {
+        //TODO
+    }
+
+    @Test
+    void getName(){
+        Weapon w = new LockRifle();
+        w.setName("Lockrifle");
+        assertEquals(w.getName(), "Lockrifle");
     }
 }

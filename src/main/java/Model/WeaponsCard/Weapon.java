@@ -21,6 +21,7 @@ public abstract class Weapon {
     private boolean secondAttack;
     private boolean thirdAttack;
     private ArrayList<WeaponsMessage> weaponsMessage;
+    private String name;
 
     /**
      * Constructor that initializes the cost of the weapons
@@ -118,4 +119,12 @@ public abstract class Weapon {
     public abstract MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
 
     public abstract MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

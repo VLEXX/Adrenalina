@@ -25,6 +25,7 @@ public class Electroscythe extends Weapon {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 0);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
+        super.setName("Electroscythe");
     }
 
     /**

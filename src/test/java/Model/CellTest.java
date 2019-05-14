@@ -124,28 +124,6 @@ class CellTest {
     @Test
     public void removeInCellPlayer() { //TODO
         Cell c = new Cell(1);
-        //Caso corretto
-        try {
-            c.addInCellPlayer(Player.GREEN);
-        } catch (PlayerAlreadyAdded a) {
-            a.printStackTrace();
-        }
-        assertEquals(c.getInCellPlayer().size(), 1);
-        try {
-            c.addInCellPlayer(Player.GREEN);
-        } catch (PlayerAlreadyAdded a) {
-            a.printStackTrace();
-        }
-        try {
-            c.removeInCellPlayer(Player.BLACK);
-        } catch (PlayerNotFound n) {
-            n.printStackTrace();
-        }
-        try {
-            c.removeInCellPlayer(Player.GREEN);
-        } catch (PlayerNotFound n) {
-            n.printStackTrace();
-        }
-        assertEquals(c.getInCellPlayer().size(), 0);
+
     }
 }

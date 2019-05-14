@@ -24,6 +24,7 @@ public class GrenadeLauncher extends Weapon {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
+        super.setName("Grenadelauncher");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

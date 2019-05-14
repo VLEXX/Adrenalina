@@ -24,6 +24,7 @@ public class ShockWave extends Weapon {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_THREE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_ONEDISTANCE, 1);
+        super.setName("Shockwave");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

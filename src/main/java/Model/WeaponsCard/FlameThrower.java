@@ -24,6 +24,7 @@ public class FlameThrower extends Weapon {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_FORCELL, 0);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INTWOCELL, 1);
+        super.setName("Flamethrower");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

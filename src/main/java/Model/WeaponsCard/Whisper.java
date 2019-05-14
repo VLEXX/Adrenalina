@@ -23,6 +23,7 @@ public class Whisper extends Weapon {
         super.setSecondAttack(false);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setName("Whisper");
     }
 
     /**

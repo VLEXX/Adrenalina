@@ -23,6 +23,7 @@ public class HeatSeeker extends Weapon {
         super.setSecondAttack(false);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setName("Heatseeker");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

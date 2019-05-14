@@ -24,6 +24,7 @@ public class ZX2 extends Weapon {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);      //Posizione 0 dell'arraylist per riferirsi al primo attacco
         super.setWeaponsMessage(WeaponsMessage.MAX_THREE_PLAYER, 1);
+        super.setName("ZX2");
     }
 
     /**

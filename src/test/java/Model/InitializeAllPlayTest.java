@@ -76,7 +76,7 @@ class InitializeAllPlayTest {
     void updatePlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         State state = new MoveState();
-        State state1 = new ShootState();
+        State state1 = new ShootFirstState();
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         initializeAllPlay.updatePlayerState(Player.YELLOW, state1);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state1);

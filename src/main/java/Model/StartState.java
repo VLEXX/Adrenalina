@@ -18,7 +18,7 @@ public class StartState implements State {
             return MessageEnum.OK;
         }
         if (dataPacket.getStatesEnum().equals(StatesEnum.SHOOT)) {
-            allPlay.getHashMapState().replace(dataPacket.getPlayer(), new ShootState());
+            allPlay.getHashMapState().replace(dataPacket.getPlayer(), new ShootFirstState());
             allPlay.notifyObserver();
             return MessageEnum.OK;
         }

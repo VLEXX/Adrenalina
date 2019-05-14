@@ -2,13 +2,13 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-class ShootStateTest {
+class ShootFirstStateTest {
 
     @Test
     void doAction() {
-        ShootState shootState = new ShootState();
+        ShootFirstState shootFirstState = new ShootFirstState();
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        shootState.doAction(dataPacket, initializeAllPlay);
+        shootFirstState.doAction(dataPacket, initializeAllPlay);
     }
 }

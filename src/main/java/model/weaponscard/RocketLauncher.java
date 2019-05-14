@@ -31,7 +31,7 @@ public class RocketLauncher extends Weapon implements Serializable {
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MYPLAYER, 1);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 2);
-        super.setName("Rocketlauncher");
+        super.setName("rocketlauncher");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

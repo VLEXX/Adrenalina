@@ -29,7 +29,7 @@ public class GrenadeLauncher extends Weapon implements Serializable {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
-        super.setName("Grenadelauncher");
+        super.setName("grenadelauncher");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

@@ -29,7 +29,7 @@ public class SledgeHammer extends Weapon implements Serializable {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
-        super.setName("Sledgehammer");
+        super.setName("sledgehammer");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

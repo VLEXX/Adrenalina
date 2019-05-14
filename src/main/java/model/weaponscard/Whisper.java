@@ -30,7 +30,7 @@ public class Whisper extends Weapon implements Serializable {
         super.setSecondAttack(false);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setName("Whisper");
+        super.setName("whisper");
     }
 
     /**

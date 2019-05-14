@@ -30,7 +30,7 @@ public class Hellion extends Weapon implements Serializable {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 0);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
-        super.setName("Hellion");
+        super.setName("hellion");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

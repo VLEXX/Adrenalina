@@ -37,7 +37,7 @@ public class Thor extends Weapon implements Serializable {
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 2);
-        super.setName("Thor");
+        super.setName("thor");
     }
 
     /**

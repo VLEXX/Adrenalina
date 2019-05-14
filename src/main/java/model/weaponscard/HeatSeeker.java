@@ -28,7 +28,7 @@ public class HeatSeeker extends Weapon implements Serializable {
         super.setSecondAttack(false);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setName("Heatseeker");
+        super.setName("heatseeker");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

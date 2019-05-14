@@ -29,7 +29,7 @@ public class FlameThrower extends Weapon implements Serializable {
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_FORCELL, 0);
         super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INTWOCELL, 1);
-        super.setName("Flamethrower");
+        super.setName("flamethrower");
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){

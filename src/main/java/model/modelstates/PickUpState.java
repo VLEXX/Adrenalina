@@ -1,9 +1,18 @@
 /**
  * @author Alex Saletti
  */
-package Model;
+package model.modelstates;
 
-import Model.WeaponsCard.Weapon;
+import model.datapacket.DataPacket;
+import model.datapacket.MessageEnum;
+import model.gamedata.InitializeAllPlay;
+import model.map.Cell;
+import model.munitions.Ammo;
+import model.munitions.Munitions;
+import model.playerdata.CurrentPlayerState;
+import model.playerdata.Player;
+import model.powerups.PowerUp;
+import model.weaponscard.Weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;

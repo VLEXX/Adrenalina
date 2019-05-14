@@ -1,6 +1,16 @@
 package model;
 
-import Model.WeaponsCard.*;
+import model.datapacket.DataPacket;
+import model.datapacket.MessageEnum;
+import model.gamedata.InitializeAllPlay;
+import model.map.SpawnPoint;
+import model.modelstates.PickUpState;
+import model.munitions.Ammo;
+import model.munitions.Munitions;
+import model.playerdata.CurrentPlayerState;
+import model.playerdata.Player;
+import model.playerdata.PlayerBoard;
+import model.weaponscard.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,7 +51,7 @@ class PickUpStateTest {
         cps.setBoard(pb);
         i.getCurrentPlayerState().put(Player.BLUE,cps);
         PickUpState pus = new PickUpState();
-        assertEquals(pus.doAction(d,i),MessageEnum.OK);
+        assertEquals(pus.doAction(d,i), MessageEnum.OK);
 
 
 

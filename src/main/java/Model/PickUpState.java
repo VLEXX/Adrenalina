@@ -1,11 +1,25 @@
+/**
+ * @author Alex Saletti
+ */
 package Model;
 
 import Model.WeaponsCard.Weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * Class that manages the PickUp Action
+ */
 public class PickUpState implements State {
+    /**
+     * Class constructor
+     */
+    public PickUpState(){}
+     /**
+     * @param dataPacket
+     * @param i
+     * @return MessageEnum
+     */
 
     @Override
     public MessageEnum doAction(DataPacket dataPacket, InitializeAllPlay i) {

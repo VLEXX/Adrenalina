@@ -55,6 +55,7 @@ public class EndTurnState implements State {
             cost.put(Munitions.YELLOW,cost.get(Munitions.YELLOW)-pw.munitionsChecker(Munitions.YELLOW));
             cost.put(Munitions.BLUE, cost.get(Munitions.BLUE)-pw.munitionsChecker(Munitions.BLUE));
         }
-
+        cost.forEach();
+i
     }
 }

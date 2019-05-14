@@ -177,4 +177,10 @@ class DataPacketTest {
         DataPacket dataPacket = new DataPacket();
         assertEquals(dataPacket.isFirstAttack(), false);
     }
+
+    @Test
+    void getWeaponsToBeRecharged() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.getWeaponsToBeRecharged().isEmpty(), true);
+    }
 }

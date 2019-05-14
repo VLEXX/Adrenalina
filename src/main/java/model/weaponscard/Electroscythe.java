@@ -10,6 +10,7 @@ import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

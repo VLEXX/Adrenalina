@@ -3,7 +3,7 @@
  */
 package model.gamedata;
 
-import ServerController.ObserverUpdate;
+import servercontroller.ObserverUpdate;
 import model.modelstates.State;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;

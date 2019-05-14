@@ -3,7 +3,7 @@
  */
 package model;
 
-import ServerController.UpdateThread;
+import servercontroller.UpdateThread;
 import model.gamedata.InitializeAllPlay;
 import model.modelstates.MoveState;
 import model.modelstates.ShootFirstState;

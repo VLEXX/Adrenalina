@@ -3,7 +3,7 @@
  */
 package model.gamedata;
 
-import ServerController.ObserverUpdate;
+import servercontroller.ObserverUpdate;
 
 import java.util.ArrayList;
 

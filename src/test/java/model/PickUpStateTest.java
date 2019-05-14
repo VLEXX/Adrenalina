@@ -52,9 +52,5 @@ class PickUpStateTest {
         i.getCurrentPlayerState().put(Player.BLUE,cps);
         PickUpState pus = new PickUpState();
         assertEquals(pus.doAction(d,i), MessageEnum.OK);
-
-
-
-
     }
 }

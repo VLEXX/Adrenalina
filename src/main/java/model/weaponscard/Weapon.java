@@ -9,13 +9,14 @@ import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Class with weapons cost
  */
-public abstract class Weapon {
+public abstract class Weapon implements Serializable {
 
     private HashMap<Munitions, Integer> firstPrice;
     private HashMap<Munitions, Integer> secondPrice;

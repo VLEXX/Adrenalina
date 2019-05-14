@@ -10,12 +10,13 @@ import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Weapon ZX2
  */
-public class ZX2 extends Weapon {
+public class ZX2 extends Weapon implements Serializable {
 
     /**
      * Constructor that set the cost of this weapon

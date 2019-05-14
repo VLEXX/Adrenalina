@@ -6,6 +6,7 @@ package model.playerdata;
 import model.map.Position;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * Classe with player current state
@@ -16,6 +17,7 @@ public class CurrentPlayerState implements Observer, Serializable {
     private PlayerBoard board;          //PlanciaGiocatore
     private int actioncounter;          //Contatore di azioni rimanenti che può compiere il giocatore (max 2 per turno)
     private Player activeplayer;        //Memorizza il colore/personaggio scelto dal giocatore
+    private HashMap<Player, Integer> controlMarks;  //Controlla il numero dei marchi da aggiungere alla plancia danni giocatore
 
     /**
      * Constructor
@@ -26,6 +28,7 @@ public class CurrentPlayerState implements Observer, Serializable {
         this.board = null;
         this.actioncounter = 2;
         this.activeplayer = player;
+        controlMarks = new HashMap<>();
     }
 
     /**
@@ -123,5 +126,13 @@ public class CurrentPlayerState implements Observer, Serializable {
         if (p == this.activeplayer) {
             this.setActiveturn(true);
         }
+    }
+
+    public HashMap<Player, Integer> getControlMarks() {
+        return controlMarks;
+    }
+
+    public void addControlMarks(Player player, int i) {
+        this.controlMarks.put(player, i);
     }
 }

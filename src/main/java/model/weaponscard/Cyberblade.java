@@ -9,12 +9,14 @@ import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
 
+import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Weapon Cyberblase
  */
-public class Cyberblade extends Weapon {
+public class Cyberblade extends Weapon implements Serializable {
 
     /**
      * Constructor that set the cost of this weapon

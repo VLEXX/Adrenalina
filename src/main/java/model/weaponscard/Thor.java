@@ -10,12 +10,13 @@ import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Weapon Thor
  */
-public class Thor extends Weapon {
+public class Thor extends Weapon implements Serializable {
 
     private Position position1;
     private Position position2;

@@ -11,12 +11,13 @@ import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Weapon Plasmagun
  */
-public class PlasmaGun extends Weapon {
+public class PlasmaGun extends Weapon implements Serializable {
 
     /**
      * Constructor that set the cost of this weapon
@@ -42,7 +43,6 @@ public class PlasmaGun extends Weapon {
      * @param playerToAttack   player to attack
      * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
@@ -58,7 +58,6 @@ public class PlasmaGun extends Weapon {
      *
      * @param player       player who attack
      * @return OK or POSITION_UNREACHABLE
-     * @author Giulia Rivara
      */
     public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         /*Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
@@ -79,7 +78,6 @@ public class PlasmaGun extends Weapon {
      * @param playerToAttack   player to attack
      * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum thirdAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
@@ -96,7 +94,6 @@ public class PlasmaGun extends Weapon {
      * @param myPosition       position of the player who attack
      * @param positionToAttack position to attack
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;
@@ -116,7 +113,6 @@ public class PlasmaGun extends Weapon {
      * @param myPosition position of the player who shot
      * @param positionToGo position to go
      * @return true if correct
-     * @author Giulia Rivara
      */
     private boolean checkPosition(Position myPosition, Position positionToGo) {
         if (myPosition.getCurrentcell().getUpCell() != null) {

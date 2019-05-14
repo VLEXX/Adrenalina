@@ -101,4 +101,11 @@ class CurrentPlayerStateTest {
         c.notifyObserver();
         assertEquals(s.isActiveturn(), false);
     }
+
+    @Test
+    void getControlMarks(){
+        CurrentPlayerState c = new CurrentPlayerState(Player.BLACK);
+        c.addControlMarks(Player.YELLOW, 3);
+        assertEquals(c.getControlMarks().get(Player.YELLOW), 3);
+    }
 }

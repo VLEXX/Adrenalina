@@ -40,7 +40,6 @@ public class Electroscythe extends Weapon {
      * @param playerToAttack player to attack
      * @param allPlay current state game
      * @return OK or POSITION_UNREACHABLE or PLAYERS_NOT_VALID
-     * @author Giulia Rivara
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
@@ -65,7 +64,6 @@ public class Electroscythe extends Weapon {
      * @param playerToAttack player to attack
      * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();

@@ -47,7 +47,6 @@ public class MachineGun extends Weapon {
      * @param playerToAttack    player to attack
      * @param allPlay           current state game
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
@@ -74,7 +73,6 @@ public class MachineGun extends Weapon {
      * @param playerToAttack   player to attack
      * @param allPlay current state game
      * @return OK or CANNOT_USE_THIS_EFFECT or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
@@ -99,7 +97,6 @@ public class MachineGun extends Weapon {
      * @param playerToAttack    first player to firstAttack
      * @param allPlay current state game
      * @return OK or CANNOT_USE_THIS_EFFECT or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum thirdAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
@@ -137,7 +134,6 @@ public class MachineGun extends Weapon {
      * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
      * @return true if ok
-     * @author Giulia Rivara
      */
     private boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;

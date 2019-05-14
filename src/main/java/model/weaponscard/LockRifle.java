@@ -10,12 +10,13 @@ import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Weapon Lockrifle
  */
-public class LockRifle extends Weapon {
+public class LockRifle extends Weapon implements Serializable {
 
     /**
      * Constructor that set the cost of this weapon
@@ -38,7 +39,6 @@ public class LockRifle extends Weapon {
      * @param playerToAttack   player to attack
      * @param allPlay       current game state
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
@@ -56,7 +56,6 @@ public class LockRifle extends Weapon {
      * @param allPlay           current state game
      * @param playerToAttack   player to attack
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
@@ -76,7 +75,6 @@ public class LockRifle extends Weapon {
      * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
      * @return true if ok
-     * @author Giulia Rivara
      */
     public boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;

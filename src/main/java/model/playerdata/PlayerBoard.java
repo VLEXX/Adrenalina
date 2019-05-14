@@ -3,7 +3,7 @@
  */
 package model.playerdata;
 
-import model.powerup.PowerUp;
+import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 /**
  * @author Federico Scatà
  */
-package model.powerup;
+package model.powerups;
 
 import model.munitions.Munitions;
 

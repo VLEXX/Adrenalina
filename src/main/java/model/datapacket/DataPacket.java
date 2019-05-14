@@ -5,7 +5,7 @@ package model.datapacket;
 
 import model.map.Cell;
 import model.playerdata.Player;
-import model.powerup.PowerUp;
+import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
 import java.util.ArrayList;

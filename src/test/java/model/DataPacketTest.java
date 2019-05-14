@@ -3,7 +3,7 @@ package model;
 import model.map.Cell;
 import model.munitions.Munitions;
 import model.playerdata.Player;
-import model.powerup.PowerUp;
+import model.powerups.PowerUp;
 import model.powerups.TagbackGrenade;
 import model.datapacket.Action;
 import model.datapacket.DataPacket;

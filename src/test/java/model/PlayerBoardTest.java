@@ -5,7 +5,7 @@ package model;
 
 import model.munitions.Munitions;
 import model.playerdata.*;
-import model.powerup.PowerUp;
+import model.powerups.PowerUp;
 import model.powerups.TagbackGrenade;
 import model.weaponscard.LockRifle;
 import model.weaponscard.Weapon;

@@ -1,4 +1,4 @@
-package model.powerup;
+package model.powerups;
 
 public enum PowerUpId {
     TARGETING_SCOPE,

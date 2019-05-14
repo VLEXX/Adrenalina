@@ -5,7 +5,7 @@ import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
 import model.map.*;
 import model.munitions.Munitions;
-import model.powerup.PowerUp;
+import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
 import java.util.HashMap;

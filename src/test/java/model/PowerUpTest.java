@@ -1,10 +1,8 @@
 package model;
 
 import model.munitions.Munitions;
-import model.powerup.PowerUp;
-import model.powerup.PowerUpId;
-import model.weaponscard.LockRifle;
-import model.weaponscard.Weapon;
+import model.powerups.PowerUp;
+import model.powerups.PowerUpId;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

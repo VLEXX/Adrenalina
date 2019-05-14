@@ -43,12 +43,8 @@ public class LockRifle extends Weapon {
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(check(myPosition, positionToAttack)) {
-            if (super.getLoaded() == true) {
-                super.setLoaded(false);
-            }
-        }
-        else return MessageEnum.POSITION_NOT_FOUND;
+        if(check(myPosition, positionToAttack) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
         return MessageEnum.OK;
@@ -65,9 +61,9 @@ public class LockRifle extends Weapon {
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(check(myPosition, positionToAttack))
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
-        else return MessageEnum.POSITION_NOT_FOUND;
+        if(check(myPosition, positionToAttack) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
         return MessageEnum.OK;
     }
 

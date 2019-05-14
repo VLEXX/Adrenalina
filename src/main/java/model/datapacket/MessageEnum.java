@@ -19,5 +19,5 @@ public enum MessageEnum implements Serializable {
     PLAYER_NOT_FOUND,
     PLAYERS_NOT_VALID,
     PLAYER_ALREADY_PRESENT,
-    ATTACK_NOT_PRESENT
+    ATTACK_NOT_PRESENT,
 }

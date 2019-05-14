@@ -43,11 +43,10 @@ public class ZX2 extends Weapon {
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(check(myPosition, positionToAttack)) {
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 2);
-        }
-        else return MessageEnum.POSITION_NOT_FOUND;
+        if(check(myPosition, positionToAttack) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 2);
         return MessageEnum.OK;
     }
 
@@ -55,26 +54,24 @@ public class ZX2 extends Weapon {
      * Function scanner mode
      * @param myPlayer player who attack
      * @param allPlay current state game
+     * @param playerToAttack player to attack
      * @return OK or POSITION_UNREACHABLE
      * @author Giulia Rivara
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
+        if(playerToAttack.get(0) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()))
+            return MessageEnum.POSITION_NOT_FOUND;
+        if(playerToAttack.get(1) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition()))
+            return MessageEnum.POSITION_NOT_FOUND;
+        if(playerToAttack.get(2) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()))
+            return MessageEnum.POSITION_NOT_FOUND;
         if (playerToAttack.get(0) != playerToAttack.get(1) && playerToAttack.get(1) != playerToAttack.get(2) && playerToAttack.get(0) != playerToAttack.get(2)) {
-            if (playerToAttack.get(0) != null) {
-                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()))
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
-                else return MessageEnum.POSITION_UNREACHABLE;
-            }
-            if (playerToAttack.get(1) != null) {
-                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition()))
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
-                else return MessageEnum.POSITION_UNREACHABLE;
-            }
-            if (playerToAttack.get(2) != null) {
-                if (check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getPlayerposition()))
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
-                else return MessageEnum.POSITION_UNREACHABLE;
-            }
+            if (playerToAttack.get(0) != null)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+            if (playerToAttack.get(1) != null)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+            if (playerToAttack.get(2) != null)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
         }
         else return MessageEnum.PLAYERS_NOT_VALID;
         return MessageEnum.OK;

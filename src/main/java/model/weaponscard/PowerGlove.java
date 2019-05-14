@@ -36,6 +36,14 @@ public class PowerGlove extends Weapon {
         return MessageEnum.OK;
     }
 
+    /**
+     * Function first attack
+     * @param myPlayer
+     * @param playerToAttack
+     * @param allPlay
+     * @return
+     * @author Giulia Rivara
+     */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         return MessageEnum.OK;
     }

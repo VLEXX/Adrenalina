@@ -1,9 +1,11 @@
 //Author: Alex Saletti
 package model;
 
+import model.datapacket.MessageEnum;
 import model.map.Cell;
 import model.map.SpawnPoint;
 import model.munitions.Ammo;
+import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -125,8 +127,18 @@ class CellTest {
     }
 
     @Test
-    public void removeInCellPlayer() { //TODO
+    public void removeInCellPlayer() {
         Cell c = new Cell(1);
+        c.addInCellPlayer(Player.GREEN);
+        assertEquals(c.removeInCellPlayer(Player.GREEN), MessageEnum.OK);
+        c.addInCellPlayer(Player.GREEN);
+        assertEquals(c.addInCellPlayer(Player.GREEN), MessageEnum.PLAYER_ALREADY_PRESENT);
+        assertEquals(c.removeInCellPlayer(Player.BLUE), MessageEnum.PLAYER_NOT_FOUND);
+    }
 
+    @Test
+    public void getInCellPlayer(){
+        Cell c = new Cell(1);
+        assertEquals(c.getInCellPlayer().isEmpty(), true);
     }
 }

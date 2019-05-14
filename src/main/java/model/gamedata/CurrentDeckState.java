@@ -5,12 +5,8 @@ package model.gamedata;
 
 import model.munitions.Ammo;
 import model.munitions.Munitions;
-import model.powerups.PowerUp;
+import model.powerups.*;
 import model.playerdata.Player;
-import model.powerups.Newton;
-import model.powerups.TagbackGrenade;
-import model.powerups.TargetingScope;
-import model.powerups.Teleporter;
 import model.weaponscard.*;
 
 import java.io.Serializable;

@@ -14,7 +14,10 @@ public class DataPacket {
     private Weapon weapon;
     private Weapon replaceWeapon;
     private ArrayList<PowerUp> paymentPowerUp;
-    private ArrayList<Player> targetPlayers;
+    private ArrayList<Player> targetPlayersFirst;
+    private ArrayList<Player> targetPlayersSecond;
+    private ArrayList<Player> targetPlayersThird;
+    private boolean firstAttack;
     private boolean secondAttack;
     private boolean thirdAttack;
     private Action action;
@@ -26,7 +29,10 @@ public class DataPacket {
         this.weapon = null;
         this.replaceWeapon = null;
         this.paymentPowerUp = new ArrayList<>();
-        this.targetPlayers = new ArrayList<>();
+        this.targetPlayersFirst = new ArrayList<>();
+        this.targetPlayersSecond = new ArrayList<>();
+        this.targetPlayersThird = new ArrayList<>();
+        this.firstAttack=false;
         this.secondAttack = false;
         this.thirdAttack = false;
         this.action=null;
@@ -124,8 +130,8 @@ public class DataPacket {
         this.paymentPowerUp = paymentPowerUp;
     }
 
-    public ArrayList<Player> getTargetPlayers() {
-        return targetPlayers;
+    public ArrayList<Player> getTargetPlayersFirst() {
+        return targetPlayersFirst;
     }
 
     public void setSecondAttack(boolean secondAttack) {
@@ -142,5 +148,21 @@ public class DataPacket {
 
     public boolean isThirdAttack() {
         return thirdAttack;
+    }
+
+    public ArrayList<Player> getTargetPlayersSecond() {
+        return targetPlayersSecond;
+    }
+
+    public ArrayList<Player> getTargetPlayersThird() {
+        return targetPlayersThird;
+    }
+
+    public void setFirstAttack(boolean firstAttack) {
+        this.firstAttack = firstAttack;
+    }
+
+    public boolean isFirstAttack() {
+        return firstAttack;
     }
 }

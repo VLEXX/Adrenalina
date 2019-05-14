@@ -109,16 +109,14 @@ class DataPacketTest {
     }
 
     @Test
-    void getTargetPlayers() {
-        DataPacket dataPacket = new DataPacket();
-        assertEquals(dataPacket.getTargetPlayers().isEmpty(), true);
-    }
-
-    @Test
     void setTargetPlayers() {
         DataPacket dataPacket = new DataPacket();
-        dataPacket.getTargetPlayers().add(Player.BLUE);
-        assertEquals(dataPacket.getTargetPlayers().contains(Player.BLUE), true);
+        dataPacket.getTargetPlayersFirst().add(Player.BLUE);
+        assertEquals(dataPacket.getTargetPlayersFirst().contains(Player.BLUE), true);
+        dataPacket.getTargetPlayersSecond().add(Player.BLUE);
+        assertEquals(dataPacket.getTargetPlayersSecond().contains(Player.BLUE), true);
+        dataPacket.getTargetPlayersThird().add(Player.BLUE);
+        assertEquals(dataPacket.getTargetPlayersThird().contains(Player.BLUE), true);
     }
 
     @Test
@@ -158,5 +156,18 @@ class DataPacketTest {
     void getAction() {
         DataPacket dataPacket = new DataPacket();
         assertEquals(dataPacket.getAction(), null);
+    }
+
+    @Test
+    void setFirstAttack() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setFirstAttack(true);
+        assertEquals(dataPacket.isSecondAttack(), true);
+    }
+
+    @Test
+    void isFirstAttack() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.isSecondAttack(), false);
     }
 }

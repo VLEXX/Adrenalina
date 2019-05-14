@@ -1,7 +1,7 @@
 package View;
 
-import Model.ChartScore;
-import Model.Player;
+import model.gamedata.ChartScore;
+import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -3,9 +3,9 @@
  */
 package ServerController;
 
-import Model.InitializeAllPlay;
-import Model.MessageString;
-import Model.Player;
+import model.gamedata.InitializeAllPlay;
+import model.datapacket.MessageString;
+import model.playerdata.Player;
 
 import java.io.*;
 

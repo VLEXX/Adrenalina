@@ -3,7 +3,7 @@
  */
 package View;
 
-import Model.Map;
+import model.map.Map;
 
 //Classe che memorizza lo stato corrente della mappa
 public class ViewMapState {

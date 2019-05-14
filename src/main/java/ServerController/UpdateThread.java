@@ -1,8 +1,8 @@
 package ServerController;
 
-import Model.InitializeAllPlay;
-import Model.Player;
-import Model.UpdatePacket;
+import model.gamedata.InitializeAllPlay;
+import model.playerdata.Player;
+import model.datapacket.UpdatePacket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;

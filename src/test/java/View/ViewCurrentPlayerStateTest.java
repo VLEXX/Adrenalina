@@ -1,7 +1,7 @@
 package View;
 
-import Model.CurrentPlayerState;
-import Model.Player;
+import model.playerdata.CurrentPlayerState;
+import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

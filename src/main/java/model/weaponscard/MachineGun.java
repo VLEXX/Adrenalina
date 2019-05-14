@@ -44,6 +44,7 @@ public class MachineGun extends Weapon {
      * Function first attack
      *
      * @param player            player who attack
+     * @param playerToAttack    player to attack
      * @param allPlay           current state game
      * @return OK or POSITION_NOT_FOUND
      * @author Giulia Rivara
@@ -54,15 +55,14 @@ public class MachineGun extends Weapon {
         Position positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
         player1 = playerToAttack.get(0);
         player2 = playerToAttack.get(1);
-        if (positionToAttack1 != null && playerToAttack.get(0) != null) {
-            if (check(position, positionToAttack1))
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
-            else return MessageEnum.POSITION_NOT_FOUND;
-        }
+        if(playerToAttack.get(0) != null && check(position, positionToAttack1) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
+        if(playerToAttack.get(1) != null && check(position, positionToAttack2) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
+        if (positionToAttack1 != null && playerToAttack.get(0) != null)
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
         if (positionToAttack2 != null && playerToAttack.get(1) != null) {
-            if(check(position, positionToAttack2))
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
-            else return MessageEnum.POSITION_NOT_FOUND;
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
         }
         return MessageEnum.OK;
     }
@@ -76,18 +76,16 @@ public class MachineGun extends Weapon {
      * @return OK or CANNOT_USE_THIS_EFFECT or POSITION_NOT_FOUND
      * @author Giulia Rivara
      */
-    public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if (player1 == null || player2 == null) {
+        if (check(position, positionToAttack) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
+        if (player1 == null || player2 == null)
             return MessageEnum.CANNOT_USE_THIS_EFFECT;
-        }
-        if (allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player1 && allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player2) {
-            return  MessageEnum.CANNOT_USE_THIS_EFFECT;
-        }
-        if(check(position, positionToAttack))
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
-        else return MessageEnum.POSITION_NOT_FOUND;
+        if (allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player1 && allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player2)
+            return MessageEnum.CANNOT_USE_THIS_EFFECT;
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
         if (playerToAttack.get(0) == player1)
             player1Attacked = true;
         else player1Attacked = false;
@@ -107,44 +105,28 @@ public class MachineGun extends Weapon {
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         Position positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
+        if(check(position, positionToAttack) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
+        if(check(position, positionToAttack2) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
         if (player1 == null || player2 == null) {
             if (playerToAttack.get(0) == player1 || playerToAttack.get(0) == player2) {
-                if(check(position, positionToAttack))
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
-                else return MessageEnum.POSITION_NOT_FOUND;
-                if (playerToAttack.get(1) != null) {
-                    if(check(position, positionToAttack2))
-                        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
-                    else return MessageEnum.POSITION_NOT_FOUND;
-                }
-            } else if (playerToAttack.get(1) == player1 || playerToAttack.get(1) == player2) {
-                if(check(position, positionToAttack2))
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
+                if (playerToAttack.get(1) != null)
                     allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
-                else return MessageEnum.POSITION_NOT_FOUND;
-                if (playerToAttack.get(0) != null) {
-                    if(check(position, positionToAttack))
-                        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
-                    else return MessageEnum.POSITION_NOT_FOUND;
-                }
+            } else if (playerToAttack.get(1) == player1 || playerToAttack.get(1) == player2) {
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
+                if (playerToAttack.get(0) != null)
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
             }
         } else if ((playerToAttack.get(0) == player1 && player1Attacked == false) || (playerToAttack.get(0) == player2 && player1Attacked == true)) {
-            if(check(position, positionToAttack))
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
-            else return MessageEnum.POSITION_NOT_FOUND;
-            if (playerToAttack.get(1) != null && playerToAttack.get(1) != player1 && playerToAttack.get(1) != player2) {
-                if(check(position, positionToAttack2))
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
-                return MessageEnum.POSITION_NOT_FOUND;
-            }
-        } else if ((playerToAttack.get(1) == player1 && player1Attacked == false) || (playerToAttack.get(1) == player2 && player1Attacked == true)) {
-            if(check(position, positionToAttack2))
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
+            if (playerToAttack.get(1) != null && playerToAttack.get(1) != player1 && playerToAttack.get(1) != player2)
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
-            else return MessageEnum.POSITION_NOT_FOUND;
-            if (playerToAttack.get(0) != null && playerToAttack.get(0) != player1 && playerToAttack.get(0) != player2) {
-                if(check(position, positionToAttack))
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
-                else return MessageEnum.POSITION_NOT_FOUND;
-            }
+        } else if ((playerToAttack.get(1) == player1 && player1Attacked == false) || (playerToAttack.get(1) == player2 && player1Attacked == true)){
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
+            if (playerToAttack.get(0) != null && playerToAttack.get(0) != player1 && playerToAttack.get(0) != player2)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
         } else return MessageEnum.CANNOT_USE_THIS_EFFECT;
         return MessageEnum.OK;
     }

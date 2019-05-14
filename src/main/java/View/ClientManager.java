@@ -3,9 +3,9 @@
  */
 package View;
 
-import Model.CurrentDeckState;
-import Model.MessageString;
-import Model.Player;
+import model.gamedata.CurrentDeckState;
+import model.datapacket.MessageString;
+import model.playerdata.Player;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

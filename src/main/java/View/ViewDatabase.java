@@ -1,7 +1,7 @@
 package View;
 
-import Model.Player;
-import Model.Position;
+import model.playerdata.Player;
+import model.map.Position;
 
 import java.util.HashMap;
 

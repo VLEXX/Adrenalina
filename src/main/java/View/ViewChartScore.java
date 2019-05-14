@@ -3,7 +3,7 @@
  */
 package View;
 
-import Model.ChartScore;
+import model.gamedata.ChartScore;
 
 public class ViewChartScore {
     private ChartScore c;

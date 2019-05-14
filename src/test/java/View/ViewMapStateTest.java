@@ -1,6 +1,6 @@
 package View;
 
-import Model.Map;
+import model.map.Map;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

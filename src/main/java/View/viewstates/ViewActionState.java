@@ -1,8 +1,8 @@
 package View.viewstates;
 
-import Model.Action;
-import Model.DataPacket;
-import Model.Player;
+import model.datapacket.Action;
+import model.datapacket.DataPacket;
+import model.playerdata.Player;
 import View.ViewDatabase;
 
 import java.util.Scanner;

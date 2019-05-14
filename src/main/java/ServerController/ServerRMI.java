@@ -3,8 +3,8 @@
  */
 package ServerController;
 
-import Model.InitializeAllPlay;
-import Model.VoteMap;
+import model.gamedata.InitializeAllPlay;
+import model.gamedata.VoteMap;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;

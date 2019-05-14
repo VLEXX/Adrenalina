@@ -3,14 +3,15 @@
  */
 package ServerController;
 
-import Model.*;
+import model.gamedata.InitializeAllPlay;
+import model.playerdata.CurrentPlayerState;
+import model.playerdata.Player;
+import model.datapacket.MessageString;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class ServerManagerFunction {

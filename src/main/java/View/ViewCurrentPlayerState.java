@@ -4,8 +4,7 @@
 package View;
 
 
-import Model.CurrentPlayerState;
-import Model.Player;
+import model.playerdata.CurrentPlayerState;
 
 //Classe che mantiene lo stato attuale del giocatore per la View
 public class ViewCurrentPlayerState {

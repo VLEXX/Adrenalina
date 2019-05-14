@@ -4,9 +4,6 @@
 package Model.WeaponsCard;
 
 import Model.*;
-import Model.Exceptions.PlayerAlreadyAdded;
-import Model.Exceptions.PlayerNotFound;
-import Model.Exceptions.PositionNotFound;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

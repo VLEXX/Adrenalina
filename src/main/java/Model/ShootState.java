@@ -14,13 +14,8 @@ public class ShootState implements State {
                 }
             }
             if(weapon.getLoaded()==true){
-                for(Player player: dataPacket.getTargetPlayers()) {
-                    if(weapon.check(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition(), allPlay.getCurrentPlayerState().get(player).getPlayerposition())==false){
-                        return MessageEnum.PLAYERS_NOT_VALID;
-                    }
-                }
                 for(Player player: dataPacket.getTargetPlayers()){
-                    weapon.firstAttack(dataPacket.getPlayer(), player, allPlay);
+                    weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayers(), allPlay);
                 }
             }
             else{

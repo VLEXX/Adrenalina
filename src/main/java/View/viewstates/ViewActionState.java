@@ -2,6 +2,8 @@ package View.viewstates;
 
 import Model.Action;
 import Model.DataPacket;
+import Model.Player;
+import View.ViewDatabase;
 
 import java.util.Scanner;
 
@@ -16,12 +18,12 @@ public class ViewActionState implements ViewState {
      * @return datapacket
      */
     @Override
-    public DataPacket doAction(Scanner stdin) {
+    public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
         System.out.println("Chose your action: SHOOT | MOVE | PICKUP | ENDTURN");
         DataPacket dataPacket;
         while(true) {
             String s = stdin.nextLine();
-            dataPacket = setAction(s);
+            dataPacket = setActionPacket(s);
             if(dataPacket!=null){
                 break;
             }
@@ -29,10 +31,11 @@ public class ViewActionState implements ViewState {
                 System.out.println("WRONG INPUT!\n Please choose between: SHOOT | MOVE | PICKUP | ENDTURN");
             }
         }
+        dataPacket.setPlayer(player);
         return dataPacket;
     }
 
-    protected DataPacket setAction(String s){
+    protected DataPacket setActionPacket(String s){
         DataPacket dataPacket = new DataPacket();
         if (s.equals("SHOOT") || s.equals("shoot") || s.equals("Shoot")) {
             dataPacket.setAction(Action.SHOOT);

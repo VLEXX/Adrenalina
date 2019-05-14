@@ -1,8 +1,6 @@
 //Author: Alex Saletti
 package Model;
 
-import Model.Exceptions.PlayerAlreadyAdded;
-import Model.Exceptions.PlayerNotFound;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

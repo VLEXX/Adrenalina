@@ -21,7 +21,6 @@ public class MarksBox implements Serializable {
 
     /**
      * @return marks map
-     * @author Giulia Rivara
      */
     public HashMap<Player, Integer> getMyMarksMap() {
         return myMarksMap;
@@ -31,7 +30,6 @@ public class MarksBox implements Serializable {
      * set marks map
      * @param player
      * @param damage
-     * @author Giulia Rivara
      */
     public void setMyMarksMap(Player player, int damage) {
         int i;

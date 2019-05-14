@@ -4,7 +4,9 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.map.Position;
 import model.munitions.Munitions;
+import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
  */
 public class HeatSeeker extends Weapon implements Serializable {
 
+    private int control = 0;
     /**
      * Constructor that set the cost of this weapon
      */
@@ -31,7 +34,23 @@ public class HeatSeeker extends Weapon implements Serializable {
         super.setName("heatseeker");
     }
 
+    /**
+     * Function first attack
+     * @param myPlayer player who attack
+     * @param playerToAttack player to attack
+     * @param allPlay current state game
+     * @return Ok or ATTACK_NOT_PRESENT
+     */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        control = allPlay.getCurrentPlayerState().get(0).getControlMarks().get(playerToAttack.get(0));
+        if(playerToAttack.get(0) != null && checkNotSee(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()) == false)
+            return MessageEnum.POSITION_UNREACHABLE;
+        if(control != 0 && allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getControlMarks().get(myPlayer) != 0) {
+            for(int i = 0; i < control; i++) {
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(i, myPlayer);
+            }
+        }
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3, myPlayer);
         return MessageEnum.OK;
     }
 
@@ -41,5 +60,19 @@ public class HeatSeeker extends Weapon implements Serializable {
 
     public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         return MessageEnum.ATTACK_NOT_PRESENT;
+    }
+
+    public boolean checkNotSee(Position myPosition, Position positionToAttack) {
+        boolean find = false;
+        for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() != positionToAttack.getCurrentcell().getCellId()) {
+                find = true;
+                break;
+            }
+        }
+        if (find == false) {
+            return false;
+        }
+        return true;
     }
 }

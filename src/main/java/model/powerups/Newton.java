@@ -1,8 +1,7 @@
-package Model.Powerups;
+package model.powerups;
 
-import Model.Munitions;
-import Model.PowerUp;
-import Model.PowerUpId;
+
+import model.munitions.Munitions;
 
 public class Newton extends PowerUp {
 

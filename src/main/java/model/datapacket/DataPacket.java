@@ -16,6 +16,7 @@ public class DataPacket {
     private StatesEnum statesEnum;
     private Weapon weapon;
     private Weapon replaceWeapon;
+    private ArrayList<Weapon> weaponsToBeRecharged;
     private ArrayList<PowerUp> paymentPowerUp;
     private ArrayList<Player> targetPlayersFirst;
     private ArrayList<Player> targetPlayersSecond;
@@ -31,6 +32,7 @@ public class DataPacket {
         this.statesEnum = null;
         this.weapon = null;
         this.replaceWeapon = null;
+        this.weaponsToBeRecharged = new ArrayList<>();
         this.paymentPowerUp = new ArrayList<>();
         this.targetPlayersFirst = new ArrayList<>();
         this.targetPlayersSecond = new ArrayList<>();
@@ -117,6 +119,13 @@ public class DataPacket {
      */
     public void setReplaceWeapon(Weapon replaceWeapon) {
         this.replaceWeapon = replaceWeapon;
+    }
+
+    /**
+     * @return weaponsToBeRecharged
+     */
+    public ArrayList<Weapon> getWeaponsToBeRecharged() {
+        return weaponsToBeRecharged;
     }
 
     /**

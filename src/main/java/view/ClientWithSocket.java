@@ -38,8 +38,7 @@ public class ClientWithSocket implements ClientStrategy{
 
                 InputMessage inputMessage = new InputMessage(inMessage);
                 InputStdin inputStdin = new InputStdin(stdin);
-                inputMessage.start();
-                inputStdin.start();
+
             }
             catch (ConnectException e){
                 System.out.println("\n" + "\u001B[31m" + "Because the Server is dark and full of connections." + "\u001B[0m");

@@ -2,6 +2,7 @@ package view;
 
 import model.playerdata.Player;
 import model.map.Position;
+import view.viewstates.ViewState;
 
 import java.util.HashMap;
 
@@ -10,6 +11,19 @@ public class ViewDatabase {
     private ViewMapState viewMapState;
     private ViewChartScore viewChartScore;
     private HashMap<Player, Position> viewPlayerPosition;
+    private HashMap<Player, ViewState> viewState;
+
+    public ViewDatabase(){
+        this.viewCurrentPlayerState=null;
+        this.viewMapState = null;
+        this.viewChartScore = null;
+        this.viewPlayerPosition = new HashMap<>();
+        this.viewState = new HashMap<>();
+    }
+
+    public HashMap<Player, ViewState> getViewState() {
+        return viewState;
+    }
 
     public ViewCurrentPlayerState getViewCurrentPlayerState() {
         return viewCurrentPlayerState;

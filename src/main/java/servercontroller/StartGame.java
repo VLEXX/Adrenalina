@@ -29,7 +29,7 @@ public class StartGame extends Thread {
         while(true){
             try {
                 DataPacket dataPacket = (DataPacket) objectInputStream.readObject();
-                MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket,allPlay);
+                MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket);
                 objectOutputStream.writeObject(messageEnum);
             } catch (IOException e) {
                 e.printStackTrace();

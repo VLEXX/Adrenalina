@@ -14,11 +14,11 @@ class WaitingStateTest {
 
     @Test
     void doAction() {
-        WaitingState waitingState = new WaitingState();
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
+        WaitingState waitingState = new WaitingState(initializeAllPlay);
         dataPacket.setPlayer(Player.YELLOW);
-        initializeAllPlay.getHashMapState().replace(Player.YELLOW, new MoveState());
-        assertEquals(waitingState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        initializeAllPlay.getHashMapState().replace(Player.YELLOW, new MoveState(initializeAllPlay));
+        assertEquals(waitingState.doAction(dataPacket), MessageEnum.OK);
     }
 }

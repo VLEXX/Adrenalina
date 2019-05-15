@@ -9,6 +9,7 @@ import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DataPacket {
     private Cell cell;
@@ -25,6 +26,7 @@ public class DataPacket {
     private boolean secondAttack;
     private boolean thirdAttack;
     private Action action;
+    private HashMap<Player, Integer> marksToAdd;
 
     public DataPacket() {
         this.cell = null;
@@ -41,6 +43,11 @@ public class DataPacket {
         this.secondAttack = false;
         this.thirdAttack = false;
         this.action=null;
+        this.marksToAdd=null;
+    }
+
+    public HashMap<Player, Integer> getMarksToAdd() {
+        return marksToAdd;
     }
 
     public void setAction(Action action) {

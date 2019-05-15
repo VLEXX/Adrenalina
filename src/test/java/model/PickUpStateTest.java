@@ -50,7 +50,7 @@ class PickUpStateTest {
         pb.getMunitionsBox().getMyMunitionsMap().put(Munitions.BLUE,1);
         cps.setBoard(pb);
         i.getCurrentPlayerState().put(Player.BLUE,cps);
-        PickUpState pus = new PickUpState();
-        assertEquals(pus.doAction(d,i), MessageEnum.OK);
+        PickUpState pus = new PickUpState(i);
+        assertEquals(pus.doAction(d), MessageEnum.OK);
     }
 }

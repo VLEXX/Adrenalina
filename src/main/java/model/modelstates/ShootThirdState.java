@@ -1,38 +1,32 @@
 package model.modelstates;
 
 import model.datapacket.DataPacket;
-import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
+import model.gamedata.InitializeAllPlay;
 import model.weaponscard.Weapon;
 
-public class ShootFirstState implements State {
+public class ShootThirdState implements State {
 
     private InitializeAllPlay allPlay;
 
-    public ShootFirstState(InitializeAllPlay initializeAllPlay){
+    public ShootThirdState(InitializeAllPlay initializeAllPlay){
         this.allPlay = initializeAllPlay;
     }
 
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
-        if(dataPacket.isFirstAttack()==false){
+        if(dataPacket.isThirdAttack()==false){
             return MessageEnum.OK;
         }
         Weapon weapon;
-        if(dataPacket.isFirstAttack()==true){
+        if(dataPacket.isThirdAttack()==true){
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
                     weapon = w;
-                    if(weapon.getLoaded()==true){
-                        return weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), allPlay);
-                    }
-                    else{
-                        return MessageEnum.EMPTY_WEAPON;
-                    }
+                    return weapon.thirdAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersSecond(), allPlay);
                 }
             }
         }
         return MessageEnum.WEAPON_NOT_FOUND;
-
     }
 }

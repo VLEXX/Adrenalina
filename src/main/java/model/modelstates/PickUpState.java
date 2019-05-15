@@ -20,32 +20,38 @@ import java.util.HashMap;
  * Class that manages the PickUp Action
  */
 public class PickUpState implements State {
+
+    private InitializeAllPlay allPlay;
+
+    public PickUpState(InitializeAllPlay initializeAllPlay){
+        this.allPlay = initializeAllPlay;
+    }
+
     /**
      * Class constructor
      */
     public PickUpState(){}
      /**
      * @param dataPacket
-     * @param i
      * @return MessageEnum
      */
 
     @Override
-    public MessageEnum doAction(DataPacket dataPacket, InitializeAllPlay i) {
-        if (i.getCurrentPlayerState().get(dataPacket.getPlayer()).isActiveturn()) {
+    public MessageEnum doAction(DataPacket dataPacket) {
+        if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).isActiveturn()) {
             if (dataPacket.getCell() != null) {
-                int a = this.moveOne(i, dataPacket.getPlayer(), dataPacket.getCell());
+                int a = this.moveOne(allPlay, dataPacket.getPlayer(), dataPacket.getCell());
                 if (a == -1) {
                     return MessageEnum.UNREACHABLE_CELL;
                 }
             }
-            if (i.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getSpawnpointzone() == null) {
-                if (this.pickUpAmmo(i, dataPacket.getPlayer()) == 0)
+            if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getSpawnpointzone() == null) {
+                if (this.pickUpAmmo(allPlay, dataPacket.getPlayer()) == 0)
                     return MessageEnum.OK;
                 else
                     return MessageEnum.AMMO_ERROR;
             } else {
-                if (this.pickUpWeapon(i, dataPacket.getPlayer(), dataPacket.getWeapon(), dataPacket.getPaymentPowerUp(), dataPacket.getReplaceWeapon()) == 0)
+                if (this.pickUpWeapon(allPlay, dataPacket.getPlayer(), dataPacket.getWeapon(), dataPacket.getPaymentPowerUp(), dataPacket.getReplaceWeapon()) == 0)
                     return MessageEnum.OK;
                 else
                     return MessageEnum.WEAPON_ERROR;

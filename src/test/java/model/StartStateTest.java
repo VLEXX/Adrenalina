@@ -13,19 +13,19 @@ class StartStateTest {
 
     @Test
     void doAction() {
-        StartState startState = new StartState();
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
+        StartState startState = new StartState(initializeAllPlay);
         dataPacket.setStatesEnum(StatesEnum.MOVE);
-        assertEquals(startState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        assertEquals(startState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.SHOOT);
-        assertEquals(startState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        assertEquals(startState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.PICK_UP);
-        assertEquals(startState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        assertEquals(startState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.END);
-        assertEquals(startState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        assertEquals(startState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.START);
-        assertEquals(startState.doAction(dataPacket, initializeAllPlay), MessageEnum.ACTION_ERROR);
+        assertEquals(startState.doAction(dataPacket), MessageEnum.ACTION_ERROR);
 
     }
 }

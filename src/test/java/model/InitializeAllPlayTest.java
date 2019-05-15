@@ -72,7 +72,7 @@ class InitializeAllPlayTest {
     @Test
     void addPlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        State state = new MoveState();
+        State state = new MoveState(initializeAllPlay);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state);
     }
@@ -80,8 +80,8 @@ class InitializeAllPlayTest {
     @Test
     void updatePlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        State state = new MoveState();
-        State state1 = new ShootFirstState();
+        State state = new MoveState(initializeAllPlay);
+        State state1 = new ShootFirstState(initializeAllPlay);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         initializeAllPlay.updatePlayerState(Player.YELLOW, state1);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state1);
@@ -90,7 +90,7 @@ class InitializeAllPlayTest {
     @Test
     void getPlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        State state = new MoveState();
+        State state = new MoveState(initializeAllPlay);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state);
     }

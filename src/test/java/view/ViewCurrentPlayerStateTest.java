@@ -2,6 +2,8 @@ package view;
 
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
+import model.weaponscard.LockRifle;
+import model.weaponscard.Weapon;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,5 +24,13 @@ class ViewCurrentPlayerStateTest {
         c.setActiveplayer(Player.BLACK);
         v.setCurrentPlayerState(c);
         assertEquals(v.getCurrentPlayerState().getActiveplayer(), Player.BLACK);
+    }
+
+    @Test
+    void setWeaponMultAttacks() {
+        ViewCurrentPlayerState v = new ViewCurrentPlayerState();
+        Weapon weapon = new LockRifle();
+        v.setWeaponMultAttacks(weapon);
+        assertEquals(v.getWeaponMultAttacks(), weapon);
     }
 }

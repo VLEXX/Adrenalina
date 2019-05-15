@@ -13,18 +13,18 @@ class MidStateTest {
 
     @Test
     void doAction() {
-        MidState midState = new MidState();
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
+        MidState midState = new MidState(initializeAllPlay);
         dataPacket.setStatesEnum(StatesEnum.MOVE);
-        assertEquals(midState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        assertEquals(midState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.SHOOT);
-        assertEquals(midState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        assertEquals(midState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.PICK_UP);
-        assertEquals(midState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        assertEquals(midState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.END);
-        assertEquals(midState.doAction(dataPacket, initializeAllPlay), MessageEnum.OK);
+        assertEquals(midState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.START);
-        assertEquals(midState.doAction(dataPacket, initializeAllPlay), MessageEnum.ACTION_ERROR);
+        assertEquals(midState.doAction(dataPacket), MessageEnum.ACTION_ERROR);
     }
 }

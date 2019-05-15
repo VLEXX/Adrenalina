@@ -13,9 +13,15 @@ import model.datapacket.MessageEnum;
 
 public class MoveState implements State {
 
+    private InitializeAllPlay allPlay;
+
+    public MoveState(InitializeAllPlay initializeAllPlay){
+        this.allPlay = initializeAllPlay;
+    }
+
     //metodo che gestisce lo spostamento del player p
     @Override
-    public MessageEnum doAction(DataPacket dataPacket, InitializeAllPlay allPlay) {
+    public MessageEnum doAction(DataPacket dataPacket) {
         /**
          printWriter.println("Choose a cell...");
          String s = new String();
@@ -42,11 +48,11 @@ public class MoveState implements State {
             return MessageEnum.UNREACHABLE_CELL;
         } else {
             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
-                allPlay.getHashMapState().replace(dataPacket.getPlayer(), new MidState());
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), new MidState(allPlay));
                 allPlay.notifyObserver();
             }
             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 0) {
-                allPlay.getHashMapState().replace(dataPacket.getPlayer(), new EndTurnState());
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), new EndTurnState(allPlay));
                 allPlay.notifyObserver();
             }
         }

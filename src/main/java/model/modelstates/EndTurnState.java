@@ -21,20 +21,25 @@ import java.util.HashMap;
 
 public class EndTurnState implements State {
 
+    private InitializeAllPlay allPlay;
+
+    public EndTurnState(InitializeAllPlay initializeAllPlay){
+        this.allPlay = initializeAllPlay;
+    }
+
     /**
      * manages the end of the turn refilling the map, recharging weapons selected by the player and
      * update the scoreboard
      * @param dataPacket class containing necessary parameters sent by client
-     * @param i class containing information about the current match
      * @return a message saying if the required action was successful or not
      */
     @Override
-    public MessageEnum doAction(DataPacket dataPacket, InitializeAllPlay i) {
-        this.refillMap(i);
-        MessageEnum out1 = this.rechargeWeapons(i,dataPacket);
+    public MessageEnum doAction(DataPacket dataPacket) {
+        this.refillMap(allPlay);
+        MessageEnum out1 = this.rechargeWeapons(allPlay,dataPacket);
         if(out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOOMUCH_POWERUPS)
             return out1;
-        this.scoreCounter(i);
+        this.scoreCounter(allPlay);
         return MessageEnum.OK;
     }
 

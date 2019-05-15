@@ -183,4 +183,10 @@ class DataPacketTest {
         DataPacket dataPacket = new DataPacket();
         assertEquals(dataPacket.getWeaponsToBeRecharged().isEmpty(), true);
     }
+
+    @Test
+    void getMarksToAdd() {
+        DataPacket dataPacket = new DataPacket();
+        assertEquals(dataPacket.getMarksToAdd().isEmpty(), true);
+    }
 }

@@ -44,11 +44,14 @@ public class Whisper extends Weapon implements Serializable {
     public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToShot = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(checkPosition(myPosition, positionToShot)){
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3, player);
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(player, 1);
+        if(checkPosition(myPosition, positionToShot) != true) {
+            if (check(myPosition, positionToShot)) {
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3, player);
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(player, 1);
+            }
+            else return MessageEnum.POSITION_UNREACHABLE;
         }
-        else return MessageEnum.PLAYER_UNREACHABLE;
+        else return MessageEnum.PLAYER_TOOMUCH_NEAR ;
         return MessageEnum.OK;
     }
 
@@ -68,58 +71,38 @@ public class Whisper extends Weapon implements Serializable {
      */
     private boolean checkPosition(Position myPosition, Position positionToAttack){
         if(myPosition.getCurrentcell().getUpCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getUpCell(), positionToAttack.getCurrentcell()))
+            if(myPosition.getCurrentcell().getUpCell().getCellId() == positionToAttack.getCurrentcell().getCellId())
                 return true;
         }
         if(myPosition.getCurrentcell().getDownCell() != null){
-            if(checkAround(myPosition.getCurrentcell().getDownCell(), positionToAttack.getCurrentcell())){
+            if(myPosition.getCurrentcell().getDownCell().getCellId() == positionToAttack.getCurrentcell().getCellId()){
                 return true;
             }
         }
         if(myPosition.getCurrentcell().getLeftCell() != null){
-            if(checkAround(myPosition.getCurrentcell().getLeftCell(), positionToAttack.getCurrentcell())){
+            if(myPosition.getCurrentcell().getLeftCell().getCellId() == positionToAttack.getCurrentcell().getCellId()){
                 return true;
             }
         }
         if(myPosition.getCurrentcell().getRightCell() != null){
-            if(checkAround(myPosition.getCurrentcell().getRightCell(), positionToAttack.getCurrentcell())){
+            if(myPosition.getCurrentcell().getRightCell().getCellId() == positionToAttack.getCurrentcell().getCellId()){
                 return true;
             }
         }
         return false;
     }
 
-    /**
-     * Function that check the correct position to attack
-     * @param current current cell of the player
-     * @param attack cell to attack
-     * @return true if correct
-     * @author Giulia Rivara
-     */
-    private boolean checkAround(Cell current, Cell attack){
-        if(current.getCellId() == attack.getCellId()){
-            return true;
-        }
-        if(current.getUpCell() != null) {
-            if (current.getUpCell().getCellId() == attack.getCellId()) {
-                return true;
+    public boolean check(Position myPosition, Position positionToAttack) {
+        boolean find = false;
+        for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+                find = true;
+                break;
             }
         }
-        if(current.getDownCell() != null){
-            if(current.getDownCell().getCellId() == attack.getCellId()){
-                return true;
-            }
+        if (find == false) {
+            return false;
         }
-        if(current.getLeftCell() != null){
-            if(current.getLeftCell().getCellId() == attack.getCellId()){
-                return true;
-            }
-        }
-        if(current.getRightCell() != null){
-            if(current.getRightCell().getCellId() == attack.getCellId()){
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 }

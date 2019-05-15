@@ -45,11 +45,15 @@ public class PlasmaGun extends Weapon implements Serializable {
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(position, positionToAttack))
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, player);
         else return  MessageEnum.POSITION_NOT_FOUND;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
+        if(control != 0);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, player);
         return MessageEnum.OK;
     }
 
@@ -61,7 +65,7 @@ public class PlasmaGun extends Weapon implements Serializable {
      */
     public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         /*Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
-        PositionToGo?
+        Position positionToGo = allPlay.getCurrentPlayerState()
         if (checkPosition(myposition, positionToGo)) {
             myposition.getCurrentcell().removeInCellPlayer(player);
             myposition.setCurrentcell(positionToGo.getCurrentcell());

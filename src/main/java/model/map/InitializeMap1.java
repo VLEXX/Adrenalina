@@ -3,6 +3,11 @@ package model.map;
 
 public class InitializeMap1 implements StrategyMap {
 
+    /**
+     *
+     *
+     * @return
+     */
     @Override
     public Map initializeMap() {
         //creazione delle istanze mappa1, stanze e celle

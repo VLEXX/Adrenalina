@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 //Classe che tiene conto del riquadro danni della plancia giocatore
 public class DamageBox implements Serializable {
-    private final static int[] maxPointArray = {8, 6, 4, 2, 1, 1};   //Punti per chi contribuisce al danno quando viene contegguata la plancia
+    private final static int[] maxPointArray = {8,6,4,2, 1, 1,1,1,1,1,1,1,1,};   //Punti per chi contribuisce al danno quando viene contegguata la plancia
     private final static int[] finalFrenzyArray = {2, 1, 1, 1};    //Punti per chi contribuisce al danno quando viene conteggiata la plancia in frenesia finale
     private Player[] damage;                                    //Array per tener conto dell'ordine dei danni dei giocatori
     private int damageTot;                                      //Totale dei danni subiti

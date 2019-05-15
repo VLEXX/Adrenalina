@@ -4,6 +4,7 @@
 package model.modelstates;
 
 import model.datapacket.DataPacket;
+import model.datapacket.StatesEnum;
 import model.gamedata.ChartScore;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
@@ -22,9 +23,11 @@ import java.util.HashMap;
 public class EndTurnState implements State {
 
     private InitializeAllPlay allPlay;
+    private HashMap<StatesEnum, State> stateHashMap;
 
-    public EndTurnState(InitializeAllPlay initializeAllPlay){
+    public EndTurnState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
         this.allPlay = initializeAllPlay;
+        this.stateHashMap = hashMap;
     }
 
     /**

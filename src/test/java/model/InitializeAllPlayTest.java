@@ -3,6 +3,7 @@
  */
 package model;
 
+import model.datapacket.StatesEnum;
 import servercontroller.UpdateThread;
 import model.gamedata.InitializeAllPlay;
 import model.modelstates.MoveState;
@@ -10,6 +11,8 @@ import model.modelstates.ShootFirstState;
 import model.modelstates.State;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -72,7 +75,8 @@ class InitializeAllPlayTest {
     @Test
     void addPlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        State state = new MoveState(initializeAllPlay);
+        HashMap<StatesEnum, State> hashMap = new HashMap<>();
+        State state = new MoveState(initializeAllPlay, hashMap);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state);
     }
@@ -80,8 +84,9 @@ class InitializeAllPlayTest {
     @Test
     void updatePlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        State state = new MoveState(initializeAllPlay);
-        State state1 = new ShootFirstState(initializeAllPlay);
+        HashMap<StatesEnum, State> hashMap = new HashMap<>();
+        State state = new MoveState(initializeAllPlay, hashMap);
+        State state1 = new ShootFirstState(initializeAllPlay, hashMap);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         initializeAllPlay.updatePlayerState(Player.YELLOW, state1);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state1);
@@ -90,7 +95,8 @@ class InitializeAllPlayTest {
     @Test
     void getPlayerState() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        State state = new MoveState(initializeAllPlay);
+        HashMap<StatesEnum, State> hashMap = new HashMap<>();
+        State state = new MoveState(initializeAllPlay, hashMap);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state);
     }

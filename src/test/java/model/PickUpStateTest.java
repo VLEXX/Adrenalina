@@ -2,9 +2,11 @@ package model;
 
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
+import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.map.SpawnPoint;
 import model.modelstates.PickUpState;
+import model.modelstates.State;
 import model.munitions.Ammo;
 import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
@@ -12,6 +14,8 @@ import model.playerdata.Player;
 import model.playerdata.PlayerBoard;
 import model.weaponscard.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,7 +54,8 @@ class PickUpStateTest {
         pb.getMunitionsBox().getMyMunitionsMap().put(Munitions.BLUE,1);
         cps.setBoard(pb);
         i.getCurrentPlayerState().put(Player.BLUE,cps);
-        PickUpState pus = new PickUpState(i);
+        HashMap<StatesEnum, State> hashMap = new HashMap<>();
+        PickUpState pus = new PickUpState(i, hashMap);
         assertEquals(pus.doAction(d), MessageEnum.OK);
     }
 }

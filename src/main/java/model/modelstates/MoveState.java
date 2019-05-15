@@ -3,6 +3,7 @@
  */
 package model.modelstates;
 
+import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.map.Room;
@@ -11,12 +12,16 @@ import model.playerdata.Player;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 
+import java.util.HashMap;
+
 public class MoveState implements State {
 
     private InitializeAllPlay allPlay;
+    private HashMap<StatesEnum, State> stateHashMap;
 
-    public MoveState(InitializeAllPlay initializeAllPlay){
+    public MoveState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
         this.allPlay = initializeAllPlay;
+        this.stateHashMap = hashMap;
     }
 
     //metodo che gestisce lo spostamento del player p
@@ -48,11 +53,11 @@ public class MoveState implements State {
             return MessageEnum.UNREACHABLE_CELL;
         } else {
             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
-                allPlay.getHashMapState().replace(dataPacket.getPlayer(), new MidState(allPlay));
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 allPlay.notifyObserver();
             }
             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 0) {
-                allPlay.getHashMapState().replace(dataPacket.getPlayer(), new EndTurnState(allPlay));
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
                 allPlay.notifyObserver();
             }
         }

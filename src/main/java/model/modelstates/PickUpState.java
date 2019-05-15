@@ -5,6 +5,7 @@ package model.modelstates;
 
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
+import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.munitions.Ammo;
@@ -22,9 +23,11 @@ import java.util.HashMap;
 public class PickUpState implements State {
 
     private InitializeAllPlay allPlay;
+    private HashMap<StatesEnum, State> stateHashMap;
 
-    public PickUpState(InitializeAllPlay initializeAllPlay){
+    public PickUpState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
         this.allPlay = initializeAllPlay;
+        this.stateHashMap = hashMap;
     }
 
     /**

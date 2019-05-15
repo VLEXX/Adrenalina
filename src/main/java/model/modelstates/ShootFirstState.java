@@ -1,16 +1,21 @@
 package model.modelstates;
 
 import model.datapacket.DataPacket;
+import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
 import model.weaponscard.Weapon;
 
+import java.util.HashMap;
+
 public class ShootFirstState implements State {
 
     private InitializeAllPlay allPlay;
+    private HashMap<StatesEnum, State> stateHashMap;
 
-    public ShootFirstState(InitializeAllPlay initializeAllPlay){
+    public ShootFirstState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
         this.allPlay = initializeAllPlay;
+        this.stateHashMap = hashMap;
     }
 
     @Override

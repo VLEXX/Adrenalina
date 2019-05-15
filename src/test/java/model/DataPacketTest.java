@@ -62,10 +62,12 @@ class DataPacketTest {
         assertEquals(dataPacket.getStatesEnum(), StatesEnum.PICK_UP);
         dataPacket.setStatesEnum(StatesEnum.SHOOT);
         assertEquals(dataPacket.getStatesEnum(), StatesEnum.SHOOT);
-        dataPacket.setStatesEnum(StatesEnum.MID);
-        assertEquals(dataPacket.getStatesEnum(), StatesEnum.MID);
-        dataPacket.setStatesEnum(StatesEnum.START);
-        assertEquals(dataPacket.getStatesEnum(), StatesEnum.START);
+        dataPacket.setStatesEnum(StatesEnum.SHOOT_SECOND);
+        assertEquals(dataPacket.getStatesEnum(), StatesEnum.SHOOT_SECOND);
+        dataPacket.setStatesEnum(StatesEnum.SHOOT_THIRD);
+        assertEquals(dataPacket.getStatesEnum(), StatesEnum.SHOOT_THIRD);
+        dataPacket.setStatesEnum(StatesEnum.ACTION);
+        assertEquals(dataPacket.getStatesEnum(), StatesEnum.ACTION);
         dataPacket.setStatesEnum(StatesEnum.WAIT);
         assertEquals(dataPacket.getStatesEnum(), StatesEnum.WAIT);
     }

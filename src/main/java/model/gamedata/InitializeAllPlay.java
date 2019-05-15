@@ -29,6 +29,7 @@ public class InitializeAllPlay implements SubjectUpdate {
     private int playercountertemp;
     private ArrayList<ObserverUpdate> observers;
 
+
     /**
      * Constructor
      */
@@ -46,6 +47,7 @@ public class InitializeAllPlay implements SubjectUpdate {
         playercounter = 0;
         playercountertemp = 0;
         observers = new ArrayList<>();
+
     }
 
     public void resetPlayerCounterTemp() {

@@ -39,19 +39,23 @@ public class Whisper extends Weapon implements Serializable {
      * @param playerToAttack player to shot
      * @param allPlay current state game
      * @return Ok or PLAYER_UNREACHABLE
-     * @author Giulia Rivara
      */
     public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
         Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToShot = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(checkPosition(myPosition, positionToShot) != true) {
             if (check(myPosition, positionToShot)) {
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3, player);
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(player, 1);
+                if(control != 0) {
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3 + control, player);
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(player, 1);
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).addControlMarks(player, 1);
+                }
             }
             else return MessageEnum.POSITION_UNREACHABLE;
         }
-        else return MessageEnum.PLAYER_TOOMUCH_NEAR ;
+        else return MessageEnum.PLAYER_TOOMUCH_NEAR;
         return MessageEnum.OK;
     }
 
@@ -67,7 +71,6 @@ public class Whisper extends Weapon implements Serializable {
      * @param myPosition position of the player who shot
      * @param positionToAttack position to shot
      * @return true if correct
-     * @author Giulia Rivara
      */
     private boolean checkPosition(Position myPosition, Position positionToAttack){
         if(myPosition.getCurrentcell().getUpCell() != null) {
@@ -92,6 +95,12 @@ public class Whisper extends Weapon implements Serializable {
         return false;
     }
 
+    /**
+     * Function that check the correct position to attack
+     * @param myPosition position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @return true if ok
+     */
     public boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {

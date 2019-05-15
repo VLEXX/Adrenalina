@@ -39,15 +39,18 @@ public class ZX2 extends Weapon implements Serializable {
      * @param playerToAttack player to attack
      * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(myPosition, positionToAttack) == false)
             return MessageEnum.POSITION_NOT_FOUND;
+        if(control != 0)
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
-        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 2);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).addControlMarks(myPlayer, 2);
         return MessageEnum.OK;
     }
 
@@ -57,9 +60,14 @@ public class ZX2 extends Weapon implements Serializable {
      * @param allPlay current state game
      * @param playerToAttack player to attack
      * @return OK or POSITION_UNREACHABLE
-     * @author Giulia Rivara
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
+        int control1 = 0;
+        int control2 = 0;
+        int control3 = 0;
+        control1 = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        control2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        control3 = allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(playerToAttack.get(0) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()))
             return MessageEnum.POSITION_NOT_FOUND;
         if(playerToAttack.get(1) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition()))
@@ -67,12 +75,21 @@ public class ZX2 extends Weapon implements Serializable {
         if(playerToAttack.get(2) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()))
             return MessageEnum.POSITION_NOT_FOUND;
         if (playerToAttack.get(0) != playerToAttack.get(1) && playerToAttack.get(1) != playerToAttack.get(2) && playerToAttack.get(0) != playerToAttack.get(2)) {
-            if (playerToAttack.get(0) != null)
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
-            if (playerToAttack.get(1) != null)
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
-            if (playerToAttack.get(2) != null)
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+            if (playerToAttack.get(0) != null) {
+                if(control1 != 0)
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control1, myPlayer);
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).addControlMarks(myPlayer, 1);
+            }
+            if (playerToAttack.get(1) != null) {
+                if(control2 != 0)
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(control2, myPlayer);
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).addControlMarks(myPlayer, 1);
+            }
+            if (playerToAttack.get(2) != null) {
+                if(control3 != 0)
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getDamageBox().increaseDamage(control3, myPlayer);
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).addControlMarks(myPlayer, 1);
+            }
         }
         else return MessageEnum.PLAYERS_NOT_VALID;
         return MessageEnum.OK;
@@ -87,7 +104,6 @@ public class ZX2 extends Weapon implements Serializable {
      * @param myPosition position of the player who attack
      * @param positionToAttack position of the player to attack
      * @return true if ok
-     * @author Giulia Rivara
      */
     private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;

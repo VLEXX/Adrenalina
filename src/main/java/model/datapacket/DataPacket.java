@@ -43,7 +43,7 @@ public class DataPacket {
         this.secondAttack = false;
         this.thirdAttack = false;
         this.action=null;
-        this.marksToAdd=null;
+        this.marksToAdd= new HashMap<>();
     }
 
     public HashMap<Player, Integer> getMarksToAdd() {

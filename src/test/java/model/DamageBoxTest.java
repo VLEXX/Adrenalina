@@ -56,7 +56,7 @@ class DamageBoxTest {
     @Test
     void getMaxPointArray() {
         DamageBox d = new DamageBox();
-        assertEquals(d.getMaxPointArray().length, 6);
+        assertEquals(d.getMaxPointArray().length, 13);
         assertEquals(d.getMaxPointArray()[0], 8);
         assertEquals(d.getMaxPointArray()[1], 6);
         assertEquals(d.getMaxPointArray()[2], 4);

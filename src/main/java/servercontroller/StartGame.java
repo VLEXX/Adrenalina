@@ -61,4 +61,8 @@ public class StartGame extends Thread {
             }
         }
     }
+
+    public HashMap<StatesEnum, model.modelstates.State> getStateHashMap() {
+        return stateHashMap;
+    }
 }

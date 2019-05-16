@@ -55,6 +55,7 @@ public class ViewDatabase {
         return viewPlayerPosition;
     }
 
+
     public void setViewPlayerPosition(HashMap<Player, Position> viewPlayerPosition) {
         this.viewPlayerPosition = viewPlayerPosition;
     }

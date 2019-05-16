@@ -68,7 +68,7 @@ public class ClientManager {
         Boolean ok = false;
         Player player1 = null;
         while (true) {
-            if(ok==false) {
+            if(ok==false){
                 player1 = this.chooseCharacter(stdin.nextLine());
                 objectOutputStream.writeObject(player1);
                 System.out.println("\n");

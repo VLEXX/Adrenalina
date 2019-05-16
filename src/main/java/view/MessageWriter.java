@@ -5,6 +5,7 @@ import model.datapacket.MessageEnum;
 public class MessageWriter {
 
     public void writeMessage(MessageEnum messageEnum){
+
         if(messageEnum.equals(MessageEnum.UNREACHABLE_CELL)){
             System.out.println(" ");
         }

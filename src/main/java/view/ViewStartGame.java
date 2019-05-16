@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class ViewStartGame extends Thread {
 
+
     private ViewDatabase viewDatabase;
     private Player player;
     private ObjectInputStream objectInputStream;

@@ -36,8 +36,6 @@ public class ClientWithSocket implements ClientStrategy{
                 clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream);
                 clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
 
-                InputMessage inputMessage = new InputMessage(inMessage);
-                InputStdin inputStdin = new InputStdin(stdin);
 
             }
             catch (ConnectException e){

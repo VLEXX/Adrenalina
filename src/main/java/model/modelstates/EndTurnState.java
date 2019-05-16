@@ -40,7 +40,7 @@ public class EndTurnState implements State {
     public MessageEnum doAction(DataPacket dataPacket) {
         this.refillMap(allPlay);
         MessageEnum out1 = this.rechargeWeapons(allPlay,dataPacket);
-        if(out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOOMUCH_POWERUPS)
+        if(out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOO_MUCH_POWERUPS)
             return out1;
         this.scoreCounter(allPlay);
         return MessageEnum.OK;
@@ -97,7 +97,7 @@ public class EndTurnState implements State {
             cost.put(Munitions.BLUE, cost.get(Munitions.BLUE)-pw.munitionsChecker(Munitions.BLUE));
         }
         if(cost.get(Munitions.RED)<0 || cost.get(Munitions.YELLOW)<0 || cost.get(Munitions.BLUE)<0)
-            return MessageEnum.TOOMUCH_POWERUPS;
+            return MessageEnum.TOO_MUCH_POWERUPS;
         if(i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED)-cost.get(Munitions.RED)<0 || i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW)-cost.get(Munitions.YELLOW)<0 || i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE)-cost.get(Munitions.BLUE)<0)
             return MessageEnum.AMMO_ERROR;
         else{

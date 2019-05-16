@@ -1,11 +1,17 @@
 package servercontroller;
 
+import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
+import model.map.Position;
+import model.modelstates.ActionState;
+import model.modelstates.PowerupState;
+import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.UpdatePacket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 
 public class UpdateThread extends Thread implements ObserverUpdate {
     private InitializeAllPlay allPlay;
@@ -27,7 +33,19 @@ public class UpdateThread extends Thread implements ObserverUpdate {
     }
 
     public synchronized void updateClient() throws IOException {
-        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore().getScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap());
+        HashMap<Player, Position> positionHashMap = new HashMap<>();
+        for(CurrentPlayerState currentPlayerState: allPlay.getCurrentPlayerState().values())
+        {
+            positionHashMap.put(currentPlayerState.getActiveplayer(), currentPlayerState.getPlayerposition());
+        }
+        StatesEnum state = null;
+        if(allPlay.getHashMapState().get(player) instanceof ActionState){
+            state = StatesEnum.ACTION;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof PowerupState){
+            state = StatesEnum.POWERUP;
+        }
+        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), positionHashMap, state);
         objectOutputStream.writeObject(updatePacket);
     }
     public void start(){

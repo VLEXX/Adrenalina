@@ -46,13 +46,17 @@ public class Thor extends Weapon implements Serializable {
      * @param playerToAttack   player to attack
      * @param allPlay current state game
      * @return OK or PLAYER_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(check(position, positionToAttack))
+        if(check(position, positionToAttack)) {
+            if (control != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, player);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, player);
+        }
         else return MessageEnum.POSITION_NOT_FOUND;
         position1 = positionToAttack;
         myPlayer = player;
@@ -64,12 +68,16 @@ public class Thor extends Weapon implements Serializable {
      * @param playerToAttack   player to attack
      * @param allPlay current state game
      * @return OK or PLAYER_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(check(position1, positionToAttack))
+        if(check(position1, positionToAttack)) {
+            if(control != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+        }
         else return MessageEnum.POSITION_NOT_FOUND;
         position2 = positionToAttack;
         return MessageEnum.OK;
@@ -80,22 +88,25 @@ public class Thor extends Weapon implements Serializable {
      * @param playerToAttack   player to attack
      * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(check(position2, positionToAttack))
+        if(check(position2, positionToAttack)) {
+            if(control != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+        }
         else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }
 
     /**
-     * Function that check for correct position and correct player
+     * Function that check for correct position
      * @param myPosition       position of the player who attack
      * @param positionToAttack position of the player to attack
      * @return OK or POSITION_NOT_FOUND
-     * @author Giulia Rivara
      */
     private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;

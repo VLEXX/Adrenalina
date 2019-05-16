@@ -176,3 +176,7 @@ c
 3src/main/java/model/gamedata/InitializeAllPlay.java,e\a\eaf0090ae64cd0a5d6c93772498445f9270dd289
 _
 /src/main/java/model/datapacket/MessageEnum.java,2\6\264c7b39db7eae11aef884aaab4c85e62deed298
+]
+-src/main/java/model/playerdata/DamageBox.java,3\0\30db9639ace13a51c6af3d2922a79dada8a66ebc
+a
+1src/main/java/model/modelstates/EndTurnState.java,a\f\af929359a49915234f3f507cd00c956dae9d7440

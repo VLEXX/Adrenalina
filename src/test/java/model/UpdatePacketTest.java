@@ -24,6 +24,7 @@ class UpdatePacketTest {
         assertEquals(updatePacket.getCurrentPlayerState().getActiveplayer(), Player.YELLOW);
     }
 
+
     @Test
     void getChart() {
         ChartScore chartScore = new ChartScore();

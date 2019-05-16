@@ -41,7 +41,8 @@ public class LockRifle extends Weapon implements Serializable {
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
-
+        if(playerToAttack.get(0) == null && myPlayer == null && allPlay == null)
+            return MessageEnum.NULL;
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
@@ -65,6 +66,8 @@ public class LockRifle extends Weapon implements Serializable {
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        if(playerToAttack.get(0) == null && myPlayer == null && allPlay == null)
+            return MessageEnum.NULL;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(myPosition, positionToAttack) == false)
@@ -74,6 +77,8 @@ public class LockRifle extends Weapon implements Serializable {
     }
 
     public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        if(playerToAttack.get(0) == null && myPlayer == null && allPlay == null)
+            return MessageEnum.NULL;
         return MessageEnum.ATTACK_NOT_PRESENT;
     }
 

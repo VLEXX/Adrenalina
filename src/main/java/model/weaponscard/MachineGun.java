@@ -49,18 +49,27 @@ public class MachineGun extends Weapon {
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control1 = 0;
+        int control2 = 0;
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack1 = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         Position positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
         player1 = playerToAttack.get(0);
         player2 = playerToAttack.get(1);
+        control1 = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
+        control2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(player);
         if(playerToAttack.get(0) != null && check(position, positionToAttack1) == false)
             return MessageEnum.POSITION_NOT_FOUND;
         if(playerToAttack.get(1) != null && check(position, positionToAttack2) == false)
             return MessageEnum.POSITION_NOT_FOUND;
-        if (positionToAttack1 != null && playerToAttack.get(0) != null)
+        if (positionToAttack1 != null && playerToAttack.get(0) != null) {
+            if(control1 != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control1, player);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
+        }
         if (positionToAttack2 != null && playerToAttack.get(1) != null) {
+            if(control2 != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(control2, player);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
         }
         return MessageEnum.OK;
@@ -75,15 +84,19 @@ public class MachineGun extends Weapon {
      * @return OK or CANNOT_USE_THIS_EFFECT or POSITION_NOT_FOUND
      */
     public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
+        int control = 0;
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if (check(position, positionToAttack) == false)
             return MessageEnum.POSITION_NOT_FOUND;
         if (player1 == null || player2 == null)
             return MessageEnum.CANNOT_USE_THIS_EFFECT;
-        if (allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player1 && allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player2)
-            return MessageEnum.CANNOT_USE_THIS_EFFECT;
-        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
+        if (allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player1 && allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player2) {
+            if(control != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, player);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
+        }
+        else return MessageEnum.CANNOT_USE_THIS_EFFECT;
         if (playerToAttack.get(0) == player1)
             player1Attacked = true;
         else player1Attacked = false;
@@ -99,6 +112,8 @@ public class MachineGun extends Weapon {
      * @return OK or CANNOT_USE_THIS_EFFECT or POSITION_NOT_FOUND
      */
     public MessageEnum thirdAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         Position positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
@@ -108,6 +123,9 @@ public class MachineGun extends Weapon {
             return MessageEnum.POSITION_NOT_FOUND;
         if (player1 == null || player2 == null) {
             if (playerToAttack.get(0) == player1 || playerToAttack.get(0) == player2) {
+                if(control != 0) {
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, player);
+                }//TODO continuare da qui a sistemare
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
                 if (playerToAttack.get(1) != null)
                     allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);

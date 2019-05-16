@@ -15,7 +15,8 @@ class CurrentPlayerStateTest {
     @Test
     void getPlayerPosition() {
         CurrentPlayerState p = new CurrentPlayerState(Player.YELLOW);
-        assertEquals(p.getPlayerposition(), null);
+        assertEquals(p.getPlayerposition().getCurrentcell(), null);
+        assertEquals(p.getPlayerposition().getCurrentroom(), null);
     }
 
     @Test

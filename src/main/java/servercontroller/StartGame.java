@@ -36,6 +36,7 @@ public class StartGame extends Thread {
         ShootSecondState shootSecondState = new ShootSecondState(allPlay, stateHashMap);
         ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap);
         PickUpState pickUpState = new PickUpState(allPlay, stateHashMap);
+        PowerupState powerupState = new PowerupState();
         stateHashMap.put(StatesEnum.ACTION, actionState);
         stateHashMap.put(StatesEnum.END, endTurnState);
         stateHashMap.put(StatesEnum.MOVE, moveState);
@@ -44,6 +45,7 @@ public class StartGame extends Thread {
         stateHashMap.put(StatesEnum.SHOOT_SECOND, shootSecondState);
         stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
         stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
+        stateHashMap.put(StatesEnum.POWERUP, powerupState);
     }
 
     public synchronized void run(){

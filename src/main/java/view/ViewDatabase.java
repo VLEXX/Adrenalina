@@ -12,13 +12,15 @@ public class ViewDatabase {
     private ViewChartScore viewChartScore;
     private HashMap<Player, Position> viewPlayerPosition;
     private HashMap<Player, ViewState> viewState;
+    private Player thisplayer;
 
-    public ViewDatabase(){
-        this.viewCurrentPlayerState=null;
-        this.viewMapState = null;
-        this.viewChartScore = null;
+    public ViewDatabase() {
+        this.viewCurrentPlayerState = new ViewCurrentPlayerState();
+        this.viewMapState = new ViewMapState();
+        this.viewChartScore = new ViewChartScore();
         this.viewPlayerPosition = new HashMap<>();
         this.viewState = new HashMap<>();
+        this.thisplayer = null;
     }
 
     public HashMap<Player, ViewState> getViewState() {
@@ -55,5 +57,13 @@ public class ViewDatabase {
 
     public void setViewPlayerPosition(HashMap<Player, Position> viewPlayerPosition) {
         this.viewPlayerPosition = viewPlayerPosition;
+    }
+
+    public Player getThisplayer() {
+        return thisplayer;
+    }
+
+    public void setThisplayer(Player thisplayer) {
+        this.thisplayer = thisplayer;
     }
 }

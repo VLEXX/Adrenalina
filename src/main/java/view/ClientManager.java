@@ -40,7 +40,7 @@ public class ClientManager {
         }
     }
 
-    public synchronized void manageChoice(Scanner inMessage, Scanner stdin, ObjectOutputStream objectOutputStream, ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    public synchronized void manageChoice(Scanner inMessage, Scanner stdin, ObjectOutputStream objectOutputStream, ObjectInputStream objectInputStream, ViewDatabase viewDatabase) throws IOException, ClassNotFoundException {
         CurrentDeckState currentDeckState= (CurrentDeckState)objectInputStream.readObject();
         System.out.println("Choose a character...");
         if(currentDeckState.getPlayers().size()==4){
@@ -66,10 +66,11 @@ public class ClientManager {
         }
 
         Boolean ok = false;
+        Player player1 = null;
         while (true) {
             if(ok==false) {
-                Player player = this.chooseCharacter(stdin.nextLine());
-                objectOutputStream.writeObject(player);
+                player1 = this.chooseCharacter(stdin.nextLine());
+                objectOutputStream.writeObject(player1);
                 System.out.println("\n");
                 MessageString message = (MessageString)objectInputStream.readObject();
                 System.out.println(message.getMessage());
@@ -77,6 +78,7 @@ public class ClientManager {
                 ok = (Boolean) objectInputStream.readObject();
             }
             if(ok==true){
+                viewDatabase.setThisplayer(player1);
                 break;
             }
         }

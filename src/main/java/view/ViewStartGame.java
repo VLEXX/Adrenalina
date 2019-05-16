@@ -49,7 +49,7 @@ public class ViewStartGame extends Thread {
         stateHashMap.put(StatesEnum.POWERUP, powerupState);
     }
 
-    public synchronized void run(){
+    public synchronized void run() {
         MessageWriter messageWriter = new MessageWriter();
         ViewUpdater viewUpdater = new ViewUpdater();
         while(true){

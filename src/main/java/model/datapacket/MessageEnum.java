@@ -12,7 +12,6 @@ public enum MessageEnum implements Serializable {
     EMPTY_WEAPON,
     WEAPON_NOT_FOUND,
     POSITION_NOT_FOUND,
-    NOT_SHOT_AGAIN,
     PLAYER_UNREACHABLE,
     CANNOT_USE_THIS_EFFECT,
     POSITION_UNREACHABLE,
@@ -20,5 +19,6 @@ public enum MessageEnum implements Serializable {
     PLAYERS_NOT_VALID,
     PLAYER_ALREADY_PRESENT,
     ATTACK_NOT_PRESENT,
-    TOO_MUCH_POWERUPS
+    TOO_MUCH_POWERUPS,
+    PLAYER_TOO_MUCH_NEAR
 }

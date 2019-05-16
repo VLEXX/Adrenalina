@@ -28,6 +28,7 @@ public class UpdatePacket implements Serializable {
         this.statesEnum = state;
     }
 
+
     public CurrentPlayerState getCurrentPlayerState() {
         return currentPlayerState;
     }

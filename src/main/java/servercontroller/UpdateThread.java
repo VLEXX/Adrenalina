@@ -39,6 +39,7 @@ public class UpdateThread extends Thread implements ObserverUpdate {
             positionHashMap.put(currentPlayerState.getActiveplayer(), currentPlayerState.getPlayerposition());
         }
         StatesEnum state = null;
+
         if(allPlay.getHashMapState().get(player) instanceof ActionState){
             state = StatesEnum.ACTION;
         }

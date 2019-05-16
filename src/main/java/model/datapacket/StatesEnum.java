@@ -5,7 +5,7 @@ package model.datapacket;
 
 import java.io.Serializable;
 
-public enum StatesEnum implements Serializable {
+public enum StatesEnum implements Serializable  {
     ACTION,
     END,
     SHOOT,

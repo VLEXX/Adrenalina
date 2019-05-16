@@ -4,7 +4,6 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
-import model.map.Cell;
 import model.map.Position;
 import model.munitions.Munitions;
 import model.playerdata.Player;
@@ -55,7 +54,7 @@ public class Whisper extends Weapon implements Serializable {
             }
             else return MessageEnum.POSITION_UNREACHABLE;
         }
-        else return MessageEnum.PLAYER_TOOMUCH_NEAR;
+        else return MessageEnum.PLAYER_TOO_MUCH_NEAR;
         return MessageEnum.OK;
     }
 

@@ -29,7 +29,7 @@ public class MessageWriter {
         if(messageEnum.equals(MessageEnum.POSITION_NOT_FOUND)){
             System.out.println(" ");
         }
-        if(messageEnum.equals(MessageEnum.NOT_SHOT_AGAIN)){
+        if(messageEnum.equals(MessageEnum.PLAYER_TOO_MUCH_NEAR)){
             System.out.println(" ");
         }
         if(messageEnum.equals(MessageEnum.PLAYER_UNREACHABLE)){

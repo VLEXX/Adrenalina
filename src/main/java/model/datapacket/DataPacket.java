@@ -54,6 +54,7 @@ public class DataPacket {
         this.action = action;
     }
 
+
     public Action getAction() {
         return action;
     }

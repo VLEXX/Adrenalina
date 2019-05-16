@@ -33,10 +33,13 @@ public class ClientWithSocket implements ClientStrategy{
                 Scanner inMessage = new Scanner(socket.getInputStream());
                 PrintWriter outMessage = new PrintWriter(socket.getOutputStream());
 
-                clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream);
+                ViewDatabase viewDatabase = new ViewDatabase();
+                clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream, viewDatabase);
                 clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
 
 
+                ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase);
+                startGame.start();
             }
             catch (ConnectException e){
                 System.out.println("\n" + "\u001B[31m" + "Because the Server is dark and full of connections." + "\u001B[0m");

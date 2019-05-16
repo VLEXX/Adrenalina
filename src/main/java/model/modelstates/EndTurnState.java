@@ -32,7 +32,7 @@ public class EndTurnState implements State {
 
     /**
      * manages the end of the turn refilling the map, recharging weapons selected by the player and
-     * update the scoreboard
+     * updating the scoreboard
      * @param dataPacket class containing necessary parameters sent by client
      * @return a message saying if the required action was successful or not
      */
@@ -137,7 +137,7 @@ public class EndTurnState implements State {
     /**
      * returns the sorted turn score chart counting damage done by all players to the dead ones
      * @param p array containing players'damages
-     * @return
+     * @return a sorted array
      */
     private Player[] damageScoreBoard(Player[] p){
         HashMap<Player,Integer> dc = new HashMap<>();

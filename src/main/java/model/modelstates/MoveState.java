@@ -14,6 +14,9 @@ import model.datapacket.MessageEnum;
 
 import java.util.HashMap;
 
+/**
+ * Class who manages a move during a player's turn
+ */
 public class MoveState implements State {
 
     private InitializeAllPlay allPlay;
@@ -24,7 +27,11 @@ public class MoveState implements State {
         this.stateHashMap = hashMap;
     }
 
-    //metodo che gestisce lo spostamento del player p
+
+    /**
+     * @param dataPacket contains data sent from player
+     * @return an ok message if the required action is successful
+     */
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
         /**
@@ -66,6 +73,13 @@ public class MoveState implements State {
         return MessageEnum.OK;
     }
 
+    /**
+     * updates to c the player p's position, if the cell is unreachable returns error
+     * @param i class containing information about the current match
+     * @param c cell that the player p wants to reach
+     * @param p player who wants to move
+     * @return 0 if the required action is successful, -1 in other cases
+     */
     public int setMove(InitializeAllPlay i, Cell c, Player p) {
         for (CurrentPlayerState ps : i.getCurrentPlayerState().values()) {
             if (ps.getActiveplayer() == p) {
@@ -81,7 +95,14 @@ public class MoveState implements State {
         return -1;
     }
 
-    //metodo che restituisce la cella avente un dato id
+
+    /**
+     * returns a cell that is reachable from p and has Id=id, null if the required cell doesn't exist
+     * @param i class containing information about the current match
+     * @param id the id of the required cell
+     * @param player player who wants to move
+     * @return cell that has Id=id if is reachable by the player p, null in other cases
+     */
     public Cell cellFinder(InitializeAllPlay i, int id, Player player) {
 
         for (Room room : i.getStateSelectedMap().getSelectedmap().getRoomList()) {
@@ -97,6 +118,14 @@ public class MoveState implements State {
         return null;
     }
 
+    /**
+     * verify if a specified cell is reachable from the player;
+     * a cell is reachable if it is less than 4 cells (max 3) from the player's position
+     * @param i class containing information about the current match
+     * @param p player
+     * @param c cell
+     * @return true if the cell c is reachable from player p, else false
+     */
     public boolean cellIsReachable(InitializeAllPlay i, Player p, Cell c) {
         for (CurrentPlayerState cps : i.getCurrentPlayerState().values()) {
             if (cps.getActiveplayer() == p && cps.getPlayerposition().getCurrentcell().getReachableCells().contains(c))

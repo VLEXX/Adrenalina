@@ -29,6 +29,7 @@ public class PlayerBoard implements Serializable {
         this.weaponsList = new ArrayList<>();
         this.powerUpList = new ArrayList<>();
         this.damageBox = new DamageBox();
+        this.munitionsBox = new MunitionsBox();
     }
 
     /**

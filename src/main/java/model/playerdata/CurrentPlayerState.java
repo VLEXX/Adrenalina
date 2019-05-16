@@ -23,7 +23,7 @@ public class CurrentPlayerState implements Observer, Serializable {
      * Constructor
      */
     public CurrentPlayerState(Player player) {
-        this.playerposition = null;
+        this.playerposition = new Position();
         this.activeturn = false;
         this.board = null;
         this.actioncounter = 2;

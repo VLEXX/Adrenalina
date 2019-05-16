@@ -7,6 +7,8 @@ public enum MessageEnum implements Serializable {
     UNREACHABLE_CELL,
     AMMO_ERROR,
     WEAPON_ERROR,
+    WEAPON_ERROR_2,
+    POWERUP_NOT_FOUND,
     NOT_YOUR_TURN,
     ACTION_ERROR,
     EMPTY_WEAPON,

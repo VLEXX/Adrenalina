@@ -25,23 +25,30 @@ public class PickUpState implements State {
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
 
+    /**
+     * Class constructor
+     */
     public PickUpState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
     }
 
-    /**
-     * Class constructor
-     */
-    public PickUpState(){}
+
      /**
      * @param dataPacket
      * @return MessageEnum
      */
-
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
         if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).isActiveturn()) {
+            if(dataPacket.getReplaceWeapon()!=null){
+                if(!allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().contains(dataPacket.getReplaceWeapon()) || allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().size()<3)
+                    return MessageEnum.WEAPON_ERROR_2;
+            }
+            for (PowerUp pw : dataPacket.getPaymentPowerUp()){
+                if(!allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().contains(pw))
+                    return MessageEnum.POWERUP_NOT_FOUND;
+            }
             if (dataPacket.getCell() != null) {
                 int a = this.moveOne(allPlay, dataPacket.getPlayer(), dataPacket.getCell());
                 if (a == -1) {
@@ -51,8 +58,6 @@ public class PickUpState implements State {
             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getSpawnpointzone() == null) {
                 if (this.pickUpAmmo(allPlay, dataPacket.getPlayer()) == 0)
                     return MessageEnum.OK;
-                else
-                    return MessageEnum.AMMO_ERROR;
             } else {
                 if (this.pickUpWeapon(allPlay, dataPacket.getPlayer(), dataPacket.getWeapon(), dataPacket.getPaymentPowerUp(), dataPacket.getReplaceWeapon()) == 0)
                     return MessageEnum.OK;
@@ -123,14 +128,15 @@ public class PickUpState implements State {
             if (n < 0) n = 0;
         });
         if (cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - cost.get(Munitions.RED) > -1 && cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - cost.get(Munitions.YELLOW) > -1 && cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - cost.get(Munitions.BLUE) > -1) {
-            cps.getBoard().getWeaponsList().add(w);
-            cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.RED, cost.get(Munitions.RED));
-            cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.YELLOW, cost.get(Munitions.YELLOW));
-            cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.BLUE, cost.get(Munitions.BLUE));
             for (int j = 0; j < 3; j++) {
                 if (cps.getPlayerposition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()[j] == w) {
+                    cps.getBoard().getWeaponsList().add(w);
+                    if (replaceweapon != null)
+                        cps.getBoard().getWeaponsList().remove(replaceweapon);
+                    cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.RED, cost.get(Munitions.RED));
+                    cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.YELLOW, cost.get(Munitions.YELLOW));
+                    cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.BLUE, cost.get(Munitions.BLUE));
                     cps.getPlayerposition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()[j] = replaceweapon;
-                    break;
                 }
             }
             return 0;

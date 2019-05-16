@@ -41,12 +41,18 @@ public class LockRifle extends Weapon implements Serializable {
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(check(myPosition, positionToAttack) == false)
             return MessageEnum.POSITION_NOT_FOUND;
+        if(control != 0) {
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+        }
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).addControlMarks(myPlayer, 1);
         return MessageEnum.OK;
     }
 
@@ -62,7 +68,7 @@ public class LockRifle extends Weapon implements Serializable {
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(myPosition, positionToAttack) == false)
             return MessageEnum.POSITION_NOT_FOUND;
-        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).addControlMarks(myPlayer, 1);
         return MessageEnum.OK;
     }
 

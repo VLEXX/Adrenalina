@@ -172,3 +172,7 @@ X
 (src/main/java/model/weaponscard/ZX2.java,e\f\ef1e4f682f20245bd3de2780138107e2d1afec89
 _
 /src/test/java/model/CurrentPlayerStateTest.java,b\1\b1ec7e38fa5b66cfba6881c7343eab686f51e24d
+c
+3src/main/java/model/gamedata/InitializeAllPlay.java,e\a\eaf0090ae64cd0a5d6c93772498445f9270dd289
+_
+/src/main/java/model/datapacket/MessageEnum.java,2\6\264c7b39db7eae11aef884aaab4c85e62deed298

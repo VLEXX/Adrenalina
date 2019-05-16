@@ -19,7 +19,6 @@ import java.util.ArrayList;
  */
 public class HeatSeeker extends Weapon implements Serializable {
 
-    private int control = 0;
     /**
      * Constructor that set the cost of this weapon
      */
@@ -42,13 +41,12 @@ public class HeatSeeker extends Weapon implements Serializable {
      * @return Ok or ATTACK_NOT_PRESENT
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
-        control = allPlay.getCurrentPlayerState().get(0).getControlMarks().get(playerToAttack.get(0));
+        int control = 0;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(playerToAttack.get(0) != null && checkNotSee(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()) == false)
             return MessageEnum.POSITION_UNREACHABLE;
-        if(control != 0 && allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getControlMarks().get(myPlayer) != 0) {
-            for(int i = 0; i < control; i++) {
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(i, myPlayer);
-            }
+        if(control != 0) {
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         }
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3, myPlayer);
         return MessageEnum.OK;
@@ -62,10 +60,16 @@ public class HeatSeeker extends Weapon implements Serializable {
         return MessageEnum.ATTACK_NOT_PRESENT;
     }
 
+    /**
+     * Function that check the correct position of the player
+     * @param myPosition position of the player who attack
+     * @param positionToAttack  position of the player to attack
+     * @return true if ok
+     */
     public boolean checkNotSee(Position myPosition, Position positionToAttack) {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
-            if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() != positionToAttack.getCurrentcell().getCellId()) {
+            if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 find = true;
                 break;
             }

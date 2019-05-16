@@ -28,7 +28,36 @@ public class ShootSecondState implements State {
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
                     weapon = w;
-                    return weapon.secondAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersSecond(), allPlay);
+                    MessageEnum messageEnum = weapon.secondAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersSecond(), allPlay);
+                    if(messageEnum.equals(MessageEnum.OK)){
+                        if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
+                            if(weapon.hasThirdAttack()==true) {
+                                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_THIRD));
+                                allPlay.notifyObserver();
+                                return messageEnum;
+                            }
+                            else{
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+                                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
+                                allPlay.notifyObserver();
+                                return messageEnum;
+                            }
+                        }
+                        if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
+                            if(weapon.hasThirdAttack()==true) {
+                                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_SECOND));
+                                allPlay.notifyObserver();
+                                return messageEnum;
+                            }
+                            else{
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+                                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
+                                allPlay.notifyObserver();
+                                return messageEnum;
+                            }
+                        }
+                    }
+                    return messageEnum;
                 }
             }
         }

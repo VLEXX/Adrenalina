@@ -23,7 +23,7 @@ public class WaitingState implements State {
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
         while (true) {
-            if (allPlay.getPlayerState(dataPacket.getPlayer()) != this) {
+            if (!(allPlay.getPlayerState(dataPacket.getPlayer()) instanceof WaitingState)) {
                 break;
             }
         }

@@ -1,5 +1,5 @@
 /**
- * @author Alex Saletti and Giulia Rivara
+ * @author Alex Saletti && Giulia Rivara
  */
 package model.map;
 
@@ -9,6 +9,9 @@ import model.playerdata.Player;
 
 import java.util.ArrayList;
 
+/**
+ * this class is used to build the entire map and each cell represents a square of the selected map
+ */
 public class Cell {
     //tipo di munizioni presenti nella cella, NULL se assenti
     private Ammo ammohere;
@@ -30,7 +33,10 @@ public class Cell {
     private ArrayList<Player> inCellPlayer;
 
 
-    //costruttore
+    /**
+     * construct a cell having the parameter id as id
+     *  @param id cell id
+     */
     public Cell(int id) {
         this.id = id;
         this.ammohere = null;
@@ -43,6 +49,11 @@ public class Cell {
         this.inCellPlayer = new ArrayList<Player>();
     }
 
+
+
+    /**
+     * the following 3 methods manage a list made of players who are located in the cell during the game
+     */
     //metodo che ritorna i giocatori presenti nella cella
     public ArrayList<Player> getInCellPlayer() {
         return inCellPlayer;
@@ -80,6 +91,10 @@ public class Cell {
         return MessageEnum.OK;
     }
 
+
+    /**
+     * the following 4 methods allow to know the near cells and return null if there is a wall
+     */
     //metodi che restituiscono le celle adiacenti
     public Cell getUpCell() {
         return upcell;
@@ -97,6 +112,14 @@ public class Cell {
         return rightcell;
     }
 
+
+    /**
+     * allow to set the near cell
+     * @param upcell
+     * @param downcell
+     * @param leftcell
+     * @param rightcell
+     */
     //metodo che setta le celle adiacenti
     public void setCells(Cell upcell, Cell downcell, Cell leftcell, Cell rightcell) {
         this.upcell = upcell;
@@ -106,6 +129,10 @@ public class Cell {
     }
 
 
+
+    /**
+     *the following 6 methods allow to set or get various class attributes
+     */
     //restituisce l'ID della cella
     public int getCellId() {
         return id;
@@ -136,6 +163,11 @@ public class Cell {
         return reachableCells;
     }
 
+
+
+    /**
+     * creates a list of the cell that are reachable in 3 moves from the actual
+     */
     //inizializza la lista delle celle raggiungibili in 3 spostamenti
     public void initializeReachableCells() {
         if (this.getUpCell() != null) {

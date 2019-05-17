@@ -1,9 +1,10 @@
 //Author: Alex Saletti
 package model.map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Map {
+public class Map implements Serializable {
     private String mapname;//nome della mappa
     private ArrayList<Room> roomlist;
 

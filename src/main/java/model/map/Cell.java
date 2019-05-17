@@ -7,12 +7,13 @@ import model.munitions.Ammo;
 import model.datapacket.MessageEnum;
 import model.playerdata.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * this class is used to build the entire map and each cell represents a square of the selected map
  */
-public class Cell {
+public class Cell implements Serializable {
     //tipo di munizioni presenti nella cella, NULL se assenti
     private Ammo ammohere;
     //tipo di spawn presente, NULL se assente

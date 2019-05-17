@@ -8,10 +8,11 @@ import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DataPacket {
+public class DataPacket implements Serializable {
     private Cell cell;
     private Player player;
     private StatesEnum statesEnum;

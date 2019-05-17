@@ -25,7 +25,7 @@ public class CurrentPlayerState implements Observer, Serializable {
     public CurrentPlayerState(Player player) {
         this.playerposition = new Position();
         this.activeturn = false;
-        this.board = null;
+        this.board = new PlayerBoard();
         this.actioncounter = 2;
         this.activeplayer = player;
         controlMarks = new HashMap<>();

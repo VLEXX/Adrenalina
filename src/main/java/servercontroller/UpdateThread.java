@@ -50,7 +50,6 @@ public class UpdateThread extends Thread implements ObserverUpdate {
         objectOutputStream.writeObject(updatePacket);
     }
     public void start(){
-        UpdatePacket updatePacket;
         while(true){
             if(endgame==true){
                 break;

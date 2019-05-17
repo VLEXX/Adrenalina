@@ -43,7 +43,7 @@ class CurrentPlayerStateTest {
     @Test
     void getBoard() {
         CurrentPlayerState p = new CurrentPlayerState(Player.YELLOW);
-        assertEquals(p.getBoard(), null);
+        assertEquals(p.getBoard().getWeaponsList().isEmpty(), true);
     }
 
     @Test

@@ -53,6 +53,15 @@ public class ViewStartGame extends Thread {
     public synchronized void run() {
         MessageWriter messageWriter = new MessageWriter();
         ViewUpdater viewUpdater = new ViewUpdater();
+        UpdatePacket updatePacket = null;
+        try {
+            updatePacket = (UpdatePacket) objectInputStream.readObject();
+            viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         while(true){
             try {
                 MessageEnum messageEnum = (MessageEnum) objectInputStream.readObject();
@@ -63,7 +72,7 @@ public class ViewStartGame extends Thread {
                 }
                 MessageEnum messageEnumOK = (MessageEnum) objectInputStream.readObject();
                 if (messageEnumOK.equals(MessageEnum.OK)){
-                    UpdatePacket updatePacket = (UpdatePacket) objectInputStream.readObject();
+                    updatePacket = (UpdatePacket) objectInputStream.readObject();
                     viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
                 }
             } catch (IOException e) {

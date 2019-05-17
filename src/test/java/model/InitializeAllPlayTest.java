@@ -139,6 +139,7 @@ class InitializeAllPlayTest {
     void removeObserver() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         UpdateThread updateThread = new UpdateThread(initializeAllPlay, Player.BLACK, null);
+        initializeAllPlay.notifyObserver();
         initializeAllPlay.addObserver(updateThread);
         assertEquals(initializeAllPlay.getObservers().contains(updateThread), true);
         initializeAllPlay.notifyObserver();

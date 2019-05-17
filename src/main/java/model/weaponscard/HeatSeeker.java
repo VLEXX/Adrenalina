@@ -41,6 +41,14 @@ public class HeatSeeker extends Weapon implements Serializable {
      * @return Ok or ATTACK_NOT_PRESENT
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        if((playerToAttack.get(0) == null)) {
+            return MessageEnum.OK;
+        }
+
+        if((playerToAttack.get(0).equals(Player.FLAG))) {
+            return MessageEnum.WEAPON_ERROR;
+        }
+
         int control = 0;
         control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(playerToAttack.get(0) != null && checkNotSee(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()) == false)

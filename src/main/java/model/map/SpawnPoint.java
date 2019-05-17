@@ -3,7 +3,9 @@ package model.map;
 
 import model.weaponscard.Weapon;
 
-public class SpawnPoint {
+import java.io.Serializable;
+
+public class SpawnPoint implements Serializable {
     private Weapon[] SpawnWeaponsList;  //lista armi presenti allo spawn
 
 

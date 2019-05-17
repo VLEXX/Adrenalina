@@ -1,9 +1,10 @@
 //Author: Alex Saletti
 package model.map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Room {
+public class Room implements Serializable {
     private int id; //id della stanza
     private ArrayList<Cell> cellslist;    //elenco delle celle della stanza
 

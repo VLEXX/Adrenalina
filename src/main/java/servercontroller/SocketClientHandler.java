@@ -56,9 +56,12 @@ public class SocketClientHandler implements Runnable {
             objectOutputStream.writeObject(message);
 
             UpdateThread updateThread = new UpdateThread(allPlay, player, objectOutputStream);
-            updateThread.start();
+            updateThread.updateClient();
+
             StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream);
             startGame.start();
+
+            updateThread.start();
 
             socket.close();
         }

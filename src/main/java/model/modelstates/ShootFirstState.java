@@ -20,9 +20,7 @@ public class ShootFirstState implements State {
 
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
-        if(dataPacket.isFirstAttack()==false){
-            return MessageEnum.OK;
-        }
+
         Weapon weapon;
         if(dataPacket.isFirstAttack()==true){
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
@@ -64,9 +62,9 @@ public class ShootFirstState implements State {
                         return MessageEnum.EMPTY_WEAPON;
                     }
                 }
+                return MessageEnum.WEAPON_NOT_FOUND;
             }
         }
-        return MessageEnum.WEAPON_NOT_FOUND;
-
+        return MessageEnum.OK;
     }
 }

@@ -135,6 +135,9 @@ public class InitializeAllPlay implements SubjectUpdate {
 
     @Override
     public void notifyObserver() {
+        if(observers.isEmpty()==true){
+            return;
+        }
         for (ObserverUpdate observer : this.getObservers()) {
             observer.update(true);
         }

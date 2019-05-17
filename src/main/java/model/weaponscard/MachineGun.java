@@ -84,6 +84,10 @@ public class MachineGun extends Weapon {
      * @return OK or CANNOT_USE_THIS_EFFECT or POSITION_NOT_FOUND
      */
     public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
+        if((playerToAttack.isEmpty()==true)) {
+            return MessageEnum.OK;
+        }
+
         int control = 0;
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
@@ -112,6 +116,14 @@ public class MachineGun extends Weapon {
      * @return OK or CANNOT_USE_THIS_EFFECT or POSITION_NOT_FOUND
      */
     public MessageEnum thirdAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        if((playerToAttack.isEmpty()==true)) {
+            return MessageEnum.OK;
+        }
+
+        if((playerToAttack.get(0).equals(Player.FLAG))) {
+            return MessageEnum.WEAPON_ERROR;
+        }
+
         int control = 0;
         int control1 = 0;
         control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);

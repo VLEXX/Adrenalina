@@ -70,6 +70,9 @@ public class LockRifle extends Weapon implements Serializable {
         if((playerToAttack.isEmpty()==true)) {
             return MessageEnum.OK;
         }
+        if((playerToAttack.get(0).equals(Player.FLAG))) {
+            return MessageEnum.WEAPON_ERROR;
+        }
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(myPosition, positionToAttack) == false)

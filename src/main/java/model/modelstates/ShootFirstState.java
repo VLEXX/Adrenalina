@@ -62,8 +62,8 @@ public class ShootFirstState implements State {
                         return MessageEnum.EMPTY_WEAPON;
                     }
                 }
-                return MessageEnum.WEAPON_NOT_FOUND;
             }
+            return MessageEnum.WEAPON_NOT_FOUND;
         }
         return MessageEnum.OK;
     }

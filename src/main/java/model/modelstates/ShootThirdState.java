@@ -20,15 +20,13 @@ public class ShootThirdState implements State {
 
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
-        if(dataPacket.isThirdAttack()==false){
-            return MessageEnum.OK;
-        }
+
         Weapon weapon;
         if(dataPacket.isThirdAttack()==true){
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
                     weapon = w;
-                    MessageEnum messageEnum = weapon.thirdAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersSecond(), allPlay);
+                    MessageEnum messageEnum = weapon.thirdAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersThird(), allPlay);
                     if(messageEnum.equals(MessageEnum.OK)){
                         if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
                             allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
@@ -46,7 +44,8 @@ public class ShootThirdState implements State {
                     return messageEnum;
                 }
             }
+            return MessageEnum.WEAPON_NOT_FOUND;
         }
-        return MessageEnum.WEAPON_NOT_FOUND;
+        return MessageEnum.OK;
     }
 }

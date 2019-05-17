@@ -20,9 +20,7 @@ public class ShootSecondState implements State {
 
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
-        if(dataPacket.isSecondAttack()==false){
-            return MessageEnum.OK;
-        }
+
         Weapon weapon;
         if(dataPacket.isSecondAttack()==true) {
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
@@ -60,7 +58,8 @@ public class ShootSecondState implements State {
                     return messageEnum;
                 }
             }
+            return MessageEnum.WEAPON_NOT_FOUND;
         }
-        return MessageEnum.WEAPON_NOT_FOUND;
+        return MessageEnum.OK;
     }
 }

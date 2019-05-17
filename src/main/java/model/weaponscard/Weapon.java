@@ -4,6 +4,7 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.map.Position;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -121,7 +122,7 @@ public abstract class Weapon implements Serializable {
 
     public abstract MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
 
-    public abstract MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
+    public abstract MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay);
 
     public abstract MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
 

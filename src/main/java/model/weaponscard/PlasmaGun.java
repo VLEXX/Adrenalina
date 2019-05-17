@@ -3,6 +3,7 @@
  */
 package model.weaponscard;
 
+import model.datapacket.DataPacket;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.map.Position;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
  * Weapon Plasmagun
  */
 public class PlasmaGun extends Weapon implements Serializable {
+
+    private Player player1;
 
     /**
      * Constructor that set the cost of this weapon
@@ -54,6 +57,7 @@ public class PlasmaGun extends Weapon implements Serializable {
         control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
         if(control != 0);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, player);
+        player1 = playerToAttack.get(0);
         return MessageEnum.OK;
     }
 
@@ -61,18 +65,18 @@ public class PlasmaGun extends Weapon implements Serializable {
      * Function phase slip
      *
      * @param player       player who attack
+     * @param playerToAttack player to attack = null
+     * @param positionToMove position to go
      * @return OK or POSITION_UNREACHABLE
      */
-    public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
-        /*Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
-        Position positionToGo = allPlay.getCurrentPlayerState()
-        if (checkPosition(myposition, positionToGo)) {
-            myposition.getCurrentcell().removeInCellPlayer(player);
-            myposition.setCurrentcell(positionToGo.getCurrentcell());
-            myposition.getCurrentcell().addInCellPlayer(player);
-        } else
-            return MessageEnum.POSITION_UNREACHABLE;
-        */return MessageEnum.OK;
+    public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
+        Position myposition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
+        if (checkPosition(myposition, positionToMove)) {
+            allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().removeInCellPlayer(player);
+            allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
+            allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().addInCellPlayer(player);
+        } else return MessageEnum.POSITION_UNREACHABLE;
+        return MessageEnum.OK;
     }
 
     /**
@@ -84,10 +88,17 @@ public class PlasmaGun extends Weapon implements Serializable {
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum thirdAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+        int control = 0;
+        if(player1 != playerToAttack.get(0))
+            return MessageEnum.PLAYER_NOT_VALID;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(check(position, positionToAttack))
+        if(check(position, positionToAttack)) {
+            if(control != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, player);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);
+        }
         else return MessageEnum.POSITION_NOT_FOUND;
         return MessageEnum.OK;
     }

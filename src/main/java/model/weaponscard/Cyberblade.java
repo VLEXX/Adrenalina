@@ -4,6 +4,7 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.map.Position;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -39,7 +40,7 @@ public class Cyberblade extends Weapon implements Serializable {
         return MessageEnum.OK;
     }
 
-    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         return MessageEnum.OK;
     }
 

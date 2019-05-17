@@ -20,7 +20,7 @@ public class ClientManager {
     }
 
     public Player chooseCharacter(String s){
-        if(s.equals("black")||s.equals("Black")||s.equals(" BLACK")){
+        if(s.equals("black")||s.equals("Black")||s.equals("BLACK")){
             return Player.BLACK;
         }
         if(s.equals("blue")||s.equals("Blue")||s.equals("BLUE")){

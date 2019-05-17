@@ -1,6 +1,7 @@
 package model;
 
 import model.map.Cell;
+import model.map.Position;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
@@ -190,5 +191,13 @@ class DataPacketTest {
     void getMarksToAdd() {
         DataPacket dataPacket = new DataPacket();
         assertEquals(dataPacket.getMarksToAdd().isEmpty(), true);
+    }
+
+    @Test
+    void setPosition() {
+        DataPacket dataPacket = new DataPacket();
+        Position position = new Position();
+        dataPacket.setPosition(position);
+        assertEquals(dataPacket.getPosition(), position);
     }
 }

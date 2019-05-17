@@ -25,7 +25,7 @@ public class PowerupState implements State {
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
 
-        if(dataPacket.getMarksToAdd().isEmpty()==true) {
+        if(dataPacket.getMarksToAdd().isEmpty()==false) {
             for (PowerUp powerUp : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()) {
                 if (powerUp.getId().equals(PowerUpId.TAGBACK_GRENADE)) {
                     if(allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().containsKey(dataPacket.getPlayer())) {

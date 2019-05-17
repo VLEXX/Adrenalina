@@ -4,6 +4,7 @@
 package model.datapacket;
 
 import model.map.Cell;
+import model.map.Position;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
@@ -28,6 +29,7 @@ public class DataPacket implements Serializable {
     private boolean thirdAttack;
     private Action action;
     private HashMap<Player, Integer> marksToAdd;
+    private Position position;
 
     public DataPacket() {
         this.cell = null;
@@ -45,6 +47,7 @@ public class DataPacket implements Serializable {
         this.thirdAttack = false;
         this.action=null;
         this.marksToAdd= new HashMap<>();
+        this.position=null;
     }
 
     public HashMap<Player, Integer> getMarksToAdd() {
@@ -185,5 +188,13 @@ public class DataPacket implements Serializable {
 
     public boolean isFirstAttack() {
         return firstAttack;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

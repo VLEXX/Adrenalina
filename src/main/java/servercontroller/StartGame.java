@@ -36,7 +36,7 @@ public class StartGame extends Thread {
         ShootSecondState shootSecondState = new ShootSecondState(allPlay, stateHashMap);
         ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap);
         PickUpState pickUpState = new PickUpState(allPlay, stateHashMap);
-        PowerupState powerupState = new PowerupState();
+        PowerupState powerupState = new PowerupState(allPlay, stateHashMap);
         stateHashMap.put(StatesEnum.ACTION, actionState);
         stateHashMap.put(StatesEnum.END, endTurnState);
         stateHashMap.put(StatesEnum.MOVE, moveState);

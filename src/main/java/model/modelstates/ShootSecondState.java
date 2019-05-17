@@ -26,7 +26,7 @@ public class ShootSecondState implements State {
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
                     weapon = w;
-                    MessageEnum messageEnum = weapon.secondAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersSecond(), allPlay);
+                    MessageEnum messageEnum = weapon.secondAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersSecond(), dataPacket.getPosition(), allPlay);
                     if(messageEnum.equals(MessageEnum.OK)){
                         if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
                             if(weapon.hasThirdAttack()==true) {

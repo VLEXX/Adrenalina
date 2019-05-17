@@ -18,6 +18,7 @@ public class CurrentPlayerState implements Observer, Serializable {
     private int actioncounter;          //Contatore di azioni rimanenti che può compiere il giocatore (max 2 per turno)
     private Player activeplayer;        //Memorizza il colore/personaggio scelto dal giocatore
     private HashMap<Player, Integer> controlMarks;  //Controlla il numero dei marchi da aggiungere alla plancia danni giocatore
+    private Player hit;
 
     /**
      * Constructor
@@ -29,6 +30,15 @@ public class CurrentPlayerState implements Observer, Serializable {
         this.actioncounter = 2;
         this.activeplayer = player;
         controlMarks = new HashMap<>();
+        this.hit = null;
+    }
+
+    public Player getHit() {
+        return hit;
+    }
+
+    public void setHit(Player hit) {
+        this.hit = hit;
     }
 
     /**

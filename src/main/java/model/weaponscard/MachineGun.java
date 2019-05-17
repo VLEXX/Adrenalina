@@ -83,7 +83,7 @@ public class MachineGun extends Weapon {
      * @param allPlay current state game
      * @return OK or CANNOT_USE_THIS_EFFECT or POSITION_NOT_FOUND
      */
-    public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
+    public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, Position p, InitializeAllPlay allPlay) {
         if((playerToAttack.isEmpty()==true)) {
             return MessageEnum.OK;
         }

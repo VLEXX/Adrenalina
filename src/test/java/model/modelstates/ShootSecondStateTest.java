@@ -33,7 +33,7 @@ class ShootSecondStateTest {
         ShootSecondState shootSecondState2 = new ShootSecondState(initializeAllPlay, stateHashMap);
         ShootThirdState shootThirdState = new ShootThirdState(initializeAllPlay, stateHashMap);
         PickUpState pickUpState = new PickUpState(initializeAllPlay, stateHashMap);
-        PowerupState powerupState = new PowerupState();
+        PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap);
         stateHashMap.put(StatesEnum.ACTION, actionState);
         stateHashMap.put(StatesEnum.END, endTurnState);
         stateHashMap.put(StatesEnum.MOVE, moveState);
@@ -91,7 +91,7 @@ class ShootSecondStateTest {
         ShootSecondState shootSecondState2 = new ShootSecondState(initializeAllPlay, stateHashMap);
         ShootThirdState shootThirdState = new ShootThirdState(initializeAllPlay, stateHashMap);
         PickUpState pickUpState = new PickUpState(initializeAllPlay, stateHashMap);
-        PowerupState powerupState = new PowerupState();
+        PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap);
         stateHashMap.put(StatesEnum.ACTION, actionState);
         stateHashMap.put(StatesEnum.END, endTurnState);
         stateHashMap.put(StatesEnum.MOVE, moveState);

@@ -109,4 +109,17 @@ class CurrentPlayerStateTest {
         c.addControlMarks(Player.YELLOW, 3);
         assertEquals(c.getControlMarks().get(Player.YELLOW), 3);
     }
+
+    @Test
+    void getHit() {
+        CurrentPlayerState c = new CurrentPlayerState(Player.BLACK);
+        assertEquals(c.getHit(), null);
+    }
+
+    @Test
+    void setHit() {
+        CurrentPlayerState c = new CurrentPlayerState(Player.BLACK);
+        c.setHit(Player.YELLOW);
+        assertEquals(c.getHit(), Player.YELLOW);
+    }
 }

@@ -4,6 +4,7 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.map.Position;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -36,7 +37,7 @@ public class SledgeHammer extends Weapon implements Serializable {
         return MessageEnum.OK;
     }
 
-    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position position, InitializeAllPlay allPlay){
         return MessageEnum.OK;
     }
 

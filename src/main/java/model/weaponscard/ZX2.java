@@ -61,7 +61,7 @@ public class ZX2 extends Weapon implements Serializable {
      * @param playerToAttack player to attack
      * @return OK or POSITION_UNREACHABLE
      */
-    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position position, InitializeAllPlay allPlay) {
         int control1 = 0;
         int control2 = 0;
         int control3 = 0;

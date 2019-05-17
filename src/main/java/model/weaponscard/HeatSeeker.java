@@ -60,7 +60,7 @@ public class HeatSeeker extends Weapon implements Serializable {
         return MessageEnum.OK;
     }
 
-    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position position, InitializeAllPlay allPlay){
         return MessageEnum.ATTACK_NOT_PRESENT;
     }
 

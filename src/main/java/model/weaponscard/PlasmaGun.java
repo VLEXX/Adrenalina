@@ -157,7 +157,6 @@ public class PlasmaGun extends Weapon implements Serializable {
      * @param current current cell of the player
      * @param go cell to go
      * @return true if correct
-     * @author Giulia Rivara
      */
     private boolean checkAround(Cell current, Cell go) {
         if (current.getCellId() == go.getCellId()) {

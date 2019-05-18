@@ -65,7 +65,6 @@ public class SledgeHammer extends Weapon implements Serializable {
      * @return PLAYER_NOT_VALID or OK or POSITION_UNREACHABLE
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
-        //TODO controllo discorso posizione
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         if (playerToAttack.get(0) != null) {
@@ -91,63 +90,35 @@ public class SledgeHammer extends Weapon implements Serializable {
     }
 
     /**
-     * Function that check the correct position to shot
+     * Function that check the correct position to move a player, in this case the player to attack can be moved in a direction for max 2 cell
      * @param myPosition position of the player who shot
      * @param positionToGo position to go
      * @return true if correct
      */
     private boolean checkPosition(Position myPosition, Position positionToGo) {
         if (myPosition.getCurrentcell().getUpCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getUpCell(), positionToGo.getCurrentcell()))
+            if (myPosition.getCurrentcell().getUpCell().getCellId() == positionToGo.getCurrentcell().getCellId()) {
+                return true;
+            } else if(myPosition.getCurrentcell().getUpCell().getCellId() == positionToGo.getCurrentcell().getCellId())
                 return true;
         }
         if (myPosition.getCurrentcell().getDownCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getDownCell(), positionToGo.getCurrentcell())) {
+            if (myPosition.getCurrentcell().getDownCell().getCellId() == positionToGo.getCurrentcell().getCellId()) {
                 return true;
-            }
+            } else if(myPosition.getCurrentcell().getDownCell().getCellId() == positionToGo.getCurrentcell().getCellId())
+                return true;
         }
         if (myPosition.getCurrentcell().getLeftCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getLeftCell(), positionToGo.getCurrentcell())) {
+            if (myPosition.getCurrentcell().getLeftCell().getCellId() == positionToGo.getCurrentcell().getCellId()) {
                 return true;
-            }
+            } else if(myPosition.getCurrentcell().getLeftCell().getCellId() == positionToGo.getCurrentcell().getCellId())
+                return true;
         }
         if (myPosition.getCurrentcell().getRightCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getRightCell(), positionToGo.getCurrentcell())) {
+            if (myPosition.getCurrentcell().getRightCell().getCellId() == positionToGo.getCurrentcell().getCellId()) {
                 return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Function that check the correct position to shot
-     * @param current current cell of the player
-     * @param go cell to go
-     * @return true if correct
-     */
-    private boolean checkAround(Cell current, Cell go) {
-        if (current.getCellId() == go.getCellId()) {
-            return true;
-        }
-        if (current.getUpCell() != null) {
-            if (current.getUpCell().getCellId() == go.getCellId()) {
+            } else if(myPosition.getCurrentcell().getRightCell().getCellId() == positionToGo.getCurrentcell().getCellId())
                 return true;
-            }
-        }
-        if (current.getDownCell() != null) {
-            if (current.getDownCell().getCellId() == go.getCellId()) {
-                return true;
-            }
-        }
-        if (current.getLeftCell() != null) {
-            if (current.getLeftCell().getCellId() == go.getCellId()) {
-                return true;
-            }
-        }
-        if (current.getRightCell() != null) {
-            if (current.getRightCell().getCellId() == go.getCellId()) {
-                return true;
-            }
         }
         return false;
     }

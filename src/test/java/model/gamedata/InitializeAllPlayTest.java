@@ -4,11 +4,9 @@
 package model.gamedata;
 
 import model.datapacket.StatesEnum;
+import model.modelstates.*;
 import servercontroller.UpdateThread;
 import model.gamedata.InitializeAllPlay;
-import model.modelstates.MoveState;
-import model.modelstates.ShootFirstState;
-import model.modelstates.State;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +61,7 @@ class InitializeAllPlayTest {
     @Test
     void getIdClientList() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        assertEquals(initializeAllPlay.getIdClientList().size(), 0);
+        assertEquals(initializeAllPlay.getIdClientList().getPlayerArrayList().isEmpty(), true);
     }
 
     @Test
@@ -146,5 +144,33 @@ class InitializeAllPlayTest {
         assertEquals(updateThread.isActiveUpdate(), true);
         initializeAllPlay.removeObserver(updateThread);
         assertEquals(initializeAllPlay.getObservers().contains(updateThread), false);
+    }
+
+    @Test
+    void putInHashMapState() {
+        InitializeAllPlay allPlay = new InitializeAllPlay();
+
+        HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
+        ActionState actionState = new ActionState(allPlay, stateHashMap);
+        EndTurnState endTurnState = new EndTurnState(allPlay, stateHashMap);
+        MoveState moveState = new MoveState(allPlay, stateHashMap);
+        WaitingState waitingState = new WaitingState(allPlay, stateHashMap);
+        ShootFirstState shootFirstState2 = new ShootFirstState(allPlay, stateHashMap);
+        ShootSecondState shootSecondState2 = new ShootSecondState(allPlay, stateHashMap);
+        ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap);
+        PickUpState pickUpState = new PickUpState(allPlay, stateHashMap);
+        PowerupState powerupState1 = new PowerupState(allPlay, stateHashMap);
+        stateHashMap.put(StatesEnum.ACTION, actionState);
+        stateHashMap.put(StatesEnum.END, endTurnState);
+        stateHashMap.put(StatesEnum.MOVE, moveState);
+        stateHashMap.put(StatesEnum.WAIT, waitingState);
+        stateHashMap.put(StatesEnum.SHOOT, shootFirstState2);
+        stateHashMap.put(StatesEnum.SHOOT_SECOND, shootSecondState2);
+        stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
+        stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
+        stateHashMap.put(StatesEnum.POWERUP, powerupState1);
+
+        allPlay.putInHashMapState(Player.YELLOW, StatesEnum.WAIT, stateHashMap);
+        assertEquals(allPlay.getHashMapState().get(Player.YELLOW) instanceof WaitingState, true);
     }
 }

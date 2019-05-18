@@ -30,6 +30,7 @@ public class ServerManagerFunction {
                 objectOutputStream.writeObject(message);
                 allPlay.getCurrentPlayerState().put(player, new CurrentPlayerState(player));
                 allPlay.getCurrentDeckState().getPlayers().remove(player);
+                allPlay.getIdClientList().getPlayerArrayList().add(player);
                 ok = true;
                 objectOutputStream.writeObject(ok);
                 System.out.println(allPlay.getPlayercountertemp());

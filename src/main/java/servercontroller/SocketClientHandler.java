@@ -55,6 +55,7 @@ public class SocketClientHandler implements Runnable {
             MessageString message = new MessageString("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
             objectOutputStream.writeObject(message);
 
+
             UpdateThread updateThread = new UpdateThread(allPlay, player, objectOutputStream);
             updateThread.updateClient();
 

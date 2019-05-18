@@ -49,6 +49,7 @@ public class StartGame extends Thread {
     }
 
     public synchronized void run(){
+        allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
         while(true){
             try {
                 DataPacket dataPacket = (DataPacket) objectInputStream.readObject();

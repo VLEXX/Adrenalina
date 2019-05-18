@@ -32,4 +32,20 @@ class IDClientListTest {
         assertEquals(cl.getClientlist()[3], 23);
         assertEquals(cl.getClientlist()[4], 24);
     }
+
+    @Test
+    void getPlayerArrayList() {
+        IDClientList idClientList = new IDClientList();
+        assertEquals(idClientList.getPlayerArrayList().isEmpty(), true);
+    }
+
+    @Test
+    void getIndexArray() {
+        IDClientList idClientList = new IDClientList();
+        idClientList.increaseIndexArray();
+        idClientList.increaseIndexArray();
+        assertEquals(idClientList.getIndexArray(),2);
+        idClientList.resetIndexArray();
+        assertEquals(idClientList.getIndexArray(),0);
+    }
 }

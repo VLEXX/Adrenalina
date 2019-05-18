@@ -3,6 +3,7 @@
  */
 package model.gamedata;
 
+import model.datapacket.StatesEnum;
 import servercontroller.ObserverUpdate;
 import model.modelstates.State;
 import model.playerdata.CurrentPlayerState;
@@ -23,7 +24,7 @@ public class InitializeAllPlay implements SubjectUpdate {
     private StateSelectedMode stateSelectedMode;
     private VoteMap voteMap;
     private VoteMode voteMode;
-    private ArrayList<IDClientList> idClientList;
+    private IDClientList idClientList;
     private HashMap<Player, State> playerState;
     private int playercounter;
     private int playercountertemp;
@@ -41,13 +42,17 @@ public class InitializeAllPlay implements SubjectUpdate {
         stateSelectedMap = new StateSelectedMap();
         voteMap = new VoteMap();
         voteMode = new VoteMode();
-        idClientList = new ArrayList<>();
+        idClientList = new IDClientList();
         currentDeckState = new CurrentDeckState();
         playerState = new HashMap<>();
         playercounter = 0;
         playercountertemp = 0;
         observers = new ArrayList<>();
 
+    }
+
+    public synchronized void putInHashMapState(Player player, StatesEnum statesEnum, HashMap<StatesEnum, State> hashMap){
+        this.playerState.put(player, hashMap.get(statesEnum));
     }
 
     public void resetPlayerCounterTemp() {
@@ -99,7 +104,7 @@ public class InitializeAllPlay implements SubjectUpdate {
         return voteMode;
     }
 
-    public ArrayList<IDClientList> getIdClientList() {
+    public IDClientList getIdClientList() {
         return idClientList;
     }
 

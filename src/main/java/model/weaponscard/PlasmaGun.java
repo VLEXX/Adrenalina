@@ -47,7 +47,7 @@ public class PlasmaGun extends Weapon implements Serializable {
      * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
      */
-    public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();

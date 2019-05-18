@@ -40,7 +40,7 @@ public class HeatSeeker extends Weapon implements Serializable {
      * @param allPlay current state game
      * @return Ok or ATTACK_NOT_PRESENT
      */
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         if((playerToAttack.get(0) == null)) {
             return MessageEnum.OK;
         }

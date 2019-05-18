@@ -46,7 +46,7 @@ public class Cyberblade extends Weapon implements Serializable {
      * @param allPlay current state game
      * @return OK or PLAYER_NOT_FOUND or PLAYER_NOT_VALID
      */
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         if (playerToAttack.get(0) != null) {

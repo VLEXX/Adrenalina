@@ -33,7 +33,7 @@ public class Furnace extends Weapon implements Serializable {
         super.setName("furnace");
     }
 
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         return MessageEnum.OK;
     }
 

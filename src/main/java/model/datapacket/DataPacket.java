@@ -5,8 +5,10 @@ package model.datapacket;
 
 import model.map.Cell;
 import model.map.Position;
+import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
+import model.powerups.PowerUpId;
 import model.weaponscard.Weapon;
 
 import java.io.Serializable;
@@ -30,6 +32,10 @@ public class DataPacket implements Serializable {
     private Action action;
     private HashMap<Player, Integer> marksToAdd;
     private Position position;
+    private PowerUpId powerUpId;
+    private Player targetPlayerPowerup;
+    private boolean powerupAction;
+    private Munitions munitions;
 
     public DataPacket() {
         this.cell = null;
@@ -48,6 +54,42 @@ public class DataPacket implements Serializable {
         this.action=null;
         this.marksToAdd= new HashMap<>();
         this.position=null;
+        this.powerUpId=null;
+        this.targetPlayerPowerup=null;
+        this.powerupAction = false;
+        this.munitions=null;
+    }
+
+    public Munitions getMunitions() {
+        return munitions;
+    }
+
+    public void setMunitions(Munitions munitions) {
+        this.munitions = munitions;
+    }
+
+    public boolean isPowerupAction() {
+        return powerupAction;
+    }
+
+    public void setPowerupAction(boolean powerupAction) {
+        this.powerupAction = powerupAction;
+    }
+
+    public Player getTargetPlayerPowerup() {
+        return targetPlayerPowerup;
+    }
+
+    public void setTargetPlayerPowerup(Player targetPlayerPowerup) {
+        this.targetPlayerPowerup = targetPlayerPowerup;
+    }
+
+    public PowerUpId getPowerUpId() {
+        return powerUpId;
+    }
+
+    public void setPowerUpId(PowerUpId powerUpId) {
+        this.powerUpId = powerUpId;
     }
 
     public HashMap<Player, Integer> getMarksToAdd() {

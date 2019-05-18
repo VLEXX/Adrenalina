@@ -23,5 +23,7 @@ public enum MessageEnum implements Serializable {
     ATTACK_NOT_PRESENT,
     TOO_MUCH_POWERUPS,
     PLAYER_TOO_MUCH_NEAR,
-    PLAYER_NOT_VALID
+    PLAYER_NOT_VALID,
+    INEXISTENT_CELL,
+    ENOUGH_AMMO
 }

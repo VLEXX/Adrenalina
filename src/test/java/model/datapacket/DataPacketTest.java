@@ -5,6 +5,7 @@ import model.map.Position;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
+import model.powerups.PowerUpId;
 import model.powerups.TagbackGrenade;
 import model.datapacket.Action;
 import model.datapacket.DataPacket;
@@ -199,5 +200,33 @@ class DataPacketTest {
         Position position = new Position();
         dataPacket.setPosition(position);
         assertEquals(dataPacket.getPosition(), position);
+    }
+
+    @Test
+    void setPowerUpId() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setPowerUpId(PowerUpId.TAGBACK_GRENADE);
+        assertEquals(dataPacket.getPowerUpId(), PowerUpId.TAGBACK_GRENADE);
+    }
+
+    @Test
+    void setTargetPlayerPowerup() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setTargetPlayerPowerup(Player.YELLOW);
+        assertEquals(dataPacket.getTargetPlayerPowerup(), Player.YELLOW);
+    }
+
+    @Test
+    void setPowerupAction() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setPowerupAction(true);
+        assertEquals(dataPacket.isPowerupAction(), true);
+    }
+
+    @Test
+    void setMunitions() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setMunitions(Munitions.BLUE);
+        assertEquals(dataPacket.getMunitions(), Munitions.BLUE);
     }
 }

@@ -69,7 +69,7 @@ public class Thor extends Weapon implements Serializable {
      * @param allPlay current state game
      * @return OK or PLAYER_NOT_FOUND
      */
-    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position position, InitializeAllPlay allPlay){
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();

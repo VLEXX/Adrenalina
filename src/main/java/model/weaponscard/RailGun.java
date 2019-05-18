@@ -37,7 +37,7 @@ public class RailGun extends Weapon implements Serializable {
         return MessageEnum.OK;
     }
 
-    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position position, InitializeAllPlay allPlay){
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         return MessageEnum.OK;
     }
 

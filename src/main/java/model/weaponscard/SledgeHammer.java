@@ -99,26 +99,34 @@ public class SledgeHammer extends Weapon implements Serializable {
         if (myPosition.getCurrentcell().getUpCell() != null) {
             if (myPosition.getCurrentcell().getUpCell().getCellId() == positionToGo.getCurrentcell().getCellId()) {
                 return true;
-            } else if(myPosition.getCurrentcell().getUpCell().getCellId() == positionToGo.getCurrentcell().getCellId())
-                return true;
+            } else if (myPosition.getCurrentcell().getUpCell().getUpCell() != null) {
+                if (myPosition.getCurrentcell().getUpCell().getUpCell().getCellId() == positionToGo.getCurrentcell().getCellId())
+                    return true;
+            }
         }
         if (myPosition.getCurrentcell().getDownCell() != null) {
             if (myPosition.getCurrentcell().getDownCell().getCellId() == positionToGo.getCurrentcell().getCellId()) {
                 return true;
-            } else if(myPosition.getCurrentcell().getDownCell().getCellId() == positionToGo.getCurrentcell().getCellId())
-                return true;
+            } else if (myPosition.getCurrentcell().getDownCell().getDownCell() != null) {
+                if (myPosition.getCurrentcell().getDownCell().getDownCell().getCellId() == positionToGo.getCurrentcell().getCellId())
+                    return true;
+            }
         }
         if (myPosition.getCurrentcell().getLeftCell() != null) {
             if (myPosition.getCurrentcell().getLeftCell().getCellId() == positionToGo.getCurrentcell().getCellId()) {
                 return true;
-            } else if(myPosition.getCurrentcell().getLeftCell().getCellId() == positionToGo.getCurrentcell().getCellId())
-                return true;
+            } else if (myPosition.getCurrentcell().getLeftCell().getLeftCell() != null) {
+                if (myPosition.getCurrentcell().getLeftCell().getLeftCell().getCellId() == positionToGo.getCurrentcell().getCellId())
+                    return true;
+            }
         }
         if (myPosition.getCurrentcell().getRightCell() != null) {
             if (myPosition.getCurrentcell().getRightCell().getCellId() == positionToGo.getCurrentcell().getCellId()) {
                 return true;
-            } else if(myPosition.getCurrentcell().getRightCell().getCellId() == positionToGo.getCurrentcell().getCellId())
-                return true;
+            } else if (myPosition.getCurrentcell().getRightCell().getRightCell() != null) {
+                if (myPosition.getCurrentcell().getRightCell().getRightCell().getCellId() == positionToGo.getCurrentcell().getCellId())
+                    return true;
+            }
         }
         return false;
     }

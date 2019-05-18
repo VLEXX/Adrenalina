@@ -59,12 +59,13 @@ public class RocketLauncher extends Weapon implements Serializable {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
         player1 = playerToAttack.get(0);
         position1 = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        //TODO movimento
-        if(checkPosition(positionToAttack, positionToMove)) {
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().removeInCellPlayer(playerToAttack.get(0));
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().addInCellPlayer(playerToAttack.get(0));
-        } else return MessageEnum.POSITION_UNREACHABLE;
+        if(positionToMove != null) {
+            if (checkPosition(positionToAttack, positionToMove)) {
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().removeInCellPlayer(playerToAttack.get(0));
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().addInCellPlayer(playerToAttack.get(0));
+            } else return MessageEnum.POSITION_UNREACHABLE;
+        }
         return MessageEnum.OK;
     }
 

@@ -50,7 +50,7 @@ class PickUpStateTest {
         a.setAmmoList(array);
         a.setPossiblePowerUp(true);
         i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).setAmmohere(a);
-        SpawnPoint sp= new SpawnPoint();
+        SpawnPoint sp= new SpawnPoint(Munitions.RED);
         sp.addWeapon(w1,0);
         sp.addWeapon(w1b,1);
         sp.addWeapon(w2,2);
@@ -138,7 +138,7 @@ class PickUpStateTest {
         a.setAmmoList(array);
         a.setPossiblePowerUp(true);
         i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).setAmmohere(a);
-        SpawnPoint sp= new SpawnPoint();
+        SpawnPoint sp= new SpawnPoint(Munitions.RED);
         sp.addWeapon(w1,0);
         sp.addWeapon(w1b,1);
         sp.addWeapon(w2,2);

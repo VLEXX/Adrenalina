@@ -41,7 +41,7 @@ public class Electroscythe extends Weapon {
      * @param allPlay current state game
      * @return OK or PLAYERS_NOT_VALID
      */
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay) {
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         for (int i = 0; i < playerToAttack.size(); i++) {

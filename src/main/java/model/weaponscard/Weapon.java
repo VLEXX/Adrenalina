@@ -120,7 +120,7 @@ public abstract class Weapon implements Serializable {
         this.weaponsMessage.add(i, weaponsMessage);
     }
 
-    public abstract MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay);
+    public abstract MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay);
 
     public abstract MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay);
 

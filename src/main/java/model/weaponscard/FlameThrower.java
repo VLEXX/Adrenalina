@@ -33,7 +33,7 @@ public class FlameThrower extends Weapon implements Serializable {
         super.setName("flamethrower");
     }
 
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         return MessageEnum.OK;
     }
 

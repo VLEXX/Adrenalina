@@ -25,5 +25,6 @@ public enum MessageEnum implements Serializable {
     PLAYER_TOO_MUCH_NEAR,
     PLAYER_NOT_VALID,
     INEXISTENT_CELL,
-    ENOUGH_AMMO
+    ENOUGH_AMMO,
+    POSITION_NOT_VALID
 }

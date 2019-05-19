@@ -34,18 +34,10 @@ public class PowerGlove extends Weapon implements Serializable {
         super.setName("powerglove");
     }
 
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         return MessageEnum.OK;
     }
 
-    /**
-     * Function first attack
-     * @param myPlayer
-     * @param playerToAttack
-     * @param allPlay
-     * @return
-     * @author Giulia Rivara
-     */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         return MessageEnum.OK;
     }

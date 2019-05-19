@@ -40,7 +40,7 @@ public class ZX2 extends Weapon implements Serializable {
      * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
      */
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();

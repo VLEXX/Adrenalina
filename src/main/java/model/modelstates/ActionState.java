@@ -22,24 +22,21 @@ public class ActionState implements State {
 
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
+        System.out.println(dataPacket.getStatesEnum());
         if (dataPacket.getStatesEnum().equals(StatesEnum.MOVE)) {
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.MOVE));
-            allPlay.notifyObserver();
             return MessageEnum.OK;
         }
         if (dataPacket.getStatesEnum().equals(StatesEnum.PICK_UP)) {
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.PICK_UP));
-            allPlay.notifyObserver();
             return MessageEnum.OK;
         }
         if (dataPacket.getStatesEnum().equals(StatesEnum.SHOOT)) {
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT));
-            allPlay.notifyObserver();
             return MessageEnum.OK;
         }
         if (dataPacket.getStatesEnum().equals(StatesEnum.END)) {
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
-            allPlay.notifyObserver();
             return MessageEnum.OK;
         } else {
             return MessageEnum.ACTION_ERROR;

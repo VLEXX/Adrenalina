@@ -30,6 +30,7 @@ public class InitializeAllPlay implements SubjectUpdate {
     private int playercountertemp;
     private ArrayList<ObserverUpdate> observers;
     private boolean endgame;
+    private State tempState;
 
 
     /**
@@ -51,6 +52,14 @@ public class InitializeAllPlay implements SubjectUpdate {
         observers = new ArrayList<>();
         this.endgame=false;
 
+    }
+
+    public State getTempState() {
+        return tempState;
+    }
+
+    public void setTempState(State tempState) {
+        this.tempState = tempState;
     }
 
     public void setEndgame(boolean endgame) {
@@ -130,11 +139,11 @@ public class InitializeAllPlay implements SubjectUpdate {
         playerState.replace(player, state);
     }
 
-    public State getPlayerState(Player player) {
+    public synchronized State getPlayerState(Player player) {
         return playerState.get(player);
     }
 
-    public HashMap<Player, State> getHashMapState() {
+    public synchronized HashMap<Player, State> getHashMapState() {
         return playerState;
     }
 
@@ -149,7 +158,7 @@ public class InitializeAllPlay implements SubjectUpdate {
     }
 
     @Override
-    public void notifyObserver() {
+    public synchronized void notifyObserver() {
         if(observers.isEmpty()==true){
             return;
         }

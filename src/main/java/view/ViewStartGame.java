@@ -23,33 +23,14 @@ public class ViewStartGame extends Thread {
     private HashMap<StatesEnum, ViewState> stateHashMap;
     private Scanner stdin;
 
-    public ViewStartGame(Player p, ObjectInputStream oi, ObjectOutputStream oo, Scanner scanner, ViewDatabase database){
+    public ViewStartGame(Player p, ObjectInputStream oi, ObjectOutputStream oo, Scanner scanner, ViewDatabase database, HashMap<StatesEnum,ViewState> hash){
         this.viewDatabase = database;
         this.stdin = scanner;
         this.player=p;
         this.objectInputStream=oi;
         this.objectOutputStream=oo;
-        this.stateHashMap = new HashMap<>();
-        ViewActionState actionState = new ViewActionState();
-        ViewEndturnState endTurnState = new ViewEndturnState();
-        ViewMoveState moveState = new ViewMoveState();
-        ViewWaitingState waitingState = new ViewWaitingState();
-        ViewShootFirstState shootFirstState = new ViewShootFirstState();
-        ViewShootSecondState shootSecondState = new ViewShootSecondState();
-        ViewShootThirdState shootThirdState = new ViewShootThirdState();
-        ViewPickupState pickUpState = new ViewPickupState();
-        ViewPowerupState powerupState = new ViewPowerupState();
-        ViewSpawnState spawnState = new ViewSpawnState();
-        stateHashMap.put(StatesEnum.ACTION, actionState);
-        stateHashMap.put(StatesEnum.END, endTurnState);
-        stateHashMap.put(StatesEnum.MOVE, moveState);
-        stateHashMap.put(StatesEnum.WAIT, waitingState);
-        stateHashMap.put(StatesEnum.SHOOT, shootFirstState);
-        stateHashMap.put(StatesEnum.SHOOT_SECOND, shootSecondState);
-        stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
-        stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
-        stateHashMap.put(StatesEnum.POWERUP, powerupState);
-        stateHashMap.put(StatesEnum.SPAWN, spawnState);
+        this.stateHashMap = hash;
+
     }
 
     public synchronized void run() {
@@ -58,33 +39,24 @@ public class ViewStartGame extends Thread {
         UpdatePacket updatePacket;
         MessageEnum messageEnum;
         MessageEnum messageEnumOK;
+        viewDatabase.getViewState().put(player, stateHashMap.get(StatesEnum.WAIT));
         while(true) {
             try {
                 updatePacket = (UpdatePacket) objectInputStream.readObject();
                 viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
                 break;
             } catch (IOException e) {
-                e.printStackTrace();
+
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+
             }
         }
         while(true){
             updatePacket = null;
-            messageEnum = null;
             messageEnumOK = null;
             try {
-                while (true) {
-                    if(messageEnum!=null){
-                        break;
-                    }
-                    messageEnum = (MessageEnum) objectInputStream.readObject();
-                }
-                messageWriter.writeMessage(messageEnum);
-                if(messageEnum.equals(MessageEnum.OK)) {
                     DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
                     objectOutputStream.writeObject(dataPacket);
-                }
 
                 while (true) {
                     if(messageEnumOK!=null){
@@ -92,20 +64,19 @@ public class ViewStartGame extends Thread {
                     }
                     messageEnumOK = (MessageEnum) objectInputStream.readObject();
                 }
-
-                if (messageEnumOK.equals(MessageEnum.OK)){
+                if(messageEnumOK.equals(MessageEnum.OK)) {
                     while (true) {
-                        if(updatePacket !=null) {
+                        if(updatePacket!=null){
+                            viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
                             break;
                         }
                         updatePacket = (UpdatePacket) objectInputStream.readObject();
                     }
-                    viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+
             }
         }
     }

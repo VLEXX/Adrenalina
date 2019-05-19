@@ -20,7 +20,7 @@ class UpdatePacketTest {
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
         StrategyMap strategyMap = new InitializeMap1();
         Map map = strategyMap.initializeMap();
-        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null);
+        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null, null, false);
         assertEquals(updatePacket.getCurrentPlayerState().getActiveplayer(), Player.YELLOW);
     }
 
@@ -31,7 +31,7 @@ class UpdatePacketTest {
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
         StrategyMap strategyMap = new InitializeMap1();
         Map map = strategyMap.initializeMap();
-        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null);
+        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null, null, false);
         assertEquals(updatePacket.getChart().getScore()[0], 0);
     }
 
@@ -41,7 +41,7 @@ class UpdatePacketTest {
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
         StrategyMap strategyMap = new InitializeMap1();
         Map map = strategyMap.initializeMap();
-        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null);
+        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null, null, false);
         assertEquals(updatePacket.getMap().getMapname(), "1");
     }
 
@@ -51,7 +51,7 @@ class UpdatePacketTest {
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
         StrategyMap strategyMap = new InitializeMap1();
         Map map = strategyMap.initializeMap();
-        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null);
+        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null, null, false);
         assertEquals(updatePacket.getPositionHashMap(), null);
     }
 
@@ -61,7 +61,7 @@ class UpdatePacketTest {
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
         StrategyMap strategyMap = new InitializeMap1();
         Map map = strategyMap.initializeMap();
-        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, StatesEnum.ACTION);
+        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, StatesEnum.ACTION, null, false);
         assertEquals(updatePacket.getStatesEnum(), StatesEnum.ACTION);
     }
 }

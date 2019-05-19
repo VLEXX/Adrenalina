@@ -80,6 +80,7 @@ public class SocketClientHandler implements Runnable {
             stateHashMap.put(StatesEnum.POWERUP, powerupState);
             stateHashMap.put(StatesEnum.SPAWN, spawnState);
 
+            allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
             if(allPlay.getIdClientList().getPlayerArrayList().get(0).equals(player)){
                 allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.SPAWN));
             }
@@ -87,11 +88,14 @@ public class SocketClientHandler implements Runnable {
             UpdateThread updateThread = new UpdateThread(allPlay, player, objectOutputStream);
             updateThread.updateClient();
 
-            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap);
+
+            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updateThread);
             startGame.start();
 
 
-            socket.close();
+            if(allPlay.isEndgame()==true) {
+                socket.close();
+            }
         }
         catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

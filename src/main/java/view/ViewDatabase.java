@@ -17,6 +17,7 @@ public class ViewDatabase {
     private HashMap<Player, ViewState> viewState;
     private Player thisplayer;
     private Stack<PowerUp> currentDeckState;
+    private boolean endgame;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -26,6 +27,15 @@ public class ViewDatabase {
         this.viewState = new HashMap<>();
         this.thisplayer = null;
         this.currentDeckState = null;
+        this.endgame=false;
+    }
+
+    public boolean isEndgame() {
+        return endgame;
+    }
+
+    public void setEndgame(boolean endgame) {
+        this.endgame = endgame;
     }
 
     public Stack<PowerUp> getCurrentDeckState() {

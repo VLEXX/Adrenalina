@@ -39,8 +39,30 @@ public class UpdateThread extends Thread implements ObserverUpdate {
         }
         StatesEnum state = null;
 
+
         if(allPlay.getHashMapState().get(player) instanceof ActionState){
             state = StatesEnum.ACTION;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof ShootFirstState){
+            state = StatesEnum.SHOOT;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof ShootSecondState){
+            state = StatesEnum.SHOOT_SECOND;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof ShootThirdState){
+            state = StatesEnum.SHOOT_THIRD;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof PickUpState){
+            state = StatesEnum.PICK_UP;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof MoveState){
+            state = StatesEnum.MOVE;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof EndTurnState){
+            state = StatesEnum.END;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof WaitingState){
+            state = StatesEnum.WAIT;
         }
         if(allPlay.getHashMapState().get(player) instanceof PowerupState){
             state = StatesEnum.POWERUP;
@@ -48,10 +70,12 @@ public class UpdateThread extends Thread implements ObserverUpdate {
         if(allPlay.getHashMapState().get(player) instanceof SpawnState){
             state = StatesEnum.SPAWN;
         }
-        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), positionHashMap, state);
+        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), positionHashMap, state, allPlay.getCurrentDeckState().getPowerupdeck(), allPlay.isEndgame());
+
         objectOutputStream.writeObject(updatePacket);
+
     }
-    public void start(){
+    public synchronized void start(){
         while(true){
             if(endgame==true){
                 break;
@@ -62,7 +86,6 @@ public class UpdateThread extends Thread implements ObserverUpdate {
                         updateClient();
                         activeUpdate=false;
                     } catch (IOException e) {
-                        e.printStackTrace();
                     }
                 }
             }
@@ -70,7 +93,7 @@ public class UpdateThread extends Thread implements ObserverUpdate {
     }
 
     @Override
-    public void update(boolean active) {
+    public synchronized void update(boolean active) {
         this.activeUpdate=active;
     }
 

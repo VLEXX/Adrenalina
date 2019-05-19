@@ -2,6 +2,7 @@ package view.viewstates;
 
 import model.datapacket.Action;
 import model.datapacket.DataPacket;
+import model.datapacket.StatesEnum;
 import model.playerdata.Player;
 import view.ViewDatabase;
 
@@ -20,7 +21,7 @@ public class ViewActionState implements ViewState {
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
         System.out.println("Chose your action: SHOOT | MOVE | PICKUP | ENDTURN");
-        DataPacket dataPacket;
+        DataPacket dataPacket = null;
         while(true) {
             String s = stdin.nextLine();
             dataPacket = setActionPacket(s);
@@ -38,19 +39,19 @@ public class ViewActionState implements ViewState {
     protected DataPacket setActionPacket(String s){
         DataPacket dataPacket = new DataPacket();
         if (s.equals("SHOOT") || s.equals("shoot") || s.equals("Shoot")) {
-            dataPacket.setAction(Action.SHOOT);
+            dataPacket.setStatesEnum(StatesEnum.SHOOT);
             return dataPacket;
         }
         if (s.equals("PICKUP") || s.equals("pickup") || s.equals("Pickup")) {
-            dataPacket.setAction(Action.PICK_UP);
+            dataPacket.setStatesEnum(StatesEnum.PICK_UP);
             return dataPacket;
         }
         if (s.equals("MOVE") || s.equals("move") || s.equals("Move")) {
-            dataPacket.setAction(Action.MOVE);
+            dataPacket.setStatesEnum(StatesEnum.MOVE);
             return dataPacket;
         }
         if (s.equals("ENDTURN") || s.equals("endturn") || s.equals("Endturn")) {
-            dataPacket.setAction(Action.ENDTURN);
+            dataPacket.setStatesEnum(StatesEnum.END);
             return dataPacket;
         } else {
             return null;

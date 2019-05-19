@@ -173,4 +173,11 @@ class InitializeAllPlayTest {
         allPlay.putInHashMapState(Player.YELLOW, StatesEnum.WAIT, stateHashMap);
         assertEquals(allPlay.getHashMapState().get(Player.YELLOW) instanceof WaitingState, true);
     }
+
+    @Test
+    void setEndgame() {
+        InitializeAllPlay allPlay = new InitializeAllPlay();
+        allPlay.setEndgame(true);
+        assertEquals(allPlay.isEndgame(), true);
+    }
 }

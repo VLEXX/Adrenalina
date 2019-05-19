@@ -19,6 +19,9 @@ public class ViewUpdater {
         if(updatePacket.getStatesEnum().equals(StatesEnum.POWERUP)){
             viewDatabase.getViewState().replace(player, hashMap.get(StatesEnum.POWERUP));
         }
+        if(updatePacket.getStatesEnum().equals(StatesEnum.SPAWN)){
+            viewDatabase.getViewState().replace(player, hashMap.get(StatesEnum.SPAWN));
+        }
         viewDatabase.setViewPlayerPosition(updatePacket.getPositionHashMap());
     }
 }

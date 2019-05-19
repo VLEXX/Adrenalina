@@ -36,7 +36,8 @@ public class DataPacket implements Serializable {
     private Player targetPlayerPowerup;
     private boolean powerupAction;
     private Munitions munitions;
-    private PowerUp powerUp;
+    private PowerUp powerUpToKeepSpawn;
+    private PowerUp powerUpSpawn;
 
     public DataPacket() {
         this.cell = null;
@@ -59,15 +60,24 @@ public class DataPacket implements Serializable {
         this.targetPlayerPowerup=null;
         this.powerupAction = false;
         this.munitions = null;
-        this.powerUp = null;
+        this.powerUpToKeepSpawn = null;
+        this.powerUpSpawn = null;
     }
 
-    public void setPowerUp(PowerUp powerUp) {
-        this.powerUp = powerUp;
+    public PowerUp getPowerUpSpawn() {
+        return powerUpSpawn;
     }
 
-    public PowerUp getPowerUp() {
-        return powerUp;
+    public void setPowerUpSpawn(PowerUp powerUpSpawn) {
+        this.powerUpSpawn = powerUpSpawn;
+    }
+
+    public void setPowerUpToKeepSpawn(PowerUp powerUp) {
+        this.powerUpToKeepSpawn = powerUp;
+    }
+
+    public PowerUp getPowerUpToKeepSpawn() {
+        return powerUpToKeepSpawn;
     }
 
     public Munitions getMunitions() {

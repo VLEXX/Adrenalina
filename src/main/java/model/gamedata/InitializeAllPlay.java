@@ -29,6 +29,7 @@ public class InitializeAllPlay implements SubjectUpdate {
     private int playercounter;
     private int playercountertemp;
     private ArrayList<ObserverUpdate> observers;
+    private boolean endgame;
 
 
     /**
@@ -48,7 +49,16 @@ public class InitializeAllPlay implements SubjectUpdate {
         playercounter = 0;
         playercountertemp = 0;
         observers = new ArrayList<>();
+        this.endgame=false;
 
+    }
+
+    public void setEndgame(boolean endgame) {
+        this.endgame = endgame;
+    }
+
+    public boolean isEndgame() {
+        return endgame;
     }
 
     public synchronized void putInHashMapState(Player player, StatesEnum statesEnum, HashMap<StatesEnum, State> hashMap){

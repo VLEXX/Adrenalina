@@ -3,8 +3,7 @@ package servercontroller;
 import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.map.Position;
-import model.modelstates.ActionState;
-import model.modelstates.PowerupState;
+import model.modelstates.*;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.UpdatePacket;
@@ -45,6 +44,9 @@ public class UpdateThread extends Thread implements ObserverUpdate {
         }
         if(allPlay.getHashMapState().get(player) instanceof PowerupState){
             state = StatesEnum.POWERUP;
+        }
+        if(allPlay.getHashMapState().get(player) instanceof SpawnState){
+            state = StatesEnum.SPAWN;
         }
         UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), positionHashMap, state);
         objectOutputStream.writeObject(updatePacket);

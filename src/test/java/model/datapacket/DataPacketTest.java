@@ -231,10 +231,18 @@ class DataPacketTest {
     }
 
     @Test
-    void setPowerUp() {
+    void setPowerUpToKeepSpawn() {
         DataPacket dataPacket = new DataPacket();
         PowerUp powerUp = new TagbackGrenade(Munitions.RED);
-        dataPacket.setPowerUp(powerUp);
-        assertEquals(dataPacket.getPowerUp().getId(), powerUp.getId());
+        dataPacket.setPowerUpToKeepSpawn(powerUp);
+        assertEquals(dataPacket.getPowerUpToKeepSpawn().getId(), powerUp.getId());
+    }
+
+    @Test
+    void setPowerUpSpawn() {
+        DataPacket dataPacket = new DataPacket();
+        PowerUp powerUp = new TagbackGrenade(Munitions.RED);
+        dataPacket.setPowerUpSpawn(powerUp);
+        assertEquals(dataPacket.getPowerUpSpawn().getId(), powerUp.getId());
     }
 }

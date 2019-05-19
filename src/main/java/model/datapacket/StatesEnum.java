@@ -14,5 +14,6 @@ public enum StatesEnum implements Serializable  {
     MOVE,
     PICK_UP,
     WAIT,
-    POWERUP
+    POWERUP,
+    SPAWN
 }

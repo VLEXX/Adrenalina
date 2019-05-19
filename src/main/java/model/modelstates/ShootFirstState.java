@@ -27,7 +27,7 @@ public class ShootFirstState implements State {
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
                     weapon = w;
                     if(weapon.getLoaded()==true){
-                        MessageEnum messageEnum = weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), allPlay);
+                        MessageEnum messageEnum = weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), dataPacket.getPosition(), allPlay);
                         if(messageEnum.equals(MessageEnum.OK)){
                             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
                                 if(weapon.hasSecondAttack()==true) {

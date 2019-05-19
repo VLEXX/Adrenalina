@@ -1,5 +1,6 @@
 package view;
 
+import model.gamedata.CurrentDeckState;
 import model.map.Position;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
@@ -53,5 +54,13 @@ class ViewDatabaseTest {
     void getViewState() {
         ViewDatabase viewDatabase = new ViewDatabase();
         assertEquals(viewDatabase.getViewState().isEmpty(), true);
+    }
+
+    @Test
+    void setCurrentDeckState() {
+        ViewDatabase viewDatabase = new ViewDatabase();
+        CurrentDeckState currentDeckState = new CurrentDeckState();
+        viewDatabase.setCurrentDeckState(currentDeckState.getPowerupdeck());
+        assertEquals(viewDatabase.getCurrentDeckState(), currentDeckState.getPowerupdeck());
     }
 }

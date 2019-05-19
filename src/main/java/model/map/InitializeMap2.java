@@ -1,6 +1,8 @@
 //Author: Alex Saletti
 package model.map;
 
+import model.munitions.Munitions;
+
 public class InitializeMap2 implements StrategyMap {
     @Override
     public Map initializeMap() {
@@ -23,6 +25,12 @@ public class InitializeMap2 implements StrategyMap {
         Cell cell9 = new Cell(9);
         Cell cell10 = new Cell(10);
         Cell cell11 = new Cell(11);
+        SpawnPoint spawnPointRed = new SpawnPoint(Munitions.RED);
+        SpawnPoint spawnPointBlue = new SpawnPoint(Munitions.BLUE);
+        SpawnPoint spawnPointYellow = new SpawnPoint(Munitions.YELLOW);
+        cell3.setSpawnpointzone(spawnPointBlue);
+        cell4.setSpawnpointzone(spawnPointRed);
+        cell11.setSpawnpointzone(spawnPointYellow);
         //stanze presenti nella mappa
         map2.addRoom(room1);
         map2.addRoom(room2);

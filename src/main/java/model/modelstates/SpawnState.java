@@ -25,32 +25,42 @@ public class SpawnState implements State {
 
         PowerUp pop1 = allPlay.getCurrentDeckState().getPowerupdeck().pop();
         PowerUp pop2 = allPlay.getCurrentDeckState().getPowerupdeck().pop();
-        if((pop1.getId().equals(dataPacket.getPowerUp().getId()))){
-            allPlay.getCurrentDeckState().getPowerupdeck().push(pop1);
-            for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
-                for(Cell cell: room.getCellsList()){
-                    if(cell.getSpawnpointzone().getSpawnColor().equals(pop1.getColor())){
-                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
-                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
-                        cell.addInCellPlayer(dataPacket.getPlayer());
+        if(pop1.getId().equals(dataPacket.getPowerUpToKeepSpawn().getId())){
+            if(pop2.getId().equals(dataPacket.getPowerUpSpawn().getId())) {
+                for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
+                    for (Cell cell : room.getCellsList()) {
+                        if (cell.getSpawnpointzone().getSpawnColor().equals(pop2.getColor())) {
+                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
+                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                            cell.addInCellPlayer(dataPacket.getPlayer());
+                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().add(pop1);
+                            allPlay.getCurrentDeckState().getPowerupdeck().push(pop2);
+                            return MessageEnum.OK;
+                        }
                     }
                 }
+
             }
-            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().add(pop1);
         }
-        if((pop2.getId().equals(dataPacket.getPowerUp().getId()))){
-            allPlay.getCurrentDeckState().getPowerupdeck().push(pop1);
-            for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
-                for(Cell cell: room.getCellsList()){
-                    if(cell.getSpawnpointzone().getSpawnColor().equals(pop2.getColor())){
-                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
-                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
-                        cell.addInCellPlayer(dataPacket.getPlayer());
+
+        if(pop2.getId().equals(dataPacket.getPowerUpToKeepSpawn().getId())){
+            if(pop1.getId().equals(dataPacket.getPowerUpSpawn().getId())) {
+                for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
+                    for (Cell cell : room.getCellsList()) {
+                        if (cell.getSpawnpointzone().getSpawnColor().equals(pop1.getColor())) {
+                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
+                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                            cell.addInCellPlayer(dataPacket.getPlayer());
+                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().add(pop2);
+                            allPlay.getCurrentDeckState().getPowerupdeck().push(pop1);
+                            return MessageEnum.OK;
+                        }
                     }
                 }
+
             }
-            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().add(pop1);
         }
-        return null;
+
+        return MessageEnum.POWERUP_NOT_FOUND;
     }
 }

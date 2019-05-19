@@ -3,13 +3,16 @@
  */
 package servercontroller;
 
+import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageString;
+import model.modelstates.*;
 import model.playerdata.Player;
 
 import java.io.*;
 
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class SocketClientHandler implements Runnable {
@@ -55,17 +58,38 @@ public class SocketClientHandler implements Runnable {
             MessageString message = new MessageString("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
             objectOutputStream.writeObject(message);
 
+            HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
+            ActionState actionState = new ActionState(allPlay, stateHashMap);
+            EndTurnState endTurnState = new EndTurnState(allPlay, stateHashMap);
+            MoveState moveState = new MoveState(allPlay, stateHashMap);
+            WaitingState waitingState = new WaitingState(allPlay, stateHashMap);
+            ShootFirstState shootFirstState = new ShootFirstState(allPlay, stateHashMap);
+            ShootSecondState shootSecondState = new ShootSecondState(allPlay, stateHashMap);
+            ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap);
+            PickUpState pickUpState = new PickUpState(allPlay, stateHashMap);
+            PowerupState powerupState = new PowerupState(allPlay, stateHashMap);
+            SpawnState spawnState = new SpawnState(allPlay, stateHashMap);
+            stateHashMap.put(StatesEnum.ACTION, actionState);
+            stateHashMap.put(StatesEnum.END, endTurnState);
+            stateHashMap.put(StatesEnum.MOVE, moveState);
+            stateHashMap.put(StatesEnum.WAIT, waitingState);
+            stateHashMap.put(StatesEnum.SHOOT, shootFirstState);
+            stateHashMap.put(StatesEnum.SHOOT_SECOND, shootSecondState);
+            stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
+            stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
+            stateHashMap.put(StatesEnum.POWERUP, powerupState);
+            stateHashMap.put(StatesEnum.SPAWN, spawnState);
+
             if(allPlay.getIdClientList().getPlayerArrayList().get(0).equals(player)){
-                
+                allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.SPAWN));
             }
 
             UpdateThread updateThread = new UpdateThread(allPlay, player, objectOutputStream);
             updateThread.updateClient();
 
-            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream);
+            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap);
             startGame.start();
 
-            updateThread.start();
 
             socket.close();
         }

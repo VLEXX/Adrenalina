@@ -1,10 +1,13 @@
 package view;
 
+import model.gamedata.CurrentDeckState;
 import model.playerdata.Player;
 import model.map.Position;
+import model.powerups.PowerUp;
 import view.viewstates.ViewState;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 public class ViewDatabase {
     private ViewCurrentPlayerState viewCurrentPlayerState;
@@ -13,6 +16,7 @@ public class ViewDatabase {
     private HashMap<Player, Position> viewPlayerPosition;
     private HashMap<Player, ViewState> viewState;
     private Player thisplayer;
+    private Stack<PowerUp> currentDeckState;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -21,6 +25,15 @@ public class ViewDatabase {
         this.viewPlayerPosition = new HashMap<>();
         this.viewState = new HashMap<>();
         this.thisplayer = null;
+        this.currentDeckState = null;
+    }
+
+    public Stack<PowerUp> getCurrentDeckState() {
+        return currentDeckState;
+    }
+
+    public void setCurrentDeckState(Stack<PowerUp> currentDeckState) {
+        this.currentDeckState = currentDeckState;
     }
 
     public HashMap<Player, ViewState> getViewState() {

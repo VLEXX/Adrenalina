@@ -5,6 +5,7 @@ import model.datapacket.MessageEnum;
 import model.map.Cell;
 import model.map.SpawnPoint;
 import model.munitions.Ammo;
+import model.munitions.Munitions;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
@@ -77,7 +78,7 @@ class CellTest {
     @Test
     void setSpawnPointColor() {
         Cell testcellA = new Cell(1);
-        SpawnPoint spawntest = new SpawnPoint();
+        SpawnPoint spawntest = new SpawnPoint(Munitions.RED);
         testcellA.setSpawnpointzone(spawntest);
         assertEquals(testcellA.getSpawnpointzone(), spawntest);
     }

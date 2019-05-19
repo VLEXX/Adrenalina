@@ -103,7 +103,7 @@ public class Cyberblade extends Weapon implements Serializable {
     }
 
     /**
-     * Function that check
+     * Function checks the correct position where a player want to go
      * @param current current cell of the player
      * @param go cell when the player want to go
      * @return true if possible

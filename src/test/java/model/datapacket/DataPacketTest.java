@@ -229,4 +229,12 @@ class DataPacketTest {
         dataPacket.setMunitions(Munitions.BLUE);
         assertEquals(dataPacket.getMunitions(), Munitions.BLUE);
     }
+
+    @Test
+    void setPowerUp() {
+        DataPacket dataPacket = new DataPacket();
+        PowerUp powerUp = new TagbackGrenade(Munitions.RED);
+        dataPacket.setPowerUp(powerUp);
+        assertEquals(dataPacket.getPowerUp().getId(), powerUp.getId());
+    }
 }

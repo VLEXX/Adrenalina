@@ -1,16 +1,25 @@
 //Author: Alex Saletti
 package model.map;
 
+import model.munitions.Munitions;
 import model.weaponscard.Weapon;
 
 import java.io.Serializable;
 
 public class SpawnPoint implements Serializable {
     private Weapon[] SpawnWeaponsList;  //lista armi presenti allo spawn
+    private Munitions spawnColor;
 
 
-    public SpawnPoint() {                //costruttore
+
+
+    public SpawnPoint(Munitions m) {                //costruttore
         this.SpawnWeaponsList = new Weapon[]{null, null, null};
+        this.spawnColor = m;
+    }
+
+    public Munitions getSpawnColor() {
+        return spawnColor;
     }
 
     //inserice l'arma nella posizione indicata dall'indice

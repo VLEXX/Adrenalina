@@ -128,7 +128,7 @@ public class MoveState implements State {
      */
     public boolean cellIsReachable(InitializeAllPlay i, Player p, Cell c) {
         for (CurrentPlayerState cps : i.getCurrentPlayerState().values()) {
-            if (cps.getActiveplayer() == p && cps.getPlayerposition().getCurrentcell().getReachableCells().contains(c))
+            if (cps.getActiveplayer() == p && cps.getPlayerposition().getCurrentcell().getReachable3Cells().contains(c))
                 return true;
         }
         return false;

@@ -58,6 +58,7 @@ class PickUpStateTest {
         cps.getPlayerposition().setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
         cps.setActiveturn(false);
         PlayerBoard pb = new PlayerBoard();
+        pb.getDamageBox().increaseDamage(5,Player.YELLOW);
         pb.getMunitionsBox().getMyMunitionsMap().put(Munitions.RED,0);
         pb.getMunitionsBox().getMyMunitionsMap().put(Munitions.YELLOW,0);
         pb.getMunitionsBox().getMyMunitionsMap().put(Munitions.BLUE,0);

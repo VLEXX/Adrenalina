@@ -3,7 +3,6 @@
  */
 package model.weaponscard;
 
-import model.datapacket.DataPacket;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.map.Position;
@@ -112,8 +111,8 @@ public class PlasmaGun extends Weapon implements Serializable {
      */
     private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;
-        for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
-            if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 find = true;
                 break;
             }

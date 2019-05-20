@@ -6,7 +6,6 @@ package model.weaponscard;
 import model.gamedata.InitializeAllPlay;
 import model.map.Position;
 import model.munitions.Munitions;
-import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
@@ -76,8 +75,8 @@ public class HeatSeeker extends Weapon implements Serializable {
      */
     public boolean checkNotSee(Position myPosition, Position positionToAttack) {
         boolean notfind = true;
-        for (int i = 0; i < myPosition.getCurrentcell().getReachableCells().size(); i++) {
-            if (myPosition.getCurrentcell().getReachableCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 notfind = false;
                 break;
             }

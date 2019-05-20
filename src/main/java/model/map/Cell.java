@@ -28,8 +28,10 @@ public class Cell implements Serializable {
     private Cell rightcell;
     //id della cella
     private int id;
-    //celle dove è possibile spostarsi
-    private ArrayList<Cell> reachableCells;
+    //celle raggiungibili con 2 spostamenti unitari
+    private ArrayList<Cell> reachable2Cells;
+    //celle raggiungibili con 3 spostamenti unitari
+    private ArrayList<Cell> reachable3Cells;
     //giocatore presente nella cella
     private ArrayList<Player> inCellPlayer;
 
@@ -46,7 +48,8 @@ public class Cell implements Serializable {
         this.upcell = null;
         this.rightcell = null;
         this.spawnpointzone = null;
-        this.reachableCells = new ArrayList<Cell>();
+        this.reachable2Cells = new ArrayList<Cell>();
+        this.reachable3Cells = new ArrayList<Cell>();
         this.inCellPlayer = new ArrayList<Player>();
     }
 
@@ -115,7 +118,7 @@ public class Cell implements Serializable {
 
 
     /**
-     * allow to set the near cell
+     * allow to set the near cells
      * @param upcell
      * @param downcell
      * @param leftcell
@@ -132,7 +135,7 @@ public class Cell implements Serializable {
 
 
     /**
-     *the following 6 methods allow to set or get various class attributes
+     *the following 7 methods allow to set or get various class attributes
      */
     //restituisce l'ID della cella
     public int getCellId() {
@@ -159,153 +162,199 @@ public class Cell implements Serializable {
         this.spawnpointzone = spawnpointzone;
     }
 
-    //restituisce le celle raggiungibili
-    public ArrayList<Cell> getReachableCells() {
-        return reachableCells;
+    //restituisce le celle raggiungibili che distano 3 dalla cella corrente
+    public ArrayList<Cell> getReachable3Cells() {
+        return reachable3Cells;
     }
-
-
+    
+    //restituisce le celle raggiungibili che distano 2 dalla cella corente
+    public ArrayList<Cell> getReachable2Cells() {
+        return reachable2Cells;
+    }
 
     /**
      * creates a list of the cell that are reachable in 3 moves from the actual
      */
     //inizializza la lista delle celle raggiungibili in 3 spostamenti
-    public void initializeReachableCells() {
+    public void initializeReachable3Cells() {
         if (this.getUpCell() != null) {
-            reachableCells.add(this.getUpCell());
+            reachable3Cells.add(this.getUpCell());
             if (this.getUpCell().getUpCell() != null) {
-                if (!reachableCells.contains(this.getUpCell().getUpCell()))
-                    reachableCells.add(this.getUpCell().getUpCell());
-                if (this.getUpCell().getUpCell().getUpCell() != null && !reachableCells.contains(this.getUpCell().getUpCell().getUpCell()))
-                    reachableCells.add(this.getUpCell().getUpCell().getUpCell());
-                if (this.getUpCell().getUpCell().getRightCell() != null && !reachableCells.contains(this.getUpCell().getUpCell().getRightCell()))
-                    reachableCells.add(this.getUpCell().getUpCell().getRightCell());
-                if (this.getUpCell().getUpCell().getLeftCell() != null && !reachableCells.contains(this.getUpCell().getUpCell().getLeftCell()))
-                    reachableCells.add(this.getUpCell().getUpCell().getLeftCell());
+                if (!reachable3Cells.contains(this.getUpCell().getUpCell()))
+                    reachable3Cells.add(this.getUpCell().getUpCell());
+                if (this.getUpCell().getUpCell().getUpCell() != null && !reachable3Cells.contains(this.getUpCell().getUpCell().getUpCell()))
+                    reachable3Cells.add(this.getUpCell().getUpCell().getUpCell());
+                if (this.getUpCell().getUpCell().getRightCell() != null && !reachable3Cells.contains(this.getUpCell().getUpCell().getRightCell()))
+                    reachable3Cells.add(this.getUpCell().getUpCell().getRightCell());
+                if (this.getUpCell().getUpCell().getLeftCell() != null && !reachable3Cells.contains(this.getUpCell().getUpCell().getLeftCell()))
+                    reachable3Cells.add(this.getUpCell().getUpCell().getLeftCell());
             }
             if (this.getUpCell().getLeftCell() != null) {
-                if (!reachableCells.contains(this.getUpCell().getLeftCell()))
-                    reachableCells.add(this.getUpCell().getLeftCell());
-                if (this.getUpCell().getLeftCell().getUpCell() != null && !reachableCells.contains(this.getUpCell().getLeftCell().getUpCell()))
-                    reachableCells.add(this.getUpCell().getLeftCell().getUpCell());
-                if (this.getUpCell().getLeftCell().getDownCell() != null && !reachableCells.contains(this.getUpCell().getLeftCell().getDownCell()))
-                    reachableCells.add(this.getUpCell().getLeftCell().getDownCell());
-                if (this.getUpCell().getLeftCell().getLeftCell() != null && !reachableCells.contains(this.getUpCell().getLeftCell().getLeftCell()))
-                    reachableCells.add(this.getUpCell().getLeftCell().getLeftCell());
+                if (!reachable3Cells.contains(this.getUpCell().getLeftCell()))
+                    reachable3Cells.add(this.getUpCell().getLeftCell());
+                if (this.getUpCell().getLeftCell().getUpCell() != null && !reachable3Cells.contains(this.getUpCell().getLeftCell().getUpCell()))
+                    reachable3Cells.add(this.getUpCell().getLeftCell().getUpCell());
+                if (this.getUpCell().getLeftCell().getDownCell() != null && !reachable3Cells.contains(this.getUpCell().getLeftCell().getDownCell()))
+                    reachable3Cells.add(this.getUpCell().getLeftCell().getDownCell());
+                if (this.getUpCell().getLeftCell().getLeftCell() != null && !reachable3Cells.contains(this.getUpCell().getLeftCell().getLeftCell()))
+                    reachable3Cells.add(this.getUpCell().getLeftCell().getLeftCell());
             }
             if (this.getUpCell().getRightCell() != null) {
-                if (!reachableCells.contains(this.getUpCell().getRightCell()))
-                    reachableCells.add(this.getUpCell().getRightCell());
-                if (this.getUpCell().getRightCell().getUpCell() != null && !reachableCells.contains(this.getUpCell().getRightCell().getUpCell()))
-                    reachableCells.add(this.getUpCell().getRightCell().getUpCell());
-                if (this.getUpCell().getRightCell().getDownCell() != null && !reachableCells.contains(this.getUpCell().getRightCell().getDownCell()))
-                    reachableCells.add(this.getUpCell().getRightCell().getDownCell());
-                if (this.getUpCell().getRightCell().getRightCell() != null && !reachableCells.contains(this.getUpCell().getRightCell().getRightCell()))
-                    reachableCells.add(this.getUpCell().getRightCell().getRightCell());
+                if (!reachable3Cells.contains(this.getUpCell().getRightCell()))
+                    reachable3Cells.add(this.getUpCell().getRightCell());
+                if (this.getUpCell().getRightCell().getUpCell() != null && !reachable3Cells.contains(this.getUpCell().getRightCell().getUpCell()))
+                    reachable3Cells.add(this.getUpCell().getRightCell().getUpCell());
+                if (this.getUpCell().getRightCell().getDownCell() != null && !reachable3Cells.contains(this.getUpCell().getRightCell().getDownCell()))
+                    reachable3Cells.add(this.getUpCell().getRightCell().getDownCell());
+                if (this.getUpCell().getRightCell().getRightCell() != null && !reachable3Cells.contains(this.getUpCell().getRightCell().getRightCell()))
+                    reachable3Cells.add(this.getUpCell().getRightCell().getRightCell());
             }
         }
         if (this.getDownCell() != null) {
-            if (!reachableCells.contains(this.getDownCell()))
-                reachableCells.add(this.getDownCell());
+            if (!reachable3Cells.contains(this.getDownCell()))
+                reachable3Cells.add(this.getDownCell());
             if (this.getDownCell().getDownCell() != null) {
-                if (!reachableCells.contains(this.getDownCell().getDownCell()))
-                    reachableCells.add(this.getDownCell().getDownCell());
-                if (this.getDownCell().getDownCell().getDownCell() != null && !reachableCells.contains(this.getDownCell().getDownCell().getDownCell()))
-                    reachableCells.add(this.getDownCell().getDownCell().getDownCell());
-                if (this.getDownCell().getDownCell().getRightCell() != null && !reachableCells.contains(this.getDownCell().getDownCell().getRightCell()))
-                    reachableCells.add(this.getDownCell().getDownCell().getRightCell());
-                if (this.getDownCell().getDownCell().getLeftCell() != null && !reachableCells.contains(this.getDownCell().getDownCell().getLeftCell()))
-                    reachableCells.add(this.getDownCell().getDownCell().getLeftCell());
+                if (!reachable3Cells.contains(this.getDownCell().getDownCell()))
+                    reachable3Cells.add(this.getDownCell().getDownCell());
+                if (this.getDownCell().getDownCell().getDownCell() != null && !reachable3Cells.contains(this.getDownCell().getDownCell().getDownCell()))
+                    reachable3Cells.add(this.getDownCell().getDownCell().getDownCell());
+                if (this.getDownCell().getDownCell().getRightCell() != null && !reachable3Cells.contains(this.getDownCell().getDownCell().getRightCell()))
+                    reachable3Cells.add(this.getDownCell().getDownCell().getRightCell());
+                if (this.getDownCell().getDownCell().getLeftCell() != null && !reachable3Cells.contains(this.getDownCell().getDownCell().getLeftCell()))
+                    reachable3Cells.add(this.getDownCell().getDownCell().getLeftCell());
             }
             if (this.getDownCell().getLeftCell() != null) {
-                if (!reachableCells.contains(this.getDownCell().getLeftCell()))
-                    reachableCells.add(this.getDownCell().getLeftCell());
-                if (this.getDownCell().getLeftCell().getUpCell() != null && !reachableCells.contains(this.getDownCell().getLeftCell().getUpCell()))
-                    reachableCells.add(this.getDownCell().getLeftCell().getUpCell());
-                if (this.getDownCell().getLeftCell().getDownCell() != null && !reachableCells.contains(this.getDownCell().getLeftCell().getDownCell()))
-                    reachableCells.add(this.getDownCell().getLeftCell().getDownCell());
-                if (this.getDownCell().getLeftCell().getLeftCell() != null && !reachableCells.contains(this.getDownCell().getLeftCell().getLeftCell()))
-                    reachableCells.add(this.getDownCell().getLeftCell().getLeftCell());
+                if (!reachable3Cells.contains(this.getDownCell().getLeftCell()))
+                    reachable3Cells.add(this.getDownCell().getLeftCell());
+                if (this.getDownCell().getLeftCell().getUpCell() != null && !reachable3Cells.contains(this.getDownCell().getLeftCell().getUpCell()))
+                    reachable3Cells.add(this.getDownCell().getLeftCell().getUpCell());
+                if (this.getDownCell().getLeftCell().getDownCell() != null && !reachable3Cells.contains(this.getDownCell().getLeftCell().getDownCell()))
+                    reachable3Cells.add(this.getDownCell().getLeftCell().getDownCell());
+                if (this.getDownCell().getLeftCell().getLeftCell() != null && !reachable3Cells.contains(this.getDownCell().getLeftCell().getLeftCell()))
+                    reachable3Cells.add(this.getDownCell().getLeftCell().getLeftCell());
             }
             if (this.getDownCell().getRightCell() != null) {
-                if (!reachableCells.contains(this.getDownCell().getRightCell()))
-                    reachableCells.add(this.getDownCell().getRightCell());
-                if (this.getDownCell().getRightCell().getUpCell() != null && !reachableCells.contains(this.getDownCell().getRightCell().getUpCell()))
-                    reachableCells.add(this.getDownCell().getRightCell().getUpCell());
-                if (this.getDownCell().getRightCell().getDownCell() != null && !reachableCells.contains(this.getDownCell().getRightCell().getDownCell()))
-                    reachableCells.add(this.getDownCell().getRightCell().getDownCell());
-                if (this.getDownCell().getRightCell().getRightCell() != null && !reachableCells.contains(this.getDownCell().getRightCell().getRightCell()))
-                    reachableCells.add(this.getDownCell().getRightCell().getRightCell());
+                if (!reachable3Cells.contains(this.getDownCell().getRightCell()))
+                    reachable3Cells.add(this.getDownCell().getRightCell());
+                if (this.getDownCell().getRightCell().getUpCell() != null && !reachable3Cells.contains(this.getDownCell().getRightCell().getUpCell()))
+                    reachable3Cells.add(this.getDownCell().getRightCell().getUpCell());
+                if (this.getDownCell().getRightCell().getDownCell() != null && !reachable3Cells.contains(this.getDownCell().getRightCell().getDownCell()))
+                    reachable3Cells.add(this.getDownCell().getRightCell().getDownCell());
+                if (this.getDownCell().getRightCell().getRightCell() != null && !reachable3Cells.contains(this.getDownCell().getRightCell().getRightCell()))
+                    reachable3Cells.add(this.getDownCell().getRightCell().getRightCell());
             }
         }
         if (this.getLeftCell() != null) {
-            if (!reachableCells.contains(this.getLeftCell()))
-                reachableCells.add(this.getLeftCell());
+            if (!reachable3Cells.contains(this.getLeftCell()))
+                reachable3Cells.add(this.getLeftCell());
             if (this.getLeftCell().getDownCell() != null) {
-                if (!reachableCells.contains(this.getLeftCell().getDownCell()))
-                    reachableCells.add(this.getLeftCell().getDownCell());
-                if (this.getLeftCell().getDownCell().getDownCell() != null && !reachableCells.contains(this.getLeftCell().getDownCell().getDownCell()))
-                    reachableCells.add(this.getLeftCell().getDownCell().getDownCell());
-                if (this.getLeftCell().getDownCell().getRightCell() != null && !reachableCells.contains(this.getLeftCell().getDownCell().getRightCell()))
-                    reachableCells.add(this.getLeftCell().getDownCell().getRightCell());
-                if (this.getLeftCell().getDownCell().getLeftCell() != null && !reachableCells.contains(this.getLeftCell().getDownCell().getLeftCell()))
-                    reachableCells.add(this.getLeftCell().getDownCell().getLeftCell());
+                if (!reachable3Cells.contains(this.getLeftCell().getDownCell()))
+                    reachable3Cells.add(this.getLeftCell().getDownCell());
+                if (this.getLeftCell().getDownCell().getDownCell() != null && !reachable3Cells.contains(this.getLeftCell().getDownCell().getDownCell()))
+                    reachable3Cells.add(this.getLeftCell().getDownCell().getDownCell());
+                if (this.getLeftCell().getDownCell().getRightCell() != null && !reachable3Cells.contains(this.getLeftCell().getDownCell().getRightCell()))
+                    reachable3Cells.add(this.getLeftCell().getDownCell().getRightCell());
+                if (this.getLeftCell().getDownCell().getLeftCell() != null && !reachable3Cells.contains(this.getLeftCell().getDownCell().getLeftCell()))
+                    reachable3Cells.add(this.getLeftCell().getDownCell().getLeftCell());
             }
             if (this.getLeftCell().getLeftCell() != null) {
-                if (!reachableCells.contains(this.getLeftCell().getLeftCell()))
-                    reachableCells.add(this.getLeftCell().getLeftCell());
-                if (this.getLeftCell().getLeftCell().getUpCell() != null && !reachableCells.contains(this.getLeftCell().getLeftCell().getUpCell()))
-                    reachableCells.add(this.getLeftCell().getLeftCell().getUpCell());
-                if (this.getLeftCell().getLeftCell().getDownCell() != null && !reachableCells.contains(this.getLeftCell().getLeftCell().getDownCell()))
-                    reachableCells.add(this.getLeftCell().getLeftCell().getDownCell());
-                if (this.getLeftCell().getLeftCell().getLeftCell() != null && !reachableCells.contains(this.getLeftCell().getLeftCell().getLeftCell()))
-                    reachableCells.add(this.getLeftCell().getLeftCell().getLeftCell());
+                if (!reachable3Cells.contains(this.getLeftCell().getLeftCell()))
+                    reachable3Cells.add(this.getLeftCell().getLeftCell());
+                if (this.getLeftCell().getLeftCell().getUpCell() != null && !reachable3Cells.contains(this.getLeftCell().getLeftCell().getUpCell()))
+                    reachable3Cells.add(this.getLeftCell().getLeftCell().getUpCell());
+                if (this.getLeftCell().getLeftCell().getDownCell() != null && !reachable3Cells.contains(this.getLeftCell().getLeftCell().getDownCell()))
+                    reachable3Cells.add(this.getLeftCell().getLeftCell().getDownCell());
+                if (this.getLeftCell().getLeftCell().getLeftCell() != null && !reachable3Cells.contains(this.getLeftCell().getLeftCell().getLeftCell()))
+                    reachable3Cells.add(this.getLeftCell().getLeftCell().getLeftCell());
             }
             if (this.getLeftCell().getUpCell() != null) {
-                if (!reachableCells.contains(this.getLeftCell().getUpCell()))
-                    reachableCells.add(this.getLeftCell().getUpCell());
-                if (this.getLeftCell().getUpCell().getUpCell() != null && !reachableCells.contains(this.getLeftCell().getUpCell().getUpCell()))
-                    reachableCells.add(this.getLeftCell().getUpCell().getUpCell());
-                if (this.getLeftCell().getUpCell().getLeftCell() != null && !reachableCells.contains(this.getLeftCell().getUpCell().getLeftCell()))
-                    reachableCells.add(this.getLeftCell().getUpCell().getLeftCell());
-                if (this.getLeftCell().getUpCell().getRightCell() != null && !reachableCells.contains(this.getLeftCell().getUpCell().getRightCell()))
-                    reachableCells.add(this.getLeftCell().getUpCell().getRightCell());
+                if (!reachable3Cells.contains(this.getLeftCell().getUpCell()))
+                    reachable3Cells.add(this.getLeftCell().getUpCell());
+                if (this.getLeftCell().getUpCell().getUpCell() != null && !reachable3Cells.contains(this.getLeftCell().getUpCell().getUpCell()))
+                    reachable3Cells.add(this.getLeftCell().getUpCell().getUpCell());
+                if (this.getLeftCell().getUpCell().getLeftCell() != null && !reachable3Cells.contains(this.getLeftCell().getUpCell().getLeftCell()))
+                    reachable3Cells.add(this.getLeftCell().getUpCell().getLeftCell());
+                if (this.getLeftCell().getUpCell().getRightCell() != null && !reachable3Cells.contains(this.getLeftCell().getUpCell().getRightCell()))
+                    reachable3Cells.add(this.getLeftCell().getUpCell().getRightCell());
             }
         }
         if (this.getRightCell() != null) {
-            if (!reachableCells.contains(this.getRightCell()))
-                reachableCells.add(this.getRightCell());
+            if (!reachable3Cells.contains(this.getRightCell()))
+                reachable3Cells.add(this.getRightCell());
             if (this.getRightCell().getDownCell() != null) {
-                if (!reachableCells.contains(this.getRightCell().getDownCell()))
-                    reachableCells.add(this.getRightCell().getDownCell());
-                if (this.getRightCell().getDownCell().getDownCell() != null && !reachableCells.contains(this.getRightCell().getDownCell().getDownCell()))
-                    reachableCells.add(this.getRightCell().getDownCell().getDownCell());
-                if (this.getRightCell().getDownCell().getRightCell() != null && !reachableCells.contains(this.getRightCell().getDownCell().getRightCell()))
-                    reachableCells.add(this.getRightCell().getDownCell().getRightCell());
-                if (this.getRightCell().getDownCell().getLeftCell() != null && !reachableCells.contains(this.getRightCell().getDownCell().getLeftCell()))
-                    reachableCells.add(this.getRightCell().getDownCell().getLeftCell());
+                if (!reachable3Cells.contains(this.getRightCell().getDownCell()))
+                    reachable3Cells.add(this.getRightCell().getDownCell());
+                if (this.getRightCell().getDownCell().getDownCell() != null && !reachable3Cells.contains(this.getRightCell().getDownCell().getDownCell()))
+                    reachable3Cells.add(this.getRightCell().getDownCell().getDownCell());
+                if (this.getRightCell().getDownCell().getRightCell() != null && !reachable3Cells.contains(this.getRightCell().getDownCell().getRightCell()))
+                    reachable3Cells.add(this.getRightCell().getDownCell().getRightCell());
+                if (this.getRightCell().getDownCell().getLeftCell() != null && !reachable3Cells.contains(this.getRightCell().getDownCell().getLeftCell()))
+                    reachable3Cells.add(this.getRightCell().getDownCell().getLeftCell());
             }
             if (this.getRightCell().getRightCell() != null) {
-                if (!reachableCells.contains(this.getRightCell().getRightCell()))
-                    reachableCells.add(this.getRightCell().getRightCell());
-                if (this.getRightCell().getRightCell().getUpCell() != null && !reachableCells.contains(this.getRightCell().getRightCell().getUpCell()))
-                    reachableCells.add(this.getRightCell().getRightCell().getUpCell());
-                if (this.getRightCell().getRightCell().getDownCell() != null && !reachableCells.contains(this.getRightCell().getRightCell().getDownCell()))
-                    reachableCells.add(this.getRightCell().getRightCell().getDownCell());
-                if (this.getRightCell().getRightCell().getRightCell() != null && !reachableCells.contains(this.getRightCell().getRightCell().getRightCell()))
-                    reachableCells.add(this.getRightCell().getRightCell().getRightCell());
+                if (!reachable3Cells.contains(this.getRightCell().getRightCell()))
+                    reachable3Cells.add(this.getRightCell().getRightCell());
+                if (this.getRightCell().getRightCell().getUpCell() != null && !reachable3Cells.contains(this.getRightCell().getRightCell().getUpCell()))
+                    reachable3Cells.add(this.getRightCell().getRightCell().getUpCell());
+                if (this.getRightCell().getRightCell().getDownCell() != null && !reachable3Cells.contains(this.getRightCell().getRightCell().getDownCell()))
+                    reachable3Cells.add(this.getRightCell().getRightCell().getDownCell());
+                if (this.getRightCell().getRightCell().getRightCell() != null && !reachable3Cells.contains(this.getRightCell().getRightCell().getRightCell()))
+                    reachable3Cells.add(this.getRightCell().getRightCell().getRightCell());
             }
             if (this.getRightCell().getUpCell() != null) {
-                if (!reachableCells.contains(this.getRightCell().getUpCell()))
-                    reachableCells.add(this.getRightCell().getUpCell());
-                if (this.getRightCell().getUpCell().getUpCell() != null && !reachableCells.contains(this.getRightCell().getUpCell().getUpCell()))
-                    reachableCells.add(this.getRightCell().getUpCell().getUpCell());
-                if (this.getRightCell().getUpCell().getLeftCell() != null && !reachableCells.contains(this.getRightCell().getUpCell().getLeftCell()))
-                    reachableCells.add(this.getRightCell().getUpCell().getLeftCell());
-                if (this.getRightCell().getUpCell().getRightCell() != null && !reachableCells.contains(this.getRightCell().getUpCell().getRightCell()))
-                    reachableCells.add(this.getRightCell().getUpCell().getRightCell());
+                if (!reachable3Cells.contains(this.getRightCell().getUpCell()))
+                    reachable3Cells.add(this.getRightCell().getUpCell());
+                if (this.getRightCell().getUpCell().getUpCell() != null && !reachable3Cells.contains(this.getRightCell().getUpCell().getUpCell()))
+                    reachable3Cells.add(this.getRightCell().getUpCell().getUpCell());
+                if (this.getRightCell().getUpCell().getLeftCell() != null && !reachable3Cells.contains(this.getRightCell().getUpCell().getLeftCell()))
+                    reachable3Cells.add(this.getRightCell().getUpCell().getLeftCell());
+                if (this.getRightCell().getUpCell().getRightCell() != null && !reachable3Cells.contains(this.getRightCell().getUpCell().getRightCell()))
+                    reachable3Cells.add(this.getRightCell().getUpCell().getRightCell());
             }
         }
+    }
+
+    /**
+     * creates a list of the cell that are reachable in 2 moves from the actual 
+     */
+    public void initializeReachable2Cells(){
+        if(this.getUpCell()!=null){
+            reachable2Cells.add(this.getUpCell());
+            if(!reachable2Cells.contains(this.getUpCell().getUpCell())&&this.getUpCell().getUpCell()!=null)
+                reachable2Cells.add(this.getUpCell().getUpCell());
+            if(!reachable2Cells.contains(this.getUpCell().getLeftCell())&&this.getUpCell().getLeftCell()!=null)
+                reachable2Cells.add(this.getUpCell().getLeftCell());
+            if(!reachable2Cells.contains(this.getUpCell().getRightCell())&&this.getUpCell().getRightCell()!=null)
+                reachable2Cells.add(this.getUpCell().getRightCell());
+        }
+        if(this.getLeftCell()!=null){
+            reachable2Cells.add(this.getLeftCell());
+            if(!reachable2Cells.contains(this.getLeftCell().getUpCell())&&this.getLeftCell().getUpCell()!=null)
+                reachable2Cells.add(this.getLeftCell().getUpCell());
+            if(!reachable2Cells.contains(this.getLeftCell().getLeftCell())&&this.getLeftCell().getLeftCell()!=null)
+                reachable2Cells.add(this.getLeftCell().getLeftCell());
+            if(!reachable2Cells.contains(this.getLeftCell().getDownCell())&&this.getLeftCell().getDownCell()!=null)
+                reachable2Cells.add(this.getLeftCell().getDownCell());
+        }
+        if(this.getDownCell()!=null){
+            reachable2Cells.add(this.getDownCell());
+            if(!reachable2Cells.contains(this.getDownCell().getDownCell())&&this.getDownCell().getDownCell()!=null)
+                reachable2Cells.add(this.getDownCell().getDownCell());
+            if(!reachable2Cells.contains(this.getDownCell().getLeftCell())&&this.getDownCell().getLeftCell()!=null)
+                reachable2Cells.add(this.getDownCell().getLeftCell());
+            if(!reachable2Cells.contains(this.getDownCell().getRightCell())&&this.getDownCell().getRightCell()!=null)
+                reachable2Cells.add(this.getDownCell().getRightCell());
+        }
+        if(this.getRightCell()!=null){
+            reachable2Cells.add(this.getRightCell());
+            if(!reachable2Cells.contains(this.getRightCell().getUpCell())&&this.getRightCell().getUpCell()!=null)
+                reachable2Cells.add(this.getRightCell().getUpCell());
+            if(!reachable2Cells.contains(this.getRightCell().getRightCell())&&this.getRightCell().getRightCell()!=null)
+                reachable2Cells.add(this.getRightCell().getRightCell());
+            if(!reachable2Cells.contains(this.getRightCell().getDownCell())&&this.getRightCell().getDownCell()!=null)
+                reachable2Cells.add(this.getRightCell().getDownCell());
+        }
+        
     }
 
 }

@@ -2,8 +2,6 @@
 package model.map;
 
 import model.datapacket.MessageEnum;
-import model.map.Cell;
-import model.map.SpawnPoint;
 import model.munitions.Ammo;
 import model.munitions.Munitions;
 import model.playerdata.Player;
@@ -84,18 +82,18 @@ class CellTest {
     }
 
     @Test
-    void getReachableCells() {
+    void getReachable3Cells() {
         Cell cell1 = new Cell(1);
         Cell cell2 = new Cell(2);
         Cell cell3 = new Cell(3);
         Cell cell4 = new Cell(4);
         Cell cell5 = new Cell(5);
         cell1.setCells(cell2, cell3, cell4, cell5);
-        cell1.initializeReachableCells();
-        assertTrue(cell1.getReachableCells().contains(cell2));
-        assertTrue(cell1.getReachableCells().contains(cell3));
-        assertTrue(cell1.getReachableCells().contains(cell4));
-        assertTrue(cell1.getReachableCells().contains(cell5));
+        cell1.initializeReachable3Cells();
+        assertTrue(cell1.getReachable3Cells().contains(cell2));
+        assertTrue(cell1.getReachable3Cells().contains(cell3));
+        assertTrue(cell1.getReachable3Cells().contains(cell4));
+        assertTrue(cell1.getReachable3Cells().contains(cell5));
     }
 
     @Test
@@ -122,9 +120,9 @@ class CellTest {
         cellarray[40].setCells(cellarray[44], null, cellarray[43], cellarray[45]);
         cellarray[41].setCells(cellarray[46], cellarray[48], null, cellarray[47]);
         cellarray[42].setCells(null, cellarray[50], cellarray[49], cellarray[51]);
-        testcell.initializeReachableCells();
+        testcell.initializeReachable3Cells();
         for (int j = 0; j < 52; j++)
-            assertTrue(testcell.getReachableCells().contains(cellarray[j]));
+            assertTrue(testcell.getReachable3Cells().contains(cellarray[j]));
     }
 
     @Test
@@ -141,5 +139,37 @@ class CellTest {
     public void getInCellPlayer(){
         Cell c = new Cell(1);
         assertEquals(c.getInCellPlayer().isEmpty(), true);
+    }
+
+    @Test
+    void getReachable2Cells() {
+        Cell cell1 = new Cell(1);
+        Cell cell2 = new Cell(2);
+        Cell cell3 = new Cell(3);
+        Cell cell4 = new Cell(4);
+        Cell cell5 = new Cell(5);
+        cell1.setCells(cell2, cell3, cell4, cell5);
+        cell1.initializeReachable2Cells();
+        assertTrue(cell1.getReachable2Cells().contains(cell2));
+        assertTrue(cell1.getReachable2Cells().contains(cell3));
+        assertTrue(cell1.getReachable2Cells().contains(cell4));
+        assertTrue(cell1.getReachable2Cells().contains(cell5));
+    }
+
+    @Test
+    void initializeReachable2Cells() {
+        Cell testcell = new Cell(-1);
+        Cell[] cellarray;
+        cellarray = new Cell[16];
+        for (int i = 0; i < 16; i++)
+            cellarray[i] = new Cell(i);
+        testcell.setCells(cellarray[1],cellarray[9],cellarray[5],cellarray[13]);
+        cellarray[1].setCells(cellarray[3],null,cellarray[2],cellarray[4]);
+        cellarray[5].setCells(cellarray[6],cellarray[8],cellarray[7],null);
+        cellarray[9].setCells(null,cellarray[11],cellarray[10],cellarray[12]);
+        cellarray[13].setCells(cellarray[14],cellarray[0],null,cellarray[15]);
+        testcell.initializeReachable2Cells();
+        for (int j = 0; j < 16; j++)
+            assertTrue(testcell.getReachable2Cells().contains(cellarray[j]));
     }
 }

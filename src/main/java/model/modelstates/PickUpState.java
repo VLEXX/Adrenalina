@@ -50,7 +50,11 @@ public class PickUpState implements State {
                     return MessageEnum.POWERUP_NOT_FOUND;
             }
             if (dataPacket.getCell() != null) {
-                int a = this.moveOne(allPlay, dataPacket.getPlayer(), dataPacket.getCell());
+                int a;
+                if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getDamageBox().getDamage()[2]==null)
+                    a = this.moveOne(allPlay, dataPacket.getPlayer(), dataPacket.getCell());
+                else
+                    a = this.moveTwo(allPlay, dataPacket.getPlayer(),dataPacket.getCell());
                 if (a == -1) {
                     return MessageEnum.UNREACHABLE_CELL;
                 }
@@ -107,6 +111,23 @@ public class PickUpState implements State {
             return 0; //posizione di p aggiornata con successo
         }
         return -1; //cella non raggiungibile
+    }
+
+    //metodo che permette al player di muoversi nelle celle che distano al più 2
+    private int moveTwo(InitializeAllPlay i, Player p, Cell c){
+        CurrentPlayerState cps = i.getCurrentPlayerState().get(p);
+        if(cps.getPlayerposition().getCurrentcell().getReachable2Cells().contains(c)){
+            cps.getPlayerposition().setCurrentcell(c);
+            i.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> {
+                if (room.getCellsList().contains(c)) {
+                    cps.getPlayerposition().setCurrentroom(room);
+                }
+            });
+            return 0; //posizione di p aggiornata con successo
+        }
+        else
+            return -1;
+
     }
 
     private int pickUpAmmo(InitializeAllPlay i, Player p) {

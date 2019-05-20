@@ -58,7 +58,10 @@ public class InitializeMap3 implements StrategyMap {
         cell9.setCells(null, null, cell8, cell10);
         cell10.setCells(cell7, null, cell9, null);
         //settaggio celle raggiungibili
-        map3.getRoomList().forEach(room -> room.getCellsList().forEach(cell -> cell.initializeReachableCells()));
+        map3.getRoomList().forEach(room -> room.getCellsList().forEach(cell -> {
+            cell.initializeReachable3Cells();
+            cell.initializeReachable2Cells();
+        }));
         return map3;
     }
 }

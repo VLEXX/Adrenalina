@@ -116,22 +116,43 @@ public class EndTurnState implements State {
      */
     private void scoreCounter(InitializeAllPlay i){
         HashMap<Player,Integer> score = new HashMap<>();
-        i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> score.put(player,0)));
+        HashMap<Player,Integer> deathcounter = new HashMap<>();
+        i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
+            score.put(player,0);
+            deathcounter.put(player,0);
+        }));
         i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
             if(currentPlayerState.getBoard().getDamageBox().isDead()) {
                 DamageBox db = currentPlayerState.getBoard().getDamageBox();
                 score.put(db.getDamage()[0],score.get(db.getDamage()[0])+1);
                 Player[] points=this.damageScoreBoard(db.getDamage());
                 for(int j=0; j<points.length;j++){
-                score.put(points[j],score.get(points[j])+db.getMaxPointArray()[db.getMaxPointIndex()+j]);
+                    if(points[j]!=null)
+                        score.put(points[j],score.get(points[j])+db.getMaxPointArray()[db.getMaxPointIndex()+j]);
                 }
                 db.setMaxPointIndex(db.getMaxPointIndex()+1);
+                deathcounter.put(db.getDamage()[10],deathcounter.get(db.getDamage()[10])+1);
+                int z=0;
+                while(i.getSkullArray()[z]!=null)
+                    z++;
+                i.getSkullArray()[z]=db.getDamage()[10];
+                i.getSecondSkullArray()[z]=db.getDamage()[10];
+                if(db.getDamage()[11]!=null){
+                    if(i.getCurrentPlayerState().get(db.getDamage()[11]).getBoard().getMarksBox().getMyMarksMap().get(player)<3)
+                        i.getCurrentPlayerState().get(db.getDamage()[11]).getBoard().getMarksBox().setMyMarksMap(player,1);
+                }
+
+                for(int j=0;j<12;j++)
+                    db.getDamage()[j]=null;
             }
         }));
+        deathcounter.forEach((player, integer) -> {
+            if(integer>1)
+                score.put(player,score.get(player)+1);
+        });
         score.forEach(((player, integer) -> {
             i.getChartScore().setScore(player,integer);
         }));
-
     }
 
     /**
@@ -142,12 +163,14 @@ public class EndTurnState implements State {
     private Player[] damageScoreBoard(Player[] p){
         HashMap<Player,Integer> dc = new HashMap<>();
         ArrayList<Player> order = new ArrayList<>();
-        for(int j=0;p[j]!=null;j++){
-            if (!dc.containsKey(p[j])) {
-                dc.put(p[j], 1);
-                order.add(p[j]);
-            } else
-                dc.put(p[j], dc.get(p[j]) + 1);
+        for(int j=0;j<12;j++){
+            if(p[j]!=null) {
+                if (!dc.containsKey(p[j])) {
+                    dc.put(p[j], 1);
+                    order.add(p[j]);
+                } else
+                    dc.put(p[j], dc.get(p[j]) + 1);
+            }
         }
         int k = dc.size();
         Player[] result = new Player[k];

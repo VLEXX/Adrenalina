@@ -31,6 +31,8 @@ public class InitializeAllPlay implements SubjectUpdate {
     private ArrayList<ObserverUpdate> observers;
     private boolean endgame;
     private State tempState;
+    private Player[] SkullArray;
+    private Player[] SecondSkullArray;
 
 
     /**
@@ -51,6 +53,8 @@ public class InitializeAllPlay implements SubjectUpdate {
         playercountertemp = 0;
         observers = new ArrayList<>();
         this.endgame=false;
+        this.SkullArray= new Player[]{null,null,null,null,null,null,null,null};
+        this.SecondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
 
     }
 
@@ -170,5 +174,13 @@ public class InitializeAllPlay implements SubjectUpdate {
     @Override
     public ArrayList<ObserverUpdate> getObservers() {
         return observers;
+    }
+
+    public Player[] getSkullArray() {
+        return SkullArray;
+    }
+
+    public Player[] getSecondSkullArray() {
+        return SecondSkullArray;
     }
 }

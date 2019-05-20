@@ -59,14 +59,14 @@ public class MoveState implements State {
         if (out != 0) {
             return MessageEnum.UNREACHABLE_CELL;
         } else {
-            if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
-                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
-                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
-                allPlay.notifyObserver();
-            }
             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
+                allPlay.notifyObserver();
+            }
+            if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
+                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 allPlay.notifyObserver();
             }
         }

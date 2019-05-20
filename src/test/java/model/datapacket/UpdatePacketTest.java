@@ -52,7 +52,7 @@ class UpdatePacketTest {
         StrategyMap strategyMap = new InitializeMap1();
         Map map = strategyMap.initializeMap();
         UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null, null, false);
-        assertEquals(updatePacket.getPositionHashMap(), null);
+        assertEquals(updatePacket.getPosition(), null);
     }
 
     @Test

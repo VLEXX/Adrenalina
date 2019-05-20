@@ -37,9 +37,7 @@ public class StartGame extends Thread {
         while(true){
             try {
                 if(allPlay.isEndgame()==false) {
-                    System.out.println("ciao1" + player);
                     DataPacket dataPacket = (DataPacket) objectInputStream.readObject();
-                    System.out.println("ciao2" + player);
                     MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket);
                     objectOutputStream.writeObject(messageEnum);
                     updateThread.updateClient();

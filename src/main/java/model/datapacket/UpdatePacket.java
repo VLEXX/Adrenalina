@@ -18,17 +18,17 @@ public class UpdatePacket implements Serializable {
     private ChartScore chartScore;
     private CurrentPlayerState currentPlayerState;
     private Map map;
-    private HashMap<Player, Position> positionHashMap;
+    private Position position;
     private StatesEnum statesEnum;
     private Stack<PowerUp> powerUpDeck;
     private boolean endgame;
 
 
-    public UpdatePacket(ChartScore chart, CurrentPlayerState currentPlayerState, Map m, HashMap<Player, Position> hashMap, StatesEnum state, Stack<PowerUp> deck, boolean end) {
+    public UpdatePacket(ChartScore chart, CurrentPlayerState currentPlayerState, Map m, Position position, StatesEnum state, Stack<PowerUp> deck, boolean end) {
         this.chartScore = chart;
         this.currentPlayerState = currentPlayerState;
         this.map = m;
-        this.positionHashMap = hashMap;
+        this.position = position;
         this.statesEnum = state;
         this.powerUpDeck = deck;
         this.endgame=end;
@@ -54,8 +54,8 @@ public class UpdatePacket implements Serializable {
         return map;
     }
 
-    public HashMap<Player, Position> getPositionHashMap() {
-        return positionHashMap;
+    public Position getPosition() {
+        return position;
     }
 
     public StatesEnum getStatesEnum() {

@@ -20,31 +20,31 @@ public class ViewPickupState implements ViewState {
         s.toLowerCase();
         if(s.equals("y")){
             System.out.println("Write the cell ID between: \n");
-            System.out.println(viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getRightCell().getCellId() + " | " + viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getLeftCell().getCellId() + " | " + viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getDownCell().getCellId() + " | " + viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getUpCell().getCellId());
+            System.out.println(viewDatabase.getViewPlayerPosition().getCurrentcell().getRightCell().getCellId() + " | " + viewDatabase.getViewPlayerPosition().getCurrentcell().getLeftCell().getCellId() + " | " + viewDatabase.getViewPlayerPosition().getCurrentcell().getDownCell().getCellId() + " | " + viewDatabase.getViewPlayerPosition().getCurrentcell().getUpCell().getCellId());
             int i = stdin.nextInt();
-            if(i == viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getUpCell().getCellId()){
-                dataPacket.setCell(viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getUpCell());
+            if(i == viewDatabase.getViewPlayerPosition().getCurrentcell().getUpCell().getCellId()){
+                dataPacket.setCell(viewDatabase.getViewPlayerPosition().getCurrentcell().getUpCell());
             }
-            if(i == viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getDownCell().getCellId()){
-                dataPacket.setCell(viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getDownCell());
+            if(i == viewDatabase.getViewPlayerPosition().getCurrentcell().getDownCell().getCellId()){
+                dataPacket.setCell(viewDatabase.getViewPlayerPosition().getCurrentcell().getDownCell());
             }
-            if(i == viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getRightCell().getCellId()){
-                dataPacket.setCell(viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getRightCell());
+            if(i == viewDatabase.getViewPlayerPosition().getCurrentcell().getRightCell().getCellId()){
+                dataPacket.setCell(viewDatabase.getViewPlayerPosition().getCurrentcell().getRightCell());
             }
-            if(i == viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getLeftCell().getCellId()){
-                dataPacket.setCell(viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getLeftCell());
+            if(i == viewDatabase.getViewPlayerPosition().getCurrentcell().getLeftCell().getCellId()){
+                dataPacket.setCell(viewDatabase.getViewPlayerPosition().getCurrentcell().getLeftCell());
             }
         }
-        if(viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getSpawnpointzone()!=null) {
+        if(viewDatabase.getViewPlayerPosition().getCurrentcell().getSpawnpointzone()!=null) {
             System.out.println("What do you want to pickup between: \n");
-            for(Weapon weapon: viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()){
+            for(Weapon weapon: viewDatabase.getViewPlayerPosition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()){
                 System.out.println(weapon.getName() + " ");
             }
             while(true) {
                 Weapon w = null;
                 String s1 = stdin.nextLine();
                 s1.toLowerCase();
-                for (Weapon weapon : viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()) {
+                for (Weapon weapon : viewDatabase.getViewPlayerPosition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()) {
                     if (s1.equals(weapon.getName())) {
                         w=weapon;
                         int red = 0;
@@ -79,7 +79,7 @@ public class ViewPickupState implements ViewState {
                 }
                 if(w==null) {
                     System.out.println("WRONG INPUT! Please choose between: \n");
-                    for (Weapon weapon1 : viewDatabase.getViewPlayerPosition().get(player).getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()) {
+                    for (Weapon weapon1 : viewDatabase.getViewPlayerPosition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()) {
                         System.out.println(weapon1.getName() + " ");
                     }
                 }

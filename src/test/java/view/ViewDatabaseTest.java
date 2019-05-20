@@ -38,9 +38,9 @@ class ViewDatabaseTest {
     @Test
     void setViewPlayerPosition() {
         ViewDatabase viewDatabase = new ViewDatabase();
-        HashMap<Player, Position> hashMap = new HashMap<>();
-        viewDatabase.setViewPlayerPosition(hashMap);
-        assertEquals(viewDatabase.getViewPlayerPosition().isEmpty(), true);
+        Position position = new Position();
+        viewDatabase.setViewPlayerPosition(position);
+        assertEquals(viewDatabase.getViewPlayerPosition(), position);
     }
 
     @Test

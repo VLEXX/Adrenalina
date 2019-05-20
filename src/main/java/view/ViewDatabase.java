@@ -13,7 +13,7 @@ public class ViewDatabase {
     private ViewCurrentPlayerState viewCurrentPlayerState;
     private ViewMapState viewMapState;
     private ViewChartScore viewChartScore;
-    private HashMap<Player, Position> viewPlayerPosition;
+    private Position viewPlayerPosition;
     private HashMap<Player, ViewState> viewState;
     private Player thisplayer;
     private Stack<PowerUp> currentDeckState;
@@ -23,7 +23,7 @@ public class ViewDatabase {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
         this.viewMapState = new ViewMapState();
         this.viewChartScore = new ViewChartScore();
-        this.viewPlayerPosition = new HashMap<>();
+        this.viewPlayerPosition = null;
         this.viewState = new HashMap<>();
         this.thisplayer = null;
         this.currentDeckState = null;
@@ -74,12 +74,12 @@ public class ViewDatabase {
         this.viewMapState = viewMapState;
     }
 
-    public HashMap<Player, Position> getViewPlayerPosition() {
+    public Position getViewPlayerPosition() {
         return viewPlayerPosition;
     }
 
 
-    public void setViewPlayerPosition(HashMap<Player, Position> viewPlayerPosition) {
+    public void setViewPlayerPosition(Position viewPlayerPosition) {
         this.viewPlayerPosition = viewPlayerPosition;
     }
 

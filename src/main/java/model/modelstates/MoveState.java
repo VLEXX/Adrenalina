@@ -63,15 +63,17 @@ public class MoveState implements State {
      */
     public int setMove(InitializeAllPlay i, Cell c, Player p) {
         CurrentPlayerState ps = i.getCurrentPlayerState().get(p);
-            if (i.getCurrentPlayerState().get(p).isActiveturn() && ps.getPlayerposition().getCurrentcell().getReachable3Cells().contains(c)) {
-                ps.getPlayerposition().setCurrentcell(c);
                 for(Room room :i.getStateSelectedMap().getSelectedmap().getRoomList()) {
-                    if (room.getCellsList().contains(c)) {
-                        ps.getPlayerposition().setCurrentroom(room);
-                        return 0;
+                    for(Cell cell: room.getCellsList()) {
+                        if (c.getCellId()==cell.getCellId()){
+                            if(i.getCurrentPlayerState().get(p).getPlayerposition().getCurrentcell().getReachable3Cells().contains(cell)) {
+                                ps.getPlayerposition().setCurrentcell(cell);
+                                ps.getPlayerposition().setCurrentroom(room);
+                                return 0;
+                            }
+                        }
                     }
                 }
-            }
         return -1;
     }
 

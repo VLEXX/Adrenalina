@@ -15,7 +15,7 @@ import java.util.HashMap;
 /**
  * Class that initialize the player
  */
-public class InitializeAllPlay implements SubjectUpdate {
+public class InitializeAllPlay {
     private ArrayList<CurrentTurnState> currentTurnState;
     private HashMap<Player, CurrentPlayerState> currentPlayerState;
     private CurrentDeckState currentDeckState;
@@ -149,31 +149,6 @@ public class InitializeAllPlay implements SubjectUpdate {
 
     public synchronized HashMap<Player, State> getHashMapState() {
         return playerState;
-    }
-
-    @Override
-    public void addObserver(ObserverUpdate e) {
-        observers.add(e);
-    }
-
-    @Override
-    public void removeObserver(ObserverUpdate e) {
-        observers.remove(e);
-    }
-
-    @Override
-    public synchronized void notifyObserver() {
-        if(observers.isEmpty()==true){
-            return;
-        }
-        for (ObserverUpdate observer : this.getObservers()) {
-            observer.update(true);
-        }
-    }
-
-    @Override
-    public ArrayList<ObserverUpdate> getObservers() {
-        return observers;
     }
 
     public Player[] getSkullArray() {

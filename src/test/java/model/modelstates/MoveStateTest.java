@@ -95,8 +95,49 @@ class MoveStateTest {
         dataPacket.setCell(initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
 
         assertEquals(moveState.doAction(dataPacket), MessageEnum.OK);
-        assertEquals(moveState.doAction(dataPacket), MessageEnum.OK);
-        initializeAllPlay.getCurrentPlayerState().get(Player.BLUE).setActiveplayer(Player.YELLOW);
+        assertEquals(moveState.doAction(dataPacket), MessageEnum.UNREACHABLE_CELL);
 
-        assertEquals(moveState.doAction(dataPacket), MessageEnum.UNREACHABLE_CELL);    }
+    }
+
+    @Test
+    void doAction2() {
+        InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
+        HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
+        ActionState actionState = new ActionState(initializeAllPlay, stateHashMap);
+        EndTurnState endTurnState = new EndTurnState(initializeAllPlay, stateHashMap);
+        MoveState moveStatein = new MoveState(initializeAllPlay, stateHashMap);
+        WaitingState waitingState = new WaitingState(initializeAllPlay, stateHashMap);
+        ShootFirstState shootFirstState = new ShootFirstState(initializeAllPlay, stateHashMap);
+        ShootSecondState shootSecondState = new ShootSecondState(initializeAllPlay, stateHashMap);
+        ShootThirdState shootThirdState = new ShootThirdState(initializeAllPlay, stateHashMap);
+        PickUpState pickUpState = new PickUpState(initializeAllPlay, stateHashMap);
+        PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap);
+        stateHashMap.put(StatesEnum.ACTION, actionState);
+        stateHashMap.put(StatesEnum.END, endTurnState);
+        stateHashMap.put(StatesEnum.MOVE, moveStatein);
+        stateHashMap.put(StatesEnum.WAIT, waitingState);
+        stateHashMap.put(StatesEnum.SHOOT, shootFirstState);
+        stateHashMap.put(StatesEnum.SHOOT_SECOND, shootSecondState);
+        stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
+        stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
+        stateHashMap.put(StatesEnum.POWERUP, powerupState);
+        MoveState moveState = new MoveState(initializeAllPlay, stateHashMap);
+
+        initializeAllPlay.getStateSelectedMap().setStrategyMap(0);
+        initializeAllPlay.getStateSelectedMap().setSelectedmap();
+        CurrentPlayerState cps = new CurrentPlayerState(Player.BLUE);
+        Position p = new Position();
+        p.setCurrentroom(initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
+        p.setCurrentcell(initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0));
+        cps.setPlayerposition(p);
+        initializeAllPlay.getCurrentPlayerState().put(Player.BLUE, cps);
+        HashMap<StatesEnum, State> hashMap = new HashMap<>();
+        MoveState ms = new MoveState(initializeAllPlay, hashMap);
+
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setPlayer(Player.BLUE);
+        dataPacket.setCell(initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
+        initializeAllPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+        assertEquals(moveState.doAction(dataPacket), MessageEnum.OK);
+    }
 }

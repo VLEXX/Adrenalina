@@ -41,7 +41,7 @@ public class ViewMoveState implements ViewState {
             }
             System.out.println("WRONG INPUT!\nPlease choose between:\n");
             for(Cell cell: viewDatabase.getViewPlayerPosition().getCurrentcell().getReachable3Cells()) {
-                System.out.println(cell.getCellId() + " | ");
+                System.out.print(cell.getCellId() + " | ");
             }
         }
     }

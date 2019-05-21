@@ -160,4 +160,12 @@ class InitializeAllPlayTest {
         allPlay.setEndgame(true);
         assertEquals(allPlay.isEndgame(), true);
     }
+
+    @Test
+    void setTempState() {
+        InitializeAllPlay allPlay = new InitializeAllPlay();
+        State state = new ShootFirstState(allPlay, null);
+        allPlay.setTempState(state);
+        assertEquals(allPlay.getTempState(), state);
+    }
 }

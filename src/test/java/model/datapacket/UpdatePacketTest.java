@@ -8,7 +8,10 @@ import model.map.StrategyMap;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.UpdatePacket;
+import model.powerups.PowerUp;
 import org.junit.jupiter.api.Test;
+
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -64,4 +67,17 @@ class UpdatePacketTest {
         UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, StatesEnum.ACTION, null, false);
         assertEquals(updatePacket.getStatesEnum(), StatesEnum.ACTION);
     }
+
+    @Test
+    void isEndgame() {
+        ChartScore chartScore = new ChartScore();
+        CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
+        StrategyMap strategyMap = new InitializeMap1();
+        Map map = strategyMap.initializeMap();
+        Stack<PowerUp> stack = new Stack<>();
+        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, StatesEnum.ACTION, stack, false);
+        assertEquals(updatePacket.isEndgame(), false);
+        assertEquals(updatePacket.getPowerUpDeck(), stack);
+    }
+
 }

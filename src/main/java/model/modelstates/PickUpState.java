@@ -64,13 +64,11 @@ public class PickUpState implements State {
                     if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==2) {
                         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                         allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
-                        allPlay.notifyObserver();
                         return MessageEnum.OK;
                     }
                     if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==1) {
                         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                         allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
-                        allPlay.notifyObserver();
                         return MessageEnum.OK;
                     }
                 }
@@ -79,13 +77,11 @@ public class PickUpState implements State {
                     if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==2) {
                         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                         allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
-                        allPlay.notifyObserver();
                         return MessageEnum.OK;
                     }
                     if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==1) {
                         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                         allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
-                        allPlay.notifyObserver();
                         return MessageEnum.OK;
                     }
                 }

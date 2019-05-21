@@ -31,26 +31,22 @@ public class ShootSecondState implements State {
                         if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
                             if(weapon.hasThirdAttack()==true) {
                                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_THIRD));
-                                allPlay.notifyObserver();
                                 return messageEnum;
                             }
                             else{
                                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
-                                allPlay.notifyObserver();
                                 return messageEnum;
                             }
                         }
                         if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
                             if(weapon.hasThirdAttack()==true) {
                                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_SECOND));
-                                allPlay.notifyObserver();
                                 return messageEnum;
                             }
                             else{
                                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
-                                allPlay.notifyObserver();
                                 return messageEnum;
                             }
                         }

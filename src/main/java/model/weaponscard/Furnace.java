@@ -34,6 +34,8 @@ public class Furnace extends Weapon implements Serializable {
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
+        int control = 0;
+
         return MessageEnum.OK;
     }
 

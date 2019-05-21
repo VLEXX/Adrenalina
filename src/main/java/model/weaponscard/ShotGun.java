@@ -87,7 +87,7 @@ public class ShotGun extends Weapon implements Serializable {
     }
 
     /**
-     * Function check the correct position where a player want to move
+     * Function check the correct position to shot
      * @param current current cell of the player
      * @param shot cell when the player want to go
      * @return true if possible

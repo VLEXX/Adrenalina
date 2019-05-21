@@ -5,15 +5,12 @@ package model.modelstates;
 
 import model.datapacket.DataPacket;
 import model.datapacket.StatesEnum;
-import model.gamedata.ChartScore;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
 import model.map.*;
 import model.munitions.Munitions;
-import model.playerdata.CurrentPlayerState;
 import model.playerdata.DamageBox;
 import model.playerdata.Player;
-import model.playerdata.PlayerBoard;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
@@ -51,7 +48,7 @@ public class EndTurnState implements State {
      * refills the empty ammo and weapons slots of the map
      * @param i class containing information about the current match
      */
-    private void refillMap( InitializeAllPlay i){
+    public void refillMap( InitializeAllPlay i){
         for(Room r : i.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell c : r.getCellsList()){
                 if(c.getSpawnpointzone()==null){
@@ -78,7 +75,7 @@ public class EndTurnState implements State {
      * @param d class containing necessary parameters sent by client
      * @return a message saying if the required action was successful or not
      */
-    private MessageEnum rechargeWeapons(InitializeAllPlay i, DataPacket d){
+    public MessageEnum rechargeWeapons(InitializeAllPlay i, DataPacket d){
         HashMap<Munitions, Integer> cost = new HashMap<>();
         cost.put(Munitions.RED, 0);
         cost.put(Munitions.YELLOW, 0);

@@ -54,23 +54,6 @@ class MoveStateTest {
 
     }
 
-    @Test
-    void cellIsReachable() {
-        InitializeAllPlay i = new InitializeAllPlay();
-        i.getStateSelectedMap().setStrategyMap(0);
-        i.getStateSelectedMap().setSelectedmap();
-        CurrentPlayerState ps = new CurrentPlayerState(Player.BLUE);
-        Position p = new Position();
-        p.setCurrentroom(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
-        p.setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
-        ps.setPlayerposition(p);
-        i.getCurrentPlayerState().put(Player.BLUE, ps);
-        HashMap<StatesEnum, State> hashMap = new HashMap<>();
-        MoveState ms = new MoveState(i, hashMap);
-        assertTrue(ms.cellIsReachable(i, Player.BLUE, i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0)));
-        assertFalse(ms.cellIsReachable(i, Player.BLUE, i.getStateSelectedMap().getSelectedmap().getRoomList().get(4).getCellsList().get(0)));
-
-    }
 
     @Test
     void doAction() {

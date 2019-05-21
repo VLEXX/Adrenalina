@@ -1,4 +1,6 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
 import model.munitions.Munitions;
@@ -62,10 +64,12 @@ public class InitializeMap2 implements StrategyMap {
         cell10.setCells(null, null, cell9, cell11);
         cell11.setCells(cell7, null, cell10, null);
         //settaggio celle raggiungibili
-        map2.getRoomList().forEach(room -> room.getCellsList().forEach(cell -> {
-            cell.initializeReachable3Cells();
-            cell.initializeReachable2Cells();
-        }));
+        for(Room r : map2.getRoomList()) {
+            for (Cell c : r.getCellsList()) {
+                c.initializeReachable2Cells();
+                c.initializeReachable3Cells();
+            }
+        }
         return map2;
     }
 }

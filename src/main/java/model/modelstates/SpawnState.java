@@ -49,14 +49,16 @@ public class SpawnState implements State {
             if(pop1.getId().equals(dataPacket.getPowerUpSpawn().getId())) {
                 for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
                     for (Cell cell : room.getCellsList()) {
-                        if (cell.getSpawnpointzone().getSpawnColor().equals(pop1.getColor())) {
-                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
-                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
-                            cell.addInCellPlayer(dataPacket.getPlayer());
-                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().add(pop2);
-                            allPlay.getCurrentDeckState().getPowerupdeck().push(pop1);
-                            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
-                            return MessageEnum.OK;
+                        if(cell.getSpawnpointzone()!=null) {
+                            if (cell.getSpawnpointzone().getSpawnColor().equals(pop1.getColor())) {
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                                cell.addInCellPlayer(dataPacket.getPlayer());
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().add(pop2);
+                                allPlay.getCurrentDeckState().getPowerupdeck().push(pop1);
+                                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
+                                return MessageEnum.OK;
+                            }
                         }
                     }
                 }

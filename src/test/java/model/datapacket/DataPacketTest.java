@@ -245,4 +245,11 @@ class DataPacketTest {
         dataPacket.setPowerUpSpawn(powerUp);
         assertEquals(dataPacket.getPowerUpSpawn().getId(), powerUp.getId());
     }
+
+    @Test
+    void setWeaponlistempty() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setWeaponlistempty(true);
+        assertEquals(dataPacket.isWeaponlistempty(), true);
+    }
 }

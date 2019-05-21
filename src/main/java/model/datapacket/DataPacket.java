@@ -38,6 +38,7 @@ public class DataPacket implements Serializable {
     private Munitions munitions;
     private PowerUp powerUpToKeepSpawn;
     private PowerUp powerUpSpawn;
+    private boolean weaponlistempty;
 
     public DataPacket() {
         this.cell = null;
@@ -62,6 +63,15 @@ public class DataPacket implements Serializable {
         this.munitions = null;
         this.powerUpToKeepSpawn = null;
         this.powerUpSpawn = null;
+        this.weaponlistempty=false;
+    }
+
+    public boolean isWeaponlistempty() {
+        return weaponlistempty;
+    }
+
+    public void setWeaponlistempty(boolean weaponlistempty) {
+        this.weaponlistempty = weaponlistempty;
     }
 
     public PowerUp getPowerUpSpawn() {

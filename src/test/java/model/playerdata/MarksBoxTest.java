@@ -20,6 +20,6 @@ class MarksBoxTest {
         assertEquals(marksBox.getMyMarksMap().size(), 1);
         assertEquals(marksBox.getMyMarksMap().get(player).intValue(), 2);
         marksBox.setMyMarksMap(player, 2);
-        assertEquals(marksBox.getMyMarksMap().get(player).intValue(), 4);
+        assertEquals(marksBox.getMyMarksMap().get(player).intValue(), 3);
     }
 }

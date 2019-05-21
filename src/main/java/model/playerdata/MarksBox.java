@@ -29,16 +29,18 @@ public class MarksBox implements Serializable {
     /**
      * set marks map
      * @param player
-     * @param damage
+     * @param marx
      */
-    public void setMyMarksMap(Player player, int damage) {
+    public void setMyMarksMap(Player player, int marx) {
         int i;
         if (myMarksMap.get(player) != null) {
             i = myMarksMap.get(player).intValue();
-            i = i + damage;
-            myMarksMap.replace(player, i);
+            i = i + marx;
+            if(i <= 3) {
+                myMarksMap.replace(player, i);
+            } else myMarksMap.replace(player, 3);
         } else {
-            myMarksMap.put(player, damage);
+            myMarksMap.put(player, marx);
         }
     }
 }

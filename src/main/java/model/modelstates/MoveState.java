@@ -36,21 +36,22 @@ public class MoveState implements State {
     public MessageEnum doAction(DataPacket dataPacket) {
 
         int out = setMove(allPlay, dataPacket.getCell(), dataPacket.getPlayer());
-        if (out != 0) {
-            return MessageEnum.UNREACHABLE_CELL;
-        } else {
+        if (out == 0) {
             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
                 allPlay.notifyObserver();
+                return MessageEnum.OK;
             }
             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 allPlay.notifyObserver();
+                return MessageEnum.OK;
             }
         }
-        return MessageEnum.OK;
+        return MessageEnum.UNREACHABLE_CELL;
+
     }
 
     /**
@@ -67,9 +68,9 @@ public class MoveState implements State {
                 for(Room room :i.getStateSelectedMap().getSelectedmap().getRoomList()) {
                     if (room.getCellsList().contains(c)) {
                         ps.getPlayerposition().setCurrentroom(room);
+                        return 0;
                     }
-                };
-                return 0;
+                }
             }
         return -1;
     }
@@ -87,10 +88,8 @@ public class MoveState implements State {
         for (Room room : i.getStateSelectedMap().getSelectedmap().getRoomList()) {
             for (Cell cell : room.getCellsList()) {
                 if (cell.getCellId() == id) {
-                    if (i.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().getReachable3Cells().contains(cell)) {
+                    if (i.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().getReachable3Cells().contains(cell))
                         return cell;
-                    } else
-                        return null;
                 }
             }
         }

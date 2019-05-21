@@ -24,23 +24,31 @@ public class ViewActionState implements ViewState {
         DataPacket dataPacket = null;
         while(true) {
             String s = stdin.nextLine();
-            dataPacket = setActionPacket(s);
+            dataPacket = setActionPacket(s, viewDatabase, player);
             if(dataPacket!=null){
                 break;
             }
             else{
-                System.out.println("WRONG INPUT!\n Please choose between: SHOOT | MOVE | PICKUP | ENDTURN");
+                if(s.equals("SHOOT") || s.equals("shoot") || s.equals("Shoot")){
+                    System.out.println("Your weapon list is empty! Please choose  another action between: MOVE | PICKUP | ENDTURN");
+                }
+                else {
+                    System.out.println("WRONG INPUT!\n Please choose between: SHOOT | MOVE | PICKUP | ENDTURN");
+                }
             }
         }
         dataPacket.setPlayer(player);
         return dataPacket;
     }
 
-    protected DataPacket setActionPacket(String s){
+    protected DataPacket setActionPacket(String s, ViewDatabase viewDatabase, Player player){
         DataPacket dataPacket = new DataPacket();
         if (s.equals("SHOOT") || s.equals("shoot") || s.equals("Shoot")) {
-            dataPacket.setStatesEnum(StatesEnum.SHOOT);
-            return dataPacket;
+            if(viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList().isEmpty()==false) {
+                dataPacket.setStatesEnum(StatesEnum.SHOOT);
+                return dataPacket;
+            }
+            return null;
         }
         if (s.equals("PICKUP") || s.equals("pickup") || s.equals("Pickup")) {
             dataPacket.setStatesEnum(StatesEnum.PICK_UP);

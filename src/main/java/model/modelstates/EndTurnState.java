@@ -165,7 +165,7 @@ public class EndTurnState implements State {
                 while(i.getSkullArray()[z]!=null)
                     z++;
                 i.getSkullArray()[z]=db.getDamage()[10];
-                i.getSecondSkullArray()[z]=db.getDamage()[10];
+                i.getSecondSkullArray()[z]=db.getDamage()[11];
                 if(db.getDamage()[11]!=null)
                     i.getCurrentPlayerState().get(db.getDamage()[11]).getBoard().getMarksBox().setMyMarksMap(player,1);
                 for(int j=0;j<12;j++)
@@ -192,22 +192,22 @@ public class EndTurnState implements State {
             if(p[j]!=null) {
                 if (!dc.containsKey(p[j])) {
                     dc.put(p[j], 1);
-                    order.add(p[j]); } else
+                    order.add(p[j]); }
+                else
                     dc.put(p[j], dc.get(p[j]) + 1); } }
         int k = dc.size();
         Player[] result = new Player[k];
-        Set<Player> res = dc.keySet();
         int m=0;
-        for(Player pp : res){
+        for(Player pp : order){
             result[m]=pp;
             m++;
         }
         for(int j=0;j<k;j++){
-            for(int y=0;y<j;y++){
-              if(dc.get(result[y])<dc.get(result[y+1]) || (dc.get(result[y])==dc.get(result[y+1])&& order.indexOf(result[y])>order.indexOf(result[y+1]))){
-                  Player temp = result[y+1];
-                  result[y+1] = result[y];
-                  result[y]=temp; }
+            for(int y=1;y<k-j;y++){
+              if(dc.get(result[y-1])<dc.get(result[y])){
+                  Player temp = result[y];
+                  result[y] = result[y-1];
+                  result[y-1]=temp; }
             }
         }
         return result;

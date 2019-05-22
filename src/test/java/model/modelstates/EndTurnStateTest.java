@@ -95,8 +95,8 @@ class EndTurnStateTest {
         cps2.getBoard().getDamageBox().setDead(true);
         cps2.getBoard().getDamageBox().setDead(true);
         cps2.getBoard().getDamageBox().increaseDamage(12, Player.BLUE);
-        cps3.getBoard().getDamageBox().increaseDamage(4, Player.YELLOW);
-        cps3.getBoard().getDamageBox().increaseDamage(2, Player.BLACK);
+        cps3.getBoard().getDamageBox().increaseDamage(3, Player.YELLOW);
+        cps3.getBoard().getDamageBox().increaseDamage(3, Player.BLACK);
         cps3.getBoard().getDamageBox().increaseDamage(5, Player.BLUE);
         i.getCurrentPlayerState().put(Player.YELLOW, cps2);
         i.getCurrentPlayerState().put(Player.GREEN, cps3);
@@ -126,19 +126,4 @@ class EndTurnStateTest {
         }
     }
 
-    @Test
-    void rechargeWeapons() {
-        InitializeAllPlay i = new InitializeAllPlay();
-        HashMap<StatesEnum,State> testhm = new HashMap<>();
-        i.getStateSelectedMap().setStrategyMap(0);
-        i.getStateSelectedMap().setSelectedmap();
-        EndTurnState eds = new EndTurnState(i,testhm);
-        DataPacket d = new DataPacket();
-        d.setPlayer(Player.BLUE);
-        Weapon w1 = new HeatSeeker();
-        Weapon w2 = new Whisper();
-        d.getWeaponsToBeRecharged().add(w1);
-        d.getWeaponsToBeRecharged().add(w2);
-
-    }
 }

@@ -158,3 +158,9 @@ _
 /src/main/java/model/playerdata/PlayerBoard.java,4\8\48c03a27e2116dbfaec52c35084b2e0f52cf1b0b
 e
 5src/test/java/model/modelstates/EndTurnStateTest.java,2\5\2590a9d5cee8f8a94ff712126081a5fad45af55d
+P
+ src/main/java/model/map/Map.java,9\a\9ad968486394a3a028bbf5908ebc0aeb847c0216
+b
+2src/main/java/model/gamedata/StateSelectedMap.java,8\0\8099cd2400fd573c56fd020c0dcbe4bf2cb41726
+b
+2src/test/java/model/modelstates/MoveStateTest.java,2\c\2cec194c687e9e846a18cdf91240d14c3f419d6c

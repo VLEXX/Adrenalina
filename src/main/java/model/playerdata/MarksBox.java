@@ -34,7 +34,7 @@ public class MarksBox implements Serializable {
     public void setMyMarksMap(Player player, int marx) {
         int i;
         if (myMarksMap.get(player) != null) {
-            i = myMarksMap.get(player).intValue();
+            i = myMarksMap.get(player);
             i = i + marx;
             if(i <= 3) {
                 myMarksMap.replace(player, i);

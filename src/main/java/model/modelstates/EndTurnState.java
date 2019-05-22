@@ -16,6 +16,7 @@ import model.weaponscard.Weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class EndTurnState implements State {
 
@@ -39,6 +40,7 @@ public class EndTurnState implements State {
         MessageEnum out1 = this.rechargeWeapons(allPlay,dataPacket);
         if(out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOO_MUCH_POWERUPS)
             return out1;
+        this.transferMarks(allPlay);
         this.scoreCounter(allPlay);
         return MessageEnum.OK;
     }
@@ -67,7 +69,16 @@ public class EndTurnState implements State {
         }
     }
 
-
+    /**
+     * transfer marks to players
+     */
+    private void transferMarks(InitializeAllPlay i) {
+        i.getCurrentPlayerState().forEach((player, cps) -> {
+        cps.getControlMarks().forEach(((player1, integer) -> {
+            cps.getBoard().getMarksBox().setMyMarksMap(player1,integer);
+        }));
+        });
+    }
     /**
      * recharges weapons selected by the player, returns error if the player
      * hasn't enough ammo or gives more payingpowerups than the needed ones
@@ -75,29 +86,51 @@ public class EndTurnState implements State {
      * @param d class containing necessary parameters sent by client
      * @return a message saying if the required action was successful or not
      */
-    public MessageEnum rechargeWeapons(InitializeAllPlay i, DataPacket d){
+    private MessageEnum rechargeWeapons(InitializeAllPlay i, DataPacket d){
         HashMap<Munitions, Integer> cost = new HashMap<>();
         cost.put(Munitions.RED, 0);
         cost.put(Munitions.YELLOW, 0);
         cost.put(Munitions.BLUE, 0);
         for(Weapon w : d.getWeaponsToBeRecharged()){
-            if(w.getFirstPrice().containsKey(Munitions.RED))
-                cost.put(Munitions.RED,cost.get(Munitions.RED)+w.getFirstPrice().get(Munitions.RED));
-            if(w.getFirstPrice().containsKey(Munitions.YELLOW))
-                cost.put(Munitions.YELLOW,cost.get(Munitions.YELLOW)+w.getFirstPrice().get(Munitions.YELLOW));
-            if(w.getFirstPrice().containsKey(Munitions.BLUE))
-                cost.put(Munitions.BLUE,cost.get(Munitions.BLUE)+w.getFirstPrice().get(Munitions.BLUE));
+            for(Weapon w2 : i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getWeaponsList()) {
+                if(w.getName()==w2.getName()) {
+                    if (w.getFirstPrice().containsKey(Munitions.RED))
+                        cost.put(Munitions.RED, cost.get(Munitions.RED) + w.getFirstPrice().get(Munitions.RED));
+                    if (w.getFirstPrice().containsKey(Munitions.YELLOW))
+                        cost.put(Munitions.YELLOW, cost.get(Munitions.YELLOW) + w.getFirstPrice().get(Munitions.YELLOW));
+                    if (w.getFirstPrice().containsKey(Munitions.BLUE))
+                        cost.put(Munitions.BLUE, cost.get(Munitions.BLUE) + w.getFirstPrice().get(Munitions.BLUE));
+                }
+            }
         }
         for(PowerUp pw : d.getPaymentPowerUp()){
-            cost.put(Munitions.RED,cost.get(Munitions.RED)-pw.munitionsChecker(Munitions.RED));
-            cost.put(Munitions.YELLOW,cost.get(Munitions.YELLOW)-pw.munitionsChecker(Munitions.YELLOW));
-            cost.put(Munitions.BLUE, cost.get(Munitions.BLUE)-pw.munitionsChecker(Munitions.BLUE));
+            for(PowerUp pw2 : i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getPowerupList()) {
+                if(pw.getId()==pw2.getId() && pw.getColor()==pw2.getColor()) {
+                    cost.put(Munitions.RED, cost.get(Munitions.RED) - pw.munitionsChecker(Munitions.RED));
+                    cost.put(Munitions.YELLOW, cost.get(Munitions.YELLOW) - pw.munitionsChecker(Munitions.YELLOW));
+                    cost.put(Munitions.BLUE, cost.get(Munitions.BLUE) - pw.munitionsChecker(Munitions.BLUE));
+                }
+            }
         }
         if(cost.get(Munitions.RED)<0 || cost.get(Munitions.YELLOW)<0 || cost.get(Munitions.BLUE)<0)
             return MessageEnum.TOO_MUCH_POWERUPS;
-        if(i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED)-cost.get(Munitions.RED)<0 || i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW)-cost.get(Munitions.YELLOW)<0 || i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE)-cost.get(Munitions.BLUE)<0)
+        if(i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED)-cost.get(Munitions.RED)<0 /*|| i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW)-cost.get(Munitions.YELLOW)<0 || i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE)-cost.get(Munitions.BLUE)<0*/)
             return MessageEnum.AMMO_ERROR;
         else{
+            ArrayList<PowerUp> toRemove = new ArrayList<>();
+            for(PowerUp pw : d.getPaymentPowerUp()) {
+                for(PowerUp pw2 : i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getPowerupList()) {
+                    if(pw.getId()==pw2.getId() && pw.getColor()==pw2.getColor())
+                        toRemove.add(pw2);
+                }
+            }
+            i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getPowerupList().removeAll(toRemove);
+            for(Weapon w : d.getWeaponsToBeRecharged()) {
+                for(Weapon w2 : i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getWeaponsList()) {
+                    if(w.getName()==w2.getName())
+                        w2.setLoaded(true);
+                }
+            }
             i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.RED,i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED)-cost.get(Munitions.RED));
             i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.YELLOW,i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW)-cost.get(Munitions.YELLOW));
             i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.BLUE,i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE)-cost.get(Munitions.BLUE));
@@ -125,8 +158,7 @@ public class EndTurnState implements State {
                 Player[] points=this.damageScoreBoard(db.getDamage());
                 for(int j=0; j<points.length;j++){
                     if(points[j]!=null)
-                        score.put(points[j],score.get(points[j])+db.getMaxPointArray()[db.getMaxPointIndex()+j]);
-                }
+                        score.put(points[j],score.get(points[j])+db.getMaxPointArray()[db.getMaxPointIndex()+j]); }
                 db.setMaxPointIndex(db.getMaxPointIndex()+1);
                 deathcounter.put(db.getDamage()[10],deathcounter.get(db.getDamage()[10])+1);
                 int z=0;
@@ -134,14 +166,10 @@ public class EndTurnState implements State {
                     z++;
                 i.getSkullArray()[z]=db.getDamage()[10];
                 i.getSecondSkullArray()[z]=db.getDamage()[10];
-                if(db.getDamage()[11]!=null){
-                    if(i.getCurrentPlayerState().get(db.getDamage()[11]).getBoard().getMarksBox().getMyMarksMap().get(player)<3)
-                        i.getCurrentPlayerState().get(db.getDamage()[11]).getBoard().getMarksBox().setMyMarksMap(player,1);
-                }
-
+                if(db.getDamage()[11]!=null)
+                    i.getCurrentPlayerState().get(db.getDamage()[11]).getBoard().getMarksBox().setMyMarksMap(player,1);
                 for(int j=0;j<12;j++)
-                    db.getDamage()[j]=null;
-            }
+                    db.getDamage()[j]=null; }
         }));
         deathcounter.forEach((player, integer) -> {
             if(integer>1)
@@ -164,23 +192,23 @@ public class EndTurnState implements State {
             if(p[j]!=null) {
                 if (!dc.containsKey(p[j])) {
                     dc.put(p[j], 1);
-                    order.add(p[j]);
-                } else
-                    dc.put(p[j], dc.get(p[j]) + 1);
-            }
-        }
+                    order.add(p[j]); } else
+                    dc.put(p[j], dc.get(p[j]) + 1); } }
         int k = dc.size();
         Player[] result = new Player[k];
+        Set<Player> res = dc.keySet();
+        int m=0;
+        for(Player pp : res){
+            result[m]=pp;
+            m++;
+        }
         for(int j=0;j<k;j++){
             for(int y=0;y<j;y++){
               if(dc.get(result[y])<dc.get(result[y+1]) || (dc.get(result[y])==dc.get(result[y+1])&& order.indexOf(result[y])>order.indexOf(result[y+1]))){
                   Player temp = result[y+1];
                   result[y+1] = result[y];
-                  result[y]=temp;
-              }
-
+                  result[y]=temp; }
             }
         }
         return result;
-    }
-}
+    }}

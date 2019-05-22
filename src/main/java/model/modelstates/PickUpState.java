@@ -41,7 +41,6 @@ public class PickUpState implements State {
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
         if(dataPacket.isWeaponlistempty()==true){
-            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
             return MessageEnum.OK;
         }

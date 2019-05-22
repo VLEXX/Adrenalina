@@ -28,6 +28,11 @@ class PickUpStateTest {
     void doAction() {
         DataPacket d = new DataPacket();
         InitializeAllPlay i = new InitializeAllPlay();
+        HashMap<StatesEnum, State> hashMap = new HashMap<>();
+        PickUpState pus = new PickUpState(i, hashMap);
+        d.setWeaponlistempty(true);
+        assertEquals(pus.doAction(d), MessageEnum.OK);
+        d.setWeaponlistempty(false);
         i.getStateSelectedMap().setStrategyMap(0);
         i.getStateSelectedMap().setSelectedmap();
         d.setPlayer(Player.BLUE);
@@ -64,8 +69,7 @@ class PickUpStateTest {
         pb.getMunitionsBox().getMyMunitionsMap().put(Munitions.BLUE,0);
         cps.setBoard(pb);
         i.getCurrentPlayerState().put(Player.BLUE,cps);
-        HashMap<StatesEnum, State> hashMap = new HashMap<>();
-        PickUpState pus = new PickUpState(i, hashMap);
+
         assertEquals(pus.doAction(d),MessageEnum.NOT_YOUR_TURN);
         cps.setActiveturn(true);
         pb.getWeaponsList().add(w2);

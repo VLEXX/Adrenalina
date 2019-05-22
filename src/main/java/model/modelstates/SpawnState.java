@@ -24,8 +24,8 @@ public class SpawnState implements State {
     public MessageEnum doAction(DataPacket dataPacket) {
         PowerUp pop1 = allPlay.getCurrentDeckState().getPowerupdeck().pop();
         PowerUp pop2 = allPlay.getCurrentDeckState().getPowerupdeck().pop();
-        if(pop1.getId().equals(dataPacket.getPowerUpToKeepSpawn().getId())){
-            if(pop2.getId().equals(dataPacket.getPowerUpSpawn().getId())) {
+        if((pop1.getId().equals(dataPacket.getPowerUpToKeepSpawn().getId())) &&(pop1.getColor().equals(dataPacket.getPowerUpToKeepSpawn().getColor()))){
+            if((pop2.getId().equals(dataPacket.getPowerUpSpawn().getId())) && (pop2.getColor().equals(dataPacket.getPowerUpSpawn().getColor()))) {
                 for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
                     for (Cell cell : room.getCellsList()) {
                         if(cell.getSpawnpointzone()!=null) {
@@ -41,12 +41,11 @@ public class SpawnState implements State {
                         }
                     }
                 }
-
             }
         }
 
-        if(pop2.getId().equals(dataPacket.getPowerUpToKeepSpawn().getId())){
-            if(pop1.getId().equals(dataPacket.getPowerUpSpawn().getId())) {
+        if((pop2.getId().equals(dataPacket.getPowerUpToKeepSpawn().getId()))&&(pop2.getColor().equals(dataPacket.getPowerUpToKeepSpawn().getColor()))){
+            if((pop1.getId().equals(dataPacket.getPowerUpSpawn().getId()))&&(pop1.getColor().equals(dataPacket.getPowerUpSpawn().getColor()))){
                 for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
                     for (Cell cell : room.getCellsList()) {
                         if(cell.getSpawnpointzone()!=null) {
@@ -62,7 +61,6 @@ public class SpawnState implements State {
                         }
                     }
                 }
-
             }
         }
         return MessageEnum.POWERUP_NOT_FOUND;

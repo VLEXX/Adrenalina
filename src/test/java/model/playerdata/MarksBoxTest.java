@@ -22,4 +22,16 @@ class MarksBoxTest {
         marksBox.setMyMarksMap(player, 2);
         assertEquals(marksBox.getMyMarksMap().get(player).intValue(), 3);
     }
+
+    @Test
+    void setMyMarksMap2() {
+        Player player = Player.YELLOW;
+        int marks = 1;
+        MarksBox marksBox = new MarksBox();
+        marksBox.setMyMarksMap(player, marks);
+        assertEquals(marksBox.getMyMarksMap().size(), 1);
+        assertEquals(marksBox.getMyMarksMap().get(player).intValue(), 1);
+        marksBox.setMyMarksMap(player, 2);
+        assertEquals(marksBox.getMyMarksMap().get(player).intValue(), 3);
+    }
 }

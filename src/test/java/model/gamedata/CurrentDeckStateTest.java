@@ -2,6 +2,7 @@ package model.gamedata;
 
 import model.gamedata.CurrentDeckState;
 import model.playerdata.Player;
+import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +40,4 @@ class CurrentDeckStateTest {
         assertEquals(c.getPlayers().contains(Player.BLUE), true);
         assertEquals(c.getPlayers().contains(Player.BLACK), true);
     }
-
-
 }

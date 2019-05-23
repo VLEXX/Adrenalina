@@ -27,7 +27,7 @@ public class Client {
         while(s!="socket"||s!="Socket"||s!="SOCKET"||s!="rmi"||s!="RMI") {
             s = in.nextLine();
             if (s.equals("socket") || s.equals("Socket") || s.equals("SOCKET")) {
-                client.clientstrategy = new ClientWithSocket("127.0.0.1", 5858);
+                client.clientstrategy = new ClientWithSocket("192.168.178.22", 5858);
                 try {
                     client.clientstrategy.startClient();
                     break;

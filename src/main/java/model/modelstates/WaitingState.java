@@ -24,9 +24,8 @@ public class WaitingState implements State {
     public MessageEnum doAction(DataPacket dataPacket) {
         while (true) {
             if (!(allPlay.getPlayerState(dataPacket.getPlayer()) instanceof WaitingState)) {
-                break;
+                return MessageEnum.OK;
             }
         }
-        return MessageEnum.OK;
     }
 }

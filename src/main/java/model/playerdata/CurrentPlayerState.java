@@ -19,6 +19,7 @@ public class CurrentPlayerState implements Observer, Serializable {
     private Player activeplayer;        //Memorizza il colore/personaggio scelto dal giocatore
     private HashMap<Player, Integer> controlMarks;  //Controlla il numero dei marchi da aggiungere alla plancia danni giocatore
     private Player hit;
+    private boolean endturn;
 
     /**
      * Constructor
@@ -31,6 +32,15 @@ public class CurrentPlayerState implements Observer, Serializable {
         this.activeplayer = player;
         controlMarks = new HashMap<>();
         this.hit = null;
+        this.endturn=false;
+    }
+
+    public void setEndturn(boolean endturn) {
+        this.endturn = endturn;
+    }
+
+    public boolean isEndturn() {
+        return endturn;
     }
 
     public Player getHit() {

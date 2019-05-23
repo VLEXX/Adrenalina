@@ -8,6 +8,7 @@ import model.map.Cell;
 import model.map.Room;
 import model.powerups.PowerUp;
 
+import java.util.Collections;
 import java.util.HashMap;
 
 public class SpawnState implements State {
@@ -35,7 +36,10 @@ public class SpawnState implements State {
                                 cell.addInCellPlayer(dataPacket.getPlayer());
                                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().add(pop1);
                                 allPlay.getCurrentDeckState().getPowerupdeck().push(pop2);
+                                System.out.println(allPlay.getCurrentDeckState().getPowerupdeck().peek().getId() + " " + allPlay.getCurrentDeckState().getPowerupdeck().peek().getColor());
                                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
+                                System.out.println(dataPacket.getPlayer());
+                                System.out.println(allPlay.getHashMapState().get(dataPacket.getPlayer()));
                                 return MessageEnum.OK;
                             }
                         }
@@ -55,6 +59,7 @@ public class SpawnState implements State {
                                 cell.addInCellPlayer(dataPacket.getPlayer());
                                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().add(pop2);
                                 allPlay.getCurrentDeckState().getPowerupdeck().push(pop1);
+                                Collections.shuffle(allPlay.getCurrentDeckState().getPowerupdeck());
                                 allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                                 return MessageEnum.OK;
                             }

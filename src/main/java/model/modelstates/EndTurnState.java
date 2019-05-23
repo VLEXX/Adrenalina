@@ -42,6 +42,7 @@ public class EndTurnState implements State {
             return out1;
         this.transferMarks(allPlay);
         this.scoreCounter(allPlay);
+        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setEndturn(true);
         return MessageEnum.OK;
     }
 
@@ -114,7 +115,7 @@ public class EndTurnState implements State {
         }
         if(cost.get(Munitions.RED)<0 || cost.get(Munitions.YELLOW)<0 || cost.get(Munitions.BLUE)<0)
             return MessageEnum.TOO_MUCH_POWERUPS;
-        if(i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED)-cost.get(Munitions.RED)<0 /*|| i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW)-cost.get(Munitions.YELLOW)<0 || i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE)-cost.get(Munitions.BLUE)<0*/)
+        if(i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED)-cost.get(Munitions.RED)<0 || i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW)-cost.get(Munitions.YELLOW)<0 || i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE)-cost.get(Munitions.BLUE)<0)
             return MessageEnum.AMMO_ERROR;
         else{
             ArrayList<PowerUp> toRemove = new ArrayList<>();

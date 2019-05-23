@@ -35,7 +35,6 @@ public class ViewSpawnState implements ViewState {
                 System.out.println("WRONG INPUT! Please write: '1' if you want to keep Card 1 or '2' if you want to keep Card 2\n");
             }
         }
-
         return dataPacket;
     }
 }

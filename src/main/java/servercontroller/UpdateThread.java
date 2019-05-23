@@ -33,6 +33,8 @@ public class UpdateThread {
             position.setCurrentroom(allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentroom());
         }
 
+
+
         StatesEnum state = null;
 
         if(allPlay.getHashMapState().get(player) instanceof ActionState){

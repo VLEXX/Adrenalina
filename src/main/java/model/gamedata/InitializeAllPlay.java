@@ -55,7 +55,6 @@ public class InitializeAllPlay {
         this.endgame=false;
         this.SkullArray= new Player[]{null,null,null,null,null,null,null,null};
         this.SecondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
-
     }
 
     public State getTempState() {

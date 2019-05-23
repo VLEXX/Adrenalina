@@ -6,9 +6,11 @@ package servercontroller;
 import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.modelstates.ActionState;
+import model.modelstates.EndTurnState;
 import model.playerdata.Player;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
+import model.powerups.PowerUp;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -38,8 +40,26 @@ public class StartGame extends Thread {
             try {
                 if(allPlay.isEndgame()==false) {
                     DataPacket dataPacket = (DataPacket) objectInputStream.readObject();
+                    System.out.println(player + " " + allPlay.getHashMapState().get(player));
                     MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket);
                     objectOutputStream.writeObject(messageEnum);
+                    if(allPlay.getHashMapState().get(player) instanceof EndTurnState){
+                        if(allPlay.getCurrentPlayerState().get(player).isEndturn()==true) {
+                            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.WAIT));
+                            if (allPlay.getIdClientList().getIndexArray() < allPlay.getIdClientList().getPlayerArrayList().size()) {
+                                allPlay.getIdClientList().increaseIndexArray();
+                            }
+                            else{
+                                allPlay.getIdClientList().resetIndexArray();
+                            }
+                            if (allPlay.getCurrentPlayerState().get(allPlay.getIdClientList().getPlayerArrayList().get(allPlay.getIdClientList().getIndexArray())).getPlayerposition().getCurrentcell() == null) {
+                                allPlay.getHashMapState().replace(allPlay.getIdClientList().getPlayerArrayList().get(allPlay.getIdClientList().getIndexArray()), stateHashMap.get(StatesEnum.SPAWN));
+                            } else {
+                                allPlay.getHashMapState().replace(allPlay.getIdClientList().getPlayerArrayList().get(allPlay.getIdClientList().getIndexArray()), stateHashMap.get(StatesEnum.ACTION));
+                            }
+                            allPlay.getCurrentPlayerState().get(player).setEndturn(false);
+                        }
+                    }
                     updateThread.updateClient();
                 }
                 if(allPlay.isEndgame()==true) {

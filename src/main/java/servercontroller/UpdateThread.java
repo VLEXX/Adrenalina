@@ -7,10 +7,12 @@ import model.modelstates.*;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.UpdatePacket;
+import model.powerups.PowerUp;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class UpdateThread {
     private InitializeAllPlay allPlay;
@@ -32,8 +34,6 @@ public class UpdateThread {
             position.setCurrentcell(allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell());
             position.setCurrentroom(allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentroom());
         }
-
-
 
         StatesEnum state = null;
 
@@ -67,7 +67,10 @@ public class UpdateThread {
         if(allPlay.getHashMapState().get(player) instanceof SpawnState){
             state = StatesEnum.SPAWN;
         }
-        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), position, state, allPlay.getCurrentDeckState().getPowerupdeck(), allPlay.isEndgame());
+
+        Stack<PowerUp> deck = (Stack<PowerUp>) allPlay.getCurrentDeckState().getPowerupdeck().clone();
+        System.out.println(player + "     " + deck.peek().getId() + " " + deck.peek().getColor());
+        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), position, state, deck, allPlay.isEndgame());
         objectOutputStream.writeObject(updatePacket);
     }
 }

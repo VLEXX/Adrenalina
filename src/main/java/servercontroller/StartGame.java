@@ -7,6 +7,7 @@ import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.modelstates.ActionState;
 import model.modelstates.EndTurnState;
+import model.modelstates.SpawnState;
 import model.playerdata.Player;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
@@ -46,7 +47,7 @@ public class StartGame extends Thread {
                     if(allPlay.getHashMapState().get(player) instanceof EndTurnState){
                         if(allPlay.getCurrentPlayerState().get(player).isEndturn()==true) {
                             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.WAIT));
-                            if (allPlay.getIdClientList().getIndexArray() < allPlay.getIdClientList().getPlayerArrayList().size()) {
+                            if (allPlay.getIdClientList().getIndexArray() < allPlay.getIdClientList().getPlayerArrayList().size()-1) {
                                 allPlay.getIdClientList().increaseIndexArray();
                             }
                             else{

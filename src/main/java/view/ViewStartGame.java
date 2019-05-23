@@ -67,6 +67,7 @@ public class ViewStartGame extends Thread {
                 if(messageEnumOK.equals(MessageEnum.OK)) {
                     while (true) {
                         if(updatePacket!=null){
+                            System.out.println(player + " " + updatePacket.getPowerUpDeck().peek().getId() + " " + updatePacket.getPowerUpDeck().peek().getColor());
                             viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
                             break;
                         }

@@ -42,8 +42,9 @@ public class ViewDatabase {
         return currentDeckState;
     }
 
-    public void setCurrentDeckState(Stack<PowerUp> currentDeckState) {
-        this.currentDeckState = currentDeckState;
+    public void setCurrentDeckState(Stack<PowerUp> currentDeckState1) {
+        this.currentDeckState=null;
+        this.currentDeckState = currentDeckState1;
     }
 
     public HashMap<Player, ViewState> getViewState() {

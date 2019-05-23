@@ -44,16 +44,17 @@ public class RocketLauncher extends Weapon implements Serializable {
      * @param myPlayer player who attack
      * @param playerToAttack player to shot
      * @param allPlay current state game
-     * @return POSITION_NOT_FOUND or POSITION_NOT_VALID or OK or POSITION_UNREACHABLE
+     * @return PLAYER_UNREACHABLE or POSITION_NOT_VALID or OK or POSITION_UNREACHABLE
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(check(myPosition, positionToAttack) == false)
-            return MessageEnum.POSITION_NOT_FOUND;
+            return MessageEnum.PLAYER_UNREACHABLE;
         if(myPosition.getCurrentcell().getCellId() == positionToAttack.getCurrentcell().getCellId())
             return MessageEnum.POSITION_NOT_VALID;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
@@ -92,19 +93,22 @@ public class RocketLauncher extends Weapon implements Serializable {
      * @param myPlayer player who shot
      * @param playerToAttack player to shot
      * @param allPlay current state game
-     * @return
+     * @return PLAYER_NOT_FOUND or OK
      */
     public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
         int control = 0;
         for (int i = 0; i < position1.getCurrentcell().getInCellPlayer().size(); i++) {
-            if(position1.getCurrentcell().getInCellPlayer().size() == 0)
-                return MessageEnum.PLAYER_NOT_FOUND;
-            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
-            if (control != 0)
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
-            allPlay.getCurrentPlayerState().get(player1).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+            if (position1.getCurrentcell().getInCellPlayer().get(i) != player1) {
+                control = allPlay.getCurrentPlayerState().get(position1.getCurrentcell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                if (control != 0)
+                    allPlay.getCurrentPlayerState().get(position1.getCurrentcell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                allPlay.getCurrentPlayerState().get(position1.getCurrentcell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+            }
         }
+        control = allPlay.getCurrentPlayerState().get(player1).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        if(control != 0)
+            allPlay.getCurrentPlayerState().get(player1).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+        allPlay.getCurrentPlayerState().get(player1).getBoard().getDamageBox().increaseDamage(1, myPlayer);
         return MessageEnum.OK;
     }
 

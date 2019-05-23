@@ -43,20 +43,20 @@ public class Hellion extends Weapon implements Serializable {
      * @param allPlay current game state
      * @return POSITION_NOT_FOUND or OK
      */
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay) {
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
+        if (check(myPosition, positionToAttack) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
+        if (checkPosition(myPosition.getCurrentcell(), positionToAttack.getCurrentcell()) == false)
+            return MessageEnum.POSITION_NOT_FOUND;
         control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
-        if(check(myPosition, positionToAttack) == false)
-            return MessageEnum.POSITION_NOT_FOUND;
-        if(checkPosition(myPosition.getCurrentcell(), positionToAttack.getCurrentcell()) == false)
-            return MessageEnum.POSITION_NOT_FOUND;
-        if(control != 0)
+        if (control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
-        for(int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++) {
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).addControlMarks(myPlayer, 1);
+        for (int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++) {
+            allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).addControlMarks(myPlayer, 1);
         }
         return MessageEnum.OK;
     }
@@ -73,16 +73,16 @@ public class Hellion extends Weapon implements Serializable {
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(check(myPosition, positionToAttack) == false)
             return MessageEnum.POSITION_NOT_FOUND;
         if(checkPosition(myPosition.getCurrentcell(), positionToAttack.getCurrentcell()) == false)
             return MessageEnum.POSITION_NOT_FOUND;
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
         for(int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++) {
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).addControlMarks(myPlayer, 2);
+            allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).addControlMarks(myPlayer, 2);
         }
         return MessageEnum.OK;
     }

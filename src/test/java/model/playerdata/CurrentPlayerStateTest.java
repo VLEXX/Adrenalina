@@ -122,4 +122,11 @@ class CurrentPlayerStateTest {
         c.setHit(Player.YELLOW);
         assertEquals(c.getHit(), Player.YELLOW);
     }
+
+    @Test
+    void setEndturn() {
+        CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
+        currentPlayerState.setEndturn(true);
+        assertEquals(currentPlayerState.isEndturn(), true);
+    }
 }

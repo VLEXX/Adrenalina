@@ -4,6 +4,8 @@ import model.datapacket.DataPacket;
 import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
+import model.map.Cell;
+import model.map.Room;
 import model.weaponscard.Weapon;
 
 import java.util.HashMap;
@@ -22,7 +24,60 @@ public class ShootFirstState implements State {
     public MessageEnum doAction(DataPacket dataPacket) {
 
         Weapon weapon;
+        Cell celltemp=allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell();
+        Cell cellnull = null;
         if(dataPacket.isFirstAttack()==true){
+            if(dataPacket.getCell()!=null){
+                if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getDamageBox().isShootUp()==true){
+                    for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
+                        for(Cell cell: room.getCellsList()){
+                            if(dataPacket.getCell().getCellId()==cell.getCellId()) {
+                                if (celltemp.getUpCell() == cell) {
+                                    celltemp.removeInCellPlayer(dataPacket.getPlayer());
+                                    cell.addInCellPlayer(dataPacket.getPlayer());
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                                    cellnull=cell;
+                                    break;
+                                }
+                                else if (celltemp.getDownCell() == cell) {
+                                    celltemp.removeInCellPlayer(dataPacket.getPlayer());
+                                    cell.addInCellPlayer(dataPacket.getPlayer());
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                                    cellnull=cell;
+                                    break;
+                                }
+                                else if(celltemp.getRightCell()==cell){
+                                    celltemp.removeInCellPlayer(dataPacket.getPlayer());
+                                    cell.addInCellPlayer(dataPacket.getPlayer());
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                                    cellnull=cell;
+                                    break;
+                                }
+                                else if(celltemp.getLeftCell()==cell){
+                                    celltemp.removeInCellPlayer(dataPacket.getPlayer());
+                                    cell.addInCellPlayer(dataPacket.getPlayer());
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                                    cellnull=cell;
+                                    break;
+                                }
+                            }
+                        }
+                        if(cellnull!=null){
+                            break;
+                        }
+                    }
+                    if(cellnull==null){
+                        return MessageEnum.UNREACHABLE_CELL;
+                    }
+                }
+                else{
+                    return MessageEnum.SHOOTUP_ERROR;
+                }
+            }
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
                     weapon = w;

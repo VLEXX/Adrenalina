@@ -26,5 +26,6 @@ public enum MessageEnum implements Serializable {
     PLAYER_NOT_VALID,
     INEXISTENT_CELL,
     ENOUGH_AMMO,
-    POSITION_NOT_VALID
+    POSITION_NOT_VALID,
+    SHOOTUP_ERROR
 }

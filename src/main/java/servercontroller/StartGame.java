@@ -41,7 +41,6 @@ public class StartGame extends Thread {
             try {
                 if(allPlay.isEndgame()==false) {
                     DataPacket dataPacket = (DataPacket) objectInputStream.readObject();
-                    System.out.println(player + " " + allPlay.getHashMapState().get(player));
                     MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket);
                     objectOutputStream.writeObject(messageEnum);
                     if(allPlay.getHashMapState().get(player) instanceof EndTurnState){

@@ -4,6 +4,8 @@
 package servercontroller;
 
 import model.gamedata.InitializeAllPlay;
+import model.map.Cell;
+import model.map.Room;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.MessageString;
@@ -33,9 +35,7 @@ public class ServerManagerFunction {
                 allPlay.getIdClientList().getPlayerArrayList().add(player);
                 ok = true;
                 objectOutputStream.writeObject(ok);
-                System.out.println(allPlay.getPlayercountertemp());
                 allPlay.decreasePlayerCounterTemp();
-                System.out.println(allPlay.getPlayercountertemp());
                 break;
             }
             else{
@@ -59,6 +59,7 @@ public class ServerManagerFunction {
                 allPlay.getVoteMap().setFinalresult();
                 allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
                 allPlay.getStateSelectedMap().setSelectedmap();
+                refillMap(allPlay);
             }
         }
         if(i==2){
@@ -69,6 +70,7 @@ public class ServerManagerFunction {
                 allPlay.getVoteMap().setFinalresult();
                 allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
                 allPlay.getStateSelectedMap().setSelectedmap();
+                refillMap(allPlay);
             }
         }
         if(i==3){
@@ -79,6 +81,7 @@ public class ServerManagerFunction {
                 allPlay.getVoteMap().setFinalresult();
                 allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
                 allPlay.getStateSelectedMap().setSelectedmap();
+                refillMap(allPlay);
             }
         }
         if(i==4){
@@ -89,6 +92,26 @@ public class ServerManagerFunction {
                 allPlay.getVoteMap().setFinalresult();
                 allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
                 allPlay.getStateSelectedMap().setSelectedmap();
+                refillMap(allPlay);
+            }
+        }
+    }
+
+    public void refillMap( InitializeAllPlay i){
+        for(Room r : i.getStateSelectedMap().getSelectedmap().getRoomList()){
+            for(Cell c : r.getCellsList()){
+                if(c.getSpawnpointzone()==null){
+                    if(c.getAmmohere()==null)
+                        c.setAmmohere(i.getCurrentDeckState().getAmmodeck().pop());
+                }
+                else{
+                    for(int j=0;j<3;j++){
+                        if(c.getSpawnpointzone().getSpawnWeaponsList()[j]==null) {
+                            if(!i.getCurrentDeckState().getWeaponsdeck().empty())
+                                c.getSpawnpointzone().getSpawnWeaponsList()[j] = i.getCurrentDeckState().getWeaponsdeck().pop();
+                        }
+                    }
+                }
             }
         }
     }

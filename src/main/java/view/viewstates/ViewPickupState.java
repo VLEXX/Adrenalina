@@ -90,6 +90,7 @@ public class ViewPickupState implements ViewState {
                 for (Weapon weapon : tempcell.getSpawnpointzone().getSpawnWeaponsList()) {
                     System.out.print(weapon.getName() + " | ");
                 }
+                System.out.print("\n");
                 while (true) {
                     Weapon w = null;
                     String s1 = stdin.nextLine();
@@ -101,19 +102,37 @@ public class ViewPickupState implements ViewState {
                             int blue = 0;
                             int yellow = 0;
                             if (weapon.getCardColor().equals(Munitions.BLUE)) {
-                                red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - weapon.getFirstPrice().get(Munitions.RED);
-                                blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - weapon.getFirstPrice().get(Munitions.BLUE) + 1;
-                                yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - weapon.getFirstPrice().get(Munitions.YELLOW);
+                                if(weapon.getFirstPrice().containsKey(Munitions.RED)==true) {
+                                    red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - weapon.getFirstPrice().get(Munitions.RED);
+                                }
+                                if(weapon.getFirstPrice().containsKey(Munitions.BLUE)==true) {
+                                    blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - weapon.getFirstPrice().get(Munitions.BLUE) + 1;
+                                }
+                                if(weapon.getFirstPrice().containsKey(Munitions.YELLOW)==true) {
+                                    yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - weapon.getFirstPrice().get(Munitions.YELLOW);
+                                }
                             }
                             if (weapon.getCardColor().equals(Munitions.RED)) {
-                                red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - weapon.getFirstPrice().get(Munitions.RED) + 1;
-                                blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - weapon.getFirstPrice().get(Munitions.BLUE);
-                                yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - weapon.getFirstPrice().get(Munitions.YELLOW);
+                                if(weapon.getFirstPrice().containsKey(Munitions.RED)==true) {
+                                    red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - weapon.getFirstPrice().get(Munitions.RED) + 1;
+                                }
+                                if(weapon.getFirstPrice().containsKey(Munitions.BLUE)==true) {
+                                    blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - weapon.getFirstPrice().get(Munitions.BLUE);
+                                }
+                                if(weapon.getFirstPrice().containsKey(Munitions.YELLOW)==true) {
+                                    yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - weapon.getFirstPrice().get(Munitions.YELLOW);
+                                }
                             }
                             if (weapon.getCardColor().equals(Munitions.YELLOW)) {
-                                red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - weapon.getFirstPrice().get(Munitions.RED);
-                                blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - weapon.getFirstPrice().get(Munitions.BLUE);
-                                yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - weapon.getFirstPrice().get(Munitions.YELLOW) + 1;
+                                if(weapon.getFirstPrice().containsKey(Munitions.RED)==true) {
+                                    red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - weapon.getFirstPrice().get(Munitions.RED);
+                                }
+                                if(weapon.getFirstPrice().containsKey(Munitions.BLUE)==true) {
+                                    blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - weapon.getFirstPrice().get(Munitions.BLUE);
+                                }
+                                if(weapon.getFirstPrice().containsKey(Munitions.YELLOW)==true) {
+                                    yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - weapon.getFirstPrice().get(Munitions.YELLOW) + 1;
+                                }
                             }
                             if ((red >= 0) && (blue >= 0) && (yellow >= 0)) {
                                 if (dataPacket.getWeapon() != null) {

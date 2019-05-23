@@ -12,7 +12,7 @@ public class ViewSpawnState implements ViewState {
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
         DataPacket dataPacket = new DataPacket();
         dataPacket.setPlayer(player);
-        System.out.println("Now two Power-Up Cards will be picked up...");
+        System.out.println("Now two Power-Up Cards will be picked up...\n");
         PowerUp pop1 = viewDatabase.getCurrentDeckState().pop();
         PowerUp pop2 = viewDatabase.getCurrentDeckState().pop();
         System.out.println("Power-Up 1: " + pop1.getId() + "  Card Color 1: " + pop1.getColor() + "\n");

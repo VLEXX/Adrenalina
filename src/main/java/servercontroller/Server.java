@@ -15,7 +15,6 @@ public class Server {
     public Server(){
         this.counter=5;
         this.allPlay = new InitializeAllPlay();
-        System.out.println("model Inizialized\n");
         this.socketserver = new SocketServer(5858, this.allPlay, counter);
         this.server_rmi = new ServerRMI(this.allPlay, counter);
 

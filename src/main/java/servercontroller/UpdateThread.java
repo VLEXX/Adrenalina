@@ -69,7 +69,6 @@ public class UpdateThread {
         }
 
         Stack<PowerUp> deck = (Stack<PowerUp>) allPlay.getCurrentDeckState().getPowerupdeck().clone();
-        System.out.println(player + "     " + deck.peek().getId() + " " + deck.peek().getColor());
         UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), position, state, deck, allPlay.isEndgame());
         objectOutputStream.writeObject(updatePacket);
     }

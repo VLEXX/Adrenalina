@@ -15,6 +15,7 @@ import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -126,6 +127,8 @@ public class EndTurnState implements State {
                 }
             }
             i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getPowerupList().removeAll(toRemove);
+            i.getCurrentDeckState().getPowerupdeck().addAll(toRemove);
+            Collections.shuffle(i.getCurrentDeckState().getPowerupdeck());
             for(Weapon w : d.getWeaponsToBeRecharged()) {
                 for(Weapon w2 : i.getCurrentPlayerState().get(d.getPlayer()).getBoard().getWeaponsList()) {
                     if(w.getName()==w2.getName())

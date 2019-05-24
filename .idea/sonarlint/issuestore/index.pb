@@ -164,3 +164,5 @@ b
 2src/main/java/model/gamedata/StateSelectedMap.java,8\0\8099cd2400fd573c56fd020c0dcbe4bf2cb41726
 b
 2src/test/java/model/modelstates/MoveStateTest.java,2\c\2cec194c687e9e846a18cdf91240d14c3f419d6c
+b
+2src/main/java/model/gamedata/CurrentDeckState.java,6\4\642505ded511711b4e26933d5dc67ec3a6b84754

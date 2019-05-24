@@ -8,14 +8,17 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
+import model.map.Room;
 import model.munitions.Ammo;
 import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
+import model.playerdata.MunitionsBox;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 /**
  * Class that manages the PickUp Action
@@ -28,164 +31,169 @@ public class PickUpState implements State {
     /**
      * Class constructor
      */
-    public PickUpState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
+    public PickUpState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
     }
 
 
-     /**
+    /**
      * @param dataPacket
      * @return MessageEnum
      */
     @Override
     public MessageEnum doAction(DataPacket dataPacket) {
-        if(dataPacket.isWeaponlistempty()==true){
+        Weapon ww = null;
+        int pwcheck = 0;
+        if (dataPacket.isWeaponlistempty() == true) {
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
             return MessageEnum.OK;
         }
-        if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).isActiveturn()) {
-            if(dataPacket.getReplaceWeapon()!=null){
-                if(!allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().contains(dataPacket.getReplaceWeapon()) || allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().size()<3)
-                    return MessageEnum.WEAPON_ERROR_2;
+        //controlla se il rimpiazzo dell'arma è possibile e necessario
+        if (dataPacket.getReplaceWeapon() != null) {
+            for (Weapon wp : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
+                if (wp.getName() == dataPacket.getReplaceWeapon().getName())
+                    ww = wp;
             }
-            for (PowerUp pw : dataPacket.getPaymentPowerUp()){
-                if(!allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().contains(pw))
-                    return MessageEnum.POWERUP_NOT_FOUND;
-            }
-            if (dataPacket.getCell() != null) {
-                int a;
-                if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getDamageBox().getDamage()[2]==null)
-                    a = this.moveOne(allPlay, dataPacket.getPlayer(), dataPacket.getCell());
-                else
-                    a = this.moveTwo(allPlay, dataPacket.getPlayer(),dataPacket.getCell());
-                if (a == -1) {
-                    return MessageEnum.UNREACHABLE_CELL;
-                }
-            }
-            if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getSpawnpointzone() == null) {
-                if (this.pickUpAmmo(allPlay, dataPacket.getPlayer()) == 0) {
-                    if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==2) {
-                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
-                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
-                        return MessageEnum.OK;
-                    }
-                    if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==1) {
-                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
-                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
-                        return MessageEnum.OK;
-                    }
-                }
-            } else {
-                if (this.pickUpWeapon(allPlay, dataPacket.getPlayer(), dataPacket.getWeapon(), dataPacket.getPaymentPowerUp(), dataPacket.getReplaceWeapon()) == 0) {
-                    if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==2) {
-                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
-                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
-                        return MessageEnum.OK;
-                    }
-                    if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==1) {
-                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
-                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
-                        return MessageEnum.OK;
-                    }
-                }
-                else
-                    return MessageEnum.WEAPON_ERROR;
+            if (ww == null || allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().size() < 3)
+                return MessageEnum.WEAPON_ERROR_2;
+        }
+        //controlla se i powerup siano effettivamente posseduti
+        for (PowerUp pw : dataPacket.getPaymentPowerUp()) {
+            for (PowerUp pw3 : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()) {
+                if (pw.getId() == pw3.getId() && pw.getColor() == pw3.getColor())
+                    pwcheck++;
             }
         }
-        return MessageEnum.NOT_YOUR_TURN;
-
-    }
-
-
-    //metodo che permette al player di spostarsi nella cella vicina
-    private int moveOne(InitializeAllPlay i, Player p, Cell c) {
-        CurrentPlayerState cps = i.getCurrentPlayerState().get(p);
-        if (cps.getPlayerposition().getCurrentcell().getUpCell() == c || cps.getPlayerposition().getCurrentcell().getDownCell() == c || cps.getPlayerposition().getCurrentcell().getLeftCell() == c || cps.getPlayerposition().getCurrentcell().getRightCell() == c) {
-            cps.getPlayerposition().setCurrentcell(c);
-            i.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> {
-                if (room.getCellsList().contains(c)) {
-                    cps.getPlayerposition().setCurrentroom(room);
+        Cell cc = null;
+        if (pwcheck != dataPacket.getPaymentPowerUp().size())
+            return MessageEnum.POWERUP_NOT_FOUND;
+        //controlla se la cella scelta in caso di movimento sia raggiungibile
+        if (dataPacket.getCell() != null) {
+            for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
+                for (Cell cell : room.getCellsList()) {
+                    if (cell.getCellId() == dataPacket.getCell().getCellId())
+                        cc = cell;
                 }
-            });
-            return 0; //posizione di p aggiornata con successo
+            }
         }
-        return -1; //cella non raggiungibile
-    }
-
-    //metodo che permette al player di muoversi nelle celle che distano al più 2
-    private int moveTwo(InitializeAllPlay i, Player p, Cell c){
-        CurrentPlayerState cps = i.getCurrentPlayerState().get(p);
-        if(cps.getPlayerposition().getCurrentcell().getReachable2Cells().contains(c)){
-            cps.getPlayerposition().setCurrentcell(c);
-            i.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> {
-                if (room.getCellsList().contains(c)) {
-                    cps.getPlayerposition().setCurrentroom(room);
-                }
-            });
-            return 0; //posizione di p aggiornata con successo
+        Cell ccv = allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell();
+        if (cc != null) {
+            boolean a;
+            if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getDamageBox().getDamage()[2] == null)
+                a = (cc == ccv.getDownCell() || cc == ccv.getLeftCell() || cc == ccv.getUpCell() || cc == ccv.getRightCell());
+            else
+                a = ccv.getReachable2Cells().contains(cc);
+            if (!a)
+                return MessageEnum.UNREACHABLE_CELL;
         }
-        else
-            return -1;
-
-    }
-
-    private int pickUpAmmo(InitializeAllPlay i, Player p) {
-        CurrentPlayerState cps = i.getCurrentPlayerState().get(p);
-        Ammo a = cps.getPlayerposition().getCurrentcell().getAmmohere();
-        if (a.getAmmoList()[0] + cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) < 4)
-            cps.getBoard().getMunitionsBox().increaseMyMunitionsBox(Munitions.RED, a.getAmmoList()[0]);
-        else
-            cps.getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.RED, 3);
-        if (a.getAmmoList()[1] + cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) < 4)
-            cps.getBoard().getMunitionsBox().increaseMyMunitionsBox(Munitions.YELLOW, a.getAmmoList()[1]);
-        else
-            cps.getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.YELLOW, 3);
-        if (a.getAmmoList()[2] + cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) < 4)
-            cps.getBoard().getMunitionsBox().increaseMyMunitionsBox(Munitions.BLUE, a.getAmmoList()[2]);
-        else
-            cps.getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.BLUE, 3);
-        if (a.getPossiblePowerUp() && cps.getBoard().getPowerupList().size() < 3)
-            cps.getBoard().getPowerupList().add(i.getCurrentDeckState().getPowerupdeck().pop());
-        cps.getPlayerposition().getCurrentcell().setAmmohere(null);
-        return 0; //munizioni e potenziamento raccolti correttamente
-    }
-
-    //raccogliere l'arma e lasciarne un'altra in caso il player ne abbia più di 3
-    private int pickUpWeapon(InitializeAllPlay i, Player p, Weapon w, ArrayList<PowerUp> u, Weapon replaceweapon) {
-        CurrentPlayerState cps = i.getCurrentPlayerState().get(p);
+        //imposta la cella da verificare per controllare le armi presenti
+        if (cc != null)
+            ccv = cc;
+        //verifica la presenza di armi o munizioni, in caso di armi la possibilità di pagarle
         HashMap<Munitions, Integer> cost = new HashMap<>();
         cost.put(Munitions.RED, 0);
         cost.put(Munitions.YELLOW, 0);
         cost.put(Munitions.BLUE, 0);
-        if (w.getFirstPrice().containsKey(Munitions.RED))
-            cost.put(Munitions.RED, w.getFirstPrice().get(Munitions.RED) - w.munitionsChecker(Munitions.RED));
-        if (w.getFirstPrice().containsKey(Munitions.YELLOW))
-            cost.put(Munitions.YELLOW, w.getFirstPrice().get(Munitions.YELLOW) - w.munitionsChecker(Munitions.YELLOW));
-        if (w.getFirstPrice().containsKey(Munitions.BLUE))
-            cost.put(Munitions.BLUE, w.getFirstPrice().get(Munitions.BLUE) - w.munitionsChecker(Munitions.BLUE));
-        u.forEach(powerUp -> {
-            cost.put(Munitions.RED, cost.get(Munitions.RED) - powerUp.munitionsChecker(Munitions.RED));
-            cost.put(Munitions.YELLOW, cost.get(Munitions.YELLOW) - powerUp.munitionsChecker(Munitions.YELLOW));
-            cost.put(Munitions.BLUE, cost.get(Munitions.BLUE) - powerUp.munitionsChecker(Munitions.BLUE));
-        });
-        cost.forEach((m, n) -> {
-            if (n < 0) n = 0;
-        });
-        if (cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - cost.get(Munitions.RED) > -1 && cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - cost.get(Munitions.YELLOW) > -1 && cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - cost.get(Munitions.BLUE) > -1) {
-            for (int j = 0; j < 3; j++) {
-                if (cps.getPlayerposition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()[j] == w) {
-                    cps.getBoard().getWeaponsList().add(w);
-                    if (replaceweapon != null)
-                        cps.getBoard().getWeaponsList().remove(replaceweapon);
-                    cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.RED, cost.get(Munitions.RED));
-                    cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.YELLOW, cost.get(Munitions.YELLOW));
-                    cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.BLUE, cost.get(Munitions.BLUE));
-                    cps.getPlayerposition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()[j] = replaceweapon;
+        ArrayList<PowerUp> toRemove2 = new ArrayList<>();
+        Weapon www = dataPacket.getWeapon();
+        if (ccv.getSpawnpointzone() != null) {
+            boolean b = false;
+            for (Weapon w2 : ccv.getSpawnpointzone().getSpawnWeaponsList()) {
+                if (w2.getName() == www.getName()) {
+                    b = true;
+                    www = w2;
                 }
             }
-            return 0;
-        } else
-            return -1;
+            if (!b)
+                return MessageEnum.WEAPON_NOT_FOUND;
+            if (www.getFirstPrice().containsKey(Munitions.RED))
+                cost.put(Munitions.RED, www.getFirstPrice().get(Munitions.RED) - www.munitionsChecker(Munitions.RED));
+            if (www.getFirstPrice().containsKey(Munitions.YELLOW))
+                cost.put(Munitions.YELLOW, www.getFirstPrice().get(Munitions.YELLOW) - www.munitionsChecker(Munitions.YELLOW));
+            if (www.getFirstPrice().containsKey(Munitions.BLUE))
+                cost.put(Munitions.BLUE, www.getFirstPrice().get(Munitions.BLUE) - www.munitionsChecker(Munitions.BLUE));
+            dataPacket.getPaymentPowerUp().forEach(powerUp -> {
+                for (PowerUp pw2 : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()) {
+                    if (powerUp.getColor() == pw2.getColor() && powerUp.getId() == pw2.getId())
+                        toRemove2.add(pw2);
+                }
+                cost.put(Munitions.RED, cost.get(Munitions.RED) - powerUp.munitionsChecker(Munitions.RED));
+                cost.put(Munitions.YELLOW, cost.get(Munitions.YELLOW) - powerUp.munitionsChecker(Munitions.YELLOW));
+                cost.put(Munitions.BLUE, cost.get(Munitions.BLUE) - powerUp.munitionsChecker(Munitions.BLUE));
+            });
+            if (cost.get(Munitions.RED) < 0 || cost.get(Munitions.YELLOW) < 0 || cost.get(Munitions.BLUE) < 0)
+                return MessageEnum.TOO_MUCH_POWERUPS;
+            HashMap<Munitions, Integer> mb = allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap();
+            if (mb.get(Munitions.RED) - cost.get(Munitions.RED) < 0 || mb.get(Munitions.YELLOW) - cost.get(Munitions.YELLOW) < 0 || mb.get(Munitions.BLUE) - cost.get(Munitions.BLUE) < 0)
+                return MessageEnum.AMMO_ERROR;
+        }
+
+
+        //fine controlli e inizio modifica del model
+        //settaggio posizione
+        Cell ccv2 = ccv;
+        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(ccv);
+        allPlay.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> {
+            if (room.getCellsList().contains(ccv2)) {
+                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+            }
+        });
+        if (ccv.getSpawnpointzone() == null) {
+            CurrentPlayerState cps = allPlay.getCurrentPlayerState().get(dataPacket.getPlayer());
+            Ammo a = cps.getPlayerposition().getCurrentcell().getAmmohere();
+            if (a.getAmmoList()[0] + cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) < 4)
+                cps.getBoard().getMunitionsBox().increaseMyMunitionsBox(Munitions.RED, a.getAmmoList()[0]);
+            else
+                cps.getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.RED, 3);
+            if (a.getAmmoList()[1] + cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) < 4)
+                cps.getBoard().getMunitionsBox().increaseMyMunitionsBox(Munitions.YELLOW, a.getAmmoList()[1]);
+            else
+                cps.getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.YELLOW, 3);
+            if (a.getAmmoList()[2] + cps.getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) < 4)
+                cps.getBoard().getMunitionsBox().increaseMyMunitionsBox(Munitions.BLUE, a.getAmmoList()[2]);
+            else
+                cps.getBoard().getMunitionsBox().getMyMunitionsMap().put(Munitions.BLUE, 3);
+            if (a.getPossiblePowerUp() && cps.getBoard().getPowerupList().size() < 3)
+                cps.getBoard().getPowerupList().add(allPlay.getCurrentDeckState().getPowerupdeck().pop());
+            allPlay.getCurrentDeckState().getAmmodeck().push(a);
+            Collections.shuffle(allPlay.getCurrentDeckState().getAmmodeck());
+            cps.getPlayerposition().getCurrentcell().setAmmohere(null);
+        } else {
+            for (int j = 0; j < 3; j++) {
+                if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()[j] == www) {
+                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().add(www);
+                    if (ww != null)
+                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().remove(ww);
+                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.RED, cost.get(Munitions.RED));
+                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.YELLOW, cost.get(Munitions.YELLOW));
+                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.BLUE, cost.get(Munitions.BLUE));
+                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()[j] = ww;
+                }
+            }
+            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().removeAll(toRemove2);
+            allPlay.getCurrentDeckState().getPowerupdeck().addAll(toRemove2);
+            Collections.shuffle(allPlay.getCurrentDeckState().getPowerupdeck());
+        }
+        if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
+            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
+        } else {
+            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
+        }
+        return MessageEnum.OK;
+
     }
 }
+        
+
+
+
+
+
+
+
+
+
+

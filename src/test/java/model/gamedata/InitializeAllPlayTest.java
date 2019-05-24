@@ -10,6 +10,7 @@ import model.gamedata.InitializeAllPlay;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,12 +57,6 @@ class InitializeAllPlayTest {
     void getVoteMode() {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getVoteMode().getFinalResult(), -1);
-    }
-
-    @Test
-    void getIdClientList() {
-        InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        assertEquals(initializeAllPlay.getIdClientList().getPlayerArrayList().isEmpty(), true);
     }
 
     @Test

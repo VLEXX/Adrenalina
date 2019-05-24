@@ -1,40 +1,23 @@
 //Author: Federico Scatà
 package model.gamedata;
 
-import model.gamedata.IDClientList;
 import org.junit.jupiter.api.Test;
+
+import java.rmi.RemoteException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IDClientListTest {
 
     @Test
-    void getClientList() {
+    void setClientList() throws RemoteException {
         IDClientList cl = new IDClientList();
-        assertEquals(cl.getClientlist()[0], 0);
-        assertEquals(cl.getClientlist()[1], 0);
-        assertEquals(cl.getClientlist()[2], 0);
-        assertEquals(cl.getClientlist()[3], 0);
-        assertEquals(cl.getClientlist()[4], 0);
+        int i = cl.addClient();
+        assertEquals(cl.getClientlist().get(0), i);
     }
 
     @Test
-    void setClientList() {
-        IDClientList cl = new IDClientList();
-        cl.setClientList(0, 52);
-        cl.setClientList(1, 68);
-        cl.setClientList(2, 1);
-        cl.setClientList(3, 23);
-        cl.setClientList(4, 24);
-        assertEquals(cl.getClientlist()[0], 52);
-        assertEquals(cl.getClientlist()[1], 68);
-        assertEquals(cl.getClientlist()[2], 1);
-        assertEquals(cl.getClientlist()[3], 23);
-        assertEquals(cl.getClientlist()[4], 24);
-    }
-
-    @Test
-    void getPlayerArrayList() {
+    void getPlayerArrayList() throws RemoteException {
         IDClientList idClientList = new IDClientList();
         assertEquals(idClientList.getPlayerArrayList().isEmpty(), true);
     }

@@ -5,8 +5,10 @@ package model.gamedata;
 
 import model.map.*;
 
+import java.io.Serializable;
+
 //Classe che memorizza la mappa corrente selezionata del gioco
-public class StateSelectedMap {
+public class StateSelectedMap implements Serializable {
     private Map selectedmap;    //mappa selezionata
     private StrategyMap strategyMap;
 

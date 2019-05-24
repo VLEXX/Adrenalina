@@ -3,6 +3,7 @@
  */
 package servercontroller;
 
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.map.Room;
@@ -20,7 +21,7 @@ public class ServerManagerFunction {
 
     public ServerManagerFunction(){}
 
-    public synchronized Player chooseCharacterManager(PrintWriter printWriter, ObjectInputStream objectInputStream, InitializeAllPlay allPlay, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
+    public synchronized Player chooseCharacterManager(PrintWriter printWriter, ObjectInputStream objectInputStream, InitializeAllPlay allPlay, ObjectOutputStream objectOutputStream, IDClientList IDclientList) throws IOException, ClassNotFoundException {
         objectOutputStream.writeObject(allPlay.getCurrentDeckState());
 
         Player player;
@@ -32,7 +33,7 @@ public class ServerManagerFunction {
                 objectOutputStream.writeObject(message);
                 allPlay.getCurrentPlayerState().put(player, new CurrentPlayerState(player));
                 allPlay.getCurrentDeckState().getPlayers().remove(player);
-                allPlay.getIdClientList().getPlayerArrayList().add(player);
+                IDclientList.getPlayerArrayList().add(player);
                 ok = true;
                 objectOutputStream.writeObject(ok);
                 allPlay.decreasePlayerCounterTemp();

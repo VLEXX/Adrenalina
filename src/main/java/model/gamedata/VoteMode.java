@@ -3,8 +3,10 @@
  */
 package model.gamedata;
 
+import java.io.Serializable;
+
 //Classe che gestisce la votazione per la scelta della modalità in cui giocare
-public class VoteMode {
+public class VoteMode implements Serializable {
     private int[] voteresultmode;   //Array che memorizza i voti ottenuti da ciascuna modalità (VoteResult[0] => BASE, VoteResult[1] => Dominazione, ...)
     private int finalresultmode;    //Memorizza la modalità finale votata (da 1 a 3)
 

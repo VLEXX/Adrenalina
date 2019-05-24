@@ -3,23 +3,28 @@
  */
 package servercontroller;
 
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SocketServer extends Thread{
+public class SocketServer extends Thread implements Serializable {
     private int port;
     private InitializeAllPlay allPlay;
-    private int counter;
+    private ArrayList<ObserverCounter> observerCounters;
+    private IDClientList idClientList;
 
-    public SocketServer(int port, InitializeAllPlay allPlay, int i){
+    public SocketServer(int port, InitializeAllPlay allPlay, IDClientList clientList){
         this.port = port;
         this.allPlay = allPlay;
-        this.counter=i;
+        this.observerCounters=new ArrayList<>();
+        this.idClientList=clientList;
     }
 
     public void startSocketServer() throws IOException {
@@ -29,11 +34,12 @@ public class SocketServer extends Thread{
         ServerSocket serverSocket = new ServerSocket(port);
 
         System.out.println("Server ready");
-        while(this.counter!=0) {
+        while(this.idClientList.getClientCounter()!=0) {
             try {
                 Socket socket = serverSocket.accept();
-                executor.submit(new SocketClientHandler(socket, this.allPlay));
-                counter--;
+                executor.submit(new SocketClientHandler(socket, this.allPlay, idClientList));
+                this.idClientList.update();
+                System.out.println(this.idClientList.getClientCounter());
             }
             catch (IOException e){
                 break;
@@ -51,4 +57,5 @@ public class SocketServer extends Thread{
             e.printStackTrace();
         }
     }
+
 }

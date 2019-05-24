@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 public interface Subject {
 
-    public void addObserver(Observer e);
+    void addObserver(Observer e);
 
-    public void removeObserver(Observer e);
+    void removeObserver(Observer e);
 
-    public void notifyObserver();
+    void notifyObserver();
 
-    public ArrayList<Observer> getObservers();
+    ArrayList<Observer> getObservers();
 }

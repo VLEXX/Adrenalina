@@ -4,6 +4,7 @@
 package servercontroller;
 
 import model.datapacket.StatesEnum;
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageString;
 import model.modelstates.*;
@@ -19,11 +20,13 @@ public class SocketClientHandler implements Runnable {
     private Socket socket;
     private InitializeAllPlay allPlay;
     private Player player;
+    private IDClientList idClientList;
 
-    public SocketClientHandler(Socket socket, InitializeAllPlay allPlay) {
+    public SocketClientHandler(Socket socket, InitializeAllPlay allPlay, IDClientList clientList) {
         this.socket = socket;
         this.allPlay = allPlay;
         this.player=null;
+        this.idClientList=clientList;
     }
 
     public void run() {
@@ -37,7 +40,7 @@ public class SocketClientHandler implements Runnable {
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
             allPlay.addPlayerCounter();
 
-            player=serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream);
+            player=serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream, idClientList);
             while(true){
                 if(allPlay.getPlayercountertemp()==0){
                     boolean ok = true;
@@ -81,7 +84,7 @@ public class SocketClientHandler implements Runnable {
             stateHashMap.put(StatesEnum.SPAWN, spawnState);
 
             allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
-            if(allPlay.getIdClientList().getPlayerArrayList().get(0).equals(player)){
+            if(idClientList.getPlayerArrayList().get(0).equals(player)){
                 allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.SPAWN));
             }
 
@@ -89,7 +92,7 @@ public class SocketClientHandler implements Runnable {
             updateThread.updateClient();
 
 
-            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updateThread);
+            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updateThread, idClientList);
             startGame.start();
 
 

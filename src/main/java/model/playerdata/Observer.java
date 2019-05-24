@@ -6,5 +6,5 @@ package model.playerdata;
 import model.playerdata.Player;
 
 public interface Observer {
-    public void update(Player p);
+    void update(Player p);
 }

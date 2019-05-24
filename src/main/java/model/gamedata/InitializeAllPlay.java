@@ -9,13 +9,14 @@ import model.modelstates.State;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Class that initialize the player
  */
-public class InitializeAllPlay {
+public class InitializeAllPlay implements Serializable {
     private ArrayList<CurrentTurnState> currentTurnState;
     private HashMap<Player, CurrentPlayerState> currentPlayerState;
     private CurrentDeckState currentDeckState;
@@ -24,7 +25,6 @@ public class InitializeAllPlay {
     private StateSelectedMode stateSelectedMode;
     private VoteMap voteMap;
     private VoteMode voteMode;
-    private IDClientList idClientList;
     private HashMap<Player, State> playerState;
     private int playercounter;
     private int playercountertemp;
@@ -46,7 +46,6 @@ public class InitializeAllPlay {
         stateSelectedMap = new StateSelectedMap();
         voteMap = new VoteMap();
         voteMode = new VoteMode();
-        idClientList = new IDClientList();
         currentDeckState = new CurrentDeckState();
         playerState = new HashMap<>();
         playercounter = 0;
@@ -124,10 +123,6 @@ public class InitializeAllPlay {
 
     public VoteMode getVoteMode() {
         return voteMode;
-    }
-
-    public IDClientList getIdClientList() {
-        return idClientList;
     }
 
     public CurrentDeckState getCurrentDeckState() {

@@ -4,25 +4,32 @@
 package model.gamedata;
 
 import model.playerdata.Player;
+import servercontroller.ObserverCounter;
+import servercontroller.SubjectCounter;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Random;
 
 //Classe che memorizza gli ID dei client che si collegano al server (da 3 a 5 client)
-public class IDClientList {
-    private int[] clientlist;   //Array che memorizza gli ID
-
+public class IDClientList implements IDClientListInterface, Serializable {
+    private ArrayList<Integer> clientlist;   //Array che memorizza gli ID
     private ArrayList<Player> playerArrayList;
-
     private int indexArray;
+    private int clientCounter;
+    private ArrayList<ObserverCounter> observerCounters;
 
     //Costruttore che inizializza l'array a 0 (gli ID assegnati sono diversi da 0)
     public IDClientList() {
-        this.clientlist = new int[]{0, 0, 0, 0, 0};
+        this.clientlist = new ArrayList<>();
         this.playerArrayList = new ArrayList<>();
         this.indexArray=0;
+        this.clientCounter=5;
+        this.observerCounters=new ArrayList<>();
     }
 
-    public synchronized ArrayList<Player> getPlayerArrayList() {
+    public synchronized ArrayList<Player> getPlayerArrayList() throws RemoteException {
         return playerArrayList;
     }
 
@@ -39,12 +46,34 @@ public class IDClientList {
     }
 
     //Ritorna l'array degli ID Client
-    public int[] getClientlist() {
+    public ArrayList<Integer> getClientlist() {
         return this.clientlist;
     }
 
     //Setta nella cella corretta, a seconda dell'indice passato, l'ID da memorizzare
-    public void setClientList(int index, int id) {
-        this.clientlist[index] = id;
+    public synchronized int addClient() throws RemoteException {
+        Random random = new Random();
+        int i;
+        if(clientCounter>0){
+            while (true) {
+                i = random.nextInt(1000);
+                if (!(clientlist.contains(i))) {
+                    this.clientlist.add(i);
+                    clientCounter--;
+                    break;
+                }
+            }
+            return i;
+        }
+        return -1;
     }
+
+    public int getClientCounter() {
+        return clientCounter;
+    }
+
+    public synchronized void update() {
+        this.clientCounter--;
+    }
+
 }

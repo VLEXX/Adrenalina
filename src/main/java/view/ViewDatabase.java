@@ -18,6 +18,7 @@ public class ViewDatabase {
     private Player thisplayer;
     private Stack<PowerUp> currentDeckState;
     private boolean endgame;
+    private int clientToken;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -28,6 +29,15 @@ public class ViewDatabase {
         this.thisplayer = null;
         this.currentDeckState = null;
         this.endgame=false;
+        this.clientToken=0;
+    }
+
+    public int getClientToken() {
+        return clientToken;
+    }
+
+    public void setClientToken(int clientToken) {
+        this.clientToken = clientToken;
     }
 
     public boolean isEndgame() {

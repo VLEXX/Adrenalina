@@ -4,6 +4,7 @@
 package servercontroller;
 
 import model.datapacket.StatesEnum;
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.modelstates.ActionState;
 import model.modelstates.EndTurnState;
@@ -25,14 +26,16 @@ public class StartGame extends Thread {
     private ObjectOutputStream objectOutputStream;
     private HashMap<StatesEnum, model.modelstates.State> stateHashMap;
     private UpdateThread updateThread;
+    private IDClientList idClientList;
 
-    public StartGame(InitializeAllPlay i, Player p, ObjectInputStream oi, ObjectOutputStream oo, HashMap<StatesEnum, model.modelstates.State> hashMap, UpdateThread update){
+    public StartGame(InitializeAllPlay i, Player p, ObjectInputStream oi, ObjectOutputStream oo, HashMap<StatesEnum, model.modelstates.State> hashMap, UpdateThread update, IDClientList clientList){
         this.allPlay=i;
         this.player=p;
         this.objectInputStream=oi;
         this.objectOutputStream=oo;
         this.stateHashMap = hashMap;
         this.updateThread = update;
+        this.idClientList=clientList;
     }
 
     public synchronized void run(){
@@ -46,16 +49,16 @@ public class StartGame extends Thread {
                     if(allPlay.getHashMapState().get(player) instanceof EndTurnState){
                         if(allPlay.getCurrentPlayerState().get(player).isEndturn()==true) {
                             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.WAIT));
-                            if (allPlay.getIdClientList().getIndexArray() < allPlay.getIdClientList().getPlayerArrayList().size()-1) {
-                                allPlay.getIdClientList().increaseIndexArray();
+                            if (idClientList.getIndexArray() < idClientList.getPlayerArrayList().size()-1) {
+                                idClientList.increaseIndexArray();
                             }
                             else{
-                                allPlay.getIdClientList().resetIndexArray();
+                                idClientList.resetIndexArray();
                             }
-                            if (allPlay.getCurrentPlayerState().get(allPlay.getIdClientList().getPlayerArrayList().get(allPlay.getIdClientList().getIndexArray())).getPlayerposition().getCurrentcell() == null) {
-                                allPlay.getHashMapState().replace(allPlay.getIdClientList().getPlayerArrayList().get(allPlay.getIdClientList().getIndexArray()), stateHashMap.get(StatesEnum.SPAWN));
+                            if (allPlay.getCurrentPlayerState().get(idClientList.getPlayerArrayList().get(idClientList.getIndexArray())).getPlayerposition().getCurrentcell() == null) {
+                                allPlay.getHashMapState().replace(idClientList.getPlayerArrayList().get(idClientList.getIndexArray()), stateHashMap.get(StatesEnum.SPAWN));
                             } else {
-                                allPlay.getHashMapState().replace(allPlay.getIdClientList().getPlayerArrayList().get(allPlay.getIdClientList().getIndexArray()), stateHashMap.get(StatesEnum.ACTION));
+                                allPlay.getHashMapState().replace(idClientList.getPlayerArrayList().get(idClientList.getIndexArray()), stateHashMap.get(StatesEnum.ACTION));
                             }
                             allPlay.getCurrentPlayerState().get(player).setEndturn(false);
                         }

@@ -63,4 +63,11 @@ class ViewDatabaseTest {
         viewDatabase.setCurrentDeckState(currentDeckState.getPowerupdeck());
         assertEquals(viewDatabase.getCurrentDeckState(), currentDeckState.getPowerupdeck());
     }
+
+    @Test
+    void setClientToken() {
+        ViewDatabase viewDatabase = new ViewDatabase();
+        viewDatabase.setClientToken(12);
+        assertEquals(viewDatabase.getClientToken(), 12);
+    }
 }

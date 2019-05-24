@@ -95,8 +95,8 @@ public class ViewPickupState implements ViewState {
                     Weapon w = null;
                     String s1 = stdin.nextLine();
                     s1.toLowerCase();
-                    for (Weapon weapon : tempcell.getSpawnpointzone().getSpawnWeaponsList()) {
-                        if (s1.equals(weapon.getName())) {
+                    for (Weapon weapon : tempcell.getSpawnpointzone().getSpawnWeaponsList()){
+                        if (s1.equals(weapon.getName())){
                             w = weapon;
                             int red = 0;
                             int blue = 0;
@@ -135,10 +135,8 @@ public class ViewPickupState implements ViewState {
                                 }
                             }
                             if ((red >= 0) && (blue >= 0) && (yellow >= 0)) {
-                                if (dataPacket.getWeapon() != null) {
-                                    dataPacket.setWeapon(weapon);
-                                    return dataPacket;
-                                }
+                                dataPacket.setWeapon(weapon);
+                                return dataPacket;
                             } else {
                                 System.out.println("Insufficient Munitions!\n");
                                 break;
@@ -148,7 +146,7 @@ public class ViewPickupState implements ViewState {
                     if (w == null) {
                         System.out.println("WRONG INPUT! Please choose between: \n");
                         for (Weapon weapon1 : viewDatabase.getViewPlayerPosition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()) {
-                            System.out.println(weapon1.getName() + " ");
+                            System.out.print(weapon1.getName() + " | ");
                         }
                     }
                 }

@@ -54,22 +54,30 @@ public class IDClientList implements IDClientListInterface, Serializable {
     public synchronized int addClient() throws RemoteException {
         Random random = new Random();
         int i;
-        if(clientCounter>0){
-            while (true) {
-                i = random.nextInt(1000);
-                if (!(clientlist.contains(i))) {
-                    this.clientlist.add(i);
-                    clientCounter--;
-                    break;
+        if(playerArrayList.size()!=5) {
+            if (getClientCounter() > 0) {
+                while (true) {
+                    i = random.nextInt(1000);
+                    if (!(clientlist.contains(i))) {
+                        System.out.println(getClientCounter());
+                        this.clientlist.add(i);
+                        this.update();
+                        System.out.println(getClientCounter());
+                        break;
+                    }
                 }
+                return i;
             }
-            return i;
         }
         return -1;
     }
 
-    public int getClientCounter() {
-        return clientCounter;
+    public synchronized int add() throws RemoteException{
+        return this.addClient();
+    }
+
+    public synchronized int getClientCounter() {
+        return this.clientCounter;
     }
 
     public synchronized void update() {

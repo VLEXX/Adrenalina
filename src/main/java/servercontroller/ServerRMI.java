@@ -26,11 +26,15 @@ public class ServerRMI extends Thread{
         System.out.println("Binding server to registry...");
         Registry registry = LocateRegistry.createRegistry(8080);
         registry.bind("server_central", this.allPlay.getVoteMap());
-        registry.bind("IDClientList", this.idClientList);
+        registry.bind("IDClientList", getIdClientList());
 
         System.out.println("Attendo invocazioni dal client...");
 
 
+    }
+
+    public IDClientList getIdClientList() {
+        return idClientList;
     }
 
     public void run(){

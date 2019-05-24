@@ -100,7 +100,7 @@ public class PickUpState implements State {
         if (ccv.getSpawnpointzone() != null) {
             boolean b = false;
             for (Weapon w2 : ccv.getSpawnpointzone().getSpawnWeaponsList()) {
-                if (w2.getName() == www.getName()) {
+                if (w2.getName().equals(www.getName())) {
                     b = true;
                     www = w2;
                 }
@@ -178,12 +178,13 @@ public class PickUpState implements State {
         if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
             allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
+            System.out.println(allPlay.getHashMapState().get(dataPacket.getPlayer()));
         } else {
             allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
+            System.out.println(allPlay.getHashMapState().get(dataPacket.getPlayer()));
         }
         return MessageEnum.OK;
-
     }
 }
         

@@ -60,6 +60,7 @@ public class ViewStartGame extends Thread {
 
                 while (true) {
                     if(messageEnumOK!=null){
+                        messageWriter.writeMessage(messageEnumOK);
                         break;
                     }
                     messageEnumOK = (MessageEnum) objectInputStream.readObject();

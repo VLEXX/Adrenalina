@@ -12,10 +12,6 @@ import java.rmi.registry.Registry;
 
 public class ClientWithRMI implements ClientStrategy {
 
-    public ClientWithRMI(){
-
-    }
-
     public void startClient() throws RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry(8080);
 

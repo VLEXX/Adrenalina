@@ -11,4 +11,6 @@ public interface IDClientListInterface extends Remote {
     ArrayList<Player> getPlayerArrayList() throws RemoteException;
 
     int addClient() throws RemoteException;
+
+    void update() throws RemoteException;
 }

@@ -8,12 +8,14 @@ import servercontroller.ObserverCounter;
 import servercontroller.SubjectCounter;
 
 import java.io.Serializable;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Random;
 
 //Classe che memorizza gli ID dei client che si collegano al server (da 3 a 5 client)
-public class IDClientList implements IDClientListInterface, Serializable {
+public class IDClientList extends UnicastRemoteObject implements Remote, IDClientListInterface, Serializable {
     private ArrayList<Integer> clientlist;   //Array che memorizza gli ID
     private ArrayList<Player> playerArrayList;
     private int indexArray;
@@ -21,7 +23,7 @@ public class IDClientList implements IDClientListInterface, Serializable {
     private ArrayList<ObserverCounter> observerCounters;
 
     //Costruttore che inizializza l'array a 0 (gli ID assegnati sono diversi da 0)
-    public IDClientList() {
+    public IDClientList() throws RemoteException{
         this.clientlist = new ArrayList<>();
         this.playerArrayList = new ArrayList<>();
         this.indexArray=0;
@@ -59,9 +61,8 @@ public class IDClientList implements IDClientListInterface, Serializable {
                 while (true) {
                     i = random.nextInt(1000);
                     if (!(clientlist.contains(i))) {
-                        System.out.println(getClientCounter());
                         this.clientlist.add(i);
-                        this.update();
+                        update();
                         System.out.println(getClientCounter());
                         break;
                     }
@@ -76,12 +77,11 @@ public class IDClientList implements IDClientListInterface, Serializable {
         return this.addClient();
     }
 
-    public synchronized int getClientCounter() {
+    public synchronized int getClientCounter() throws RemoteException {
         return this.clientCounter;
     }
 
-    public synchronized void update() {
+    public synchronized void update() throws RemoteException{
         this.clientCounter--;
     }
-
 }

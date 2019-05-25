@@ -4,6 +4,7 @@
 package view;
 
 import model.gamedata.IDClientList;
+import model.gamedata.IDClientListInterface;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -22,7 +23,7 @@ public class ClientWithRMI implements ClientStrategy {
         ClientManager clientManager = new ClientManager();
         ViewDatabase viewDatabase = new ViewDatabase();
 
-        IDClientList idClientList = (IDClientList) registry.lookup("IDClientList");
+        IDClientListInterface idClientList = (IDClientListInterface) registry.lookup("IDClientList");
         int token = idClientList.addClient();
         if(token==-1){
             System.out.println("\n" + "\u001B[31m" + "Because the Server is dark and full of connections." + "\u001B[0m");
@@ -30,7 +31,5 @@ public class ClientWithRMI implements ClientStrategy {
         else{
             System.out.println(token);
         }
-
-
     }
 }

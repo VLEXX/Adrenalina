@@ -4,6 +4,7 @@
 package servercontroller;
 
 import model.gamedata.IDClientList;
+import model.gamedata.IDClientListInterface;
 import model.gamedata.InitializeAllPlay;
 import model.gamedata.VoteMap;
 
@@ -11,8 +12,9 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
-public class ServerRMI extends Thread{
+public class ServerRMI extends Thread {
     private InitializeAllPlay allPlay;
     private IDClientList idClientList;
 
@@ -26,15 +28,11 @@ public class ServerRMI extends Thread{
         System.out.println("Binding server to registry...");
         Registry registry = LocateRegistry.createRegistry(8080);
         registry.bind("server_central", this.allPlay.getVoteMap());
-        registry.bind("IDClientList", getIdClientList());
+        registry.bind("IDClientList", this.idClientList);
 
         System.out.println("Attendo invocazioni dal client...");
 
 
-    }
-
-    public IDClientList getIdClientList() {
-        return idClientList;
     }
 
     public void run(){

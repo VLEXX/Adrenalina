@@ -23,7 +23,7 @@ class IDClientListTest {
     }
 
     @Test
-    void getIndexArray() {
+    void getIndexArray() throws RemoteException {
         IDClientList idClientList = new IDClientList();
         idClientList.increaseIndexArray();
         idClientList.increaseIndexArray();

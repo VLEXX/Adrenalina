@@ -11,26 +11,23 @@ import model.powerups.PowerUp;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Stack;
 
-public class UpdateThread {
+public class Updater extends UnicastRemoteObject implements UpdaterInterface {
     private InitializeAllPlay allPlay;
-    private Player player;
-    private ObjectOutputStream objectOutputStream;
 
-    public UpdateThread(InitializeAllPlay i, Player p, ObjectOutputStream o){
+    public Updater(InitializeAllPlay i) throws RemoteException{
         this.allPlay=i;
-        this.player=p;
-        this.objectOutputStream=o;
     }
 
 
-    public synchronized void updateClient() throws IOException {
+    public synchronized UpdatePacket updateClient(Player player) throws IOException, RemoteException {
 
         Position position = new Position();
-
-        if(allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell()!=null) {
+        if (allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell() != null) {
             position.setCurrentcell(allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell());
             position.setCurrentroom(allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentroom());
         }
@@ -70,6 +67,6 @@ public class UpdateThread {
 
         Stack<PowerUp> deck = (Stack<PowerUp>) allPlay.getCurrentDeckState().getPowerupdeck().clone();
         UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), position, state, deck, allPlay.isEndgame());
-        objectOutputStream.writeObject(updatePacket);
+        return updatePacket;
     }
 }

@@ -10,6 +10,7 @@ import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MoveStateTest {
 
     @Test
-    void cellFinder() {
+    void cellFinder() throws RemoteException {
         InitializeAllPlay i = new InitializeAllPlay();
         i.getStateSelectedMap().setStrategyMap(1);
         i.getStateSelectedMap().setSelectedmap();
@@ -36,7 +37,7 @@ class MoveStateTest {
     }
 
     @Test
-    void setMove() {
+    void setMove() throws RemoteException {
         InitializeAllPlay i = new InitializeAllPlay();
         i.getStateSelectedMap().setStrategyMap(0);
         i.getStateSelectedMap().setSelectedmap();
@@ -56,7 +57,7 @@ class MoveStateTest {
 
 
     @Test
-    void doAction() {
+    void doAction() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
         ActionState actionState = new ActionState(initializeAllPlay, stateHashMap);
@@ -100,7 +101,7 @@ class MoveStateTest {
     }
 
     @Test
-    void doAction2() {
+    void doAction2() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
         ActionState actionState = new ActionState(initializeAllPlay, stateHashMap);

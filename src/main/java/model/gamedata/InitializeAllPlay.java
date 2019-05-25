@@ -10,13 +10,16 @@ import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 
 import java.io.Serializable;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Class that initialize the player
  */
-public class InitializeAllPlay implements Serializable {
+public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Serializable, InitializeAllPlayInterface {
     private ArrayList<CurrentTurnState> currentTurnState;
     private HashMap<Player, CurrentPlayerState> currentPlayerState;
     private CurrentDeckState currentDeckState;
@@ -38,7 +41,7 @@ public class InitializeAllPlay implements Serializable {
     /**
      * Constructor
      */
-    public InitializeAllPlay() {
+    public InitializeAllPlay() throws RemoteException {
         currentTurnState = new ArrayList<>();
         currentPlayerState = new HashMap<>();
         chartScore = new ChartScore();
@@ -84,11 +87,11 @@ public class InitializeAllPlay implements Serializable {
         playercountertemp--;
     }
 
-    public synchronized int getPlayercountertemp() {
+    public synchronized int getPlayercountertemp() throws RemoteException {
         return playercountertemp;
     }
 
-    public void addPlayerCounter() {
+    public synchronized void addPlayerCounter() throws RemoteException{
         playercounter++;
         playercountertemp++;
     }
@@ -125,7 +128,7 @@ public class InitializeAllPlay implements Serializable {
         return voteMode;
     }
 
-    public CurrentDeckState getCurrentDeckState() {
+    public synchronized CurrentDeckState getCurrentDeckState() throws RemoteException {
         return currentDeckState;
     }
 

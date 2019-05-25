@@ -4,15 +4,13 @@
 package servercontroller;
 
 import model.datapacket.StatesEnum;
+import model.datapacket.UpdatePacket;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
-import model.modelstates.ActionState;
 import model.modelstates.EndTurnState;
-import model.modelstates.SpawnState;
 import model.playerdata.Player;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
-import model.powerups.PowerUp;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -25,16 +23,16 @@ public class StartGame extends Thread {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private HashMap<StatesEnum, model.modelstates.State> stateHashMap;
-    private UpdateThread updateThread;
+    private Updater updater;
     private IDClientList idClientList;
 
-    public StartGame(InitializeAllPlay i, Player p, ObjectInputStream oi, ObjectOutputStream oo, HashMap<StatesEnum, model.modelstates.State> hashMap, UpdateThread update, IDClientList clientList){
+    public StartGame(InitializeAllPlay i, Player p, ObjectInputStream oi, ObjectOutputStream oo, HashMap<StatesEnum, model.modelstates.State> hashMap, Updater update, IDClientList clientList){
         this.allPlay=i;
         this.player=p;
         this.objectInputStream=oi;
         this.objectOutputStream=oo;
         this.stateHashMap = hashMap;
-        this.updateThread = update;
+        this.updater = update;
         this.idClientList=clientList;
     }
 
@@ -63,7 +61,8 @@ public class StartGame extends Thread {
                             allPlay.getCurrentPlayerState().get(player).setEndturn(false);
                         }
                     }
-                    updateThread.updateClient();
+                    UpdatePacket updatePacket = updater.updateClient(player);
+                    objectOutputStream.writeObject(updatePacket);
                 }
                 if(allPlay.isEndgame()==true) {
                     break;

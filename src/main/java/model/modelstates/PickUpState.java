@@ -17,6 +17,7 @@ import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class PickUpState implements State {
      * @return MessageEnum
      */
     @Override
-    public MessageEnum doAction(DataPacket dataPacket) {
+    public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
         Weapon ww = null;
         int pwcheck = 0;
         if (dataPacket.isWeaponlistempty()) {

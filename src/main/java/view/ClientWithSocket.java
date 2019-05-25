@@ -4,8 +4,6 @@
 package view;
 
 import model.datapacket.StatesEnum;
-import model.datapacket.UpdatePacket;
-import servercontroller.UpdateThread;
 import view.viewstates.*;
 
 import java.io.*;
@@ -63,7 +61,7 @@ public class ClientWithSocket implements ClientStrategy{
                 stateHashMap.put(StatesEnum.SPAWN, spawnState);
 
                 ViewDatabase viewDatabase = new ViewDatabase();
-                clientManager.manageChoice(inMessage, stdin, objectOutputStream, objectInputStream, viewDatabase);
+                clientManager.manageChoice(stdin, objectOutputStream, objectInputStream, viewDatabase);
                 clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
 
                 ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);

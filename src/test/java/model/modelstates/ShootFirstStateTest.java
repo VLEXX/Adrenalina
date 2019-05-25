@@ -14,6 +14,7 @@ import model.weaponscard.LockRifle;
 import model.weaponscard.Weapon;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ShootFirstStateTest {
 
     @Test
-    void doAction() {
+    void doAction() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -78,7 +79,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void shootUp() {
+    void shootUp() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -140,7 +141,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void shootUp2() {
+    void shootUp2() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -202,7 +203,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void shootUp3() {
+    void shootUp3() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -264,7 +265,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void shootUp4() {
+    void shootUp4() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -326,7 +327,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void shootUp5() {
+    void shootUp5() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -388,7 +389,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void shootUp6() {
+    void shootUp6() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -450,7 +451,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void doAction2() {
+    void doAction2() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -502,7 +503,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void doAction3() {
+    void doAction3() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -555,7 +556,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void doAction4() {
+    void doAction4() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -608,7 +609,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void doAction5() {
+    void doAction5() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -661,7 +662,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void doAction6() {
+    void doAction6() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -713,7 +714,7 @@ class ShootFirstStateTest {
     }
 
     @Test
-    void doAction7() {
+    void doAction7() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();

@@ -25,10 +25,16 @@ public class ServerRMI extends Thread {
 
     public void startServerRMI() throws RemoteException, AlreadyBoundException {
 
+        Updater updater = new Updater(this.allPlay);
+        ServerManagerFunctionRMI serverManagerFunctionRMI = new ServerManagerFunctionRMI(this.allPlay, this.idClientList);
         System.out.println("Binding server to registry...");
         Registry registry = LocateRegistry.createRegistry(8080);
-        registry.bind("server_central", this.allPlay.getVoteMap());
+        //registry.bind("server_central", this.allPlay.getVoteMap());
+        registry.bind("Playercountertemp", this.allPlay);
         registry.bind("IDClientList", this.idClientList);
+        registry.bind("Updater", updater);
+        registry.bind("ServerManagerFunctionRMI", serverManagerFunctionRMI);
+        registry.bind("VoteMap", allPlay.getVoteMap());
 
         System.out.println("Attendo invocazioni dal client...");
 

@@ -12,6 +12,7 @@ import model.powerups.TagbackGrenade;
 import model.powerups.TargetingScope;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpawnStateTest {
 
     @Test
-    void doAction() {
+    void doAction() throws RemoteException {
 
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
@@ -67,7 +68,7 @@ class SpawnStateTest {
     }
 
     @Test
-    void doAction2() {
+    void doAction2() throws RemoteException {
 
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
@@ -118,7 +119,7 @@ class SpawnStateTest {
     }
 
     @Test
-    void doAction3() {
+    void doAction3() throws RemoteException {
 
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
@@ -166,7 +167,7 @@ class SpawnStateTest {
     }
 
     @Test
-    void doAction4() {
+    void doAction4() throws RemoteException {
 
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();

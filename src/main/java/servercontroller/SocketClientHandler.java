@@ -4,6 +4,7 @@
 package servercontroller;
 
 import model.datapacket.StatesEnum;
+import model.datapacket.UpdatePacket;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageString;
@@ -88,11 +89,12 @@ public class SocketClientHandler implements Runnable {
                 allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.SPAWN));
             }
 
-            UpdateThread updateThread = new UpdateThread(allPlay, player, objectOutputStream);
-            updateThread.updateClient();
+            Updater updater = new Updater(allPlay);
+            UpdatePacket updatePacket = updater.updateClient(player);
+            objectOutputStream.writeObject(updatePacket);
 
 
-            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updateThread, idClientList);
+            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
             startGame.start();
 
 

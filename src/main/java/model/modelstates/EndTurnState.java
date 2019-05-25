@@ -14,6 +14,7 @@ import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class EndTurnState implements State {
      * @return a message saying if the required action was successful or not
      */
     @Override
-    public MessageEnum doAction(DataPacket dataPacket) {
+    public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
         this.refillMap(allPlay);
         MessageEnum out1 = this.rechargeWeapons(allPlay,dataPacket);
         if(out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOO_MUCH_POWERUPS)
@@ -52,7 +53,7 @@ public class EndTurnState implements State {
      * refills the empty ammo and weapons slots of the map
      * @param i class containing information about the current match
      */
-    public void refillMap( InitializeAllPlay i){
+    public void refillMap( InitializeAllPlay i) throws RemoteException {
         for(Room r : i.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell c : r.getCellsList()){
                 if(c.getSpawnpointzone()==null){
@@ -88,7 +89,7 @@ public class EndTurnState implements State {
      * @param d class containing necessary parameters sent by client
      * @return a message saying if the required action was successful or not
      */
-    private MessageEnum rechargeWeapons(InitializeAllPlay i, DataPacket d){
+    private MessageEnum rechargeWeapons(InitializeAllPlay i, DataPacket d) throws RemoteException {
         HashMap<Munitions, Integer> cost = new HashMap<>();
         cost.put(Munitions.RED, 0);
         cost.put(Munitions.YELLOW, 0);

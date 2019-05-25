@@ -12,7 +12,12 @@ import java.rmi.RemoteException;
 public class Server {
 
     public static void main(String[] args) {
-        InitializeAllPlay allPlay = new InitializeAllPlay();
+        InitializeAllPlay allPlay = null;
+        try {
+            allPlay = new InitializeAllPlay();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         IDClientList idClientList = null;
         try {
             idClientList = new IDClientList();

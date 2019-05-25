@@ -1,23 +1,17 @@
-/**
- * @author Federico Scatà
- */
 package view;
 
-import model.gamedata.CurrentDeckState;
 import model.datapacket.MessageString;
+import model.gamedata.CurrentDeckState;
 import model.playerdata.Player;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
-public class ClientManager {
-
-    public ClientManager(){
-
-    }
+public class ClientManagerRMI {
 
     public Player chooseCharacter(String s){
         if(s.equals("black")||s.equals("Black")||s.equals("BLACK")){
@@ -40,8 +34,7 @@ public class ClientManager {
         }
     }
 
-    public synchronized void manageChoice(Scanner stdin, ObjectOutputStream objectOutputStream, ObjectInputStream objectInputStream, ViewDatabase viewDatabase) throws IOException, ClassNotFoundException {
-        CurrentDeckState currentDeckState= (CurrentDeckState)objectInputStream.readObject();
+    public Player manageChoice(Scanner stdin,  CurrentDeckState currentDeckState){
         System.out.println("Choose a character...");
         if(currentDeckState.getPlayers().size()==4){
             System.out.println("-------");
@@ -65,57 +58,31 @@ public class ClientManager {
             System.out.println(player);
         }
 
-        Boolean ok = false;
-        Player player1 = null;
+
+        Player player1;
         while (true) {
-            if(ok==false){
-                player1 = this.chooseCharacter(stdin.nextLine());
-                objectOutputStream.writeObject(player1);
-                System.out.println("\n");
-                MessageString message = (MessageString)objectInputStream.readObject();
-                System.out.println(message.getMessage());
-                System.out.println("\n\n");
-                ok = (Boolean) objectInputStream.readObject();
+            player1 = this.chooseCharacter(stdin.nextLine());
+            if(player1!=Player.FLAG) {
+                return player1;
             }
-            if(ok==true){
-                viewDatabase.setThisplayer(player1);
-                break;
-            }
-        }
-        ok=false;
-        System.out.println("Waiting the opponents...\n\n");
-        while(true) {
-            ok = (boolean) objectInputStream.readObject();
-            if(ok == true){
-                break;
+            else{
+                System.out.println("Character not available");
             }
         }
     }
 
-    public synchronized void manageVote(PrintWriter outMessage, Scanner inMessage, Scanner stdin, ObjectOutputStream objectOutputStream, ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    public synchronized int manageVote(Scanner stdin) {
         System.out.println("Vote Map: 1 | 2 | 3 | 4");
         String s;
         while(true) {
             s=stdin.nextLine();
             if(s.equals("1") || s.equals("2") || s.equals("3") || s.equals("4")) {
                 Integer i = Integer.parseInt(s);
-                objectOutputStream.writeObject(i);
-                break;
+                return i;
             }
             else{
                 System.out.println("WRONG INPUT\n\n Choose between 1 | 2 | 3 | 4");
             }
         }
-        boolean ok = false;
-        System.out.println("Waiting the opponents...\n\n");
-        while(true) {
-            ok = (boolean) objectInputStream.readObject();
-            if(ok == true){
-                break;
-            }
-        }
-        MessageString message = (MessageString)objectInputStream.readObject();
-        System.out.println(message.getMessage());
     }
-
 }

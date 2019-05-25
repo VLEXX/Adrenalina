@@ -20,6 +20,7 @@ import model.weaponscard.Weapon;
 import model.weaponscard.Whisper;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class EndTurnStateTest {
 
     @Test
-    void doAction() {
+    void doAction() throws RemoteException {
         //inizializza tutti i parametri necessari
         InitializeAllPlay i = new InitializeAllPlay();
         HashMap<StatesEnum, State> testhm = new HashMap<>();
@@ -109,7 +110,7 @@ class EndTurnStateTest {
     }
 
     @Test
-    void refillMap() {
+    void refillMap() throws RemoteException {
         InitializeAllPlay i = new InitializeAllPlay();
         HashMap<StatesEnum,State> testhm = new HashMap<>();
         i.getStateSelectedMap().setStrategyMap(0);

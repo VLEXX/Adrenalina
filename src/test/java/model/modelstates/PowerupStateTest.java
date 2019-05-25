@@ -12,6 +12,7 @@ import model.playerdata.Player;
 import model.powerups.*;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PowerupStateTest {
 
     @Test
-    void doActionTagbackGrenade() {
+    void doActionTagbackGrenade() throws RemoteException {
         DataPacket dataPacket = new DataPacket();
         dataPacket.setPowerupAction(true);
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -67,7 +68,7 @@ class PowerupStateTest {
     }
 
     @Test
-    void doActionNewton() {
+    void doActionNewton() throws RemoteException {
         DataPacket dataPacket = new DataPacket();
         dataPacket.setPowerupAction(true);
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -175,7 +176,7 @@ class PowerupStateTest {
     }
 
     @Test
-    void doActionTeleporter() {
+    void doActionTeleporter() throws RemoteException {
         DataPacket dataPacket = new DataPacket();
         dataPacket.setPowerupAction(true);
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -242,7 +243,7 @@ class PowerupStateTest {
     }
 
     @Test
-    void doActionOK() {
+    void doActionOK() throws RemoteException {
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
@@ -276,7 +277,7 @@ class PowerupStateTest {
     }
 
     @Test
-    void doActionTergetingScope() {
+    void doActionTergetingScope() throws RemoteException {
         DataPacket dataPacket = new DataPacket();
         dataPacket.setPowerupAction(true);
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();

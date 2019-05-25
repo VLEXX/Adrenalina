@@ -3,55 +3,51 @@
  */
 package servercontroller;
 
+import model.datapacket.MessageEnum;
+import model.datapacket.MessageString;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.map.Room;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
-import model.datapacket.MessageString;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-public class ServerManagerFunction {
+public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Remote, ServerManagerFunctionInterfaceRMI {
 
-    public ServerManagerFunction(){}
+    private InitializeAllPlay allPlay;
+    private IDClientList idClientList;
 
-    public synchronized Player chooseCharacterManager(PrintWriter printWriter, ObjectInputStream objectInputStream, InitializeAllPlay allPlay, ObjectOutputStream objectOutputStream, IDClientList IDclientList) throws IOException, ClassNotFoundException {
-        objectOutputStream.writeObject(allPlay.getCurrentDeckState());
+    public ServerManagerFunctionRMI(InitializeAllPlay initializeAllPlay, IDClientList clientList) throws RemoteException{
+        this.allPlay=initializeAllPlay;
+        this.idClientList=clientList;
+    }
 
-        Player player;
-        Boolean ok;
+    public synchronized MessageEnum chooseCharacterManager(Player player) throws IOException, RemoteException {
         while(true) {
-            player = (Player) objectInputStream.readObject();
             if (allPlay.getCurrentDeckState().getPlayers().contains(player)) {
-                MessageString message = new MessageString("You choose: " + player.toString());
-                objectOutputStream.writeObject(message);
                 allPlay.getCurrentPlayerState().put(player, new CurrentPlayerState(player));
                 allPlay.getCurrentDeckState().getPlayers().remove(player);
-                IDclientList.getPlayerArrayList().add(player);
-                ok = true;
-                objectOutputStream.writeObject(ok);
+                idClientList.getPlayerArrayList().add(player);
                 allPlay.decreasePlayerCounterTemp();
                 break;
             }
             else{
-                MessageString message = new MessageString("Character not available");
-                objectOutputStream.writeObject(message);
-                ok = false;
-                objectOutputStream.writeObject(ok);
+                return MessageEnum.PLAYER_NOT_FOUND;
             }
         }
-        return player;
+        return MessageEnum.OK;
     }
 
-    public synchronized void manageVoteMap(Scanner inMessage, InitializeAllPlay allPlay, PrintWriter printWriter, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
-        Integer i = (Integer) objectInputStream.readObject();
+    public synchronized MessageEnum manageVoteMap(int i) throws IOException, RemoteException{
 
         if(i==1){
             allPlay.getVoteMap().setVoteresult(0);
@@ -63,6 +59,7 @@ public class ServerManagerFunction {
                 allPlay.getStateSelectedMap().setSelectedmap();
                 refillMap(allPlay);
             }
+            return MessageEnum.OK;
         }
         if(i==2){
             allPlay.getVoteMap().setVoteresult(1);
@@ -74,6 +71,7 @@ public class ServerManagerFunction {
                 allPlay.getStateSelectedMap().setSelectedmap();
                 refillMap(allPlay);
             }
+            return MessageEnum.OK;
         }
         if(i==3){
             allPlay.getVoteMap().setVoteresult(2);
@@ -85,6 +83,7 @@ public class ServerManagerFunction {
                 allPlay.getStateSelectedMap().setSelectedmap();
                 refillMap(allPlay);
             }
+            return MessageEnum.OK;
         }
         if(i==4){
             allPlay.getVoteMap().setVoteresult(3);
@@ -96,6 +95,10 @@ public class ServerManagerFunction {
                 allPlay.getStateSelectedMap().setSelectedmap();
                 refillMap(allPlay);
             }
+            return MessageEnum.OK;
+        }
+        else{
+            return MessageEnum.ERROR;
         }
     }
 

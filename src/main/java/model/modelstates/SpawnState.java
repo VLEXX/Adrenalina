@@ -8,6 +8,7 @@ import model.map.Cell;
 import model.map.Room;
 import model.powerups.PowerUp;
 
+import java.rmi.RemoteException;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -22,7 +23,7 @@ public class SpawnState implements State {
     }
 
     @Override
-    public MessageEnum doAction(DataPacket dataPacket) {
+    public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
         PowerUp pop1 = allPlay.getCurrentDeckState().getPowerupdeck().pop();
         PowerUp pop2 = allPlay.getCurrentDeckState().getPowerupdeck().pop();
         if((pop1.getId().equals(dataPacket.getPowerUpToKeepSpawn().getId())) &&(pop1.getColor().equals(dataPacket.getPowerUpToKeepSpawn().getColor()))){

@@ -5,16 +5,17 @@ package model.gamedata;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 //Classe che gestisce la votazione per la scelta della mappa in cui giocare
-public class VoteMap implements VoteMapInterface, Serializable {
+public class VoteMap extends UnicastRemoteObject implements VoteMapInterface, Serializable {
     private int[] voteresult;   //Array che memorizza i voti ottenuti da ciascuna mappa (voteresult[0] => Mappa1, voteresult[1] => Mappa2, ...)
     private int finalresult;    //Memorizza la mappa finale votata (da 1 a 4)
     private int i;
     private boolean initmap;
 
     //Costruttore che inizialzza l'array a 0 e la mappa finale votata a -1 (le mappe vanno da 1 a 4)
-    public VoteMap() {
+    public VoteMap() throws RemoteException{
         voteresult = new int[]{0, 0, 0, 0};
         finalresult = -1;
         i = 0;
@@ -22,7 +23,7 @@ public class VoteMap implements VoteMapInterface, Serializable {
     }
 
     //Ritorna la mappa votata finala
-    public int getFinalresult() {
+    public synchronized int getFinalresult() throws RemoteException {
         return finalresult;
     }
 
@@ -49,11 +50,11 @@ public class VoteMap implements VoteMapInterface, Serializable {
         voteresult[index] = voteresult[index] + 1;
     }
 
-    public synchronized void addPlayerCounter() {
+    public synchronized void addPlayerCounter() throws RemoteException{
         i++;
     }
 
-    public int getPlayerCounter() {
+    public synchronized int getPlayerCounter() throws RemoteException {
         return i;
     }
 

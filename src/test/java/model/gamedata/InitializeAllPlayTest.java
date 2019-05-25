@@ -5,8 +5,6 @@ package model.gamedata;
 
 import model.datapacket.StatesEnum;
 import model.modelstates.*;
-import servercontroller.UpdateThread;
-import model.gamedata.InitializeAllPlay;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
@@ -18,55 +16,55 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class InitializeAllPlayTest {
 
     @Test
-    void getChartScore() {
+    void getChartScore() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getChartScore().getScore()[0], 0);
     }
 
     @Test
-    void getVoteMap() {
+    void getVoteMap() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getVoteMap().getFinalresult(), -1);
     }
 
     @Test
-    void getCurrentPlayerState() {
+    void getCurrentPlayerState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getCurrentPlayerState().size(), 0);
     }
 
     @Test
-    void getCurrentTurnState() {
+    void getCurrentTurnState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getCurrentTurnState().size(), 0);
     }
 
     @Test
-    void getStateSelectedMap() {
+    void getStateSelectedMap() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getStateSelectedMap().getSelectedmap(), null);
     }
 
     @Test
-    void getStateSelectedMode() {
+    void getStateSelectedMode() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getStateSelectedMode().getSelectedmode(), null);
     }
 
     @Test
-    void getVoteMode() {
+    void getVoteMode() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getVoteMode().getFinalResult(), -1);
     }
 
     @Test
-    void getCurrentDeckState() {
+    void getCurrentDeckState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         assertEquals(initializeAllPlay.getCurrentDeckState().getPlayers().size(), 5);
     }
 
     @Test
-    void addPlayerState() {
+    void addPlayerState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> hashMap = new HashMap<>();
         State state = new MoveState(initializeAllPlay, hashMap);
@@ -75,7 +73,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void updatePlayerState() {
+    void updatePlayerState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> hashMap = new HashMap<>();
         State state = new MoveState(initializeAllPlay, hashMap);
@@ -86,7 +84,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void getPlayerState() {
+    void getPlayerState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> hashMap = new HashMap<>();
         State state = new MoveState(initializeAllPlay, hashMap);
@@ -95,7 +93,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void addPlayerCounter() {
+    void addPlayerCounter() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         initializeAllPlay.addPlayerCounter();
         assertEquals(initializeAllPlay.getPlayercounter(), 1);
@@ -103,7 +101,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void decreasePlayerCounterTemp() {
+    void decreasePlayerCounterTemp() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         initializeAllPlay.addPlayerCounter();
         initializeAllPlay.addPlayerCounter();
@@ -114,7 +112,7 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void getHashMapState() {
+    void getHashMapState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         initializeAllPlay.getHashMapState().put(Player.BLUE, null);
         assertEquals(initializeAllPlay.getHashMapState().containsKey(Player.BLUE), true);
@@ -122,7 +120,7 @@ class InitializeAllPlayTest {
 
 
     @Test
-    void putInHashMapState() {
+    void putInHashMapState() throws RemoteException {
         InitializeAllPlay allPlay = new InitializeAllPlay();
 
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
@@ -150,14 +148,14 @@ class InitializeAllPlayTest {
     }
 
     @Test
-    void setEndgame() {
+    void setEndgame() throws RemoteException {
         InitializeAllPlay allPlay = new InitializeAllPlay();
         allPlay.setEndgame(true);
         assertEquals(allPlay.isEndgame(), true);
     }
 
     @Test
-    void setTempState() {
+    void setTempState() throws RemoteException {
         InitializeAllPlay allPlay = new InitializeAllPlay();
         State state = new ShootFirstState(allPlay, null);
         allPlay.setTempState(state);

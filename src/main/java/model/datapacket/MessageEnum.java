@@ -27,5 +27,6 @@ public enum MessageEnum implements Serializable {
     INEXISTENT_CELL,
     ENOUGH_AMMO,
     POSITION_NOT_VALID,
-    SHOOTUP_ERROR
+    SHOOTUP_ERROR,
+    ERROR
 }

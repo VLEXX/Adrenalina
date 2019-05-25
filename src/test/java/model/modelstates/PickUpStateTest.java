@@ -19,6 +19,7 @@ import model.powerups.PowerUpId;
 import model.weaponscard.*;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PickUpStateTest {
 
     @Test
-    void doAction() {
+    void doAction() throws RemoteException {
 
        InitializeAllPlay i = new InitializeAllPlay();
        HashMap<StatesEnum,State> hm = new HashMap();

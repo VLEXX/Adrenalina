@@ -2,9 +2,7 @@ package view;
 
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
-import model.gamedata.InitializeAllPlay;
 import model.playerdata.Player;
-import servercontroller.UpdateThread;
 import view.viewstates.ViewState;
 
 import java.io.IOException;

@@ -11,6 +11,7 @@ import model.weaponscard.MachineGun;
 import model.weaponscard.Weapon;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShootThirdStateTest {
 
     @Test
-    void doAction() {
+    void doAction() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
@@ -61,7 +62,7 @@ class ShootThirdStateTest {
     }
 
     @Test
-    void doAction2() {
+    void doAction2() throws RemoteException {
 
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();

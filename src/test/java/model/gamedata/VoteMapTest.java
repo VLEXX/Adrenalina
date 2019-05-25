@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class VoteMapTest {
 
     @Test
-    void getFinalResult() {
+    void getFinalResult() throws RemoteException {
         VoteMap m = new VoteMap();
         assertEquals(m.getFinalresult(), -1);
     }
@@ -30,7 +30,7 @@ class VoteMapTest {
     }
 
     @Test
-    void getVoteResult() {
+    void getVoteResult() throws RemoteException {
         VoteMap m = new VoteMap();
         assertEquals(m.getVoteresult()[0], 0);
         assertEquals(m.getVoteresult()[1], 0);
@@ -51,20 +51,20 @@ class VoteMapTest {
     }
 
     @Test
-    void addPlayerCounter() {
+    void addPlayerCounter() throws RemoteException {
         VoteMap m = new VoteMap();
         m.addPlayerCounter();
         assertEquals(m.getPlayerCounter(), 1);
     }
 
     @Test
-    void getPlayerCounter() {
+    void getPlayerCounter() throws RemoteException {
         VoteMap m = new VoteMap();
         assertEquals(m.getPlayerCounter(), 0);
     }
 
     @Test
-    void decreasePlayerCounter() {
+    void decreasePlayerCounter() throws RemoteException {
         VoteMap m = new VoteMap();
         m.addPlayerCounter();
         m.addPlayerCounter();
@@ -73,13 +73,13 @@ class VoteMapTest {
     }
 
     @Test
-    void getInitMap() {
+    void getInitMap() throws RemoteException {
         VoteMap m = new VoteMap();
         assertEquals(m.getInitMap(), false);
     }
 
     @Test
-    void setInitMap() {
+    void setInitMap() throws RemoteException {
         VoteMap m = new VoteMap();
         m.setInitmap();
         assertEquals(m.getInitMap(), true);

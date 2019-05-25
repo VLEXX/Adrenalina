@@ -8,6 +8,7 @@ import model.datapacket.StatesEnum;
 import model.modelstates.State;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ActionStateTest {
 
     @Test
-    void doAction() {
+    void doAction() throws RemoteException {
         DataPacket dataPacket = new DataPacket();
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         HashMap<StatesEnum, State> hashMap = new HashMap<>();

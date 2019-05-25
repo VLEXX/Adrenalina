@@ -45,14 +45,14 @@ public class PickUpState implements State {
     public MessageEnum doAction(DataPacket dataPacket) {
         Weapon ww = null;
         int pwcheck = 0;
-        if (dataPacket.isWeaponlistempty() == true) {
+        if (dataPacket.isWeaponlistempty()) {
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
             return MessageEnum.OK;
         }
         //controlla se il rimpiazzo dell'arma è possibile e necessario
         if (dataPacket.getReplaceWeapon() != null) {
             for (Weapon wp : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
-                if (wp.getName() == dataPacket.getReplaceWeapon().getName())
+                if (wp.getName().equals(dataPacket.getReplaceWeapon().getName()))
                     ww = wp;
             }
             if (ww == null || allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().size() < 3)
@@ -65,9 +65,9 @@ public class PickUpState implements State {
                     pwcheck++;
             }
         }
-        Cell cc = null;
         if (pwcheck != dataPacket.getPaymentPowerUp().size())
             return MessageEnum.POWERUP_NOT_FOUND;
+        Cell cc = null;
         //controlla se la cella scelta in caso di movimento sia raggiungibile
         if (dataPacket.getCell() != null) {
             for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
@@ -162,6 +162,7 @@ public class PickUpState implements State {
         } else {
             for (int j = 0; j < 3; j++) {
                 if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getSpawnpointzone().getSpawnWeaponsList()[j] == www) {
+                    www.setLoaded(true);
                     allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().add(www);
                     if (ww != null)
                         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().remove(ww);
@@ -178,11 +179,10 @@ public class PickUpState implements State {
         if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
             allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
-            System.out.println(allPlay.getHashMapState().get(dataPacket.getPlayer()));
         } else {
             allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
-            System.out.println(allPlay.getHashMapState().get(dataPacket.getPlayer()));
+
         }
         return MessageEnum.OK;
     }

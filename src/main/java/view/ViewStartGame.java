@@ -37,7 +37,6 @@ public class ViewStartGame extends Thread {
         MessageWriter messageWriter = new MessageWriter();
         ViewUpdater viewUpdater = new ViewUpdater();
         UpdatePacket updatePacket;
-        MessageEnum messageEnum;
         MessageEnum messageEnumOK;
         viewDatabase.getViewState().put(player, stateHashMap.get(StatesEnum.WAIT));
         while(true) {

@@ -17,14 +17,16 @@ import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 /**
  * Class that manages the PickUp Action
  */
-public class PickUpState implements State {
+public class PickUpState extends UnicastRemoteObject implements State, Serializable {
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
@@ -32,7 +34,7 @@ public class PickUpState implements State {
     /**
      * Class constructor
      */
-    public PickUpState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) {
+    public PickUpState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException{
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
     }

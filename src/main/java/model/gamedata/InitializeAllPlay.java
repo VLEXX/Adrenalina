@@ -75,7 +75,8 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         return endgame;
     }
 
-    public synchronized void putInHashMapState(Player player, StatesEnum statesEnum, HashMap<StatesEnum, State> hashMap){
+    public synchronized void putInHashMapState(Player player, StatesEnum statesEnum, HashMap<StatesEnum, State> hashMap) throws RemoteException{
+        System.out.println(hashMap.get(statesEnum));
         this.playerState.put(player, hashMap.get(statesEnum));
     }
 

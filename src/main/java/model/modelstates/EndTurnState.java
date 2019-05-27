@@ -14,18 +14,20 @@ import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
-public class EndTurnState implements State {
+public class EndTurnState extends UnicastRemoteObject implements State, Serializable {
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
 
-    public EndTurnState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
+    public EndTurnState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap)throws RemoteException{
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
     }

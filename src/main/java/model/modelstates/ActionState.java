@@ -8,14 +8,17 @@ import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
-public class ActionState implements State {
+public class ActionState extends UnicastRemoteObject implements State, Serializable {
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
 
-    public ActionState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
+    public ActionState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap)throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
     }

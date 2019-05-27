@@ -8,16 +8,18 @@ import model.map.Cell;
 import model.map.Room;
 import model.powerups.PowerUp;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class SpawnState implements State {
+public class SpawnState extends UnicastRemoteObject implements State, Serializable {
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
 
-    public SpawnState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
+    public SpawnState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException{
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
     }

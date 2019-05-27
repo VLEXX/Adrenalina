@@ -12,17 +12,20 @@ import model.playerdata.Player;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
 /**
  * Class who manages a move during a player's turn
  */
-public class MoveState implements State {
+public class MoveState extends UnicastRemoteObject implements State, Serializable {
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
 
-    public MoveState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
+    public MoveState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
     }

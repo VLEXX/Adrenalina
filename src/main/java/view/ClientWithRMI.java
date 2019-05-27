@@ -7,8 +7,10 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.gamedata.*;
+import model.modelstates.*;
 import model.playerdata.Player;
 import servercontroller.ServerManagerFunctionInterfaceRMI;
+import servercontroller.StateBoxInterface;
 import servercontroller.UpdaterInterface;
 import view.viewstates.*;
 
@@ -33,6 +35,28 @@ public class ClientWithRMI implements ClientStrategy {
         ViewDatabase viewDatabase = new ViewDatabase();
         ViewUpdater viewUpdater = new ViewUpdater();
 
+        ViewActionState actionState = new ViewActionState();
+        ViewEndturnState endTurnState = new ViewEndturnState();
+        ViewMoveState moveState = new ViewMoveState();
+        ViewWaitingState waitingState = new ViewWaitingState();
+        ViewShootFirstState shootFirstState = new ViewShootFirstState();
+        ViewShootSecondState shootSecondState = new ViewShootSecondState();
+        ViewShootThirdState shootThirdState = new ViewShootThirdState();
+        ViewPickupState pickUpState = new ViewPickupState();
+        ViewPowerupState powerupState = new ViewPowerupState();
+        ViewSpawnState spawnState = new ViewSpawnState();
+        HashMap<StatesEnum, ViewState> viewStateHashMap = new HashMap<>();
+        viewStateHashMap.put(StatesEnum.ACTION, actionState);
+        viewStateHashMap.put(StatesEnum.END, endTurnState);
+        viewStateHashMap.put(StatesEnum.MOVE, moveState);
+        viewStateHashMap.put(StatesEnum.WAIT, waitingState);
+        viewStateHashMap.put(StatesEnum.SHOOT, shootFirstState);
+        viewStateHashMap.put(StatesEnum.SHOOT_SECOND, shootSecondState);
+        viewStateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
+        viewStateHashMap.put(StatesEnum.PICK_UP, pickUpState);
+        viewStateHashMap.put(StatesEnum.POWERUP, powerupState);
+        viewStateHashMap.put(StatesEnum.SPAWN, spawnState);
+
         Scanner stdin = new Scanner(System.in);
 
         IDClientListInterface idClientList = (IDClientListInterface) registry.lookup("IDClientList");
@@ -40,6 +64,7 @@ public class ClientWithRMI implements ClientStrategy {
         UpdaterInterface updater = (UpdaterInterface) registry.lookup("Updater");
         ServerManagerFunctionInterfaceRMI serverManagerFunctionRMI = (ServerManagerFunctionInterfaceRMI) registry.lookup("ServerManagerFunctionRMI");
         VoteMapInterface voteMap = (VoteMapInterface) registry.lookup("VoteMap");
+        StateBoxInterface stateHashMap = (StateBoxInterface) registry.lookup("StateBox");
 
         int token = idClientList.addClient();
         if(token==-1){
@@ -49,27 +74,6 @@ public class ClientWithRMI implements ClientStrategy {
             System.out.println("\n");
             allPlay.addPlayerCounter();
 
-            ViewActionState actionState = new ViewActionState();
-            ViewEndturnState endTurnState = new ViewEndturnState();
-            ViewMoveState moveState = new ViewMoveState();
-            ViewWaitingState waitingState = new ViewWaitingState();
-            ViewShootFirstState shootFirstState = new ViewShootFirstState();
-            ViewShootSecondState shootSecondState = new ViewShootSecondState();
-            ViewShootThirdState shootThirdState = new ViewShootThirdState();
-            ViewPickupState pickUpState = new ViewPickupState();
-            ViewPowerupState powerupState = new ViewPowerupState();
-            ViewSpawnState spawnState = new ViewSpawnState();
-            HashMap<StatesEnum, ViewState> stateHashMap = new HashMap<>();
-            stateHashMap.put(StatesEnum.ACTION, actionState);
-            stateHashMap.put(StatesEnum.END, endTurnState);
-            stateHashMap.put(StatesEnum.MOVE, moveState);
-            stateHashMap.put(StatesEnum.WAIT, waitingState);
-            stateHashMap.put(StatesEnum.SHOOT, shootFirstState);
-            stateHashMap.put(StatesEnum.SHOOT_SECOND, shootSecondState);
-            stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
-            stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
-            stateHashMap.put(StatesEnum.POWERUP, powerupState);
-            stateHashMap.put(StatesEnum.SPAWN, spawnState);
 
             int playercounter = allPlay.getPlayercountertemp();
             CurrentDeckState currentDeckState = allPlay.getCurrentDeckState();
@@ -106,6 +110,16 @@ public class ClientWithRMI implements ClientStrategy {
             }
             int map=voteMap.getFinalresult()+1;
             System.out.println("Map Selected: " + map + "\n");
+
+
+            allPlay.putInHashMapState(player,StatesEnum.WAIT, stateHashMap.getHashMap());
+            if(idClientList.getPlayerArrayList().get(0).equals(player)){
+                allPlay.getHashMapState().replace(player, stateHashMap.getHashMap().get(StatesEnum.SPAWN));
+            }
+
+            UpdatePacket updatePacket = updater.updateClient(player);
+            viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);
+
 
         }
     }

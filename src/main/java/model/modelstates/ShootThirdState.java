@@ -6,14 +6,17 @@ import model.datapacket.StatesEnum;
 import model.gamedata.InitializeAllPlay;
 import model.weaponscard.Weapon;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
-public class ShootThirdState implements State {
+public class ShootThirdState extends UnicastRemoteObject implements State, Serializable {
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
 
-    public ShootThirdState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap){
+    public ShootThirdState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
     }

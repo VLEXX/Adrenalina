@@ -73,10 +73,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         return -1;
     }
 
-    public synchronized int add() throws RemoteException{
-        return this.addClient();
-    }
-
     public synchronized int getClientCounter() throws RemoteException {
         return this.clientCounter;
     }

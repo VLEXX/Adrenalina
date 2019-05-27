@@ -5,7 +5,6 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
-import view.viewstates.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

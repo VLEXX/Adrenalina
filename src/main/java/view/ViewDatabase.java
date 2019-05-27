@@ -1,10 +1,8 @@
 package view;
 
-import model.gamedata.CurrentDeckState;
 import model.playerdata.Player;
 import model.map.Position;
 import model.powerups.PowerUp;
-import view.viewstates.ViewState;
 
 import java.util.HashMap;
 import java.util.Stack;

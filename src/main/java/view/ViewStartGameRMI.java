@@ -4,9 +4,7 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
-import servercontroller.Updater;
 import servercontroller.UpdaterInterface;
-import view.viewstates.ViewState;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,9 +1,10 @@
-package view.viewstates;
+package view.viewstatessocket;
 
 import model.datapacket.DataPacket;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import view.ViewDatabase;
+import view.ViewState;
 
 import java.util.Scanner;
 

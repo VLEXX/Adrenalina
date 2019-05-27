@@ -1,4 +1,4 @@
-package view.viewstates;
+package view.viewstatesrmi;
 
 import model.datapacket.DataPacket;
 import model.munitions.Munitions;
@@ -6,10 +6,11 @@ import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 import view.ViewDatabase;
+import view.ViewState;
 
 import java.util.Scanner;
 
-public class ViewEndturnState implements ViewState{
+public class ViewEndturnStateRMI implements ViewState {
 
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {

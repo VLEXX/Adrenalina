@@ -3,7 +3,7 @@ package view;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
-import view.viewstates.ViewState;
+
 import java.util.HashMap;
 
 public class ViewUpdater {

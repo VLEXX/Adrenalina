@@ -7,16 +7,14 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.gamedata.*;
-import model.modelstates.*;
 import model.playerdata.Player;
 import servercontroller.ServerManagerFunctionInterfaceRMI;
 import servercontroller.StateBoxInterface;
 import servercontroller.UpdaterInterface;
-import view.viewstates.*;
+import view.viewstatessocket.*;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.HashMap;

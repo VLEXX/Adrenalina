@@ -14,6 +14,11 @@ class IDClientListTest {
         IDClientList cl = new IDClientList();
         int i = cl.addClient();
         assertEquals(cl.getClientlist().get(0), i);
+        cl.addClient();
+        cl.addClient();
+        cl.addClient();
+        cl.addClient();
+        assertEquals(cl.addClient(), -1);
     }
 
     @Test

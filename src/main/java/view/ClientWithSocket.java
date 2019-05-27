@@ -4,7 +4,7 @@
 package view;
 
 import model.datapacket.StatesEnum;
-import view.viewstates.*;
+import view.viewstatessocket.*;
 
 import java.io.*;
 import java.net.ConnectException;

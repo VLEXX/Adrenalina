@@ -1,14 +1,15 @@
-package view.viewstates;
+package view.viewstatesrmi;
 
 import model.datapacket.DataPacket;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.powerups.PowerUpId;
 import view.ViewDatabase;
+import view.ViewState;
 
 import java.util.Scanner;
 
-public class ViewPowerupState implements ViewState {
+public class ViewPowerupStateRMI implements ViewState {
 
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {

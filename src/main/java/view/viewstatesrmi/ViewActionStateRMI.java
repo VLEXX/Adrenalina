@@ -1,17 +1,17 @@
-package view.viewstates;
+package view.viewstatesrmi;
 
-import model.datapacket.Action;
 import model.datapacket.DataPacket;
 import model.datapacket.StatesEnum;
 import model.playerdata.Player;
 import view.ViewDatabase;
+import view.ViewState;
 
 import java.util.Scanner;
 
 /**
  * view state to choice action to do (shoot, move, pick_up or end turn)
  */
-public class ViewActionState implements ViewState {
+public class ViewActionStateRMI implements ViewState {
     /**
      * set Action attribute in datapacket
      *

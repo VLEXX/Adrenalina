@@ -1,9 +1,11 @@
-package view.viewstates;
+package view.viewstatessocket;
 
 import model.datapacket.DataPacket;
 import model.playerdata.Player;
 import model.weaponscard.Weapon;
 import view.ViewDatabase;
+import view.ViewState;
+
 import java.util.Scanner;
 
 public class ViewShootFirstState implements ViewState {

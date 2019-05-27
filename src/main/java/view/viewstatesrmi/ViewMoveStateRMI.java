@@ -1,16 +1,17 @@
-package view.viewstates;
+package view.viewstatesrmi;
 
-import model.map.Cell;
 import model.datapacket.DataPacket;
+import model.map.Cell;
 import model.playerdata.Player;
 import view.ViewDatabase;
+import view.ViewState;
 
 import java.util.Scanner;
 
 /**
  * Move State: create and set the DataPacket with target Cell and Player
  */
-public class ViewMoveState implements ViewState {
+public class ViewMoveStateRMI implements ViewState {
 
     /**
      * ask with System.in the target cell id and call setMovePacket method

@@ -4,6 +4,7 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.map.Cell;
 import model.map.Position;
 import model.munitions.Munitions;
 import model.playerdata.Player;
@@ -33,17 +34,84 @@ public class Furnace extends Weapon implements Serializable {
         super.setName("furnace");
     }
 
-    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
+    /**
+     * Function first attack
+     * @param myPlayer player who attack
+     * @param playerToAttack player to attack
+     * @param positionToAttack room to attack
+     * @param allPlay current state game
+     * @return POSITION_NOT_VALID or OK
+     */
+    public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToAttack, InitializeAllPlay allPlay) {
         int control = 0;
-
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        if(myPosition.getCurrentroom().getRoomId() == positionToAttack.getCurrentroom().getRoomId())
+            return MessageEnum.POSITION_NOT_VALID;
+        for(int i = 0; i < positionToAttack.getCurrentroom().getCellsList().size(); i++){
+            for(int j = 0; j < positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().size(); j++){
+                control = allPlay.getCurrentPlayerState().get(playerToAttack.get(j)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                if(control != 0)
+                    allPlay.getCurrentPlayerState().get(playerToAttack.get(j)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(j)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+            }
+        }
         return MessageEnum.OK;
     }
 
-    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
+    /**
+     * Function comfortable fire mode attack
+     * @param myPlayer player who attack
+     * @param playerToAttack player to attack
+     * @param positionToAttack position in which player shot to all player present
+     * @param allPlay current state game
+     * @return POSITION_UNREACHABLE or OK
+     */
+    public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToAttack, InitializeAllPlay allPlay) {
+        int control = 0;
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        if(checkPosition(myPosition.getCurrentcell(), positionToAttack.getCurrentcell()) == false)
+            return MessageEnum.POSITION_UNREACHABLE;
+        for( int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++){
+            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+            if(control != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).addControlMarks(myPlayer, 1);
+        }
         return MessageEnum.OK;
     }
 
-    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
+    public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay) {
         return MessageEnum.ATTACK_NOT_PRESENT;
+    }
+
+    /**
+     * Function check the correct position to shot
+     * @param current current cell of the player
+     * @param shot cell to shot
+     * @return true if possible
+     */
+    private boolean checkPosition(Cell current, Cell shot) {
+        if (current.getUpCell() != null) {
+            if (current.getUpCell().getCellId() == shot.getCellId()) {
+                return true;
+            }
+        }
+        if (current.getDownCell() != null) {
+            if (current.getDownCell().getCellId() == shot.getCellId()) {
+                return true;
+            }
+        }
+        if (current.getLeftCell() != null) {
+            if (current.getLeftCell().getCellId() == shot.getCellId()) {
+                return true;
+            }
+        }
+        if (current.getRightCell() != null) {
+            if (current.getRightCell().getCellId() == shot.getCellId()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

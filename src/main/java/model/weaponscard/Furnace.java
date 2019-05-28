@@ -6,6 +6,7 @@ package model.weaponscard;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.map.Position;
+import model.map.Room;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -45,14 +46,17 @@ public class Furnace extends Weapon implements Serializable {
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToAttack, InitializeAllPlay allPlay) {
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        Room roomToAttack = positionToAttack.getCurrentroom();
         if(myPosition.getCurrentroom().getRoomId() == positionToAttack.getCurrentroom().getRoomId())
+            return MessageEnum.POSITION_NOT_VALID;
+        if(checkRoom(myPosition, roomToAttack) == false)
             return MessageEnum.POSITION_NOT_VALID;
         for(int i = 0; i < positionToAttack.getCurrentroom().getCellsList().size(); i++){
             for(int j = 0; j < positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().size(); j++){
-                control = allPlay.getCurrentPlayerState().get(playerToAttack.get(j)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                control = allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(j)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(j)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+                    allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
             }
         }
         return MessageEnum.OK;
@@ -72,11 +76,11 @@ public class Furnace extends Weapon implements Serializable {
         if(checkPosition(myPosition.getCurrentcell(), positionToAttack.getCurrentcell()) == false)
             return MessageEnum.POSITION_UNREACHABLE;
         for( int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++){
-            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+            control = allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if(control != 0)
-                allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).addControlMarks(myPlayer, 1);
+                allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+            allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+            allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).addControlMarks(myPlayer, 1);
         }
         return MessageEnum.OK;
     }
@@ -110,6 +114,23 @@ public class Furnace extends Weapon implements Serializable {
         if (current.getRightCell() != null) {
             if (current.getRightCell().getCellId() == shot.getCellId()) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Function chech if the room is reachable
+     * @param myPosition my position
+     * @param roomToSHot room that i see
+     * @return true if ok
+     */
+    private boolean checkRoom(Position myPosition, Room roomToSHot){
+        for( int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++){
+            for(int j = 0; j < roomToSHot.getCellsList().size(); j++){
+                if(myPosition.getCurrentcell().getReachable2Cells().get(i) == roomToSHot.getCellsList().get(j)){
+                    return true;
+                }
             }
         }
         return false;

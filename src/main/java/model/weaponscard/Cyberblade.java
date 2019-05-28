@@ -71,8 +71,8 @@ public class Cyberblade extends Weapon implements Serializable {
      * @return POSITION_UNREACHABLE or OK
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
-        Position myposition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        if (checkPosition(myposition.getCurrentcell(), positionToMove.getCurrentcell())) {
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        if (checkPosition(myPosition.getCurrentcell(), positionToMove.getCurrentcell())) {
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().getCurrentcell().removeInCellPlayer(myPlayer);
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().getCurrentcell().addInCellPlayer(myPlayer);

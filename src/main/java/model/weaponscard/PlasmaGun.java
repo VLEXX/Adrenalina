@@ -69,8 +69,8 @@ public class PlasmaGun extends Weapon implements Serializable {
      * @return OK or POSITION_UNREACHABLE
      */
     public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
-        Position myposition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
-        if (checkPosition(myposition, positionToMove)) {
+        Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
+        if (checkPosition(myPosition, positionToMove)) {
             allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().removeInCellPlayer(player);
             allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
             allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().addInCellPlayer(player);

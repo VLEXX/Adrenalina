@@ -128,7 +128,7 @@ public class Furnace extends Weapon implements Serializable {
     private boolean checkRoom(Position myPosition, Room roomToSHot){
         for( int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++){
             for(int j = 0; j < roomToSHot.getCellsList().size(); j++){
-                if(myPosition.getCurrentcell().getReachable2Cells().get(i) == roomToSHot.getCellsList().get(j)){
+                if(myPosition.getCurrentcell().getReachable3Cells().get(i) == roomToSHot.getCellsList().get(j)){
                     return true;
                 }
             }

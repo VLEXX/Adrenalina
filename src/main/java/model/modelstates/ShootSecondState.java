@@ -3,6 +3,7 @@ package model.modelstates;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.weaponscard.Weapon;
 
@@ -16,11 +17,13 @@ public class ShootSecondState extends UnicastRemoteObject implements State, Seri
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
     private StatesEnum namestate;
+    private IDClientList idClientList;
 
-    public ShootSecondState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
+    public ShootSecondState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap, IDClientList clientList) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
         this.namestate=StatesEnum.SHOOT_SECOND;
+        this.idClientList= clientList;
     }
 
     public StatesEnum getNamestate() throws RemoteException{
@@ -28,8 +31,10 @@ public class ShootSecondState extends UnicastRemoteObject implements State, Seri
     }
 
     @Override
-    public MessageEnum doAction(DataPacket dataPacket) {
-
+    public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
+        if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
+            return MessageEnum.TOKEN_ERROR;
+        }
         Weapon weapon;
         if(dataPacket.isSecondAttack()==true) {
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {

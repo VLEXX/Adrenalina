@@ -1,4 +1,4 @@
-package view.viewstatesrmi;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.munitions.Munitions;
@@ -8,7 +8,7 @@ import view.ViewState;
 
 import java.util.Scanner;
 
-public class ViewShootSecondStateRMI implements ViewState {
+public class ViewShootSecondState implements ViewState {
 
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
@@ -23,6 +23,7 @@ public class ViewShootSecondStateRMI implements ViewState {
                 s.toLowerCase();
                 if(s.equals("y")){
                     DataPacket dataPacket = new DataPacket();
+                    dataPacket.setToken(viewDatabase.getClientToken());
                     dataPacket.setWeapon(viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks());
                     dataPacket.setSecondAttack(true);
                     return dataPacket;

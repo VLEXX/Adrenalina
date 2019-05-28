@@ -20,6 +20,7 @@ public class CurrentPlayerState implements Observer, Serializable {
     private HashMap<Player, Integer> controlMarks;  //Controlla il numero dei marchi da aggiungere alla plancia danni giocatore
     private Player hit;
     private boolean endturn;
+    private int token;
 
     /**
      * Constructor
@@ -33,6 +34,14 @@ public class CurrentPlayerState implements Observer, Serializable {
         controlMarks = new HashMap<>();
         this.hit = null;
         this.endturn=false;
+    }
+
+    public int getToken() {
+        return token;
+    }
+
+    public void setToken(int token) {
+        this.token = token;
     }
 
     public void setEndturn(boolean endturn) {

@@ -1,4 +1,4 @@
-package view.viewstatessocket;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.map.Cell;
@@ -15,6 +15,7 @@ public class ViewPickupState implements ViewState {
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
         DataPacket dataPacket = new DataPacket();
+        dataPacket.setToken(viewDatabase.getClientToken());
         dataPacket.setPlayer(player);
         System.out.println("Do you want to move before? ( Y | N )\n");
         String s = stdin.nextLine();

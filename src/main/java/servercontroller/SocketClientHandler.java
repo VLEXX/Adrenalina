@@ -63,16 +63,16 @@ public class SocketClientHandler implements Runnable {
             objectOutputStream.writeObject(message);
 
             HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
-            ActionState actionState = new ActionState(allPlay, stateHashMap);
-            EndTurnState endTurnState = new EndTurnState(allPlay, stateHashMap);
-            MoveState moveState = new MoveState(allPlay, stateHashMap);
-            WaitingState waitingState = new WaitingState(allPlay, stateHashMap);
-            ShootFirstState shootFirstState = new ShootFirstState(allPlay, stateHashMap);
-            ShootSecondState shootSecondState = new ShootSecondState(allPlay, stateHashMap);
-            ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap);
-            PickUpState pickUpState = new PickUpState(allPlay, stateHashMap);
-            PowerupState powerupState = new PowerupState(allPlay, stateHashMap);
-            SpawnState spawnState = new SpawnState(allPlay, stateHashMap);
+            ActionState actionState = new ActionState(allPlay, stateHashMap,idClientList);
+            EndTurnState endTurnState = new EndTurnState(allPlay, stateHashMap, idClientList);
+            MoveState moveState = new MoveState(allPlay, stateHashMap, idClientList);
+            WaitingState waitingState = new WaitingState(allPlay, stateHashMap, idClientList);
+            ShootFirstState shootFirstState = new ShootFirstState(allPlay, stateHashMap, idClientList);
+            ShootSecondState shootSecondState = new ShootSecondState(allPlay, stateHashMap, idClientList);
+            ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap, idClientList);
+            PickUpState pickUpState = new PickUpState(allPlay, stateHashMap, idClientList);
+            PowerupState powerupState = new PowerupState(allPlay, stateHashMap, idClientList);
+            SpawnState spawnState = new SpawnState(allPlay, stateHashMap, idClientList);
             stateHashMap.put(StatesEnum.ACTION, actionState);
             stateHashMap.put(StatesEnum.END, endTurnState);
             stateHashMap.put(StatesEnum.MOVE, moveState);
@@ -93,6 +93,8 @@ public class SocketClientHandler implements Runnable {
             UpdatePacket updatePacket = updater.updateClient(player);
             objectOutputStream.writeObject(updatePacket);
 
+            Integer token = allPlay.getCurrentPlayerState().get(player).getToken();
+            objectOutputStream.writeObject(token);
 
             StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
             startGame.start();

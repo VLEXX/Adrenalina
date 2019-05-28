@@ -5,6 +5,7 @@ package model.modelstates;
 
 import model.datapacket.DataPacket;
 import model.datapacket.StatesEnum;
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
 import model.map.*;
@@ -27,11 +28,13 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
     private StatesEnum namestate;
+    private IDClientList idClientList;
 
-    public EndTurnState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap)throws RemoteException{
+    public EndTurnState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap, IDClientList clientList)throws RemoteException{
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
         this.namestate=StatesEnum.END;
+        this.idClientList=clientList;
     }
 
     public StatesEnum getNamestate() throws RemoteException {
@@ -46,6 +49,9 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
      */
     @Override
     public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
+        if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
+            return MessageEnum.TOKEN_ERROR;
+        }
         this.refillMap(allPlay);
         MessageEnum out1 = this.rechargeWeapons(allPlay,dataPacket);
         if(out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOO_MUCH_POWERUPS)

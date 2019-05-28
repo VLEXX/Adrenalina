@@ -1,6 +1,7 @@
 package servercontroller;
 
 import model.datapacket.StatesEnum;
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.modelstates.*;
 
@@ -14,19 +15,19 @@ public class StateBox extends UnicastRemoteObject implements Remote, StateBoxInt
     private HashMap<StatesEnum, State> hashMap;
 
 
-    public StateBox(InitializeAllPlay allPlay) throws RemoteException {
+    public StateBox(InitializeAllPlay allPlay, IDClientList clientList) throws RemoteException {
 
         this.hashMap = new HashMap<>();
-        ActionState actionState = new ActionState(allPlay, hashMap);
-        EndTurnState endTurnState = new EndTurnState(allPlay, hashMap);
-        MoveState moveState = new MoveState(allPlay, hashMap);
-        WaitingState waitingState = new WaitingState(allPlay, hashMap);
-        ShootFirstState shootFirstState = new ShootFirstState(allPlay, hashMap);
-        ShootSecondState shootSecondState = new ShootSecondState(allPlay, hashMap);
-        ShootThirdState shootThirdState = new ShootThirdState(allPlay, hashMap);
-        PickUpState pickUpState = new PickUpState(allPlay, hashMap);
-        PowerupState powerupState = new PowerupState(allPlay, hashMap);
-        SpawnState spawnState = new SpawnState(allPlay, hashMap);
+        ActionState actionState = new ActionState(allPlay, hashMap,clientList);
+        EndTurnState endTurnState = new EndTurnState(allPlay, hashMap, clientList);
+        MoveState moveState = new MoveState(allPlay, hashMap, clientList);
+        WaitingState waitingState = new WaitingState(allPlay, hashMap, clientList);
+        ShootFirstState shootFirstState = new ShootFirstState(allPlay, hashMap, clientList);
+        ShootSecondState shootSecondState = new ShootSecondState(allPlay, hashMap, clientList);
+        ShootThirdState shootThirdState = new ShootThirdState(allPlay, hashMap, clientList);
+        PickUpState pickUpState = new PickUpState(allPlay, hashMap, clientList);
+        PowerupState powerupState = new PowerupState(allPlay, hashMap, clientList);
+        SpawnState spawnState = new SpawnState(allPlay, hashMap, clientList);
         hashMap.put(StatesEnum.ACTION, actionState);
         hashMap.put(StatesEnum.END, endTurnState);
         hashMap.put(StatesEnum.MOVE, moveState);

@@ -28,7 +28,7 @@ public class ServerRMI extends Thread {
 
         Updater updater = new Updater(this.allPlay);
         ServerManagerFunctionRMI serverManagerFunctionRMI = new ServerManagerFunctionRMI(this.allPlay, this.idClientList);
-        StateBox stateBox = new StateBox(this.allPlay);
+        StateBox stateBox = new StateBox(this.allPlay, idClientList);
         ManageEndTurn manageEndTurn = new ManageEndTurn(allPlay, idClientList);
 
         System.out.println("Binding server to registry...");

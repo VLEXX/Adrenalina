@@ -3,6 +3,7 @@
  */
 package model.modelstates;
 
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
@@ -18,15 +19,20 @@ public class ActionState extends UnicastRemoteObject implements State, Serializa
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
     private StatesEnum namestate;
+    private IDClientList idClientList;
 
-    public ActionState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap)throws RemoteException {
+    public ActionState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap, IDClientList clientList)throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
         this.namestate=StatesEnum.ACTION;
+        this.idClientList=clientList;
     }
 
     @Override
-    public MessageEnum doAction(DataPacket dataPacket) {
+    public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
+        if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
+            return MessageEnum.TOKEN_ERROR;
+        }
         System.out.println(dataPacket.getStatesEnum());
         if (dataPacket.getStatesEnum().equals(StatesEnum.MOVE)) {
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.MOVE));

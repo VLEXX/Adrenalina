@@ -1,4 +1,4 @@
-package view.viewstatessocket;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.playerdata.Player;
@@ -13,6 +13,7 @@ public class ViewSpawnState implements ViewState {
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
         DataPacket dataPacket = new DataPacket();
         dataPacket.setPlayer(player);
+        dataPacket.setToken(viewDatabase.getClientToken());
         System.out.println("Now two Power-Up Cards will be picked up...\n");
         PowerUp pop1 = viewDatabase.getCurrentDeckState().pop();
         PowerUp pop2 = viewDatabase.getCurrentDeckState().pop();

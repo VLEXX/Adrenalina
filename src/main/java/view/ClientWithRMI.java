@@ -11,7 +11,7 @@ import model.playerdata.Player;
 import servercontroller.ServerManagerFunctionInterfaceRMI;
 import servercontroller.StateBoxInterface;
 import servercontroller.UpdaterInterface;
-import view.viewstatessocket.*;
+import view.viewstates.*;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -68,7 +68,7 @@ public class ClientWithRMI implements ClientStrategy {
         else{
             System.out.println("\n");
             allPlay.addPlayerCounter();
-
+            viewDatabase.setClientToken(token);
 
             CurrentDeckState currentDeckState = allPlay.getCurrentDeckState();
             Player player = clientManager.manageChoice(stdin, currentDeckState);
@@ -127,7 +127,7 @@ public class ClientWithRMI implements ClientStrategy {
             viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);
 
 
-            ViewStartGameRMI viewStartGameRMI = new ViewStartGameRMI(player, stdin, viewDatabase, viewStateHashMap , updater, allPlay, manageEndTurn, stateHashMap);
+            ViewStartGameRMI viewStartGameRMI = new ViewStartGameRMI(player, stdin, viewDatabase, viewStateHashMap , updater, allPlay, manageEndTurn, stateHashMap, idClientList);
             viewStartGameRMI.start();
 
         }

@@ -13,4 +13,6 @@ public interface IDClientListInterface extends Remote {
     int addClient() throws RemoteException;
 
     void update() throws RemoteException;
+
+
 }

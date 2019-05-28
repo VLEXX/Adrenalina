@@ -1,4 +1,4 @@
-package view.viewstatesrmi;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.datapacket.StatesEnum;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * view state to choice action to do (shoot, move, pick_up or end turn)
  */
-public class ViewActionStateRMI implements ViewState {
+public class ViewActionState implements ViewState {
     /**
      * set Action attribute in datapacket
      *
@@ -38,6 +38,7 @@ public class ViewActionStateRMI implements ViewState {
             }
         }
         dataPacket.setPlayer(player);
+        dataPacket.setToken(viewDatabase.getClientToken());
         return dataPacket;
     }
 

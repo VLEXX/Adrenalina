@@ -5,7 +5,7 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
-import view.viewstatessocket.ViewWaitingState;
+import view.viewstates.ViewWaitingState;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -43,6 +43,8 @@ public class ViewStartGame extends Thread {
             try {
                 updatePacket = (UpdatePacket) objectInputStream.readObject();
                 viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
+                int token = (Integer) objectInputStream.readObject();
+                viewDatabase.setClientToken(token);
                 break;
             } catch (IOException e) {
 
@@ -50,6 +52,7 @@ public class ViewStartGame extends Thread {
 
             }
         }
+
         while(true){
             updatePacket = null;
             messageEnumOK = null;

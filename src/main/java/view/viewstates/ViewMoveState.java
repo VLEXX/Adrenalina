@@ -1,7 +1,7 @@
-package view.viewstatesrmi;
+package view.viewstates;
 
-import model.datapacket.DataPacket;
 import model.map.Cell;
+import model.datapacket.DataPacket;
 import model.playerdata.Player;
 import view.ViewDatabase;
 import view.ViewState;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * Move State: create and set the DataPacket with target Cell and Player
  */
-public class ViewMoveStateRMI implements ViewState {
+public class ViewMoveState implements ViewState {
 
     /**
      * ask with System.in the target cell id and call setMovePacket method
@@ -30,6 +30,7 @@ public class ViewMoveStateRMI implements ViewState {
         System.out.println(" ");
         int id;
         DataPacket dataPacket = new DataPacket();
+        dataPacket.setToken(viewDatabase.getClientToken());
         while(true){
             id=stdin.nextInt();
             System.out.println(stdin.nextLine());

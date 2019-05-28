@@ -3,6 +3,7 @@ package model.modelstates;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.map.Room;
@@ -20,14 +21,17 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
     private StatesEnum namestate;
+    private IDClientList idClientList;
+
 
     /**
      * Class constructor
      */
-    public PowerupState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
+    public PowerupState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap, IDClientList clientList) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
         this.namestate=StatesEnum.POWERUP;
+        this.idClientList=clientList;
     }
 
     public StatesEnum getNamestate() throws RemoteException {
@@ -35,7 +39,10 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
     }
 
     @Override
-    public MessageEnum doAction(DataPacket dataPacket) {
+    public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
+        if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
+            return MessageEnum.TOKEN_ERROR;
+        }
         if(dataPacket.isPowerupAction()==true) {
             if (dataPacket.getPowerUpId().equals(PowerUpId.TAGBACK_GRENADE)) {
                 return doTagbackGrenade(dataPacket);

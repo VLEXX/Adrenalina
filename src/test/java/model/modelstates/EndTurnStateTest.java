@@ -3,6 +3,7 @@ package model.modelstates;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
 import model.map.Position;
@@ -32,10 +33,11 @@ class EndTurnStateTest {
     void doAction() throws RemoteException {
         //inizializza tutti i parametri necessari
         InitializeAllPlay i = new InitializeAllPlay();
+        IDClientList idClientList = new IDClientList();
         HashMap<StatesEnum, State> testhm = new HashMap<>();
         i.getStateSelectedMap().setStrategyMap(0);
         i.getStateSelectedMap().setSelectedmap();
-        EndTurnState eds = new EndTurnState(i, testhm);
+        EndTurnState eds = new EndTurnState(i, testhm, idClientList);
         CurrentPlayerState cps = new CurrentPlayerState(Player.BLUE);
         DataPacket d = new DataPacket();
         i.getCurrentPlayerState().put(Player.BLUE, cps);
@@ -112,10 +114,11 @@ class EndTurnStateTest {
     @Test
     void refillMap() throws RemoteException {
         InitializeAllPlay i = new InitializeAllPlay();
+        IDClientList idClientList = new IDClientList();
         HashMap<StatesEnum,State> testhm = new HashMap<>();
         i.getStateSelectedMap().setStrategyMap(0);
         i.getStateSelectedMap().setSelectedmap();
-        EndTurnState eds = new EndTurnState(i,testhm);
+        EndTurnState eds = new EndTurnState(i,testhm, idClientList);
         eds.refillMap(i);
         for(Room r : i.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell c : r.getCellsList()){

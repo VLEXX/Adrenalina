@@ -28,5 +28,6 @@ public enum MessageEnum implements Serializable {
     ENOUGH_AMMO,
     POSITION_NOT_VALID,
     SHOOTUP_ERROR,
-    ERROR
+    ERROR,
+    TOKEN_ERROR
 }

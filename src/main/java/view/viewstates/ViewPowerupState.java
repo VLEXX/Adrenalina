@@ -1,4 +1,4 @@
-package view.viewstatesrmi;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.playerdata.Player;
@@ -9,12 +9,13 @@ import view.ViewState;
 
 import java.util.Scanner;
 
-public class ViewPowerupStateRMI implements ViewState {
+public class ViewPowerupState implements ViewState {
 
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
         String s;
         DataPacket dataPacket = new DataPacket();
+        dataPacket.setToken(viewDatabase.getClientToken());
         dataPacket.setPlayer(player);
         for(PowerUp powerUp: viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList()) {
             if (powerUp.getId().equals(PowerUpId.TAGBACK_GRENADE)){

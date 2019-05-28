@@ -1,4 +1,4 @@
-package view.viewstatessocket;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.playerdata.Player;
@@ -18,6 +18,7 @@ public class ViewShootFirstState implements ViewState {
         }
         String s;
         DataPacket dataPacket = new DataPacket();
+        dataPacket.setToken(viewDatabase.getClientToken());
         Weapon w;
         while(true){
             s = stdin.nextLine();

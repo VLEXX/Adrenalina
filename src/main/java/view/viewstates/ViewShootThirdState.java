@@ -1,4 +1,4 @@
-package view.viewstatessocket;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.munitions.Munitions;
@@ -23,6 +23,7 @@ public class ViewShootThirdState implements ViewState {
                 s.toLowerCase();
                 if(s.equals("y")){
                     DataPacket dataPacket = new DataPacket();
+                    dataPacket.setToken(viewDatabase.getClientToken());
                     dataPacket.setWeapon(viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks());
                     dataPacket.setThirdAttack(true);
                     return dataPacket;

@@ -48,7 +48,7 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
     }
 
     //Ritorna l'array degli ID Client
-    public ArrayList<Integer> getClientlist() {
+    public ArrayList<Integer> getClientlist() throws RemoteException {
         return this.clientlist;
     }
 

@@ -66,8 +66,9 @@ class InitializeAllPlayTest {
     @Test
     void addPlayerState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
+        IDClientList idClientList = new IDClientList();
         HashMap<StatesEnum, State> hashMap = new HashMap<>();
-        State state = new MoveState(initializeAllPlay, hashMap);
+        State state = new MoveState(initializeAllPlay, hashMap, idClientList);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state);
     }
@@ -75,9 +76,10 @@ class InitializeAllPlayTest {
     @Test
     void updatePlayerState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
+        IDClientList idClientList = new IDClientList();
         HashMap<StatesEnum, State> hashMap = new HashMap<>();
-        State state = new MoveState(initializeAllPlay, hashMap);
-        State state1 = new ShootFirstState(initializeAllPlay, hashMap);
+        State state = new MoveState(initializeAllPlay, hashMap, idClientList);
+        State state1 = new ShootFirstState(initializeAllPlay, hashMap, idClientList);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         initializeAllPlay.updatePlayerState(Player.YELLOW, state1);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state1);
@@ -86,8 +88,9 @@ class InitializeAllPlayTest {
     @Test
     void getPlayerState() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
+        IDClientList idClientList = new IDClientList();
         HashMap<StatesEnum, State> hashMap = new HashMap<>();
-        State state = new MoveState(initializeAllPlay, hashMap);
+        State state = new MoveState(initializeAllPlay, hashMap, idClientList);
         initializeAllPlay.addPlayerState(Player.YELLOW, state);
         assertEquals(initializeAllPlay.getPlayerState(Player.YELLOW), state);
     }
@@ -122,17 +125,17 @@ class InitializeAllPlayTest {
     @Test
     void putInHashMapState() throws RemoteException {
         InitializeAllPlay allPlay = new InitializeAllPlay();
-
+        IDClientList idClientList = new IDClientList();
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
-        ActionState actionState = new ActionState(allPlay, stateHashMap);
-        EndTurnState endTurnState = new EndTurnState(allPlay, stateHashMap);
-        MoveState moveState = new MoveState(allPlay, stateHashMap);
-        WaitingState waitingState = new WaitingState(allPlay, stateHashMap);
-        ShootFirstState shootFirstState2 = new ShootFirstState(allPlay, stateHashMap);
-        ShootSecondState shootSecondState2 = new ShootSecondState(allPlay, stateHashMap);
-        ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap);
-        PickUpState pickUpState = new PickUpState(allPlay, stateHashMap);
-        PowerupState powerupState1 = new PowerupState(allPlay, stateHashMap);
+        ActionState actionState = new ActionState(allPlay, stateHashMap, idClientList);
+        EndTurnState endTurnState = new EndTurnState(allPlay, stateHashMap, idClientList);
+        MoveState moveState = new MoveState(allPlay, stateHashMap, idClientList);
+        WaitingState waitingState = new WaitingState(allPlay, stateHashMap, idClientList);
+        ShootFirstState shootFirstState2 = new ShootFirstState(allPlay, stateHashMap,idClientList);
+        ShootSecondState shootSecondState2 = new ShootSecondState(allPlay, stateHashMap, idClientList);
+        ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap, idClientList);
+        PickUpState pickUpState = new PickUpState(allPlay, stateHashMap, idClientList);
+        PowerupState powerupState1 = new PowerupState(allPlay, stateHashMap, idClientList);
         stateHashMap.put(StatesEnum.ACTION, actionState);
         stateHashMap.put(StatesEnum.END, endTurnState);
         stateHashMap.put(StatesEnum.MOVE, moveState);
@@ -157,7 +160,8 @@ class InitializeAllPlayTest {
     @Test
     void setTempState() throws RemoteException {
         InitializeAllPlay allPlay = new InitializeAllPlay();
-        State state = new ShootFirstState(allPlay, null);
+        IDClientList idClientList = new IDClientList();
+        State state = new ShootFirstState(allPlay, null, idClientList);
         allPlay.setTempState(state);
         assertEquals(allPlay.getTempState(), state);
     }

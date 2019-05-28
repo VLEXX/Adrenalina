@@ -1,4 +1,4 @@
-package view.viewstatessocket;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.playerdata.Player;
@@ -25,6 +25,7 @@ public class ViewWaitingState implements ViewState {
             i--;
         }
         DataPacket dataPacket = new DataPacket();
+        dataPacket.setToken(viewDatabase.getClientToken());
         dataPacket.setPlayer(player);
         return dataPacket;
     }

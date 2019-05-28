@@ -34,6 +34,7 @@ public class ServerManagerFunction {
                 objectOutputStream.writeObject(message);
                 allPlay.getCurrentPlayerState().put(player, new CurrentPlayerState(player));
                 allPlay.getCurrentDeckState().getPlayers().remove(player);
+                allPlay.getCurrentPlayerState().get(player).setToken(IDclientList.addClient());
                 IDclientList.getPlayerArrayList().add(player);
                 ok = true;
                 objectOutputStream.writeObject(ok);

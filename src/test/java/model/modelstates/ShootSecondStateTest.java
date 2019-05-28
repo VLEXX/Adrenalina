@@ -3,6 +3,7 @@ package model.modelstates;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
+import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
@@ -21,20 +22,22 @@ class ShootSecondStateTest {
     @Test
     void doAction() throws RemoteException {
         DataPacket dataPacket = new DataPacket();
+        IDClientList idClientList = new IDClientList();
+        dataPacket.setToken(idClientList.addClient());
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
         initializeAllPlay.getCurrentPlayerState().put(Player.YELLOW, currentPlayerState);
 
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
-        ActionState actionState = new ActionState(initializeAllPlay, stateHashMap);
-        EndTurnState endTurnState = new EndTurnState(initializeAllPlay, stateHashMap);
-        MoveState moveState = new MoveState(initializeAllPlay, stateHashMap);
-        WaitingState waitingState = new WaitingState(initializeAllPlay, stateHashMap);
-        ShootFirstState shootFirstState2 = new ShootFirstState(initializeAllPlay, stateHashMap);
-        ShootSecondState shootSecondState2 = new ShootSecondState(initializeAllPlay, stateHashMap);
-        ShootThirdState shootThirdState = new ShootThirdState(initializeAllPlay, stateHashMap);
-        PickUpState pickUpState = new PickUpState(initializeAllPlay, stateHashMap);
-        PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap);
+        ActionState actionState = new ActionState(initializeAllPlay, stateHashMap, idClientList);
+        EndTurnState endTurnState = new EndTurnState(initializeAllPlay, stateHashMap, idClientList);
+        MoveState moveState = new MoveState(initializeAllPlay, stateHashMap, idClientList);
+        WaitingState waitingState = new WaitingState(initializeAllPlay, stateHashMap, idClientList);
+        ShootFirstState shootFirstState2 = new ShootFirstState(initializeAllPlay, stateHashMap, idClientList);
+        ShootSecondState shootSecondState2 = new ShootSecondState(initializeAllPlay, stateHashMap, idClientList);
+        ShootThirdState shootThirdState = new ShootThirdState(initializeAllPlay, stateHashMap, idClientList);
+        PickUpState pickUpState = new PickUpState(initializeAllPlay, stateHashMap, idClientList);
+        PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap, idClientList);
         stateHashMap.put(StatesEnum.ACTION, actionState);
         stateHashMap.put(StatesEnum.END, endTurnState);
         stateHashMap.put(StatesEnum.MOVE, moveState);
@@ -45,7 +48,7 @@ class ShootSecondStateTest {
         stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
         stateHashMap.put(StatesEnum.POWERUP, powerupState);
 
-        ShootSecondState shootSecondState = new ShootSecondState(initializeAllPlay, stateHashMap);
+        ShootSecondState shootSecondState = new ShootSecondState(initializeAllPlay, stateHashMap, idClientList);
         assertEquals(shootSecondState.doAction(dataPacket), MessageEnum.OK);
 
         dataPacket.setSecondAttack(true);
@@ -79,20 +82,22 @@ class ShootSecondStateTest {
     @Test
     void doAction2() throws RemoteException {
         DataPacket dataPacket = new DataPacket();
+        IDClientList idClientList = new IDClientList();
+        dataPacket.setToken(idClientList.addClient());
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
         initializeAllPlay.getCurrentPlayerState().put(Player.YELLOW, currentPlayerState);
 
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
-        ActionState actionState = new ActionState(initializeAllPlay, stateHashMap);
-        EndTurnState endTurnState = new EndTurnState(initializeAllPlay, stateHashMap);
-        MoveState moveState = new MoveState(initializeAllPlay, stateHashMap);
-        WaitingState waitingState = new WaitingState(initializeAllPlay, stateHashMap);
-        ShootFirstState shootFirstState2 = new ShootFirstState(initializeAllPlay, stateHashMap);
-        ShootSecondState shootSecondState2 = new ShootSecondState(initializeAllPlay, stateHashMap);
-        ShootThirdState shootThirdState = new ShootThirdState(initializeAllPlay, stateHashMap);
-        PickUpState pickUpState = new PickUpState(initializeAllPlay, stateHashMap);
-        PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap);
+        ActionState actionState = new ActionState(initializeAllPlay, stateHashMap, idClientList);
+        EndTurnState endTurnState = new EndTurnState(initializeAllPlay, stateHashMap, idClientList);
+        MoveState moveState = new MoveState(initializeAllPlay, stateHashMap, idClientList);
+        WaitingState waitingState = new WaitingState(initializeAllPlay, stateHashMap, idClientList);
+        ShootFirstState shootFirstState2 = new ShootFirstState(initializeAllPlay, stateHashMap, idClientList);
+        ShootSecondState shootSecondState2 = new ShootSecondState(initializeAllPlay, stateHashMap, idClientList);
+        ShootThirdState shootThirdState = new ShootThirdState(initializeAllPlay, stateHashMap, idClientList);
+        PickUpState pickUpState = new PickUpState(initializeAllPlay, stateHashMap, idClientList);
+        PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap, idClientList);
         stateHashMap.put(StatesEnum.ACTION, actionState);
         stateHashMap.put(StatesEnum.END, endTurnState);
         stateHashMap.put(StatesEnum.MOVE, moveState);
@@ -103,7 +108,7 @@ class ShootSecondStateTest {
         stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
         stateHashMap.put(StatesEnum.POWERUP, powerupState);
 
-        ShootSecondState shootSecondState = new ShootSecondState(initializeAllPlay, stateHashMap);
+        ShootSecondState shootSecondState = new ShootSecondState(initializeAllPlay, stateHashMap, idClientList);
         assertEquals(shootSecondState.doAction(dataPacket), MessageEnum.OK);
 
         dataPacket.setSecondAttack(true);

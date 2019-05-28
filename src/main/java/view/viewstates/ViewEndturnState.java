@@ -1,4 +1,4 @@
-package view.viewstatesrmi;
+package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.munitions.Munitions;
@@ -10,12 +10,13 @@ import view.ViewState;
 
 import java.util.Scanner;
 
-public class ViewEndturnStateRMI implements ViewState {
+public class ViewEndturnState implements ViewState {
 
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
 
         DataPacket dataPacket = new DataPacket();
+        dataPacket.setToken(viewDatabase.getClientToken());
         dataPacket.setPlayer(player);
         System.out.println("Do you want recharge a weapon? ( Y | N )\n");
         String s = stdin.nextLine();

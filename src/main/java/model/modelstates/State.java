@@ -5,6 +5,7 @@ package model.modelstates;
 
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
+import model.datapacket.StatesEnum;
 
 import java.io.Serializable;
 import java.rmi.Remote;
@@ -13,4 +14,6 @@ import java.rmi.server.UnicastRemoteObject;
 
 public interface State extends Remote {
     MessageEnum doAction(DataPacket dataPacket) throws RemoteException;
+
+    StatesEnum getNamestate()throws RemoteException;
 }

@@ -76,7 +76,6 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     }
 
     public synchronized void putInHashMapState(Player player, StatesEnum statesEnum, HashMap<StatesEnum, State> hashMap) throws RemoteException{
-        System.out.println(hashMap.get(statesEnum));
         this.playerState.put(player, hashMap.get(statesEnum));
     }
 
@@ -141,12 +140,16 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         playerState.replace(player, state);
     }
 
-    public synchronized State getPlayerState(Player player) {
+    public synchronized State getPlayerState(Player player) throws RemoteException {
         return playerState.get(player);
     }
 
     public synchronized HashMap<Player, State> getHashMapState() {
         return playerState;
+    }
+
+    public synchronized void replaceInHashMap(Player player, StatesEnum statesEnum, HashMap<StatesEnum, State> hashMap) throws RemoteException{
+        this.playerState.replace(player, hashMap.get(statesEnum));
     }
 
     public Player[] getSkullArray() {

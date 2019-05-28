@@ -20,5 +20,8 @@ public interface InitializeAllPlayInterface extends Remote {
 
      HashMap<Player, State> getHashMapState() throws RemoteException;
 
+     State getPlayerState(Player player) throws RemoteException;
+
+     void replaceInHashMap(Player player, StatesEnum statesEnum, HashMap<StatesEnum, State> hashMap) throws RemoteException;
 
 }

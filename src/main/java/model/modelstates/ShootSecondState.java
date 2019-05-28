@@ -15,10 +15,16 @@ public class ShootSecondState extends UnicastRemoteObject implements State, Seri
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
+    private StatesEnum namestate;
 
     public ShootSecondState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
+        this.namestate=StatesEnum.SHOOT_SECOND;
+    }
+
+    public StatesEnum getNamestate() throws RemoteException{
+        return namestate;
     }
 
     @Override

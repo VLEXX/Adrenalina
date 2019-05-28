@@ -19,6 +19,7 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
+    private StatesEnum namestate;
 
     /**
      * Class constructor
@@ -26,6 +27,11 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
     public PowerupState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
+        this.namestate=StatesEnum.POWERUP;
+    }
+
+    public StatesEnum getNamestate() throws RemoteException {
+        return namestate;
     }
 
     @Override

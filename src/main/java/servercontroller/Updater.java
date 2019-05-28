@@ -34,34 +34,34 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
 
         StatesEnum state = null;
 
-        if(allPlay.getHashMapState().get(player) instanceof ActionState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.ACTION)){
             state = StatesEnum.ACTION;
         }
-        if(allPlay.getHashMapState().get(player) instanceof ShootFirstState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.SHOOT)){
             state = StatesEnum.SHOOT;
         }
-        if(allPlay.getHashMapState().get(player) instanceof ShootSecondState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.SHOOT_SECOND)){
             state = StatesEnum.SHOOT_SECOND;
         }
-        if(allPlay.getHashMapState().get(player) instanceof ShootThirdState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.SHOOT_THIRD)){
             state = StatesEnum.SHOOT_THIRD;
         }
-        if(allPlay.getHashMapState().get(player) instanceof PickUpState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.PICK_UP)){
             state = StatesEnum.PICK_UP;
         }
-        if(allPlay.getHashMapState().get(player) instanceof MoveState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.MOVE)){
             state = StatesEnum.MOVE;
         }
-        if(allPlay.getHashMapState().get(player) instanceof EndTurnState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)){
             state = StatesEnum.END;
         }
-        if(allPlay.getHashMapState().get(player) instanceof WaitingState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.WAIT)){
             state = StatesEnum.WAIT;
         }
-        if(allPlay.getHashMapState().get(player) instanceof PowerupState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.POWERUP)){
             state = StatesEnum.POWERUP;
         }
-        if(allPlay.getHashMapState().get(player) instanceof SpawnState){
+        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.SPAWN)){
             state = StatesEnum.SPAWN;
         }
 

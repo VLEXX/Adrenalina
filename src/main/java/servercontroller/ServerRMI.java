@@ -4,10 +4,7 @@
 package servercontroller;
 
 import model.datapacket.StatesEnum;
-import model.gamedata.IDClientList;
-import model.gamedata.IDClientListInterface;
-import model.gamedata.InitializeAllPlay;
-import model.gamedata.VoteMap;
+import model.gamedata.*;
 import model.modelstates.*;
 
 import java.rmi.AlreadyBoundException;
@@ -32,17 +29,20 @@ public class ServerRMI extends Thread {
         Updater updater = new Updater(this.allPlay);
         ServerManagerFunctionRMI serverManagerFunctionRMI = new ServerManagerFunctionRMI(this.allPlay, this.idClientList);
         StateBox stateBox = new StateBox(this.allPlay);
+        ManageEndTurn manageEndTurn = new ManageEndTurn(allPlay, idClientList);
 
         System.out.println("Binding server to registry...");
         Registry registry = LocateRegistry.createRegistry(8080);
 
 
-        registry.bind("Playercountertemp", this.allPlay);
+        registry.bind("allPlay", this.allPlay);
         registry.bind("IDClientList", this.idClientList);
         registry.bind("Updater", updater);
         registry.bind("ServerManagerFunctionRMI", serverManagerFunctionRMI);
         registry.bind("VoteMap", allPlay.getVoteMap());
         registry.bind("StateBox", stateBox);
+        registry.bind("ManageEndTurn", manageEndTurn);
+
 
         System.out.println("Attendo invocazioni dal client...");
 

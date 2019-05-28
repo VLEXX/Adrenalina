@@ -17,16 +17,23 @@ public class WaitingState extends UnicastRemoteObject implements State , Seriali
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
+    private StatesEnum namestate;
+
 
     public WaitingState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
+        this.namestate=StatesEnum.WAIT;
+    }
+
+    public StatesEnum getNamestate() throws RemoteException {
+        return namestate;
     }
 
     @Override
-    public synchronized MessageEnum doAction(DataPacket dataPacket) {
+    public synchronized MessageEnum doAction(DataPacket dataPacket) throws RemoteException{
         while (true) {
-            if (!(allPlay.getPlayerState(dataPacket.getPlayer()) instanceof WaitingState)) {
+            if (allPlay.getPlayerState(dataPacket.getPlayer())!=this) {
                 return MessageEnum.OK;
             }
         }

@@ -24,12 +24,17 @@ public class MoveState extends UnicastRemoteObject implements State, Serializabl
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
+    private StatesEnum namestate;
 
     public MoveState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
+        this.namestate=StatesEnum.MOVE;
     }
 
+    public StatesEnum getNamestate() throws RemoteException {
+        return namestate;
+    }
 
     /**
      * @param dataPacket contains data sent from player

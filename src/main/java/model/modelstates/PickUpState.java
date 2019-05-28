@@ -30,6 +30,7 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
+    private StatesEnum namestate;
 
     /**
      * Class constructor
@@ -37,8 +38,12 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
     public PickUpState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException{
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
+        this.namestate=StatesEnum.PICK_UP;
     }
 
+    public StatesEnum getNamestate() throws RemoteException {
+        return namestate;
+    }
 
     /**
      * @param dataPacket

@@ -5,6 +5,7 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
+import view.viewstatessocket.ViewWaitingState;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -63,13 +64,15 @@ public class ViewStartGame extends Thread {
                     }
                     messageEnumOK = (MessageEnum) objectInputStream.readObject();
                 }
-                if(messageEnumOK.equals(MessageEnum.OK)) {
-                    while (true) {
-                        if(updatePacket!=null){
-                            viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
-                            break;
-                        }
-                        updatePacket = (UpdatePacket) objectInputStream.readObject();
+                while (true) {
+                    if(updatePacket!=null){
+                        viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
+                        break;
+                    }
+                    updatePacket = (UpdatePacket) objectInputStream.readObject();
+
+                    if(!(viewDatabase.getViewState().get(player)instanceof ViewWaitingState)){
+                        ((ViewWaitingState)stateHashMap.get(StatesEnum.WAIT)).resetI();
                     }
                 }
             } catch (IOException e) {

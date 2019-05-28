@@ -25,10 +25,6 @@ public class ClientWithRMI implements ClientStrategy {
     public void startClient() throws IOException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry(8080);
 
-        String[] e = registry.list();
-
-        String remoteObject = "server_central";
-
         ClientManagerRMI clientManager = new ClientManagerRMI();
         ViewDatabase viewDatabase = new ViewDatabase();
         ViewUpdater viewUpdater = new ViewUpdater();
@@ -58,11 +54,12 @@ public class ClientWithRMI implements ClientStrategy {
         Scanner stdin = new Scanner(System.in);
 
         IDClientListInterface idClientList = (IDClientListInterface) registry.lookup("IDClientList");
-        InitializeAllPlayInterface allPlay = (InitializeAllPlayInterface) registry.lookup("Playercountertemp");
+        InitializeAllPlayInterface allPlay = (InitializeAllPlayInterface) registry.lookup("allPlay");
         UpdaterInterface updater = (UpdaterInterface) registry.lookup("Updater");
         ServerManagerFunctionInterfaceRMI serverManagerFunctionRMI = (ServerManagerFunctionInterfaceRMI) registry.lookup("ServerManagerFunctionRMI");
         VoteMapInterface voteMap = (VoteMapInterface) registry.lookup("VoteMap");
         StateBoxInterface stateHashMap = (StateBoxInterface) registry.lookup("StateBox");
+        ManageEndTurnInterface manageEndTurn = (ManageEndTurnInterface) registry.lookup("ManageEndTurn");
 
         int token = idClientList.addClient();
         if(token==-1){
@@ -73,7 +70,6 @@ public class ClientWithRMI implements ClientStrategy {
             allPlay.addPlayerCounter();
 
 
-            int playercounter = allPlay.getPlayercountertemp();
             CurrentDeckState currentDeckState = allPlay.getCurrentDeckState();
             Player player = clientManager.manageChoice(stdin, currentDeckState);
             MessageEnum messageEnumOK;
@@ -84,10 +80,14 @@ public class ClientWithRMI implements ClientStrategy {
                     break;
                 }
             }
-            System.out.println("Waiting for the opponent...\n");
+            int i=1;
             while (true){
                 if(allPlay.getPlayercountertemp()==0){
                     break;
+                }
+                if(i==1) {
+                    System.out.println("Waiting for the opponent...\n");
+                    i--;
                 }
             }
 
@@ -100,10 +100,14 @@ public class ClientWithRMI implements ClientStrategy {
                     break;
                 }
             }
-            System.out.println("Waiting for the opponent...\n");
+            i=1;
             while (true){
                 if(voteMap.getPlayerCounter()==0){
                     break;
+                }
+                if(i==1) {
+                    System.out.println("Waiting for the opponent...\n");
+                    i--;
                 }
             }
             int map=voteMap.getFinalresult()+1;
@@ -111,13 +115,20 @@ public class ClientWithRMI implements ClientStrategy {
 
 
             allPlay.putInHashMapState(player,StatesEnum.WAIT, stateHashMap.getHashMap());
+            viewDatabase.getViewState().put(player, viewStateHashMap.get(StatesEnum.WAIT));
+
             if(idClientList.getPlayerArrayList().get(0).equals(player)){
-                allPlay.getHashMapState().replace(player, stateHashMap.getHashMap().get(StatesEnum.SPAWN));
+                allPlay.replaceInHashMap(player, StatesEnum.SPAWN, stateHashMap.getHashMap());
+                viewDatabase.getViewState().replace(player, viewStateHashMap.get(StatesEnum.SPAWN));
             }
+
 
             UpdatePacket updatePacket = updater.updateClient(player);
             viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);
 
+
+            ViewStartGameRMI viewStartGameRMI = new ViewStartGameRMI(player, stdin, viewDatabase, viewStateHashMap , updater, allPlay, manageEndTurn, stateHashMap);
+            viewStartGameRMI.start();
 
         }
     }

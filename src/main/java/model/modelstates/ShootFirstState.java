@@ -17,10 +17,16 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
+    private StatesEnum namestate;
 
     public ShootFirstState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
+        this.namestate=StatesEnum.SHOOT;
+    }
+
+    public StatesEnum getNamestate() throws RemoteException {
+        return namestate;
     }
 
     @Override

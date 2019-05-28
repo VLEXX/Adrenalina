@@ -17,10 +17,12 @@ public class ActionState extends UnicastRemoteObject implements State, Serializa
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
+    private StatesEnum namestate;
 
     public ActionState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap)throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
+        this.namestate=StatesEnum.ACTION;
     }
 
     @Override
@@ -44,5 +46,9 @@ public class ActionState extends UnicastRemoteObject implements State, Serializa
         } else {
             return MessageEnum.ACTION_ERROR;
         }
+    }
+
+    public StatesEnum getNamestate() throws RemoteException {
+        return namestate;
     }
 }

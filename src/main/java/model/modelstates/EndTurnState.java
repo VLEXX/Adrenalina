@@ -26,10 +26,16 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
 
     private InitializeAllPlay allPlay;
     private HashMap<StatesEnum, State> stateHashMap;
+    private StatesEnum namestate;
 
     public EndTurnState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap)throws RemoteException{
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
+        this.namestate=StatesEnum.END;
+    }
+
+    public StatesEnum getNamestate() throws RemoteException {
+        return namestate;
     }
 
     /**

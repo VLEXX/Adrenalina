@@ -142,8 +142,6 @@ Q
 +src/main/java/model/map/InitializeMap3.java,f\c\fc54c7111ced8432b1acf705817eb33968328e8e
 [
 +src/main/java/model/map/InitializeMap4.java,0\7\077eea66576398995e8e2a0de5afc47abcb62982
-`
-0src/main/java/view/viewstates/ViewMoveState.java,6\0\600570bec98574c2a41c9429be7c6167da194146
 _
 /src/main/java/model/modelstates/SpawnState.java,8\2\826d6b10f9bc8aa23f8156dc80f4686fc525021a
 `

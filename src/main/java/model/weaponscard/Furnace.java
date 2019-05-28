@@ -53,10 +53,10 @@ public class Furnace extends Weapon implements Serializable {
             return MessageEnum.POSITION_NOT_VALID;
         for(int i = 0; i < positionToAttack.getCurrentroom().getCellsList().size(); i++){
             for(int j = 0; j < positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().size(); j++){
-                control = allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                control = allPlay.getCurrentPlayerState().get(roomToAttack.getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
-                    allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-                allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+                    allPlay.getCurrentPlayerState().get(roomToAttack.getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                allPlay.getCurrentPlayerState().get(roomToAttack.getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
             }
         }
         return MessageEnum.OK;

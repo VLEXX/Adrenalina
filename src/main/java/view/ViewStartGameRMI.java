@@ -8,6 +8,7 @@ import model.gamedata.InitializeAllPlayInterface;
 import model.gamedata.ManageEndTurn;
 import model.gamedata.ManageEndTurnInterface;
 import model.modelstates.EndTurnState;
+import model.modelstates.WaitingState;
 import model.playerdata.Player;
 import servercontroller.StateBoxInterface;
 import servercontroller.UpdaterInterface;
@@ -44,20 +45,32 @@ public class ViewStartGameRMI extends Thread {
         MessageWriter messageWriter = new MessageWriter();
         ViewUpdater viewUpdater = new ViewUpdater();
         UpdatePacket updatePacket;
-        MessageEnum messageEnumOK;
+        MessageEnum messageEnumOK = null;
 
         try {
             updatePacket = updaterInterface.updateClient(player);
             viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
         } catch (IOException e) {}
 
+        int n =1;
 
         while(true){
             try {
                 if (viewDatabase.isEndgame() == false) {
-                    DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
-                    messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
-                    messageWriter.writeMessage(messageEnumOK);
+                    if(viewDatabase.getViewState().get(player) instanceof ViewWaitingState) {
+                        if(n==1) {
+                            DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
+                            messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
+                            messageWriter.writeMessage(messageEnumOK);
+                            n--;
+                        }
+                    }
+                    else {
+                        DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
+                        messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
+                        messageWriter.writeMessage(messageEnumOK);
+                    }
+
 
                     if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)){
                         manageEndTurn.manageEndTurn(player,statebox.getHashMap());
@@ -68,6 +81,7 @@ public class ViewStartGameRMI extends Thread {
 
                     if(!(viewDatabase.getViewState().get(player)instanceof ViewWaitingState)){
                         ((ViewWaitingState)stateHashMap.get(StatesEnum.WAIT)).resetI();
+                        n=1;
                     }
 
                 }

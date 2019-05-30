@@ -2,9 +2,7 @@ package model.datapacket;
 
 import model.datapacket.StatesEnum;
 import model.gamedata.ChartScore;
-import model.map.InitializeMap1;
-import model.map.Map;
-import model.map.StrategyMap;
+import model.map.*;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.UpdatePacket;
@@ -80,4 +78,14 @@ class UpdatePacketTest {
         assertEquals(updatePacket.getPowerUpDeck(), stack);
     }
 
+    @Test
+    void addInHashMap() {
+        UpdatePacket updatePacket = new UpdatePacket(null,null,null,null,null,null, false);
+        Position position = new Position();
+        Room room = new Room(1);
+        position.setCurrentroom(room);
+        updatePacket.addInHashMap(Player.YELLOW,position);
+        assertEquals(updatePacket.getPositionHashMap().get(Player.YELLOW).getCurrentroom().getRoomId(), 1);
+
+    }
 }

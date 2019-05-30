@@ -17,6 +17,7 @@ public class ViewDatabase {
     private Stack<PowerUp> currentDeckState;
     private boolean endgame;
     private int clientToken;
+    private HashMap<Player, Position> positionHashMap;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -28,6 +29,15 @@ public class ViewDatabase {
         this.currentDeckState = null;
         this.endgame=false;
         this.clientToken=0;
+        this.positionHashMap = new HashMap<>();
+    }
+
+    public HashMap<Player, Position> getPositionHashMap() {
+        return positionHashMap;
+    }
+
+    public void setPositionHashMap(HashMap<Player, Position> positionHashMap) {
+        this.positionHashMap = positionHashMap;
     }
 
     public int getClientToken() {

@@ -39,7 +39,7 @@ public class WaitingState extends UnicastRemoteObject implements State , Seriali
             return MessageEnum.TOKEN_ERROR;
         }
         while (true) {
-            if (!(allPlay.getPlayerState(dataPacket.getPlayer()).getNamestate().equals(StatesEnum.WAIT))) {
+            if (allPlay.getPlayerState(dataPacket.getPlayer()).getNamestate().equals(StatesEnum.WAIT)==false) {
                 return MessageEnum.OK;
             }
         }

@@ -1,6 +1,7 @@
 package view;
 
 import model.gamedata.CurrentDeckState;
+import model.map.Cell;
 import model.map.Position;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
@@ -69,5 +70,17 @@ class ViewDatabaseTest {
         ViewDatabase viewDatabase = new ViewDatabase();
         viewDatabase.setClientToken(12);
         assertEquals(viewDatabase.getClientToken(), 12);
+    }
+
+    @Test
+    void setPositionHashMap() {
+        ViewDatabase viewDatabase = new ViewDatabase();
+        HashMap<Player, Position> hashMap = new HashMap<>();
+        Position position = new Position();
+        Cell cell = new Cell(1);
+        position.setCurrentcell(cell);
+        hashMap.put(Player.YELLOW, position);
+        viewDatabase.setPositionHashMap(hashMap);
+        assertEquals(viewDatabase.getPositionHashMap().get(Player.YELLOW).getCurrentcell().getCellId(), 1);
     }
 }

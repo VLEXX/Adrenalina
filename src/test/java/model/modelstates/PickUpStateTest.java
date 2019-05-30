@@ -103,7 +103,14 @@ class PickUpStateTest {
         d.setCell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
         i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1).setAmmohere(a);
         assertEquals(pus.doAction(d),MessageEnum.OK);
+        d.setToken(0);
+        assertEquals(pus.doAction(d), MessageEnum.TOKEN_ERROR);
 
     }
 
+    @Test
+    void getNamestate() throws RemoteException {
+        PickUpState pickUpState = new PickUpState(null, null, null);
+        assertEquals(pickUpState.getNamestate(), StatesEnum.PICK_UP);
+    }
 }

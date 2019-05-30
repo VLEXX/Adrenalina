@@ -147,5 +147,7 @@ class MoveStateTest {
         dataPacket.setCell(initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
         initializeAllPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
         assertEquals(moveState.doAction(dataPacket), MessageEnum.OK);
+        dataPacket.setToken(0);
+        assertEquals(moveState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
     }
 }

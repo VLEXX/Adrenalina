@@ -125,5 +125,13 @@ class ShootSecondStateTest {
         initializeAllPlay.getCurrentPlayerState().get(Player.YELLOW).decreaseActionCounter();
         assertEquals(shootSecondState.doAction(dataPacket), MessageEnum.OK);
 
+        dataPacket.setToken(0);
+        assertEquals(shootSecondState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
+    }
+
+    @Test
+    void getNamestate() throws RemoteException {
+        ShootSecondState shootSecondState = new ShootSecondState(null, null, null);
+        assertEquals(shootSecondState.getNamestate(), StatesEnum.SHOOT_SECOND);
     }
 }

@@ -790,5 +790,14 @@ class ShootFirstStateTest {
         dataPacket.setPlayer(Player.YELLOW);
         dataPacket.getTargetPlayersFirst().add(0, null);
         assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.WEAPON_NOT_FOUND);
+
+        dataPacket.setToken(0);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
+    }
+
+    @Test
+    void getNamestate() throws RemoteException {
+        ShootFirstState shootFirstState = new ShootFirstState(null, null, null);
+        assertEquals(shootFirstState.getNamestate(), StatesEnum.SHOOT);
     }
 }

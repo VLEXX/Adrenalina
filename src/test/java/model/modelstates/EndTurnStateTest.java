@@ -40,6 +40,7 @@ class EndTurnStateTest {
         EndTurnState eds = new EndTurnState(i, testhm, idClientList);
         CurrentPlayerState cps = new CurrentPlayerState(Player.BLUE);
         DataPacket d = new DataPacket();
+        d.setToken(idClientList.addClient());
         i.getCurrentPlayerState().put(Player.BLUE, cps);
         d.setPlayer(Player.BLUE);
         //verifica la refillmap
@@ -107,7 +108,8 @@ class EndTurnStateTest {
         cps.getControlMarks().put(Player.YELLOW, 2);
         cps.getControlMarks().put(Player.GREEN, 3);
         assertEquals(eds.doAction(d), MessageEnum.OK);
-
+        d.setToken(0);
+        assertEquals(eds.doAction(d), MessageEnum.TOKEN_ERROR);
 
     }
 
@@ -128,6 +130,12 @@ class EndTurnStateTest {
                     assertEquals(c.getAmmohere(), null);
             }
         }
+    }
+
+    @Test
+    void getNamestate() throws RemoteException {
+        EndTurnState endTurnState = new EndTurnState(null, null, null);
+        assertEquals(endTurnState.getNamestate(), StatesEnum.END);
     }
 
 }

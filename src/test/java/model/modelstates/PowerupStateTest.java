@@ -336,6 +336,15 @@ class PowerupStateTest {
         initializeAllPlay.getCurrentPlayerState().get(Player.YELLOW).getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.BLUE, 2);
         assertEquals(powerupState.doAction(dataPacket), MessageEnum.ENOUGH_AMMO);
 
+        dataPacket.setToken(0);
+        assertEquals(powerupState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
+
+    }
+
+    @Test
+    void getNamestate() throws RemoteException {
+        PowerupState powerupState = new PowerupState(null, null, null);
+        assertEquals(powerupState.getNamestate(), StatesEnum.POWERUP);
     }
 
 }

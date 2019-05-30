@@ -34,6 +34,14 @@ class ActionStateTest {
         assertEquals(actionState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.ACTION);
         assertEquals(actionState.doAction(dataPacket), MessageEnum.ACTION_ERROR);
+        dataPacket.setToken(0);
+        assertEquals(actionState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
 
+    }
+
+    @Test
+    void getNamestate() throws RemoteException {
+        ActionState actionState = new ActionState(null, null, null);
+        assertEquals(actionState.getNamestate(), StatesEnum.ACTION);
     }
 }

@@ -224,5 +224,14 @@ class SpawnStateTest {
         stack.push(powerUp1);
         assertEquals(spawnState.doAction(dataPacket), MessageEnum.OK);
 
+        dataPacket.setToken(0);
+        assertEquals(spawnState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
     }
+
+    @Test
+    void getNamestate() throws RemoteException {
+        SpawnState spawnState = new SpawnState(null, null, null);
+        assertEquals(spawnState.getNamestate(), StatesEnum.SPAWN);
+    }
+
 }

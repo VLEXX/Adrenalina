@@ -165,4 +165,33 @@ class InitializeAllPlayTest {
         allPlay.setTempState(state);
         assertEquals(allPlay.getTempState(), state);
     }
+
+    @Test
+    void replaceInHashMap() throws RemoteException {
+        InitializeAllPlay allPlay = new InitializeAllPlay();
+        IDClientList idClientList = new IDClientList();
+        HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
+        ActionState actionState = new ActionState(allPlay, stateHashMap, idClientList);
+        EndTurnState endTurnState = new EndTurnState(allPlay, stateHashMap, idClientList);
+        MoveState moveState = new MoveState(allPlay, stateHashMap, idClientList);
+        WaitingState waitingState = new WaitingState(allPlay, stateHashMap, idClientList);
+        ShootFirstState shootFirstState2 = new ShootFirstState(allPlay, stateHashMap,idClientList);
+        ShootSecondState shootSecondState2 = new ShootSecondState(allPlay, stateHashMap, idClientList);
+        ShootThirdState shootThirdState = new ShootThirdState(allPlay, stateHashMap, idClientList);
+        PickUpState pickUpState = new PickUpState(allPlay, stateHashMap, idClientList);
+        PowerupState powerupState1 = new PowerupState(allPlay, stateHashMap, idClientList);
+        stateHashMap.put(StatesEnum.ACTION, actionState);
+        stateHashMap.put(StatesEnum.END, endTurnState);
+        stateHashMap.put(StatesEnum.MOVE, moveState);
+        stateHashMap.put(StatesEnum.WAIT, waitingState);
+        stateHashMap.put(StatesEnum.SHOOT, shootFirstState2);
+        stateHashMap.put(StatesEnum.SHOOT_SECOND, shootSecondState2);
+        stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
+        stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
+        stateHashMap.put(StatesEnum.POWERUP, powerupState1);
+
+        allPlay.putInHashMapState(Player.YELLOW, StatesEnum.WAIT,stateHashMap);
+        allPlay.replaceInHashMap(Player.YELLOW, StatesEnum.ACTION, stateHashMap);
+        assertEquals(allPlay.getPlayerState(Player.YELLOW).getNamestate(), StatesEnum.ACTION);
+    }
 }

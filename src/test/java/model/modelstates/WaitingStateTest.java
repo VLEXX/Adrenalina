@@ -27,7 +27,15 @@ class WaitingStateTest {
         HashMap<StatesEnum, State> hashMap = new HashMap<>();
         WaitingState waitingState = new WaitingState(initializeAllPlay, hashMap, idClientList);
         dataPacket.setPlayer(Player.YELLOW);
-        initializeAllPlay.getHashMapState().replace(Player.YELLOW, new MoveState(initializeAllPlay, hashMap, idClientList));
+        initializeAllPlay.getHashMapState().put(Player.YELLOW, new MoveState(initializeAllPlay, hashMap, idClientList));
         assertEquals(waitingState.doAction(dataPacket), MessageEnum.OK);
+        dataPacket.setToken(0);
+        assertEquals(waitingState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
+    }
+
+    @Test
+    void getNamestate() throws RemoteException {
+        WaitingState waitingState = new WaitingState(null, null, null);
+        assertEquals(waitingState.getNamestate(), StatesEnum.WAIT);
     }
 }

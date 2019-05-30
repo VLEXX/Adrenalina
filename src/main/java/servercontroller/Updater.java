@@ -67,6 +67,14 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
 
         Stack<PowerUp> deck = (Stack<PowerUp>) allPlay.getCurrentDeckState().getPowerupdeck().clone();
         UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), position, state, deck, allPlay.isEndgame());
+        for(CurrentPlayerState currentPlayerState: allPlay.getCurrentPlayerState().values()){
+            if(currentPlayerState.getPlayerposition().getCurrentcell()==null){
+                updatePacket.addInHashMap(currentPlayerState.getActiveplayer(), null);
+            }
+            else {
+                updatePacket.addInHashMap(currentPlayerState.getActiveplayer(), currentPlayerState.getPlayerposition());
+            }
+        }
         return updatePacket;
     }
 }

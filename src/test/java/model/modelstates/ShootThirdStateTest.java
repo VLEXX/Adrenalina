@@ -109,5 +109,15 @@ class ShootThirdStateTest {
         initializeAllPlay.getCurrentPlayerState().get(Player.YELLOW).getBoard().getWeaponsList().add(weapon);
         assertEquals(shootThirdState.doAction(dataPacket), MessageEnum.WEAPON_ERROR);
 
+        dataPacket.setToken(0);
+        assertEquals(shootThirdState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
+
     }
+
+    @Test
+    void getNamestate() throws RemoteException {
+        ShootThirdState shootThirdState = new ShootThirdState(null, null, null);
+        assertEquals(shootThirdState.getNamestate(), StatesEnum.SHOOT_THIRD);
+    }
+
 }

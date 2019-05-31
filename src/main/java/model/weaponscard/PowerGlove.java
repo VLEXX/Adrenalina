@@ -60,6 +60,14 @@ public class PowerGlove extends Weapon implements Serializable {
         return MessageEnum.OK;
     }
 
+    /**
+     * Function hundred fists mode
+     * @param myPlayer player who attack
+     * @param playerToAttack player to attack
+     * @param positionToMove null
+     * @param allPlay current state game
+     * @return POSITION_NOT_VALID or OK
+     */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay) {
         int control = 0;
         char move = 'F';
@@ -104,26 +112,6 @@ public class PowerGlove extends Weapon implements Serializable {
 
     public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         return MessageEnum.ATTACK_NOT_PRESENT;
-    }
-
-    /**
-     * Function that check the correct position to attack
-     * @param myPosition position of the player who attack
-     * @param positionToAttack position of the player to attack
-     * @return true if ok
-     */
-    public boolean check(Position myPosition, Position positionToAttack) {
-        boolean find = false;
-        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
-            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
-                find = true;
-                break;
-            }
-        }
-        if (find == false) {
-            return false;
-        }
-        return true;
     }
 
     /**

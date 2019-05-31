@@ -4,6 +4,7 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.map.Cell;
 import model.map.Position;
 import model.munitions.Munitions;
 import model.playerdata.Player;
@@ -35,14 +36,79 @@ public class TractorBeam extends Weapon implements Serializable {
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
+        int control = 0;
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
+        if(myPosition == positionToMove || check2(myPosition,positionToMove)) {
+            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+            if (control != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().removeInCellPlayer(playerToAttack.get(0));
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().addInCellPlayer(playerToAttack.get(0));
+        } else
+            return MessageEnum.POSITION_NOT_VALID;
         return MessageEnum.OK;
     }
 
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
+        int control = 0;
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
+        if(myPosition != positionToAttack && check2(myPosition, positionToAttack) == false)
+            return MessageEnum.PLAYER_NOT_VALID;
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().removeInCellPlayer(playerToAttack.get(0));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().setCurrentcell(myPosition.getCurrentcell());
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().addInCellPlayer(playerToAttack.get(0));
+        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        if(control != 0)
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3, myPlayer);
         return MessageEnum.OK;
     }
 
     public MessageEnum thirdAttack(Player myPlayer, ArrayList<Player> playerToAttack, InitializeAllPlay allPlay){
         return MessageEnum.ATTACK_NOT_PRESENT;
+    }
+
+     /** Function that check for correct position
+     * @param myPosition       position of the player who attack
+     * @param positionToAttack position of the player to attack
+     * @return true if ok
+     */
+    public boolean check(Position myPosition, Position positionToAttack) {
+        boolean find = false;
+        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+                find = true;
+                break;
+            }
+        }
+        if (find == false) {
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * Check that the position is correct
+     *
+     * @param myPosition       position of the player who attack
+     * @param positionToMove position to move
+     * @return true if correct
+     */
+    private boolean check2(Position myPosition, Position positionToMove){
+        boolean find = false;
+        for (int i = 0; i < myPosition.getCurrentcell().getReachable2Cells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachable2Cells().get(i).getCellId() == positionToMove.getCurrentcell().getCellId()) {
+                find = true;
+                break;
+            }
+        }
+        if (find == false)
+            return false;
+        return true;
     }
 }

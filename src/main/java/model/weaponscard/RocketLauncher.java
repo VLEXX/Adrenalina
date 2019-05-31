@@ -61,7 +61,7 @@ public class RocketLauncher extends Weapon implements Serializable {
         player1 = playerToAttack.get(0);
         position1 = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(positionToMove != null) {
-            if (checkPosition(positionToAttack, positionToMove)) {
+            if (check2(positionToAttack, positionToMove)) {
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().removeInCellPlayer(playerToAttack.get(0));
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().addInCellPlayer(playerToAttack.get(0));
@@ -80,7 +80,7 @@ public class RocketLauncher extends Weapon implements Serializable {
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         Position myposition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        if (checkPosition(myposition, positionToMove)) {
+        if (check2(myposition, positionToMove)) {
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().getCurrentcell().removeInCellPlayer(myPlayer);
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().getCurrentcell().addInCellPlayer(myPlayer);
@@ -133,64 +133,22 @@ public class RocketLauncher extends Weapon implements Serializable {
     }
 
     /**
-     * Function that check the correct position to shot
-     * @param myPosition position of the player who shot
-     * @param positionToGo position to go
-     * @return true if correct
+     * Check that the position is correct
+     *
+     * @param myPosition       position of the player who attack
+     * @param positionToAttack position to attack
+     * @return OK or POSITION_NOT_FOUND
      */
-    private boolean checkPosition(Position myPosition, Position positionToGo) {
-        if (myPosition.getCurrentcell().getUpCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getUpCell(), positionToGo.getCurrentcell()))
-                return true;
-        }
-        if (myPosition.getCurrentcell().getDownCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getDownCell(), positionToGo.getCurrentcell())) {
-                return true;
+    private boolean check2(Position myPosition, Position positionToAttack){
+        boolean find = false;
+        for (int i = 0; i < myPosition.getCurrentcell().getReachable2Cells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachable2Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+                find = true;
+                break;
             }
         }
-        if (myPosition.getCurrentcell().getLeftCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getLeftCell(), positionToGo.getCurrentcell())) {
-                return true;
-            }
-        }
-        if (myPosition.getCurrentcell().getRightCell() != null) {
-            if (checkAround(myPosition.getCurrentcell().getRightCell(), positionToGo.getCurrentcell())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Function that check the correct position to shot
-     * @param current current cell of the player
-     * @param go cell to go
-     * @return true if correct
-     */
-    private boolean checkAround(Cell current, Cell go) {
-        if (current.getCellId() == go.getCellId()) {
-            return true;
-        }
-        if (current.getUpCell() != null) {
-            if (current.getUpCell().getCellId() == go.getCellId()) {
-                return true;
-            }
-        }
-        if (current.getDownCell() != null) {
-            if (current.getDownCell().getCellId() == go.getCellId()) {
-                return true;
-            }
-        }
-        if (current.getLeftCell() != null) {
-            if (current.getLeftCell().getCellId() == go.getCellId()) {
-                return true;
-            }
-        }
-        if (current.getRightCell() != null) {
-            if (current.getRightCell().getCellId() == go.getCellId()) {
-                return true;
-            }
-        }
-        return false;
+        if (find == false)
+            return false;
+        return true;
     }
 }

@@ -79,7 +79,9 @@ public class MoveState extends UnicastRemoteObject implements State, Serializabl
                     for(Cell cell: room.getCellsList()) {
                         if (c.getCellId()==cell.getCellId()){
                             if(i.getCurrentPlayerState().get(p).getPlayerposition().getCurrentcell().getReachable3Cells().contains(cell)) {
+                                ps.getPlayerposition().getCurrentcell().getInCellPlayer().remove(p);
                                 ps.getPlayerposition().setCurrentcell(cell);
+                                cell.addInCellPlayer(p);
                                 ps.getPlayerposition().setCurrentroom(room);
                                 return 0;
                             }

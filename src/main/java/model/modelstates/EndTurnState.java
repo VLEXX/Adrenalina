@@ -1,5 +1,5 @@
 /**
- * @author: Alex Saletti
+ * @author Alex Saletti
  */
 package model.modelstates;
 
@@ -171,7 +171,9 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
             deathcounter.put(player,0);
         }));
         i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
-            if(currentPlayerState.getBoard().getDamageBox().isDead()) {
+            if(currentPlayerState.getBoard().getDamageBox().getDamage()[10]!=null) {
+                currentPlayerState.getPlayerposition().setCurrentroom(null);
+                currentPlayerState.getPlayerposition().setCurrentcell(null);
                 DamageBox db = currentPlayerState.getBoard().getDamageBox();
                 score.put(db.getDamage()[0],score.get(db.getDamage()[0])+1);
                 Player[] points=this.damageScoreBoard(db.getDamage());

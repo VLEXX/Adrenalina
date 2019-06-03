@@ -23,6 +23,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 /**
  * Class that manages the PickUp Action
@@ -148,7 +149,9 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
         //fine controlli e inizio modifica del model
         //settaggio posizione
         Cell ccv2 = ccv;
+        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getInCellPlayer().remove(dataPacket.getPlayer());
         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(ccv);
+        ccv.addInCellPlayer(dataPacket.getPlayer());
         allPlay.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> {
             if (room.getCellsList().contains(ccv2)) {
                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);

@@ -88,4 +88,11 @@ class UpdatePacketTest {
         assertEquals(updatePacket.getPositionHashMap().get(Player.YELLOW).getCurrentroom().getRoomId(), 1);
 
     }
+
+    @Test
+    void setFisrtTurn() {
+        UpdatePacket updatePacket= new UpdatePacket(null, null,null,null,null, null, false);
+        updatePacket.setFisrtTurn(false);
+        assertEquals(updatePacket.isFisrtTurn(), false);
+    }
 }

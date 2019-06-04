@@ -12,6 +12,7 @@ public class ViewUpdater {
     public void updateView(UpdatePacket updatePacket, ViewDatabase viewDatabase, HashMap<StatesEnum, ViewState> hashMap, Player player){
 
         viewDatabase.setPositionHashMap(updatePacket.getPositionHashMap());
+        viewDatabase.setFirstTurnGame(updatePacket.isFisrtTurn());
 
         viewDatabase.getViewCurrentPlayerState().setCurrentPlayerState(updatePacket.getCurrentPlayerState());
         viewDatabase.getViewMapState().setSelectedMap(updatePacket.getMap());

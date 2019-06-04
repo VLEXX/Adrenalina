@@ -23,6 +23,7 @@ public class UpdatePacket implements Serializable {
     private Stack<PowerUp> powerUpDeck;
     private boolean endgame;
     private HashMap<Player, Position> positionHashMap;
+    private boolean fisrtTurn;
 
 
     public UpdatePacket(ChartScore chart, CurrentPlayerState currentPlayerState, Map m, Position position, StatesEnum state, Stack<PowerUp> deck, boolean end) {
@@ -34,6 +35,15 @@ public class UpdatePacket implements Serializable {
         this.powerUpDeck = deck;
         this.endgame=end;
         this.positionHashMap = new HashMap<>();
+        this.fisrtTurn=false;
+    }
+
+    public boolean isFisrtTurn() {
+        return fisrtTurn;
+    }
+
+    public void setFisrtTurn(boolean fisrtTurn) {
+        this.fisrtTurn = fisrtTurn;
     }
 
     public HashMap<Player, Position> getPositionHashMap() {

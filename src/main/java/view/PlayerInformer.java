@@ -25,16 +25,20 @@ public class PlayerInformer {
 
     //informa delle posizioni
     public void positionsInformer(){
-        if(dbb.getViewPlayerPosition().getCurrentcell()==null)
-            System.out.println("You are dead and will respawn at your turn;\n");
+        if(dbb.getViewPlayerPosition().getCurrentcell()==null) {
+            if(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getMaxPointIndex()!=0)
+                System.out.println("You are dead and will respawn at your turn;\n");
+        }
         else
             System.out.println("You are in the cell having ID="+dbb.getViewPlayerPosition().getCurrentcell().getCellId()+" (room "+dbb.getViewPlayerPosition().getCurrentroom().getRoomId()+");\n");
         dbb.getPositionHashMap().forEach((player, position) -> {
             if(player!=dbb.getThisplayer()) {
                 if (dbb.getPositionHashMap().get(player) != null)
                     System.out.println("The " + player + " player is in the cell having ID=" + position.getCurrentcell().getCellId() + " (room ID=" + position.getCurrentroom().getRoomId() + ");\n");
-                else
-                    System.out.println("The " + player + " is dead;\n");
+                else {
+                    if(!dbb.isFirstTurnGame())
+                        System.out.println("The " + player + " is dead;\n");
+                }
             }
         });
 

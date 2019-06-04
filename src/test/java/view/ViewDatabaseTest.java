@@ -83,4 +83,11 @@ class ViewDatabaseTest {
         viewDatabase.setPositionHashMap(hashMap);
         assertEquals(viewDatabase.getPositionHashMap().get(Player.YELLOW).getCurrentcell().getCellId(), 1);
     }
+
+    @Test
+    void setFirstTurnGame() {
+        ViewDatabase viewDatabase = new ViewDatabase();
+        viewDatabase.setFirstTurnGame(true);
+        assertEquals(viewDatabase.isFirstTurnGame(), true);
+    }
 }

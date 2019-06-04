@@ -38,6 +38,7 @@ public class ViewStartGame extends Thread {
         ViewUpdater viewUpdater = new ViewUpdater();
         UpdatePacket updatePacket;
         MessageEnum messageEnumOK;
+        PlayerInformer playerInformer = new PlayerInformer(viewDatabase);
         viewDatabase.getViewState().put(player, stateHashMap.get(StatesEnum.WAIT));
         while(true) {
             try {
@@ -76,6 +77,7 @@ public class ViewStartGame extends Thread {
 
                     if(!(viewDatabase.getViewState().get(player)instanceof ViewWaitingState)){
                         ((ViewWaitingState)stateHashMap.get(StatesEnum.WAIT)).resetI();
+                        playerInformer.informer();
                     }
                 }
             } catch (IOException e) {

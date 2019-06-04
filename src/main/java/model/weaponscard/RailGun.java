@@ -11,7 +11,6 @@ import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
 import model.datapacket.WeaponsMessage;
-import sun.jvm.hotspot.runtime.posix.POSIXSignals;
 
 import java.io.Serializable;
 import java.util.ArrayList;

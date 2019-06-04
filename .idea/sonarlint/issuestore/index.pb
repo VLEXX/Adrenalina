@@ -180,3 +180,5 @@ $src/main/java/view/ViewMapState.java,3\5\35e273617a2122d0c2be398d9bd21da2a189b
 +src/main/java/model/powerups/PowerUpId.java,8\1\812c0d3459517bb6d02bc4a9d933809e417d105d
 V
 &src/main/java/view/PlayerInformer.java,8\8\8817c66a615fc5984411527adecdfb7f293a4d91
+Q
+!src/main/java/model/map/Room.java,5\0\50c9cb84a55f09fccc2a7bb28a510eb097440545

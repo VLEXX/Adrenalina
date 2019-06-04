@@ -17,6 +17,12 @@ public class PlayerInformer {
         this.dbb=dbb;
     }
 
+    public void informer(){
+        positionsInformer();
+        playerStats();
+        mapStats();
+    }
+
     //informa delle posizioni
     public void positionsInformer(){
         if(dbb.getViewPlayerPosition().getCurrentcell()==null)
@@ -60,20 +66,20 @@ public class PlayerInformer {
         else{
             System.out.println("You have");
             for(PowerUp w : dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList()){
-                System.out.println(" a "+w.getColor()+" "+w.getId());
+                System.out.print(" a "+w.getColor()+" "+w.getId());
                 if(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList().indexOf(w)==dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList().size()-1)
-                    System.out.println(".\n");
+                    System.out.print(".\n\n");
                 else
-                    System.out.println(",");
+                    System.out.print(",");
             }
         }
         System.out.println("You have");
         dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().forEach(((munitions, integer) -> {
-            System.out.println(" "+integer+" "+munitions+" munitions");
-            if(munitions== Munitions.BLUE)
-                System.out.println(".\n");
+            System.out.print(" "+integer+" "+munitions+" munitions");
+            if(munitions== Munitions.YELLOW)
+                System.out.print(".\n\n");
             else
-                System.out.println(",");
+                System.out.print(",");
         }));
     }
 
@@ -94,11 +100,11 @@ public class PlayerInformer {
                     else{
                         for(int z=0; z<3;z++){
                             if(c.getSpawnpointzone().getSpawnWeaponsList()[z]!=null) {
-                                System.out.println(c.getSpawnpointzone().getSpawnWeaponsList()[z].getName());
+                                System.out.print(c.getSpawnpointzone().getSpawnWeaponsList()[z].getName());
                                 if(z==2)
-                                    System.out.println(".\n");
+                                    System.out.print(".\n");
                                 else
-                                    System.out.println(", ");
+                                    System.out.print(", ");
                             }
                         }
                     }

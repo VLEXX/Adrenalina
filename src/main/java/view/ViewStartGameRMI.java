@@ -47,7 +47,6 @@ public class ViewStartGameRMI extends Thread {
         ViewUpdater viewUpdater = new ViewUpdater();
         UpdatePacket updatePacket;
         MessageEnum messageEnumOK = null;
-        PlayerInformer playerInformer = new PlayerInformer(viewDatabase);
 
         try {
             updatePacket = updaterInterface.updateClient(player);
@@ -70,6 +69,7 @@ public class ViewStartGameRMI extends Thread {
                             DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
                             messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
                             messageWriter.writeMessage(messageEnumOK);
+                            System.out.println(messageEnumOK);
                         }
 
 
@@ -83,9 +83,7 @@ public class ViewStartGameRMI extends Thread {
                         if (!(viewDatabase.getViewState().get(player) instanceof ViewWaitingState)) {
                             ((ViewWaitingState) stateHashMap.get(StatesEnum.WAIT)).resetI();
                             n = 1;
-                            playerInformer.informer();
                         }
-
                 }
                 else {
                     break;

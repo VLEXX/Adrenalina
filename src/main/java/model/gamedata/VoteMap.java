@@ -28,7 +28,7 @@ public class VoteMap extends UnicastRemoteObject implements VoteMapInterface, Se
     }
 
     //Setta la mappa votata finale
-    public synchronized void setFinalresult() {
+    public void setFinalresult() {
         if (initmap == true) {
             int k = -1;
             for (int j = 0; j < 4; j++) {
@@ -41,12 +41,12 @@ public class VoteMap extends UnicastRemoteObject implements VoteMapInterface, Se
     }
 
     //Ritorna l'array dei voti
-    public synchronized int[] getVoteresult() {
+    public int[] getVoteresult() {
         return voteresult;
     }
 
     //Setta il voto a seconda dell'indice(che corrisponde alla mappa votata, 0,1,2,3)
-    public synchronized void setVoteresult(int index) throws RemoteException {
+    public void setVoteresult(int index) throws RemoteException {
         voteresult[index] = voteresult[index] + 1;
     }
 
@@ -58,15 +58,15 @@ public class VoteMap extends UnicastRemoteObject implements VoteMapInterface, Se
         return i;
     }
 
-    public synchronized void decreasePlayerCounter() {
+    public void decreasePlayerCounter() {
         i--;
     }
 
-    public synchronized boolean getInitMap() {
+    public boolean getInitMap() {
         return initmap;
     }
 
-    public synchronized void setInitmap() {
+    public void setInitmap() {
         if (initmap == false) {
             initmap = true;
         }

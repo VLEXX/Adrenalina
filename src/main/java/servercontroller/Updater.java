@@ -1,7 +1,6 @@
 package servercontroller;
 
 import model.datapacket.StatesEnum;
-import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Position;
 import model.modelstates.*;
@@ -19,7 +18,6 @@ import java.util.Stack;
 
 public class Updater extends UnicastRemoteObject implements UpdaterInterface {
     private InitializeAllPlay allPlay;
-    private IDClientList idClientList;
 
     public Updater(InitializeAllPlay i) throws RemoteException{
         this.allPlay=i;
@@ -77,10 +75,6 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
                 updatePacket.addInHashMap(currentPlayerState.getActiveplayer(), currentPlayerState.getPlayerposition());
             }
         }
-        if(idClientList.isFirstTurn()==true){
-            updatePacket.setFisrtTurn(true);
-        }
-
         return updatePacket;
     }
 }

@@ -74,10 +74,9 @@ public class ViewStartGame extends Thread {
                         break;
                     }
                     updatePacket = (UpdatePacket) objectInputStream.readObject();
-
+                    playerInformer.informer();
                     if(!(viewDatabase.getViewState().get(player)instanceof ViewWaitingState)){
                         ((ViewWaitingState)stateHashMap.get(StatesEnum.WAIT)).resetI();
-                        playerInformer.informer();
                     }
                 }
             } catch (IOException e) {

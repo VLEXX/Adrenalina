@@ -18,7 +18,6 @@ public class ViewDatabase {
     private boolean endgame;
     private int clientToken;
     private HashMap<Player, Position> positionHashMap;
-    private boolean firstTurnGame;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -31,15 +30,6 @@ public class ViewDatabase {
         this.endgame=false;
         this.clientToken=0;
         this.positionHashMap = new HashMap<>();
-        this.firstTurnGame=true;
-    }
-
-    public boolean isFirstTurnGame() {
-        return firstTurnGame;
-    }
-
-    public void setFirstTurnGame(boolean firstTurnGame) {
-        this.firstTurnGame = firstTurnGame;
     }
 
     public HashMap<Player, Position> getPositionHashMap() {

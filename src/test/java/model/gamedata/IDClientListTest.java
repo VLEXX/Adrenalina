@@ -36,11 +36,4 @@ class IDClientListTest {
         idClientList.resetIndexArray();
         assertEquals(idClientList.getIndexArray(),0);
     }
-
-    @Test
-    void setFirstTurn() throws RemoteException {
-        IDClientList idClientList = new IDClientList();
-        idClientList.setFirstTurn(false);
-        assertEquals(idClientList.isFirstTurn(), false);
-    }
 }

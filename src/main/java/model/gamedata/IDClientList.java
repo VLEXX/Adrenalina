@@ -21,7 +21,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
     private int indexArray;
     private int clientCounter;
     private ArrayList<ObserverCounter> observerCounters;
-    private boolean firstTurn;
 
     //Costruttore che inizializza l'array a 0 (gli ID assegnati sono diversi da 0)
     public IDClientList() throws RemoteException{
@@ -30,15 +29,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         this.indexArray=0;
         this.clientCounter=5;
         this.observerCounters=new ArrayList<>();
-        this.firstTurn=true;
-    }
-
-    public boolean isFirstTurn() {
-        return firstTurn;
-    }
-
-    public void setFirstTurn(boolean firstTurn) {
-        this.firstTurn = firstTurn;
     }
 
     public synchronized ArrayList<Player> getPlayerArrayList() throws RemoteException {
@@ -55,7 +45,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
 
     public void resetIndexArray(){
         this.indexArray = 0;
-        this.firstTurn=false;
     }
 
     //Ritorna l'array degli ID Client

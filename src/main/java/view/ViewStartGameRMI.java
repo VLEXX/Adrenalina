@@ -47,6 +47,7 @@ public class ViewStartGameRMI extends Thread {
         ViewUpdater viewUpdater = new ViewUpdater();
         UpdatePacket updatePacket;
         MessageEnum messageEnumOK = null;
+        PlayerInformer playerInformer = new PlayerInformer(viewDatabase);
 
         try {
             updatePacket = updaterInterface.updateClient(player);
@@ -79,7 +80,7 @@ public class ViewStartGameRMI extends Thread {
 
                         updatePacket = updaterInterface.updateClient(player);
                         viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
-
+                        playerInformer.informer();
                         if (!(viewDatabase.getViewState().get(player) instanceof ViewWaitingState)) {
                             ((ViewWaitingState) stateHashMap.get(StatesEnum.WAIT)).resetI();
                             n = 1;

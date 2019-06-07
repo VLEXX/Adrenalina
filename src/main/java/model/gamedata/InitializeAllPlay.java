@@ -34,8 +34,8 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     private ArrayList<ObserverUpdate> observers;
     private boolean endgame;
     private State tempState;
-    private Player[] SkullArray;
-    private Player[] SecondSkullArray;
+    private Player[] skullArray;
+    private Player[] secondSkullArray;
 
 
     /**
@@ -55,8 +55,8 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         playercountertemp = 0;
         observers = new ArrayList<>();
         this.endgame=false;
-        this.SkullArray= new Player[]{null,null,null,null,null,null,null,null};
-        this.SecondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
+        this.skullArray= new Player[]{null,null,null,null,null,null,null,null};
+        this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
     }
 
     public State getTempState() {
@@ -153,11 +153,11 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     }
 
     public Player[] getSkullArray() {
-        return SkullArray;
+        return skullArray;
     }
 
     public Player[] getSecondSkullArray() {
-        return SecondSkullArray;
+        return secondSkullArray;
     }
 
 

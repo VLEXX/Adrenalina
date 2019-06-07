@@ -88,4 +88,20 @@ class UpdatePacketTest {
         assertEquals(updatePacket.getPositionHashMap().get(Player.YELLOW).getCurrentroom().getRoomId(), 1);
 
     }
+
+    @Test
+    void setSkullArray() {
+        UpdatePacket updatePacket = new UpdatePacket(null, null, null, null, null, null, false);
+        Player[] skull = {Player.BLUE,null,null,null,null,null,null,null};
+        updatePacket.setSkullArray(skull);
+        assertEquals(updatePacket.getSkullArray()[0], Player.BLUE);
+    }
+
+    @Test
+    void setSecondSkullArray() {
+        UpdatePacket updatePacket = new UpdatePacket(null, null, null, null, null, null, false);
+        Player[] skull = {Player.BLUE,null,null,null,null,null,null,null};
+        updatePacket.setSecondSkullArray(skull);
+        assertEquals(updatePacket.getSecondSkullArray()[0], Player.BLUE);
+    }
 }

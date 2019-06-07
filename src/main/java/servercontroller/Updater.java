@@ -75,6 +75,10 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
                 updatePacket.addInHashMap(currentPlayerState.getActiveplayer(), currentPlayerState.getPlayerposition());
             }
         }
+
+        updatePacket.setSkullArray(allPlay.getSkullArray());
+        updatePacket.setSecondSkullArray(allPlay.getSecondSkullArray());
+
         return updatePacket;
     }
 }

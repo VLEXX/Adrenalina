@@ -83,4 +83,16 @@ class ViewDatabaseTest {
         viewDatabase.setPositionHashMap(hashMap);
         assertEquals(viewDatabase.getPositionHashMap().get(Player.YELLOW).getCurrentcell().getCellId(), 1);
     }
+
+    @Test
+    void setSkullArray() {
+        ViewDatabase viewDatabase = new ViewDatabase();
+        Player[] skull = new Player[]{Player.BLUE,null,null,null,null,null,null,null};
+        Player[] second = new Player[]{Player.BLUE,null,null,null,null,null,null,null};
+        viewDatabase.setSkullArray(skull);
+        viewDatabase.setSecondSkullArray(second);
+        assertEquals(viewDatabase.getSkullArray()[0], Player.BLUE);
+        assertEquals(viewDatabase.getSecondSkullArray()[0], Player.BLUE);
+    }
+
 }

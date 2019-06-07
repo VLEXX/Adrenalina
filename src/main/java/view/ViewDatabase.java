@@ -18,6 +18,8 @@ public class ViewDatabase {
     private boolean endgame;
     private int clientToken;
     private HashMap<Player, Position> positionHashMap;
+    private Player[] skullArray;
+    private Player[] secondSkullArray;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -30,6 +32,24 @@ public class ViewDatabase {
         this.endgame=false;
         this.clientToken=0;
         this.positionHashMap = new HashMap<>();
+        this.skullArray= new Player[]{null,null,null,null,null,null,null,null};
+        this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
+    }
+
+    public Player[] getSkullArray() {
+        return skullArray;
+    }
+
+    public Player[] getSecondSkullArray() {
+        return secondSkullArray;
+    }
+
+    public void setSkullArray(Player[] skullArray) {
+        this.skullArray = skullArray;
+    }
+
+    public void setSecondSkullArray(Player[] secondSkullArray) {
+        this.secondSkullArray = secondSkullArray;
     }
 
     public HashMap<Player, Position> getPositionHashMap() {

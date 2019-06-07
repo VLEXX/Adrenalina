@@ -23,6 +23,8 @@ public class UpdatePacket implements Serializable {
     private Stack<PowerUp> powerUpDeck;
     private boolean endgame;
     private HashMap<Player, Position> positionHashMap;
+    private Player[] SkullArray;
+    private Player[] SecondSkullArray;
 
 
     public UpdatePacket(ChartScore chart, CurrentPlayerState currentPlayerState, Map m, Position position, StatesEnum state, Stack<PowerUp> deck, boolean end) {
@@ -34,6 +36,24 @@ public class UpdatePacket implements Serializable {
         this.powerUpDeck = deck;
         this.endgame=end;
         this.positionHashMap = new HashMap<>();
+        this.SkullArray = new Player[]{null, null, null, null, null, null, null, null};
+        this.SecondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
+    }
+
+    public Player[] getSkullArray() {
+        return SkullArray;
+    }
+
+    public Player[] getSecondSkullArray() {
+        return SecondSkullArray;
+    }
+
+    public void setSkullArray(Player[] skullArray) {
+        SkullArray = skullArray;
+    }
+
+    public void setSecondSkullArray(Player[] secondSkullArray) {
+        SecondSkullArray = secondSkullArray;
     }
 
     public HashMap<Player, Position> getPositionHashMap() {

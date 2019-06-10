@@ -40,7 +40,7 @@ public class HeatSeeker extends Weapon implements Serializable {
      * @return Ok or ATTACK_NOT_PRESENT
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
-        if((playerToAttack.get(0) == null)) {
+        if((playerToAttack.size() == 0)) {
             return MessageEnum.OK;
         }
 
@@ -73,7 +73,7 @@ public class HeatSeeker extends Weapon implements Serializable {
      * @param positionToAttack  position of the player to attack
      * @return true if ok
      */
-    public boolean checkNotSee(Position myPosition, Position positionToAttack) {
+    private boolean checkNotSee(Position myPosition, Position positionToAttack) {
         boolean notfind = true;
         for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
             if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {

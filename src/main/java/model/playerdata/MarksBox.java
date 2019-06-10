@@ -43,12 +43,6 @@ public class MarksBox implements Serializable {
             myMarksMap.put(player, marx);
         }
     }
-
-    public void setMyMarksMap2(HashMap<Player, Integer> myMarksMap) {
-        this.myMarksMap = myMarksMap;
-    }
-
-
 }
 
 

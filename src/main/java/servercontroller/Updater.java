@@ -69,11 +69,16 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
         }
 
         Stack<PowerUp> deck = (Stack<PowerUp>) allPlay.getCurrentDeckState().getPowerupdeck().clone();
-        ChartScore chartScore = allPlay.getChartScore().deepClone();
-        Map map = allPlay.getStateSelectedMap().getSelectedmap().deepClone();
-        boolean endgame = allPlay.isEndgame();
+        ChartScore chartScore = null;
+        Map map = null;
+        CurrentPlayerState currentPlayerState = null;
+        try {
+            chartScore = allPlay.getChartScore().deepClone();
+            map = allPlay.getStateSelectedMap().getSelectedmap().deepClone();
+            currentPlayerState = allPlay.getCurrentPlayerState().get(player).deepClone();
+        } catch (ClassNotFoundException e) {}
 
-        CurrentPlayerState currentPlayerState = allPlay.getCurrentPlayerState().get(player).deepClone();
+        boolean endgame = allPlay.isEndgame();
 
         UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, position, state, deck, endgame);
 

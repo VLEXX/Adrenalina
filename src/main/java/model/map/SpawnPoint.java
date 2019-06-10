@@ -18,14 +18,6 @@ public class SpawnPoint implements Serializable {
         this.spawnColor = m;
     }
 
-    public void setSpawnColor(Munitions spawnColor) {
-        this.spawnColor = spawnColor;
-    }
-
-    public void setSpawnWeaponsList(Weapon[] spawnWeaponsList) {
-        SpawnWeaponsList = spawnWeaponsList;
-    }
-
     public Munitions getSpawnColor() {
         return spawnColor;
     }

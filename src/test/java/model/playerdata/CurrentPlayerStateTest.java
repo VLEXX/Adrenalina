@@ -8,6 +8,8 @@ import model.playerdata.Player;
 import model.playerdata.PlayerBoard;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CurrentPlayerStateTest {
@@ -135,5 +137,12 @@ class CurrentPlayerStateTest {
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
         currentPlayerState.setToken(123);
         assertEquals(currentPlayerState.getToken(), 123);
+    }
+
+    @Test
+    void deepClone() throws IOException, ClassNotFoundException {
+        CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.BLUE);
+        CurrentPlayerState clone = currentPlayerState.deepClone();
+        assertEquals(clone.getActiveplayer(), Player.BLUE);
     }
 }

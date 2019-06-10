@@ -38,10 +38,4 @@ public class MunitionsBox implements Serializable, Cloneable {
         actual = actual - cont;
         myMunitionsMap.replace(munitions, actual);
     }
-
-    public void setMyMunitionsMap(HashMap<Munitions, Integer> myMunitionsMap) {
-        this.myMunitionsMap = myMunitionsMap;
-    }
-
-
 }

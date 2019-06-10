@@ -5,6 +5,8 @@ import model.gamedata.ChartScore;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ChartScoreTest {
@@ -32,5 +34,16 @@ class ChartScoreTest {
         assertEquals(cs.getScore()[3], 5);
         cs.setScore(Player.BLACK, 5);
         assertEquals(cs.getScore()[4], 5);
+    }
+
+    @Test
+    void deepClone() throws IOException, ClassNotFoundException {
+        ChartScore cs = new ChartScore();
+        ChartScore clone = cs.deepClone();
+        assertEquals(clone.getScore()[0],0);
+        assertEquals(clone.getScore()[1],0);
+        assertEquals(clone.getScore()[2],0);
+        assertEquals(clone.getScore()[3],0);
+        assertEquals(clone.getScore()[4],0);
     }
 }

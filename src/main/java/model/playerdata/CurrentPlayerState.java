@@ -165,16 +165,7 @@ public class CurrentPlayerState implements Observer, Serializable {
         this.controlMarks.put(player, i);
     }
 
-    public synchronized void setControlMarks(HashMap<Player, Integer> controlMarks) {
-        this.controlMarks = controlMarks;
-    }
-
-    public synchronized void setActioncounter(int actioncounter) {
-        this.actioncounter = actioncounter;
-    }
-
-    public CurrentPlayerState deepClone(){
-        try{
+    public CurrentPlayerState deepClone() throws IOException, ClassNotFoundException {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
             objectOutputStream.writeObject(this);
@@ -182,10 +173,5 @@ public class CurrentPlayerState implements Observer, Serializable {
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream objectInputStream = new ObjectInputStream(bais);
             return (CurrentPlayerState) objectInputStream.readObject();
-        } catch (IOException e) {
-            return null;
-        } catch (ClassNotFoundException e) {
-            return null;
-        }
     }
 }

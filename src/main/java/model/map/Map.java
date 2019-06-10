@@ -30,8 +30,7 @@ public class Map implements Serializable {
         roomlist.add(r);
     }
 
-    public Map deepClone(){
-        try{
+    public Map deepClone() throws IOException, ClassNotFoundException {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
             objectOutputStream.writeObject(this);
@@ -39,11 +38,6 @@ public class Map implements Serializable {
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream objectInputStream = new ObjectInputStream(bais);
             return (Map) objectInputStream.readObject();
-        } catch (IOException e) {
-            return null;
-        } catch (ClassNotFoundException e) {
-            return null;
-        }
     }
 }
 

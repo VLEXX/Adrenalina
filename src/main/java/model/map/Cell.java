@@ -357,17 +357,6 @@ public class Cell implements Serializable {
         
     }
 
-    public synchronized void setReachable2Cells(ArrayList<Cell> reachable2Cells) {
-        this.reachable2Cells = reachable2Cells;
-    }
-
-    public synchronized void setReachable3Cells(ArrayList<Cell> reachable3Cells) {
-        this.reachable3Cells = reachable3Cells;
-    }
-
-    public synchronized void setInCellPlayer(ArrayList<Player> inCellPlayer) {
-        this.inCellPlayer = inCellPlayer;
-    }
 
 
 }

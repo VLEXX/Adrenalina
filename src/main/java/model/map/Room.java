@@ -22,14 +22,6 @@ public class Room implements Serializable {
         cellslist.add(c);
     }
 
-    public synchronized void setCellslist(ArrayList<Cell> cellslist) {
-        this.cellslist = cellslist;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public ArrayList<Cell> getCellsList() {
         return cellslist;
     }

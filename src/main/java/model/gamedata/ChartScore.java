@@ -54,8 +54,7 @@ public class ChartScore implements Serializable {
         }
     }
 
-    public ChartScore deepClone(){
-        try{
+    public ChartScore deepClone() throws IOException, ClassNotFoundException {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
             objectOutputStream.writeObject(this);
@@ -63,10 +62,6 @@ public class ChartScore implements Serializable {
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream objectInputStream = new ObjectInputStream(bais);
             return (ChartScore) objectInputStream.readObject();
-        } catch (IOException e) {
-            return null;
-        } catch (ClassNotFoundException e) {
-            return null;
-        }
+
     }
 }

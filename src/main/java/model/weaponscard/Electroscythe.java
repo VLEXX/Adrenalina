@@ -46,7 +46,7 @@ public class Electroscythe extends Weapon {
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         for (int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
             Player player = myPosition.getCurrentcell().getInCellPlayer().get(i);
-            if (player != null) {
+            if (player != null && player != myPlayer) {
                 control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if (control != 0) {
                     allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);
@@ -69,7 +69,7 @@ public class Electroscythe extends Weapon {
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         for (int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
             Player player = myPosition.getCurrentcell().getInCellPlayer().get(i);
-            if (player != null) {
+            if (player != null && player != myPlayer) {
                 control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if (control != 0) {
                     allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);

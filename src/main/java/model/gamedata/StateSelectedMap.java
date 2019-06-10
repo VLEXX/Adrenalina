@@ -19,17 +19,17 @@ public class StateSelectedMap implements Serializable {
     }
 
     //Ritorna la mappa selezionata
-    public Map getSelectedmap() {
+    public synchronized Map getSelectedmap() {
         return selectedmap;
     }
 
     //Setta la mappa selezionata
-    public void setSelectedmap() {
+    public synchronized void setSelectedmap() {
         this.selectedmap = strategyMap.initializeMap();
     }
 
     //Setta la StrategyMap per l'inizializzazione della mappa
-    public void setStrategyMap(int i) {
+    public synchronized void setStrategyMap(int i) {
         if (i == 0) {
             strategyMap = new InitializeMap1();
         }

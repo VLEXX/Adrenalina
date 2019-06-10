@@ -106,6 +106,8 @@ public class SocketClientHandler implements Runnable {
         }
         catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
         }
     }
 }

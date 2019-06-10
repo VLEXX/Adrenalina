@@ -5,7 +5,7 @@ package model.gamedata;
 
 import model.playerdata.Player;
 
-import java.io.Serializable;
+import java.io.*;
 
 /**
  * Class with current game chart. Every array cell corresponds to every Player
@@ -51,6 +51,22 @@ public class ChartScore implements Serializable {
         }
         if (p == Player.BLACK) {
             this.score[4] = this.score[4] + score;
+        }
+    }
+
+    public ChartScore deepClone(){
+        try{
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
+            objectOutputStream.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+            return (ChartScore) objectInputStream.readObject();
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
         }
     }
 }

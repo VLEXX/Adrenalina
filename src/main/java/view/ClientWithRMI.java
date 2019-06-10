@@ -123,7 +123,12 @@ public class ClientWithRMI implements ClientStrategy {
             }
 
 
-            UpdatePacket updatePacket = updater.updateClient(player);
+            UpdatePacket updatePacket = null;
+            try {
+                updatePacket = updater.updateClient(player);
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
             viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);
 
 

@@ -1,13 +1,16 @@
 package servercontroller;
 
 import model.datapacket.StatesEnum;
+import model.gamedata.ChartScore;
 import model.gamedata.InitializeAllPlay;
+import model.map.Map;
 import model.map.Position;
 import model.modelstates.*;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.datapacket.UpdatePacket;
 import model.powerups.PowerUp;
+import model.weaponscard.Weapon;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -24,7 +27,7 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
     }
 
 
-    public synchronized UpdatePacket updateClient(Player player) throws IOException, RemoteException {
+    public synchronized UpdatePacket updateClient(Player player) throws IOException, RemoteException, CloneNotSupportedException {
 
         Position position = new Position();
         if (allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell() != null) {
@@ -66,13 +69,20 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
         }
 
         Stack<PowerUp> deck = (Stack<PowerUp>) allPlay.getCurrentDeckState().getPowerupdeck().clone();
-        UpdatePacket updatePacket = new UpdatePacket(allPlay.getChartScore(), allPlay.getCurrentPlayerState().get(player), allPlay.getStateSelectedMap().getSelectedmap(), position, state, deck, allPlay.isEndgame());
-        for(CurrentPlayerState currentPlayerState: allPlay.getCurrentPlayerState().values()){
-            if(currentPlayerState.getPlayerposition().getCurrentcell()==null){
-                updatePacket.addInHashMap(currentPlayerState.getActiveplayer(), null);
+        ChartScore chartScore = allPlay.getChartScore().deepClone();
+        Map map = allPlay.getStateSelectedMap().getSelectedmap().deepClone();
+        boolean endgame = allPlay.isEndgame();
+
+        CurrentPlayerState currentPlayerState = allPlay.getCurrentPlayerState().get(player).deepClone();
+
+        UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, position, state, deck, endgame);
+
+        for(CurrentPlayerState currentPlayerState1: allPlay.getCurrentPlayerState().values()){
+            if(currentPlayerState1.getPlayerposition().getCurrentcell()==null){
+                updatePacket.addInHashMap(currentPlayerState1.getActiveplayer(), null);
             }
             else {
-                updatePacket.addInHashMap(currentPlayerState.getActiveplayer(), currentPlayerState.getPlayerposition());
+                updatePacket.addInHashMap(currentPlayerState1.getActiveplayer(), currentPlayerState1.getPlayerposition());
             }
         }
 

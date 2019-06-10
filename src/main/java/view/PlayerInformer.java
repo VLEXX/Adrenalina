@@ -57,17 +57,17 @@ public class PlayerInformer {
         if(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList().isEmpty())
             System.out.println("You have no weapons.\n");
         else{
-            System.out.println("Weapons: ");
+            System.out.println("Weapons: \n");
             for(Weapon w : dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList()){
-                System.out.println(" "+w.getName()+"that is ");
+                System.out.print(w.getName());
                 if(w.getLoaded())
-                    System.out.println("loaded");
+                    System.out.print(" (LOADED)\n");
                 else
-                    System.out.println("unloaded");
+                    System.out.print(" (UNLOADED)\n");
                 if(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList().indexOf(w)==dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList().size()-1)
-                    System.out.println(".\n");
+                    System.out.print("\n");
                 else
-                    System.out.println(",\n");
+                    System.out.print("\n");
             }
         }
         if(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList().isEmpty())

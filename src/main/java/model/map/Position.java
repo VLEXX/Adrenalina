@@ -6,7 +6,7 @@ package model.map;
 import java.io.Serializable;
 
 //Classe che memorizza e identifica la posizione di un giocatore
-public class Position implements Serializable {
+public class Position implements Serializable{
     private Cell currentcell;   //cella corrente
     private Room currentroom;   //stanza corrente
 
@@ -22,7 +22,7 @@ public class Position implements Serializable {
     }
 
     //Setta la cella corrente
-    public void setCurrentcell(Cell currentcell) {
+    public synchronized void setCurrentcell(Cell currentcell) {
         this.currentcell = currentcell;
     }
 
@@ -32,7 +32,9 @@ public class Position implements Serializable {
     }
 
     //Setta la stanza corrente
-    public void setCurrentroom(Room currentroom) {
+    public synchronized void setCurrentroom(Room currentroom) {
         this.currentroom = currentroom;
     }
+
+
 }

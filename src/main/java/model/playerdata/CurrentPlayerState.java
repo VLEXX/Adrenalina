@@ -5,7 +5,7 @@ package model.playerdata;
 
 import model.map.Position;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashMap;
 
 /**
@@ -40,11 +40,11 @@ public class CurrentPlayerState implements Observer, Serializable {
         return token;
     }
 
-    public void setToken(int token) {
+    public synchronized void setToken(int token) {
         this.token = token;
     }
 
-    public void setEndturn(boolean endturn) {
+    public synchronized void setEndturn(boolean endturn) {
         this.endturn = endturn;
     }
 
@@ -56,7 +56,7 @@ public class CurrentPlayerState implements Observer, Serializable {
         return hit;
     }
 
-    public void setHit(Player hit) {
+    public synchronized void setHit(Player hit) {
         this.hit = hit;
     }
 
@@ -72,7 +72,7 @@ public class CurrentPlayerState implements Observer, Serializable {
      *
      * @param playerposition
      */
-    public void setPlayerposition(Position playerposition) {
+    public synchronized void setPlayerposition(Position playerposition) {
         this.playerposition = playerposition;
     }
 
@@ -88,7 +88,7 @@ public class CurrentPlayerState implements Observer, Serializable {
      *
      * @param activeturn
      */
-    public void setActiveturn(boolean activeturn) {
+    public synchronized void setActiveturn(boolean activeturn) {
         this.activeturn = activeturn;
     }
 
@@ -104,7 +104,7 @@ public class CurrentPlayerState implements Observer, Serializable {
      *
      * @param board
      */
-    public void setBoard(PlayerBoard board) {
+    public synchronized void setBoard(PlayerBoard board) {
         this.board = board;
     }
 
@@ -141,7 +141,7 @@ public class CurrentPlayerState implements Observer, Serializable {
      *
      * @param activeplayer
      */
-    public void setActiveplayer(Player activeplayer) {
+    public synchronized void setActiveplayer(Player activeplayer) {
         this.activeplayer = activeplayer;
     }
 
@@ -163,5 +163,29 @@ public class CurrentPlayerState implements Observer, Serializable {
 
     public void addControlMarks(Player player, int i) {
         this.controlMarks.put(player, i);
+    }
+
+    public synchronized void setControlMarks(HashMap<Player, Integer> controlMarks) {
+        this.controlMarks = controlMarks;
+    }
+
+    public synchronized void setActioncounter(int actioncounter) {
+        this.actioncounter = actioncounter;
+    }
+
+    public CurrentPlayerState deepClone(){
+        try{
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
+            objectOutputStream.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+            return (CurrentPlayerState) objectInputStream.readObject();
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
     }
 }

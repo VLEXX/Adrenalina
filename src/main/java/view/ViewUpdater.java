@@ -3,17 +3,19 @@ package view;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
+import model.weaponscard.Weapon;
 
 import java.util.HashMap;
 
 public class ViewUpdater {
 
 
-    public void updateView(UpdatePacket updatePacket, ViewDatabase viewDatabase, HashMap<StatesEnum, ViewState> hashMap, Player player){
+    public synchronized void updateView(UpdatePacket updatePacket, ViewDatabase viewDatabase, HashMap<StatesEnum, ViewState> hashMap, Player player){
 
         viewDatabase.setPositionHashMap(updatePacket.getPositionHashMap());
 
         viewDatabase.getViewCurrentPlayerState().setCurrentPlayerState(updatePacket.getCurrentPlayerState());
+
         viewDatabase.getViewMapState().setSelectedMap(updatePacket.getMap());
         viewDatabase.getViewChartScore().setChartScore(updatePacket.getChart());
         if(updatePacket.getStatesEnum()==null){

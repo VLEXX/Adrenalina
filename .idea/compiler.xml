@@ -9,6 +9,7 @@
         <module name="ing-sw-2019-3" />
         <module name="Progetto" />
         <module name="progettoAdrenalina" />
+        <module name="v2" />
       </profile>
     </annotationProcessing>
   </component>

@@ -48,9 +48,9 @@ public class Cell implements Serializable {
         this.upcell = null;
         this.rightcell = null;
         this.spawnpointzone = null;
-        this.reachable2Cells = new ArrayList<Cell>();
-        this.reachable3Cells = new ArrayList<Cell>();
-        this.inCellPlayer = new ArrayList<Player>();
+        this.reachable2Cells = new ArrayList<>();
+        this.reachable3Cells = new ArrayList<>();
+        this.inCellPlayer = new ArrayList<>();
     }
 
 
@@ -125,7 +125,7 @@ public class Cell implements Serializable {
      * @param rightcell
      */
     //metodo che setta le celle adiacenti
-    public void setCells(Cell upcell, Cell downcell, Cell leftcell, Cell rightcell) {
+    public synchronized void setCells(Cell upcell, Cell downcell, Cell leftcell, Cell rightcell) {
         this.upcell = upcell;
         this.downcell = downcell;
         this.leftcell = leftcell;
@@ -148,7 +148,7 @@ public class Cell implements Serializable {
     }
 
     //setta il tipo di munizioni presenti
-    public void setAmmohere(Ammo ammohere) {
+    public synchronized void setAmmohere(Ammo ammohere) {
         this.ammohere = ammohere;
     }
 
@@ -158,7 +158,7 @@ public class Cell implements Serializable {
     }
 
     //setta l'oggetto dello spawn
-    public void setSpawnpointzone(SpawnPoint spawnpointzone) {
+    public synchronized void setSpawnpointzone(SpawnPoint spawnpointzone) {
         this.spawnpointzone = spawnpointzone;
     }
 
@@ -356,6 +356,19 @@ public class Cell implements Serializable {
         }
         
     }
+
+    public synchronized void setReachable2Cells(ArrayList<Cell> reachable2Cells) {
+        this.reachable2Cells = reachable2Cells;
+    }
+
+    public synchronized void setReachable3Cells(ArrayList<Cell> reachable3Cells) {
+        this.reachable3Cells = reachable3Cells;
+    }
+
+    public synchronized void setInCellPlayer(ArrayList<Player> inCellPlayer) {
+        this.inCellPlayer = inCellPlayer;
+    }
+
 
 }
 

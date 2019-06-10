@@ -1,7 +1,7 @@
 //Author: Alex Saletti
 package model.map;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Map implements Serializable {
@@ -28,6 +28,22 @@ public class Map implements Serializable {
 
     public void addRoom(Room r) {        //aggiunge una stanza
         roomlist.add(r);
+    }
+
+    public Map deepClone(){
+        try{
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
+            objectOutputStream.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+            return (Map) objectInputStream.readObject();
+        } catch (IOException e) {
+            return null;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
     }
 }
 

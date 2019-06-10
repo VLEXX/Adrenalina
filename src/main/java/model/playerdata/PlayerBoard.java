@@ -147,5 +147,7 @@ public class PlayerBoard implements Serializable {
     public void setMunitionsBox(MunitionsBox munitionsBox) {
         this.munitionsBox = munitionsBox;
     }
+
+
 }
 

@@ -11,6 +11,7 @@ import model.modelstates.EndTurnState;
 import model.playerdata.Player;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
+import model.weaponscard.Weapon;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -44,7 +45,7 @@ public class StartGame extends Thread {
                     DataPacket dataPacket = (DataPacket) objectInputStream.readObject();
                     MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket);
                     objectOutputStream.writeObject(messageEnum);
-                    if(allPlay.getHashMapState().get(player) instanceof EndTurnState){
+                    if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)){
                         if(allPlay.getCurrentPlayerState().get(player).isEndturn()==true) {
                             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.WAIT));
                             if (idClientList.getIndexArray() < idClientList.getPlayerArrayList().size()-1) {
@@ -62,12 +63,15 @@ public class StartGame extends Thread {
                         }
                     }
                     UpdatePacket updatePacket = updater.updateClient(player);
+                    for(Weapon weapon: updatePacket.getCurrentPlayerState().getBoard().getWeaponsList()){
+                        System.out.print(weapon.getName());
+                    }
                     objectOutputStream.writeObject(updatePacket);
                 }
                 if(allPlay.isEndgame()==true) {
                     break;
                 }
-            } catch (IOException e) {
+            } catch (IOException | CloneNotSupportedException e) {
 
             } catch (ClassNotFoundException e) {
 

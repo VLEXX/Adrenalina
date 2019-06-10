@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 //Classe che gestisce le munizioni del giocatore
-public class MunitionsBox implements Serializable {
+public class MunitionsBox implements Serializable, Cloneable {
     private HashMap<Munitions, Integer> myMunitionsMap;
 
     //Costruttore delle munizioni
@@ -38,4 +38,10 @@ public class MunitionsBox implements Serializable {
         actual = actual - cont;
         myMunitionsMap.replace(munitions, actual);
     }
+
+    public void setMyMunitionsMap(HashMap<Munitions, Integer> myMunitionsMap) {
+        this.myMunitionsMap = myMunitionsMap;
+    }
+
+
 }

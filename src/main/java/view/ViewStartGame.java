@@ -5,6 +5,7 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
+import model.weaponscard.Weapon;
 import view.viewstates.ViewWaitingState;
 
 import java.io.IOException;
@@ -69,16 +70,17 @@ public class ViewStartGame extends Thread {
                     messageEnumOK = (MessageEnum) objectInputStream.readObject();
                 }
                 while (true) {
-                    if(updatePacket!=null){
+                    if (updatePacket != null) {
                         viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
                         break;
                     }
                     updatePacket = (UpdatePacket) objectInputStream.readObject();
+                }
                     playerInformer.informer();
                     if(!(viewDatabase.getViewState().get(player)instanceof ViewWaitingState)){
                         ((ViewWaitingState)stateHashMap.get(StatesEnum.WAIT)).resetI();
                     }
-                }
+
             } catch (IOException e) {
 
             } catch (ClassNotFoundException e) {

@@ -17,7 +17,7 @@ import java.util.HashMap;
 /**
  * Class with weapons cost
  */
-public abstract class Weapon implements Serializable {
+public abstract class Weapon implements Serializable, Cloneable {
 
     private HashMap<Munitions, Integer> firstPrice;
     private HashMap<Munitions, Integer> secondPrice;
@@ -132,5 +132,10 @@ public abstract class Weapon implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

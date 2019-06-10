@@ -6,7 +6,7 @@ package model.playerdata;
 import java.io.Serializable;
 
 //Classe che tiene conto del riquadro danni della plancia giocatore
-public class DamageBox implements Serializable {
+public class DamageBox implements Serializable{
     private final static int[] maxPointArray = {8,6,4,2, 1, 1,1,1,1,1,1,1,1,};   //Punti per chi contribuisce al danno quando viene contegguata la plancia
     private final static int[] finalFrenzyArray = {2, 1, 1, 1};    //Punti per chi contribuisce al danno quando viene conteggiata la plancia in frenesia finale
     private Player[] damage;                                    //Array per tener conto dell'ordine dei danni dei giocatori
@@ -33,6 +33,10 @@ public class DamageBox implements Serializable {
     //Ritorna i danni giocatore
     public Player[] getDamage() {
         return damage;
+    }
+
+    public void setDamage(Player[] damage) {
+        this.damage = damage;
     }
 
     //Imposta la modalità frenesia mettendo "true", "false" altrimenti
@@ -129,4 +133,5 @@ public class DamageBox implements Serializable {
     public void setDead(boolean dead) {
         this.dead = dead;
     }
+
 }

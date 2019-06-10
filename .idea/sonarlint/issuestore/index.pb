@@ -180,3 +180,15 @@ $src/main/java/view/ViewMapState.java,3\5\35e273617a2122d0c2be398d9bd21da2a189b
 +src/main/java/model/powerups/PowerUpId.java,8\1\812c0d3459517bb6d02bc4a9d933809e417d105d
 V
 &src/main/java/view/PlayerInformer.java,8\8\8817c66a615fc5984411527adecdfb7f293a4d91
+a
+1src/test/java/model/playerdata/DamageBoxTest.java,4\6\46a8dd22a7554dfbf6b299b38eaaadbee38c8ecb
+Y
+)src/main/java/model/powerups/PowerUp.java,f\c\fc9f23c10248a4a6f0146683f764d1287f3c24f7
+\
+,src/test/java/model/powerup/PowerUpTest.java,6\6\66f0a7861782bf3974ccaecd8e26bca1ad8212c7
+f
+6src/test/java/model/gamedata/StateSelectedMapTest.java,4\3\434bc10e87576ed227a4ef0c693c39254a54fcd8
+b
+2src/test/java/model/weaponscard/LockRifleTest.java,5\0\501fb8a134daa0c111f74b689d1d00b085355532
+c
+3src/test/java/model/weaponscard/CyberbladeTest.java,9\7\97c78db400a64d45171f6af48d4267de1acee697

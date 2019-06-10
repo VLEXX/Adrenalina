@@ -44,19 +44,13 @@ public class Electroscythe extends Weapon {
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay) {
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        for (int i = 0; i < playerToAttack.size(); i++) {
-            if (playerToAttack.get(i) != null) {
-                Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getPlayerposition();
-                if (myPosition.getCurrentcell().getCellId() != positionToAttack.getCurrentcell().getCellId())
-                    return MessageEnum.PLAYERS_NOT_VALID;
-            }
-        }
-        for (int i = 0; i < playerToAttack.size(); i++) {
-            if (playerToAttack.get(i) != null) {
-                control = allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        for (int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
+            Player player = myPosition.getCurrentcell().getInCellPlayer().get(i);
+            if (player != null) {
+                control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if (control != 0) {
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+                    allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                    allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(1, myPlayer);
                 }
             }
         }
@@ -73,19 +67,13 @@ public class Electroscythe extends Weapon {
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        for (int i = 0; i < playerToAttack.size(); i++) {
-            if (playerToAttack.get(i) != null) {
-                Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getPlayerposition();
-                if (myPosition.getCurrentcell().getCellId() != positionToAttack.getCurrentcell().getCellId())
-                    return MessageEnum.PLAYERS_NOT_VALID;
-            }
-        }
-        for (int i = 0; i < playerToAttack.size(); i++) {
-            if (playerToAttack.get(i) != null) {
-                control = allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        for (int i = 0; i < myPosition.getCurrentcell().getInCellPlayer().size(); i++) {
+            Player player = myPosition.getCurrentcell().getInCellPlayer().get(i);
+            if (player != null) {
+                control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if (control != 0) {
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+                    allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                    allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(2, myPlayer);
                 }
             }
         }

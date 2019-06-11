@@ -54,18 +54,20 @@ class HeatSeekerTest {
         allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
-        assertEquals(heatSeeker.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_UNREACHABLE);
+        assertEquals(heatSeeker.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
         //caso position visibile
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
-        assertEquals(heatSeeker.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
-
-        //flag
-        //TODO
+        assertEquals(heatSeeker.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_UNREACHABLE);
 
         //giocatore nullo
         playerToAttack.remove(Player.PURPLE);
         assertEquals(heatSeeker.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+
+        //flag
+        Player player = Player.FLAG;
+        playerToAttack.add(player);
+        assertEquals(heatSeeker.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.WEAPON_ERROR);
     }
 
     @Test

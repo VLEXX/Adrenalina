@@ -63,9 +63,7 @@ public class StartGame extends Thread {
                         }
                     }
                     UpdatePacket updatePacket = updater.updateClient(player);
-                    for(Weapon weapon: updatePacket.getCurrentPlayerState().getBoard().getWeaponsList()){
-                        System.out.print(weapon.getName());
-                    }
+
                     objectOutputStream.writeObject(updatePacket);
                 }
                 if(allPlay.isEndgame()==true) {

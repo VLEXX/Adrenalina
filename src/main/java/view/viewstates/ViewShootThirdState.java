@@ -30,6 +30,9 @@ public class ViewShootThirdState implements ViewState {
                 }
             }
         }
-        return new DataPacket();
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setToken(viewDatabase.getClientToken());
+        dataPacket.setPlayer(player);
+        return dataPacket;
     }
 }

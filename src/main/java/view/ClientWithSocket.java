@@ -72,6 +72,7 @@ public class ClientWithSocket implements ClientStrategy{
 
                     viewDatabase.setNickname(clientManager.manageNickname(stdin, objectOutputStream));
 
+                    System.out.println("\n");
                     clientManager.manageChoice(stdin, objectOutputStream, objectInputStream, viewDatabase);
                     clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
 

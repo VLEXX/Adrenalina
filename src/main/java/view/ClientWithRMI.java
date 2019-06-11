@@ -53,6 +53,8 @@ public class ClientWithRMI implements ClientStrategy {
 
         Scanner stdin = new Scanner(System.in);
 
+        System.out.println("Connection established\n\n");
+
         IDClientListInterface idClientList = (IDClientListInterface) registry.lookup("IDClientList");
         InitializeAllPlayInterface allPlay = (InitializeAllPlayInterface) registry.lookup("allPlay");
         UpdaterInterface updater = (UpdaterInterface) registry.lookup("Updater");
@@ -61,80 +63,89 @@ public class ClientWithRMI implements ClientStrategy {
         StateBoxInterface stateHashMap = (StateBoxInterface) registry.lookup("StateBox");
         ManageEndTurnInterface manageEndTurn = (ManageEndTurnInterface) registry.lookup("ManageEndTurn");
 
-        int token = idClientList.addClient();
-        if(token==-1){
-            System.out.println("\n" + "\u001B[31m" + "Because the Server is dark and full of connections." + "\u001B[0m");
+        String game = clientManager.manageStart(stdin);
+        if(game.equals("continue")){
+
         }
-        else{
-            System.out.println("\n");
-            allPlay.addPlayerCounter();
-            viewDatabase.setClientToken(token);
+        else if(game.equals("new game")) {
+            int token = idClientList.addClient();
+            if (token == -1) {
+                System.out.println("\n" + "\u001B[31m" + "Because the Server is dark and full of connections." + "\u001B[0m");
+            } else {
 
-            CurrentDeckState currentDeckState = allPlay.getCurrentDeckState();
-            Player player = clientManager.manageChoice(stdin, currentDeckState);
-            MessageEnum messageEnumOK;
-            while(true){
-                messageEnumOK=serverManagerFunctionRMI.chooseCharacterManager(player);
-                if(messageEnumOK.equals(MessageEnum.OK)){
-                    System.out.println("\nYou choose: " + player + "\n");
-                    break;
+                String nickname = clientManager.manageNickname(stdin);
+                serverManagerFunctionRMI.manageNickname(nickname);
+
+                System.out.println("\n");
+                allPlay.addPlayerCounter();
+                viewDatabase.setClientToken(token);
+
+                CurrentDeckState currentDeckState = allPlay.getCurrentDeckState();
+                Player player = clientManager.manageChoice(stdin, currentDeckState);
+                MessageEnum messageEnumOK;
+                while (true) {
+                    messageEnumOK = serverManagerFunctionRMI.chooseCharacterManager(player);
+                    if (messageEnumOK.equals(MessageEnum.OK)) {
+                        System.out.println("\nYou choose: " + player + "\n");
+                        break;
+                    }
                 }
-            }
-            int i=1;
-            while (true){
-                if(allPlay.getPlayercountertemp()==0){
-                    break;
+                int i = 1;
+                while (true) {
+                    if (allPlay.getPlayercountertemp() == 0) {
+                        break;
+                    }
+                    if (i == 1) {
+                        System.out.println("Waiting for the opponent...\n");
+                        i--;
+                    }
                 }
-                if(i==1) {
-                    System.out.println("Waiting for the opponent...\n");
-                    i--;
+                serverManagerFunctionRMI.manageNickPlayer(nickname, player);
+                voteMap.addPlayerCounter();
+                System.out.println("\n");
+                int mapnumber = clientManager.manageVote(stdin);
+                while (true) {
+                    messageEnumOK = serverManagerFunctionRMI.manageVoteMap(mapnumber);
+                    if (messageEnumOK.equals(MessageEnum.OK)) {
+                        break;
+                    }
                 }
-            }
-
-            voteMap.addPlayerCounter();
-            System.out.println("\n");
-            int mapnumber = clientManager.manageVote(stdin);
-            while(true){
-                messageEnumOK=serverManagerFunctionRMI.manageVoteMap(mapnumber);
-                if(messageEnumOK.equals(MessageEnum.OK)){
-                    break;
+                i = 1;
+                while (true) {
+                    if (voteMap.getPlayerCounter() == 0) {
+                        break;
+                    }
+                    if (i == 1) {
+                        System.out.println("Waiting for the opponent...\n");
+                        i--;
+                    }
                 }
-            }
-            i=1;
-            while (true){
-                if(voteMap.getPlayerCounter()==0){
-                    break;
+                int map = voteMap.getFinalresult() + 1;
+                System.out.println("Map Selected: " + map + "\n");
+
+
+                allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap.getHashMap());
+                viewDatabase.getViewState().put(player, viewStateHashMap.get(StatesEnum.WAIT));
+
+                if (idClientList.getPlayerArrayList().get(0).equals(player)) {
+                    allPlay.replaceInHashMap(player, StatesEnum.SPAWN, stateHashMap.getHashMap());
+                    viewDatabase.getViewState().replace(player, viewStateHashMap.get(StatesEnum.SPAWN));
                 }
-                if(i==1) {
-                    System.out.println("Waiting for the opponent...\n");
-                    i--;
+
+
+                UpdatePacket updatePacket = null;
+                try {
+                    updatePacket = updater.updateClient(player);
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
                 }
+                viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);
+
+
+                ViewStartGameRMI viewStartGameRMI = new ViewStartGameRMI(player, stdin, viewDatabase, viewStateHashMap, updater, allPlay, manageEndTurn, stateHashMap, idClientList);
+                viewStartGameRMI.start();
+
             }
-            int map=voteMap.getFinalresult()+1;
-            System.out.println("Map Selected: " + map + "\n");
-
-
-            allPlay.putInHashMapState(player,StatesEnum.WAIT, stateHashMap.getHashMap());
-            viewDatabase.getViewState().put(player, viewStateHashMap.get(StatesEnum.WAIT));
-
-            if(idClientList.getPlayerArrayList().get(0).equals(player)){
-                allPlay.replaceInHashMap(player, StatesEnum.SPAWN, stateHashMap.getHashMap());
-                viewDatabase.getViewState().replace(player, viewStateHashMap.get(StatesEnum.SPAWN));
-            }
-
-
-            UpdatePacket updatePacket = null;
-            try {
-                updatePacket = updater.updateClient(player);
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
-            viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);
-
-
-            ViewStartGameRMI viewStartGameRMI = new ViewStartGameRMI(player, stdin, viewDatabase, viewStateHashMap , updater, allPlay, manageEndTurn, stateHashMap, idClientList);
-            viewStartGameRMI.start();
-
         }
     }
 }

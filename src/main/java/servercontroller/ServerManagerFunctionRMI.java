@@ -120,4 +120,12 @@ public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Rem
             }
         }
     }
+
+    public void manageNickname(String nickname) throws RemoteException{
+        idClientList.getNicknameList().add(nickname);
+    }
+
+    public void manageNickPlayer(String nickname, Player player)throws RemoteException{
+        idClientList.getNickPlayer().put(nickname, player);
+    }
 }

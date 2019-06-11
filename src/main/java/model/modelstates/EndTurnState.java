@@ -42,7 +42,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
     }
 
     /**
-     * manages the end of the turn refilling the map, recharging weapons selected by the player and
+     * manages the end of the turn refilling the map, recharging weapons previously selected by the player and
      * updating the scoreboard
      * @param dataPacket class containing necessary parameters sent by client
      * @return a message saying if the required action was successful or not

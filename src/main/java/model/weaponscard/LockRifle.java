@@ -41,7 +41,7 @@ public class LockRifle extends Weapon implements Serializable {
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
-        if((playerToAttack.get(0) == null)) {
+        if((playerToAttack.size() == 0)) {
             return MessageEnum.OK;
         }
         int control = 0;
@@ -64,6 +64,7 @@ public class LockRifle extends Weapon implements Serializable {
      * @param myPlayer           player who attack
      * @param allPlay           current state game
      * @param playerToAttack   player to attack
+     * @param positionToMove null
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
@@ -94,7 +95,7 @@ public class LockRifle extends Weapon implements Serializable {
      * @param positionToAttack position of the player to attack
      * @return true if ok
      */
-    public boolean check(Position myPosition, Position positionToAttack) {
+    private boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
             if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {

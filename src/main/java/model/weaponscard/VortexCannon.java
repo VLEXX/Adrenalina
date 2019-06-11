@@ -53,7 +53,8 @@ public class VortexCannon extends Weapon implements Serializable {
             return MessageEnum.POSITION_UNREACHABLE;
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(checkPosition(positionVortex.getCurrentcell(),positionToAttack.getCurrentcell())){
-            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+            if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if(positionVortex.getCurrentcell() != positionToAttack.getCurrentcell()) {
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().removeInCellPlayer(playerToAttack.get(0));
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().setCurrentcell(positionVortex.getCurrentcell());
@@ -85,7 +86,8 @@ public class VortexCannon extends Weapon implements Serializable {
         Position positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
         if(checkPosition(position.getCurrentcell(), positionToAttack1.getCurrentcell()) && checkPosition(position.getCurrentcell(), positionToAttack2.getCurrentcell())){
             //player 1
-            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+            if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if(position.getCurrentcell() != positionToAttack1.getCurrentcell()) {
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().getCurrentcell().removeInCellPlayer(playerToAttack.get(0));
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition().setCurrentcell(position.getCurrentcell());
@@ -95,7 +97,8 @@ public class VortexCannon extends Weapon implements Serializable {
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
             //player 2
-            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+            if(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                control = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if(position.getCurrentcell() != positionToAttack2.getCurrentcell()) {
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition().getCurrentcell().removeInCellPlayer(playerToAttack.get(1));
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition().setCurrentcell(position.getCurrentcell());

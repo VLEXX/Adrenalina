@@ -60,15 +60,18 @@ public class ShockWave extends Weapon implements Serializable {
             if (checkPosition(myPosition.getCurrentcell(), positionToAttack3.getCurrentcell()) == false)
                 return MessageEnum.POSITION_NOT_VALID;
         }
-        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
-        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        if(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
-        control = allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+        if(allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
@@ -88,7 +91,8 @@ public class ShockWave extends Weapon implements Serializable {
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         if(myPosition.getCurrentcell().getUpCell() != null){
             for(int i = 0; i < myPosition.getCurrentcell().getUpCell().getInCellPlayer().size(); i++){
-                control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
                     allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
                 allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
@@ -96,7 +100,8 @@ public class ShockWave extends Weapon implements Serializable {
         }
         if(myPosition.getCurrentcell().getDownCell() != null){
             for(int i = 0; i < myPosition.getCurrentcell().getDownCell().getInCellPlayer().size(); i++){
-                control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
                     allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
                 allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
@@ -104,7 +109,8 @@ public class ShockWave extends Weapon implements Serializable {
         }
         if(myPosition.getCurrentcell().getRightCell() != null){
             for(int i = 0; i < myPosition.getCurrentcell().getRightCell().getInCellPlayer().size(); i++){
-                control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
                     allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
                 allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
@@ -112,7 +118,8 @@ public class ShockWave extends Weapon implements Serializable {
         }
         if(myPosition.getCurrentcell().getLeftCell() != null){
             for(int i = 0; i < myPosition.getCurrentcell().getLeftCell().getInCellPlayer().size(); i++){
-                control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
                     allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
                 allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);

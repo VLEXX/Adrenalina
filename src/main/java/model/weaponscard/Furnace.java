@@ -53,7 +53,8 @@ public class Furnace extends Weapon implements Serializable {
             return MessageEnum.POSITION_NOT_VALID;
         for(int i = 0; i < positionToAttack.getCurrentroom().getCellsList().size(); i++){
             for(int j = 0; j < positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().size(); j++){
-                control = allPlay.getCurrentPlayerState().get(roomToAttack.getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(roomToAttack.getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
                     allPlay.getCurrentPlayerState().get(roomToAttack.getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
                 allPlay.getCurrentPlayerState().get(roomToAttack.getCellsList().get(i).getInCellPlayer().get(j)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
@@ -76,7 +77,8 @@ public class Furnace extends Weapon implements Serializable {
         if(checkPosition(myPosition.getCurrentcell(), positionToAttack.getCurrentcell()) == false)
             return MessageEnum.POSITION_UNREACHABLE;
         for( int i = 0; i < positionToAttack.getCurrentcell().getInCellPlayer().size(); i++){
-            control = allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+            if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                control = allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if(control != 0)
                 allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
             allPlay.getCurrentPlayerState().get(positionToAttack.getCurrentcell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);

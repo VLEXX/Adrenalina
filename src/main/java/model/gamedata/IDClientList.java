@@ -12,15 +12,18 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 //Classe che memorizza gli ID dei client che si collegano al server (da 3 a 5 client)
 public class IDClientList extends UnicastRemoteObject implements Remote, IDClientListInterface, Serializable {
-    private ArrayList<Integer> clientlist;   //Array che memorizza gli ID
+    private ArrayList<Integer> clientlist;   //Array che memorizza i token
     private ArrayList<Player> playerArrayList;
     private int indexArray;
     private int clientCounter;
     private ArrayList<ObserverCounter> observerCounters;
+    private ArrayList<String> nicknameList;
+    private HashMap<String, Player> nickPlayer;
 
     //Costruttore che inizializza l'array a 0 (gli ID assegnati sono diversi da 0)
     public IDClientList() throws RemoteException{
@@ -29,6 +32,16 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         this.indexArray=0;
         this.clientCounter=5;
         this.observerCounters=new ArrayList<>();
+        this.nicknameList = new ArrayList<>();
+        this.nickPlayer=new HashMap<>();
+    }
+
+    public synchronized HashMap<String, Player> getNickPlayer() {
+        return nickPlayer;
+    }
+
+    public synchronized ArrayList<String> getNicknameList() {
+        return nicknameList;
     }
 
     public synchronized ArrayList<Player> getPlayerArrayList() throws RemoteException {
@@ -63,7 +76,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
                     if (!(clientlist.contains(i))) {
                         this.clientlist.add(i);
                         update();
-                        System.out.println(getClientCounter());
                         break;
                     }
                 }

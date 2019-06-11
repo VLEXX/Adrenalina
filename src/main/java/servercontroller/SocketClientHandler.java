@@ -39,28 +39,6 @@ public class SocketClientHandler implements Runnable {
             PrintWriter outMessage = new PrintWriter(this.socket.getOutputStream());
             Scanner inMessage = new Scanner(socket.getInputStream());
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
-            allPlay.addPlayerCounter();
-
-            player=serverManagerFunction.chooseCharacterManager(outMessage, objectInputStream, this.allPlay, objectOutputStream, idClientList);
-            while(true){
-                if(allPlay.getPlayercountertemp()==0){
-                    boolean ok = true;
-                    objectOutputStream.writeObject(ok);
-                    break;
-                }
-            }
-            allPlay.getVoteMap().addPlayerCounter();
-            serverManagerFunction.manageVoteMap(inMessage, allPlay, outMessage, objectInputStream, objectOutputStream);
-            while(true){
-                if(allPlay.getStateSelectedMap().getSelectedmap()!=null){
-                    boolean ok = true;
-                    objectOutputStream.writeObject(ok);
-                    break;
-                }
-            }
-            allPlay.resetPlayerCounterTemp();
-            MessageString message = new MessageString("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
-            objectOutputStream.writeObject(message);
 
             HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
             ActionState actionState = new ActionState(allPlay, stateHashMap,idClientList);
@@ -84,24 +62,57 @@ public class SocketClientHandler implements Runnable {
             stateHashMap.put(StatesEnum.POWERUP, powerupState);
             stateHashMap.put(StatesEnum.SPAWN, spawnState);
 
-            allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
-            if(idClientList.getPlayerArrayList().get(0).equals(player)){
-                allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.SPAWN));
+            String game = (String) objectInputStream.readObject();
+            if(game.equals("continue")){
+
             }
+            else if(game.equals("new game")) {
+                String nickname = (String) objectInputStream.readObject();
+                idClientList.getNicknameList().add(nickname);
 
-            Updater updater = new Updater(allPlay);
-            UpdatePacket updatePacket = updater.updateClient(player);
-            objectOutputStream.writeObject(updatePacket);
+                allPlay.addPlayerCounter();
+                player = serverManagerFunction.chooseCharacterManager(objectInputStream, this.allPlay, objectOutputStream, idClientList);
+                while (true) {
+                    if (allPlay.getPlayercountertemp() == 0) {
+                        boolean ok = true;
+                        objectOutputStream.writeObject(ok);
+                        break;
+                    }
+                }
+                idClientList.getNickPlayer().put(nickname, player);
+                allPlay.getVoteMap().addPlayerCounter();
+                serverManagerFunction.manageVoteMap(allPlay, outMessage, objectInputStream, objectOutputStream);
+                while (true) {
+                    if (allPlay.getStateSelectedMap().getSelectedmap() != null) {
+                        boolean ok = true;
+                        objectOutputStream.writeObject(ok);
+                        break;
+                    }
+                }
+                allPlay.resetPlayerCounterTemp();
+                MessageString message = new MessageString("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
+                objectOutputStream.writeObject(message);
 
-            Integer token = allPlay.getCurrentPlayerState().get(player).getToken();
-            objectOutputStream.writeObject(token);
 
-            StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
-            startGame.start();
+                allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
+                if (idClientList.getPlayerArrayList().get(0).equals(player)) {
+                    allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.SPAWN));
+                }
+
+                Updater updater = new Updater(allPlay);
+                UpdatePacket updatePacket = updater.updateClient(player);
+                objectOutputStream.writeObject(updatePacket);
+
+                Integer token = allPlay.getCurrentPlayerState().get(player).getToken();
+                objectOutputStream.writeObject(token);
+
+                StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
+                startGame.start();
 
 
-            if(allPlay.isEndgame()==true) {
-                socket.close();
+                if (allPlay.isEndgame() == true) {
+                    socket.close();
+                }
             }
         }
         catch (IOException | ClassNotFoundException e) {

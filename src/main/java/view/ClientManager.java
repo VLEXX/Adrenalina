@@ -118,4 +118,26 @@ public class ClientManager {
         System.out.println(message.getMessage());
     }
 
+    public String manageStart(Scanner stdin){
+        System.out.println("> New Game\n> Continue\n");
+        String s;
+        while(true){
+            s = stdin.nextLine();
+            s.toLowerCase();
+            if(s.equals("new game")||s.equals("continue")){
+                return s;
+            }
+            else{
+                System.out.println("WRONG INPUT! Please choose between 'New Game' or 'Continue'\n");
+            }
+        }
+    }
+
+    public String manageNickname(Scanner stdin, ObjectOutputStream objectOutputStream) throws IOException {
+        System.out.print("Insert your nickname: ");
+        String s = stdin.nextLine();
+        objectOutputStream.writeObject(s);
+        return s;
+    }
+
 }

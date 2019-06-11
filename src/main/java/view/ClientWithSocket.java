@@ -60,13 +60,24 @@ public class ClientWithSocket implements ClientStrategy{
                 stateHashMap.put(StatesEnum.POWERUP, powerupState);
                 stateHashMap.put(StatesEnum.SPAWN, spawnState);
 
-                ViewDatabase viewDatabase = new ViewDatabase();
-                clientManager.manageChoice(stdin, objectOutputStream, objectInputStream, viewDatabase);
-                clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
+                String game = clientManager.manageStart(stdin);
+                if(game.equals("continue")){
 
-                ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);
-                startGame.start();
+                }
+                else if(game.equals("new game")){
 
+                    ViewDatabase viewDatabase = new ViewDatabase();
+
+                    objectOutputStream.writeObject(game);
+
+                    viewDatabase.setNickname(clientManager.manageNickname(stdin, objectOutputStream));
+
+                    clientManager.manageChoice(stdin, objectOutputStream, objectInputStream, viewDatabase);
+                    clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
+
+                    ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);
+                    startGame.start();
+                }
             }
             catch (ConnectException e){
                 System.out.println("\n" + "\u001B[31m" + "Because the Server is dark and full of connections." + "\u001B[0m");

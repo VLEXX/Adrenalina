@@ -33,7 +33,6 @@ public class ActionState extends UnicastRemoteObject implements State, Serializa
         if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
             return MessageEnum.TOKEN_ERROR;
         }
-        System.out.println(dataPacket.getStatesEnum());
         if (dataPacket.getStatesEnum().equals(StatesEnum.MOVE)) {
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.MOVE));
             return MessageEnum.OK;

@@ -20,6 +20,7 @@ public class ViewDatabase {
     private HashMap<Player, Position> positionHashMap;
     private Player[] skullArray;
     private Player[] secondSkullArray;
+    private String nickname;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -34,6 +35,14 @@ public class ViewDatabase {
         this.positionHashMap = new HashMap<>();
         this.skullArray= new Player[]{null,null,null,null,null,null,null,null};
         this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Player[] getSkullArray() {

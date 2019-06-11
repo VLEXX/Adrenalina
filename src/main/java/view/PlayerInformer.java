@@ -18,9 +18,9 @@ public class PlayerInformer {
     }
 
     public void informer(){
+        mapStats();
         positionsInformer();
         playerStats();
-        mapStats();
     }
 
     //informa delle posizioni

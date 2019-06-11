@@ -39,7 +39,6 @@ public class SocketServer extends Thread implements Serializable {
                 Socket socket = serverSocket.accept();
                 executor.submit(new SocketClientHandler(socket, this.allPlay, idClientList));
                 this.idClientList.update();
-                System.out.println(getIdClientList().getClientCounter());
             }
             catch (IOException e){
                 break;

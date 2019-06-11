@@ -22,7 +22,7 @@ public class ServerManagerFunction {
 
     public ServerManagerFunction(){}
 
-    public synchronized Player chooseCharacterManager(PrintWriter printWriter, ObjectInputStream objectInputStream, InitializeAllPlay allPlay, ObjectOutputStream objectOutputStream, IDClientList IDclientList) throws IOException, ClassNotFoundException {
+    public synchronized Player chooseCharacterManager(ObjectInputStream objectInputStream, InitializeAllPlay allPlay, ObjectOutputStream objectOutputStream, IDClientList IDclientList) throws IOException, ClassNotFoundException {
         objectOutputStream.writeObject(allPlay.getCurrentDeckState());
 
         Player player;
@@ -51,7 +51,7 @@ public class ServerManagerFunction {
         return player;
     }
 
-    public synchronized void manageVoteMap(Scanner inMessage, InitializeAllPlay allPlay, PrintWriter printWriter, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
+    public synchronized void manageVoteMap(InitializeAllPlay allPlay, PrintWriter printWriter, ObjectInputStream objectInputStream, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
         Integer i = (Integer) objectInputStream.readObject();
 
         if(i==1){

@@ -44,6 +44,7 @@ public class SpawnPoint implements Serializable {
         return SpawnWeaponsList;
     }
 
+
     //danneggia lo spawnpoint in modalità dominazione
     public ArrayList<Player> getSPDamage(){
         return this.damageToSP;

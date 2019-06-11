@@ -134,8 +134,4 @@ public abstract class Weapon implements Serializable, Cloneable {
         this.name = name;
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 }

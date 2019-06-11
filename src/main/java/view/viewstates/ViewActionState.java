@@ -20,7 +20,7 @@ public class ViewActionState implements ViewState {
      */
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
-        System.out.println("Chose your action: SHOOT | MOVE | PICKUP | ENDTURN");
+        System.out.println("Chose your action: SHOOT | MOVE | PICKUP | POWERUP | ENDTURN");
         DataPacket dataPacket = null;
         while(true) {
             String s = stdin.nextLine();
@@ -57,6 +57,10 @@ public class ViewActionState implements ViewState {
         }
         if (s.equals("MOVE") || s.equals("move") || s.equals("Move")) {
             dataPacket.setStatesEnum(StatesEnum.MOVE);
+            return dataPacket;
+        }
+        if (s.equals("POWERUP") || s.equals("powerup") || s.equals("Powerup")) {
+            dataPacket.setStatesEnum(StatesEnum.POWERUP);
             return dataPacket;
         }
         if (s.equals("ENDTURN") || s.equals("endturn") || s.equals("Endturn")) {

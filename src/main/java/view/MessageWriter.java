@@ -13,7 +13,7 @@ public class MessageWriter {
             System.out.println(MessageEnum.AMMO_ERROR);
         }
         if(messageEnum.equals(MessageEnum.POWERUP_NOT_FOUND)){
-            System.out.println(MessageEnum.POWERUP_NOT_FOUND);
+            System.out.println("You don't have power-up to use!");
         }
         if(messageEnum.equals(MessageEnum.WEAPON_ERROR_2)){
             System.out.println(MessageEnum.WEAPON_ERROR_2);

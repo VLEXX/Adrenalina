@@ -43,6 +43,10 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
         if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
             return MessageEnum.TOKEN_ERROR;
         }
+        if(dataPacket.getPowerUpId()==null){
+            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
+            return MessageEnum.POWERUP_NOT_FOUND;
+        }
         if(dataPacket.isPowerupAction()==true) {
             if (dataPacket.getPowerUpId().equals(PowerUpId.TAGBACK_GRENADE)) {
                 return doTagbackGrenade(dataPacket);

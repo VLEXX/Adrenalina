@@ -37,7 +37,6 @@ public class ViewPickupState implements ViewState {
                     System.out.print(viewDatabase.getViewPlayerPosition().getCurrentcell().getLeftCell().getCellId() + " ");
                 }
                 System.out.println("\n");
-                stdin.nextLine();
                 int i = stdin.nextInt();
                 if (viewDatabase.getViewPlayerPosition().getCurrentcell().getUpCell() != null) {
                     if (i == viewDatabase.getViewPlayerPosition().getCurrentcell().getUpCell().getCellId()) {

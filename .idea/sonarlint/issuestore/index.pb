@@ -192,3 +192,11 @@ b
 2src/test/java/model/weaponscard/LockRifleTest.java,5\0\501fb8a134daa0c111f74b689d1d00b085355532
 c
 3src/test/java/model/weaponscard/CyberbladeTest.java,9\7\97c78db400a64d45171f6af48d4267de1acee697
+f
+6src/test/java/model/weaponscard/ElectroscytheTest.java,2\a\2a3af4f0e0899fe1c6988119274971db6ef47b1d
+e
+5src/test/java/model/weaponscard/FlameThrowerTest.java,c\1\c1b052979c69cbf59378fb5487a3849def39762c
+`
+0src/test/java/model/weaponscard/FurnaceTest.java,3\f\3f987e5cbe02ba7d3ba8652fd1df3e7bdcee2ef4
+c
+3src/test/java/model/weaponscard/HeatSeekerTest.java,c\3\c3748ad1b662fcb3103867ddf2fe55583c195191

@@ -75,7 +75,8 @@ class PickUpStateTest {
         cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.BLUE,3);
         assertEquals(pus.doAction(d),MessageEnum.AMMO_ERROR);
         Weapon w2 = new Thor();
-        d.setWeapon(w2);
+        Weapon w2a = new Thor();
+        d.setWeapon(w2a);
         i.getStateSelectedMap().getSelectedmap().getRoomList().get(2).getCellsList().get(0).getSpawnpointzone().getSpawnWeaponsList()[2]=w2;
         assertEquals(pus.doAction(d),MessageEnum.AMMO_ERROR);
         d.setReplaceWeapon(rw);
@@ -87,6 +88,7 @@ class PickUpStateTest {
         cps.getBoard().getMunitionsBox().increaseMyMunitionsBox(Munitions.YELLOW,3);
         cps.getBoard().getMunitionsBox().increaseMyMunitionsBox(Munitions.BLUE,3);
         assertEquals(pus.doAction(d),MessageEnum.OK);
+        assertTrue(cps.getBoard().getWeaponsList().contains(w2));
         d.setCell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0));
         Ammo a = new Ammo();
         d.setReplaceWeapon(null);
@@ -100,9 +102,11 @@ class PickUpStateTest {
         cps.getBoard().getMunitionsBox().getMyMunitionsMap().replace(Munitions.BLUE,0);
         i.getCurrentPlayerState().get(d.getPlayer()).resetActionCounter();
         assertEquals(pus.doAction(d),MessageEnum.OK);
+        assertEquals(i.getCurrentPlayerState().get(d.getPlayer()).getPlayerposition().getCurrentcell().getAmmohere(),null);
         d.setCell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1));
         i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1).setAmmohere(a);
         assertEquals(pus.doAction(d),MessageEnum.OK);
+        assertEquals(i.getCurrentPlayerState().get(d.getPlayer()).getPlayerposition().getCurrentcell().getAmmohere(),null);
         d.setToken(0);
         assertEquals(pus.doAction(d), MessageEnum.TOKEN_ERROR);
 

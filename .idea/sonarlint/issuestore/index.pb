@@ -192,3 +192,13 @@ b
 2src/test/java/model/weaponscard/LockRifleTest.java,5\0\501fb8a134daa0c111f74b689d1d00b085355532
 c
 3src/test/java/model/weaponscard/CyberbladeTest.java,9\7\97c78db400a64d45171f6af48d4267de1acee697
+Z
+*src/main/java/servercontroller/Server.java,c\5\c53896f1a9f817f26356e91e5d861d6b2ba76964
+U
+%src/main/java/view/ClientWithRMI.java,5\c\5c60a76081aacd32d710a63e4350c9ccd697baad
+X
+(src/main/java/view/ClientWithSocket.java,b\9\b9749f0f787d04a7c58ec8828535f724f722754f
+`
+0src/main/java/servercontroller/SocketServer.java,d\e\deac219eae8b5d980d8407cdb4811629ecb75e9d
+[
++src/test/java/model/map/SpawnPointTest.java,1\b\1b99621bf3cbc1a5dfdeeb5750d9935bbaf87020

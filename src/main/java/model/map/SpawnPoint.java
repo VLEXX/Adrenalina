@@ -1,21 +1,26 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
 import model.munitions.Munitions;
+import model.playerdata.Player;
 import model.weaponscard.Weapon;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class SpawnPoint implements Serializable {
     private Weapon[] SpawnWeaponsList;  //lista armi presenti allo spawn
     private Munitions spawnColor;
-
+    private ArrayList<Player> damageToSP;
 
 
 
     public SpawnPoint(Munitions m) {                //costruttore
         this.SpawnWeaponsList = new Weapon[]{null, null, null};
         this.spawnColor = m;
+        this.damageToSP = new ArrayList<>();
     }
 
     public Munitions getSpawnColor() {
@@ -38,5 +43,11 @@ public class SpawnPoint implements Serializable {
     public Weapon[] getSpawnWeaponsList() {
         return SpawnWeaponsList;
     }
+
+    //danneggia lo spawnpoint in modalità dominazione
+    public ArrayList<Player> getSPDamage(){
+        return this.damageToSP;
+    }
+
 
 }

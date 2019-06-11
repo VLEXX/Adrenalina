@@ -25,6 +25,7 @@ public class PlayerInformer {
 
     //informa delle posizioni
     public void positionsInformer(){
+        System.out.println("PLAYERS' POSITION:\n");
         if(dbb.getViewPlayerPosition().getCurrentcell()==null) {
             if (dbb.getSkullArray()[0] != null) {
                 System.out.println("You are dead and will respawn at your turn;\n");
@@ -57,7 +58,7 @@ public class PlayerInformer {
         if(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList().isEmpty())
             System.out.println("You have no weapons.\n");
         else{
-            System.out.println("Weapons: \n");
+            System.out.println("Owned weapons:\n ");
             for(Weapon w : dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList()){
                 System.out.print(w.getName());
                 if(w.getLoaded())
@@ -90,6 +91,7 @@ public class PlayerInformer {
 
     //mostra tutto quello presente sulla mappa
     public void mapStats(){
+        System.out.println("MAP STATS\n");
         for(Room r : dbb.getViewMapState().getSelectedMap().getRoomList()){
             for(Cell c : r.getCellsList()){
                 System.out.println("The cell having ID = "+c.getCellId()+" contains ");

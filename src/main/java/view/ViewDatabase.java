@@ -21,6 +21,7 @@ public class ViewDatabase {
     private Player[] skullArray;
     private Player[] secondSkullArray;
     private String nickname;
+    private boolean attackinprogress;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -35,6 +36,15 @@ public class ViewDatabase {
         this.positionHashMap = new HashMap<>();
         this.skullArray= new Player[]{null,null,null,null,null,null,null,null};
         this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
+        this.attackinprogress = false;
+    }
+
+    public boolean isAttackinprogress() {
+        return attackinprogress;
+    }
+
+    public void setAttackinprogress(boolean attackinprogress) {
+        this.attackinprogress = attackinprogress;
     }
 
     public String getNickname() {

@@ -24,10 +24,10 @@ public class Client {
         Scanner in = new Scanner(System.in);
         String s = null;
         Client client = new Client();
-        while(s!="socket"||s!="Socket"||s!="SOCKET"||s!="rmi"||s!="RMI") {
+        while(s!="socket"||s!="Socket"||s!="SOCKET"||s!="rmi"||s!="RMI"){
             s = in.nextLine();
             if (s.equals("socket") || s.equals("Socket") || s.equals("SOCKET")) {
-                client.clientstrategy = new ClientWithSocket("192.168.43.23", 5858);
+                client.clientstrategy = new ClientWithSocket("192.168.178.22", 5858);
                 try {
                     client.clientstrategy.startClient();
                     break;

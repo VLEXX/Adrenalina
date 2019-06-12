@@ -13,7 +13,7 @@ public class ViewUpdater {
     public synchronized void updateView(UpdatePacket updatePacket, ViewDatabase viewDatabase, HashMap<StatesEnum, ViewState> hashMap, Player player){
 
         viewDatabase.setPositionHashMap(updatePacket.getPositionHashMap());
-
+        viewDatabase.setAttackinprogress(updatePacket.isAttackinprogress());
         viewDatabase.getViewCurrentPlayerState().setCurrentPlayerState(updatePacket.getCurrentPlayerState());
 
         viewDatabase.getViewMapState().setSelectedMap(updatePacket.getMap());

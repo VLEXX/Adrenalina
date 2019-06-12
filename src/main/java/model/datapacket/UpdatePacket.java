@@ -25,6 +25,7 @@ public class UpdatePacket implements Serializable {
     private HashMap<Player, Position> positionHashMap;
     private Player[] SkullArray;
     private Player[] SecondSkullArray;
+    private boolean attackinprogress;
 
 
     public UpdatePacket(ChartScore chart, CurrentPlayerState currentPlayerState, Map m, Position position, StatesEnum state, Stack<PowerUp> deck, boolean end) {
@@ -38,6 +39,15 @@ public class UpdatePacket implements Serializable {
         this.positionHashMap = new HashMap<>();
         this.SkullArray = new Player[]{null, null, null, null, null, null, null, null};
         this.SecondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
+        this.attackinprogress = false;
+    }
+
+    public boolean isAttackinprogress() {
+        return attackinprogress;
+    }
+
+    public void setAttackinprogress(boolean attackinprogress) {
+        this.attackinprogress = attackinprogress;
     }
 
     public Player[] getSkullArray() {

@@ -3,7 +3,7 @@
  */
 package model.map;
 
-import java.io.Serializable;
+import java.io.*;
 
 //Classe che memorizza e identifica la posizione di un giocatore
 public class Position implements Serializable{
@@ -36,5 +36,14 @@ public class Position implements Serializable{
         this.currentroom = currentroom;
     }
 
+    public Position deepClone() throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
+        objectOutputStream.writeObject(this);
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+        return (Position) objectInputStream.readObject();
+    }
 
 }

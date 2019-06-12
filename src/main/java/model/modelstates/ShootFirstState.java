@@ -7,6 +7,10 @@ import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
 import model.map.Cell;
 import model.map.Room;
+import model.playerdata.CurrentPlayerState;
+import model.playerdata.Player;
+import model.powerups.PowerUp;
+import model.powerups.PowerUpId;
 import model.weaponscard.Weapon;
 
 import java.io.Serializable;
@@ -98,7 +102,29 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                     if(weapon.getLoaded()==true){
                         MessageEnum messageEnum = weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), dataPacket.getPosition(), allPlay);
                         if(messageEnum.equals(MessageEnum.OK)){
-
+                            if(dataPacket.getPowerUpId()!=null){
+                                for(PowerUp powerUp: allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()){
+                                    if(powerUp.getId().equals(dataPacket.getPowerUpId())){
+                                        if(powerUp.getColor().equals(dataPacket.getPowerUpColor())){
+                                            if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(dataPacket.getMunitions())>=1){
+                                                int n = allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().get(dataPacket.getMunitions());
+                                                n = n -1;
+                                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().replace(dataPacket.getMunitions(), n);
+                                                allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getBoard().getDamageBox().increaseDamage(1,dataPacket.getPlayer());
+                                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().remove(powerUp);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            for(Player player: dataPacket.getTargetPlayersFirst()) {
+                                allPlay.getCurrentPlayerState().get(player).setAttackinprogress(true);
+                                for(PowerUp powerUp: allPlay.getCurrentPlayerState().get(player).getBoard().getPowerupList()){
+                                    if(powerUp.getId().equals(PowerUpId.TAGBACK_GRENADE)){
+                                        allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.POWERUP));
+                                    }
+                                }
+                            }
                             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
                                 if(weapon.hasSecondAttack()==true) {
                                     allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_SECOND));

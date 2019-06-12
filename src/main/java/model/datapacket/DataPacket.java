@@ -33,6 +33,7 @@ public class DataPacket implements Serializable {
     private HashMap<Player, Integer> marksToAdd;
     private Position position;
     private PowerUpId powerUpId;
+    private Munitions powerUpColor;
     private Player targetPlayerPowerup;
     private boolean powerupAction;
     private Munitions munitions;
@@ -66,6 +67,15 @@ public class DataPacket implements Serializable {
         this.powerUpSpawn = null;
         this.weaponlistempty=false;
         this.token=0;
+        this.powerUpColor=null;
+    }
+
+    public Munitions getPowerUpColor() {
+        return powerUpColor;
+    }
+
+    public void setPowerUpColor(Munitions powerUpColor) {
+        this.powerUpColor = powerUpColor;
     }
 
     public void setToken(int token) {

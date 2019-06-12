@@ -114,25 +114,31 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
     }
 
     private MessageEnum doNewton(DataPacket dataPacket){
-
         for (PowerUp powerUp : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()) {
             if (powerUp.getId().equals(PowerUpId.NEWTON)) {
-                Cell c = allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().getCurrentcell();
-                ArrayList<Integer> arrayList = createArrayCell(c);
-                if(arrayList.contains(dataPacket.getCell().getCellId())){
-                    for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
-                        for(Cell cell: room.getCellsList()){
-                            if(dataPacket.getCell().getCellId()==cell.getCellId()){
-                                allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().getCurrentcell().removeInCellPlayer(dataPacket.getTargetPlayerPowerup());
-                                allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().setCurrentcell(cell);
-                                allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().setCurrentroom(room);
-                                cell.addInCellPlayer(dataPacket.getTargetPlayerPowerup());
-                                return MessageEnum.OK;
+                if(powerUp.getColor().equals(dataPacket.getPowerUpColor())) {
+                    Cell c = allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().getCurrentcell();
+                    if (c == null) {
+                        return MessageEnum.PLAYER_NOT_VALID;
+                    }
+                    ArrayList<Integer> arrayList = createArrayCell(c);
+                    if (arrayList.contains(dataPacket.getCell().getCellId())) {
+                        for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
+                            for (Cell cell : room.getCellsList()) {
+                                if (dataPacket.getCell().getCellId() == cell.getCellId()) {
+                                    System.out.print(cell.getCellId());
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().getCurrentcell().removeInCellPlayer(dataPacket.getTargetPlayerPowerup());
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().setCurrentcell(cell);
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().setCurrentroom(room);
+                                    cell.addInCellPlayer(dataPacket.getTargetPlayerPowerup());
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().remove(powerUp);
+                                    return MessageEnum.OK;
+                                }
                             }
                         }
                     }
+                    return MessageEnum.UNREACHABLE_CELL;
                 }
-                return MessageEnum.UNREACHABLE_CELL;
             }
         }
         return MessageEnum.POWERUP_NOT_FOUND;
@@ -160,18 +166,21 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
 
         for (PowerUp powerUp : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()) {
             if (powerUp.getId().equals(PowerUpId.TELEPORTER)) {
-                for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
-                    for(Cell cell: room.getCellsList()){
-                        if(dataPacket.getCell().getCellId()==cell.getCellId()){
-                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().removeInCellPlayer(dataPacket.getPlayer());
-                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
-                            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
-                            cell.addInCellPlayer(dataPacket.getPlayer());
-                            return MessageEnum.OK;
+                if(powerUp.getColor().equals(dataPacket.getPowerUpColor())) {
+                    for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {
+                        for (Cell cell : room.getCellsList()) {
+                            if (dataPacket.getCell().getCellId() == cell.getCellId()) {
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().removeInCellPlayer(dataPacket.getPlayer());
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(cell);
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().remove(powerUp);
+                                cell.addInCellPlayer(dataPacket.getPlayer());
+                                return MessageEnum.OK;
+                            }
                         }
                     }
+                    return MessageEnum.INEXISTENT_CELL;
                 }
-                return MessageEnum.INEXISTENT_CELL;
             }
         }
         return MessageEnum.POWERUP_NOT_FOUND;

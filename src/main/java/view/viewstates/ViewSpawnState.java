@@ -29,8 +29,8 @@ public class ViewSpawnState implements ViewState {
                 break;
             }
             if (s.equals("2")) {
-                dataPacket.setPowerUpToKeepSpawn(pop1);
-                dataPacket.setPowerUpSpawn(pop2);
+                dataPacket.setPowerUpToKeepSpawn(pop2);
+                dataPacket.setPowerUpSpawn(pop1);
                 break;
             }
             else{

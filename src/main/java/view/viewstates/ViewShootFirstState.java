@@ -4,6 +4,8 @@ import model.datapacket.DataPacket;
 import model.datapacket.WeaponsMessage;
 import model.map.Cell;
 import model.playerdata.Player;
+import model.powerups.PowerUp;
+import model.powerups.PowerUpId;
 import model.weaponscard.Weapon;
 import view.ViewDatabase;
 import view.ViewState;
@@ -266,6 +268,66 @@ public class ViewShootFirstState implements ViewState {
                     break;
                 }
             }
+        }
+        for(PowerUp powerUp: viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList()){
+            if(powerUp.getId().equals(PowerUpId.TARGETING_SCOPE)){
+                System.out.println("Do you want to use Power-Up 'Targeting Scope'? ( Y | N )\n");
+                String risp;
+                while(true){
+                    risp = stdin.nextLine();
+                    risp = risp.toLowerCase();
+                    if(risp.equals("y")){
+                        int k=0;
+                        for(PowerUp powerUp1: viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList()){
+                            if(powerUp1.getId().equals(PowerUpId.TARGETING_SCOPE)){
+                                k++;
+                            }
+                        }
+                        if(k>1){
+                            String power;
+                            while(true){
+                                System.out.println("Insert Power-Up name: ");
+                                power = stdin.nextLine();
+                                power = power.toUpperCase();
+                                System.out.print("\n");
+                                for(PowerUp powerUp3: viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList()){
+                                    if(powerUp3.getId().toString().equals(power)){
+                                        String color;
+                                        System.out.println("Insert Power-Up color: ");
+                                        color = stdin.nextLine();
+                                        color = color.toUpperCase();
+                                        System.out.println("\n");
+                                        for(PowerUp powerUp1: viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getPowerupList()){
+                                            if(powerUp1.getId().toString().equals(power) && powerUp1.getColor().toString().equals(color)){
+                                                dataPacket.setPowerUpId(powerUp1.getId());
+                                                dataPacket.setPowerUpColor(powerUp1.getColor());
+                                                break;
+                                            }
+                                        }
+                                        if(dataPacket.getPowerUpId()!=null && dataPacket.getPowerUpColor()!=null){
+                                            break;
+                                        }
+                                    }
+                                }
+                                if(dataPacket.getPowerUpId()!=null && dataPacket.getPowerUpColor()!=null){
+                                    break;
+                                }
+                            }
+                        }
+                        else if(k==1){
+                            dataPacket.setPowerUpId(powerUp.getId());
+                            dataPacket.setPowerUpColor(powerUp.getColor());
+                        }
+                    }
+                    else if(risp.equals("n")){
+                        break;
+                    }
+                    else{
+                        System.out.println("WRONG INPUT! Please insert 'y' or 'n'\n");
+                    }
+                }
+            }
+            break;
         }
         return dataPacket;
     }

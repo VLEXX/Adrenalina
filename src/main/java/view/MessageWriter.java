@@ -13,7 +13,7 @@ public class MessageWriter {
             System.out.println(MessageEnum.AMMO_ERROR);
         }
         if(messageEnum.equals(MessageEnum.POWERUP_NOT_FOUND)){
-            System.out.println("You don't have power-up to use!");
+            System.out.println("You don't have Power-Up to use!");
         }
         if(messageEnum.equals(MessageEnum.WEAPON_ERROR_2)){
             System.out.println(MessageEnum.WEAPON_ERROR_2);
@@ -49,7 +49,7 @@ public class MessageWriter {
             System.out.println(" ");
         }
         if(messageEnum.equals(MessageEnum.PLAYERS_NOT_VALID)){
-            System.out.println(" ");
+            System.out.println(MessageEnum.PLAYER_NOT_VALID);
         }
         if(messageEnum.equals(MessageEnum.PLAYER_ALREADY_PRESENT)){
             System.out.println(" ");

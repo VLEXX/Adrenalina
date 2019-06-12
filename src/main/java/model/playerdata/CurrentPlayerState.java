@@ -21,6 +21,7 @@ public class CurrentPlayerState implements Observer, Serializable {
     private Player hit;
     private boolean endturn;
     private int token;
+    private boolean attackinprogress;
 
     /**
      * Constructor
@@ -31,9 +32,18 @@ public class CurrentPlayerState implements Observer, Serializable {
         this.board = new PlayerBoard();
         this.actioncounter = 2;
         this.activeplayer = player;
-        controlMarks = new HashMap<>();
+        this.controlMarks = new HashMap<>();
         this.hit = null;
         this.endturn=false;
+        this.attackinprogress=false;
+    }
+
+    public boolean isAttackinprogress() {
+        return attackinprogress;
+    }
+
+    public void setAttackinprogress(boolean attackinprogress) {
+        this.attackinprogress = attackinprogress;
     }
 
     public int getToken() {

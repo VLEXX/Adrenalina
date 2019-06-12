@@ -30,8 +30,8 @@ public class Furnace extends Weapon implements Serializable {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 0);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_ROOM, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL, 1);
         super.setName("furnace");
     }
 

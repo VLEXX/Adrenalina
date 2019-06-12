@@ -30,7 +30,7 @@ public class SledgeHammer extends Weapon implements Serializable {
         super.setSecondAttack(true);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_MAX_TWO_CELL, 1);
         super.setName("sledgehammer");
     }
 

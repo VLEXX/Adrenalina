@@ -30,8 +30,8 @@ public class Hellion extends Weapon implements Serializable {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 0);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
         super.setName("hellion");
     }
 

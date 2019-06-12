@@ -34,8 +34,8 @@ public class RocketLauncher extends Weapon implements Serializable {
         super.setSecondAttack(true);
         super.setThirdAttack(true);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setWeaponsMessage(WeaponsMessage.MYPLAYER, 1);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 2);
+        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_CELL, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL, 2);
         super.setName("rocketlauncher");
     }
 

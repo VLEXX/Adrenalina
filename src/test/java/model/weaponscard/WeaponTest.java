@@ -73,11 +73,11 @@ class WeaponTest {
         //TODO
         Weapon w = new LockRifle();
         w.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
-        w.setWeaponsMessage(WeaponsMessage.MYPLAYER, 2);
-        w.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 3);
+        w.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL, 2);
+        w.setWeaponsMessage(WeaponsMessage.NOTHING, 3);
         assertEquals(w.getWeaponsMessage().get(1), WeaponsMessage.MAX_ONE_PLAYER);
-        assertEquals(w.getWeaponsMessage().get(2), WeaponsMessage.MYPLAYER);
-        assertEquals(w.getWeaponsMessage().get(3), WeaponsMessage.ALL_PLAYER_INCELL);
+        assertEquals(w.getWeaponsMessage().get(2), WeaponsMessage.MAX_ONE_CELL);
+        assertEquals(w.getWeaponsMessage().get(3), WeaponsMessage.NOTHING);
     }
 
     @Test

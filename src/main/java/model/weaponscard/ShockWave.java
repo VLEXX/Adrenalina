@@ -30,7 +30,7 @@ public class ShockWave extends Weapon implements Serializable {
         super.setSecondAttack(true);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_THREE_PLAYER, 0);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_ONEDISTANCE, 1);
+        super.setWeaponsMessage(WeaponsMessage.NOTHING, 1);
         super.setName("shockwave");
     }
 

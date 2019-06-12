@@ -31,7 +31,7 @@ public class PowerGlove extends Weapon implements Serializable {
         super.setSecondAttack(true);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_PLAYER, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_CELL_MAX_TWO_PLAYER, 1);
         super.setName("powerglove");
     }
 

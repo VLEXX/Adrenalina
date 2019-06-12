@@ -29,8 +29,8 @@ public class FlameThrower extends Weapon implements Serializable {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_FORCELL, 0);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INTWOCELL, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_CELL, 1);
         super.setName("flamethrower");
     }
 

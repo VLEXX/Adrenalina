@@ -94,6 +94,12 @@ class CyberbladeTest {
         myPosition.setCurrentcell(map.getRoomList().get(2).getCellsList().get(1));
         positionToMove.setCurrentcell(map.getRoomList().get(4).getCellsList().get(0));
         assertEquals(c.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        myPosition.setCurrentcell(map.getRoomList().get(0).getCellsList().get(0));
+        positionToMove.setCurrentcell(map.getRoomList().get(0).getCellsList().get(0));
+        assertEquals(c.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        myPosition.setCurrentcell(map.getRoomList().get(0).getCellsList().get(0));
+        positionToMove.setCurrentcell(map.getRoomList().get(0).getCellsList().get(1));
+        assertEquals(c.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
     }
 
     @Test

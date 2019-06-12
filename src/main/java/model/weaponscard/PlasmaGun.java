@@ -33,7 +33,7 @@ public class PlasmaGun extends Weapon implements Serializable {
         super.setSecondAttack(true);
         super.setThirdAttack(true);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setWeaponsMessage(WeaponsMessage.MYPLAYER, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_CELL, 1);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 2);
         super.setName("plasmagun");
     }

@@ -30,7 +30,7 @@ public class TractorBeam extends Weapon implements Serializable {
         super.setCardColor(Munitions.BLUE);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_MAX_TWO_CELL, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
         super.setName("tractorbeam");
     }

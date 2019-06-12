@@ -30,7 +30,7 @@ public class GrenadeLauncher extends Weapon implements Serializable {
         super.setSecondAttack(true);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL, 1);
         super.setName("grenadelauncher");
     }
 

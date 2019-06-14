@@ -70,7 +70,6 @@ class WeaponTest {
 
     @Test
     void getWeaponsMessage() {
-        //TODO
         Weapon w = new LockRifle();
         w.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
         w.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL, 2);

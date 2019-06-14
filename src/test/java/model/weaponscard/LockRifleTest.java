@@ -116,7 +116,8 @@ class LockRifleTest {
         assertEquals(l.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
         //caso flag
-        //TODO
+        playerToAttack.add(Player.FLAG);
+        assertEquals(l.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.WEAPON_ERROR);
     }
 
     @Test

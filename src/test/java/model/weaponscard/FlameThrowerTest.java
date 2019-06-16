@@ -21,6 +21,7 @@ class FlameThrowerTest {
 
     @Test
     void firstAttack() {
+        //caso base
         FlameThrower flameThrower = new FlameThrower();
         Player myPlayer = Player.BLACK;
         ArrayList<Player> playerToAttack = new ArrayList<>();
@@ -32,7 +33,6 @@ class FlameThrowerTest {
         Position myPosition = new Position();
         Position positionToAttack = new Position();
         Position positionToAttack2 = new Position();
-        Position positionToMove = new Position();
         PlayerBoard playerBoard = new PlayerBoard();
         PlayerBoard playerBoard2 = new PlayerBoard();
         MarksBox marksBox = new MarksBox();
@@ -53,7 +53,6 @@ class FlameThrowerTest {
         positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
         positionToAttack2.getCurrentcell().addInCellPlayer(playerToAttack.get(1));
         myPosition.getCurrentcell().addInCellPlayer(myPlayer);
-        positionToMove = positionToAttack2;
         try{
             allPlay = new InitializeAllPlay();
         } catch(Exception e) {
@@ -65,8 +64,28 @@ class FlameThrowerTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
-        assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
-        //finire TODO
+        assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack2, allPlay), MessageEnum.OK);
+
+        //caso F move2
+        positionToAttack.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(0));
+        assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack2, allPlay), MessageEnum.POSITION_NOT_VALID);
+
+        //caso F move
+        myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(3));
+        assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack, allPlay), MessageEnum.POSITION_NOT_VALID);
+
+        //caso U
+        myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack2, allPlay), MessageEnum.OK);
+
+        //caso L
+        myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(3));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(4).getCellsList().get(0));
+        assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack2, allPlay), MessageEnum.OK);
     }
 
     @Test

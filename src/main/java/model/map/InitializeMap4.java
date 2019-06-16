@@ -1,4 +1,6 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
 import model.munitions.Munitions;
@@ -70,9 +72,9 @@ public class InitializeMap4 implements StrategyMap {
             for (Cell c : r.getCellsList()) {
                 c.initializeReachable2Cells();
                 c.initializeReachable3Cells();
+                c.initializeVisibleCells(map4);
             }
         }
-
         return map4;
     }
 }

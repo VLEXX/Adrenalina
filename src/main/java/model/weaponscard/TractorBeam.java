@@ -38,7 +38,7 @@ public class TractorBeam extends Weapon implements Serializable {
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        if(myPosition == positionToMove || check2(myPosition,positionToMove)) {
+        if(myPosition == positionToMove || check(myPosition,positionToMove)) {
             if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
                 control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if (control != 0)
@@ -80,8 +80,8 @@ public class TractorBeam extends Weapon implements Serializable {
      */
     public boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;
-        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
-            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+        for (int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++) {
+            if (myPosition.getCurrentcell().getVisibleCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 find = true;
                 break;
             }

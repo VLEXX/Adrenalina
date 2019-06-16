@@ -174,4 +174,9 @@ class CellTest {
         for (int j = 0; j < 16; j++)
             assertTrue(testcell.getReachable2Cells().contains(cellarray[j]));
     }
+
+    @Test
+    void initializeVisibleCells() {
+
+    }
 }

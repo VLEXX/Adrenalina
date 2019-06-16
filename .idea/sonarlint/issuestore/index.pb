@@ -200,3 +200,7 @@ e
 0src/test/java/model/weaponscard/FurnaceTest.java,3\f\3f987e5cbe02ba7d3ba8652fd1df3e7bdcee2ef4
 c
 3src/test/java/model/weaponscard/HeatSeekerTest.java,c\3\c3748ad1b662fcb3103867ddf2fe55583c195191
+\
+,src/test/java/model/weaponscard/ZX2Test.java,1\5\15387bc13c1a88987ac56658443b4a69e6c82c0e
+Z
+*src/main/java/servercontroller/Server.java,c\5\c53896f1a9f817f26356e91e5d861d6b2ba76964

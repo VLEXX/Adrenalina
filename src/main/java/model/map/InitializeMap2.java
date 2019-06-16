@@ -68,6 +68,7 @@ public class InitializeMap2 implements StrategyMap {
             for (Cell c : r.getCellsList()) {
                 c.initializeReachable2Cells();
                 c.initializeReachable3Cells();
+                c.initializeVisibleCells(map2);
             }
         }
         return map2;

@@ -34,10 +34,11 @@ public class Cell implements Serializable {
     private ArrayList<Cell> reachable3Cells;
     //giocatore presente nella cella
     private ArrayList<Player> inCellPlayer;
-
+    //celle visibili da un giocatore
+    private ArrayList<Cell> visibleCells;
 
     /**
-     * construct a cell having the parameter id as id
+     * Construct a cell having the parameter id as id
      *  @param id cell id
      */
     public Cell(int id) {
@@ -51,9 +52,100 @@ public class Cell implements Serializable {
         this.reachable2Cells = new ArrayList<>();
         this.reachable3Cells = new ArrayList<>();
         this.inCellPlayer = new ArrayList<>();
+        this.visibleCells = new ArrayList<>();
     }
 
+    /**
+     * Initialize the visible cell from a player
+     * @param map
+     * @author Giulia Rivara
+     */
+    public void initializeVisibleCells(Map map){
+        int ID = 0;
+        for(int i = 0; i < map.getRoomList().size(); i++){
+            for(int j = 0; j < map.getRoomList().get(i).getCellsList().size(); j++){
+                if(this.getCellId() == map.getRoomList().get(i).getCellsList().get(j).getCellId()){
+                    for(int k = 0; k < map.getRoomList().get(i).getCellsList().size(); k++)
+                    visibleCells.add(map.getRoomList().get(i).getCellsList().get(k));
+                    //visibleCells = map.getRoomList().get(i).getCellsList();
+                    ID = map.getRoomList().get(i).getRoomId();
+                    break;
+                }
+            }
+        }
+        if(this.getUpCell() != null){
+            for(int i = 0; i < map.getRoomList().size(); i++){
+                for(int j = 0; j < map.getRoomList().get(i).getCellsList().size(); j++){
+                    if(this.getUpCell().getCellId() == map.getRoomList().get(i).getCellsList().get(j).getCellId()){
+                        if(map.getRoomList().get(i).getRoomId() == ID){
+                            break;
+                        } else {
+                            for(int k = 0; k < map.getRoomList().get(i).getCellsList().size(); k++){
+                                visibleCells.add(map.getRoomList().get(i).getCellsList().get(k));
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if(this.getDownCell() != null){
+            for(int i = 0; i < map.getRoomList().size(); i++){
+                for(int j = 0; j < map.getRoomList().get(i).getCellsList().size(); j++){
+                    if(this.getDownCell().getCellId() == map.getRoomList().get(i).getCellsList().get(j).getCellId()){
+                        if(map.getRoomList().get(i).getRoomId() == ID){
+                            break;
+                        } else {
+                            for(int k = 0; k < map.getRoomList().get(i).getCellsList().size(); k++){
+                                visibleCells.add(map.getRoomList().get(i).getCellsList().get(k));
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if(this.getLeftCell() != null){
+            for(int i = 0; i < map.getRoomList().size(); i++){
+                for(int j = 0; j < map.getRoomList().get(i).getCellsList().size(); j++){
+                    if(this.getLeftCell().getCellId() == map.getRoomList().get(i).getCellsList().get(j).getCellId()){
+                        if(map.getRoomList().get(i).getRoomId() == ID){
+                            break;
+                        } else {
+                            for(int k = 0; k < map.getRoomList().get(i).getCellsList().size(); k++){
+                                visibleCells.add(map.getRoomList().get(i).getCellsList().get(k));
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if(this.getRightCell() != null){
+            for(int i = 0; i < map.getRoomList().size(); i++){
+                for(int j = 0; j < map.getRoomList().get(i).getCellsList().size(); j++){
+                    if(this.getRightCell().getCellId() == map.getRoomList().get(i).getCellsList().get(j).getCellId()){
+                        if(map.getRoomList().get(i).getRoomId() == ID){
+                            break;
+                        } else {
+                            for(int k = 0; k < map.getRoomList().get(i).getCellsList().size(); k++){
+                                visibleCells.add(map.getRoomList().get(i).getCellsList().get(k));
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    /**
+     * @return the visible cells from a player
+     * @author Giulia Rivara
+     */
+    public ArrayList<Cell> getVisibleCells() {
+        return visibleCells;
+    }
 
     /**
      * the following 3 methods manage a list made of players who are located in the cell during the game
@@ -63,7 +155,12 @@ public class Cell implements Serializable {
         return inCellPlayer;
     }
 
-    //metodo che aggiunge un giocatore nella cella
+    /**
+     * Method add a player into a cell
+     * @param player
+     * @return OK
+     * @author Giulia Rivara
+     */
     public MessageEnum addInCellPlayer(Player player){
         boolean found = false;
         for (int i = 0; i < inCellPlayer.size(); i++) {
@@ -79,7 +176,12 @@ public class Cell implements Serializable {
         return MessageEnum.OK;
     }
 
-    //metodo che rimuove un giocatore da una cella
+    /**
+     * Method remove a player from a cell
+     * @param player
+     * @return OK
+     * @author Giulia Rivara
+     */
     public MessageEnum removeInCellPlayer(Player player){
         boolean found = false;
         for (int i = 0; i < inCellPlayer.size(); i++) {
@@ -131,8 +233,6 @@ public class Cell implements Serializable {
         this.leftcell = leftcell;
         this.rightcell = rightcell;
     }
-
-
 
     /**
      *the following 7 methods allow to set or get various class attributes
@@ -354,10 +454,6 @@ public class Cell implements Serializable {
             if(!reachable2Cells.contains(this.getRightCell().getDownCell())&&this.getRightCell().getDownCell()!=null)
                 reachable2Cells.add(this.getRightCell().getDownCell());
         }
-        
     }
-
-
-
 }
 

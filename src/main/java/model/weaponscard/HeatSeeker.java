@@ -76,8 +76,8 @@ public class HeatSeeker extends Weapon implements Serializable {
      */
     private boolean checkNotSee(Position myPosition, Position positionToAttack) {
         boolean notfind = true;
-        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
-            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+        for (int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++) {
+            if (myPosition.getCurrentcell().getVisibleCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 notfind = false;
                 break;
             }

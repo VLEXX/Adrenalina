@@ -99,7 +99,7 @@ public class Hellion extends Weapon implements Serializable {
      * @param positionToAttack position of the player to attack
      * @return true if ok
      */
-    public boolean check(Position myPosition, Position positionToAttack) {
+    private boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++) {
             if (myPosition.getCurrentcell().getVisibleCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {

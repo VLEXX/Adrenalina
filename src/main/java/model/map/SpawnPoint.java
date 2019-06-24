@@ -14,6 +14,7 @@ public class SpawnPoint implements Serializable {
     private Weapon[] SpawnWeaponsList;  //lista armi presenti allo spawn
     private Munitions spawnColor;
     private ArrayList<Player> damageToSP;
+    private short[] pointArray;
 
 
 
@@ -21,6 +22,7 @@ public class SpawnPoint implements Serializable {
         this.SpawnWeaponsList = new Weapon[]{null, null, null};
         this.spawnColor = m;
         this.damageToSP = new ArrayList<>();
+        this.pointArray = new short[]{8,6,4,2,1};
     }
 
     public Munitions getSpawnColor() {

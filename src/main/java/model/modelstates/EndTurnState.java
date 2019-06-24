@@ -8,6 +8,7 @@ import model.datapacket.StatesEnum;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
+import model.gamedata.Mode;
 import model.map.*;
 import model.munitions.Munitions;
 import model.playerdata.DamageBox;
@@ -169,6 +170,11 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
         i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
             score.put(player,0);
             deathcounter.put(player,0);
+            if(i.getStateSelectedMode().getSelectedmode()== Mode.DOMINATION && currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone()!=null){
+                currentPlayerState.getBoard().getDamageBox().increaseDamage(1,player);
+                if(currentPlayerState.getPlayerposition().getCurrentcell().getInCellPlayer().size()==1)
+                    currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone().getSPDamage().add(player);
+            }
         }));
         i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
             if(currentPlayerState.getBoard().getDamageBox().getDamage()[10]!=null) {
@@ -178,7 +184,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
                 score.put(db.getDamage()[0],score.get(db.getDamage()[0])+1);
                 Player[] points=this.damageScoreBoard(db.getDamage());
                 for(int j=0; j<points.length;j++){
-                    if(points[j]!=null)
+                    if(points[j]!=null && points[j]!=player)
                         score.put(points[j],score.get(points[j])+db.getMaxPointArray()[db.getMaxPointIndex()+j]); }
                 db.setMaxPointIndex(db.getMaxPointIndex()+1);
                 deathcounter.put(db.getDamage()[10],deathcounter.get(db.getDamage()[10])+1);
@@ -196,9 +202,22 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
             if(integer>1)
                 score.put(player,score.get(player)+1);
         });
-        score.forEach(((player, integer) -> {
-            i.getChartScore().setScore(player,integer);
-        }));
+        score.forEach(((player, integer) ->
+            i.getChartScore().setScore(player,integer)
+        ));
+        short k=0;
+        for(Room r : i.getStateSelectedMap().getSelectedmap().getRoomList()){
+            for(Cell c : r.getCellsList()){
+                if(c.getSpawnpointzone()!=null){
+                    if(c.getSpawnpointzone().getSPDamage().size()>=8)
+                        k++;
+                }
+            }
+        }
+        if(i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && (k>=2 || i.getSkullArray()[7]!=null))
+            i.setFinalfrenzy(true);
+        //if(i.getSkullArray()[7]!=null && i.getStateSelectedMode().getSelectedmode()==Mode.BASE)
+            //todo stato frenesia finale
     }
 
     /**

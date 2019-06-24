@@ -36,6 +36,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     private State tempState;
     private Player[] skullArray;
     private Player[] secondSkullArray;
+    private boolean finalfrenzy;
 
 
     /**
@@ -57,6 +58,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         this.endgame=false;
         this.skullArray= new Player[]{null,null,null,null,null,null,null,null};
         this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
+        this.finalfrenzy=false;
     }
 
     public State getTempState() {
@@ -160,5 +162,11 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         return secondSkullArray;
     }
 
+    public void setFinalfrenzy(boolean ff){
+        finalfrenzy=ff;
+    }
 
+    public boolean isFinalfrenzy() {
+        return finalfrenzy;
+    }
 }

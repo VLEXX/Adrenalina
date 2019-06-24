@@ -35,7 +35,7 @@ public class DamageBox implements Serializable{
         return damage;
     }
 
-    //Imposta la modalità frenesia mettendo "true", "false" altrimenti
+    //Ritorna la modalità frenesia
     public boolean isActiveFrenzy() {
         return activeFrenzy;
     }

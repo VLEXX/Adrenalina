@@ -220,3 +220,13 @@ h
 8src/test/java/model/weaponscard/GrenadeLauncherTest.java,3\8\3802a3fbfe89ec266d7e847fdb6b384cf3ae468f
 `
 0src/test/java/model/weaponscard/WhisperTest.java,7\0\70da48a0bebc896ac40ca5042eae464c0c23f246
+b
+2src/test/java/model/weaponscard/PlasmaGunTest.java,5\a\5a20acb8f7e2f47a6c817f988f7bc50c00037e49
+d
+4src/test/java/model/weaponscard/TractorBeamTest.java,9\5\95663642b7839b9931f6fa2f88e21201fc885bc8
+c
+3src/test/java/model/weaponscard/PowerGloveTest.java,0\f\0f6729e38417a498c860954a4e121e8b94582fa5
+e
+5src/test/java/model/weaponscard/SledgeHammerTest.java,3\d\3d0e68d5e5358f9d9872159940809c218fff5528
+]
+-src/test/java/model/weaponscard/ThorTest.java,6\2\62e7f9621e7ac09a43984552f89ed252192e1a64

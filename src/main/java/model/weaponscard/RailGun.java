@@ -4,9 +4,11 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Map;
 import model.map.Position;
+import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -35,6 +37,27 @@ public class RailGun extends Weapon implements Serializable {
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_TWO_PLAYER, 1);
         super.setName("railgun");
+    }
+
+    /**
+     * Attack for the DOMINATION mode at the spawn point
+     * @param myPlayer player who attack
+     * @param spawnPoint
+     * @param allPlay current state game
+     * @return OK or ATTACK_NOT_PRESENT
+     */
+    public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
+        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
+            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
+            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+            if(spawnPoint != null) {
+                if (positionSP == myPosition) {
+                    spawnPoint.getSPDamage().add(myPlayer);
+                }
+            }
+        } else
+            return MessageEnum.ATTACK_NOT_PRESENT;
+        return MessageEnum.OK;
     }
 
     /**

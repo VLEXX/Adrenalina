@@ -51,6 +51,4 @@ public class SpawnPoint implements Serializable {
     public ArrayList<Player> getSPDamage(){
         return this.damageToSP;
     }
-
-
 }

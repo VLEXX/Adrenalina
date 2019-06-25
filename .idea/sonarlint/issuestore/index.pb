@@ -230,3 +230,5 @@ e
 5src/test/java/model/weaponscard/SledgeHammerTest.java,3\d\3d0e68d5e5358f9d9872159940809c218fff5528
 ]
 -src/test/java/model/weaponscard/ThorTest.java,6\2\62e7f9621e7ac09a43984552f89ed252192e1a64
+b
+2src/test/java/model/weaponscard/ShockWaveTest.java,7\b\7bc96d216507510524b0ffbb9c22ee9b738beebc

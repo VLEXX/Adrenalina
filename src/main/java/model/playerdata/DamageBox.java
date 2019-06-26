@@ -87,8 +87,11 @@ public class DamageBox implements Serializable{
 
     //Funzione che gestisce i danni
     public void increaseDamage(int damagePoint, Player player) {
-        for (int i = damageTot; i < damageTot + damagePoint; i++)
+        for (int i = damageTot; i < damageTot + damagePoint; i++) {
+            if (i > 11)
+                break;
             damage[i] = player;
+        }
         damageTot = damagePoint + damageTot;
         if (damageTot > 2 && damageTot < 6) {
             pickUp = true;

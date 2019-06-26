@@ -147,7 +147,6 @@ class SledgeHammerTest {
         myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(3));
         positionToMove.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
         assertEquals(sledgeHammer.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
-        //TODO sistemare
     }
 
     @Test

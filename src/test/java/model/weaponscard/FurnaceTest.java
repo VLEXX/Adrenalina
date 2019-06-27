@@ -68,7 +68,6 @@ class FurnaceTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         assertEquals(furnace.firstAttack(myPlayer, playerToAttack, positionToAttack, allPlay), MessageEnum.OK);
 
-        //TODO sistemare
         //caso stessa stanza
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
         positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));

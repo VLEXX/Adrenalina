@@ -71,7 +71,6 @@ class WhisperTest {
         positionToAttack.setCurrentcell(map4.getRoomList().get(0).getCellsList().get(0));
         assertEquals(whisper.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
-        //TODO sistemare
         //caso down
         myPosition.setCurrentcell(map4.getRoomList().get(1).getCellsList().get(1));
         positionToAttack.setCurrentcell(map4.getRoomList().get(4).getCellsList().get(2));

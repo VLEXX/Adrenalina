@@ -5,10 +5,9 @@ package model.weaponscard;
 
 import model.datapacket.MessageEnum;
 import model.gamedata.InitializeAllPlay;
-import model.map.Cell;
-import model.map.InitializeMap1;
-import model.map.Map;
-import model.map.Position;
+import model.gamedata.Mode;
+import model.map.*;
+import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.MarksBox;
 import model.playerdata.Player;
@@ -19,6 +18,32 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CyberbladeTest {
+
+    @Test
+    void firstAttackSP(){
+        /*//caso base
+        Cyberblade cyberblade = new Cyberblade();
+        Position myPosition = new Position();
+        Position positionSP = new Position();
+        Player player = Player.YELLOW;
+        Munitions munitions = Munitions.BLUE;
+        SpawnPoint spawnPoint = new SpawnPoint(munitions);
+        CurrentPlayerState myCurrentPlayerState = new CurrentPlayerState(player);
+        InitializeMap1 initializeMap1 = new InitializeMap1();
+        Map map = initializeMap1.initializeMap();
+        myPosition.setCurrentcell(map.getRoomList().get(0).getCellsList().get(0));
+        positionSP.setCurrentcell(map.getRoomList().get(0).getCellsList().get(0));
+        InitializeAllPlay allPlay = null;
+        try{
+            allPlay = new InitializeAllPlay();
+        } catch(Exception e) {
+        }
+        allPlay.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
+        allPlay.getCurrentPlayerState().put(player, myCurrentPlayerState);
+        allPlay.getCurrentPlayerState().get(player).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(map.getRoomList().get(0).getCellsList().get(0)).setPlayerposition(positionSP);
+        assertEquals(cyberblade.firstAttack(player, spawnPoint, allPlay), MessageEnum.OK);*/
+    }
 
     @Test
     void firstAttack() {

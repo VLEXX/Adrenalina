@@ -58,7 +58,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
         if(out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOO_MUCH_POWERUPS)
             return out1;
         this.transferMarks(allPlay);
-        this.scoreCounter(allPlay);
+        this.scoreCounter(allPlay,dataPacket);
         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setEndturn(true);
         return MessageEnum.OK;
     }
@@ -164,7 +164,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
      * updates all players'score and the chart; if a player is dead the respective MaxPointIndex will be updated
      * @param i class containing information about the current match
      */
-    private void scoreCounter(InitializeAllPlay i){
+    private void scoreCounter(InitializeAllPlay i, DataPacket dataPacket){
         HashMap<Player,Integer> score = new HashMap<>();
         HashMap<Player,Integer> deathcounter = new HashMap<>();
         i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
@@ -211,6 +211,41 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
                 if(c.getSpawnpointzone()!=null){
                     if(c.getSpawnpointzone().getSPDamage().size()>=8)
                         k++;
+                }
+            }
+        }
+        if(dataPacket.getPlayer()==i.getLastTurnPlayer() && i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && i.isFinalfrenzy()){
+            for(Room r : i.getStateSelectedMap().getSelectedmap().getRoomList()){
+                for(Cell c : r.getCellsList()){
+                    if(c.getSpawnpointzone()!=null){
+                        HashMap<Player,Integer> spawnscore = new HashMap<>();
+                        for(int z=0;z<c.getSpawnpointzone().getSPDamage().size();z++) {
+                            spawnscore.putIfAbsent(c.getSpawnpointzone().getSPDamage().get(z), 0);
+                            spawnscore.put(c.getSpawnpointzone().getSPDamage().get(z), spawnscore.get(c.getSpawnpointzone().getSPDamage().get(z)) + 1);
+                        }
+                        ArrayList<Player> order1 = new ArrayList<>();
+                        spawnscore.forEach((player, integer) -> order1.add(player));
+                        for(int j=0;j<k;j++){
+                            for(int y=1;y<k-j;y++){
+                                if(spawnscore.get(order1.get(y-1))<spawnscore.get(order1.get(y))){
+                                    Player temp = order1.get(y);
+                                    order1.set(y,order1.get(y-1));
+                                    order1.set(y-1,temp);
+                                }
+                            }
+                        }
+                        int inc=0;
+                        i.getChartScore().setScore(order1.get(inc),c.getSpawnpointzone().getPointArray()[inc]);
+                        for (int l=1;l<order1.size();l++){
+                            if(spawnscore.get(order1.get(l))==spawnscore.get(order1.get(l-1))){
+                                i.getChartScore().setScore(order1.get(l),c.getSpawnpointzone().getPointArray()[inc]);
+                            }else{
+                                inc=l;
+                                i.getChartScore().setScore(order1.get(l),c.getSpawnpointzone().getPointArray()[inc]);
+                            }
+
+                        }
+                    }
                 }
             }
         }

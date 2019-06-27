@@ -37,7 +37,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     private Player[] skullArray;
     private Player[] secondSkullArray;
     private boolean finalfrenzy;
-
+    private Player lastTurnPlayer;
 
     /**
      * Constructor
@@ -59,6 +59,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         this.skullArray= new Player[]{null,null,null,null,null,null,null,null};
         this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
         this.finalfrenzy=false;
+        this.lastTurnPlayer=null;
     }
 
     public State getTempState() {
@@ -168,5 +169,13 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
 
     public boolean isFinalfrenzy() {
         return finalfrenzy;
+    }
+
+    public void setLastTurnPlayer(Player lastTurnPlayer) {
+        this.lastTurnPlayer = lastTurnPlayer;
+    }
+
+    public Player getLastTurnPlayer(){
+        return lastTurnPlayer;
     }
 }

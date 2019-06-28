@@ -6,6 +6,11 @@ package model.map;
 import model.munitions.Munitions;
 
 public class InitializeMap2 implements StrategyMap {
+
+    /**
+     * initialize map 2
+     * @return map2
+     */
     @Override
     public Map initializeMap() {
         //creazione delle istanze mappa2, stanze e celle

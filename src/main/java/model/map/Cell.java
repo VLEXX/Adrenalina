@@ -1,5 +1,5 @@
 /**
- * @author Alex Saletti && Giulia Rivara
+ * @author Alex Saletti & Giulia Rivara
  */
 package model.map;
 

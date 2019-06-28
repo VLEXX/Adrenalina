@@ -1,4 +1,6 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
 import model.munitions.Munitions;
@@ -6,9 +8,8 @@ import model.munitions.Munitions;
 public class InitializeMap1 implements StrategyMap {
 
     /**
-     *
-     *
-     * @return
+     * Initialize map 1
+     * @return map1
      */
     @Override
     public Map initializeMap() {

@@ -5,9 +5,11 @@ package model.playerdata;
 
 import java.io.Serializable;
 
-//Classe che tiene conto del riquadro danni della plancia giocatore
+/**
+ * Class is the damage box of the player board
+ */
 public class DamageBox implements Serializable{
-    private final static int[] maxPointArray = {8,6,4,2, 1, 1,1,1,1,1,1,1,1,};   //Punti per chi contribuisce al danno quando viene contegguata la plancia
+    private final static int[] maxPointArray = {8,6,4,2,1,1,1,1,1,1,1,1,1,};   //Punti per chi contribuisce al danno quando viene contegguata la plancia
     private final static int[] finalFrenzyArray = {2, 1, 1, 1};    //Punti per chi contribuisce al danno quando viene conteggiata la plancia in frenesia finale
     private Player[] damage;                                    //Array per tener conto dell'ordine dei danni dei giocatori
     private int damageTot;                                      //Totale dei danni subiti
@@ -18,7 +20,9 @@ public class DamageBox implements Serializable{
     private int deathCounter;                                   //Contatore delle morti del giocatore
     private boolean dead;                                       //Giocatore morto se "true", "false" altrimenti
 
-    //Costruttore che imposta la plancia dei danni del giocatore
+    /**
+     * Constructor for the damage box
+     */
     public DamageBox() {
         this.damage = new Player[]{null, null, null, null, null, null, null, null, null, null, null, null};
         this.damageTot = 0;
@@ -30,62 +34,93 @@ public class DamageBox implements Serializable{
         this.dead = false;
     }
 
-    //Ritorna i danni giocatore
+    /**
+     * @return the damage
+     */
     public Player[] getDamage() {
         return damage;
     }
 
-    //Ritorna la modalità frenesia
+    /**
+     * @return true if the frenzy mode is active
+     */
     public boolean isActiveFrenzy() {
         return activeFrenzy;
     }
 
-    //Setta la modalità frenesia "true" se attiva, "false" altrimenti
+    /**
+     * Set true if the frenzy mode is active
+     * @param activeFrenzy
+     */
     public void setActiveFrenzy(boolean activeFrenzy) {
         this.activeFrenzy = activeFrenzy;
     }
 
-    //Ritorna il numero delle morti
+    /**
+     * @return the number of death
+     */
     public int getDeathCounter() {
         return deathCounter;
     }
 
-    //Setta il contatore delle morti
+    /**
+     * Set the death counter
+     * @param deathCounter
+     */
     public void setDeathCounter(int deathCounter) {
         this.deathCounter = deathCounter;
     }
 
-    //Indica se è possibile attivare il potenziamento
+    /**
+     * @return true if the pickup is active
+     */
     public boolean isPickUp() {
         return pickUp;
     }
 
-    //Setta l'uso del potenziamento
+    /**
+     * Set true if the pickup is active
+     * @param pickUp
+     */
     public void setPickUp(boolean pickUp) {
         this.pickUp = pickUp;
     }
 
-    //Indica se è possibile attivare il potenziamento
+    /**
+     * @return  true if shootup is active
+     */
     public boolean isShootUp() {
         return shootUp;
     }
 
-    //Setta l'uso del potenziamento
+    /**
+     * Set true if shootup is active
+     * @param shootUp
+     */
     public void setShootUp(boolean shootUp) {
         this.shootUp = shootUp;
     }
 
-    //Ritorna l'ultimo danno subito
+    /**
+     * @return the total damage
+     */
     public int getDamageTot() {
         return damageTot;
     }
 
-    //Setta i danni giocatore subiti
+    /**
+     * Set the total damage
+     * @param damageTot
+     */
     public void setDamageTot(int damageTot) {
         this.damageTot = damageTot;
     }
 
-    //Funzione che gestisce i danni
+    /**
+     * Function increase damage of a player
+     * @param damagePoint
+     * @param player
+     */
     public void increaseDamage(int damagePoint, Player player) {
         for (int i = damageTot; i < damageTot + damagePoint; i++) {
             if (i > 11)
@@ -103,34 +138,47 @@ public class DamageBox implements Serializable{
         deathCounter++;
     }
 
-    //Ritorna il punteggio da cui si parte per assegnare i punti a chi uccide
+    /**
+     * @return the max point to bring when the player die
+     */
     public int getMaxPointIndex() {
         return maxPointIndex;
     }
 
-    //Setta l'indice per assegnare il punteggio
+    /**
+     * Set the index for the max point
+     * @param maxPointIndex
+     */
     public void setMaxPointIndex(int maxPointIndex) {
         this.maxPointIndex = maxPointIndex;
     }
 
-    //Restituisce il vettore con il valore dei punteggi
+    /**
+     * @return the array with the points
+     */
     public int[] getMaxPointArray() {
         return maxPointArray;
     }
 
-    //Restituisce il vettore con il valore dei punteggi nella frenesia finale
+    /**
+     * @return the array with the points for the final frenzy mode
+     */
     public int[] getFinalFrenzyArray() {
         return finalFrenzyArray;
     }
 
-    //Ritorna false se il giocatore è vivo e true se morto
+    /**
+     * @return true if a player is dead
+     */
     public boolean isDead() {
         return dead;
     }
 
-    //Setta il giocatore in false se morto
+    /**
+     * Set false if a player is dead
+     * @param dead
+     */
     public void setDead(boolean dead) {
         this.dead = dead;
     }
-
 }

@@ -6,6 +6,11 @@ package model.map;
 import model.munitions.Munitions;
 
 public class InitializeMap4 implements StrategyMap {
+
+    /**
+     * initialize map 4
+     * @return map4
+     */
     @Override
     public Map initializeMap() {
         Map map4 = new Map();

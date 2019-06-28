@@ -1,9 +1,16 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
 import model.munitions.Munitions;
 
 public class InitializeMap3 implements StrategyMap {
+
+    /**
+     * Initialize map 3
+     * @return map3
+     */
     @Override
     public Map initializeMap() {
         //creazione delle istanze mappa2, stanze e celle

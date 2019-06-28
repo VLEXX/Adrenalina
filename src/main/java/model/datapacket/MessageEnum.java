@@ -1,3 +1,6 @@
+/**
+ * @author Giulia Rivara & Federico Scatà
+ */
 package model.datapacket;
 
 import java.io.Serializable;

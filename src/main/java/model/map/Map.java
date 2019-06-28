@@ -1,4 +1,6 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
 import java.io.*;
@@ -31,13 +33,13 @@ public class Map implements Serializable {
     }
 
     public Map deepClone() throws IOException, ClassNotFoundException {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
-            objectOutputStream.writeObject(this);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
+        objectOutputStream.writeObject(this);
 
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream objectInputStream = new ObjectInputStream(bais);
-            return (Map) objectInputStream.readObject();
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+        return (Map) objectInputStream.readObject();
     }
 }
 

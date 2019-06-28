@@ -3,7 +3,6 @@
  */
 package model.weaponscard;
 
-import model.datapacket.DataPacket;
 import model.gamedata.InitializeAllPlay;
 import model.map.Position;
 import model.map.SpawnPoint;

@@ -5,10 +5,7 @@ package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
 import model.gamedata.Mode;
-import model.map.Cell;
-import model.map.Map;
-import model.map.Position;
-import model.map.SpawnPoint;
+import model.map.*;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;

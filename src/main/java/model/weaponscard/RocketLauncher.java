@@ -103,8 +103,8 @@ public class RocketLauncher extends Weapon implements Serializable {
      * @return POSITION_UNREACHABLE or OK
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
-        Position myposition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        if (check2(myposition, positionToMove)) {
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        if (check2(myPosition, positionToMove)) {
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().getCurrentcell().removeInCellPlayer(myPlayer);
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().setCurrentcell(positionToMove.getCurrentcell());
             allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition().getCurrentcell().addInCellPlayer(myPlayer);

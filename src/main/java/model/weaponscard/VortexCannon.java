@@ -75,7 +75,7 @@ public class VortexCannon extends Weapon implements Serializable {
         if(myPosition == positionVortex || check(myPosition,positionVortex) == false)
             return MessageEnum.POSITION_UNREACHABLE;
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(checkPosition(positionVortex.getCurrentcell(),positionToAttack.getCurrentcell())){
+        if(checkPosition(positionVortex.getCurrentcell(), positionToAttack.getCurrentcell())){
             if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
                 control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if(positionVortex.getCurrentcell() != positionToAttack.getCurrentcell()) {
@@ -145,7 +145,7 @@ public class VortexCannon extends Weapon implements Serializable {
      * @param positionToAttack position of the player to attack
      * @return true if ok
      */
-    public boolean check(Position myPosition, Position positionToAttack) {
+    private boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;
         for (int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++) {
             if (myPosition.getCurrentcell().getVisibleCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {

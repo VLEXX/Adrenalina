@@ -80,21 +80,6 @@ class WeaponTest {
     }
 
     @Test
-    void firstAttack() {
-        //TODO
-    }
-
-    @Test
-    void secondAttack() {
-        //TODO
-    }
-
-    @Test
-    void thirdAttack() {
-        //TODO
-    }
-
-    @Test
     void getName(){
         Weapon w = new LockRifle();
         w.setName("Lockrifle");

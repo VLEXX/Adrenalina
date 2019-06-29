@@ -48,7 +48,7 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         return playerArrayList;
     }
 
-    public int getIndexArray() {
+    public synchronized int getIndexArray() {
         return indexArray;
     }
 
@@ -69,20 +69,15 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
     public synchronized int addClient() throws RemoteException {
         Random random = new Random();
         int i;
-        if(playerArrayList.size()!=5) {
-            if (getClientCounter() > 0) {
-                while (true) {
-                    i = random.nextInt(1000);
-                    if (!(clientlist.contains(i))) {
-                        this.clientlist.add(i);
-                        update();
-                        break;
-                    }
-                }
-                return i;
+        while (true) {
+            i = random.nextInt(1000);
+            if (!(clientlist.contains(i))) {
+                this.clientlist.add(i);
+                update();
+                break;
             }
         }
-        return -1;
+        return i;
     }
 
     public synchronized int getClientCounter() throws RemoteException {

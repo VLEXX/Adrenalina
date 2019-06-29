@@ -82,14 +82,6 @@ public class ClientManager {
                 break;
             }
         }
-        ok=false;
-        System.out.println("Waiting the opponents...\n\n");
-        while(true) {
-            ok = (boolean) objectInputStream.readObject();
-            if(ok == true){
-                break;
-            }
-        }
     }
 
     public synchronized void manageVote(PrintWriter outMessage, Scanner inMessage, Scanner stdin, ObjectOutputStream objectOutputStream, ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
@@ -106,14 +98,7 @@ public class ClientManager {
                 System.out.println("WRONG INPUT\n\n Choose between 1 | 2 | 3 | 4");
             }
         }
-        boolean ok = false;
-        System.out.println("Waiting the opponents...\n\n");
-        while(true) {
-            ok = (boolean) objectInputStream.readObject();
-            if(ok == true){
-                break;
-            }
-        }
+
         MessageString message = (MessageString)objectInputStream.readObject();
         System.out.println(message.getMessage());
     }

@@ -23,7 +23,7 @@ import java.util.Scanner;
 public class ClientWithRMI implements ClientStrategy {
 
     public void startClient() throws IOException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry("192.168.178.22", 8080);
+        Registry registry = LocateRegistry.getRegistry("192.168.178.45", 8080);
 
         ClientManagerRMI clientManager = new ClientManagerRMI();
         ViewDatabase viewDatabase = new ViewDatabase();
@@ -53,7 +53,6 @@ public class ClientWithRMI implements ClientStrategy {
 
         Scanner stdin = new Scanner(System.in);
 
-        System.out.println("Connection established\n\n");
 
         IDClientListInterface idClientList = (IDClientListInterface) registry.lookup("IDClientList");
         InitializeAllPlayInterface allPlay = (InitializeAllPlayInterface) registry.lookup("allPlay");

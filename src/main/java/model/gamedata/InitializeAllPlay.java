@@ -36,6 +36,8 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     private State tempState;
     private Player[] skullArray;
     private Player[] secondSkullArray;
+    private boolean wait;
+    private boolean starting;
     private boolean finalfrenzy;
     private Player lastTurnPlayer;
 
@@ -60,6 +62,24 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
         this.finalfrenzy=false;
         this.lastTurnPlayer=null;
+        this.wait=false;
+        this.starting=false;
+    }
+
+    public synchronized boolean isStarting() {
+        return starting;
+    }
+
+    public void setStarting(boolean starting) {
+        this.starting = starting;
+    }
+
+    public synchronized boolean isWait() {
+        return wait;
+    }
+
+    public void setWait(boolean wait) {
+        this.wait = wait;
     }
 
     public State getTempState() {

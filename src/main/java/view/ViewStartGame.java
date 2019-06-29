@@ -45,8 +45,6 @@ public class ViewStartGame extends Thread {
             try {
                 updatePacket = (UpdatePacket) objectInputStream.readObject();
                 viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
-                int token = (Integer) objectInputStream.readObject();
-                viewDatabase.setClientToken(token);
                 break;
             } catch (IOException e) {
 

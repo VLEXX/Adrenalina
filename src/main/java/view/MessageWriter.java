@@ -60,5 +60,8 @@ public class MessageWriter {
         if(messageEnum.equals(MessageEnum.TOO_MUCH_POWERUPS)){
             System.out.println(MessageEnum.TOO_MUCH_POWERUPS);
         }
+        if(messageEnum.equals(MessageEnum.TOKEN_ERROR)){
+            System.out.println(MessageEnum.TOKEN_ERROR);
+        }
     }
 }

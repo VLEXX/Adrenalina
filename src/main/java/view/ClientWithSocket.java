@@ -26,7 +26,6 @@ public class ClientWithSocket implements ClientStrategy{
         public void startClient() throws IOException, ClassNotFoundException {
             try {
                 Socket socket = new Socket(ip, port);
-                System.out.println("Connection established\n\n");
 
                 ClientManager clientManager = new ClientManager();
 
@@ -76,8 +75,44 @@ public class ClientWithSocket implements ClientStrategy{
                     clientManager.manageChoice(stdin, objectOutputStream, objectInputStream, viewDatabase);
                     clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
 
-                    ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);
-                    startGame.start();
+                    boolean go;
+                    go = (boolean) objectInputStream.readObject();
+
+                    if(!go){
+                        System.out.println("Waiting for other players...\n");
+                    }
+
+
+                    int token = (Integer) objectInputStream.readObject();
+                    viewDatabase.setClientToken(token);
+
+
+
+                    go = (boolean) objectInputStream.readObject();
+
+                    System.out.println("10 seconds to start...\n");
+
+                    while(true) {
+                        go = (boolean) objectInputStream.readObject();
+                        go = (boolean) objectInputStream.readObject();
+                        if(go){
+                            break;
+                        }
+                        else{
+                            System.out.println("Waiting for other players...\n");
+                            go = (boolean) objectInputStream.readObject();
+                            System.out.println("10 seconds to start...\n");
+                        }
+                    }
+
+                    System.out.println("\n");
+
+                    go = (boolean) objectInputStream.readObject();
+
+                    if(go){
+                        ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);
+                        startGame.start();
+                    }
                 }
             }
             catch (ConnectException e){

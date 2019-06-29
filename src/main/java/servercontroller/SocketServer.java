@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,16 +35,22 @@ public class SocketServer extends Thread implements Serializable {
         ServerSocket serverSocket = new ServerSocket(port);
 
         System.out.println("Server ready");
-        while(this.idClientList.getClientCounter()!=0) {
+        while(true) {
             try {
-                Socket socket = serverSocket.accept();
-                executor.submit(new SocketClientHandler(socket, this.allPlay, idClientList));
-                this.idClientList.update();
+                if(idClientList.getNicknameList().size()!=5){
+                    Socket socket = serverSocket.accept();
+                    executor.submit(new SocketClientHandler(socket, this.allPlay, idClientList));
+                    this.idClientList.update();
+                }
+                else{
+                    break;
+                }
             }
             catch (IOException e){
-                break;
+
             }
         }
+
 
         executor.shutdown();
         serverSocket.close();

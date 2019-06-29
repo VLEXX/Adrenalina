@@ -14,8 +14,11 @@ import model.playerdata.Player;
 import java.io.*;
 
 import java.net.Socket;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import static java.lang.Thread.sleep;
 
 public class SocketClientHandler implements Runnable {
     private Socket socket;
@@ -72,23 +75,11 @@ public class SocketClientHandler implements Runnable {
 
                 allPlay.addPlayerCounter();
                 player = serverManagerFunction.chooseCharacterManager(objectInputStream, this.allPlay, objectOutputStream, idClientList);
-                while (true) {
-                    if (allPlay.getPlayercountertemp() == 0) {
-                        boolean ok = true;
-                        objectOutputStream.writeObject(ok);
-                        break;
-                    }
-                }
+
                 idClientList.getNickPlayer().put(nickname, player);
                 allPlay.getVoteMap().addPlayerCounter();
                 serverManagerFunction.manageVoteMap(allPlay, outMessage, objectInputStream, objectOutputStream);
-                while (true) {
-                    if (allPlay.getStateSelectedMap().getSelectedmap() != null) {
-                        boolean ok = true;
-                        objectOutputStream.writeObject(ok);
-                        break;
-                    }
-                }
+
                 allPlay.resetPlayerCounterTemp();
                 MessageString message = new MessageString("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
                 objectOutputStream.writeObject(message);
@@ -99,12 +90,54 @@ public class SocketClientHandler implements Runnable {
                     allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.SPAWN));
                 }
 
+                if(idClientList.getPlayerArrayList().size() < 3) {
+                    objectOutputStream.writeObject(false);
+                }
+                else{
+                    objectOutputStream.writeObject(true);
+                }
+
+
+                while(true){
+                    if(idClientList.getPlayerArrayList().size() >= 3){
+                        allPlay.setWait(false);
+                        break;
+                    }
+                }
+
+                Integer token = idClientList.addClient();
+                objectOutputStream.writeObject(token);
+
+                objectOutputStream.writeObject(true);
+
+                while(true) {
+                    if(!allPlay.isWait()) {
+                        sleep(10 * 1000);
+                        objectOutputStream.writeObject(true);
+                        sleep(2 * 1000);
+                        if (idClientList.getPlayerArrayList().size() >= 3) {
+                            objectOutputStream.writeObject(true);
+                            break;
+                        } else {
+                            objectOutputStream.writeObject(false);
+                            allPlay.setWait(true);
+                            while(true){
+                                if(idClientList.getPlayerArrayList().size() >= 3){
+                                    objectOutputStream.writeObject(true);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                objectOutputStream.writeObject(true);
+
                 Updater updater = new Updater(allPlay);
                 UpdatePacket updatePacket = updater.updateClient(player);
                 objectOutputStream.writeObject(updatePacket);
 
-                Integer token = allPlay.getCurrentPlayerState().get(player).getToken();
-                objectOutputStream.writeObject(token);
+
 
                 StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
                 startGame.start();
@@ -115,9 +148,14 @@ public class SocketClientHandler implements Runnable {
                 }
             }
         }
-        catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (CloneNotSupportedException e) {
+        catch (IOException e) {
+            try {
+                idClientList.getPlayerArrayList().remove(player);
+                idClientList.getClientlist().remove(allPlay.getCurrentPlayerState().get(player).getToken());
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
+            }
+        } catch (CloneNotSupportedException | ClassNotFoundException | InterruptedException e) {
             e.printStackTrace();
         }
     }

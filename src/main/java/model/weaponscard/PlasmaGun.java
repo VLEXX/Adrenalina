@@ -40,25 +40,25 @@ public class PlasmaGun extends Weapon implements Serializable {
         super.setName("plasmagun");
     }
 
-    /**
+     /**
      * Attack for the DOMINATION mode at the spawn point
      * @param myPlayer player who attack
      * @param spawnPoint
      * @param allPlay current state game
-     * @return OK or ATTACK_NOT_PRESENT
+     * @return OK or ATTACK_NOT_PRESENT or POSITION_NOT_VALID
      */
     public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
-            }
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        int cellID = myPosition.getCurrentcell().getCellId();
+        int roomID = myPosition.getCurrentroom().getRoomId();
+        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION) {
+            if (allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(roomID-1).getCellsList().get(cellID-1).getSpawnpointzone() == spawnPoint) {
+                spawnPoint.getSPDamage().add(myPlayer);
+            } else
+                return MessageEnum.POSITION_NOT_VALID;
+            return MessageEnum.OK;
         } else
             return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
     }
 
     /**
@@ -66,6 +66,7 @@ public class PlasmaGun extends Weapon implements Serializable {
      *
      * @param player           player who attack
      * @param playerToAttack   player to attack
+     * @param positionToMove null
      * @param allPlay current state game
      * @return OK or POSITION_NOT_FOUND
      */
@@ -88,8 +89,9 @@ public class PlasmaGun extends Weapon implements Serializable {
      * Function phase slip
      *
      * @param player       player who attack
-     * @param playerToAttack player to attack = null
+     * @param playerToAttack null
      * @param positionToMove position to go
+     * @param allPlay current state game
      * @return OK or POSITION_UNREACHABLE
      */
     public MessageEnum secondAttack(Player player, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
@@ -132,7 +134,7 @@ public class PlasmaGun extends Weapon implements Serializable {
      *
      * @param myPosition       position of the player who attack
      * @param positionToAttack position to attack
-     * @return OK or POSITION_NOT_FOUND
+     * @return true if ok
      */
     private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;
@@ -152,7 +154,7 @@ public class PlasmaGun extends Weapon implements Serializable {
      *
      * @param myPosition       position of the player who attack
      * @param positionToAttack position to attack
-     * @return OK or POSITION_NOT_FOUND
+     * @return true if ok
      */
     private boolean check2(Position myPosition, Position positionToAttack){
         boolean find = false;

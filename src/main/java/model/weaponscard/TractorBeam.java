@@ -42,22 +42,30 @@ public class TractorBeam extends Weapon implements Serializable {
      * @param myPlayer player who attack
      * @param spawnPoint
      * @param allPlay current state game
-     * @return OK or ATTACK_NOT_PRESENT
+     * @return OK or ATTACK_NOT_PRESENT or POSITION_NOT_VALID
      */
     public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
-            }
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        int cellID = myPosition.getCurrentcell().getCellId();
+        int roomID = myPosition.getCurrentroom().getRoomId();
+        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION) {
+            if (allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(roomID-1).getCellsList().get(cellID-1).getSpawnpointzone() == spawnPoint) {
+                spawnPoint.getSPDamage().add(myPlayer);
+            } else
+                return MessageEnum.POSITION_NOT_VALID;
+            return MessageEnum.OK;
         } else
             return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
     }
 
+    /**
+     * Function first attack
+     * @param myPlayer player who attack
+     * @param playerToAttack player to attack
+     * @param positionToMove where want to go
+     * @param allPlay current state game
+     * @return OK or POSITION_NOT_VALID
+     */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
@@ -75,6 +83,14 @@ public class TractorBeam extends Weapon implements Serializable {
         return MessageEnum.OK;
     }
 
+    /**
+     * Function punisher mode attack
+     * @param myPlayer player who attack
+     * @param playerToAttack player to attack
+     * @param positionToMove null
+     * @param allPlay current state game
+     * @return PLAYER_NOT_VALID or OK
+     */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();

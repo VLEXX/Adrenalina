@@ -41,22 +41,30 @@ public class FlameThrower extends Weapon implements Serializable {
      * @param myPlayer player who attack
      * @param spawnPoint
      * @param allPlay current state game
-     * @return OK or ATTACK_NOT_PRESENT
+     * @return OK or ATTACK_NOT_PRESENT or POSITION_NOT_VALID
      */
     public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
-            }
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        int cellID = myPosition.getCurrentcell().getCellId();
+        int roomID = myPosition.getCurrentroom().getRoomId();
+        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION) {
+            if (allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(roomID-1).getCellsList().get(cellID-1).getSpawnpointzone() == spawnPoint) {
+                spawnPoint.getSPDamage().add(myPlayer);
+            } else
+                return MessageEnum.POSITION_NOT_VALID;
+            return MessageEnum.OK;
         } else
             return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
     }
 
+    /**
+     * Function first attack
+     * @param myPlayer player who attack
+     * @param playerToAttack player to attack
+     * @param positionToAttack position to attack
+     * @param allPlay current state game
+     * @return POSITION_NOT_VALID or OK
+     */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToAttack, InitializeAllPlay allPlay){
         int control = 0;
         char move = 'F';
@@ -85,6 +93,14 @@ public class FlameThrower extends Weapon implements Serializable {
         return MessageEnum.OK;
     }
 
+    /**
+     * Function barbecue attack
+     * @param myPlayer player who attack
+     * @param playerToAttack player to attack
+     * @param positionToFire position to attack
+     * @param allPlay current state game
+     * @return POSITION_NOT_VALID or OK
+     */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToFire, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         char move = checkPosition2(myPosition, positionToFire);
@@ -112,12 +128,19 @@ public class FlameThrower extends Weapon implements Serializable {
         return MessageEnum.ATTACK_NOT_PRESENT;
     }
 
+    /**
+     * Attack function
+     * @param myPlayer
+     * @param cellToFire
+     * @param allPlay current state game
+     * @param damage number of damage
+     */
     private void attack(Player myPlayer, Cell cellToFire, InitializeAllPlay allPlay, int damage){
         int control = 0;
         for(int i = 0; i < cellToFire.getInCellPlayer().size(); i++){
             Player player = cellToFire.getInCellPlayer().get(i);
             if(allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
-            control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if(control != 0)
                 allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);
             allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(damage, myPlayer);

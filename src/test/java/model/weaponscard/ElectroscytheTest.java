@@ -22,6 +22,7 @@ class ElectroscytheTest {
 
     @Test
     void firstAttack() {
+        //caso base
         Electroscythe electroscythe = new Electroscythe();
         Player myPlayer = Player.BLACK;
         ArrayList<Player> playerToAttack = new ArrayList<>();
@@ -72,6 +73,7 @@ class ElectroscytheTest {
 
     @Test
     void secondAttack() {
+        //caso base
         Electroscythe electroscythe = new Electroscythe();
         Player myPlayer = Player.BLACK;
         ArrayList<Player> playerToAttack = new ArrayList<>();

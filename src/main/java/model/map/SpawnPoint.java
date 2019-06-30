@@ -55,4 +55,20 @@ public class SpawnPoint implements Serializable {
     public short[] getPointArray() {
         return pointArray;
     }
+
+    public void setDamageToSP(ArrayList<Player> damageToSP) {
+        this.damageToSP = damageToSP;
+    }
+
+    public void setPointArray(short[] pointArray) {
+        this.pointArray = pointArray;
+    }
+
+    public void setSpawnColor(Munitions spawnColor) {
+        this.spawnColor = spawnColor;
+    }
+
+    public void setSpawnWeaponsList(Weapon[] spawnWeaponsList) {
+        SpawnWeaponsList = spawnWeaponsList;
+    }
 }

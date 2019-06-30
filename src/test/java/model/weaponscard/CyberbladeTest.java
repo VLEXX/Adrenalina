@@ -24,25 +24,35 @@ class CyberbladeTest {
         //caso base
         Cyberblade cyberblade = new Cyberblade();
         Position myPosition = new Position();
-        Position positionSP = new Position();
         Player player = Player.YELLOW;
         Munitions munitions = Munitions.BLUE;
         SpawnPoint spawnPoint = new SpawnPoint(munitions);
         CurrentPlayerState myCurrentPlayerState = new CurrentPlayerState(player);
-        InitializeMap1 initializeMap1 = new InitializeMap1();
-        Map map = initializeMap1.initializeMap();
-        myPosition.setCurrentcell(map.getRoomList().get(0).getCellsList().get(0));
-        positionSP.setCurrentcell(map.getRoomList().get(0).getCellsList().get(0));
+
         InitializeAllPlay allPlay = null;
         try{
             allPlay = new InitializeAllPlay();
         } catch(Exception e) {
         }
+        allPlay.getStateSelectedMap().setStrategyMap(1);
+        allPlay.getStateSelectedMap().setSelectedmap();
+        myPosition.setCurrentroom(allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
+        myPosition.setCurrentcell(allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0));
         allPlay.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
         allPlay.getCurrentPlayerState().put(player, myCurrentPlayerState);
         allPlay.getCurrentPlayerState().get(player).setPlayerposition(myPosition);
-        allPlay.getCurrentPlayerState().get(map.getRoomList().get(0).getCellsList().get(0)).setPlayerposition(positionSP);
+        allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).setSpawnpointzone(spawnPoint);
         assertEquals(cyberblade.firstAttack(player, spawnPoint, allPlay), MessageEnum.OK);
+
+        //caso non in mode domination
+        allPlay.getStateSelectedMode().setSelectedmode(Mode.BASE);
+        assertEquals(cyberblade.firstAttack(player, spawnPoint, allPlay), MessageEnum.ATTACK_NOT_PRESENT);
+
+        //caso posizione errata
+        allPlay.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
+        myPosition.setCurrentcell(allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(1).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(player).setPlayerposition(myPosition);
+        assertEquals(cyberblade.firstAttack(player, spawnPoint, allPlay), MessageEnum.POSITION_NOT_VALID);
     }
 
     @Test

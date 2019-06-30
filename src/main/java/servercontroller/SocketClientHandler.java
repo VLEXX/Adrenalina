@@ -68,7 +68,45 @@ public class SocketClientHandler implements Runnable {
             String game = (String) objectInputStream.readObject();
             if(game.equals("continue")){
 
+                String nickname = (String) objectInputStream.readObject();
+                if(idClientList.getNicknameList().contains(nickname)){
+                    while(true){
+                        if(allPlay.isStarting()){
+                            break;
+                        }
+                        else{
+                            idClientList.getPlayerArrayList().add(idClientList.getNickPlayer().get(nickname));
+                        }
+                    }
+                }
 
+                Integer token = idClientList.addClient();
+                objectOutputStream.writeObject(token);
+
+                this.player = idClientList.getNickPlayer().get(nickname);
+                objectOutputStream.writeObject(player);
+
+                if(!(idClientList.getPlayerArrayList().contains(player))){
+                    idClientList.getPlayerArrayList().add(idClientList.getNickPlayer().get(nickname));
+                }
+
+                Updater updater = new Updater(allPlay);
+                UpdatePacket updatePacket = updater.updateClient(player);
+                objectOutputStream.writeObject(updatePacket);
+
+
+                allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
+
+
+                StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
+                startGame.start();
+
+                while(true) {
+                    if (allPlay.isEndgame() == true) {
+                        socket.close();
+                        break;
+                    }
+                }
 
             }
             else if(game.equals("new game")) {
@@ -142,11 +180,15 @@ public class SocketClientHandler implements Runnable {
 
 
                 StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
+                allPlay.setStarting(true);
                 startGame.start();
 
 
-                if (allPlay.isEndgame() == true) {
-                    socket.close();
+                while(true) {
+                    if (allPlay.isEndgame() == true) {
+                        socket.close();
+                        break;
+                    }
                 }
             }
         }

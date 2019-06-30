@@ -218,42 +218,39 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
             for(Room r : i.getStateSelectedMap().getSelectedmap().getRoomList()){
                 for(Cell c : r.getCellsList()){
                     if(c.getSpawnpointzone()!=null){
+                        if(!c.getSpawnpointzone().getSPDamage().isEmpty()){
                         HashMap<Player,Integer> spawnscore = new HashMap<>();
                         for(int z=0;z<c.getSpawnpointzone().getSPDamage().size();z++) {
                             spawnscore.putIfAbsent(c.getSpawnpointzone().getSPDamage().get(z), 0);
-                            spawnscore.put(c.getSpawnpointzone().getSPDamage().get(z), spawnscore.get(c.getSpawnpointzone().getSPDamage().get(z)) + 1);
-                        }
+                            spawnscore.put(c.getSpawnpointzone().getSPDamage().get(z), spawnscore.get(c.getSpawnpointzone().getSPDamage().get(z)) + 1); }
                         ArrayList<Player> order1 = new ArrayList<>();
-                        spawnscore.forEach((player, integer) -> order1.add(player));
-                        for(int j=0;j<k;j++){
-                            for(int y=1;y<k-j;y++){
+                        order1.addAll(spawnscore.keySet());
+                        for(int j=0;j<order1.size();j++){
+                            for(int y=1;y<order1.size()-j;y++){
                                 if(spawnscore.get(order1.get(y-1))<spawnscore.get(order1.get(y))){
                                     Player temp = order1.get(y);
                                     order1.set(y,order1.get(y-1));
                                     order1.set(y-1,temp);
                                 }
-                            }
-                        }
+                            } }
                         int inc=0;
                         i.getChartScore().setScore(order1.get(inc),c.getSpawnpointzone().getPointArray()[inc]);
-                        for (int l=1;l<order1.size();l++){
-                            if(spawnscore.get(order1.get(l))==spawnscore.get(order1.get(l-1))){
-                                i.getChartScore().setScore(order1.get(l),c.getSpawnpointzone().getPointArray()[inc]);
-                            }else{
-                                inc=l;
-                                i.getChartScore().setScore(order1.get(l),c.getSpawnpointzone().getPointArray()[inc]);
-                            }
-
+                        for (int l=1;l<order1.size();l++) {
+                            if (spawnscore.get(order1.get(l)) == spawnscore.get(order1.get(l - 1))) {
+                                i.getChartScore().setScore(order1.get(l), c.getSpawnpointzone().getPointArray()[inc]); } else {
+                                inc = l;
+                                i.getChartScore().setScore(order1.get(l), c.getSpawnpointzone().getPointArray()[inc]); }
+                        }
                         }
                     }
                 }
-            }
-        }
+            } }
         if(i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && (k>=2 || i.getSkullArray()[7]!=null))
             i.setFinalfrenzy(true);
-        //if(i.getSkullArray()[7]!=null && i.getStateSelectedMode().getSelectedmode()==Mode.BASE)
-            //todo stato frenesia finale
+        //if(i.getSkullArray()[7]!=null && i.getStateSelectedMode().getSelectedmode()==Mode.BASE) //
+        // todo stato frenesia finale
     }
+
 
     /**
      * returns the sorted turn score chart counting damage done by all players to the dead ones

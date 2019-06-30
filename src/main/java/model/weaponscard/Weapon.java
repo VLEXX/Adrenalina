@@ -5,6 +5,7 @@ package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
 import model.map.Position;
+import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -121,6 +122,8 @@ public abstract class Weapon implements Serializable, Cloneable {
     }
 
     public abstract MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay);
+
+    public abstract  MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay);
 
     public abstract MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay);
 

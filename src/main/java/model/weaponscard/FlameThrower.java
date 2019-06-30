@@ -4,8 +4,10 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Position;
+import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -29,9 +31,30 @@ public class FlameThrower extends Weapon implements Serializable {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_FORCELL, 0);
-        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INTWOCELL, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_CELL, 1);
         super.setName("flamethrower");
+    }
+
+    /**
+     * Attack for the DOMINATION mode at the spawn point
+     * @param myPlayer player who attack
+     * @param spawnPoint
+     * @param allPlay current state game
+     * @return OK or ATTACK_NOT_PRESENT
+     */
+    public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
+        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
+            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
+            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+            if(spawnPoint != null) {
+                if (positionSP == myPosition) {
+                    spawnPoint.getSPDamage().add(myPlayer);
+                }
+            }
+        } else
+            return MessageEnum.ATTACK_NOT_PRESENT;
+        return MessageEnum.OK;
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToAttack, InitializeAllPlay allPlay){
@@ -64,7 +87,7 @@ public class FlameThrower extends Weapon implements Serializable {
 
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToFire, InitializeAllPlay allPlay){
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        char move = checkPosition2(myPosition,positionToFire);
+        char move = checkPosition2(myPosition, positionToFire);
         if(move == 'F')
             return MessageEnum.POSITION_NOT_VALID;
         if(move == 'T')
@@ -91,7 +114,7 @@ public class FlameThrower extends Weapon implements Serializable {
 
     private void attack(Player myPlayer, Cell cellToFire, InitializeAllPlay allPlay, int damage){
         int control = 0;
-        for(int i = 0; i<cellToFire.getInCellPlayer().size(); i++){
+        for(int i = 0; i < cellToFire.getInCellPlayer().size(); i++){
             Player player = cellToFire.getInCellPlayer().get(i);
             if(allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
             control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);

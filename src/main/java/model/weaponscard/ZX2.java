@@ -4,7 +4,9 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
+import model.gamedata.Mode;
 import model.map.Position;
+import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -31,6 +33,27 @@ public class ZX2 extends Weapon implements Serializable {
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);      //Posizione 0 dell'arraylist per riferirsi al primo attacco
         super.setWeaponsMessage(WeaponsMessage.MAX_THREE_PLAYER, 1);
         super.setName("zx2");
+    }
+
+    /**
+     * Attack for the DOMINATION mode at the spawn point
+     * @param myPlayer player who attack
+     * @param spawnPoint
+     * @param allPlay current state game
+     * @return OK or ATTACK_NOT_PRESENT
+     */
+    public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
+        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
+            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
+            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+            if(spawnPoint != null) {
+                if (positionSP == myPosition) {
+                    spawnPoint.getSPDamage().add(myPlayer);
+                }
+            }
+        } else
+            return MessageEnum.ATTACK_NOT_PRESENT;
+        return MessageEnum.OK;
     }
 
     /**
@@ -72,11 +95,11 @@ public class ZX2 extends Weapon implements Serializable {
             control2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
             control3 = allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
-        if(playerToAttack.get(0) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()))
+        if(playerToAttack.get(0) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()) == false)
             return MessageEnum.POSITION_NOT_FOUND;
-        if(playerToAttack.get(1) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition()))
+        if(playerToAttack.get(1) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition()) == false)
             return MessageEnum.POSITION_NOT_FOUND;
-        if(playerToAttack.get(2) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition()))
+        if(playerToAttack.get(2) != null && check(allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition(), allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getPlayerposition()) == false)
             return MessageEnum.POSITION_NOT_FOUND;
         if (playerToAttack.get(0) != playerToAttack.get(1) && playerToAttack.get(1) != playerToAttack.get(2) && playerToAttack.get(0) != playerToAttack.get(2)) {
             if (playerToAttack.get(0) != null) {
@@ -111,8 +134,8 @@ public class ZX2 extends Weapon implements Serializable {
      */
     private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;
-        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
-            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+        for (int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++) {
+            if (myPosition.getCurrentcell().getVisibleCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 find = true;
                 break;
             }

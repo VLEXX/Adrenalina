@@ -64,7 +64,6 @@ public class ClientWithSocket implements ClientStrategy{
 
 
 
-
                 }
                 else if(game.equals("new game")){
 

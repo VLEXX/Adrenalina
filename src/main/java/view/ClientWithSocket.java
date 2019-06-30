@@ -4,6 +4,8 @@
 package view;
 
 import model.datapacket.StatesEnum;
+import model.datapacket.UpdatePacket;
+import model.playerdata.Player;
 import view.viewstates.*;
 
 import java.io.*;
@@ -62,7 +64,22 @@ public class ClientWithSocket implements ClientStrategy{
                 String game = clientManager.manageStart(stdin);
                 if(game.equals("continue")){
 
+                    ViewDatabase viewDatabase = new ViewDatabase();
+                    ViewUpdater viewUpdater = new ViewUpdater();
 
+                    objectOutputStream.writeObject(game);
+
+                    viewDatabase.setNickname(clientManager.manageNickname(stdin, objectOutputStream));
+
+                    int token = (Integer) objectInputStream.readObject();
+                    viewDatabase.setClientToken(token);
+
+                    Player player = (Player) objectInputStream.readObject();
+                    viewDatabase.setThisplayer(player);
+
+
+                    ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);
+                    startGame.start();
 
                 }
                 else if(game.equals("new game")){

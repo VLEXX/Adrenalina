@@ -68,6 +68,8 @@ public class SocketClientHandler implements Runnable {
             String game = (String) objectInputStream.readObject();
             if(game.equals("continue")){
 
+
+
             }
             else if(game.equals("new game")) {
                 String nickname = (String) objectInputStream.readObject();

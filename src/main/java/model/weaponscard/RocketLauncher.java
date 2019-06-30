@@ -4,10 +4,8 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
-import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Position;
-import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -36,30 +34,9 @@ public class RocketLauncher extends Weapon implements Serializable {
         super.setSecondAttack(true);
         super.setThirdAttack(true);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setWeaponsMessage(WeaponsMessage.MAX_TWO_CELL, 1);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL, 2);
+        super.setWeaponsMessage(WeaponsMessage.MYPLAYER, 1);
+        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 2);
         super.setName("rocketlauncher");
-    }
-
-    /**
-     * Attack for the DOMINATION mode at the spawn point
-     * @param myPlayer player who attack
-     * @param spawnPoint
-     * @param allPlay current state game
-     * @return OK or ATTACK_NOT_PRESENT
-     */
-    public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
-            }
-        } else
-            return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
     }
 
     /**
@@ -147,8 +124,8 @@ public class RocketLauncher extends Weapon implements Serializable {
      */
     private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;
-        for (int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++) {
-            if (myPosition.getCurrentcell().getVisibleCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 find = true;
                 break;
             }

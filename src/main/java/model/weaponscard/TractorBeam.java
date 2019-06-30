@@ -4,10 +4,8 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
-import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Position;
-import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -32,36 +30,15 @@ public class TractorBeam extends Weapon implements Serializable {
         super.setCardColor(Munitions.BLUE);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_MAX_TWO_CELL, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
         super.setName("tractorbeam");
-    }
-
-    /**
-     * Attack for the DOMINATION mode at the spawn point
-     * @param myPlayer player who attack
-     * @param spawnPoint
-     * @param allPlay current state game
-     * @return OK or ATTACK_NOT_PRESENT
-     */
-    public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
-            }
-        } else
-            return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
     }
 
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        if(myPosition == positionToMove || check(myPosition,positionToMove)) {
+        if(myPosition == positionToMove || check2(myPosition,positionToMove)) {
             if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
                 control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if (control != 0)
@@ -101,10 +78,10 @@ public class TractorBeam extends Weapon implements Serializable {
      * @param positionToAttack position of the player to attack
      * @return true if ok
      */
-    private boolean check(Position myPosition, Position positionToAttack) {
+    public boolean check(Position myPosition, Position positionToAttack) {
         boolean find = false;
-        for (int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++) {
-            if (myPosition.getCurrentcell().getVisibleCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 find = true;
                 break;
             }

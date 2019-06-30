@@ -4,9 +4,7 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
-import model.gamedata.Mode;
 import model.map.Position;
-import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -43,27 +41,6 @@ public class Thor extends Weapon implements Serializable {
     }
 
     /**
-     * Attack for the DOMINATION mode at the spawn point
-     * @param myPlayer player who attack
-     * @param spawnPoint
-     * @param allPlay current state game
-     * @return OK or ATTACK_NOT_PRESENT
-     */
-    public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
-            }
-        } else
-            return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
-    }
-
-    /**
      * Function first attack
      * @param player           player who attack
      * @param playerToAttack   player to attack
@@ -72,7 +49,7 @@ public class Thor extends Weapon implements Serializable {
      */
     public MessageEnum firstAttack(Player player, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
         int control = 0;
-        if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(player))
+        if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
             control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
@@ -136,8 +113,8 @@ public class Thor extends Weapon implements Serializable {
      */
     private boolean check(Position myPosition, Position positionToAttack){
         boolean find = false;
-        for (int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++) {
-            if (myPosition.getCurrentcell().getVisibleCells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
+        for (int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++) {
+            if (myPosition.getCurrentcell().getReachable3Cells().get(i).getCellId() == positionToAttack.getCurrentcell().getCellId()) {
                 find = true;
                 break;
             }

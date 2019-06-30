@@ -4,10 +4,8 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
-import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Position;
-import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -32,29 +30,8 @@ public class SledgeHammer extends Weapon implements Serializable {
         super.setSecondAttack(true);
         super.setThirdAttack(false);
         super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 0);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER_MAX_TWO_CELL, 1);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_PLAYER, 1);
         super.setName("sledgehammer");
-    }
-
-    /**
-     * Attack for the DOMINATION mode at the spawn point
-     * @param myPlayer player who attack
-     * @param spawnPoint
-     * @param allPlay current state game
-     * @return OK or ATTACK_NOT_PRESENT
-     */
-    public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
-            }
-        } else
-            return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
     }
 
     /**

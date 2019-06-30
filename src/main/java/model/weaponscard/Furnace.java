@@ -4,11 +4,9 @@
 package model.weaponscard;
 
 import model.gamedata.InitializeAllPlay;
-import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Position;
 import model.map.Room;
-import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.datapacket.MessageEnum;
@@ -32,30 +30,9 @@ public class Furnace extends Weapon implements Serializable {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_ROOM, 0);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL, 1);
+        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 0);
+        super.setWeaponsMessage(WeaponsMessage.ALL_PLAYER_INCELL, 1);
         super.setName("furnace");
-    }
-
-    /**
-     * Attack for the DOMINATION mode at the spawn point
-     * @param myPlayer player who attack
-     * @param spawnPoint
-     * @param allPlay current state game
-     * @return OK or ATTACK_NOT_PRESENT
-     */
-    public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
-            }
-        } else
-            return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
     }
 
     /**
@@ -151,9 +128,9 @@ public class Furnace extends Weapon implements Serializable {
      * @return true if ok
      */
     private boolean checkRoom(Position myPosition, Room roomToSHot){
-        for( int i = 0; i < myPosition.getCurrentcell().getVisibleCells().size(); i++){
+        for( int i = 0; i < myPosition.getCurrentcell().getReachable3Cells().size(); i++){
             for(int j = 0; j < roomToSHot.getCellsList().size(); j++){
-                if(myPosition.getCurrentcell().getVisibleCells().get(i) == roomToSHot.getCellsList().get(j)){
+                if(myPosition.getCurrentcell().getReachable3Cells().get(i) == roomToSHot.getCellsList().get(j)){
                     return true;
                 }
             }

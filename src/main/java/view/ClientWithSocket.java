@@ -62,6 +62,9 @@ public class ClientWithSocket implements ClientStrategy{
                 String game = clientManager.manageStart(stdin);
                 if(game.equals("continue")){
 
+
+
+
                 }
                 else if(game.equals("new game")){
 

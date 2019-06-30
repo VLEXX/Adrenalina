@@ -21,7 +21,7 @@ class CyberbladeTest {
 
     @Test
     void firstAttackSP(){
-        /*//caso base
+        //caso base
         Cyberblade cyberblade = new Cyberblade();
         Position myPosition = new Position();
         Position positionSP = new Position();
@@ -42,14 +42,13 @@ class CyberbladeTest {
         allPlay.getCurrentPlayerState().put(player, myCurrentPlayerState);
         allPlay.getCurrentPlayerState().get(player).setPlayerposition(myPosition);
         allPlay.getCurrentPlayerState().get(map.getRoomList().get(0).getCellsList().get(0)).setPlayerposition(positionSP);
-        assertEquals(cyberblade.firstAttack(player, spawnPoint, allPlay), MessageEnum.OK);*/
+        assertEquals(cyberblade.firstAttack(player, spawnPoint, allPlay), MessageEnum.OK);
     }
 
     @Test
     void firstAttack() {
+        //caso base
         Cyberblade c = new Cyberblade();
-
-        //creo i player, la loro current state e le loro position, nelle position inserisco la loro cella
         Player myPlayer = Player.BLACK;
         ArrayList<Player> playerToAttack = new ArrayList<>();
         playerToAttack.add(Player.YELLOW);
@@ -61,8 +60,6 @@ class CyberbladeTest {
         Cell cell = new Cell(3);
         myPosition.setCurrentcell(cell);
         positionToAttack.setCurrentcell(cell);
-
-        //creo la playerBoard per ogni giocatore(tranne myplayer), poi creo marksBox, la setto, e poi la metto dentro playerboard
         PlayerBoard playerBoard1 = new PlayerBoard();
         MarksBox marksBox = new MarksBox();
         marksBox.setMyMarksMap(myPlayer, 2);
@@ -88,6 +85,7 @@ class CyberbladeTest {
 
     @Test
     void secondAttack() {
+        //caso base
         Cyberblade c = new Cyberblade();
         Player myPlayer = Player.BLACK;
         ArrayList<Player> playerToAttack = new ArrayList<>();

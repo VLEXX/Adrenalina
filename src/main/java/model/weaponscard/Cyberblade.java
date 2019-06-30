@@ -6,6 +6,7 @@ package model.weaponscard;
 import model.gamedata.InitializeAllPlay;
 import model.gamedata.Mode;
 import model.map.Cell;
+import model.map.Map;
 import model.map.Position;
 import model.map.SpawnPoint;
 import model.munitions.Munitions;
@@ -49,17 +50,16 @@ public class Cyberblade extends Weapon implements Serializable {
      * @return OK or ATTACK_NOT_PRESENT
      */
     public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION){
-            Position positionSP = allPlay.getCurrentPlayerState().get(spawnPoint).getPlayerposition();
-            Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-            if(spawnPoint != null) {
-                if (positionSP == myPosition) {
-                    spawnPoint.getSPDamage().add(myPlayer);
-                }
+        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
+        int cellID = myPosition.getCurrentcell().getCellId();
+        int roomID = myPosition.getCurrentroom().getRoomId();
+        if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION) {
+            if (allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(roomID-1).getCellsList().get(cellID-1).getSpawnpointzone() == spawnPoint) {
+                spawnPoint.getSPDamage().add(myPlayer);
             }
+            return MessageEnum.OK;
         } else
             return MessageEnum.ATTACK_NOT_PRESENT;
-        return MessageEnum.OK;
     }
 
     /**

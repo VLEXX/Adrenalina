@@ -22,7 +22,6 @@ public class Thor extends Weapon implements Serializable {
 
     private Position position1;
     private Position position2;
-    private Player myPlayer;
 
     /**
      * Constructor that set the cost of this weapon
@@ -84,7 +83,6 @@ public class Thor extends Weapon implements Serializable {
         }
         else return MessageEnum.POSITION_NOT_FOUND;
         position1 = positionToAttack;
-        myPlayer = player;
         return MessageEnum.OK;
     }
 

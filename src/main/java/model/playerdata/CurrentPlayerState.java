@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.HashMap;
 
 /**
- * Classe with player current state
+ * Class with player current state
  */
 public class CurrentPlayerState implements Observer, Serializable {
     private Position playerposition;    //Posizione attuale del giocatore

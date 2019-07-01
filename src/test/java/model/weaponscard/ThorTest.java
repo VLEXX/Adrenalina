@@ -100,8 +100,9 @@ class ThorTest {
         assertEquals(thor.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_FOUND);
 
         //secondo attacco
+        playerToAttack.remove(Player.PURPLE);
         playerToAttack.add(Player.YELLOW);
-        CurrentPlayerState attackCurrentPlayerState2 = new CurrentPlayerState(playerToAttack.get(1));
+        CurrentPlayerState attackCurrentPlayerState2 = new CurrentPlayerState(playerToAttack.get(0));
         Position positionToAttack2 = new Position();
         PlayerBoard playerBoard2 = new PlayerBoard();
         MarksBox marksBox2 = new MarksBox();
@@ -109,19 +110,36 @@ class ThorTest {
         playerBoard2.setMarksBox(marksBox2);
         positionToAttack2.setCurrentroom(map1.getRoomList().get(0));
         positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
-        positionToAttack2.getCurrentcell().addInCellPlayer(playerToAttack.get(1));
-        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
-        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
-        allPlay.getCurrentPlayerState().put(playerToAttack.get(1), attackCurrentPlayerState2);
+        positionToAttack2.getCurrentcell().addInCellPlayer(playerToAttack.get(0));
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(0), attackCurrentPlayerState2);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack2);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard2);
         assertEquals(thor.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
-        //TODO sistemare
-    }
 
-    @Test
-    void secondAttack() {
-    }
+        //caso 2 posizione sbagliata
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(4).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack2);
+        assertEquals(thor.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_FOUND);
 
-    @Test
-    void thirdAttack() {
+        //terzo attacco
+        playerToAttack.remove(Player.YELLOW);
+        playerToAttack.add(Player.BLUE);
+        CurrentPlayerState attackCurrentPlayerState3 = new CurrentPlayerState(playerToAttack.get(0));
+        Position positionToAttack3 = new Position();
+        PlayerBoard playerBoard3 = new PlayerBoard();
+        MarksBox marksBox3 = new MarksBox();
+        marksBox3.setMyMarksMap(myPlayer, 1);
+        playerBoard3.setMarksBox(marksBox2);
+        positionToAttack3.setCurrentroom(map1.getRoomList().get(2));
+        positionToAttack3.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(1));
+        positionToAttack3.getCurrentcell().addInCellPlayer(playerToAttack.get(0));
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(0), attackCurrentPlayerState3);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack3);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard3);
+        assertEquals(thor.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.OK);
+
+        //caso posizione sbagliata
+        positionToAttack3.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        assertEquals(thor.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.POSITION_NOT_FOUND);
     }
 }

@@ -210,8 +210,11 @@ class ShockWaveTest {
         positionToAttack.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
         positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
         positionToAttack3.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).setPlayerposition(positionToAttack3);
         assertEquals(shockWave.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
-        //TODO controllare
     }
 
     @Test

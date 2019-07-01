@@ -110,6 +110,8 @@ class FurnaceTest {
         //caso stessa stanza
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
         positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
         assertEquals(furnace.firstAttack(myPlayer, playerToAttack, positionToAttack, allPlay), MessageEnum.POSITION_NOT_VALID);
 
         //caso stanza non visibile
@@ -126,7 +128,6 @@ class FurnaceTest {
     void thirdAttack() {
         Furnace furnace = new Furnace();
         InitializeAllPlay allPlay = null;
-        Position positionToAttack = null;
         Player myPlayer = null;
         ArrayList<Player> playerToAttack = null;
         assertEquals(furnace.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.ATTACK_NOT_PRESENT);

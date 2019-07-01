@@ -109,7 +109,7 @@ class MachineGunTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         assertEquals(machineGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
-        //caso player 1 non visibile
+       //caso player 1 non visibile
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));
         assertEquals(machineGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_FOUND);
 
@@ -119,8 +119,12 @@ class MachineGunTest {
         assertEquals(machineGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_FOUND);
 
         //secondo attacco
+        playerToAttack.remove(Player.GREEN);
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
+        assertEquals(machineGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
         //terzo attacco
-        //TODO
+
     }
 }

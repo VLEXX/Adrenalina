@@ -114,38 +114,42 @@ public class ShockWave extends Weapon implements Serializable {
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         if(myPosition.getCurrentcell().getUpCell() != null){
             for(int i = 0; i < myPosition.getCurrentcell().getUpCell().getInCellPlayer().size(); i++){
-                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
-                    control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                Player player = myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i);
+                if(allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
-                    allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-                allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+                    allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(1, myPlayer);
             }
         }
         if(myPosition.getCurrentcell().getDownCell() != null){
             for(int i = 0; i < myPosition.getCurrentcell().getDownCell().getInCellPlayer().size(); i++){
-                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
-                    control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                Player player = myPosition.getCurrentcell().getDownCell().getInCellPlayer().get(i);
+                if(allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
-                    allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-                allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+                    allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(1, myPlayer);
             }
         }
         if(myPosition.getCurrentcell().getRightCell() != null){
             for(int i = 0; i < myPosition.getCurrentcell().getRightCell().getInCellPlayer().size(); i++){
-                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
-                    control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                Player player = myPosition.getCurrentcell().getRightCell().getInCellPlayer().get(i);
+                if(allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
-                    allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-                allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+                    allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(1, myPlayer);
             }
         }
         if(myPosition.getCurrentcell().getLeftCell() != null){
             for(int i = 0; i < myPosition.getCurrentcell().getLeftCell().getInCellPlayer().size(); i++){
-                if(allPlay.getCurrentPlayerState().get(playerToAttack.get(i)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
-                    control = allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+                Player player = myPosition.getCurrentcell().getLeftCell().getInCellPlayer().get(i);
+                if(allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                    control = allPlay.getCurrentPlayerState().get(player).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
                 if(control != 0)
-                    allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-                allPlay.getCurrentPlayerState().get(myPosition.getCurrentcell().getUpCell().getInCellPlayer().get(i)).getBoard().getDamageBox().increaseDamage(1, myPlayer);
+                    allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+                allPlay.getCurrentPlayerState().get(player).getBoard().getDamageBox().increaseDamage(1, myPlayer);
             }
         }
         return MessageEnum.OK;

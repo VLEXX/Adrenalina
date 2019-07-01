@@ -91,6 +91,7 @@ public class RailGun extends Weapon implements Serializable {
      */
     public MessageEnum secondAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position cardinalDirection, InitializeAllPlay allPlay){
         int control = 0;
+        map = allPlay.getStateSelectedMap().getSelectedmap();
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         Position positionToAttack2 = null;

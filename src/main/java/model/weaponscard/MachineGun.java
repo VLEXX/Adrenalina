@@ -78,8 +78,6 @@ public class MachineGun extends Weapon {
         Position position = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToAttack1 = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         Position positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
-        player1 = playerToAttack.get(0);
-        player2 = playerToAttack.get(1);
         if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(player))
             control1 = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
         if(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().containsKey(player))
@@ -98,6 +96,8 @@ public class MachineGun extends Weapon {
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(control2, player);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(1, player);
         }
+        player1 = playerToAttack.get(0);
+        player2 = playerToAttack.get(1);
         return MessageEnum.OK;
     }
 
@@ -122,7 +122,7 @@ public class MachineGun extends Weapon {
             return MessageEnum.POSITION_NOT_FOUND;
         if (player1 == null || player2 == null)
             return MessageEnum.CANNOT_USE_THIS_EFFECT;
-        if (allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player1 && allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() != player2) {
+        if (allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() == player1 || allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getActiveplayer() == player2) {
             if(control != 0)
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, player);
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(1, player);

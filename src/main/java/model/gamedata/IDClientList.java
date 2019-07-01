@@ -24,6 +24,8 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
     private ArrayList<ObserverCounter> observerCounters;
     private ArrayList<String> nicknameList;
     private HashMap<String, Player> nickPlayer;
+    private HashMap<Player, Boolean> connection;
+    private ArrayList<Player> playerRMI;
 
     //Costruttore che inizializza l'array a 0 (gli ID assegnati sono diversi da 0)
     public IDClientList() throws RemoteException{
@@ -34,6 +36,28 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         this.observerCounters=new ArrayList<>();
         this.nicknameList = new ArrayList<>();
         this.nickPlayer=new HashMap<>();
+        this.connection=new HashMap<>();
+        this.playerRMI=new ArrayList<>();
+    }
+
+    public synchronized void addPlayerRMI(Player player) throws RemoteException{
+        playerRMI.add(player);
+    }
+
+    public synchronized void addConnection(Player player) throws RemoteException{
+        connection.put(player, true);
+    }
+
+    public synchronized void replaceConnection(Player player, Boolean bool) throws RemoteException{
+        connection.replace(player, bool);
+    }
+
+    public synchronized ArrayList<Player> getPlayerRMI() throws RemoteException {
+        return playerRMI;
+    }
+
+    public synchronized HashMap<Player, Boolean> getConnection() throws RemoteException{
+        return connection;
     }
 
     public synchronized HashMap<String, Player> getNickPlayer() {
@@ -63,6 +87,10 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
     //Ritorna l'array degli ID Client
     public ArrayList<Integer> getClientlist() throws RemoteException {
         return this.clientlist;
+    }
+
+    public void increaseClientCounter(){
+        this.clientCounter++;
     }
 
     //Setta nella cella corretta, a seconda dell'indice passato, l'ID da memorizzare

@@ -46,7 +46,9 @@ public class ServerRMI extends Thread {
 
         System.out.println("Attendo invocazioni dal client...");
 
+        CheckConnectionController checkConnectionController = new CheckConnectionController(idClientList,allPlay);
 
+        checkConnectionController.start();
     }
 
     public void run(){

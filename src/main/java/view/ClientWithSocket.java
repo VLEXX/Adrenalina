@@ -108,8 +108,8 @@ public class ClientWithSocket implements ClientStrategy{
 
 
                     go = (boolean) objectInputStream.readObject();
+                    System.out.println("\nFew seconds to start...\n");
 
-                    System.out.println("10 seconds to start...\n");
 
                     while(true) {
                         go = (boolean) objectInputStream.readObject();
@@ -118,14 +118,13 @@ public class ClientWithSocket implements ClientStrategy{
                             break;
                         }
                         else{
-                            System.out.println("Waiting for other players...\n");
                             go = (boolean) objectInputStream.readObject();
-                            System.out.println("10 seconds to start...\n");
                         }
                     }
 
                     System.out.println("\n");
 
+                    go = (boolean) objectInputStream.readObject();
                     go = (boolean) objectInputStream.readObject();
 
                     if(go){

@@ -5,6 +5,7 @@ import model.playerdata.Player;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface IDClientListInterface extends Remote {
 
@@ -14,5 +15,14 @@ public interface IDClientListInterface extends Remote {
 
     void update() throws RemoteException;
 
+    HashMap<Player, Boolean> getConnection() throws RemoteException;
+
+    ArrayList<Player> getPlayerRMI() throws RemoteException;
+
+    void addConnection(Player player)throws RemoteException;
+
+    void replaceConnection(Player player, Boolean bool) throws RemoteException;
+
+    void addPlayerRMI(Player player) throws RemoteException;
 
 }

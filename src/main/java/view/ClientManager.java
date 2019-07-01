@@ -99,8 +99,6 @@ public class ClientManager {
             }
         }
 
-        MessageString message = (MessageString)objectInputStream.readObject();
-        System.out.println(message.getMessage());
     }
 
     public String manageStart(Scanner stdin){

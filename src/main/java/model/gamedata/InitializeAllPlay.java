@@ -66,19 +66,19 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         this.starting=false;
     }
 
-    public synchronized boolean isStarting() {
+    public synchronized boolean isStarting() throws RemoteException {
         return starting;
     }
 
-    public void setStarting(boolean starting) {
+    public void setStarting(boolean starting) throws RemoteException {
         this.starting = starting;
     }
 
-    public synchronized boolean isWait() {
+    public synchronized boolean isWait() throws RemoteException {
         return wait;
     }
 
-    public void setWait(boolean wait) {
+    public void setWait(boolean wait) throws RemoteException {
         this.wait = wait;
     }
 
@@ -94,7 +94,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         this.endgame = endgame;
     }
 
-    public boolean isEndgame() {
+    public boolean isEndgame()throws RemoteException {
         return endgame;
     }
 

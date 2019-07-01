@@ -113,6 +113,7 @@ public class SocketClientHandler implements Runnable {
                 String nickname = (String) objectInputStream.readObject();
                 idClientList.getNicknameList().add(nickname);
 
+
                 allPlay.addPlayerCounter();
                 player = serverManagerFunction.chooseCharacterManager(objectInputStream, this.allPlay, objectOutputStream, idClientList);
 
@@ -121,8 +122,6 @@ public class SocketClientHandler implements Runnable {
                 serverManagerFunction.manageVoteMap(allPlay, outMessage, objectInputStream, objectOutputStream);
 
                 allPlay.resetPlayerCounterTemp();
-                MessageString message = new MessageString("Map Selected: " + allPlay.getStateSelectedMap().getSelectedmap().getMapname() + "\n\n");
-                objectOutputStream.writeObject(message);
 
 
                 allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
@@ -151,36 +150,42 @@ public class SocketClientHandler implements Runnable {
                 objectOutputStream.writeObject(true);
 
                 while(true) {
-                    if(!allPlay.isWait()) {
-                        sleep(10 * 1000);
-                        objectOutputStream.writeObject(true);
-                        sleep(2 * 1000);
-                        if (idClientList.getPlayerArrayList().size() >= 3) {
-                            objectOutputStream.writeObject(true);
-                            break;
-                        } else {
-                            objectOutputStream.writeObject(false);
+                    if(!allPlay.isWait()){
+                        while (true) {
                             allPlay.setWait(true);
-                            while(true){
-                                if(idClientList.getPlayerArrayList().size() >= 3){
-                                    objectOutputStream.writeObject(true);
-                                    break;
+                            sleep(10 * 1000);
+                            objectOutputStream.writeObject(true);
+                            sleep(2 * 1000);
+                            if (idClientList.getPlayerArrayList().size() >= 3){
+                                objectOutputStream.writeObject(true);
+                                allPlay.setStarting(true);
+                                break;
+                            } else {
+                                objectOutputStream.writeObject(false);
+                                while (true) {
+                                    if (idClientList.getPlayerArrayList().size() >= 3) {
+                                        objectOutputStream.writeObject(true);
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
+                    else{
+                        if(allPlay.isStarting()){
+                            objectOutputStream.writeObject(true);
+                            objectOutputStream.writeObject(true);
+                            break;
+                        }
+                    }
                 }
 
-                objectOutputStream.writeObject(true);
 
                 Updater updater = new Updater(allPlay);
                 UpdatePacket updatePacket = updater.updateClient(player);
                 objectOutputStream.writeObject(updatePacket);
 
-
-
                 StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
-                allPlay.setStarting(true);
                 startGame.start();
 
 

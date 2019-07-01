@@ -151,7 +151,8 @@ class RocketLauncherTest {
         allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
         assertEquals(rocketLauncher.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
-        //caso più di due quadrati/TODO check
+        //caso più di due quadrati
+        myPosition.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(0));
         positionToMove.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));
         assertEquals(rocketLauncher.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_UNREACHABLE);
     }

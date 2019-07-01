@@ -106,21 +106,32 @@ class WhisperTest {
 
         //caso up
         myPosition.setCurrentcell(map4.getRoomList().get(5).getCellsList().get(0));
-        positionToAttack.setCurrentcell(map4.getRoomList().get(0).getCellsList().get(0));
-        assertEquals(whisper.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        positionToAttack.setCurrentcell(map4.getRoomList().get(0).getCellsList().get(1));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        assertEquals(whisper.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.PLAYER_TOO_MUCH_NEAR);
 
         //caso down
         myPosition.setCurrentcell(map4.getRoomList().get(1).getCellsList().get(1));
-        positionToAttack.setCurrentcell(map4.getRoomList().get(4).getCellsList().get(2));
-        assertEquals(whisper.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        positionToAttack.setCurrentcell(map4.getRoomList().get(4).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        assertEquals(whisper.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.PLAYER_TOO_MUCH_NEAR);
 
         //caso left
         myPosition.setCurrentcell(map4.getRoomList().get(4).getCellsList().get(2));
-        positionToAttack.setCurrentcell(map4.getRoomList().get(5).getCellsList().get(0));
-        assertEquals(whisper.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        positionToAttack.setCurrentcell(map4.getRoomList().get(5).getCellsList().get(1));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        assertEquals(whisper.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.PLAYER_TOO_MUCH_NEAR);
 
-        //caso control != 0
+        //caso control !=0
+        myPosition.setCurrentcell(map4.getRoomList().get(2).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map4.getRoomList().get(4).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         marksBox.setMyMarksMap(myPlayer, 1);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().setMarksBox(marksBox);
         assertEquals(whisper.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
     }

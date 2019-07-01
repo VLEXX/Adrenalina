@@ -5,9 +5,12 @@ package model.weaponscard;
 
 import model.datapacket.MessageEnum;
 import model.gamedata.InitializeAllPlay;
+import model.gamedata.Mode;
 import model.map.InitializeMap1;
 import model.map.Map;
 import model.map.Position;
+import model.map.SpawnPoint;
+import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.MarksBox;
 import model.playerdata.Player;
@@ -19,6 +22,42 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlasmaGunTest {
+
+    @Test
+    void firstAttackSP(){
+        //caso base
+        PlasmaGun plasmaGun = new PlasmaGun();
+        Position myPosition = new Position();
+        Player player = Player.YELLOW;
+        Munitions munitions = Munitions.BLUE;
+        SpawnPoint spawnPoint = new SpawnPoint(munitions);
+        CurrentPlayerState myCurrentPlayerState = new CurrentPlayerState(player);
+
+        InitializeAllPlay allPlay = null;
+        try{
+            allPlay = new InitializeAllPlay();
+        } catch(Exception e) {
+        }
+        allPlay.getStateSelectedMap().setStrategyMap(1);
+        allPlay.getStateSelectedMap().setSelectedmap();
+        myPosition.setCurrentroom(allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
+        myPosition.setCurrentcell(allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0));
+        allPlay.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
+        allPlay.getCurrentPlayerState().put(player, myCurrentPlayerState);
+        allPlay.getCurrentPlayerState().get(player).setPlayerposition(myPosition);
+        allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0).setSpawnpointzone(spawnPoint);
+        assertEquals(plasmaGun.firstAttack(player, spawnPoint, allPlay), MessageEnum.OK);
+
+        //caso non in mode domination
+        allPlay.getStateSelectedMode().setSelectedmode(Mode.BASE);
+        assertEquals(plasmaGun.firstAttack(player, spawnPoint, allPlay), MessageEnum.ATTACK_NOT_PRESENT);
+
+        //caso posizione errata
+        allPlay.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
+        myPosition.setCurrentcell(allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(1).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(player).setPlayerposition(myPosition);
+        assertEquals(plasmaGun.firstAttack(player, spawnPoint, allPlay), MessageEnum.POSITION_NOT_VALID);
+    }
 
     @Test
     void firstAttack() {

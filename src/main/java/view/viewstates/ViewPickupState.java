@@ -155,8 +155,18 @@ public class ViewPickupState implements ViewState {
                 }
             }
         }
-        System.out.println("No weapon found in this cell!\n" + stdin.nextLine());
-        System.out.println("\nPlease choose a valide ACTION...\n");
+        else{
+            if(tempcell.getAmmohere()!=null){
+                System.out.println("Ammo card here!\n");
+                dataPacket.setCell(tempcell);
+                return dataPacket;
+            }
+            else{
+                System.out.println("No weapon or ammo found in this cell!\n" + stdin.nextLine());
+                System.out.println("\nPlease choose a valide ACTION...\n");
+            }
+        }
+
         dataPacket.setWeaponlistempty(true);
         return dataPacket;
     }

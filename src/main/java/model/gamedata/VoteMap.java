@@ -71,4 +71,8 @@ public class VoteMap extends UnicastRemoteObject implements VoteMapInterface, Se
             initmap = true;
         }
     }
+
+    public void setI(int i) throws RemoteException{
+        this.i = i;
+    }
 }

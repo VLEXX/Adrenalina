@@ -136,9 +136,6 @@ public class ClientWithSocket implements ClientStrategy{
 
                     System.out.println("\n");
 
-                    go = (boolean) objectInputStream.readObject();
-                    go = (boolean) objectInputStream.readObject();
-
                     if(go){
                         ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);
                         startGame.start();

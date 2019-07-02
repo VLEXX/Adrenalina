@@ -144,6 +144,7 @@ public class CurrentDeckState implements Serializable {
         this.weaponsdeck.push(whisper);
         ZX2 zx2 = new ZX2();
         this.weaponsdeck.push(zx2);
+
         this.powerupdeck = new Stack<>();
         for (Munitions munitions : Munitions.values()) {
             this.powerupdeck.push(new Newton(munitions));
@@ -157,6 +158,7 @@ public class CurrentDeckState implements Serializable {
         for (Munitions munitions : Munitions.values()) {
             this.powerupdeck.push(new Teleporter(munitions));
         }
+
         this.players = new ArrayList<>();
         players.add(Player.BLUE);
         players.add(Player.BLACK);

@@ -8,8 +8,11 @@ import model.datapacket.UpdatePacket;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageString;
+import model.map.Cell;
+import model.map.Room;
 import model.modelstates.*;
 import model.playerdata.Player;
+import model.weaponscard.Weapon;
 
 import java.io.*;
 
@@ -121,7 +124,7 @@ public class SocketClientHandler implements Runnable {
 
 
                 allPlay.addPlayerCounter();
-                player = serverManagerFunction.chooseCharacterManager(objectInputStream, this.allPlay, objectOutputStream, idClientList);
+                this.player = serverManagerFunction.chooseCharacterManager(objectInputStream, this.allPlay, objectOutputStream, idClientList);
 
                 idClientList.getNickPlayer().put(nickname, player);
                 allPlay.getVoteMap().addPlayerCounter();
@@ -156,8 +159,8 @@ public class SocketClientHandler implements Runnable {
                 objectOutputStream.writeObject(true);
 
                 while(true) {
-                    if(!allPlay.isWait()){
-                        while (true) {
+                    if(idClientList.getPlayerArrayList().get(0)==this.player){
+                        while (true){
                             allPlay.setWait(true);
                             sleep(10 * 1000);
                             objectOutputStream.writeObject(true);
@@ -176,6 +179,9 @@ public class SocketClientHandler implements Runnable {
                                 }
                             }
                         }
+                        if(allPlay.isStarting()){
+                            break;
+                        }
                     }
                     else{
                         if(allPlay.isStarting()){
@@ -186,6 +192,17 @@ public class SocketClientHandler implements Runnable {
                     }
                 }
 
+                if(idClientList.getPlayerArrayList().get(0)!=player){
+                    sleep(50);
+                }
+                if(!allPlay.getVoteMap().getInitMap()){
+                    allPlay.getVoteMap().setInitmap();
+                    allPlay.getVoteMap().setFinalresult();
+                    allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
+                    allPlay.getStateSelectedMap().setSelectedmap();
+                    serverManagerFunction.refillMap(allPlay);
+                }
+
 
                 Updater updater = new Updater(allPlay);
                 UpdatePacket updatePacket = updater.updateClient(player);
@@ -194,7 +211,16 @@ public class SocketClientHandler implements Runnable {
                 StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
                 startGame.start();
 
-
+                for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
+                    for(Cell cell: room.getCellsList()){
+                        if(cell.getSpawnpointzone()!=null){
+                            for(Weapon weapon: cell.getSpawnpointzone().getSpawnWeaponsList()){
+                                System.out.println(weapon);
+                            }
+                            System.out.println("\n");
+                        }
+                    }
+                }
                 while(true) {
                     if (allPlay.isEndgame() == true) {
                         socket.close();

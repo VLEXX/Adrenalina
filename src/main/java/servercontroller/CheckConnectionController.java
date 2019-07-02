@@ -22,8 +22,6 @@ public class CheckConnectionController extends Thread {
         try{
             ArrayList<Player> players = new ArrayList<>();
             while(true){
-                CheckPlayer checkPlayer = new CheckPlayer(idClientList);
-                checkPlayer.start();
                 if(allPlay.isEndgame()){
                     break;
                 }

@@ -6,8 +6,11 @@ package view;
 import model.map.Cell;
 import model.map.Room;
 import model.munitions.Munitions;
+import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
+
+import java.util.HashMap;
 
 public class PlayerInformer {
     ViewDatabase dbb;
@@ -87,6 +90,76 @@ public class PlayerInformer {
         System.out.print(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) + " " + "YELLOW munitions, ");
         System.out.print(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) + " " + "BLUE munitions, ");
         System.out.print(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) + " " + "RED munitions.\n\n");
+        System.out.println("DAMAGE STATS:\n");
+        if (dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getDamage()[0]==null)
+            System.out.println("You haven't got any damage yet.\n\n");
+        else{
+            HashMap<Player,Integer> dcount = new HashMap<>();
+            int kl=0;
+            for(kl =0; dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getDamage()[kl]!=null;kl++){
+                dcount.putIfAbsent(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getDamage()[kl],0);
+                dcount.put(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getDamage()[kl],dcount.get(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getDamage()[kl])+1);
+            }
+            if(kl<11)
+                System.out.println("You got "+kl+" damage points.\n");
+            else if(kl==11) {
+                if(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getDamage()[10]==dbb.getThisplayer())
+                    System.out.println("You were killed (11 damage points) by a spawnpoint.\n");
+                else
+                    System.out.println("You were killed (11 damage points) by " + dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getDamage()[10]+".\n");
+            } else if(kl>11)
+                System.out.println("You were overkilled (12 damage points) by "+ dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getDamageBox().getDamage()[11]+".\n");
+            dcount.forEach((player, integer) -> {
+                if(player==dbb.getThisplayer())
+                    System.out.println("You got "+integer+" damage points from spawnpoints.\n");
+                else
+                    System.out.println("You got "+integer+" damage points from "+player+".\n");
+            });
+            if(!dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMarksBox().getMyMarksMap().isEmpty()) {
+                dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMarksBox().getMyMarksMap().forEach((player, integer) -> {
+                    System.out.println("You got " + integer + " marks from " + player + " player.\n");;
+                });
+            }else
+                System.out.println("You got no marks.");
+            System.out.println("\n");
+        }
+        dbb.getPlayersdamage().forEach((player, players) -> {
+            if(player!=dbb.getThisplayer()) {
+                if (players[0] == null)
+                    System.out.println(player + " player hasn't got any damage yet.\n\n");
+                else {
+                    HashMap<Player, Integer> dcount = new HashMap<>();
+                    int kl = 0;
+                    for (kl = 0; players[kl] != null; kl++) {
+                        dcount.putIfAbsent(players[kl], 0);
+                        dcount.put(players[kl], dcount.get(players[kl]) + 1);
+                    }
+                    if (kl < 11)
+                        System.out.println(player + " player got " + kl + " damage points.\n");
+                    else if (kl == 11) {
+                        if (players[10] == player)
+                            System.out.println(player + " player was killed (11 damage points) by a spawnpoint.\n");
+                        else
+                            System.out.println(player + " player was killed (11 damage points) by " + players[10] + ".\n");
+                    } else if (kl > 11)
+                        System.out.println(player + " player was overkilled (12 damage points) by " + players[11] + ".\n");
+                    dcount.forEach((pplayer, integer) -> {
+                        if (pplayer == player)
+                            System.out.println(player + " player got " + integer + " damage points from spawnpoints.\n");
+                        else
+                            System.out.println(player + " player got " + integer + " damage points from " + pplayer + ".\n");
+                    });
+                        if (!dbb.getPlayersmarks().get(player).isEmpty()) {
+                            dbb.getPlayersmarks().get(player).forEach((player2, integer) -> {
+                                System.out.println(player + " got " + integer + " marks from " + player2 + " player.\n");
+                                ;
+                            });
+                        } else
+                            System.out.println(player + " got no marks.\n");
+                    System.out.println("\n");
+                }
+            }});
+
     }
 
     //mostra tutto quello presente sulla mappa
@@ -131,6 +204,8 @@ public class PlayerInformer {
             System.out.println(i+"skulls left to the end of the game.\n\n");
         else if (i==1)
             System.out.println("Only 1 skull left to the end of the game!!\n\n");
+        if(dbb.getFinalFrenzy())
+            System.out.println("Final Frenzy is enabled!!!!\n\n");
 
 
     }

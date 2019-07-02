@@ -232,3 +232,13 @@ e
 -src/test/java/model/weaponscard/ThorTest.java,6\2\62e7f9621e7ac09a43984552f89ed252192e1a64
 b
 2src/test/java/model/weaponscard/ShockWaveTest.java,7\b\7bc96d216507510524b0ffbb9c22ee9b738beebc
+c
+3src/main/java/model/gamedata/StateSelectedMode.java,a\5\a5b993d812c3e688037a8da2fcb4ad0adeb53149
+U
+%src/main/java/view/ClientWithRMI.java,5\c\5c60a76081aacd32d710a63e4350c9ccd697baad
+X
+(src/main/java/view/ClientWithSocket.java,b\9\b9749f0f787d04a7c58ec8828535f724f722754f
+e
+5src/main/java/model/modelstates/FinalFrenzyState.java,0\f\0fcdf7062452fd2dcedd8a07c02d742dc2be26e3
+e
+5src/test/java/model/modelstates/PowerupStateTest.java,d\9\d9f69fe31cad6c3520f6efe79f185f1ff078a89c

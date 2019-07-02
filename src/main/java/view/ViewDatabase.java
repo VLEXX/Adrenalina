@@ -4,6 +4,7 @@ import model.playerdata.Player;
 import model.map.Position;
 import model.powerups.PowerUp;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -22,6 +23,9 @@ public class ViewDatabase {
     private Player[] secondSkullArray;
     private String nickname;
     private boolean attackinprogress;
+    private boolean finalfrenzy;
+    private HashMap<Player,Player[]> playersdamage;
+    private HashMap<Player, HashMap<Player,Integer>> playersmarks;
 
     public ViewDatabase() {
         this.viewCurrentPlayerState = new ViewCurrentPlayerState();
@@ -37,10 +41,27 @@ public class ViewDatabase {
         this.skullArray= new Player[]{null,null,null,null,null,null,null,null};
         this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
         this.attackinprogress = false;
+        this.finalfrenzy=false;
+        this.playersdamage=new HashMap<>();
+        this.playersmarks=new HashMap<>();
     }
 
     public boolean isAttackinprogress() {
         return attackinprogress;
+    }
+
+    public HashMap<Player, HashMap<Player,Integer>> getPlayersmarks() {
+        return playersmarks;
+    }
+
+    public HashMap<Player, Player[]> getPlayersdamage() {
+        return playersdamage;
+    }
+
+    public boolean getFinalFrenzy(){return finalfrenzy;}
+
+    public void setFinalFrenzy(boolean ff){
+        finalfrenzy = ff;
     }
 
     public void setAttackinprogress(boolean attackinprogress) {

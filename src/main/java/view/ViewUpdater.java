@@ -106,5 +106,13 @@ public class ViewUpdater {
             viewDatabase.setCurrentDeckState(updatePacket.getPowerUpDeck());
             viewDatabase.setEndgame(updatePacket.isEndgame());
         }
+        if(updatePacket.getStatesEnum().equals(StatesEnum.FRENZY)){
+            viewDatabase.getViewState().replace(player, hashMap.get(StatesEnum.FRENZY));
+            if(updatePacket.getPosition()!=null) {
+                viewDatabase.setViewPlayerPosition(updatePacket.getPosition());
+            }
+            viewDatabase.setCurrentDeckState(updatePacket.getPowerUpDeck());
+            viewDatabase.setEndgame(updatePacket.isEndgame());
+        }
     }
 }

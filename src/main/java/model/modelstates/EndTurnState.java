@@ -53,6 +53,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
         if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
             return MessageEnum.TOKEN_ERROR;
         }
+        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setEndturn(true);
         this.refillMap(allPlay);
         MessageEnum out1 = this.rechargeWeapons(allPlay,dataPacket);
         if(out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOO_MUCH_POWERUPS)
@@ -247,8 +248,6 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
             } }
         if(i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && (k>=2 || i.getSkullArray()[7]!=null))
             i.setFinalfrenzy(true);
-        //if(i.getSkullArray()[7]!=null && i.getStateSelectedMode().getSelectedmode()==Mode.BASE) //
-        // todo stato frenesia finale
     }
 
 

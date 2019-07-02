@@ -54,6 +54,7 @@ public class SocketClientHandler implements Runnable {
             PickUpState pickUpState = new PickUpState(allPlay, stateHashMap, idClientList);
             PowerupState powerupState = new PowerupState(allPlay, stateHashMap, idClientList);
             SpawnState spawnState = new SpawnState(allPlay, stateHashMap, idClientList);
+            FinalFrenzyState finalFrenzyState = new FinalFrenzyState(allPlay,stateHashMap, idClientList);
             stateHashMap.put(StatesEnum.ACTION, actionState);
             stateHashMap.put(StatesEnum.END, endTurnState);
             stateHashMap.put(StatesEnum.MOVE, moveState);
@@ -64,48 +65,53 @@ public class SocketClientHandler implements Runnable {
             stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
             stateHashMap.put(StatesEnum.POWERUP, powerupState);
             stateHashMap.put(StatesEnum.SPAWN, spawnState);
+            stateHashMap.put(StatesEnum.FRENZY, finalFrenzyState);
 
             String game = (String) objectInputStream.readObject();
             if(game.equals("continue")){
 
                 String nickname = (String) objectInputStream.readObject();
-                if(idClientList.getNicknameList().contains(nickname)){
-                    while(true){
-                        if(allPlay.isStarting()){
+                if(idClientList.getNicknameList().contains(nickname)) {
+                    objectOutputStream.writeObject(true);
+                    while (true) {
+                        if (allPlay.isStarting()) {
                             break;
                         }
-                        else{
+                        if (!(idClientList.getNicknameList().contains(nickname))) {
                             idClientList.getPlayerArrayList().add(idClientList.getNickPlayer().get(nickname));
                         }
                     }
-                }
 
-                Integer token = idClientList.addClient();
-                objectOutputStream.writeObject(token);
+                    Integer token = idClientList.addClient();
+                    objectOutputStream.writeObject(token);
 
-                this.player = idClientList.getNickPlayer().get(nickname);
-                objectOutputStream.writeObject(player);
+                    this.player = idClientList.getNickPlayer().get(nickname);
+                    objectOutputStream.writeObject(player);
 
-                if(!(idClientList.getPlayerArrayList().contains(player))){
-                    idClientList.getPlayerArrayList().add(idClientList.getNickPlayer().get(nickname));
-                }
-
-                Updater updater = new Updater(allPlay);
-                UpdatePacket updatePacket = updater.updateClient(player);
-                objectOutputStream.writeObject(updatePacket);
-
-
-                allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
-
-
-                StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
-                startGame.start();
-
-                while(true) {
-                    if (allPlay.isEndgame() == true) {
-                        socket.close();
-                        break;
+                    if (!(idClientList.getPlayerArrayList().contains(player))) {
+                        idClientList.getPlayerArrayList().add(idClientList.getNickPlayer().get(nickname));
                     }
+
+                    Updater updater = new Updater(allPlay);
+                    UpdatePacket updatePacket = updater.updateClient(player);
+                    objectOutputStream.writeObject(updatePacket);
+
+
+                    allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap);
+
+
+                    StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
+                    startGame.start();
+
+                    while (true) {
+                        if (allPlay.isEndgame() == true) {
+                            socket.close();
+                            break;
+                        }
+                    }
+                }
+                else{
+                    objectOutputStream.writeObject(false);
                 }
 
             }

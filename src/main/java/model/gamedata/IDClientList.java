@@ -26,6 +26,9 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
     private HashMap<String, Player> nickPlayer;
     private HashMap<Player, Boolean> connection;
     private ArrayList<Player> playerRMI;
+    private Player sleepPlayer;
+    private HashMap<String, Integer> nickToken;
+    private HashMap<Player, Integer> playerToken;
 
     //Costruttore che inizializza l'array a 0 (gli ID assegnati sono diversi da 0)
     public IDClientList() throws RemoteException{
@@ -38,10 +41,58 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         this.nickPlayer=new HashMap<>();
         this.connection=new HashMap<>();
         this.playerRMI=new ArrayList<>();
+        this.sleepPlayer=null;
+        this.nickToken=new HashMap<>();
+        this.playerToken=new HashMap<>();
+    }
+
+    public synchronized Integer getPlayerNick(Player player) throws RemoteException{
+        return this.playerToken.get(player);
+    }
+
+    public synchronized void putNickPlayer(Player player, Integer token) throws RemoteException{
+        this.playerToken.put(player, token);
+    }
+
+    public synchronized void removeNickPlayer(Player player) throws RemoteException{
+        this.playerToken.remove(player);
+    }
+
+    public synchronized void addNickToken(String nick, Integer integer) throws RemoteException{
+        this.nickToken.put(nick, integer);
+    }
+
+    public synchronized Integer getNickToken(String nick){
+        return this.nickToken.get(nick);
+    }
+
+    public synchronized void setSleepPlayer(Player sleepPlayer) throws RemoteException {
+        this.sleepPlayer = sleepPlayer;
+    }
+
+    public Player getSleepPlayer() {
+        return sleepPlayer;
+    }
+
+    public boolean isInPlayerList(String nick) throws RemoteException{
+        if(playerArrayList.contains(nickPlayer.get(nick))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public Player getPlayerFromNick(String nick) throws RemoteException{
+        return nickPlayer.get(nick);
     }
 
     public synchronized void addPlayerRMI(Player player) throws RemoteException{
         playerRMI.add(player);
+    }
+
+    public synchronized void addPlayerInList (String nick) throws RemoteException{
+        playerArrayList.add(nickPlayer.get(nick));
     }
 
     public synchronized void addConnection(Player player) throws RemoteException{

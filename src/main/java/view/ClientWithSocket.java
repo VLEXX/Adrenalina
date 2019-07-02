@@ -49,6 +49,7 @@ public class ClientWithSocket implements ClientStrategy{
                 ViewPickupState pickUpState = new ViewPickupState();
                 ViewPowerupState powerupState = new ViewPowerupState();
                 ViewSpawnState spawnState = new ViewSpawnState();
+                ViewFrenzyState frenzyState = new ViewFrenzyState();
                 HashMap<StatesEnum, ViewState> stateHashMap = new HashMap<>();
                 stateHashMap.put(StatesEnum.ACTION, actionState);
                 stateHashMap.put(StatesEnum.END, endTurnState);
@@ -60,26 +61,37 @@ public class ClientWithSocket implements ClientStrategy{
                 stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
                 stateHashMap.put(StatesEnum.POWERUP, powerupState);
                 stateHashMap.put(StatesEnum.SPAWN, spawnState);
+                stateHashMap.put(StatesEnum.FRENZY, frenzyState);
 
                 String game = clientManager.manageStart(stdin);
                 if(game.equals("continue")){
 
                     ViewDatabase viewDatabase = new ViewDatabase();
-                    ViewUpdater viewUpdater = new ViewUpdater();
 
                     objectOutputStream.writeObject(game);
 
-                    viewDatabase.setNickname(clientManager.manageNickname(stdin, objectOutputStream));
+                    while(true) {
+                        viewDatabase.setNickname(clientManager.manageNickname(stdin, objectOutputStream));
 
-                    int token = (Integer) objectInputStream.readObject();
-                    viewDatabase.setClientToken(token);
+                        boolean go;
+                        go = (boolean) objectInputStream.readObject();
+                        if (go) {
+                            break;
+                        } else {
+                            System.out.println("Nickname not found! Please insert a valide nickname...\n");
+                        }
+                    }
+                        int token = (Integer) objectInputStream.readObject();
+                        viewDatabase.setClientToken(token);
 
-                    Player player = (Player) objectInputStream.readObject();
-                    viewDatabase.setThisplayer(player);
+                        Player player = (Player) objectInputStream.readObject();
+                        viewDatabase.setThisplayer(player);
 
 
-                    ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);
-                    startGame.start();
+                        ViewStartGame startGame = new ViewStartGame(viewDatabase.getThisplayer(), objectInputStream, objectOutputStream, stdin, viewDatabase, stateHashMap);
+                        startGame.start();
+
+
 
                 }
                 else if(game.equals("new game")){

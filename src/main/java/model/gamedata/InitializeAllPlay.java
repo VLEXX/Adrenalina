@@ -29,6 +29,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     private VoteMap voteMap;
     private VoteMode voteMode;
     private HashMap<Player, State> playerState;
+    private HashMap<Player, State> playerStateTempFrenzy;
     private int playercounter;
     private int playercountertemp;
     private ArrayList<ObserverUpdate> observers;
@@ -40,6 +41,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     private boolean starting;
     private boolean finalfrenzy;
     private Player lastTurnPlayer;
+    private VoteFrenzy voteFrenzy;
 
     /**
      * Constructor
@@ -64,6 +66,16 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         this.lastTurnPlayer=null;
         this.wait=false;
         this.starting=false;
+        this.voteFrenzy=new VoteFrenzy();
+        this.playerStateTempFrenzy=new HashMap<>();
+    }
+
+    public HashMap<Player, State> getPlayerStateTempFrenzy() {
+        return playerStateTempFrenzy;
+    }
+
+    public VoteFrenzy getVoteFrenzy() {
+        return voteFrenzy;
     }
 
     public synchronized boolean isStarting() throws RemoteException {
@@ -78,7 +90,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         return wait;
     }
 
-    public void setWait(boolean wait) throws RemoteException {
+    public synchronized void setWait(boolean wait) throws RemoteException {
         this.wait = wait;
     }
 

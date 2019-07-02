@@ -31,6 +31,7 @@ public class ServerRMI extends Thread {
         StateBox stateBox = new StateBox(this.allPlay, idClientList);
         ManageEndTurn manageEndTurn = new ManageEndTurn(allPlay, idClientList);
 
+
         System.out.println("Binding server to registry...");
         Registry registry = LocateRegistry.createRegistry(8080);
 
@@ -42,6 +43,7 @@ public class ServerRMI extends Thread {
         registry.bind("VoteMap", allPlay.getVoteMap());
         registry.bind("StateBox", stateBox);
         registry.bind("ManageEndTurn", manageEndTurn);
+
 
 
         System.out.println("Attendo invocazioni dal client...");

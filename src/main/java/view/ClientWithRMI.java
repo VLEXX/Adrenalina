@@ -41,6 +41,7 @@ public class ClientWithRMI implements ClientStrategy {
         ViewPickupState pickUpState = new ViewPickupState();
         ViewPowerupState powerupState = new ViewPowerupState();
         ViewSpawnState spawnState = new ViewSpawnState();
+        ViewFrenzyState frenzyState = new ViewFrenzyState();
         HashMap<StatesEnum, ViewState> viewStateHashMap = new HashMap<>();
         viewStateHashMap.put(StatesEnum.ACTION, actionState);
         viewStateHashMap.put(StatesEnum.END, endTurnState);
@@ -52,6 +53,7 @@ public class ClientWithRMI implements ClientStrategy {
         viewStateHashMap.put(StatesEnum.PICK_UP, pickUpState);
         viewStateHashMap.put(StatesEnum.POWERUP, powerupState);
         viewStateHashMap.put(StatesEnum.SPAWN, spawnState);
+        viewStateHashMap.put(StatesEnum.FRENZY, frenzyState);
 
         Scanner stdin = new Scanner(System.in);
 
@@ -66,6 +68,53 @@ public class ClientWithRMI implements ClientStrategy {
 
         String game = clientManager.manageStart(stdin);
         if(game.equals("continue")){
+
+            while (true) {
+                String nickname = clientManager.manageNickname(stdin);
+                if (serverManagerFunctionRMI.isInArrayNick(nickname)) {
+                    while (true) {
+                        if (allPlay.isStarting()) {
+                            break;
+                        }
+                        if (!(idClientList.isInPlayerList(nickname))) {
+                            idClientList.addPlayerInList(nickname);
+                            System.out.println("Nickname OK!\n\nFew seconds to start...\n");
+                        }
+                    }
+
+                    if(!(idClientList.isInPlayerList(nickname))){
+                        idClientList.addPlayerInList(nickname);
+                    }
+
+                    int token = idClientList.addClient();
+                    viewDatabase.setClientToken(token);
+
+
+                    Player player = idClientList.getPlayerFromNick(nickname);
+                    idClientList.putNickPlayer(player, token);
+
+                    viewDatabase.setThisplayer(player);
+
+                    UpdatePacket updatePacket = null;
+                    try {
+                        updatePacket = updater.updateClient(player);
+                    } catch (CloneNotSupportedException e) {}
+
+                    allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap.getHashMap());
+                    viewDatabase.getViewState().put(player, viewStateHashMap.get(StatesEnum.WAIT));
+
+                    viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);
+
+                    ViewStartGameRMI viewStartGameRMI = new ViewStartGameRMI(player, stdin, viewDatabase, viewStateHashMap, updater, allPlay, manageEndTurn, stateHashMap, idClientList);
+                    viewStartGameRMI.start();
+
+                    break;
+
+                }
+                else{
+                    System.out.println("Nickname not found! Please insert a valide nickname...\n");
+                }
+            }
 
         }
         else if(game.equals("new game")) {
@@ -93,6 +142,8 @@ public class ClientWithRMI implements ClientStrategy {
                         break;
                     }
                 }
+
+                idClientList.putNickPlayer(player, token);
 
 
                 serverManagerFunctionRMI.manageNickPlayer(nickname, player);
@@ -129,16 +180,22 @@ public class ClientWithRMI implements ClientStrategy {
                     }
                 }
 
+                System.out.println(token);
                 System.out.println("Few seconds to start...\n");
 
                 while (true) {
                     try {
+                        if(idClientList.getPlayerArrayList().get(0)!=player){
+                            sleep(200);
+                        }
                         if (!allPlay.isWait()) {
+                            allPlay.setWait(true);
                             while(true) {
-                                allPlay.setWait(true);
+                                idClientList.setSleepPlayer(player);
                                 sleep(10 * 1000);
                                 if (idClientList.getPlayerArrayList().size() >= 3) {
                                     allPlay.setStarting(true);
+                                    idClientList.setSleepPlayer(null);
                                     break;
                                 } else {
                                     System.out.println("Waiting for other players...\n");
@@ -170,11 +227,12 @@ public class ClientWithRMI implements ClientStrategy {
                 }
                 viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);
 
+                ViewStartGameRMI viewStartGameRMI = new ViewStartGameRMI(player, stdin, viewDatabase, viewStateHashMap, updater, allPlay, manageEndTurn, stateHashMap, idClientList);
+                viewStartGameRMI.start();
 
             }
 
-            ViewStartGameRMI viewStartGameRMI = new ViewStartGameRMI(player, stdin, viewDatabase, viewStateHashMap, updater, allPlay, manageEndTurn, stateHashMap, idClientList);
-            viewStartGameRMI.start();
+
         }
     }
 }

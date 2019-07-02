@@ -17,4 +17,6 @@ public interface ServerManagerFunctionInterfaceRMI extends Remote {
 
     void manageNickPlayer(String nickname, Player player)throws RemoteException;
 
+    boolean isInArrayNick(String nick) throws RemoteException;
+
 }

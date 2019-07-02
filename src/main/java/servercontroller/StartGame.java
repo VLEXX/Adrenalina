@@ -7,6 +7,7 @@ import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
+import model.gamedata.Mode;
 import model.modelstates.EndTurnState;
 import model.playerdata.Player;
 import model.datapacket.DataPacket;
@@ -46,7 +47,7 @@ public class StartGame extends Thread {
                     MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket);
                     objectOutputStream.writeObject(messageEnum);
                     if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)){
-                        if(allPlay.getCurrentPlayerState().get(player).isEndturn()==true) {
+                        if(allPlay.getCurrentPlayerState().get(player).isEndturn()) {
                             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.WAIT));
                             if (idClientList.getIndexArray() < idClientList.getPlayerArrayList().size()-1) {
                                 idClientList.increaseIndexArray();
@@ -60,6 +61,12 @@ public class StartGame extends Thread {
                                 allPlay.getHashMapState().replace(idClientList.getPlayerArrayList().get(idClientList.getIndexArray()), stateHashMap.get(StatesEnum.ACTION));
                             }
                             allPlay.getCurrentPlayerState().get(player).setEndturn(false);
+                        }
+                        if(allPlay.getSkullArray()[7]!=null && allPlay.getStateSelectedMode().getSelectedmode()== Mode.BASE) {
+                            for(Player player: idClientList.getPlayerArrayList()){
+                                allPlay.getPlayerStateTempFrenzy().put(player, allPlay.getHashMapState().get(player));
+                                allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.FRENZY));
+                            }
                         }
                     }
                     UpdatePacket updatePacket = updater.updateClient(player);

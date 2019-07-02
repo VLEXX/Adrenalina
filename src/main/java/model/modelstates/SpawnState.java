@@ -36,6 +36,10 @@ public class SpawnState extends UnicastRemoteObject implements State, Serializab
     @Override
     public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
         if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
+            for(int i: idClientList.getClientlist()){
+                System.out.print(i + " ");
+            }
+            System.out.println("\n" + dataPacket.getToken());
             return MessageEnum.TOKEN_ERROR;
         }
         PowerUp pop1 = allPlay.getCurrentDeckState().getPowerupdeck().pop();

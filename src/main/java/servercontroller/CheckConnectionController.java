@@ -22,19 +22,34 @@ public class CheckConnectionController extends Thread {
         try{
             ArrayList<Player> players = new ArrayList<>();
             while(true){
+                CheckPlayer checkPlayer = new CheckPlayer(idClientList);
+                checkPlayer.start();
                 if(allPlay.isEndgame()){
                     break;
                 }
                 else{
                     for(Player player: idClientList.getPlayerRMI()){
-                        if(idClientList.getConnection().get(player).equals(true)){
-                            idClientList.getConnection().replace(player, false);
+                        if(idClientList.getSleepPlayer()!=null){
+                            if(!player.equals(idClientList.getSleepPlayer())){
+                                if (idClientList.getConnection().get(player).equals(true)) {
+                                    idClientList.getConnection().replace(player, false);
+                                } else {
+                                    idClientList.getConnection().remove(player);
+                                    players.add(player);
+                                    idClientList.getPlayerArrayList().remove(player);
+                                    idClientList.getClientlist().remove(idClientList.getPlayerNick(player));
+                                }
+                            }
                         }
                         else{
-                            idClientList.getConnection().remove(player);
-                            players.add(player);
-                            idClientList.getPlayerArrayList().remove(player);
-                            idClientList.getClientlist().remove(allPlay.getCurrentPlayerState().get(player).getToken());
+                            if (idClientList.getConnection().get(player).equals(true)) {
+                                idClientList.getConnection().replace(player, false);
+                            } else {
+                                idClientList.getConnection().remove(player);
+                                players.add(player);
+                                idClientList.getPlayerArrayList().remove(player);
+                                idClientList.getClientlist().remove(idClientList.getPlayerNick(player));
+                            }
                         }
                     }
                     if(players.size()!=0){

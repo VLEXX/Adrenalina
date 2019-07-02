@@ -128,4 +128,13 @@ public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Rem
     public void manageNickPlayer(String nickname, Player player)throws RemoteException{
         idClientList.getNickPlayer().put(nickname, player);
     }
+
+    public boolean isInArrayNick(String nick) throws RemoteException{
+        if(idClientList.getNicknameList().contains(nick)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

@@ -25,4 +25,20 @@ public interface IDClientListInterface extends Remote {
 
     void addPlayerRMI(Player player) throws RemoteException;
 
+     boolean isInPlayerList(String nick) throws RemoteException;
+
+    void addPlayerInList (String nick) throws RemoteException;
+
+    Player getPlayerFromNick(String nick) throws RemoteException;
+
+    void setSleepPlayer(Player sleepPlayer) throws RemoteException;
+
+    void addNickToken(String nick, Integer integer) throws RemoteException;
+
+    Integer getPlayerNick(Player player) throws RemoteException;
+
+    void putNickPlayer(Player player, Integer token) throws RemoteException;
+
+    void removeNickPlayer(Player player) throws RemoteException;
+
 }

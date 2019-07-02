@@ -11,6 +11,7 @@ import model.gamedata.ManageEndTurnInterface;
 import model.playerdata.Player;
 import servercontroller.StateBoxInterface;
 import servercontroller.UpdaterInterface;
+import view.viewstates.ViewFrenzyState;
 import view.viewstates.ViewWaitingState;
 
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class ViewStartGameRMI extends Thread {
         MessageWriter messageWriter = new MessageWriter();
         ViewUpdater viewUpdater = new ViewUpdater();
         UpdatePacket updatePacket;
-        MessageEnum messageEnumOK = null;
+        MessageEnum messageEnumOK;
         PlayerInformer playerInformer = new PlayerInformer(viewDatabase);
 
         try {
@@ -55,10 +56,11 @@ public class ViewStartGameRMI extends Thread {
         } catch (IOException | CloneNotSupportedException e) {}
 
         int n =1;
+        int k = 1;
 
         while(true){
             try {
-                if (viewDatabase.isEndgame() == false) {
+                if (!viewDatabase.isEndgame()) {
                         if (viewDatabase.getViewState().get(player) instanceof ViewWaitingState) {
                             if (n == 1) {
                                 DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
@@ -66,13 +68,20 @@ public class ViewStartGameRMI extends Thread {
                                 messageWriter.writeMessage(messageEnumOK);
                                 n--;
                             }
-                        } else {
+                        }
+                        else if(viewDatabase.getViewState().get(player) instanceof ViewFrenzyState){
+                            if (k == 1) {
+                                DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
+                                messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
+                                messageWriter.writeMessage(messageEnumOK);
+                                k--;
+                            }
+                        }
+                        else {
                             DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
                             messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
                             messageWriter.writeMessage(messageEnumOK);
-                            System.out.println(messageEnumOK);
                         }
-
 
                         if (allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)) {
                             manageEndTurn.manageEndTurn(player, statebox.getHashMap());
@@ -84,6 +93,9 @@ public class ViewStartGameRMI extends Thread {
                         if (!(viewDatabase.getViewState().get(player) instanceof ViewWaitingState)) {
                             ((ViewWaitingState) stateHashMap.get(StatesEnum.WAIT)).resetI();
                             n = 1;
+                        }
+                        if (!(viewDatabase.getViewState().get(player) instanceof ViewFrenzyState)) {
+                           k = 1;
                         }
                 }
                 else {

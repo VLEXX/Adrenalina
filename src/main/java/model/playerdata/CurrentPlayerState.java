@@ -6,6 +6,7 @@ package model.playerdata;
 import model.map.Position;
 
 import java.io.*;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 /**
@@ -50,7 +51,7 @@ public class CurrentPlayerState implements Observer, Serializable {
         return token;
     }
 
-    public synchronized void setToken(int token) {
+    public synchronized void setToken(int token){
         this.token = token;
     }
 

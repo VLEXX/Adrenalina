@@ -20,7 +20,7 @@ public class ManageEndTurn extends UnicastRemoteObject implements ManageEndTurnI
     }
 
     public void manageEndTurn(Player player, HashMap<StatesEnum, State> hashMap) throws RemoteException {
-        if(allPlay.getCurrentPlayerState().get(player).isEndturn()==true) {
+        if(allPlay.getCurrentPlayerState().get(player).isEndturn()) {
             allPlay.getHashMapState().replace(player, hashMap.get(StatesEnum.WAIT));
             if (idClientList.getIndexArray() < idClientList.getPlayerArrayList().size()-1) {
                 idClientList.increaseIndexArray();

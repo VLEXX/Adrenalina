@@ -41,6 +41,7 @@ public class DataPacket implements Serializable {
     private PowerUp powerUpSpawn;
     private boolean weaponlistempty;
     private int token;
+    private boolean frenzy;
 
     public DataPacket() {
         this.cell = null;
@@ -68,6 +69,15 @@ public class DataPacket implements Serializable {
         this.weaponlistempty=false;
         this.token=0;
         this.powerUpColor=null;
+        this.frenzy=false;
+    }
+
+    public boolean isFrenzy() {
+        return frenzy;
+    }
+
+    public void setFrenzy(boolean frenzy) {
+        this.frenzy = frenzy;
     }
 
     public Munitions getPowerUpColor() {

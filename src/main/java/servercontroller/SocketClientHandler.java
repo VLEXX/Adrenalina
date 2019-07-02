@@ -211,16 +211,7 @@ public class SocketClientHandler implements Runnable {
                 StartGame startGame = new StartGame(allPlay, player, objectInputStream, objectOutputStream, stateHashMap, updater, idClientList);
                 startGame.start();
 
-                for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
-                    for(Cell cell: room.getCellsList()){
-                        if(cell.getSpawnpointzone()!=null){
-                            for(Weapon weapon: cell.getSpawnpointzone().getSpawnWeaponsList()){
-                                System.out.println(weapon);
-                            }
-                            System.out.println("\n");
-                        }
-                    }
-                }
+
                 while(true) {
                     if (allPlay.isEndgame() == true) {
                         socket.close();

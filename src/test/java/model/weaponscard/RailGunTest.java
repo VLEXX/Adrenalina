@@ -160,18 +160,40 @@ class RailGunTest {
         //caso 2 posizione non valida
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
         positionToAttack2.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
         assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_VALID);
 
         //caso mia posizione
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
-        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
         assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
         //caso right
         myPosition.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(0));
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
         positionToAttack2.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
         assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+
+        //uno spostamento a sx
+        playerToAttack.remove(Player.GREEN);
+        positionToAttack.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(1));
+        myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+
+        //player sopra
+        myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+
+        //non è possibile coprire il caso in cui a sinistra ho un muro, sopra di me una cella con una porta a sx e sotto di me muro
+        //non è posisbile coprire il caso in cui a destra ho un muro, sotto di me una cella con una porta a dx e sotto di me muro
     }
 
     @Test

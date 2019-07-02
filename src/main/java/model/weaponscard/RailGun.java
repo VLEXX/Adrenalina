@@ -70,7 +70,7 @@ public class RailGun extends Weapon implements Serializable {
         map = allPlay.getStateSelectedMap().getSelectedmap();
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(checkCardinal(myPosition, positionToAttack)){
+        if(checkCardinal(myPosition, positionToAttack) != 'F'){
             if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
                 control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
             if(control != 0)
@@ -95,22 +95,30 @@ public class RailGun extends Weapon implements Serializable {
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         Position positionToAttack2 = null;
-        if(playerToAttack.get(1) != null)
+        char move = 'F';
+        char move2 = 'F';
+        if(playerToAttack.size() > 1)
             positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
-        if(checkCardinal(myPosition, positionToAttack) == false)
+        move = checkCardinal(myPosition, positionToAttack);
+        if(move == 'F')
             return MessageEnum.POSITION_NOT_VALID;
-        if(checkCardinal(myPosition, positionToAttack2) == false)
-            return MessageEnum.POSITION_NOT_VALID;
+        if(positionToAttack2 != null) {
+            move2 = checkCardinal(myPosition, positionToAttack2);
+            if(move2 == 'F' || move2 != move)
+                return MessageEnum.POSITION_NOT_VALID;
+        }
         if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
             control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
         if(control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
-        if(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
-            control = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
-        if(control != 0)
-            allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
-        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+        if(positionToAttack2 != null) {
+            if (allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
+                control = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
+            if (control != 0)
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
+            allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
+        }
         return MessageEnum.OK;
     }
 
@@ -124,20 +132,20 @@ public class RailGun extends Weapon implements Serializable {
      * @param positionToAttack position cardinal to attack
      * @return true if correct
      */
-    private boolean checkCardinal(Position myPosition, Position positionToAttack){
+    private char checkCardinal(Position myPosition, Position positionToAttack){
         //controllo che il giocatore sia o nella mia cella o sotto
-        if(positionToAttack == myPosition || positionToAttack.getCurrentcell().getCellId() == myPosition.getCurrentcell().getCellId()+4 || positionToAttack.getCurrentcell().getCellId() == myPosition.getCurrentcell().getCellId()+8)
-            return true;
+        if(positionToAttack.getCurrentcell().getCellId() == myPosition.getCurrentcell().getCellId() || positionToAttack.getCurrentcell().getCellId() == myPosition.getCurrentcell().getCellId()+4 || positionToAttack.getCurrentcell().getCellId() == myPosition.getCurrentcell().getCellId()+8)
+            return 'D';
         //controllo che il giocatore sia sopra di me
         if(positionToAttack.getCurrentcell().getCellId() == myPosition.getCurrentcell().getCellId()-4 || positionToAttack.getCurrentcell().getCellId() == myPosition.getCurrentcell().getCellId()-8)
-            return true;
+            return 'U';
         Cell position = myPosition.getCurrentcell();
         Cell temp = null;
         for(int i = 0; i < 3; i++) {
             //controllo che il giocatore sia a sinistra con la porta
             if (position.getLeftCell() != null) {
                 if (position.getLeftCell() == positionToAttack.getCurrentcell())
-                    return true;
+                    return 'L';
                 else position = position.getLeftCell();
             } else {
                 //controllo sotto se c'è la porta a sx
@@ -145,14 +153,14 @@ public class RailGun extends Weapon implements Serializable {
                 if (temp != null && temp.getLeftCell() != null) {
                     position = findCell(temp.getLeftCell().getCellId() - 4); //prendo ID cella alla mia sx oltre porta/muro
                     if (position == positionToAttack.getCurrentcell())
-                        return true;
+                        return 'L';
                 } else {
                     //controllo sopra se c'è la porta a sx
                     temp = findCell(position.getCellId() - 4); //temp = cella sopra
                     if (temp != null && temp.getLeftCell() != null) {
                         position = findCell(temp.getLeftCell().getCellId() + 4);
                         if (position == positionToAttack.getCurrentcell())
-                            return true;
+                            return 'L';
                     } else
                         break;
                 }
@@ -162,7 +170,7 @@ public class RailGun extends Weapon implements Serializable {
             //controllo che il giocatore sia a destra con la porta
             if (position.getRightCell() != null) {
                 if (position.getRightCell() == positionToAttack.getCurrentcell())
-                    return true;
+                    return 'R';
                 else position = position.getRightCell();
             } else {
                 //controllo sotto se c'è la porta a dx
@@ -170,20 +178,20 @@ public class RailGun extends Weapon implements Serializable {
                 if (temp != null && temp.getRightCell() != null) {
                     position = findCell(temp.getRightCell().getCellId() - 4); //prendo ID cella alla mia dx oltre porta/muro
                     if (position == positionToAttack.getCurrentcell())
-                        return true;
+                        return 'R';
                 } else {
                     //controllo sopra se c'è la porta a dx
                     temp = findCell(position.getCellId() - 4); //temp = cella sopra
                     if (temp != null && temp.getRightCell() != null) {
                         position = findCell(temp.getRightCell().getCellId() + 4);
                         if (position == positionToAttack.getCurrentcell())
-                            return true;
+                            return 'R';
                     } else
                         break;
                 }
             }
         }
-        return false;
+        return 'F';
     }
 
     /**

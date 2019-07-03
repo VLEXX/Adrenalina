@@ -76,8 +76,8 @@ class FlameThrowerTest {
         PlayerBoard playerBoard2 = new PlayerBoard();
         MarksBox marksBox = new MarksBox();
         MarksBox marksBox2 = new MarksBox();
-        marksBox.setMyMarksMap(myPlayer, 2);
-        marksBox2.setMyMarksMap(myPlayer, 3);
+        marksBox.setMyMarksMap(myPlayer, 1);
+        marksBox2.setMyMarksMap(myPlayer, 1);
         playerBoard.setMarksBox(marksBox);
         playerBoard2.setMarksBox(marksBox2);
         InitializeAllPlay allPlay = null;

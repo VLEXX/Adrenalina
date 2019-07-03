@@ -103,7 +103,7 @@ class LockRifleTest {
 
     @Test
     void secondAttack() {
-        //Inizializzazione generale
+        //caso base
         LockRifle l = new LockRifle();
         Player myPlayer = Player.BLACK;
         ArrayList<Player> playerToAttack = new ArrayList<>();

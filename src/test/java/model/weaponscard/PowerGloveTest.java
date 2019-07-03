@@ -152,8 +152,72 @@ class PowerGloveTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
-        //caso
+        //caso F
+        positionToAttack.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(0));
+        assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_VALID);
 
+        //caso R
+        myPosition.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+
+        //caso U
+        myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+
+        //caso D
+        myPosition.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+
+        //caso posizione errata L
+        myPosition.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_VALID);
+
+        //caso posizione errata R
+        myPosition.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_VALID);
+
+        //caso posizione errata U
+        myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_VALID);
+
+        //caso posizione errata D
+        myPosition.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(0));
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_VALID);
     }
 
     @Test

@@ -108,22 +108,22 @@ public class PowerGlove extends Weapon implements Serializable {
         if (control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
-        if (playerToAttack.get(1) != null){
+        if (playerToAttack.size()>1){
             Position positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
             if(move == 'R'){
-                if(positionToAttack.getCurrentcell().getRightCell() != null || positionToAttack.getCurrentcell().getRightCell() == positionToAttack2.getCurrentcell()){
+                if(positionToAttack.getCurrentcell().getRightCell() != null && positionToAttack.getCurrentcell().getRightCell() != positionToAttack2.getCurrentcell()) {
                     return MessageEnum.POSITION_NOT_VALID;
                 }
             } else if(move == 'L'){
-                if(positionToAttack.getCurrentcell().getRightCell() != null || positionToAttack.getCurrentcell().getRightCell() == positionToAttack2.getCurrentcell()) {
+                if(positionToAttack.getCurrentcell().getLeftCell() != null && positionToAttack.getCurrentcell().getLeftCell().getCellId() != positionToAttack2.getCurrentcell().getCellId()) {
                     return MessageEnum.POSITION_NOT_VALID;
                 }
             } else if (move == 'U') {
-                if(positionToAttack.getCurrentcell().getRightCell() != null || positionToAttack.getCurrentcell().getRightCell() == positionToAttack2.getCurrentcell()) {
+                if(positionToAttack.getCurrentcell().getUpCell() != null && positionToAttack.getCurrentcell().getUpCell() != positionToAttack2.getCurrentcell()) {
                     return MessageEnum.POSITION_NOT_VALID;
                 }
             } else if(move == 'D') {
-                if (positionToAttack.getCurrentcell().getRightCell() != null || positionToAttack.getCurrentcell().getRightCell() == positionToAttack2.getCurrentcell()) {
+                if (positionToAttack.getCurrentcell().getDownCell() != null && positionToAttack.getCurrentcell().getDownCell() != positionToAttack2.getCurrentcell()) {
                     return MessageEnum.POSITION_NOT_VALID;
                 }
             }

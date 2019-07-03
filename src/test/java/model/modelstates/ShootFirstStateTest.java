@@ -6,6 +6,7 @@ import model.datapacket.StatesEnum;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
+import model.map.Position;
 import model.map.Room;
 import model.modelstates.*;
 import model.playerdata.CurrentPlayerState;
@@ -31,6 +32,8 @@ class ShootFirstStateTest {
         dataPacket.setToken(idClientList.addClient());
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
+        Position position = new Position();
+        currentPlayerState.setPlayerposition(position);
         initializeAllPlay.getCurrentPlayerState().put(Player.YELLOW, currentPlayerState);
 
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();

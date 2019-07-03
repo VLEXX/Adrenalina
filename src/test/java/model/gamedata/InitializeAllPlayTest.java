@@ -194,4 +194,30 @@ class InitializeAllPlayTest {
         allPlay.replaceInHashMap(Player.YELLOW, StatesEnum.ACTION, stateHashMap);
         assertEquals(allPlay.getPlayerState(Player.YELLOW).getNamestate(), StatesEnum.ACTION);
     }
+
+    @Test
+    void getPlayerStateTempFrenzy() throws RemoteException {
+        InitializeAllPlay allPlay = new InitializeAllPlay();
+        assertEquals(allPlay.getPlayerStateTempFrenzy().isEmpty(), true);
+    }
+
+    @Test
+    void getVoteFrenzy() throws RemoteException {
+        InitializeAllPlay allPlay = new InitializeAllPlay();
+        assertEquals(allPlay.getVoteFrenzy().getResult(),  false);
+    }
+
+    @Test
+    void setStarting() throws RemoteException {
+        InitializeAllPlay allPlay = new InitializeAllPlay();
+        allPlay.setStarting(true);
+        assertEquals(allPlay.isStarting(), true);
+    }
+
+    @Test
+    void setWait() throws RemoteException {
+        InitializeAllPlay allPlay = new InitializeAllPlay();
+        allPlay.setWait(true);
+        assertEquals(allPlay.isWait(), true);
+    }
 }

@@ -40,7 +40,6 @@ public class SocketServer extends Thread implements Serializable {
                 if(idClientList.getNicknameList().size()!=5){
                     Socket socket = serverSocket.accept();
                     executor.submit(new SocketClientHandler(socket, this.allPlay, idClientList));
-                    this.idClientList.update();
                 }
                 else{
                     break;

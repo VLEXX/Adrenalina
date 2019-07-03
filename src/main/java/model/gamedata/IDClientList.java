@@ -50,20 +50,12 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         return this.playerToken.get(player);
     }
 
-    public synchronized void putNickPlayer(Player player, Integer token) throws RemoteException{
+    public synchronized void putPlayerToken(Player player, Integer token) throws RemoteException{
         this.playerToken.put(player, token);
     }
 
-    public synchronized void removeNickPlayer(Player player) throws RemoteException{
+    public synchronized void removePlayerToken(Player player) throws RemoteException{
         this.playerToken.remove(player);
-    }
-
-    public synchronized void addNickToken(String nick, Integer integer) throws RemoteException{
-        this.nickToken.put(nick, integer);
-    }
-
-    public synchronized Integer getNickToken(String nick){
-        return this.nickToken.get(nick);
     }
 
     public synchronized void setSleepPlayer(Player sleepPlayer) throws RemoteException {
@@ -83,8 +75,12 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         }
     }
 
-    public Player getPlayerFromNick(String nick) throws RemoteException{
+    public synchronized Player getPlayerFromNick(String nick) throws RemoteException{
         return nickPlayer.get(nick);
+    }
+
+    public synchronized void addNickPlayer(String nick, Player player){
+        this.nickPlayer.put(nick, player);
     }
 
     public synchronized void addPlayerRMI(Player player) throws RemoteException{
@@ -140,10 +136,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         return this.clientlist;
     }
 
-    public void increaseClientCounter(){
-        this.clientCounter++;
-    }
-
     //Setta nella cella corretta, a seconda dell'indice passato, l'ID da memorizzare
     public synchronized int addClient() throws RemoteException {
         Random random = new Random();
@@ -157,10 +149,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
             }
         }
         return i;
-    }
-
-    public synchronized int getClientCounter() throws RemoteException {
-        return this.clientCounter;
     }
 
     public synchronized void update() throws RemoteException{

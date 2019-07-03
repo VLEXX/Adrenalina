@@ -91,7 +91,7 @@ public class ClientWithRMI implements ClientStrategy {
 
 
                     Player player = idClientList.getPlayerFromNick(nickname);
-                    idClientList.putNickPlayer(player, token);
+                    idClientList.putPlayerToken(player, token);
 
                     viewDatabase.setThisplayer(player);
 
@@ -143,7 +143,7 @@ public class ClientWithRMI implements ClientStrategy {
                     }
                 }
 
-                idClientList.putNickPlayer(player, token);
+                idClientList.putPlayerToken(player, token);
 
 
                 serverManagerFunctionRMI.manageNickPlayer(nickname, player);

@@ -86,4 +86,11 @@ class VoteMapTest {
         m.setInitmap();
         assertEquals(m.getInitMap(), true);
     }
+
+    @Test
+    void setI() throws RemoteException {
+        VoteMap voteMap = new VoteMap();
+        voteMap.setI(2);
+        assertEquals(voteMap.getPlayerCounter(),2);
+    }
 }

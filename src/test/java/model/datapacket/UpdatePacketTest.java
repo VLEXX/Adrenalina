@@ -104,4 +104,11 @@ class UpdatePacketTest {
         updatePacket.setSecondSkullArray(skull);
         assertEquals(updatePacket.getSecondSkullArray()[0], Player.BLUE);
     }
+
+    @Test
+    void setAttackinprogress() {
+        UpdatePacket updatePacket = new UpdatePacket(null, null, null, null, null, null, false);
+        updatePacket.setAttackinprogress(true);
+        assertEquals(updatePacket.isAttackinprogress(), true);
+    }
 }

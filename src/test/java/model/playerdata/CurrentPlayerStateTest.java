@@ -145,4 +145,11 @@ class CurrentPlayerStateTest {
         CurrentPlayerState clone = currentPlayerState.deepClone();
         assertEquals(clone.getActiveplayer(), Player.BLUE);
     }
+
+    @Test
+    void setAttackinprogress() {
+        CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.BLUE);
+        currentPlayerState.setAttackinprogress(true);
+        assertEquals(currentPlayerState.isAttackinprogress(), true);
+    }
 }

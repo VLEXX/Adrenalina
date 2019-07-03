@@ -96,6 +96,10 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
             }
         }
 
+        if(allPlay.getCurrentPlayerState().get(player).isAttackinprogress()){
+            updatePacket.setAttackinprogress(true);
+        }
+
         updatePacket.setSkullArray(allPlay.getSkullArray());
         updatePacket.setSecondSkullArray(allPlay.getSecondSkullArray());
 

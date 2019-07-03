@@ -51,50 +51,18 @@ public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Rem
 
         if(i==1){
             allPlay.getVoteMap().setVoteresult(0);
-            allPlay.getVoteMap().decreasePlayerCounter();
-            if(allPlay.getVoteMap().getPlayerCounter()==0){
-                allPlay.getVoteMap().setInitmap();
-                allPlay.getVoteMap().setFinalresult();
-                allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
-                allPlay.getStateSelectedMap().setSelectedmap();
-                refillMap(allPlay);
-            }
             return MessageEnum.OK;
         }
         if(i==2){
             allPlay.getVoteMap().setVoteresult(1);
-            allPlay.getVoteMap().decreasePlayerCounter();
-            if(allPlay.getVoteMap().getPlayerCounter()==0){
-                allPlay.getVoteMap().setInitmap();
-                allPlay.getVoteMap().setFinalresult();
-                allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
-                allPlay.getStateSelectedMap().setSelectedmap();
-                refillMap(allPlay);
-            }
             return MessageEnum.OK;
         }
         if(i==3){
             allPlay.getVoteMap().setVoteresult(2);
-            allPlay.getVoteMap().decreasePlayerCounter();
-            if(allPlay.getVoteMap().getPlayerCounter()==0){
-                allPlay.getVoteMap().setInitmap();
-                allPlay.getVoteMap().setFinalresult();
-                allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
-                allPlay.getStateSelectedMap().setSelectedmap();
-                refillMap(allPlay);
-            }
             return MessageEnum.OK;
         }
         if(i==4){
             allPlay.getVoteMap().setVoteresult(3);
-            allPlay.getVoteMap().decreasePlayerCounter();
-            if(allPlay.getVoteMap().getPlayerCounter()==0){
-                allPlay.getVoteMap().setInitmap();
-                allPlay.getVoteMap().setFinalresult();
-                allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
-                allPlay.getStateSelectedMap().setSelectedmap();
-                refillMap(allPlay);
-            }
             return MessageEnum.OK;
         }
         else{
@@ -126,7 +94,7 @@ public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Rem
     }
 
     public void manageNickPlayer(String nickname, Player player)throws RemoteException{
-        idClientList.getNickPlayer().put(nickname, player);
+        idClientList.addNickPlayer(nickname, player);
     }
 
     public boolean isInArrayNick(String nick) throws RemoteException{

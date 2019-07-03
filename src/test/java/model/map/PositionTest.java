@@ -6,6 +6,8 @@ import model.map.Position;
 import model.map.Room;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PositionTest {
@@ -36,5 +38,13 @@ class PositionTest {
         Room r = new Room(1);
         p.setCurrentroom(r);
         assertEquals(p.getCurrentroom(), r);
+    }
+
+    @Test
+    void deepClone() throws IOException, ClassNotFoundException {
+        Position position = new Position();
+        position.setCurrentcell(new Cell(1));
+        Position clone = position.deepClone();
+        assertEquals(clone.getCurrentcell().getCellId(), 1);
     }
 }

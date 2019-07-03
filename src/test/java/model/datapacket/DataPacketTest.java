@@ -252,4 +252,18 @@ class DataPacketTest {
         dataPacket.setWeaponlistempty(true);
         assertEquals(dataPacket.isWeaponlistempty(), true);
     }
+
+    @Test
+    void setFrenzy() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setFrenzy(true);
+        assertEquals(dataPacket.isFrenzy(), true);
+    }
+
+    @Test
+    void setPowerUpColor() {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setPowerUpColor(Munitions.BLUE);
+        assertEquals(dataPacket.getPowerUpColor(), Munitions.BLUE);
+    }
 }

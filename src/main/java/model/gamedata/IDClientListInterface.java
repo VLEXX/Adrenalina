@@ -13,8 +13,6 @@ public interface IDClientListInterface extends Remote {
 
     int addClient() throws RemoteException;
 
-    void update() throws RemoteException;
-
     HashMap<Player, Boolean> getConnection() throws RemoteException;
 
     ArrayList<Player> getPlayerRMI() throws RemoteException;
@@ -33,12 +31,10 @@ public interface IDClientListInterface extends Remote {
 
     void setSleepPlayer(Player sleepPlayer) throws RemoteException;
 
-    void addNickToken(String nick, Integer integer) throws RemoteException;
-
     Integer getPlayerNick(Player player) throws RemoteException;
 
-    void putNickPlayer(Player player, Integer token) throws RemoteException;
+    void putPlayerToken(Player player, Integer token) throws RemoteException;
 
-    void removeNickPlayer(Player player) throws RemoteException;
+    void removePlayerToken(Player player) throws RemoteException;
 
 }

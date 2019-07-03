@@ -12,10 +12,16 @@ import model.weaponscard.Weapon;
 
 import java.util.HashMap;
 
+/**
+ * it gives the player necessary in-game information
+ */
 public class PlayerInformer {
     ViewDatabase dbb;
 
-    //costruttore
+    /**
+     * builder
+     * @param dbb contains match data
+     */
     public PlayerInformer(ViewDatabase dbb){
         this.dbb=dbb;
     }
@@ -26,7 +32,11 @@ public class PlayerInformer {
         playerStats();
     }
 
-    //informa delle posizioni
+
+
+    /**
+     * it gives the players information about players'position
+     */
     public void positionsInformer(){
         System.out.println("PLAYERS' POSITION:\n");
         if(dbb.getViewPlayerPosition().getCurrentcell()==null) {
@@ -55,7 +65,11 @@ public class PlayerInformer {
 
     }
 
-    //mostra al player le proprie statistiche
+
+
+    /**
+     * it gives the players information about their equipment, their received damage points and other player damage points
+     */
     public void playerStats(){
         System.out.println("YOUR EQUIPMENT:\n");
         if(dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList().isEmpty())
@@ -162,7 +176,11 @@ public class PlayerInformer {
 
     }
 
-    //mostra tutto quello presente sulla mappa
+
+
+    /**
+     * it shows all the available pickupable on the map
+     */
     public void mapStats(){
         System.out.println("MAP STATS\n");
         for(Room r : dbb.getViewMapState().getSelectedMap().getRoomList()){
@@ -174,7 +192,7 @@ public class PlayerInformer {
                         System.out.println("it also allows you to draw a powerup from the deck.\n");
                     else
                         System.out.print("\n");
-                }else{
+                }else if(c.getSpawnpointzone()!=null){
                     if(c.getSpawnpointzone().getSpawnWeaponsList()[0]==null && c.getSpawnpointzone().getSpawnWeaponsList()[1]==null && c.getSpawnpointzone().getSpawnWeaponsList()[2]==null)
                         System.out.println("nothing.\n");
                     else{
@@ -188,11 +206,17 @@ public class PlayerInformer {
                             }
                         }
                     }
-                }
+                }else
+                    System.out.println("nothing.\n\n");
             }
         }
     }
 
+
+
+    /**
+     * it shows stats about the match (final frenzy mode and number of left skulls)
+     */
     public void matchStats(){
         System.out.println("MATCH STATS\n");
         short i=0;

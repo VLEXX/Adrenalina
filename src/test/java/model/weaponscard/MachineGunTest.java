@@ -110,21 +110,106 @@ class MachineGunTest {
         assertEquals(machineGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
        //caso player 1 non visibile
+        positionToAttack.setCurrentroom(map1.getRoomList().get(3));
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         assertEquals(machineGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_FOUND);
 
         //caso player 2 non visibile
+        positionToAttack.setCurrentroom(map1.getRoomList().get(0));
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(0));
+        positionToAttack.setCurrentroom(map1.getRoomList().get(3));
         positionToAttack2.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
         assertEquals(machineGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_FOUND);
 
         //secondo attacco
         playerToAttack.remove(Player.GREEN);
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
-        positionToAttack2.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
         assertEquals(machineGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
-        //terzo attacco
+        //caso giocatore diverso
+        playerToAttack.remove(Player.PURPLE);
+        playerToAttack.add(Player.YELLOW);
+        positionToAttack.setCurrentroom(map1.getRoomList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        positionToAttack.getCurrentcell().addInCellPlayer(playerToAttack.get(0));
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(0), attackCurrentPlayerState);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
+        assertEquals(machineGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.CANNOT_USE_THIS_EFFECT);
 
+        //terzo attaccoe vari casi
+        playerToAttack.add(Player.GREEN);
+        positionToAttack2.setCurrentroom(map1.getRoomList().get(0));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        positionToAttack2.getCurrentcell().addInCellPlayer(playerToAttack.get(0));
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(1), attackCurrentPlayerState2);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.OK);
+
+        playerToAttack.remove(Player.YELLOW);
+        playerToAttack.add(Player.YELLOW);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.OK);
+
+        playerToAttack.remove(Player.YELLOW);
+        playerToAttack.add(Player.PURPLE);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.PLAYERS_NOT_VALID);
+
+        playerToAttack.remove(Player.GREEN);
+        playerToAttack.add(Player.GREEN);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.PLAYERS_NOT_VALID);
+
+
+        //caso player attaccato false
+        playerToAttack.remove(Player.PURPLE);
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(0), attackCurrentPlayerState);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
+        assertEquals(machineGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+
+        //caso giocatore nullo
+        machineGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay);
+        assertEquals(machineGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.CANNOT_USE_THIS_EFFECT);
+
+        playerToAttack.add(Player.GREEN);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.PLAYERS_NOT_VALID);
+
+        playerToAttack.remove(Player.GREEN);
+        playerToAttack.add(Player.YELLOW);
+        positionToAttack.setCurrentroom(map1.getRoomList().get(3));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.POSITION_NOT_FOUND);
+
+        allPlay.getCurrentPlayerState().remove(playerToAttack.get(0));
+        allPlay.getCurrentPlayerState().remove(playerToAttack.get(1));
+
+        positionToAttack2.setCurrentroom(map1.getRoomList().get(3));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
+        positionToAttack.setCurrentroom(map1.getRoomList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(0), attackCurrentPlayerState);
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(1), attackCurrentPlayerState2);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.POSITION_NOT_FOUND);
+
+        //caso flag secondo e terzo attacco
+        playerToAttack.remove(1);
+        playerToAttack.remove(0);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.OK);
+        assertEquals(machineGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        playerToAttack.add(Player.FLAG);
+        assertEquals(machineGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.WEAPON_ERROR);
+
+        //caso posizione errata secondo attacco
+        playerToAttack.remove(0);
+        playerToAttack.add(Player.GREEN);
+        positionToAttack.setCurrentroom(map1.getRoomList().get(3));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(0), attackCurrentPlayerState);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        assertEquals(machineGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_FOUND);
     }
 }

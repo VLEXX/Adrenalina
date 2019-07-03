@@ -242,3 +242,7 @@ e
 5src/main/java/model/modelstates/FinalFrenzyState.java,0\f\0fcdf7062452fd2dcedd8a07c02d742dc2be26e3
 e
 5src/test/java/model/modelstates/PowerupStateTest.java,d\9\d9f69fe31cad6c3520f6efe79f185f1ff078a89c
+X
+(src/main/java/view/ClientManagerRMI.java,4\e\4e6da7fcc348ff96d147934b7f8c33bd08771925
+Z
+*src/main/java/view/CheckConnectionRMI.java,a\4\a46550103d8d607947723bde37345705fdb99af6

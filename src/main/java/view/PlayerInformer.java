@@ -27,6 +27,7 @@ public class PlayerInformer {
     }
 
     public void informer(){
+        matchStats();
         mapStats();
         positionsInformer();
         playerStats();
@@ -218,7 +219,8 @@ public class PlayerInformer {
      * it shows stats about the match (final frenzy mode and number of left skulls)
      */
     public void matchStats(){
-        System.out.println("MATCH STATS\n");
+        System.out.println("MATCH STATS:\n");
+        System.out.println("You are playing "+dbb.getViewMapState().getSelectedMap().getMapname()+".\n");
         short i=0;
         for(short j=0;j<dbb.getSkullArray().length;j++){
             if(dbb.getSkullArray()[j]==null)

@@ -202,15 +202,11 @@ public class ClientWithRMI implements ClientStrategy {
                     }
                 }
 
-                System.out.println(token);
                 System.out.println("Few seconds to start...\n");
 
                 while (true) {
                     try {
-                        if(idClientList.getPlayerArrayList().get(0)!=player){
-                            sleep(200);
-                        }
-                        if (!allPlay.isWait()) {
+                        if(idClientList.getPlayerArrayList().get(0).equals(player)){
                             allPlay.setWait(true);
                             while(true) {
                                 idClientList.setSleepPlayer(player);
@@ -220,19 +216,20 @@ public class ClientWithRMI implements ClientStrategy {
                                     idClientList.setSleepPlayer(null);
                                     break;
                                 } else {
-                                    System.out.println("Waiting for other players...\n");
                                     while (true) {
                                         if (idClientList.getPlayerArrayList().size() >= 3) {
                                             break;
                                         }
                                     }
-                                    System.out.println("New player is in! Few seconds to start...\n");
                                 }
                             }
                         } else {
                             if (allPlay.isStarting()) {
                                 break;
                             }
+                        }
+                        if(allPlay.isStarting()){
+                            break;
                         }
                     }
                     catch (InterruptedException e) {
@@ -241,17 +238,11 @@ public class ClientWithRMI implements ClientStrategy {
                 }
 
                 if(idClientList.getPlayerArrayList().get(0)==player) {
-                    voteMap.setInitmap();
-                    voteMap.setFinalresult();
-                    stateSelectedMap.setStrategyMap(voteMap.getFinalresult());
-                    stateSelectedMap.setSelectedmap();
-                    serverManagerFunctionRMI.refillMap();
-                    voteMode.setFinalResult();
-                    stateSelectedMode.setSelectedmode(voteMode.getFinalResult());
+                    serverManagerFunctionRMI.finalizeMapMode();
                 }
                 else{
                     try {
-                        sleep(200);
+                        sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

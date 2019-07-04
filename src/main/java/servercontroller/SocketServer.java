@@ -34,7 +34,7 @@ public class SocketServer extends Thread implements Serializable {
 
         ServerSocket serverSocket = new ServerSocket(port);
 
-        System.out.println("Server ready");
+        System.out.println("SOCKET Server ready...");
         while(true) {
             try {
                 if(idClientList.getNicknameList().size()!=5){

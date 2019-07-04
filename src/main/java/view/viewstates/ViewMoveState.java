@@ -33,7 +33,7 @@ public class ViewMoveState implements ViewState {
         dataPacket.setToken(viewDatabase.getClientToken());
         while(true){
             id=stdin.nextInt();
-            System.out.println(stdin.nextLine());
+            stdin.nextLine();
             for(Cell cell: viewDatabase.getViewPlayerPosition().getCurrentcell().getReachable3Cells()){
                 if(id==cell.getCellId()){
                     dataPacket.setPlayer(player);

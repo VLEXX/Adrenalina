@@ -30,7 +30,7 @@ public class ServerRMI extends Thread {
         ManageEndTurn manageEndTurn = new ManageEndTurn(allPlay, idClientList);
 
 
-        System.out.println("Binding server to registry...");
+        System.out.println("RMI Server ready...");
         Registry registry = LocateRegistry.createRegistry(8080);
 
 
@@ -41,13 +41,10 @@ public class ServerRMI extends Thread {
         registry.bind("VoteMap", allPlay.getVoteMap());
         registry.bind("StateBox", stateBox);
         registry.bind("ManageEndTurn", manageEndTurn);
-        registry.bind("StateSelectedMap", allPlay.getStateSelectedMap());
-        registry.bind("VoteMode", allPlay.getVoteMode());
-        registry.bind("StateSelectedMode", allPlay.getStateSelectedMode());
+        registry.bind("StateSelectedMap", this.allPlay.getStateSelectedMap());
+        registry.bind("VoteMode", this.allPlay.getVoteMode());
+        registry.bind("StateSelectedMode", this.allPlay.getStateSelectedMode());
 
-
-
-        System.out.println("Attendo invocazioni dal client...");
 
         CheckConnectionController checkConnectionController = new CheckConnectionController(idClientList,allPlay);
 

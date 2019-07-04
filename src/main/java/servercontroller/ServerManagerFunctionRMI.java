@@ -70,7 +70,20 @@ public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Rem
         }
     }
 
-    public void refillMap() throws RemoteException {
+    public synchronized void finalizeMapMode() throws IOException, RemoteException{
+        allPlay.getVoteMap().setInitmap();
+        allPlay.getVoteMap().setFinalresult();
+        allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
+        allPlay.getStateSelectedMap().setSelectedmap();
+        refillMap();
+        allPlay.getVoteMode().setFinalResult();
+        allPlay.getStateSelectedMode().setSelectedmode(allPlay.getVoteMode().getFinalResult());
+    }
+
+
+
+
+        public void refillMap() throws RemoteException {
         for(Room r : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell c : r.getCellsList()){
                 if(c.getSpawnpointzone()==null){

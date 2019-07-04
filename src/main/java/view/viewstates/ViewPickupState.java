@@ -158,7 +158,6 @@ public class ViewPickupState implements ViewState {
         else{
             if(tempcell.getAmmohere()!=null){
                 System.out.println("Ammo card here!\n");
-                dataPacket.setCell(tempcell);
                 return dataPacket;
             }
             else{

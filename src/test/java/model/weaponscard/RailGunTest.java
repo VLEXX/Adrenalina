@@ -194,7 +194,10 @@ class RailGunTest {
         assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
         //caso findcell false
-
+        myPosition.setCurrentcell(map1.getRoomList().get(4).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.POSITION_NOT_VALID);
     }
 
     @Test

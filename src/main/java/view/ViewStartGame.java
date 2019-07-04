@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package view;
 
 import model.datapacket.DataPacket;
@@ -13,6 +16,9 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Thread that manage the view game
+ */
 public class ViewStartGame extends Thread {
 
 

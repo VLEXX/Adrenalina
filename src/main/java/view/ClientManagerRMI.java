@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package view;
 
 import model.gamedata.CurrentDeckState;
@@ -5,8 +8,17 @@ import model.gamedata.Mode;
 import model.playerdata.Player;
 import java.util.Scanner;
 
+/**
+ * Class with principal method to manage client starting game
+ */
 public class ClientManagerRMI {
 
+    /**
+     * Manage client character choice
+     *
+     * @param s
+     * @return
+     */
     public Player chooseCharacter(String s){
         if(s.equals("black")||s.equals("Black")||s.equals("BLACK")){
             return Player.BLACK;
@@ -28,6 +40,14 @@ public class ClientManagerRMI {
         }
     }
 
+
+    /**
+     * Manage client character choice
+     *
+     * @param stdin
+     * @param currentDeckState
+     * @return
+     */
     public Player manageChoice(Scanner stdin,  CurrentDeckState currentDeckState){
         System.out.println("Choose a character...");
         if(currentDeckState.getPlayers().size()==4){
@@ -64,6 +84,12 @@ public class ClientManagerRMI {
         }
     }
 
+    /**
+     * Manage client map vote
+     *
+     * @param stdin
+     * @return
+     */
     public synchronized int manageVote(Scanner stdin) {
         System.out.println("Vote Map: 1 | 2 | 3 | 4");
         String s;
@@ -79,6 +105,12 @@ public class ClientManagerRMI {
         }
     }
 
+    /**
+     * Manage client start
+     *
+     * @param stdin
+     * @return
+     */
     public String manageStart(Scanner stdin){
         System.out.println("> New Game\n> Continue\n");
         String s;
@@ -94,12 +126,24 @@ public class ClientManagerRMI {
         }
     }
 
+    /**
+     * Manage client nickname choice
+     *
+     * @param stdin
+     * @return
+     */
     public String manageNickname(Scanner stdin){
         System.out.print("Insert your nickname: ");
         String s = stdin.nextLine();
         return s;
     }
 
+    /**
+     * Manage client vote mode
+     *
+     * @param stdin
+     * @return
+     */
     public Mode manageMode(Scanner stdin){
         System.out.println("1) Base\n2) Domination\n");
         System.out.println("Vote mode (Insert '1' or '2'): ");

@@ -5,7 +5,9 @@ package view;
 
 import model.map.Map;
 
-//Classe che memorizza lo stato corrente della mappa
+/**
+ * Class that contains selected map of the game
+ */
 public class ViewMapState {
     private Map currentmap; //memorizza lo stato della mappa corrente
 

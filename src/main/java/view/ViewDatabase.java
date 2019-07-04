@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package view;
 
 import model.gamedata.Mode;
@@ -8,6 +11,9 @@ import model.powerups.PowerUp;
 import java.util.HashMap;
 import java.util.Stack;
 
+/**
+ * Class that contains view data
+ */
 public class ViewDatabase {
     private ViewCurrentPlayerState viewCurrentPlayerState;
     private ViewMapState viewMapState;

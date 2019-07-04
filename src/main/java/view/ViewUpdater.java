@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package view;
 
 import model.datapacket.StatesEnum;
@@ -6,6 +9,9 @@ import model.playerdata.Player;
 
 import java.util.HashMap;
 
+/**
+ * Class that update viewdatabase with an updatePacket received by the server
+ */
 public class ViewUpdater {
 
     public synchronized void updateView(UpdatePacket updatePacket, ViewDatabase viewDatabase, HashMap<StatesEnum, ViewState> hashMap, Player player){

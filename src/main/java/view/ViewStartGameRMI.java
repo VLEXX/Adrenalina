@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package view;
 
 import model.datapacket.DataPacket;
@@ -18,6 +21,9 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Class that manage the view game for RMI client
+ */
 public class ViewStartGameRMI extends Thread {
 
     private ViewDatabase viewDatabase;

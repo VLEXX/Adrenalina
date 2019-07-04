@@ -7,7 +7,9 @@ package view;
 import model.playerdata.CurrentPlayerState;
 import model.weaponscard.Weapon;
 
-//Classe che mantiene lo stato attuale del giocatore per la view
+/**
+ * Class that contains currentPlayerState and temporary weapon for second and third attack
+ */
 public class ViewCurrentPlayerState {
     private CurrentPlayerState currentPlayerState; //memorizza lo stato corrente del giocatore per la view
     private Weapon weaponMultAttacks;

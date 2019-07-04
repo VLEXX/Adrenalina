@@ -5,6 +5,9 @@ package view;
 
 import model.gamedata.ChartScore;
 
+/**
+ * Class that contains Chart Score of the game
+ */
 public class ViewChartScore {
     private ChartScore c;
 

@@ -1,7 +1,13 @@
+/**
+ * @author Federico Scatà
+ */
 package view;
 
 import model.datapacket.MessageEnum;
 
+/**
+ * Class with method that write to System.out messages received by the server
+ */
 public class MessageWriter {
 
     public void writeMessage(MessageEnum messageEnum){

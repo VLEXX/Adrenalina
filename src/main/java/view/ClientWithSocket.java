@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 
+/**
+ * Design Pattern Strategy to manage ClientWithRMI
+ */
 public class ClientWithSocket implements ClientStrategy{
         private String ip;
         private int port;

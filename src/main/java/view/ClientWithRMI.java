@@ -22,6 +22,9 @@ import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * Design Pattern Strategy to manage ClientWithRMI
+ */
 public class ClientWithRMI implements ClientStrategy {
 
     public void startClient() throws IOException, NotBoundException {

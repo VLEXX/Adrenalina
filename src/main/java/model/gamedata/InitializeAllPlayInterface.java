@@ -33,5 +33,4 @@ public interface InitializeAllPlayInterface extends Remote {
      void setStarting(boolean starting) throws RemoteException;
 
      boolean isEndgame() throws RemoteException;
-
 }

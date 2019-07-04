@@ -11,12 +11,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SpawnPoint implements Serializable {
+
     private Weapon[] SpawnWeaponsList;  //lista armi presenti allo spawn
     private Munitions spawnColor;
     private ArrayList<Player> damageToSP;
     private short[] pointArray;
-
-
 
     public SpawnPoint(Munitions m) {                //costruttore
         this.SpawnWeaponsList = new Weapon[]{null, null, null};
@@ -46,7 +45,6 @@ public class SpawnPoint implements Serializable {
         return SpawnWeaponsList;
     }
 
-
     //danneggia lo spawnpoint in modalità dominazione
     public ArrayList<Player> getSPDamage(){
         return this.damageToSP;
@@ -55,5 +53,4 @@ public class SpawnPoint implements Serializable {
     public short[] getPointArray() {
         return pointArray;
     }
-
 }

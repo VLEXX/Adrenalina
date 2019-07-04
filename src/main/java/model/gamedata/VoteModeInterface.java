@@ -10,5 +10,4 @@ public interface VoteModeInterface extends Remote {
     void setFinalResult() throws RemoteException;
 
     Mode getFinalResult() throws RemoteException;
-
 }

@@ -4,7 +4,6 @@ import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
-import model.gamedata.IDClientList;
 import model.gamedata.IDClientListInterface;
 import model.gamedata.InitializeAllPlayInterface;
 import model.gamedata.ManageEndTurnInterface;
@@ -29,7 +28,6 @@ public class ViewStartGameRMI extends Thread {
     private InitializeAllPlayInterface allPlay;
     private ManageEndTurnInterface manageEndTurn;
     private StateBoxInterface statebox;
-    private IDClientListInterface idClientList;
 
     public ViewStartGameRMI(Player p, Scanner scanner, ViewDatabase database, HashMap<StatesEnum,ViewState> hash, UpdaterInterface updaterInterface, InitializeAllPlayInterface allPlayInterface, ManageEndTurnInterface manageEndTurn, StateBoxInterface stateBoxInterface, IDClientListInterface clientList){
         this.viewDatabase = database;
@@ -40,7 +38,6 @@ public class ViewStartGameRMI extends Thread {
         this.allPlay=allPlayInterface;
         this.manageEndTurn=manageEndTurn;
         this.statebox= stateBoxInterface;
-        this.idClientList=clientList;
     }
 
     public synchronized void run(){

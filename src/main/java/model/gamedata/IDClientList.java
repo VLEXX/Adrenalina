@@ -4,8 +4,6 @@
 package model.gamedata;
 
 import model.playerdata.Player;
-import servercontroller.ObserverCounter;
-import servercontroller.SubjectCounter;
 
 import java.io.Serializable;
 import java.rmi.Remote;
@@ -20,8 +18,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
     private ArrayList<Integer> clientlist;   //Array che memorizza i token
     private ArrayList<Player> playerArrayList;
     private int indexArray;
-    private int clientCounter;
-    private ArrayList<ObserverCounter> observerCounters;
     private ArrayList<String> nicknameList;
     private HashMap<String, Player> nickPlayer;
     private HashMap<Player, Boolean> connection;
@@ -35,8 +31,6 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
         this.clientlist = new ArrayList<>();
         this.playerArrayList = new ArrayList<>();
         this.indexArray=0;
-        this.clientCounter=5;
-        this.observerCounters=new ArrayList<>();
         this.nicknameList = new ArrayList<>();
         this.nickPlayer=new HashMap<>();
         this.connection=new HashMap<>();
@@ -144,14 +138,9 @@ public class IDClientList extends UnicastRemoteObject implements Remote, IDClien
             i = random.nextInt(1000);
             if (!(clientlist.contains(i))) {
                 this.clientlist.add(i);
-                update();
                 break;
             }
         }
         return i;
-    }
-
-    public synchronized void update() throws RemoteException{
-        this.clientCounter--;
     }
 }

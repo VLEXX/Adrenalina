@@ -8,12 +8,9 @@ import model.datapacket.UpdatePacket;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.gamedata.Mode;
-import model.modelstates.EndTurnState;
 import model.playerdata.Player;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
-import model.weaponscard.Weapon;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

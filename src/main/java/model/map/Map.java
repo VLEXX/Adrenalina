@@ -7,9 +7,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Map implements Serializable {
+
     private String mapname;//nome della mappa
     private ArrayList<Room> roomlist;
-
 
     public Map() {                   //costruttore
         mapname = null;
@@ -36,7 +36,6 @@ public class Map implements Serializable {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
         objectOutputStream.writeObject(this);
-
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         ObjectInputStream objectInputStream = new ObjectInputStream(bais);
         return (Map) objectInputStream.readObject();

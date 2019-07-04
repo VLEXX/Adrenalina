@@ -111,7 +111,6 @@ class ShootThirdStateTest {
 
         dataPacket.setToken(0);
         assertEquals(shootThirdState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
-
     }
 
     @Test
@@ -119,5 +118,4 @@ class ShootThirdStateTest {
         ShootThirdState shootThirdState = new ShootThirdState(null, null, null);
         assertEquals(shootThirdState.getNamestate(), StatesEnum.SHOOT_THIRD);
     }
-
 }

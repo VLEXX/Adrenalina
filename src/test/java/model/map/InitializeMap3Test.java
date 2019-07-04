@@ -1,7 +1,5 @@
 package model.map;
 
-import model.map.InitializeMap3;
-import model.map.Map;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

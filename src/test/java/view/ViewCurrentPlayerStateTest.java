@@ -16,7 +16,6 @@ class ViewCurrentPlayerStateTest {
         assertEquals(v.getCurrentPlayerState(), null);
     }
 
-
     @Test
     void setCurrentPlayerState() {
         ViewCurrentPlayerState v = new ViewCurrentPlayerState();

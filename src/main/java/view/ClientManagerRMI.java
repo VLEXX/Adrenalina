@@ -1,15 +1,8 @@
 package view;
 
-import model.datapacket.MessageString;
 import model.gamedata.CurrentDeckState;
 import model.gamedata.Mode;
 import model.playerdata.Player;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class ClientManagerRMI {
@@ -58,7 +51,6 @@ public class ClientManagerRMI {
         for(Player player: currentDeckState.getPlayers()) {
             System.out.println(player);
         }
-
 
         Player player1;
         while (true) {

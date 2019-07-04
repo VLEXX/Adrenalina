@@ -15,10 +15,6 @@ public class Client {
         clientstrategy = null;
     }
 
-    public void setClientstrategy(ClientStrategy clientstrategy) {
-        this.clientstrategy = clientstrategy;
-    }
-
     public static void main(String[] args){
         System.out.println("'Socket' or 'RMI'?");
         Scanner in = new Scanner(System.in);

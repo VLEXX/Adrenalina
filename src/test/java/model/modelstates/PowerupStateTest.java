@@ -6,7 +6,6 @@ import model.datapacket.StatesEnum;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
-import model.map.Position;
 import model.map.Room;
 import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
@@ -366,7 +365,6 @@ class PowerupStateTest {
 
         dataPacket.setToken(0);
         assertEquals(powerupState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
-
     }
 
     @Test
@@ -374,5 +372,4 @@ class PowerupStateTest {
         PowerupState powerupState = new PowerupState(null, null, null);
         assertEquals(powerupState.getNamestate(), StatesEnum.POWERUP);
     }
-
 }

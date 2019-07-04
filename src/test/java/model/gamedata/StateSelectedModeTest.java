@@ -1,8 +1,8 @@
-//Author: Federico Scatà
+/**
+ * @author federico Scatà
+ */
 package model.gamedata;
 
-import model.gamedata.Mode;
-import model.gamedata.StateSelectedMode;
 import org.junit.jupiter.api.Test;
 
 import java.rmi.RemoteException;

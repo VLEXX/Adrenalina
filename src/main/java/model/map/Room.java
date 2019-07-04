@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Room implements Serializable {
+
     private int id; //id della stanza
     private ArrayList<Cell> cellslist;    //elenco delle celle della stanza
-
 
     public Room(int id) {
         this.id = id;
@@ -25,5 +25,4 @@ public class Room implements Serializable {
     public ArrayList<Cell> getCellsList() {
         return cellslist;
     }
-
 }

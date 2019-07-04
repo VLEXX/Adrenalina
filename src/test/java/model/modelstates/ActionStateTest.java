@@ -2,11 +2,9 @@ package model.modelstates;
 
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
-import model.modelstates.ActionState;
 import model.datapacket.DataPacket;
 import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
-import model.modelstates.State;
 import org.junit.jupiter.api.Test;
 
 import java.rmi.RemoteException;
@@ -38,7 +36,6 @@ class ActionStateTest {
         assertEquals(actionState.doAction(dataPacket), MessageEnum.ACTION_ERROR);
         dataPacket.setToken(0);
         assertEquals(actionState.doAction(dataPacket), MessageEnum.TOKEN_ERROR);
-
     }
 
     @Test

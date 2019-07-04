@@ -11,5 +11,4 @@ import java.util.HashMap;
 public interface ManageEndTurnInterface extends Remote {
 
      void manageEndTurn(Player player, HashMap<StatesEnum, State> hashMap) throws RemoteException;
-
 }

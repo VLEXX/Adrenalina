@@ -5,18 +5,12 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
-import model.map.Position;
-import model.map.SpawnPoint;
-import model.modelstates.PickUpState;
-import model.modelstates.State;
 import model.munitions.Ammo;
 import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
-import model.playerdata.PlayerBoard;
 import model.powerups.Newton;
 import model.powerups.PowerUp;
-import model.powerups.PowerUpId;
 import model.weaponscard.*;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +23,6 @@ class PickUpStateTest {
 
     @Test
     void doAction() throws RemoteException {
-
        InitializeAllPlay i = new InitializeAllPlay();
        HashMap<StatesEnum,State> hm = new HashMap();
        i.getStateSelectedMap().setStrategyMap(0);
@@ -109,7 +102,6 @@ class PickUpStateTest {
         assertEquals(i.getCurrentPlayerState().get(d.getPlayer()).getPlayerposition().getCurrentcell().getAmmohere(),null);
         d.setToken(0);
         assertEquals(pus.doAction(d), MessageEnum.TOKEN_ERROR);
-
     }
 
     @Test

@@ -3,12 +3,10 @@ package view;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
-import model.weaponscard.Weapon;
 
 import java.util.HashMap;
 
 public class ViewUpdater {
-
 
     public synchronized void updateView(UpdatePacket updatePacket, ViewDatabase viewDatabase, HashMap<StatesEnum, ViewState> hashMap, Player player){
 

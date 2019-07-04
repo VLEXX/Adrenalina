@@ -1,7 +1,8 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package model.gamedata;
 
-import model.gamedata.VoteMap;
 import org.junit.jupiter.api.Test;
 
 import java.rmi.RemoteException;

@@ -7,20 +7,15 @@ import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
-import model.datapacket.MessageString;
 import model.gamedata.Mode;
-import model.map.Cell;
-import model.map.Room;
 import model.modelstates.*;
 import model.playerdata.Player;
-import model.weaponscard.Weapon;
 
 import java.io.*;
 
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 
@@ -44,7 +39,6 @@ public class SocketClientHandler implements Runnable {
             InputStream inputStream = this.socket.getInputStream();
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             PrintWriter outMessage = new PrintWriter(this.socket.getOutputStream());
-            Scanner inMessage = new Scanner(socket.getInputStream());
             ServerManagerFunction serverManagerFunction = new ServerManagerFunction();
 
             HashMap<StatesEnum, State> stateHashMap = new HashMap<>();

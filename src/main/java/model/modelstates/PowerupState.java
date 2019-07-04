@@ -23,7 +23,6 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
     private StatesEnum namestate;
     private IDClientList idClientList;
 
-
     /**
      * Class constructor
      */

@@ -17,7 +17,6 @@ import java.util.Stack;
 /**
  * Class with weapons deck, ammo deck, powerup deck and available player deck
  */
-
 public class CurrentDeckState implements Serializable {
     private Stack<Ammo> ammodeck;           //Mazzo delle munizioni
     private Stack<Weapon> weaponsdeck;     //Mazzo delle armi
@@ -144,7 +143,6 @@ public class CurrentDeckState implements Serializable {
         this.weaponsdeck.push(whisper);
         ZX2 zx2 = new ZX2();
         this.weaponsdeck.push(zx2);
-
         this.powerupdeck = new Stack<>();
         for (Munitions munitions : Munitions.values()) {
             this.powerupdeck.push(new Newton(munitions));
@@ -158,14 +156,12 @@ public class CurrentDeckState implements Serializable {
         for (Munitions munitions : Munitions.values()) {
             this.powerupdeck.push(new Teleporter(munitions));
         }
-
         this.players = new ArrayList<>();
         players.add(Player.BLUE);
         players.add(Player.BLACK);
         players.add(Player.GREEN);
         players.add(Player.PURPLE);
         players.add(Player.YELLOW);
-
         Collections.shuffle(this.ammodeck);
         Collections.shuffle(this.weaponsdeck);
         Collections.shuffle(this.powerupdeck);

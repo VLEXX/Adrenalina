@@ -14,7 +14,6 @@ import model.playerdata.Player;
 import model.playerdata.PlayerBoard;
 import org.junit.jupiter.api.Test;
 
-import java.awt.event.WindowStateListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 

@@ -4,7 +4,6 @@
 package view;
 
 import model.datapacket.StatesEnum;
-import model.datapacket.UpdatePacket;
 import model.gamedata.Mode;
 import model.playerdata.Player;
 import view.viewstates.*;
@@ -37,8 +36,6 @@ public class ClientWithSocket implements ClientStrategy{
                 OutputStream outputStream = socket.getOutputStream();
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
                 Scanner stdin = new Scanner(System.in);
-                Scanner inMessage = new Scanner(socket.getInputStream());
-                PrintWriter outMessage = new PrintWriter(socket.getOutputStream());
 
                 ViewActionState actionState = new ViewActionState();
                 ViewEndturnState endTurnState = new ViewEndturnState();

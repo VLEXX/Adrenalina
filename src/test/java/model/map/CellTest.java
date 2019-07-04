@@ -1,8 +1,9 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
 import model.datapacket.MessageEnum;
-import model.gamedata.InitializeAllPlay;
 import model.munitions.Ammo;
 import model.munitions.Munitions;
 import model.playerdata.Player;
@@ -124,7 +125,6 @@ class CellTest {
         testcell.initializeReachable3Cells();
         for (int j = 0; j < 52; j++)
             assertTrue(testcell.getReachable3Cells().contains(cellarray[j]));
-
     }
 
     @Test

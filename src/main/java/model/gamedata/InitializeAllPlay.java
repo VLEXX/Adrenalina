@@ -4,7 +4,6 @@
 package model.gamedata;
 
 import model.datapacket.StatesEnum;
-import servercontroller.ObserverUpdate;
 import model.modelstates.State;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
@@ -32,7 +31,6 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     private HashMap<Player, State> playerStateTempFrenzy;
     private int playercounter;
     private int playercountertemp;
-    private ArrayList<ObserverUpdate> observers;
     private boolean endgame;
     private State tempState;
     private Player[] skullArray;
@@ -58,7 +56,6 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         playerState = new HashMap<>();
         playercounter = 0;
         playercountertemp = 0;
-        observers = new ArrayList<>();
         this.endgame=false;
         this.skullArray= new Player[]{null,null,null,null,null,null,null,null};
         this.secondSkullArray = new Player[]{null,null,null,null,null,null,null,null};

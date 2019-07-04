@@ -1,9 +1,8 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package model.map;
 
-import model.map.Cell;
-import model.map.Position;
-import model.map.Room;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -26,7 +26,6 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
         this.allPlay=i;
     }
 
-
     public synchronized UpdatePacket updateClient(Player player) throws IOException, RemoteException, CloneNotSupportedException {
 
         Position position = new Position();

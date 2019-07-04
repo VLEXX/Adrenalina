@@ -21,5 +21,4 @@ public interface ServerManagerFunctionInterfaceRMI extends Remote {
     boolean isInArrayNick(String nick) throws RemoteException;
 
     void refillMap() throws RemoteException;
-
 }

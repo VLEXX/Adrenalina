@@ -177,12 +177,12 @@ public class CurrentPlayerState implements Observer, Serializable {
     }
 
     public CurrentPlayerState deepClone() throws IOException, ClassNotFoundException {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
-            objectOutputStream.writeObject(this);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
+        objectOutputStream.writeObject(this);
 
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream objectInputStream = new ObjectInputStream(bais);
-            return (CurrentPlayerState) objectInputStream.readObject();
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+        return (CurrentPlayerState) objectInputStream.readObject();
     }
 }

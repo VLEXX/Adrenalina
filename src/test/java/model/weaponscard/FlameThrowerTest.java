@@ -127,6 +127,18 @@ class FlameThrowerTest {
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));
         positionToAttack2.setCurrentcell(map1.getRoomList().get(4).getCellsList().get(0));
         assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack2, allPlay), MessageEnum.OK);
+
+        //caso control
+        playerToAttack.remove(Player.YELLOW);
+        playerToAttack.add(Player.GREEN);
+        myPosition.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
+        positionToAttack2.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        allPlay.getCurrentPlayerState().put(playerToAttack.get(1), attackCurrentPlayerState2);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
+        allPlay.getCurrentPlayerState().get(myPlayer).setPlayerposition(myPosition);
+        assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack2, allPlay), MessageEnum.OK);
     }
 
     @Test

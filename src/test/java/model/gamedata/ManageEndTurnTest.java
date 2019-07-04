@@ -87,12 +87,10 @@ class ManageEndTurnTest {
         stateHashMap.put(StatesEnum.SPAWN, spawnState);
         allPlay.getHashMapState().put(Player.BLUE, stateHashMap.get(StatesEnum.WAIT));
         allPlay.getHashMapState().put(Player.YELLOW, stateHashMap.get(StatesEnum.WAIT));
-
         idClientList.increaseIndexArray();
         Cell cell = new Cell(1);
         allPlay.getCurrentPlayerState().get(Player.YELLOW).getPlayerposition().setCurrentcell(cell);
         manageEndTurn.manageEndTurn(Player.YELLOW, stateHashMap);
-
         assertEquals(allPlay.getHashMapState().get(Player.YELLOW).getNamestate(), StatesEnum.ACTION);
     }
 }

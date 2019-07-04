@@ -150,7 +150,6 @@ public class Cell implements Serializable {
     /**
      * the following 3 methods manage a list made of players who are located in the cell during the game
      */
-    //metodo che ritorna i giocatori presenti nella cella
     public ArrayList<Player> getInCellPlayer() {
         return inCellPlayer;
     }
@@ -201,7 +200,6 @@ public class Cell implements Serializable {
     /**
      * the following 4 methods allow to know the near cells and return null if there is a wall
      */
-    //metodi che restituiscono le celle adiacenti
     public Cell getUpCell() {
         return upcell;
     }
@@ -217,7 +215,6 @@ public class Cell implements Serializable {
     public Cell getRightCell() {
         return rightcell;
     }
-
 
     /**
      * allow to set the near cells
@@ -237,37 +234,30 @@ public class Cell implements Serializable {
     /**
      *the following 7 methods allow to set or get various class attributes
      */
-    //restituisce l'ID della cella
     public int getCellId() {
         return id;
     }
 
-    //restituisce il tipo di munizioni presenti, NULL se assenti
     public Ammo getAmmohere() {
         return ammohere;
     }
 
-    //setta il tipo di munizioni presenti
     public synchronized void setAmmohere(Ammo ammohere) {
         this.ammohere = ammohere;
     }
 
-    //restituisce l'oggetto spawn, NULL se assente
     public SpawnPoint getSpawnpointzone() {
         return spawnpointzone;
     }
 
-    //setta l'oggetto dello spawn
     public synchronized void setSpawnpointzone(SpawnPoint spawnpointzone) {
         this.spawnpointzone = spawnpointzone;
     }
 
-    //restituisce le celle raggiungibili che distano 3 dalla cella corrente
     public ArrayList<Cell> getReachable3Cells() {
         return reachable3Cells;
     }
-    
-    //restituisce le celle raggiungibili che distano 2 dalla cella corente
+
     public ArrayList<Cell> getReachable2Cells() {
         return reachable2Cells;
     }
@@ -275,7 +265,6 @@ public class Cell implements Serializable {
     /**
      * creates a list of the cell that are reachable in 3 moves from the actual
      */
-    //inizializza la lista delle celle raggiungibili in 3 spostamenti
     public void initializeReachable3Cells() {
         if (this.getUpCell() != null) {
             reachable3Cells.add(this.getUpCell());

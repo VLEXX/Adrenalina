@@ -71,7 +71,6 @@ class DataPacketTest {
         assertEquals(dataPacket.getStatesEnum(), StatesEnum.WAIT);
     }
 
-
     @Test
     void setWeapon() {
         DataPacket dataPacket = new DataPacket();

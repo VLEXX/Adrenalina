@@ -4,7 +4,6 @@
 package model.playerdata;
 
 import model.munitions.Munitions;
-import model.playerdata.MunitionsBox;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

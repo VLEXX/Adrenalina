@@ -1,7 +1,5 @@
 package model.map;
 
-import model.map.Map;
-import model.map.Room;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

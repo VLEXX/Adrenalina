@@ -61,12 +61,7 @@ public class PlayerInformer {
                 }
             }
         });
-
-
-
     }
-
-
 
     /**
      * it gives the players information about their equipment, their received damage points and other player damage points
@@ -174,10 +169,7 @@ public class PlayerInformer {
                     System.out.println("\n");
                 }
             }});
-
     }
-
-
 
     /**
      * it shows all the available pickupable on the map
@@ -213,8 +205,6 @@ public class PlayerInformer {
         }
     }
 
-
-
     /**
      * it shows stats about the match (final frenzy mode and number of left skulls)
      */
@@ -233,7 +223,5 @@ public class PlayerInformer {
             System.out.println("Only 1 skull left to the end of the game!\n\n");
         if(dbb.getFinalFrenzy())
             System.out.println("Final Frenzy is enabled!\n\n");
-
-
     }
 }

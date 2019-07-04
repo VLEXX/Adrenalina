@@ -8,5 +8,4 @@ public interface StateSelectedMapInterface extends Remote {
     void setStrategyMap(int i) throws RemoteException;
 
     void setSelectedmap() throws RemoteException;
-
 }

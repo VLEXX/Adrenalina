@@ -112,6 +112,4 @@ public class UpdatePacket implements Serializable {
     public StatesEnum getStatesEnum() {
         return statesEnum;
     }
-
-
 }

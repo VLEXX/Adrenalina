@@ -3,8 +3,6 @@
  */
 package model.playerdata;
 
-import model.playerdata.MarksBox;
-import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

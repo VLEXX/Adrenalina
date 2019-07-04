@@ -121,7 +121,6 @@ class InitializeAllPlayTest {
         assertEquals(initializeAllPlay.getHashMapState().containsKey(Player.BLUE), true);
     }
 
-
     @Test
     void putInHashMapState() throws RemoteException {
         InitializeAllPlay allPlay = new InitializeAllPlay();
@@ -145,7 +144,6 @@ class InitializeAllPlayTest {
         stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
         stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
         stateHashMap.put(StatesEnum.POWERUP, powerupState1);
-
         allPlay.putInHashMapState(Player.YELLOW, StatesEnum.WAIT, stateHashMap);
         assertEquals(allPlay.getHashMapState().get(Player.YELLOW) instanceof WaitingState, true);
     }
@@ -189,7 +187,6 @@ class InitializeAllPlayTest {
         stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
         stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
         stateHashMap.put(StatesEnum.POWERUP, powerupState1);
-
         allPlay.putInHashMapState(Player.YELLOW, StatesEnum.WAIT,stateHashMap);
         allPlay.replaceInHashMap(Player.YELLOW, StatesEnum.ACTION, stateHashMap);
         assertEquals(allPlay.getPlayerState(Player.YELLOW).getNamestate(), StatesEnum.ACTION);

@@ -1,8 +1,6 @@
 package model.gamedata;
 
-import model.gamedata.CurrentDeckState;
 import model.playerdata.Player;
-import model.powerups.PowerUp;
 import model.weaponscard.Weapon;
 import org.junit.jupiter.api.Test;
 

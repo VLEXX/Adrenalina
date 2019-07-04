@@ -45,5 +45,4 @@ public class Position implements Serializable{
         ObjectInputStream objectInputStream = new ObjectInputStream(bais);
         return (Position) objectInputStream.readObject();
     }
-
 }

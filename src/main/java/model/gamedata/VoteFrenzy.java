@@ -44,5 +44,4 @@ public class VoteFrenzy extends UnicastRemoteObject implements Serializable {
             return false;
         }
     }
-
 }

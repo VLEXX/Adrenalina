@@ -5,7 +5,6 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
 import model.playerdata.Player;
-import model.weaponscard.Weapon;
 import view.viewstates.ViewWaitingState;
 
 import java.io.IOException;

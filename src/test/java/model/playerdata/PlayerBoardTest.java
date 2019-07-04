@@ -4,7 +4,6 @@
 package model.playerdata;
 
 import model.munitions.Munitions;
-import model.playerdata.*;
 import model.powerups.PowerUp;
 import model.powerups.TagbackGrenade;
 import model.weaponscard.LockRifle;

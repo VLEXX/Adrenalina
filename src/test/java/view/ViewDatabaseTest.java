@@ -94,5 +94,4 @@ class ViewDatabaseTest {
         assertEquals(viewDatabase.getSkullArray()[0], Player.BLUE);
         assertEquals(viewDatabase.getSecondSkullArray()[0], Player.BLUE);
     }
-
 }

@@ -1,7 +1,8 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
-import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.weaponscard.LockRifle;

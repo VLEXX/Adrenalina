@@ -1,4 +1,6 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package model.gamedata;
 
 import model.playerdata.Player;

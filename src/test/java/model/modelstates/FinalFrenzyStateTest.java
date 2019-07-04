@@ -43,7 +43,6 @@ class FinalFrenzyStateTest {
         i.getPlayerStateTempFrenzy().put(Player.BLUE,ps);
         i.getPlayerStateTempFrenzy().put(Player.BLACK,ps);
         assertEquals(ffs.doAction(d),MessageEnum.OK);
-
     }
 
     @Test

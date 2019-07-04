@@ -1,7 +1,8 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package model.gamedata;
 
-import model.gamedata.VoteMode;
 import org.junit.jupiter.api.Test;
 
 import java.rmi.RemoteException;
@@ -40,6 +41,5 @@ class VoteModeTest {
         m.setVoteResult(1);
         assertEquals(m.getVoteResult()[0], 0);
         assertEquals(m.getVoteResult()[1], 2);
-
     }
 }

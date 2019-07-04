@@ -1,6 +1,5 @@
 package model.munitions;
 
-import model.munitions.Ammo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +20,6 @@ class AmmoTest {
         int[] a = new int[]{3, 4, 5};
         TestAmmo.setAmmoList(a);
         assertEquals(TestAmmo.getAmmoList(), a);
-
     }
 
     @Test

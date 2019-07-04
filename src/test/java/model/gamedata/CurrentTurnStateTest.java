@@ -1,7 +1,8 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package model.gamedata;
 
-import model.gamedata.CurrentTurnState;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;

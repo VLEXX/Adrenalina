@@ -67,7 +67,6 @@ class SpawnStateTest {
         stack.push(powerUp2);
         stack.push(powerUp1);
         assertEquals(spawnState.doAction(dataPacket), MessageEnum.OK);
-
     }
 
     @Test
@@ -120,7 +119,6 @@ class SpawnStateTest {
         stack.push(powerUp2);
         stack.push(powerUp1);
         assertEquals(spawnState.doAction(dataPacket), MessageEnum.OK);
-
     }
 
     @Test
@@ -233,5 +231,4 @@ class SpawnStateTest {
         SpawnState spawnState = new SpawnState(null, null, null);
         assertEquals(spawnState.getNamestate(), StatesEnum.SPAWN);
     }
-
 }

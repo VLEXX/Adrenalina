@@ -5,7 +5,6 @@ import model.playerdata.Player;
 import model.map.Position;
 import model.powerups.PowerUp;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -71,16 +70,8 @@ public class ViewDatabase {
 
     public boolean getFinalFrenzy(){return finalfrenzy;}
 
-    public void setFinalFrenzy(boolean ff){
-        finalfrenzy = ff;
-    }
-
     public void setAttackinprogress(boolean attackinprogress) {
         this.attackinprogress = attackinprogress;
-    }
-
-    public String getNickname() {
-        return nickname;
     }
 
     public void setNickname(String nickname) {

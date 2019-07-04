@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
+
 /**
  * Class that manages the PickUp Action
  */
@@ -34,7 +35,6 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
     private HashMap<StatesEnum, State> stateHashMap;
     private StatesEnum namestate;
     private IDClientList idClientList;
-
 
     /**
      * Class constructor
@@ -145,7 +145,6 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
                 return MessageEnum.AMMO_ERROR;
         }
 
-
         //fine controlli e inizio modifica del model
         //settaggio posizione
         Cell ccv2 = ccv;
@@ -200,7 +199,6 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
         } else {
             allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
-
         }
         return MessageEnum.OK;
     }

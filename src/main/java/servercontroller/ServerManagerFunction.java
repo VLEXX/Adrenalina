@@ -24,7 +24,6 @@ public class ServerManagerFunction {
 
     public synchronized Player chooseCharacterManager(ObjectInputStream objectInputStream, InitializeAllPlay allPlay, ObjectOutputStream objectOutputStream, IDClientList IDclientList) throws IOException, ClassNotFoundException {
         objectOutputStream.writeObject(allPlay.getCurrentDeckState());
-
         Player player;
         Boolean ok;
         while(true) {

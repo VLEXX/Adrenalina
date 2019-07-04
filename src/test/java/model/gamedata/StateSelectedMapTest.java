@@ -1,8 +1,8 @@
-//Author: Federico Scatà
+/**
+ * @author Federico Scatà
+ */
 package model.gamedata;
 
-import model.gamedata.StateSelectedMap;
-import model.map.Map;
 import org.junit.jupiter.api.Test;
 
 import java.rmi.RemoteException;
@@ -20,7 +20,6 @@ class StateSelectedMapTest {
     @Test
     void setSelectedMap() throws RemoteException {
         StateSelectedMap m = new StateSelectedMap();
-        Map n = new Map();
         m.setStrategyMap(0);
         m.setSelectedmap();
         assertEquals(m.getSelectedmap().getMapname(), "1");

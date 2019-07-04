@@ -9,14 +9,12 @@ package model.munitions;
 //ammolist[1] => Gialle
 //ammolist[2] => Blu
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
 public class Ammo implements Serializable, Cloneable {
-    private int[] ammoList; //munizioni presenti
 
+    private int[] ammoList; //munizioni presenti
     private boolean PossiblePowerUp; //powerup presente
 
     //costruttore
@@ -44,6 +42,4 @@ public class Ammo implements Serializable, Cloneable {
     public void setPossiblePowerUp(boolean possiblePowerUp) {
         PossiblePowerUp = possiblePowerUp;
     }
-
-
 }

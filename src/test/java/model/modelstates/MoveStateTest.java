@@ -6,7 +6,6 @@ import model.datapacket.StatesEnum;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Position;
-import model.modelstates.*;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import org.junit.jupiter.api.Test;
@@ -55,9 +54,7 @@ class MoveStateTest {
         assertEquals(ms.setMove(i, i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1), Player.BLUE), 0);
         i.getCurrentPlayerState().get(Player.BLUE).setActiveplayer(Player.YELLOW);
         assertEquals(ms.setMove(i, i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(1), Player.BLUE), -1);
-
     }
-
 
     @Test
     void doAction() throws RemoteException {
@@ -102,7 +99,6 @@ class MoveStateTest {
 
         assertEquals(moveState.doAction(dataPacket), MessageEnum.OK);
         assertEquals(moveState.doAction(dataPacket), MessageEnum.UNREACHABLE_CELL);
-
     }
 
     @Test

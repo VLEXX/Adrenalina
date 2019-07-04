@@ -75,8 +75,6 @@ class ShootSecondStateTest {
         initializeAllPlay.getCurrentPlayerState().get(Player.YELLOW).getBoard().getWeaponsList().clear();
         initializeAllPlay.getCurrentPlayerState().get(Player.YELLOW).getBoard().getWeaponsList().add(weapon1);
         assertEquals(shootSecondState.doAction(dataPacket), MessageEnum.WEAPON_NOT_FOUND);
-
-
     }
 
     @Test

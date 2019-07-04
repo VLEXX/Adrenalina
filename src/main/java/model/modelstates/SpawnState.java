@@ -63,7 +63,6 @@ public class SpawnState extends UnicastRemoteObject implements State, Serializab
                 }
             }
         }
-
         if((pop2.getId().equals(dataPacket.getPowerUpToKeepSpawn().getId()))&&(pop2.getColor().equals(dataPacket.getPowerUpToKeepSpawn().getColor()))){
             if((pop1.getId().equals(dataPacket.getPowerUpSpawn().getId()))&&(pop1.getColor().equals(dataPacket.getPowerUpSpawn().getColor()))){
                 for (Room room : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()) {

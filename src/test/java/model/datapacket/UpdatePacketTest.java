@@ -1,12 +1,10 @@
 package model.datapacket;
 
-import model.datapacket.StatesEnum;
 import model.gamedata.ChartScore;
 import model.gamedata.Mode;
 import model.map.*;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
-import model.datapacket.UpdatePacket;
 import model.powerups.PowerUp;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +23,6 @@ class UpdatePacketTest {
         UpdatePacket updatePacket = new UpdatePacket(chartScore, currentPlayerState, map, null, null, null, false);
         assertEquals(updatePacket.getCurrentPlayerState().getActiveplayer(), Player.YELLOW);
     }
-
 
     @Test
     void getChart() {
@@ -87,7 +84,6 @@ class UpdatePacketTest {
         position.setCurrentroom(room);
         updatePacket.addInHashMap(Player.YELLOW,position);
         assertEquals(updatePacket.getPositionHashMap().get(Player.YELLOW).getCurrentroom().getRoomId(), 1);
-
     }
 
     @Test

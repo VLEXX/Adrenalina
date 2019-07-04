@@ -10,21 +10,17 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class SocketServer extends Thread implements Serializable {
     private int port;
     private InitializeAllPlay allPlay;
-    private ArrayList<ObserverCounter> observerCounters;
     private IDClientList idClientList;
 
     public SocketServer(int port, InitializeAllPlay allPlay, IDClientList clientList){
         this.port = port;
         this.allPlay = allPlay;
-        this.observerCounters=new ArrayList<>();
         this.idClientList=clientList;
     }
 

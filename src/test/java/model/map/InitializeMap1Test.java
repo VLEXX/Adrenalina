@@ -1,8 +1,8 @@
-//Author: Alex Saletti
+/**
+ * @author Alex Saletti
+ */
 package model.map;
 
-import model.map.InitializeMap1;
-import model.map.Map;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -81,7 +81,5 @@ class InitializeMap1Test {
         assertEquals(map1.getRoomList().get(4).getCellsList().get(0).getDownCell(), null);
         assertEquals(map1.getRoomList().get(4).getCellsList().get(0).getLeftCell(), null);
         assertEquals(map1.getRoomList().get(4).getCellsList().get(0).getRightCell().getCellId(), 10);
-
-
     }
 }

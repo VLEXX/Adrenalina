@@ -12,7 +12,6 @@ import model.map.Room;
 import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
-import model.playerdata.PlayerBoard;
 import model.powerups.Newton;
 import model.powerups.PowerUp;
 import model.powerups.TargetingScope;
@@ -29,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class EndTurnStateTest {
-
 
     @Test
     void doAction() throws RemoteException {
@@ -130,7 +128,6 @@ class EndTurnStateTest {
         assertEquals(eds.doAction(d), MessageEnum.OK);
         d.setToken(0);
         assertEquals(eds.doAction(d), MessageEnum.TOKEN_ERROR);
-
     }
 
     @Test
@@ -157,5 +154,4 @@ class EndTurnStateTest {
         EndTurnState endTurnState = new EndTurnState(null, null, null);
         assertEquals(endTurnState.getNamestate(), StatesEnum.END);
     }
-
 }

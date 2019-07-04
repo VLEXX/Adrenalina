@@ -36,5 +36,4 @@ public interface IDClientListInterface extends Remote {
     void putPlayerToken(Player player, Integer token) throws RemoteException;
 
     void removePlayerToken(Player player) throws RemoteException;
-
 }

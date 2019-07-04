@@ -28,7 +28,6 @@ public class MoveState extends UnicastRemoteObject implements State, Serializabl
     private StatesEnum namestate;
     private IDClientList idClientList;
 
-
     public MoveState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap, IDClientList clientList) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;
@@ -63,7 +62,6 @@ public class MoveState extends UnicastRemoteObject implements State, Serializabl
             }
         }
         return MessageEnum.UNREACHABLE_CELL;
-
     }
 
     /**
@@ -91,7 +89,6 @@ public class MoveState extends UnicastRemoteObject implements State, Serializabl
         return -1;
     }
 
-
     /**
      * returns a cell that is reachable from p and has Id=id, null if the required cell doesn't exist
      * @param i class containing information about the current match
@@ -100,7 +97,6 @@ public class MoveState extends UnicastRemoteObject implements State, Serializabl
      * @return cell that has Id=id if is reachable by the player p, null in other cases
      */
     public Cell cellFinder(InitializeAllPlay i, int id, Player player) {
-
         for (Room room : i.getStateSelectedMap().getSelectedmap().getRoomList()) {
             for (Cell cell : room.getCellsList()) {
                 if (cell.getCellId() == id) {
@@ -111,6 +107,5 @@ public class MoveState extends UnicastRemoteObject implements State, Serializabl
         }
         return null;
     }
-
 }
 

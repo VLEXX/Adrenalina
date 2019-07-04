@@ -1,6 +1,5 @@
 package model.datapacket;
 
-import model.datapacket.MessageString;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

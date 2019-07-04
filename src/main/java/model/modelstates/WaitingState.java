@@ -21,7 +21,6 @@ public class WaitingState extends UnicastRemoteObject implements State , Seriali
     private StatesEnum namestate;
     private IDClientList idClientList;
 
-
     public WaitingState(InitializeAllPlay initializeAllPlay, HashMap<StatesEnum, State> hashMap, IDClientList clientList) throws RemoteException {
         this.allPlay = initializeAllPlay;
         this.stateHashMap = hashMap;

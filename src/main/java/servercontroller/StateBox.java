@@ -4,7 +4,6 @@ import model.datapacket.StatesEnum;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.modelstates.*;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 public class StateBox extends UnicastRemoteObject implements Remote, StateBoxInterface {
 
     private HashMap<StatesEnum, State> hashMap;
-
 
     public StateBox(InitializeAllPlay allPlay, IDClientList clientList) throws RemoteException {
 

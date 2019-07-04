@@ -221,18 +221,18 @@ public class PlayerInformer {
     public void matchStats(){
         System.out.println("MATCH STATS:\n");
         System.out.println("The chosen game mode is "+dbb.getSelectedMode()+".\n");
-        System.out.println("You are playing "+dbb.getViewMapState().getSelectedMap().getMapname()+".\n");
+        System.out.println("You are playing in map "+dbb.getViewMapState().getSelectedMap().getMapname()+".\n");
         short i=0;
         for(short j=0;j<dbb.getSkullArray().length;j++){
             if(dbb.getSkullArray()[j]==null)
                 i++;
         }
         if(i>1)
-            System.out.println(i+"skulls left to the end of the game.\n\n");
+            System.out.println(i+" skulls left to the end of the game.\n\n");
         else if (i==1)
-            System.out.println("Only 1 skull left to the end of the game!!\n\n");
+            System.out.println("Only 1 skull left to the end of the game!\n\n");
         if(dbb.getFinalFrenzy())
-            System.out.println("Final Frenzy is enabled!!!!\n\n");
+            System.out.println("Final Frenzy is enabled!\n\n");
 
 
     }

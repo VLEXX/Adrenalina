@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InitializeAllPlayTest {
 
@@ -216,5 +217,47 @@ class InitializeAllPlayTest {
         InitializeAllPlay allPlay = new InitializeAllPlay();
         allPlay.setWait(true);
         assertEquals(allPlay.isWait(), true);
+    }
+
+    @Test
+    void getSkullArray() throws RemoteException {
+        InitializeAllPlay i = new InitializeAllPlay();
+        i.getSkullArray()[0]=Player.BLUE;
+        assertEquals(i.getSkullArray()[0],Player.BLUE);
+    }
+
+    @Test
+    void getSecondSkullArray() throws RemoteException {
+        InitializeAllPlay i = new InitializeAllPlay();
+        i.getSecondSkullArray()[0]=Player.BLUE;
+        assertEquals(i.getSecondSkullArray()[0],Player.BLUE);
+    }
+
+    @Test
+    void setFinalfrenzy() throws RemoteException {
+        InitializeAllPlay i = new InitializeAllPlay();
+        i.setFinalfrenzy(true);
+        assertTrue(i.isFinalfrenzy());
+    }
+
+    @Test
+    void isFinalfrenzy() throws RemoteException {
+        InitializeAllPlay i = new InitializeAllPlay();
+        i.setFinalfrenzy(true);
+        assertTrue(i.isFinalfrenzy());
+    }
+
+    @Test
+    void setLastTurnPlayer() throws RemoteException {
+        InitializeAllPlay i = new InitializeAllPlay();
+        i.setLastTurnPlayer(Player.BLUE);
+        assertEquals(i.getLastTurnPlayer(),Player.BLUE);
+    }
+
+    @Test
+    void getLastTurnPlayer() throws RemoteException {
+        InitializeAllPlay i = new InitializeAllPlay();
+        i.setLastTurnPlayer(Player.BLUE);
+        assertEquals(i.getLastTurnPlayer(),Player.BLUE);
     }
 }

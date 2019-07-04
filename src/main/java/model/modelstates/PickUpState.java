@@ -46,13 +46,22 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
         this.idClientList=clientList;
     }
 
+    /**
+     * it returns the name of the state
+     * @return
+     * @throws RemoteException
+     */
     public StatesEnum getNamestate() throws RemoteException {
         return namestate;
     }
 
+
+
+
     /**
      * @param dataPacket
      * @return MessageEnum
+     * it verify if the player can do the required action and if so it moves the player and pickup ammo/weapons
      */
     @Override
     public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
@@ -148,14 +157,16 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
         //fine controlli e inizio modifica del model
         //settaggio posizione
         Cell ccv2 = ccv;
-        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getInCellPlayer().remove(dataPacket.getPlayer());
-        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(ccv);
-        ccv.addInCellPlayer(dataPacket.getPlayer());
-        allPlay.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> {
-            if (room.getCellsList().contains(ccv2)) {
-                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
-            }
-        });
+        if(dataPacket.getCell()!=null) {
+            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell().getInCellPlayer().remove(dataPacket.getPlayer());
+            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentcell(ccv);
+            ccv.addInCellPlayer(dataPacket.getPlayer());
+            allPlay.getStateSelectedMap().getSelectedmap().getRoomList().forEach(room -> {
+                if (room.getCellsList().contains(ccv2)) {
+                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().setCurrentroom(room);
+                }
+            });
+        }
         if (ccv.getSpawnpointzone() == null) {
             CurrentPlayerState cps = allPlay.getCurrentPlayerState().get(dataPacket.getPlayer());
             Ammo a = cps.getPlayerposition().getCurrentcell().getAmmohere();

@@ -33,6 +33,7 @@ class EndTurnStateTest {
     void doAction() throws RemoteException {
         //inizializza tutti i parametri necessari
         InitializeAllPlay i = new InitializeAllPlay();
+        i.getStateSelectedMode().setSelectedmode(Mode.BASE);
         IDClientList idClientList = new IDClientList();
         HashMap<StatesEnum, State> testhm = new HashMap<>();
         i.getStateSelectedMap().setStrategyMap(0);
@@ -88,7 +89,17 @@ class EndTurnStateTest {
         i.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
         i.setLastTurnPlayer(Player.BLUE);
         Position pp = new Position();
+        Position pp2 = new Position();
+        Position pp3 = new Position();
+        Position pp4 = new Position();
         pp.setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(2));
+        pp.setCurrentroom(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
+        pp2.setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0));
+        pp2.setCurrentroom(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
+        pp3.setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0));
+        pp3.setCurrentroom(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
+        pp4.setCurrentcell(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0).getCellsList().get(0));
+        pp4.setCurrentroom(i.getStateSelectedMap().getSelectedmap().getRoomList().get(0));
         cps.setPlayerposition(pp);
         pp.getCurrentcell().addInCellPlayer(Player.BLUE);
         i.setFinalfrenzy(true);
@@ -120,6 +131,12 @@ class EndTurnStateTest {
         cps3.getBoard().getDamageBox().increaseDamage(3, Player.YELLOW);
         cps3.getBoard().getDamageBox().increaseDamage(3, Player.BLACK);
         cps3.getBoard().getDamageBox().increaseDamage(5, Player.BLUE);
+        cps2.setPlayerposition(pp2);
+        cps3.setPlayerposition(pp3);
+        cps4.setPlayerposition(pp4);
+        pp2.getCurrentcell().getInCellPlayer().add(Player.YELLOW);
+        pp3.getCurrentcell().getInCellPlayer().add(Player.GREEN);
+        pp4.getCurrentcell().getInCellPlayer().add(Player.BLACK);
         i.getCurrentPlayerState().put(Player.YELLOW, cps2);
         i.getCurrentPlayerState().put(Player.GREEN, cps3);
         i.getCurrentPlayerState().put(Player.BLACK, cps4);

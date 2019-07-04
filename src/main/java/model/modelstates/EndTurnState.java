@@ -168,17 +168,20 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
     private void scoreCounter(InitializeAllPlay i, DataPacket dataPacket){
         HashMap<Player,Integer> score = new HashMap<>();
         HashMap<Player,Integer> deathcounter = new HashMap<>();
-        i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
+        i.getCurrentPlayerState().forEach((player, currentPlayerState) -> {
             score.put(player,0);
             deathcounter.put(player,0);
-            if(i.getStateSelectedMode().getSelectedmode()== Mode.DOMINATION && currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone()!=null){
-                currentPlayerState.getBoard().getDamageBox().increaseDamage(1,player);
-                if(currentPlayerState.getPlayerposition().getCurrentcell().getInCellPlayer().size()==1)
-                    currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone().getSPDamage().add(player);
+            if(i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && currentPlayerState.getPlayerposition().getCurrentcell()!=null){
+                if(currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone()!=null) {
+                    currentPlayerState.getBoard().getDamageBox().increaseDamage(1, player);
+                    if (currentPlayerState.getPlayerposition().getCurrentcell().getInCellPlayer().size() == 1)
+                        currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone().getSPDamage().add(player);
+                }
             }
-        }));
+        });
         i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
             if(currentPlayerState.getBoard().getDamageBox().getDamage()[10]!=null) {
+                currentPlayerState.getPlayerposition().getCurrentcell().getInCellPlayer().remove(player);
                 currentPlayerState.getPlayerposition().setCurrentroom(null);
                 currentPlayerState.getPlayerposition().setCurrentcell(null);
                 DamageBox db = currentPlayerState.getBoard().getDamageBox();

@@ -15,6 +15,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * it contains information that is necessary to do an action in various states
+ */
 public class DataPacket implements Serializable {
     private Cell cell;
     private Player player;

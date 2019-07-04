@@ -248,3 +248,13 @@ Z
 *src/main/java/view/CheckConnectionRMI.java,a\4\a46550103d8d607947723bde37345705fdb99af6
 c
 3src/test/java/model/weaponscard/MachineGunTest.java,a\f\af4db4bc9f231e83b0a5f93d91e305601b31f78a
+g
+7src/test/java/model/gamedata/InitializeAllPlayTest.java,a\4\a4449e66017ee7c4ce70340740b74a99163a6d69
+i
+9src/test/java/model/modelstates/FinalFrenzyStateTest.java,0\c\0ce06b6993ebd7a58fbb9756085a9ad10043f9eb
+^
+.src/main/java/model/gamedata/IDClientList.java,2\2\2217531d7f81d4ea4378082c2278407250ea67af
+\
+,src/main/java/model/gamedata/VoteFrenzy.java,8\a\8a6bfba4139a43b28c75f251cf57cf423e0dd960
+Z
+*src/main/java/model/datapacket/Action.java,e\9\e9f0f7cf9797e5bcae2434bc797f3dfd3d05ad42

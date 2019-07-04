@@ -73,7 +73,7 @@ public class LockRifle extends Weapon implements Serializable {
         Position positionToAttack = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         if(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().containsKey(myPlayer))
             control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(myPlayer);
-        if(check(myPosition, positionToAttack) == false)
+        if(!check(myPosition, positionToAttack))
             return MessageEnum.POSITION_NOT_FOUND;
         if(control != 0) {
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);

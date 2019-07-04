@@ -1,5 +1,6 @@
 package view;
 
+import model.gamedata.Mode;
 import model.playerdata.Player;
 import model.map.Position;
 import model.powerups.PowerUp;
@@ -11,6 +12,7 @@ import java.util.Stack;
 public class ViewDatabase {
     private ViewCurrentPlayerState viewCurrentPlayerState;
     private ViewMapState viewMapState;
+    private Mode selectedMode;
     private ViewChartScore viewChartScore;
     private Position viewPlayerPosition;
     private HashMap<Player, ViewState> viewState;
@@ -44,6 +46,15 @@ public class ViewDatabase {
         this.finalfrenzy=false;
         this.playersdamage=new HashMap<>();
         this.playersmarks=new HashMap<>();
+        this.selectedMode=null;
+    }
+
+    public void setSelectedMode(Mode selectedMode) {
+        this.selectedMode = selectedMode;
+    }
+
+    public Mode getSelectedMode() {
+        return selectedMode;
     }
 
     public boolean isAttackinprogress() {

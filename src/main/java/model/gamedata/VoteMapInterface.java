@@ -16,4 +16,9 @@ public interface VoteMapInterface extends Remote {
 
     void setI(int i) throws RemoteException;
 
+    void setInitmap() throws RemoteException;
+
+    void setFinalresult() throws RemoteException;
+
+
 }

@@ -5,6 +5,8 @@ import model.gamedata.StateSelectedMap;
 import model.map.Map;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StateSelectedMapTest {
@@ -16,7 +18,7 @@ class StateSelectedMapTest {
     }
 
     @Test
-    void setSelectedMap() {
+    void setSelectedMap() throws RemoteException {
         StateSelectedMap m = new StateSelectedMap();
         Map n = new Map();
         m.setStrategyMap(0);

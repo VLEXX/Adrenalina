@@ -5,6 +5,7 @@ package view;
 
 import model.datapacket.StatesEnum;
 import model.datapacket.UpdatePacket;
+import model.gamedata.Mode;
 import model.playerdata.Player;
 import view.viewstates.*;
 
@@ -71,7 +72,7 @@ public class ClientWithSocket implements ClientStrategy{
                     objectOutputStream.writeObject(game);
 
                     while(true) {
-                        viewDatabase.setNickname(clientManager.manageNickname(stdin, objectOutputStream));
+                        viewDatabase.setNickname(clientManager.manageNickname(stdin));
 
                         boolean go;
                         go = (boolean) objectInputStream.readObject();
@@ -99,12 +100,30 @@ public class ClientWithSocket implements ClientStrategy{
                     ViewDatabase viewDatabase = new ViewDatabase();
 
                     objectOutputStream.writeObject(game);
+                    String nickname;
 
-                    viewDatabase.setNickname(clientManager.manageNickname(stdin, objectOutputStream));
+                    while(true){
+                        nickname = clientManager.manageNickname(stdin);
+                        objectOutputStream.writeObject(nickname);
+                        boolean go = (boolean) objectInputStream.readObject();
+                        if(go){
+                            break;
+                        }
+                        else{
+                            System.out.println("Nickname not available!\nChoose an other one...\n");
+                        }
+                    }
+                    viewDatabase.setNickname(nickname);
 
                     System.out.println("\n");
+
+                    Mode mode = clientManager.manageMode(stdin);
+                    objectOutputStream.writeObject(mode);
+
+                    System.out.println("\n");
+
                     clientManager.manageChoice(stdin, objectOutputStream, objectInputStream, viewDatabase);
-                    clientManager.manageVote(outMessage, inMessage, stdin, objectOutputStream, objectInputStream);
+                    clientManager.manageVote(stdin, objectOutputStream);
 
                     boolean go;
                     go = (boolean) objectInputStream.readObject();

@@ -17,6 +17,7 @@ import model.playerdata.Player;
 import model.playerdata.PlayerBoard;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GrenadeLauncherTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
         GrenadeLauncher grenadeLauncher = new GrenadeLauncher();
         Position myPosition = new Position();

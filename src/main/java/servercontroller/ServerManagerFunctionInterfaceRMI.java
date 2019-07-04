@@ -1,6 +1,7 @@
 package servercontroller;
 
 import model.datapacket.MessageEnum;
+import model.gamedata.InitializeAllPlay;
 import model.playerdata.Player;
 
 import java.io.IOException;
@@ -13,10 +14,12 @@ public interface ServerManagerFunctionInterfaceRMI extends Remote {
 
     MessageEnum manageVoteMap(int i) throws IOException, RemoteException;
 
-    void manageNickname(String nickname)throws RemoteException;
+    boolean manageNickname(String nickname)throws RemoteException;
 
     void manageNickPlayer(String nickname, Player player)throws RemoteException;
 
     boolean isInArrayNick(String nick) throws RemoteException;
+
+    void refillMap() throws RemoteException;
 
 }

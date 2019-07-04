@@ -43,6 +43,9 @@ public class ServerRMI extends Thread {
         registry.bind("VoteMap", allPlay.getVoteMap());
         registry.bind("StateBox", stateBox);
         registry.bind("ManageEndTurn", manageEndTurn);
+        registry.bind("StateSelectedMap", allPlay.getStateSelectedMap());
+        registry.bind("VoteMode", allPlay.getVoteMode());
+        registry.bind("StateSelectedMode", allPlay.getStateSelectedMode());
 
 
 

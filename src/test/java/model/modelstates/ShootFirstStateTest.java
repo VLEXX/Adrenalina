@@ -32,9 +32,11 @@ class ShootFirstStateTest {
         dataPacket.setToken(idClientList.addClient());
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
         CurrentPlayerState currentPlayerState = new CurrentPlayerState(Player.YELLOW);
-        Position position = new Position();
-        currentPlayerState.setPlayerposition(position);
+        CurrentPlayerState currentPlayerState2 = new CurrentPlayerState(Player.BLUE);
+
+
         initializeAllPlay.getCurrentPlayerState().put(Player.YELLOW, currentPlayerState);
+        initializeAllPlay.getCurrentPlayerState().put(Player.BLUE, currentPlayerState2);
 
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
         ActionState actionState = new ActionState(initializeAllPlay, stateHashMap, idClientList);
@@ -67,12 +69,24 @@ class ShootFirstStateTest {
             }
         }
 
+        for(Room room: initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
+            for(Cell cell: room.getCellsList()){
+                if(cell.getCellId()==2){
+                    initializeAllPlay.getCurrentPlayerState().get(Player.BLUE).getPlayerposition().setCurrentcell(cell);
+                    initializeAllPlay.getCurrentPlayerState().get(Player.BLUE).getPlayerposition().setCurrentroom(room);
+                }
+            }
+        }
+
+        dataPacket.getTargetPlayersFirst().add(Player.BLUE);
+
         dataPacket.setPlayer(Player.YELLOW);
+        dataPacket.setFirstAttack(true);
+        Weapon weapon = new LockRifle();
         ShootFirstState shootFirstState = new ShootFirstState(initializeAllPlay, stateHashMap, idClientList);
         assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
 
-        dataPacket.setFirstAttack(true);
-        Weapon weapon = new LockRifle();
+
 
 
 

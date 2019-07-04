@@ -28,7 +28,7 @@ public class VoteMap extends UnicastRemoteObject implements VoteMapInterface, Se
     }
 
     //Setta la mappa votata finale
-    public synchronized void setFinalresult() {
+    public synchronized void setFinalresult() throws RemoteException {
         if (initmap == true) {
             int k = -1;
             for (int j = 0; j < 4; j++) {
@@ -66,7 +66,7 @@ public class VoteMap extends UnicastRemoteObject implements VoteMapInterface, Se
         return initmap;
     }
 
-    public synchronized void setInitmap() {
+    public synchronized void setInitmap() throws RemoteException{
         if (initmap == false) {
             initmap = true;
         }

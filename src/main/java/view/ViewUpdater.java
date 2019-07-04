@@ -15,7 +15,7 @@ public class ViewUpdater {
         viewDatabase.setPositionHashMap(updatePacket.getPositionHashMap());
         viewDatabase.setAttackinprogress(updatePacket.isAttackinprogress());
         viewDatabase.getViewCurrentPlayerState().setCurrentPlayerState(updatePacket.getCurrentPlayerState());
-
+        viewDatabase.setSelectedMode(updatePacket.getSelectedMode());
         viewDatabase.getViewMapState().setSelectedMap(updatePacket.getMap());
         viewDatabase.getViewChartScore().setChartScore(updatePacket.getChart());
         if(updatePacket.getStatesEnum()==null){

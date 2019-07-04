@@ -2,6 +2,7 @@ package view;
 
 import model.datapacket.MessageString;
 import model.gamedata.CurrentDeckState;
+import model.gamedata.Mode;
 import model.playerdata.Player;
 
 import java.io.IOException;
@@ -105,5 +106,24 @@ public class ClientManagerRMI {
         System.out.print("Insert your nickname: ");
         String s = stdin.nextLine();
         return s;
+    }
+
+    public Mode manageMode(Scanner stdin){
+        System.out.println("1) Base\n2) Domination\n");
+        System.out.println("Vote mode (Insert '1' or '2'): ");
+        String i;
+        while(true){
+            i = stdin.nextLine();
+            if(i.equals("1")){
+                return Mode.BASE;
+            }
+            else if (i.equals("2")){
+                return Mode.DOMINATION;
+            }
+            else{
+                System.out.println("WRONG INPUT! Please insert '1' for Base Mode or '2' for Domination Mode\n");
+                System.out.println("Vote mode (Insert '1' or '2'): ");
+            }
+        }
     }
 }

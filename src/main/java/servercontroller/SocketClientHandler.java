@@ -8,6 +8,7 @@ import model.datapacket.UpdatePacket;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageString;
+import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Room;
 import model.modelstates.*;
@@ -119,8 +120,26 @@ public class SocketClientHandler implements Runnable {
 
             }
             else if(game.equals("new game")) {
-                String nickname = (String) objectInputStream.readObject();
-                idClientList.getNicknameList().add(nickname);
+                String nickname;
+                while(true){
+                    nickname = (String) objectInputStream.readObject();
+                    if(idClientList.getNicknameList().contains(nickname)){
+                        objectOutputStream.writeObject(false);
+                    }
+                    else{
+                        idClientList.getNicknameList().add(nickname);
+                        objectOutputStream.writeObject(true);
+                        break;
+                    }
+                }
+
+                Mode mode= (Mode) objectInputStream.readObject();
+                if(mode.equals(Mode.BASE)){
+                    allPlay.getVoteMode().setVoteResult(0);
+                }
+                else if(mode.equals(Mode.DOMINATION)){
+                    allPlay.getVoteMode().setVoteResult(1);
+                }
 
 
                 allPlay.addPlayerCounter();
@@ -192,15 +211,19 @@ public class SocketClientHandler implements Runnable {
                     }
                 }
 
-                if(idClientList.getPlayerArrayList().get(0)!=player){
-                    sleep(50);
+                if(idClientList.getPlayerArrayList().get(0)==player) {
+                    if (!allPlay.getVoteMap().getInitMap()) {
+                        allPlay.getVoteMap().setInitmap();
+                        allPlay.getVoteMap().setFinalresult();
+                        allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
+                        allPlay.getStateSelectedMap().setSelectedmap();
+                        serverManagerFunction.refillMap(allPlay);
+                        allPlay.getVoteMode().setFinalResult();
+                        allPlay.getStateSelectedMode().setSelectedmode(allPlay.getVoteMode().getFinalResult());
+                    }
                 }
-                if(!allPlay.getVoteMap().getInitMap()){
-                    allPlay.getVoteMap().setInitmap();
-                    allPlay.getVoteMap().setFinalresult();
-                    allPlay.getStateSelectedMap().setStrategyMap(allPlay.getVoteMap().getFinalresult());
-                    allPlay.getStateSelectedMap().setSelectedmap();
-                    serverManagerFunction.refillMap(allPlay);
+                else{
+                    sleep(200);
                 }
 
 

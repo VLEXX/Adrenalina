@@ -2,6 +2,7 @@ package model.datapacket;
 
 import model.datapacket.StatesEnum;
 import model.gamedata.ChartScore;
+import model.gamedata.Mode;
 import model.map.*;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
@@ -110,5 +111,12 @@ class UpdatePacketTest {
         UpdatePacket updatePacket = new UpdatePacket(null, null, null, null, null, null, false);
         updatePacket.setAttackinprogress(true);
         assertEquals(updatePacket.isAttackinprogress(), true);
+    }
+
+    @Test
+    void setSelectedMode() {
+        UpdatePacket updatePacket = new UpdatePacket(null, null, null, null, null, null, false);
+        updatePacket.setSelectedMode(Mode.BASE);
+        assertEquals(updatePacket.getSelectedMode(), Mode.BASE);
     }
 }

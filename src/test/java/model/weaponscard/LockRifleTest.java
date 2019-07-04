@@ -11,6 +11,7 @@ import model.munitions.Munitions;
 import model.playerdata.*;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LockRifleTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
         LockRifle lockRifle = new LockRifle();
         Position myPosition = new Position();

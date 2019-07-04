@@ -17,6 +17,7 @@ import model.playerdata.Player;
 import model.playerdata.PlayerBoard;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TractorBeamTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
         TractorBeam tractorBeam = new TractorBeam();
         Position myPosition = new Position();

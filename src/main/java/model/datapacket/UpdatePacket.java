@@ -4,6 +4,7 @@
 package model.datapacket;
 
 import model.gamedata.ChartScore;
+import model.gamedata.Mode;
 import model.map.Map;
 import model.map.Position;
 import model.playerdata.CurrentPlayerState;
@@ -26,6 +27,7 @@ public class UpdatePacket implements Serializable {
     private Player[] SkullArray;
     private Player[] SecondSkullArray;
     private boolean attackinprogress;
+    private Mode selectedMode;
 
 
     public UpdatePacket(ChartScore chart, CurrentPlayerState currentPlayerState, Map m, Position position, StatesEnum state, Stack<PowerUp> deck, boolean end) {
@@ -40,6 +42,15 @@ public class UpdatePacket implements Serializable {
         this.SkullArray = new Player[]{null, null, null, null, null, null, null, null};
         this.SecondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
         this.attackinprogress = false;
+        this.selectedMode=null;
+    }
+
+    public void setSelectedMode(Mode selectedMode) {
+        this.selectedMode = selectedMode;
+    }
+
+    public Mode getSelectedMode() {
+        return selectedMode;
     }
 
     public boolean isAttackinprogress() {

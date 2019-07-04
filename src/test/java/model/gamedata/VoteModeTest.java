@@ -4,25 +4,27 @@ package model.gamedata;
 import model.gamedata.VoteMode;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VoteModeTest {
 
     @Test
-    void getFinalResult() {
+    void getFinalResult() throws RemoteException {
         VoteMode m = new VoteMode();
         assertEquals(m.getFinalResult(), -1);
     }
 
     @Test
-    void setFinalResult() {
+    void setFinalResult() throws RemoteException {
         VoteMode m = new VoteMode();
-        m.setFinalResult(2);
-        assertEquals(m.getFinalResult(), 2);
+        m.setFinalResult();
+        assertEquals(m.getFinalResult(), Mode.BASE);
     }
 
     @Test
-    void getVoteResult() {
+    void getVoteResult() throws RemoteException {
         VoteMode m = new VoteMode();
         assertEquals(m.getVoteResult()[0], 0);
         assertEquals(m.getVoteResult()[1], 0);
@@ -31,7 +33,7 @@ class VoteModeTest {
     }
 
     @Test
-    void setVoteResult() {
+    void setVoteResult() throws RemoteException {
         VoteMode m = new VoteMode();
         m.setVoteResult(1);
         m.setVoteResult(1);

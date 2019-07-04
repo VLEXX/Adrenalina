@@ -15,6 +15,7 @@ import model.playerdata.PlayerBoard;
 import org.junit.jupiter.api.Test;
 
 import java.awt.event.WindowStateListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class WhisperTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
         Whisper whisper = new Whisper();
         Position myPosition = new Position();

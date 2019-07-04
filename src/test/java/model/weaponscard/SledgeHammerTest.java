@@ -14,6 +14,7 @@ import model.munitions.Munitions;
 import model.playerdata.*;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SledgeHammerTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
         SledgeHammer sledgeHammer = new SledgeHammer();
         Position myPosition = new Position();

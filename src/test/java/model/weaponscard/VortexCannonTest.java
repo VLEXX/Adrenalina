@@ -17,6 +17,7 @@ import model.playerdata.Player;
 import model.playerdata.PlayerBoard;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class VortexCannonTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
        VortexCannon vortexCannon = new VortexCannon();
         Position myPosition = new Position();

@@ -100,6 +100,7 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
             updatePacket.setAttackinprogress(true);
         }
 
+        updatePacket.setSelectedMode(allPlay.getStateSelectedMode().getSelectedmode());
         updatePacket.setSkullArray(allPlay.getSkullArray());
         updatePacket.setSecondSkullArray(allPlay.getSecondSkullArray());
 

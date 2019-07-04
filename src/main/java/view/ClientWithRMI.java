@@ -65,6 +65,10 @@ public class ClientWithRMI implements ClientStrategy {
         VoteMapInterface voteMap = (VoteMapInterface) registry.lookup("VoteMap");
         StateBoxInterface stateHashMap = (StateBoxInterface) registry.lookup("StateBox");
         ManageEndTurnInterface manageEndTurn = (ManageEndTurnInterface) registry.lookup("ManageEndTurn");
+        StateSelectedMapInterface stateSelectedMap = (StateSelectedMapInterface) registry.lookup("StateSelectedMap");
+        VoteModeInterface voteMode = (VoteModeInterface) registry.lookup("VoteMode");
+        StateSelectedModeInterface stateSelectedMode = (StateSelectedModeInterface) registry.lookup("StateSelectedMode");
+
 
         String game = clientManager.manageStart(stdin);
         if(game.equals("continue")){
@@ -118,15 +122,30 @@ public class ClientWithRMI implements ClientStrategy {
 
         }
         else if(game.equals("new game")) {
-            Player player = null;
+            Player player;
             int token = idClientList.addClient();
             if (token == -1) {
                 System.out.println("\n" + "\u001B[31m" + "Because the Server is dark and full of connections." + "\u001B[0m");
             } else {
-
                 String nickname = clientManager.manageNickname(stdin);
-                serverManagerFunctionRMI.manageNickname(nickname);
+                while (true) {
+                    boolean ok = serverManagerFunctionRMI.manageNickname(nickname);
+                    if(!ok){
+                        System.out.println("Nickname not available!\nChoose an other one...\n");
+                        nickname = clientManager.manageNickname(stdin);
+                    }
+                    else{
+                        break;
+                    }
+                }
 
+                Mode mode = clientManager.manageMode(stdin);
+                if(mode.equals(Mode.BASE)){
+                    voteMode.setVoteResult(0);
+                }
+                else if(mode.equals(Mode.DOMINATION)){
+                    voteMode.setVoteResult(1);
+                }
 
                 System.out.println("\n");
                 allPlay.addPlayerCounter();
@@ -137,7 +156,7 @@ public class ClientWithRMI implements ClientStrategy {
                 MessageEnum messageEnumOK;
                 while (true) {
                     messageEnumOK = serverManagerFunctionRMI.chooseCharacterManager(player);
-                    if (messageEnumOK.equals(MessageEnum.OK)) {
+                    if (messageEnumOK.equals(MessageEnum.OK)){
                         System.out.println("\nYou choose: " + player + "\n");
                         break;
                     }
@@ -214,6 +233,23 @@ public class ClientWithRMI implements ClientStrategy {
                         }
                     }
                     catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if(idClientList.getPlayerArrayList().get(0)==player) {
+                    voteMap.setInitmap();
+                    voteMap.setFinalresult();
+                    stateSelectedMap.setStrategyMap(voteMap.getFinalresult());
+                    stateSelectedMap.setSelectedmap();
+                    serverManagerFunctionRMI.refillMap();
+                    voteMode.setFinalResult();
+                    stateSelectedMode.setSelectedmode(voteMode.getFinalResult());
+                }
+                else{
+                    try {
+                        sleep(200);
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }

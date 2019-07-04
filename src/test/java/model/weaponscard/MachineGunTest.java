@@ -14,6 +14,7 @@ import model.munitions.Munitions;
 import model.playerdata.*;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MachineGunTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
         MachineGun machineGun = new MachineGun();
         Position myPosition = new Position();

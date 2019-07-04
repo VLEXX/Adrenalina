@@ -13,6 +13,7 @@ import model.munitions.Munitions;
 import model.playerdata.*;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RailGunTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
         RailGun railGun = new RailGun();
         Position myPosition = new Position();
@@ -55,7 +56,7 @@ class RailGunTest {
     }
 
     @Test
-    void firstAttack() {
+    void firstAttack() throws RemoteException {
         //caso base
         RailGun railGun = new RailGun();
         Player myPlayer = Player.BLACK;
@@ -99,7 +100,7 @@ class RailGunTest {
     }
 
     @Test
-    void secondAttack() {
+    void secondAttack() throws RemoteException {
         //caso base
         RailGun railGun = new RailGun();
         Player myPlayer = Player.BLACK;

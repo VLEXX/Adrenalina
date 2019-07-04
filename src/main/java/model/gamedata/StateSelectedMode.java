@@ -4,13 +4,15 @@
 package model.gamedata;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 //Classe che memorizza la modalità corrente selezionata del gioco
-public class StateSelectedMode implements Serializable {
+public class StateSelectedMode extends UnicastRemoteObject implements Serializable, StateSelectedModeInterface {
     private Mode selectedmode;  //modalità selezionata del gioco
 
     //Costruttore che inizializza la modalità a "null"
-    public StateSelectedMode() {
+    public StateSelectedMode() throws RemoteException {
         selectedmode = null;
     }
 
@@ -20,7 +22,7 @@ public class StateSelectedMode implements Serializable {
     }
 
     //Setta la modalità selezionata
-    public void setSelectedmode(Mode selectedmode) {
+    public void setSelectedmode(Mode selectedmode) throws RemoteException {
         this.selectedmode = selectedmode;
     }
 }

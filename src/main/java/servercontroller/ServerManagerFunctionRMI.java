@@ -70,18 +70,18 @@ public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Rem
         }
     }
 
-    public void refillMap( InitializeAllPlay i) throws RemoteException {
-        for(Room r : i.getStateSelectedMap().getSelectedmap().getRoomList()){
+    public void refillMap() throws RemoteException {
+        for(Room r : allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell c : r.getCellsList()){
                 if(c.getSpawnpointzone()==null){
                     if(c.getAmmohere()==null)
-                        c.setAmmohere(i.getCurrentDeckState().getAmmodeck().pop());
+                        c.setAmmohere(allPlay.getCurrentDeckState().getAmmodeck().pop());
                 }
                 else{
                     for(int j=0;j<3;j++){
                         if(c.getSpawnpointzone().getSpawnWeaponsList()[j]==null) {
-                            if(!i.getCurrentDeckState().getWeaponsdeck().empty())
-                                c.getSpawnpointzone().getSpawnWeaponsList()[j] = i.getCurrentDeckState().getWeaponsdeck().pop();
+                            if(!allPlay.getCurrentDeckState().getWeaponsdeck().empty())
+                                c.getSpawnpointzone().getSpawnWeaponsList()[j] = allPlay.getCurrentDeckState().getWeaponsdeck().pop();
                         }
                     }
                 }
@@ -89,8 +89,14 @@ public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Rem
         }
     }
 
-    public void manageNickname(String nickname) throws RemoteException{
-        idClientList.getNicknameList().add(nickname);
+    public boolean manageNickname(String nickname) throws RemoteException{
+        if(idClientList.getNicknameList().contains(nickname)){
+            return false;
+        }
+        else {
+            idClientList.getNicknameList().add(nickname);
+            return true;
+        }
     }
 
     public void manageNickPlayer(String nickname, Player player)throws RemoteException{
@@ -105,4 +111,6 @@ public class ServerManagerFunctionRMI extends UnicastRemoteObject implements Rem
             return false;
         }
     }
+
+
 }

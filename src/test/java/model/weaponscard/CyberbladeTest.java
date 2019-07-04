@@ -13,6 +13,8 @@ import model.playerdata.MarksBox;
 import model.playerdata.Player;
 import model.playerdata.PlayerBoard;
 import org.junit.jupiter.api.Test;
+
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CyberbladeTest {
 
     @Test
-    void firstAttackSP(){
+    void firstAttackSP() throws RemoteException {
         //caso base
         Cyberblade cyberblade = new Cyberblade();
         Position myPosition = new Position();

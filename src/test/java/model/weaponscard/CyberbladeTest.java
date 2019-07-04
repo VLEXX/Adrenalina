@@ -89,6 +89,7 @@ class CyberbladeTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard1);
         assertEquals(c.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(), 4);
         Cell cell2 = new Cell(4);
         positionToAttack.setCurrentcell(cell2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
@@ -173,6 +174,7 @@ class CyberbladeTest {
         positionToAttack.setCurrentcell(map.getRoomList().get(0).getCellsList().get(0));
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         assertEquals(c.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(), 4);
 
         //giocatore uguale al precedente
         Position positionToMove = null;

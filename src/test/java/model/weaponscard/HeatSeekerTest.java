@@ -95,6 +95,7 @@ class HeatSeekerTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(heatSeeker.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),5);
 
         //caso position visibile
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));

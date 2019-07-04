@@ -107,6 +107,8 @@ class FlameThrowerTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
         assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack2, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),2);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().getDamageTot(),2);
 
         //caso F move2
         positionToAttack.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(0));
@@ -156,7 +158,7 @@ class FlameThrowerTest {
         Position myPosition = new Position();
         Position positionToAttack = new Position();
         Position positionToAttack2 = new Position();
-        Position positionToMove = new Position();
+        Position positionToMove = null;
         PlayerBoard playerBoard = new PlayerBoard();
         PlayerBoard playerBoard2 = new PlayerBoard();
         MarksBox marksBox = new MarksBox();
@@ -189,7 +191,10 @@ class FlameThrowerTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         assertEquals(flameThrower.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),4);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().getDamageTot(),4);
 
         //caso F
         positionToMove.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));

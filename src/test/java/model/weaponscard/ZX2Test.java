@@ -95,6 +95,7 @@ class ZX2Test {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(zx2.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),3);
 
         //caso giocatore non visibile
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(3));

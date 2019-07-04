@@ -93,6 +93,7 @@ class RailGunTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(railGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(), 4);
 
         //caso posizione sbagliata
         positionToAttack.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(1));
@@ -152,6 +153,8 @@ class RailGunTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(), 3);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(), 3);
 
         //caso posizione non valida
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));

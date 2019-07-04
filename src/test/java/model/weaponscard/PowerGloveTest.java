@@ -94,6 +94,8 @@ class PowerGloveTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(powerGlove.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(), 2);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getControlMarks().get(myPlayer), 2);
 
         //caso sbagliato
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(3));
@@ -152,6 +154,8 @@ class PowerGloveTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         assertEquals(powerGlove.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(), 3);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().getDamageTot(), 4);
 
         //caso F
         positionToAttack.setCurrentcell(map1.getRoomList().get(2).getCellsList().get(0));

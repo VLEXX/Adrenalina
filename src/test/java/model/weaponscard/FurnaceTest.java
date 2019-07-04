@@ -101,6 +101,8 @@ class FurnaceTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         assertEquals(furnace.firstAttack(myPlayer, playerToAttack, positionToAttack, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),3);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().getDamageTot(),2);
 
         //caso stessa stanza
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
@@ -153,6 +155,7 @@ class FurnaceTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         positionToMove = positionToAttack;
         assertEquals(furnace.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),2);
 
         //caso false
         positionToMove.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(2));

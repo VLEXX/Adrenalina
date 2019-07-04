@@ -95,6 +95,7 @@ class PlasmaGunTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(plasmaGun.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),3);
 
         //caso player non visibile
         positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(3));
@@ -106,6 +107,7 @@ class PlasmaGunTest {
         //terzo attacco
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
         assertEquals(plasmaGun.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),5);
 
         //terzo attacco giocatore diverso
         playerToAttack.remove(Player.YELLOW);

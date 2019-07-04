@@ -121,6 +121,9 @@ class ShockWaveTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).setBoard(playerBoard3);
         assertEquals(shockWave.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(), 3);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().getDamageTot(), 2);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getDamageBox().getDamageTot(), 2);
 
         //caso giocatore 1 sbagliato
         positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));
@@ -205,6 +208,9 @@ class ShockWaveTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).setBoard(playerBoard3);
         assertEquals(shockWave.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),3);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().getDamageTot(),2);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getDamageBox().getDamageTot(),2);
 
         //caso right
         myPosition.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));

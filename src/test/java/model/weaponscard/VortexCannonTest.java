@@ -96,6 +96,7 @@ class VortexCannonTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(vortexCannon.firstAttack(myPlayer, playerToAttack, positionVortex, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),4);
 
         //caso non vedo il vortex
         myPosition.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
@@ -139,6 +140,8 @@ class VortexCannonTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setBoard(playerBoard3);
         assertEquals(vortexCannon.secondAttack(myPlayer, playerToAttack, positionVortex, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),2);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().getDamageTot(),2);
 
         //caso down
         positionToAttack2.setCurrentcell(map1.getRoomList().get(4).getCellsList().get(0));

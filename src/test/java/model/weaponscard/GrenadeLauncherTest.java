@@ -96,6 +96,7 @@ class GrenadeLauncherTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(grenadeLauncher.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),2);
 
         //caso giocatore non visibile
         positionToAttack.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
@@ -143,7 +144,7 @@ class GrenadeLauncherTest {
         CurrentPlayerState attackCurrentPlayerState = new CurrentPlayerState(playerToAttack.get(0));
         Position myPosition = new Position();
         Position positionToAttack = new Position();
-        Position positionToMove = new Position();
+        Position positionToMove = null;
         PlayerBoard playerBoard = new PlayerBoard();
         MarksBox marksBox = new MarksBox();
         marksBox.setMyMarksMap(myPlayer, 2);
@@ -168,6 +169,7 @@ class GrenadeLauncherTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(grenadeLauncher.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),3);
 
         //caso cella non visibile
         myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(1));

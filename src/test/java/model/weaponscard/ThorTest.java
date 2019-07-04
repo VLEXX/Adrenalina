@@ -95,6 +95,7 @@ class ThorTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
         assertEquals(thor.firstAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),3);
 
         //posizione player non visibile
         positionToAttack.setCurrentcell(map1.getRoomList().get(1).getCellsList().get(0));
@@ -116,6 +117,7 @@ class ThorTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard2);
         assertEquals(thor.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),2);
 
         //caso 2 posizione sbagliata
         positionToAttack2.setCurrentcell(map1.getRoomList().get(4).getCellsList().get(0));
@@ -138,6 +140,7 @@ class ThorTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack3);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard3);
         assertEquals(thor.thirdAttack(myPlayer, playerToAttack, allPlay), MessageEnum.OK);
+        assertEquals(allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().getDamageTot(),3);
 
         //caso posizione sbagliata
         positionToAttack3.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(1));

@@ -61,6 +61,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
         this.transferMarks(allPlay);
         this.scoreCounter(allPlay,dataPacket);
         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setEndturn(true);
+        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).resetActionCounter();
         return MessageEnum.OK;
     }
 

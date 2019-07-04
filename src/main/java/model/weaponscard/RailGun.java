@@ -154,15 +154,6 @@ public class RailGun extends Weapon implements Serializable {
                     position = findCell(temp.getLeftCell().getCellId() - 4); //prendo ID cella alla mia sx oltre porta/muro
                     if (position == positionToAttack.getCurrentcell())
                         return 'L';
-                } else {
-                    //controllo sopra se c'è la porta a sx
-                    temp = findCell(position.getCellId() - 4); //temp = cella sopra
-                    if (temp != null && temp.getLeftCell() != null) {
-                        position = findCell(temp.getLeftCell().getCellId() + 4);
-                        if (position == positionToAttack.getCurrentcell())
-                            return 'L';
-                    } else
-                        break;
                 }
             }
         }
@@ -179,15 +170,6 @@ public class RailGun extends Weapon implements Serializable {
                     position = findCell(temp.getRightCell().getCellId() - 4); //prendo ID cella alla mia dx oltre porta/muro
                     if (position == positionToAttack.getCurrentcell())
                         return 'R';
-                } else {
-                    //controllo sopra se c'è la porta a dx
-                    temp = findCell(position.getCellId() - 4); //temp = cella sopra
-                    if (temp != null && temp.getRightCell() != null) {
-                        position = findCell(temp.getRightCell().getCellId() + 4);
-                        if (position == positionToAttack.getCurrentcell())
-                            return 'R';
-                    } else
-                        break;
                 }
             }
         }

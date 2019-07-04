@@ -246,3 +246,5 @@ X
 (src/main/java/view/ClientManagerRMI.java,4\e\4e6da7fcc348ff96d147934b7f8c33bd08771925
 Z
 *src/main/java/view/CheckConnectionRMI.java,a\4\a46550103d8d607947723bde37345705fdb99af6
+c
+3src/test/java/model/weaponscard/MachineGunTest.java,a\f\af4db4bc9f231e83b0a5f93d91e305601b31f78a

@@ -189,12 +189,12 @@ class RailGunTest {
 
         //player sopra
         myPosition.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
-        positionToAttack.setCurrentcell(map1.getRoomList().get(3).getCellsList().get(0));
+        positionToAttack.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         assertEquals(railGun.secondAttack(myPlayer, playerToAttack, positionToMove, allPlay), MessageEnum.OK);
 
-        //non è possibile coprire il caso in cui a sinistra ho un muro, sopra di me una cella con una porta a sx e sotto di me muro
-        //non è posisbile coprire il caso in cui a destra ho un muro, sotto di me una cella con una porta a dx e sotto di me muro
+        //caso findcell false
+
     }
 
     @Test

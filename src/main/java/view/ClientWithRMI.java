@@ -27,8 +27,14 @@ import static java.lang.Thread.sleep;
  */
 public class ClientWithRMI implements ClientStrategy {
 
+    private String ip;
+
+    public ClientWithRMI(String s){
+        this.ip=s;
+    }
+
     public void startClient() throws IOException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 8080);
+        Registry registry = LocateRegistry.getRegistry(ip, 8080);
 
         ClientManagerRMI clientManager = new ClientManagerRMI();
         ViewDatabase viewDatabase = new ViewDatabase();

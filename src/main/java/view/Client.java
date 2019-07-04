@@ -22,11 +22,14 @@ public class Client {
         System.out.println("'Socket' or 'RMI'?");
         Scanner in = new Scanner(System.in);
         String s = null;
+        String ip;
         Client client = new Client();
         while(s!="socket"||s!="Socket"||s!="SOCKET"||s!="rmi"||s!="RMI"){
             s = in.nextLine();
             if (s.equals("socket") || s.equals("Socket") || s.equals("SOCKET")) {
-                client.clientstrategy = new ClientWithSocket("127.0.0.1", 5858);
+                System.out.println("Insert Servr IP: \n");
+                ip = in.nextLine();
+                client.clientstrategy = new ClientWithSocket(ip, 5858);
                 try {
                     client.clientstrategy.startClient();
                     break;
@@ -39,7 +42,9 @@ public class Client {
                 }
             }
             if (s.equals("rmi") || s.equals("RMI")) {
-                client.clientstrategy = new ClientWithRMI();
+                System.out.println("Insert Servr IP: \n");
+                ip = in.nextLine();
+                client.clientstrategy = new ClientWithRMI(ip);
                 try {
                     client.clientstrategy.startClient();
                     break;

@@ -65,7 +65,7 @@ public class LockRifle extends Weapon implements Serializable {
      * @return OK or POSITION_NOT_FOUND
      */
     public MessageEnum firstAttack(Player myPlayer, ArrayList<Player> playerToAttack, Position positionToMove, InitializeAllPlay allPlay){
-        if((playerToAttack.size() == 0)) {
+        if((playerToAttack.get(0) == null)) {
             return MessageEnum.OK;
         }
         int control = 0;

@@ -100,7 +100,7 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
                     weapon = w;
                     if(weapon.getLoaded()){
-                        MessageEnum messageEnum = weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), dataPacket.getPosition(), allPlay);
+                        MessageEnum messageEnum = weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), dataPacket.getPosition(), this.allPlay);
                         if(messageEnum.equals(MessageEnum.OK)){
                             if(dataPacket.getPowerUpId()!=null){
                                 for(PowerUp powerUp: allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()){

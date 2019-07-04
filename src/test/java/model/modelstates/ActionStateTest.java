@@ -26,6 +26,8 @@ class ActionStateTest {
         ActionState actionState = new ActionState(initializeAllPlay, hashMap, idClientList);
         dataPacket.setStatesEnum(StatesEnum.MOVE);
         assertEquals(actionState.doAction(dataPacket), MessageEnum.OK);
+        dataPacket.setStatesEnum(StatesEnum.POWERUP);
+        assertEquals(actionState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.SHOOT);
         assertEquals(actionState.doAction(dataPacket), MessageEnum.OK);
         dataPacket.setStatesEnum(StatesEnum.PICK_UP);

@@ -6,6 +6,7 @@ import model.datapacket.StatesEnum;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
 import model.map.Cell;
+import model.map.Position;
 import model.map.Room;
 import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
@@ -52,8 +53,11 @@ class PowerupStateTest {
         stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
         stateHashMap.put(StatesEnum.POWERUP, powerupState1);
 
-        dataPacket.setPowerUpId(PowerUpId.TAGBACK_GRENADE);
         PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap, idClientList);
+
+        assertEquals(powerupState.doAction(dataPacket), MessageEnum.POWERUP_NOT_FOUND);
+
+        dataPacket.setPowerUpId(PowerUpId.TAGBACK_GRENADE);
         assertEquals(powerupState.doAction(dataPacket), MessageEnum.OK);
 
         dataPacket.setPlayer(Player.BLUE);
@@ -104,6 +108,7 @@ class PowerupStateTest {
 
         PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap, idClientList);
         dataPacket.setPowerUpId(PowerUpId.NEWTON);
+        dataPacket.setPowerUpColor(Munitions.RED);
         dataPacket.setPlayer(Player.YELLOW);
         assertEquals(powerupState.doAction(dataPacket), MessageEnum.POWERUP_NOT_FOUND);
 
@@ -120,6 +125,8 @@ class PowerupStateTest {
                 }
             }
         }
+
+        assertEquals(powerupState.doAction(dataPacket), MessageEnum.PLAYER_NOT_VALID);
 
         for(Room room: initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell cell: room.getCellsList()){
@@ -139,6 +146,8 @@ class PowerupStateTest {
                 }
             }
         }
+
+
 
         for(Room room: initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
             for(Cell cell: room.getCellsList()){
@@ -216,6 +225,7 @@ class PowerupStateTest {
 
         dataPacket.setPlayer(Player.YELLOW);
         dataPacket.setPowerUpId(PowerUpId.TELEPORTER);
+        dataPacket.setPowerUpColor(Munitions.RED);
         assertEquals(powerupState.doAction(dataPacket), MessageEnum.POWERUP_NOT_FOUND);
 
         initializeAllPlay.getCurrentPlayerState().get(Player.YELLOW).getBoard().getPowerupList().add(new TagbackGrenade(Munitions.RED));
@@ -259,6 +269,8 @@ class PowerupStateTest {
         CurrentPlayerState currentPlayerState2 = new CurrentPlayerState(Player.BLUE);
         initializeAllPlay.getCurrentPlayerState().put(Player.YELLOW, currentPlayerState);
         initializeAllPlay.getCurrentPlayerState().put(Player.BLUE, currentPlayerState2);
+        initializeAllPlay.getStateSelectedMap().setStrategyMap(0);
+        initializeAllPlay.getStateSelectedMap().setSelectedmap();
 
         HashMap<StatesEnum, State> stateHashMap = new HashMap<>();
         ActionState actionState = new ActionState(initializeAllPlay, stateHashMap,idClientList);
@@ -279,6 +291,22 @@ class PowerupStateTest {
         stateHashMap.put(StatesEnum.SHOOT_THIRD, shootThirdState);
         stateHashMap.put(StatesEnum.PICK_UP, pickUpState);
         stateHashMap.put(StatesEnum.POWERUP, powerupState1);
+
+        dataPacket.setPlayer(Player.YELLOW);
+        dataPacket.setPowerUpColor(Munitions.BLUE);
+        dataPacket.setPowerUpId(PowerUpId.TELEPORTER);
+        PowerUp powerUp = new PowerUp(PowerUpId.TELEPORTER, Munitions.BLUE);
+        currentPlayerState.getBoard().getPowerupList().add(powerUp);
+
+        for(Room room: initializeAllPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
+            for(Cell cell: room.getCellsList()){
+                if(cell.getCellId()==3){
+                    initializeAllPlay.getCurrentPlayerState().get(Player.YELLOW).getPlayerposition().setCurrentcell(cell);
+                    cell.addInCellPlayer(Player.YELLOW);
+                    initializeAllPlay.getCurrentPlayerState().get(Player.YELLOW).getPlayerposition().setCurrentroom(room);
+                }
+            }
+        }
 
         PowerupState powerupState = new PowerupState(initializeAllPlay, stateHashMap, idClientList);
 

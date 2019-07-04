@@ -2,6 +2,7 @@ package view.viewstates;
 
 import model.datapacket.DataPacket;
 import model.datapacket.WeaponsMessage;
+import model.gamedata.Mode;
 import model.map.Cell;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
@@ -16,13 +17,14 @@ public class ViewShootFirstState implements ViewState {
 
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
+        DataPacket dataPacket = new DataPacket();
+        dataPacket.setToken(viewDatabase.getClientToken());
+
         System.out.println("Choose a weapon to use between: \n");
         for(Weapon weapon: viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList()){
             System.out.println(weapon.getName() + " | ");
         }
         String s;
-        DataPacket dataPacket = new DataPacket();
-        dataPacket.setToken(viewDatabase.getClientToken());
         Weapon w;
         while(true){
             s = stdin.nextLine();
@@ -43,6 +45,24 @@ public class ViewShootFirstState implements ViewState {
             System.out.println("WRONG INPUT! Please choose a weapon between: \n");
             for(Weapon weapon: viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList()){
                 System.out.println(weapon.getName() + " | ");
+            }
+        }
+
+        if(viewDatabase.getSelectedMode().equals(Mode.DOMINATION)){
+            if(viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getPlayerposition().getCurrentcell().getSpawnpointzone()!=null){
+                System.out.println("Do you want shoot to Spawn Point " + viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getPlayerposition().getCurrentcell().getSpawnpointzone().getSpawnColor() + "? (Y | N )\n");
+                String ans;
+                while(true){
+                    ans=stdin.nextLine();
+                    ans.toLowerCase();
+                    if(ans.equals("y")){
+                        dataPacket.setSpawnPointToAttack(viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getPlayerposition().getCurrentcell().getSpawnpointzone());
+                        return dataPacket;
+                    }
+                    else if(ans.equals("n")){
+                        break;
+                    }
+                }
             }
         }
 

@@ -5,6 +5,7 @@ package model.datapacket;
 
 import model.map.Cell;
 import model.map.Position;
+import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
@@ -44,8 +45,10 @@ public class DataPacket implements Serializable {
     private boolean weaponlistempty;
     private int token;
     private boolean frenzy;
+    private SpawnPoint spawnPointToAttack;
 
     public DataPacket() {
+        this.spawnPointToAttack=null;
         this.cell = null;
         this.player = null;
         this.statesEnum = null;
@@ -71,6 +74,14 @@ public class DataPacket implements Serializable {
         this.token=0;
         this.powerUpColor=null;
         this.frenzy=false;
+    }
+
+    public void setSpawnPointToAttack(SpawnPoint spawnPointToAttack) {
+        this.spawnPointToAttack = spawnPointToAttack;
+    }
+
+    public SpawnPoint getSpawnPointToAttack() {
+        return spawnPointToAttack;
     }
 
     public boolean isFrenzy() {

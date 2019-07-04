@@ -105,6 +105,7 @@ class FlameThrowerTest {
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setPlayerposition(positionToAttack);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).setPlayerposition(positionToAttack2);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).setBoard(playerBoard);
+        allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getMarksBox().setMyMarksMap(myPlayer, 1);
         assertEquals(flameThrower.firstAttack(myPlayer, playerToAttack, positionToAttack2, allPlay), MessageEnum.OK);
 
         //caso F move2

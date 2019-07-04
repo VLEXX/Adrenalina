@@ -5,6 +5,7 @@ import model.datapacket.MessageEnum;
 import model.datapacket.StatesEnum;
 import model.gamedata.IDClientList;
 import model.gamedata.InitializeAllPlay;
+import model.gamedata.Mode;
 import model.map.*;
 import model.munitions.Munitions;
 import model.playerdata.CurrentPlayerState;
@@ -17,6 +18,7 @@ import model.powerups.TagbackGrenade;
 import model.powerups.TargetingScope;
 import model.weaponscard.HeatSeeker;
 import model.weaponscard.LockRifle;
+import model.weaponscard.SledgeHammer;
 import model.weaponscard.Weapon;
 import org.junit.jupiter.api.Test;
 
@@ -837,6 +839,8 @@ class ShootFirstStateTest {
         playerBoard.setMarksBox(marksBox);
         InitializeMap1 initializeMap1 = new InitializeMap1();
         Map map1 = initializeMap1.initializeMap();
+        allPlay.getStateSelectedMap().setStrategyMap(0);
+        allPlay.getStateSelectedMap().setSelectedmap();
         myPosition.setCurrentroom(map1.getRoomList().get(0));
         myPosition.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(0));
         positionToAttack.setCurrentroom(map1.getRoomList().get(0));
@@ -875,5 +879,22 @@ class ShootFirstStateTest {
         ShootFirstState shootFirstState = new ShootFirstState(allPlay, stateHashMap, idClientList);
 
         assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
+
+        myCurrentPlayerState.getBoard().getWeaponsList().get(0).setLoaded(true);
+        myPosition.setCurrentroom(map1.getRoomList().get(0));
+        myPosition.setCurrentcell(map1.getRoomList().get(0).getCellsList().get(2));
+        allPlay.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
+        dataPacket.setSpawnPointToAttack(myCurrentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone());
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
+        myCurrentPlayerState.getBoard().getWeaponsList().get(0).setLoaded(true);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
+        myCurrentPlayerState.getBoard().getWeaponsList().get(0).setLoaded(false);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.EMPTY_WEAPON);
+        HeatSeeker heatSeeker = new HeatSeeker();
+        SledgeHammer sledgeHammer = new SledgeHammer();
+        myCurrentPlayerState.getBoard().getWeaponsList().add(heatSeeker);
+        myCurrentPlayerState.getBoard().getWeaponsList().add(sledgeHammer);
+        myCurrentPlayerState.getBoard().getWeaponsList().remove(lockRifle);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.WEAPON_NOT_FOUND);
     }
 }

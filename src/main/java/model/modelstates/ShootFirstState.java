@@ -7,6 +7,7 @@ import model.gamedata.InitializeAllPlay;
 import model.datapacket.MessageEnum;
 import model.map.Cell;
 import model.map.Room;
+import model.map.SpawnPoint;
 import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
@@ -40,6 +41,45 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
     public MessageEnum doAction(DataPacket dataPacket) throws RemoteException {
         if(!(idClientList.getClientlist().contains(dataPacket.getToken()))){
             return MessageEnum.TOKEN_ERROR;
+        }
+        if(dataPacket.getSpawnPointToAttack()!=null){
+            int i = 0;
+            for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
+                if (dataPacket.getWeapon().getName().equals(w.getName())) {
+                    i=1;
+                    Weapon weapon1 = w;
+                    if(weapon1.getLoaded()){
+                        SpawnPoint spawnPoint=null;
+                        for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
+                            for(Cell cell: room.getCellsList()){
+                                if(cell.getSpawnpointzone()!=null){
+                                    if(cell.getSpawnpointzone().getSpawnColor().equals(dataPacket.getSpawnPointToAttack().getSpawnColor())){
+                                        spawnPoint=cell.getSpawnpointzone();
+                                    }
+                                }
+                            }
+                        }
+                        MessageEnum messageEnum = weapon1.firstAttack(dataPacket.getPlayer(), spawnPoint, this.allPlay);
+                        if(messageEnum.equals(MessageEnum.OK)){
+                            if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==1){
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+                                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
+                            }
+                            if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter()==2){
+                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+                                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
+                            }
+                        }
+                        return messageEnum;
+                    }
+                    else{
+                        return MessageEnum.EMPTY_WEAPON;
+                    }
+                }
+            }
+            if(i==0){
+                return MessageEnum.WEAPON_NOT_FOUND;
+            }
         }
         Weapon weapon;
         Cell celltemp=allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell();

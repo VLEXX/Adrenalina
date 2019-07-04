@@ -2,6 +2,7 @@ package model.datapacket;
 
 import model.map.Cell;
 import model.map.Position;
+import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
@@ -248,5 +249,13 @@ class DataPacketTest {
         DataPacket dataPacket = new DataPacket();
         dataPacket.setPowerUpColor(Munitions.BLUE);
         assertEquals(dataPacket.getPowerUpColor(), Munitions.BLUE);
+    }
+
+    @Test
+    void setSpawnPointToAttack() {
+        DataPacket dataPacket = new DataPacket();
+        SpawnPoint spawnPoint = new SpawnPoint(Munitions.BLUE);
+        dataPacket.setSpawnPointToAttack(spawnPoint);
+        assertEquals(dataPacket.getSpawnPointToAttack().getSpawnColor(), Munitions.BLUE);
     }
 }

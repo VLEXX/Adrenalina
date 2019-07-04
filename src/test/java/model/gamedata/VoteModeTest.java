@@ -13,7 +13,7 @@ class VoteModeTest {
     @Test
     void getFinalResult() throws RemoteException {
         VoteMode m = new VoteMode();
-        assertEquals(m.getFinalResult(), -1);
+        assertEquals(m.getFinalResult(), null);
     }
 
     @Test
@@ -28,8 +28,6 @@ class VoteModeTest {
         VoteMode m = new VoteMode();
         assertEquals(m.getVoteResult()[0], 0);
         assertEquals(m.getVoteResult()[1], 0);
-        assertEquals(m.getVoteResult()[2], 0);
-        assertEquals(m.getVoteResult()[3], 0);
     }
 
     @Test
@@ -37,10 +35,8 @@ class VoteModeTest {
         VoteMode m = new VoteMode();
         m.setVoteResult(1);
         m.setVoteResult(1);
-        m.setVoteResult(2);
         assertEquals(m.getVoteResult()[0], 0);
         assertEquals(m.getVoteResult()[1], 2);
-        assertEquals(m.getVoteResult()[2], 1);
-        assertEquals(m.getVoteResult()[3], 0);
+
     }
 }

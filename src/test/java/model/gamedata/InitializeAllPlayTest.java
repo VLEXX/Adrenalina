@@ -54,7 +54,7 @@ class InitializeAllPlayTest {
     @Test
     void getVoteMode() throws RemoteException {
         InitializeAllPlay initializeAllPlay = new InitializeAllPlay();
-        assertEquals(initializeAllPlay.getVoteMode().getFinalResult(), -1);
+        assertEquals(initializeAllPlay.getVoteMode().getFinalResult(), null);
     }
 
     @Test

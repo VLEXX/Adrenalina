@@ -14,6 +14,7 @@ import model.datapacket.MessageEnum;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 /**
@@ -76,9 +77,30 @@ public class StartGame extends Thread {
                 if(allPlay.isEndgame()==true) {
                     break;
                 }
-            } catch (IOException | CloneNotSupportedException e) {
+            } catch (IOException e) {
+                try {
+                    if (!allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.WAIT)){
+                        allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.WAIT));
+                        if (idClientList.getIndexArray() < idClientList.getPlayerArrayList().size()-1) {
+                            idClientList.increaseIndexArray();
+                        }
+                        else{
+                            idClientList.resetIndexArray();
+                        }
+                        if (allPlay.getCurrentPlayerState().get(idClientList.getPlayerArrayList().get(idClientList.getIndexArray())).getPlayerposition().getCurrentcell() == null) {
+                            allPlay.getHashMapState().replace(idClientList.getPlayerArrayList().get(idClientList.getIndexArray()), stateHashMap.get(StatesEnum.SPAWN));
+                        } else {
+                            allPlay.getHashMapState().replace(idClientList.getPlayerArrayList().get(idClientList.getIndexArray()), stateHashMap.get(StatesEnum.ACTION));
+                        }
+                        allPlay.getCurrentPlayerState().get(player).setEndturn(false);
+                    }
+                    idClientList.getPlayerArrayList().remove(player);
+                    idClientList.getClientlist().remove(allPlay.getCurrentPlayerState().get(player).getToken());
 
-            } catch (ClassNotFoundException e) {
+                } catch (RemoteException u) {
+                    u.printStackTrace();
+                }
+            } catch (ClassNotFoundException | CloneNotSupportedException e) {
 
             }
         }

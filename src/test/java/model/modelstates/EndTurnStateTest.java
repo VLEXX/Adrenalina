@@ -30,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class EndTurnStateTest {
 
+
     @Test
     void doAction() throws RemoteException {
         //inizializza tutti i parametri necessari

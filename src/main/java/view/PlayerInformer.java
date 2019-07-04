@@ -220,6 +220,7 @@ public class PlayerInformer {
      */
     public void matchStats(){
         System.out.println("MATCH STATS:\n");
+        System.out.println("The chosen game mode is "+dbb.getSelectedMode()+".\n");
         System.out.println("You are playing "+dbb.getViewMapState().getSelectedMap().getMapname()+".\n");
         short i=0;
         for(short j=0;j<dbb.getSkullArray().length;j++){

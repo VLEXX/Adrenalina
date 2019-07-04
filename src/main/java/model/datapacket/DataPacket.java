@@ -29,7 +29,6 @@ public class DataPacket implements Serializable {
     private boolean firstAttack;
     private boolean secondAttack;
     private boolean thirdAttack;
-    private Action action;
     private HashMap<Player, Integer> marksToAdd;
     private Position position;
     private PowerUpId powerUpId;
@@ -57,7 +56,6 @@ public class DataPacket implements Serializable {
         this.firstAttack=false;
         this.secondAttack = false;
         this.thirdAttack = false;
-        this.action=null;
         this.marksToAdd= new HashMap<>();
         this.position=null;
         this.powerUpId=null;
@@ -156,14 +154,7 @@ public class DataPacket implements Serializable {
         return marksToAdd;
     }
 
-    public void setAction(Action action) {
-        this.action = action;
-    }
 
-
-    public Action getAction() {
-        return action;
-    }
 
     /**
      * @return cell

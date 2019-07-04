@@ -7,9 +7,6 @@ import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.powerups.PowerUpId;
 import model.powerups.TagbackGrenade;
-import model.datapacket.Action;
-import model.datapacket.DataPacket;
-import model.datapacket.StatesEnum;
 import model.weaponscard.Thor;
 import model.weaponscard.Weapon;
 import org.junit.jupiter.api.Test;
@@ -154,19 +151,6 @@ class DataPacketTest {
     void isThirdAttack() {
         DataPacket dataPacket = new DataPacket();
         assertEquals(dataPacket.isThirdAttack(), false);
-    }
-
-    @Test
-    void setAction() {
-        DataPacket dataPacket = new DataPacket();
-        dataPacket.setAction(Action.SHOOT);
-        assertEquals(dataPacket.getAction(), Action.SHOOT);
-    }
-
-    @Test
-    void getAction() {
-        DataPacket dataPacket = new DataPacket();
-        assertEquals(dataPacket.getAction(), null);
     }
 
     @Test

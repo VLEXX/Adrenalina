@@ -21,6 +21,9 @@ class VoteModeTest {
         VoteMode m = new VoteMode();
         m.setFinalResult();
         assertEquals(m.getFinalResult(), Mode.BASE);
+        m.setVoteResult(1);
+        m.setFinalResult();
+        assertEquals(m.getFinalResult(), Mode.DOMINATION);
     }
 
     @Test

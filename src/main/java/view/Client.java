@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.util.Scanner;
 
+/**
+ * Class that manage clientWithSocket and ClientWithRMI
+ */
 public class Client {
 
     private ClientStrategy clientstrategy;

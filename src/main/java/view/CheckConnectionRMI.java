@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package view;
 
 import model.gamedata.IDClientListInterface;
@@ -6,6 +9,9 @@ import model.playerdata.Player;
 
 import java.rmi.RemoteException;
 
+/**
+ * Thread that notify client is connected to server
+ */
 public class CheckConnectionRMI extends Thread {
 
     private IDClientListInterface idClientList;

@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package servercontroller;
 
 import model.datapacket.StatesEnum;
@@ -19,6 +22,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Stack;
 
+/**
+ * Create a Updatepacket to send to each client with method updateClient.
+ */
 public class Updater extends UnicastRemoteObject implements UpdaterInterface {
     private InitializeAllPlay allPlay;
 
@@ -26,6 +32,14 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
         this.allPlay=i;
     }
 
+
+    /**
+     * @param player
+     * @return updatePacket
+     * @throws IOException
+     * @throws RemoteException
+     * @throws CloneNotSupportedException
+     */
     public synchronized UpdatePacket updateClient(Player player) throws IOException, RemoteException, CloneNotSupportedException {
 
         Position position = new Position();

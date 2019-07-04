@@ -10,6 +10,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+/**
+ * Thread that identify ServerRMI and manage client RMI method call
+ */
 public class ServerRMI extends Thread {
     private InitializeAllPlay allPlay;
     private IDClientList idClientList;

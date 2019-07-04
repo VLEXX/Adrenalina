@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package servercontroller;
 
 import model.datapacket.StatesEnum;
@@ -9,6 +12,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
+/**
+ * Class used by RMI client that contains each State
+ */
 public class StateBox extends UnicastRemoteObject implements Remote, StateBoxInterface {
 
     private HashMap<StatesEnum, State> hashMap;

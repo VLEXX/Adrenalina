@@ -19,6 +19,10 @@ import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 
+
+/**
+ * Thread associate to each socket client and start the game
+ */
 public class SocketClientHandler implements Runnable {
     private Socket socket;
     private InitializeAllPlay allPlay;

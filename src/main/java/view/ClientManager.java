@@ -14,12 +14,21 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Class with principal method to manage client starting game
+ */
 public class ClientManager {
 
     public ClientManager(){
 
     }
 
+    /**
+     * Manage client character choice
+     *
+     * @param s
+     * @return
+     */
     public Player chooseCharacter(String s){
         if(s.equals("black")||s.equals("Black")||s.equals("BLACK")){
             return Player.BLACK;
@@ -41,6 +50,16 @@ public class ClientManager {
         }
     }
 
+    /**
+     * Manage client character choice
+     *
+     * @param stdin
+     * @param objectOutputStream
+     * @param objectInputStream
+     * @param viewDatabase
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public synchronized void manageChoice(Scanner stdin, ObjectOutputStream objectOutputStream, ObjectInputStream objectInputStream, ViewDatabase viewDatabase) throws IOException, ClassNotFoundException {
         CurrentDeckState currentDeckState= (CurrentDeckState)objectInputStream.readObject();
         System.out.println("Choose a character...");
@@ -85,6 +104,14 @@ public class ClientManager {
         }
     }
 
+    /**
+     * Manage client map vote
+     *
+     * @param stdin
+     * @param objectOutputStream
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public synchronized void manageVote(Scanner stdin, ObjectOutputStream objectOutputStream) throws IOException, ClassNotFoundException {
         System.out.println("Vote Map: 1 | 2 | 3 | 4");
         String s;
@@ -102,6 +129,12 @@ public class ClientManager {
 
     }
 
+    /**
+     * Manage client start
+     *
+     * @param stdin
+     * @return
+     */
     public String manageStart(Scanner stdin){
         System.out.println("> New Game\n> Continue\n");
         String s;
@@ -117,6 +150,14 @@ public class ClientManager {
         }
     }
 
+    /**
+     * Manage client nickname choice
+     *
+     * @param stdin
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public String manageNickname(Scanner stdin) throws IOException, ClassNotFoundException {
         String s;
         System.out.print("Insert your nickname: \n");
@@ -124,6 +165,12 @@ public class ClientManager {
         return s;
     }
 
+    /**
+     * Manage client vote mode
+     *
+     * @param stdin
+     * @return
+     */
     public Mode manageMode(Scanner stdin){
         System.out.println("1) Base\n2) Domination\n");
         System.out.println("Vote mode (Insert '1' or '2'): ");

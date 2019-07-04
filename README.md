@@ -8,7 +8,7 @@ Getting Started
 
 Authors
 
-    Federico Scatà - maticola - cod persona
+    Federico Scatà - 843731 - 10527534
     Giulia Rivara - 844517 - 10526743
     Alex Saletti - matricola - cod persona
 
@@ -23,12 +23,12 @@ Diagramma UML
 
 Funzionalità implementate
 
-    Regole Semplici
     Regole Complete
     CLI
     RMI
     Socket
-    //aggiungere 
+    Modalità Base
+    Modalità Dominazione
 
 Limitazioni
 

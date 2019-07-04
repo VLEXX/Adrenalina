@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package servercontroller;
 
 import model.datapacket.MessageEnum;

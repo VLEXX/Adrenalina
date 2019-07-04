@@ -13,6 +13,10 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
+/**
+ * Thread that identify the Socket Server
+ */
 public class SocketServer extends Thread implements Serializable {
     private int port;
     private InitializeAllPlay allPlay;

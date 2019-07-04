@@ -1,3 +1,6 @@
+/**
+ * @author Federico Scatà
+ */
 package servercontroller;
 
 import model.gamedata.IDClientList;
@@ -7,6 +10,10 @@ import model.playerdata.Player;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+
+/**
+ * Check every 600 ms if each RMI client is connected.
+ */
 public class CheckConnectionController extends Thread {
 
     private IDClientList idClientList;

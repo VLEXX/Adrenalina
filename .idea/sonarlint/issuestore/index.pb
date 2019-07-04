@@ -258,3 +258,7 @@ i
 ,src/main/java/model/gamedata/VoteFrenzy.java,8\a\8a6bfba4139a43b28c75f251cf57cf423e0dd960
 Z
 *src/main/java/model/datapacket/Action.java,e\9\e9f0f7cf9797e5bcae2434bc797f3dfd3d05ad42
+b
+2src/main/java/view/viewstates/ViewPickupState.java,f\5\f5e8ae16d473dff313c4d418a41ad2ee6b634424
+`
+0src/main/java/view/viewstates/ViewMoveState.java,6\0\600570bec98574c2a41c9429be7c6167da194146

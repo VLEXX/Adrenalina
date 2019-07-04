@@ -180,8 +180,9 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
                 }
             }
         });
+
         i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
-            if(currentPlayerState.getBoard().getDamageBox().getDamage()[10]!=null) {
+            if(currentPlayerState.getBoard().getDamageBox().getDamage()[10]!=null) {//todo aggiungere ||alplay.isendgame
                 currentPlayerState.getPlayerposition().getCurrentcell().getInCellPlayer().remove(player);
                 currentPlayerState.getPlayerposition().setCurrentroom(null);
                 currentPlayerState.getPlayerposition().setCurrentcell(null);
@@ -250,8 +251,12 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
                     }
                 }
             } }
-        if(i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && (k>=2 || i.getSkullArray()[7]!=null))
+        if(i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && (k>=2 || i.getSkullArray()[7]!=null)){
             i.setFinalfrenzy(true);
+            i.setLastTurnPlayer(dataPacket.getPlayer());
+        }
+        if(i.isFinalfrenzy()&& dataPacket.getPlayer()==i.getLastTurnPlayer())
+            allPlay.setEndgame(true);
     }
 
 

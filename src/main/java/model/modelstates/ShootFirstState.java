@@ -103,6 +103,8 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                         MessageEnum messageEnum = weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), dataPacket.getPosition(), this.allPlay);
                         if(messageEnum.equals(MessageEnum.OK)){
                             if(dataPacket.getPowerUpId()!=null){
+                                PowerUp powerUp1=null;
+                                int k =0;
                                 for(PowerUp powerUp: allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()){
                                     if(powerUp.getId().equals(dataPacket.getPowerUpId())){
                                         if(powerUp.getColor().equals(dataPacket.getPowerUpColor())){
@@ -111,17 +113,23 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                                                 n = n -1;
                                                 allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap().replace(dataPacket.getMunitions(), n);
                                                 allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getBoard().getDamageBox().increaseDamage(1,dataPacket.getPlayer());
-                                                allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().remove(powerUp);
+                                                powerUp1 = powerUp;
+                                                k=1;
                                             }
                                         }
                                     }
                                 }
+                                if(k ==1){
+                                    allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList().remove(powerUp1);
+                                }
                             }
-                            for(Player player: dataPacket.getTargetPlayersFirst()) {
-                                allPlay.getCurrentPlayerState().get(player).setAttackinprogress(true);
-                                for(PowerUp powerUp: allPlay.getCurrentPlayerState().get(player).getBoard().getPowerupList()){
-                                    if(powerUp.getId().equals(PowerUpId.TAGBACK_GRENADE)){
-                                        allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.POWERUP));
+                            for(Player player: dataPacket.getTargetPlayersFirst()){
+                                if(!player.equals(Player.FLAG)){
+                                    allPlay.getCurrentPlayerState().get(player).setAttackinprogress(true);
+                                    for (PowerUp powerUp : allPlay.getCurrentPlayerState().get(player).getBoard().getPowerupList()) {
+                                        if (powerUp.getId().equals(PowerUpId.TAGBACK_GRENADE)) {
+                                            allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.POWERUP));
+                                        }
                                     }
                                 }
                             }

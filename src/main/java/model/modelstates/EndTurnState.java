@@ -173,6 +173,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
             allPlay.setEndgame(true);
             allPlay.setMatchFinished(true);
         }
+
         i.getCurrentPlayerState().forEach((player, currentPlayerState) -> {
             score.put(player,0);
             deathcounter.put(player,0);

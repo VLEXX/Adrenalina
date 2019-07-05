@@ -34,7 +34,7 @@ public class ClientWithRMI implements ClientStrategy {
     }
 
     public void startClient() throws IOException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(ip, 8080);
+        Registry registry = LocateRegistry.getRegistry(ip, 8090);
 
         ClientManagerRMI clientManager = new ClientManagerRMI();
         ViewDatabase viewDatabase = new ViewDatabase();

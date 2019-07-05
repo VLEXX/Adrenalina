@@ -1,4 +1,4 @@
-# ing-sw-2019-3
+﻿# ing-sw-2019-3
 Adrenalina
 
 Software Engineering final project
@@ -10,16 +10,13 @@ Authors
 
     Federico Scatà - 843731 - 10527534
     Giulia Rivara - 844517 - 10526743
-    Alex Saletti - matricola - cod persona
+    Alex Saletti - 870175 - 10562144
 
-Testing
+Link with testing coverage and jar file
 
     La copertura dei test può essere trovata su:
-    link drive 
+    https://drive.google.com/open?id=1QQitY-jC3fgQztALH_h6wfTNOT9nBGOF
 
-Diagramma UML
-
-    Link Drive: link
 
 Funzionalità implementate
 
@@ -32,8 +29,4 @@ Funzionalità implementate
 
 Limitazioni
 
-    1. Problemi riscontrati
-    
-Scelte di design
-
-    1. eventuali scelte di giocata/programmazione/design 
+    1. Abbiamo scritto le armi complete di tutti gli attacchi, ma per mancanza di tempo non siamo riusciti a implementare il secondo e terzo attacco. 

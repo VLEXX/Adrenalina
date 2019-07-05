@@ -72,7 +72,7 @@ public class FlameThrower extends Weapon implements Serializable {
         Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
         Position positionToAttack1 = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
         Position positionToAttack2 = null;
-        if(playerToAttack.get(1) != null)
+        if(playerToAttack.size() > 1)
             positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
         move = checkPosition(myPosition.getCurrentcell(), positionToAttack1.getCurrentcell());
         if(move == 'F')

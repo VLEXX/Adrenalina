@@ -108,7 +108,7 @@ public class PowerGlove extends Weapon implements Serializable {
         if (control != 0)
             allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control, myPlayer);
         allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(2, myPlayer);
-        if (playerToAttack.size()>1){
+        if (playerToAttack.size() > 1){
             Position positionToAttack2 = allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getPlayerposition();
             if(move == 'R'){
                 if(positionToAttack.getCurrentcell().getRightCell() != null && positionToAttack.getCurrentcell().getRightCell() != positionToAttack2.getCurrentcell()) {

@@ -69,17 +69,19 @@ public class Whisper extends Weapon implements Serializable {
             control = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().getMyMarksMap().get(player);
         Position myPosition = allPlay.getCurrentPlayerState().get(player).getPlayerposition();
         Position positionToShot = allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getPlayerposition();
-        if(checkPosition(myPosition, positionToShot) != true) {
+        if(!checkPosition(myPosition, positionToShot)) {
             if (check(myPosition, positionToShot)) {
+                allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3 + control, player);
                 if(control != 0) {
-                    allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(3 + control, player);
                     allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getMarksBox().setMyMarksMap(player, 1);
                     allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).addControlMarks(player, 1);
                 }
             }
             else return MessageEnum.POSITION_UNREACHABLE;
         }
-        else return MessageEnum.PLAYER_TOO_MUCH_NEAR;
+        else{
+            return MessageEnum.PLAYER_TOO_MUCH_NEAR;
+        }
         return MessageEnum.OK;
     }
 

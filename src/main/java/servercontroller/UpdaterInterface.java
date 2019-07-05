@@ -15,6 +15,6 @@ import java.rmi.RemoteException;
  */
 public interface UpdaterInterface extends Remote {
 
-    UpdatePacket updateClient(Player player) throws IOException, RemoteException, CloneNotSupportedException;
+    UpdatePacket updateClient(Player player) throws IOException, RemoteException, CloneNotSupportedException, ClassNotFoundException;
 
 }

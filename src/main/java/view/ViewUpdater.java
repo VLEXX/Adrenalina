@@ -22,6 +22,8 @@ public class ViewUpdater {
         viewDatabase.setSelectedMode(updatePacket.getSelectedMode());
         viewDatabase.getViewMapState().setSelectedMap(updatePacket.getMap());
         viewDatabase.getViewChartScore().setChartScore(updatePacket.getChart());
+        viewDatabase.setPlayersdamage(updatePacket.getDamage());
+        viewDatabase.setPlayersmarks(updatePacket.getMarks());
         if(updatePacket.getStatesEnum()==null){
             if(updatePacket.getPosition()!=null) {
                 viewDatabase.setViewPlayerPosition(updatePacket.getPosition());

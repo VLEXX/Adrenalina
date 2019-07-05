@@ -28,6 +28,8 @@ public class UpdatePacket implements Serializable {
     private Player[] SecondSkullArray;
     private boolean attackinprogress;
     private Mode selectedMode;
+    private HashMap<Player, Player[]> damage;
+    private HashMap<Player, HashMap<Player, Integer>> marks;
 
 
     public UpdatePacket(ChartScore chart, CurrentPlayerState currentPlayerState, Map m, Position position, StatesEnum state, Stack<PowerUp> deck, boolean end) {
@@ -43,6 +45,24 @@ public class UpdatePacket implements Serializable {
         this.SecondSkullArray = new Player[]{null,null,null,null,null,null,null,null};
         this.attackinprogress = false;
         this.selectedMode=null;
+        this.damage=new HashMap<>();
+        this.marks=new HashMap<>();
+    }
+
+    public void setDamage(Player player,Player[] damage) {
+        this.damage.put(player, damage);
+    }
+
+    public HashMap<Player, Player[]> getDamage() {
+        return damage;
+    }
+
+    public void setMarks(Player player, HashMap<Player, Integer> marks) {
+        this.marks.put(player, marks);
+    }
+
+    public HashMap<Player, HashMap<Player, Integer>> getMarks() {
+        return marks;
     }
 
     public void setSelectedMode(Mode selectedMode) {

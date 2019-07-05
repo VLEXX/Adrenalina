@@ -111,7 +111,7 @@ public class ClientWithRMI implements ClientStrategy {
                     UpdatePacket updatePacket = null;
                     try {
                         updatePacket = updater.updateClient(player);
-                    } catch (CloneNotSupportedException e) {}
+                    } catch (CloneNotSupportedException | ClassNotFoundException e) {}
 
                     allPlay.putInHashMapState(player, StatesEnum.WAIT, stateHashMap.getHashMap());
                     viewDatabase.getViewState().put(player, viewStateHashMap.get(StatesEnum.WAIT));
@@ -258,7 +258,7 @@ public class ClientWithRMI implements ClientStrategy {
                 UpdatePacket updatePacket = null;
                 try {
                     updatePacket = updater.updateClient(player);
-                } catch (CloneNotSupportedException e) {
+                } catch (CloneNotSupportedException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
                 viewUpdater.updateView(updatePacket, viewDatabase, viewStateHashMap, player);

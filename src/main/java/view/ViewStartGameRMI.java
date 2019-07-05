@@ -56,7 +56,7 @@ public class ViewStartGameRMI extends Thread {
         try {
             updatePacket = updaterInterface.updateClient(player);
             viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
-        } catch (IOException | CloneNotSupportedException e) {}
+        } catch (IOException | CloneNotSupportedException | ClassNotFoundException e) {}
 
         int n =1;
         int k = 1;
@@ -109,7 +109,7 @@ public class ViewStartGameRMI extends Thread {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (CloneNotSupportedException e) {
+            } catch (CloneNotSupportedException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }

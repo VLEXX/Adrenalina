@@ -27,7 +27,7 @@ public class Client {
         while(s!="socket"||s!="Socket"||s!="SOCKET"||s!="rmi"||s!="RMI"){
             s = in.nextLine();
             if (s.equals("socket") || s.equals("Socket") || s.equals("SOCKET")) {
-                System.out.println("Insert Servr IP: \n");
+                System.out.println("Insert Server IP: \n");
                 ip = in.nextLine();
                 client.clientstrategy = new ClientWithSocket(ip, 5858);
                 try {
@@ -42,7 +42,7 @@ public class Client {
                 }
             }
             if (s.equals("rmi") || s.equals("RMI")) {
-                System.out.println("Insert Servr IP: \n");
+                System.out.println("Insert Server IP: \n");
                 ip = in.nextLine();
                 client.clientstrategy = new ClientWithRMI(ip);
                 try {

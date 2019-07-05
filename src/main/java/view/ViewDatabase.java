@@ -74,6 +74,14 @@ public class ViewDatabase {
         return playersdamage;
     }
 
+    public void setPlayersdamage(HashMap<Player, Player[]> playersdamage) {
+        this.playersdamage = playersdamage;
+    }
+
+    public void setPlayersmarks(HashMap<Player, HashMap<Player, Integer>> playersmarks) {
+        this.playersmarks = playersmarks;
+    }
+
     public boolean getFinalFrenzy(){return finalfrenzy;}
 
     public void setAttackinprogress(boolean attackinprogress) {

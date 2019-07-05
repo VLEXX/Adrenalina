@@ -3,7 +3,9 @@
  */
 package model.playerdata;
 
-import java.io.Serializable;
+import model.map.Map;
+
+import java.io.*;
 
 /**
  * Class is the damage box of the player board
@@ -180,5 +182,14 @@ public class DamageBox implements Serializable{
      */
     public void setDead(boolean dead) {
         this.dead = dead;
+    }
+
+    public Player[] deepCloneDamage() throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
+        objectOutputStream.writeObject(this.damage);
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+        return (Player[]) objectInputStream.readObject();
     }
 }

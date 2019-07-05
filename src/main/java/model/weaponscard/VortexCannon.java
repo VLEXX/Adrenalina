@@ -35,7 +35,7 @@ public class VortexCannon extends Weapon implements Serializable {
         super.setCardColor(Munitions.RED);
         super.setSecondAttack(true);
         super.setThirdAttack(false);
-        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL_MAX_ONE_PLAYER, 0);
+        super.setWeaponsMessage(WeaponsMessage.MAX_ONE_CELL, 0);
         super.setWeaponsMessage(WeaponsMessage.MAX_TWO_PLAYER, 1);
         super.setName("vortexcannon");
     }

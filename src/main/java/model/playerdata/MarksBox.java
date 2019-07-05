@@ -3,7 +3,9 @@
  */
 package model.playerdata;
 
-import java.io.Serializable;
+import model.map.Map;
+
+import java.io.*;
 import java.util.HashMap;
 
 /**
@@ -42,6 +44,15 @@ public class MarksBox implements Serializable {
         } else {
             myMarksMap.put(player, marx);
         }
+    }
+
+    public HashMap<Player, Integer> deepCloneMarks() throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(baos);
+        objectOutputStream.writeObject(this.myMarksMap);
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+        return (HashMap<Player, Integer>) objectInputStream.readObject();
     }
 }
 

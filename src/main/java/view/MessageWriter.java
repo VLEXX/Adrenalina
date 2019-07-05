@@ -69,5 +69,8 @@ public class MessageWriter {
         if(messageEnum.equals(MessageEnum.TOKEN_ERROR)){
             System.out.println(MessageEnum.TOKEN_ERROR);
         }
+        if(messageEnum.equals(MessageEnum.OK)){
+            System.out.println(MessageEnum.OK);
+        }
     }
 }

@@ -66,7 +66,7 @@ public class ViewShootFirstState implements ViewState {
             }
         }
 
-        if(dataPacket.getWeapon().getWeaponsMessage().get(0).equals(WeaponsMessage.MAX_ONE_PLAYER)) {
+        if(dataPacket.getWeapon().getWeaponsMessage().get(0).equals(WeaponsMessage.MAX_ONE_PLAYER)){
             System.out.println("Choose a player to attack between:");
             for(Player player1: viewDatabase.getPositionHashMap().keySet()){
                 if(!player1.equals(player)){
@@ -116,23 +116,33 @@ public class ViewShootFirstState implements ViewState {
                 if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell()!=null) {
                     System.out.print( " | " + viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell().getCellId());
                 }
+                System.out.println("\n");
                 while(true){
                     int id = stdin.nextInt();
-                    if(id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell().getCellId())){
-                        dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell());
-                        break;
+                    stdin.nextLine();
+                    if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell()!=null) {
+                        if (id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell().getCellId())) {
+                            dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell());
+                            break;
+                        }
                     }
-                    else if(id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell().getCellId())){
-                        dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell());
-                        break;
+                    if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell()!=null) {
+                        if (id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell().getCellId())) {
+                            dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell());
+                            break;
+                        }
                     }
-                    else if(id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell().getCellId())){
-                        dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell());
-                        break;
+                    if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell()!=null) {
+                        if (id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell().getCellId())) {
+                            dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell());
+                            break;
+                        }
                     }
-                    else if(id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell().getCellId())){
-                        dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell());
-                        break;
+                    if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell()!=null) {
+                        if (id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell().getCellId())) {
+                            dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell());
+                            break;
+                        }
                     }
                     else{
                         System.out.println("WRONG INPUT! Please choose a cell between:\n");
@@ -195,7 +205,7 @@ public class ViewShootFirstState implements ViewState {
                 }
             }
             System.out.println("Choose " + n + " player to attack between: \n");
-            for(Player player1: Player.values()){
+            for(Player player1: viewDatabase.getPositionHashMap().keySet()){
                 if(!player1.equals(player)){
                     if(!player1.equals(Player.FLAG)){
                         System.out.print(player1 + " | ");
@@ -249,7 +259,7 @@ public class ViewShootFirstState implements ViewState {
                 }
             }
             System.out.println("Choose " + n + " player to attack between: \n");
-            for(Player player1: Player.values()){
+            for(Player player1: viewDatabase.getPositionHashMap().keySet()){
                 if(!player1.equals(player)){
                     if(!player1.equals(Player.FLAG)){
                         System.out.print(player1 + " | ");

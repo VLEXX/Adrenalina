@@ -40,7 +40,7 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
      * @throws RemoteException
      * @throws CloneNotSupportedException
      */
-    public synchronized UpdatePacket updateClient(Player player) throws IOException, RemoteException, CloneNotSupportedException {
+    public synchronized UpdatePacket updateClient(Player player) throws IOException, RemoteException, CloneNotSupportedException, ClassNotFoundException {
 
         Position position = new Position();
         if (allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell() != null) {
@@ -107,6 +107,8 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
                     e.printStackTrace();
                 }
             }
+            updatePacket.setDamage(currentPlayerState1.getActiveplayer(), currentPlayerState1.getBoard().getDamageBox().deepCloneDamage());
+            updatePacket.setMarks(currentPlayerState1.getActiveplayer(), currentPlayerState1.getBoard().getMarksBox().deepCloneMarks());
         }
 
         if(allPlay.getCurrentPlayerState().get(player).isAttackinprogress()){

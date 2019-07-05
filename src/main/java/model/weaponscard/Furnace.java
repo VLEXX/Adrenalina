@@ -72,7 +72,7 @@ public class Furnace extends Weapon implements Serializable {
         Room roomToAttack = positionToAttack.getCurrentroom();
         if(myPosition.getCurrentroom().getRoomId() == positionToAttack.getCurrentroom().getRoomId())
             return MessageEnum.POSITION_NOT_VALID;
-        if(checkRoom(myPosition, roomToAttack) == false)
+        if(!checkRoom(myPosition, roomToAttack))
             return MessageEnum.POSITION_NOT_VALID;
         for(int i = 0; i < positionToAttack.getCurrentroom().getCellsList().size(); i++){
             for(int j = 0; j < positionToAttack.getCurrentroom().getCellsList().get(i).getInCellPlayer().size(); j++){

@@ -59,6 +59,7 @@ class ShootSecondStateTest {
         dataPacket.setWeapon(weapon);
         dataPacket.setPlayer(Player.YELLOW);
         weapon.setLoaded(true);
+
         assertEquals(shootSecondState.doAction(dataPacket), MessageEnum.OK);
 
 

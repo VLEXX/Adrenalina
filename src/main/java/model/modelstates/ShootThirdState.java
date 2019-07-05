@@ -36,7 +36,7 @@ public class ShootThirdState extends UnicastRemoteObject implements State, Seria
             return MessageEnum.TOKEN_ERROR;
         }
         Weapon weapon;
-        if(dataPacket.isThirdAttack()==true){
+        if(dataPacket.isThirdAttack()){
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
                     weapon = w;

@@ -12,7 +12,7 @@ public class ViewShootSecondState implements ViewState {
 
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
-        if(viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().hasSecondAttack()==true){
+        if(!viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().hasSecondAttack()){
             int red, blue, yellow;
             if(viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().getSecondPrice().get(Munitions.RED)!=null) {
                 red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().getSecondPrice().get(Munitions.RED);
@@ -38,6 +38,7 @@ public class ViewShootSecondState implements ViewState {
                 s.toLowerCase();
                 if(s.equals("y")){
                     DataPacket dataPacket = new DataPacket();
+                    dataPacket.setPlayer(player);
                     dataPacket.setToken(viewDatabase.getClientToken());
                     dataPacket.setWeapon(viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks());
                     dataPacket.setSecondAttack(true);
@@ -48,6 +49,7 @@ public class ViewShootSecondState implements ViewState {
         DataPacket dataPacket = new DataPacket();
         dataPacket.setToken(viewDatabase.getClientToken());
         dataPacket.setPlayer(player);
+        dataPacket.setSecondAttack(false);
         return dataPacket;
     }
 }

@@ -8,6 +8,7 @@ import model.playerdata.Player;
 import model.powerups.PowerUp;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -114,5 +115,22 @@ class UpdatePacketTest {
         UpdatePacket updatePacket = new UpdatePacket(null, null, null, null, null, null, false);
         updatePacket.setSelectedMode(Mode.BASE);
         assertEquals(updatePacket.getSelectedMode(), Mode.BASE);
+    }
+
+    @Test
+    void setDamage() {
+        UpdatePacket updatePacket = new UpdatePacket(null, null, null, null, null, null, false);
+        Player[] players = new Player[]{Player.YELLOW, Player.BLACK};
+        updatePacket.setDamage(Player.BLUE, players);
+        assertEquals(updatePacket.getDamage().get(Player.BLUE), players);
+    }
+
+    @Test
+    void setMarks() {
+        UpdatePacket updatePacket = new UpdatePacket(null, null, null, null, null, null, false);
+        HashMap<Player, Integer> hashMap = new HashMap<>();
+        hashMap.put(Player.BLUE, 1);
+        updatePacket.setMarks(Player.BLUE, hashMap);
+        assertEquals(updatePacket.getMarks().get(Player.BLUE), hashMap);
     }
 }

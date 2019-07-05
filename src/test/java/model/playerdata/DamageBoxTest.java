@@ -5,6 +5,8 @@ package model.playerdata;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DamageBoxTest {
@@ -101,5 +103,13 @@ class DamageBoxTest {
         DamageBox d = new DamageBox();
         d.setDead(false);
         assertEquals(d.isDead(), false);
+    }
+
+    @Test
+    void deepCloneDamage() throws IOException, ClassNotFoundException {
+        DamageBox damageBox = new DamageBox();
+        damageBox.increaseDamage(1, Player.BLUE);
+        Player[] players = damageBox.deepCloneDamage();
+        assertEquals(players[0], Player.BLUE);
     }
 }

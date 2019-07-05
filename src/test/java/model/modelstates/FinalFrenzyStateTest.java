@@ -43,6 +43,18 @@ class FinalFrenzyStateTest {
         i.getPlayerStateTempFrenzy().put(Player.BLUE,ps);
         i.getPlayerStateTempFrenzy().put(Player.BLACK,ps);
         assertEquals(ffs.doAction(d),MessageEnum.OK);
+        asd.getPlayerArrayList().add(Player.BLUE);
+        asd.getPlayerArrayList().add(Player.YELLOW);
+        asd.getPlayerArrayList().add(Player.BLACK);
+        d.setFrenzy(false);
+        ffs.doAction(d);
+        d.setFrenzy(false);
+        ffs.doAction(d);
+        d.setFrenzy(false);
+        assertEquals(ffs.doAction(d),MessageEnum.OK);
+
+
+
     }
 
     @Test

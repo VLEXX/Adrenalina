@@ -33,6 +33,7 @@ public class PlayerInformer {
         mapStats();
         positionsInformer();
         playerStats();
+        scoreCounter();
 
     }
 

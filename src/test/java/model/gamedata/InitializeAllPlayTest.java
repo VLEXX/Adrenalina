@@ -260,4 +260,17 @@ class InitializeAllPlayTest {
         i.setLastTurnPlayer(Player.BLUE);
         assertEquals(i.getLastTurnPlayer(),Player.BLUE);
     }
+
+    @Test
+    void isMatchFinished() throws RemoteException {
+        InitializeAllPlay i = new InitializeAllPlay();
+        assertTrue(!i.isMatchFinished());
+    }
+
+    @Test
+    void setMatchFinished() throws RemoteException {
+        InitializeAllPlay i = new InitializeAllPlay();
+        i.setMatchFinished(true);
+        assertTrue(i.isMatchFinished());
+    }
 }

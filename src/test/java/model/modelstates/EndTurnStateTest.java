@@ -131,6 +131,9 @@ class EndTurnStateTest {
         cps3.getBoard().getDamageBox().increaseDamage(3, Player.YELLOW);
         cps3.getBoard().getDamageBox().increaseDamage(3, Player.BLACK);
         cps3.getBoard().getDamageBox().increaseDamage(5, Player.BLUE);
+        cps4.getBoard().getDamageBox().increaseDamage(2,Player.YELLOW);
+        cps4.getBoard().getDamageBox().increaseDamage(4,Player.BLUE);
+        cps4.getBoard().getDamageBox().increaseDamage(3,Player.GREEN);
         cps2.setPlayerposition(pp2);
         cps3.setPlayerposition(pp3);
         cps4.setPlayerposition(pp4);
@@ -142,6 +145,15 @@ class EndTurnStateTest {
         i.getCurrentPlayerState().put(Player.BLACK, cps4);
         cps.getControlMarks().put(Player.YELLOW, 2);
         cps.getControlMarks().put(Player.GREEN, 3);
+        for(int h=0;h<i.getSkullArray().length;h++){
+            if(h<3)
+                i.getSkullArray()[h]=Player.BLUE;
+            else if(h>2&&h<5)
+                i.getSkullArray()[h]=Player.YELLOW;
+            else
+                i.getSkullArray()[h]=Player.GREEN;
+        }
+        i.getSecondSkullArray()[6]=Player.GREEN;
         assertEquals(eds.doAction(d), MessageEnum.OK);
         d.setToken(0);
         assertEquals(eds.doAction(d), MessageEnum.TOKEN_ERROR);

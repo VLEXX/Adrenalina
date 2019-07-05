@@ -40,6 +40,7 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
     private boolean finalfrenzy;
     private Player lastTurnPlayer;
     private VoteFrenzy voteFrenzy;
+    private boolean matchFinished;
 
     /**
      * Constructor
@@ -65,6 +66,15 @@ public class InitializeAllPlay extends UnicastRemoteObject implements Remote, Se
         this.starting=false;
         this.voteFrenzy=new VoteFrenzy();
         this.playerStateTempFrenzy=new HashMap<>();
+        this.matchFinished=false;
+    }
+
+    public boolean isMatchFinished() {
+        return matchFinished;
+    }
+
+    public void setMatchFinished(boolean matchFinished) {
+        this.matchFinished = matchFinished;
     }
 
     public HashMap<Player, State> getPlayerStateTempFrenzy() {

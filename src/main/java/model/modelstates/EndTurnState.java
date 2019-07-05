@@ -166,9 +166,13 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
      * updates all players'score and the chart; if a player is dead the respective MaxPointIndex will be updated
      * @param i class containing information about the current match
      */
-    private void scoreCounter(InitializeAllPlay i, DataPacket dataPacket){
+    private void scoreCounter(InitializeAllPlay i, DataPacket dataPacket) throws RemoteException {
         HashMap<Player,Integer> score = new HashMap<>();
         HashMap<Player,Integer> deathcounter = new HashMap<>();
+        if((i.isFinalfrenzy()&& dataPacket.getPlayer()==i.getLastTurnPlayer())||allPlay.isMatchFinished()){
+            allPlay.setEndgame(true);
+            allPlay.setMatchFinished(true);
+        }
         i.getCurrentPlayerState().forEach((player, currentPlayerState) -> {
             score.put(player,0);
             deathcounter.put(player,0);
@@ -182,27 +186,39 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
         });
 
         i.getCurrentPlayerState().forEach(((player, currentPlayerState) -> {
-            if(currentPlayerState.getBoard().getDamageBox().getDamage()[10]!=null) {//todo aggiungere ||alplay.isendgame
-                currentPlayerState.getPlayerposition().getCurrentcell().getInCellPlayer().remove(player);
-                currentPlayerState.getPlayerposition().setCurrentroom(null);
-                currentPlayerState.getPlayerposition().setCurrentcell(null);
-                DamageBox db = currentPlayerState.getBoard().getDamageBox();
-                score.put(db.getDamage()[0],score.get(db.getDamage()[0])+1);
-                Player[] points=this.damageScoreBoard(db.getDamage());
-                for(int j=0; j<points.length;j++){
-                    if(points[j]!=null && points[j]!=player)
-                        score.put(points[j],score.get(points[j])+db.getMaxPointArray()[db.getMaxPointIndex()+j]); }
-                db.setMaxPointIndex(db.getMaxPointIndex()+1);
-                deathcounter.put(db.getDamage()[10],deathcounter.get(db.getDamage()[10])+1);
-                int z=0;
-                while(i.getSkullArray()[z]!=null)
-                    z++;
-                i.getSkullArray()[z]=db.getDamage()[10];
-                i.getSecondSkullArray()[z]=db.getDamage()[11];
-                if(db.getDamage()[11]!=null)
-                    i.getCurrentPlayerState().get(db.getDamage()[11]).getBoard().getMarksBox().setMyMarksMap(player,1);
-                for(int j=0;j<12;j++)
-                    db.getDamage()[j]=null; }
+                if(currentPlayerState.getBoard().getDamageBox().getDamage()[10]!=null || allPlay.isMatchFinished()){
+                    if(currentPlayerState.getBoard().getDamageBox().getDamage()[10]!=null) {
+                        currentPlayerState.getPlayerposition().getCurrentcell().getInCellPlayer().remove(player);
+                        currentPlayerState.getPlayerposition().setCurrentroom(null);
+                        currentPlayerState.getPlayerposition().setCurrentcell(null);
+                    }
+                    DamageBox db = currentPlayerState.getBoard().getDamageBox();
+                    score.putIfAbsent(db.getDamage()[0],0);
+                    score.put(db.getDamage()[0],score.get(db.getDamage()[0])+1);
+                    Player[] points=this.damageScoreBoard(db.getDamage());
+                    for(int j=0; j<points.length;j++){
+                        if(points[j]!=null && points[j]!=player)
+                            score.put(points[j],score.get(points[j])+db.getMaxPointArray()[db.getMaxPointIndex()+j]); }
+                    db.setMaxPointIndex(db.getMaxPointIndex()+1);
+                    if(db.getDamage()[10]!=null) {
+                        deathcounter.putIfAbsent(db.getDamage()[10], 0);
+                        deathcounter.put(db.getDamage()[10], deathcounter.get(db.getDamage()[10]) + 1);
+                    }
+                    int z=0;
+                    while(i.getSkullArray()[z]!=null) {
+                        z++;
+                        if(z==8)
+                            break;
+                    }
+                    if(z<8) {
+                        i.getSkullArray()[z] = db.getDamage()[10];
+                        i.getSecondSkullArray()[z] = db.getDamage()[11];
+                    }
+                    if(db.getDamage()[11]!=null)
+                        i.getCurrentPlayerState().get(db.getDamage()[11]).getBoard().getMarksBox().setMyMarksMap(player,1);
+                    for(int j=0;j<12;j++)
+                        db.getDamage()[j]=null;
+                }
         }));
         deathcounter.forEach((player, integer) -> {
             if(integer>1)
@@ -251,12 +267,42 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
                     }
                 }
             } }
+
+        if(allPlay.isEndgame()) {
+            HashMap<Player, Integer> score2 = new HashMap<>();
+            for (int u = 0; u < allPlay.getSkullArray().length; u++) {
+                score2.putIfAbsent(allPlay.getSkullArray()[u], 0);
+                score2.put(allPlay.getSkullArray()[u], score2.get(allPlay.getSkullArray()[u]) + 1);
+                if (allPlay.getSecondSkullArray()[u] != null)
+                    score2.put(allPlay.getSkullArray()[u], score2.get(allPlay.getSkullArray()[u]) + 1);
+            }
+            allPlay.getHashMapState().forEach((player, state) -> score2.putIfAbsent(player,0));
+            Player[] jk = new Player[score2.size()];
+            int jj=0;
+            for(Player ppp : score2.keySet()){
+                jk[jj]=ppp;
+                jj++;
+            }
+
+            for(int j=0;j<jk.length;j++) {
+                for (int y = 1; y < jk.length - j; y++) {
+                    if (score2.get(jk[y - 1]) < score2.get(jk[y])) {
+                        Player temp = jk[y];
+                        jk[y] = jk[y - 1];
+                        jk[y - 1] = temp;
+                    }
+                }
+            }
+            int[] aaa = {8,6,4,2,1};
+            for(int j=0;j<jk.length;j++){
+                allPlay.getChartScore().setScore(jk[j],aaa[j]);
+            }
+        }
         if(i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && (k>=2 || i.getSkullArray()[7]!=null)){
             i.setFinalfrenzy(true);
             i.setLastTurnPlayer(dataPacket.getPlayer());
         }
-        if(i.isFinalfrenzy()&& dataPacket.getPlayer()==i.getLastTurnPlayer())
-            allPlay.setEndgame(true);
+
     }
 
 

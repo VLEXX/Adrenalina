@@ -63,6 +63,12 @@ public class FinalFrenzyState extends UnicastRemoteObject implements State, Seri
                     }
                     allPlay.setFinalfrenzy(true);
                 }
+                else{
+                    allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
+                }
+            }
+            else{
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.WAIT));
             }
         }
         return MessageEnum.OK;

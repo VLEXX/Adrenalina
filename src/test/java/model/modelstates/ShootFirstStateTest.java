@@ -75,7 +75,7 @@ class ShootFirstStateTest {
         dataPacket.setPlayer(Player.YELLOW);
         ShootFirstState shootFirstState = new ShootFirstState(initializeAllPlay, stateHashMap, idClientList);
 
-        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.ERROR);
 
         dataPacket.setFirstAttack(true);
         Weapon weapon = new LockRifle();
@@ -460,10 +460,11 @@ class ShootFirstStateTest {
                 }
             }
         }
-        dataPacket.setCell(c);
+        dataPacket.setCell(null);
         dataPacket.setWeapon(weapon);
         dataPacket.setPlayer(Player.YELLOW);
         weapon.setLoaded(true);
+        currentPlayerState.getBoard().getDamageBox().setShootUp(true);
         assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.SHOOTUP_ERROR);
     }
 
@@ -509,7 +510,7 @@ class ShootFirstStateTest {
         }
         dataPacket.setPlayer(Player.YELLOW);
         ShootFirstState shootFirstState = new ShootFirstState(initializeAllPlay, stateHashMap, idClientList);
-        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.ERROR);
 
         dataPacket.setFirstAttack(true);
         Weapon weapon = new HeatSeeker();
@@ -562,7 +563,7 @@ class ShootFirstStateTest {
         }
         dataPacket.setPlayer(Player.YELLOW);
         ShootFirstState shootFirstState = new ShootFirstState(initializeAllPlay, stateHashMap, idClientList);
-        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.ERROR);
 
         dataPacket.setFirstAttack(true);
         Weapon weapon = new LockRifle();
@@ -616,7 +617,7 @@ class ShootFirstStateTest {
         }
         dataPacket.setPlayer(Player.YELLOW);
         ShootFirstState shootFirstState = new ShootFirstState(initializeAllPlay, stateHashMap, idClientList);
-        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.ERROR);
 
         dataPacket.setFirstAttack(true);
         Weapon weapon = new HeatSeeker();
@@ -670,7 +671,7 @@ class ShootFirstStateTest {
         }
         dataPacket.setPlayer(Player.YELLOW);
         ShootFirstState shootFirstState = new ShootFirstState(initializeAllPlay, stateHashMap, idClientList);
-        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.OK);
+        assertEquals(shootFirstState.doAction(dataPacket), MessageEnum.ERROR);
 
         dataPacket.setFirstAttack(true);
         Weapon weapon = new HeatSeeker();

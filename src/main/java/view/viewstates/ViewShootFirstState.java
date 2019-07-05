@@ -96,7 +96,6 @@ public class ViewShootFirstState implements ViewState {
                             break;
                         }
                     }
-                    System.out.println("ciao exit");
                 }
                 if(!dataPacket.getTargetPlayersFirst().isEmpty()){
                     break;

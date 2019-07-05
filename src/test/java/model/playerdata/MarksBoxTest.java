@@ -5,6 +5,9 @@ package model.playerdata;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MarksBoxTest {
@@ -31,5 +34,14 @@ class MarksBoxTest {
         assertEquals(marksBox.getMyMarksMap().get(player).intValue(), 1);
         marksBox.setMyMarksMap(player, 2);
         assertEquals(marksBox.getMyMarksMap().get(player).intValue(), 3);
+    }
+
+    @Test
+    void deepCloneMarks() throws IOException, ClassNotFoundException {
+        MarksBox marksBox = new MarksBox();
+        HashMap<Player, Integer> playerIntegerHashMap;
+        marksBox.setMyMarksMap(Player.YELLOW, 1);
+        playerIntegerHashMap = marksBox.deepCloneMarks();
+        assertEquals(playerIntegerHashMap.get(Player.YELLOW), 1);
     }
 }

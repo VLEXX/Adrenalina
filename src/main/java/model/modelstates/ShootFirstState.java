@@ -139,18 +139,13 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                 }
             }
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
-                System.out.println("ciao1");
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
-                    System.out.println("ciao2");
                     weapon = w;
                     if(weapon.getLoaded()){
-                        System.out.println("ciao3");
                         MessageEnum messageEnum = weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), dataPacket.getPosition(), this.allPlay);
                         if(messageEnum.equals(MessageEnum.OK)){
                             weapon.setLoaded(false);
-                            System.out.println("ciao4");
                             if(dataPacket.getPowerUpId()!=null){
-                                System.out.println("ciao5");
                                 PowerUp powerUp1=null;
                                 int k =0;
                                 for(PowerUp powerUp: allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()){
@@ -176,7 +171,6 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                                     allPlay.getCurrentPlayerState().get(player).setAttackinprogress(true);
                                     for (PowerUp powerUp : allPlay.getCurrentPlayerState().get(player).getBoard().getPowerupList()) {
                                         if (powerUp.getId().equals(PowerUpId.TAGBACK_GRENADE)) {
-                                            System.out.println("ciao6");
                                             allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.POWERUP));
                                         }
                                     }
@@ -184,12 +178,10 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                             }
                             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
                                 if(weapon.hasSecondAttack()) {
-                                    System.out.println("ciao9");
                                     allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_SECOND));
                                     return messageEnum;
                                 }
                                 else{
-                                    System.out.println("ciao10");
                                     allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                                     allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
                                     return messageEnum;
@@ -197,12 +189,10 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                             }
                             else if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
                                 if(weapon.hasSecondAttack()) {
-                                    System.out.println("ciao7");
                                     allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_SECOND));
                                     return messageEnum;
                                 }
                                 else{
-                                    System.out.println("ciao8");
                                     allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
                                     allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                                     return messageEnum;

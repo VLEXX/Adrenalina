@@ -34,7 +34,7 @@ public class ServerRMI extends Thread {
 
 
         System.out.println("RMI Server ready...");
-        Registry registry = LocateRegistry.createRegistry(8080);
+        Registry registry = LocateRegistry.createRegistry(8090);
 
 
         registry.bind("allPlay", this.allPlay);

@@ -43,7 +43,6 @@ public class StartGame extends Thread {
 
         while(true){
             try {
-                if(allPlay.isEndgame()==false) {
                     DataPacket dataPacket = (DataPacket) objectInputStream.readObject();
                     MessageEnum messageEnum = allPlay.getPlayerState(player).doAction(dataPacket);
                     objectOutputStream.writeObject(messageEnum);
@@ -73,10 +72,6 @@ public class StartGame extends Thread {
                     UpdatePacket updatePacket = updater.updateClient(player);
 
                     objectOutputStream.writeObject(updatePacket);
-                }
-                if(allPlay.isEndgame()==true) {
-                    break;
-                }
             } catch (IOException e) {
                 try {
                     if (!allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.WAIT)){
@@ -96,7 +91,9 @@ public class StartGame extends Thread {
                     }
                     idClientList.getPlayerArrayList().remove(player);
                     idClientList.getClientlist().remove(allPlay.getCurrentPlayerState().get(player).getToken());
-
+                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().removeInCellPlayer(player);
+                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentroom(null);
+                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentcell(null);
                 } catch (RemoteException u) {
                     u.printStackTrace();
                 }

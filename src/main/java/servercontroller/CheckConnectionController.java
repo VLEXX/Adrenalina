@@ -60,6 +60,9 @@ public class CheckConnectionController extends Thread {
                                             allPlay.getCurrentPlayerState().get(player).setEndturn(false);
                                         }
                                     }
+                                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().removeInCellPlayer(player);
+                                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentroom(null);
+                                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentcell(null);
                                     idClientList.getConnection().remove(player);
                                     players.add(player);
                                     idClientList.getPlayerArrayList().remove(player);

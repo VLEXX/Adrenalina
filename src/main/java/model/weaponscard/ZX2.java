@@ -109,12 +109,12 @@ public class ZX2 extends Weapon implements Serializable {
                     allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).getBoard().getDamageBox().increaseDamage(control1, myPlayer);
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(0)).addControlMarks(myPlayer, 1);
             }
-            if (playerToAttack.get(1) != null) {
+            if (playerToAttack.size() > 1) {
                 if(control2 != 0)
                     allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).getBoard().getDamageBox().increaseDamage(control2, myPlayer);
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(1)).addControlMarks(myPlayer, 1);
             }
-            if (playerToAttack.get(2) != null) {
+            if (playerToAttack.size() > 2) {
                 if(control3 != 0)
                     allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).getBoard().getDamageBox().increaseDamage(control3, myPlayer);
                 allPlay.getCurrentPlayerState().get(playerToAttack.get(2)).addControlMarks(myPlayer, 1);

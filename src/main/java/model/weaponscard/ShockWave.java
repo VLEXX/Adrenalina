@@ -75,11 +75,11 @@ public class ShockWave extends Weapon implements Serializable {
             if (checkPosition(myPosition.getCurrentcell(), positionToAttack1.getCurrentcell()) == false)
                 return MessageEnum.POSITION_NOT_VALID;
         }
-        if(playerToAttack.get(1) != null) {
+        if(playerToAttack.size() > 1) {
             if (checkPosition(myPosition.getCurrentcell(), positionToAttack2.getCurrentcell()) == false)
                 return MessageEnum.POSITION_NOT_VALID;
         }
-        if(playerToAttack.get(2) != null) {
+        if(playerToAttack.size() > 2) {
             if (checkPosition(myPosition.getCurrentcell(), positionToAttack3.getCurrentcell()) == false)
                 return MessageEnum.POSITION_NOT_VALID;
         }

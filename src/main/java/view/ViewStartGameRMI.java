@@ -67,20 +67,20 @@ public class ViewStartGameRMI extends Thread {
                     if (n == 1) {
                         DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
                         messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
-                        messageWriter.writeMessage(messageEnumOK);
+                        System.out.println(messageEnumOK);
                         n--;
                     }
                 } else if (viewDatabase.getViewState().get(player) instanceof ViewFrenzyState) {
                     if (k == 1) {
                         DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
                         messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
-                        messageWriter.writeMessage(messageEnumOK);
+                        System.out.println(messageEnumOK);
                         k--;
                     }
                 } else {
                     DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
                     messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
-                    messageWriter.writeMessage(messageEnumOK);
+                    System.out.println(messageEnumOK);
                 }
 
                 if (allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)) {

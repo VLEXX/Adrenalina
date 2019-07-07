@@ -61,6 +61,7 @@ public class MoveState extends UnicastRemoteObject implements State, Serializabl
                 return MessageEnum.OK;
             }
         }
+        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
         return MessageEnum.UNREACHABLE_CELL;
     }
 

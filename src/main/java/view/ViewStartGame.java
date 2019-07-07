@@ -67,7 +67,8 @@ public class ViewStartGame extends Thread {
 
                 while (true) {
                     if(messageEnumOK!=null){
-                        messageWriter.writeMessage(messageEnumOK);
+                        System.out.println(messageEnumOK + "\n");
+                        sleep(200);
                         break;
                     }
                     messageEnumOK = (MessageEnum) objectInputStream.readObject();
@@ -87,9 +88,11 @@ public class ViewStartGame extends Thread {
                         break;
                     }
             } catch (IOException e) {
-
+                e.printStackTrace();
             } catch (ClassNotFoundException e) {
-
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

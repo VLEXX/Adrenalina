@@ -80,8 +80,10 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
                 if (wp.getName().equals(dataPacket.getReplaceWeapon().getName()))
                     ww = wp;
             }
-            if (ww == null || allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().size() < 3)
+            if (ww == null || allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList().size() < 3) {
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 return MessageEnum.WEAPON_ERROR_2;
+            }
         }
         //controlla se i powerup siano effettivamente posseduti
         for (PowerUp pw : dataPacket.getPaymentPowerUp()) {
@@ -90,8 +92,10 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
                     pwcheck++;
             }
         }
-        if (pwcheck != dataPacket.getPaymentPowerUp().size())
+        if (pwcheck != dataPacket.getPaymentPowerUp().size()) {
+            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
             return MessageEnum.POWERUP_NOT_FOUND;
+        }
         Cell cc = null;
         //controlla se la cella scelta in caso di movimento sia raggiungibile
         if (dataPacket.getCell() != null) {
@@ -109,8 +113,10 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
                 a = (cc == ccv.getDownCell() || cc == ccv.getLeftCell() || cc == ccv.getUpCell() || cc == ccv.getRightCell());
             else
                 a = ccv.getReachable2Cells().contains(cc);
-            if (!a)
+            if (!a) {
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 return MessageEnum.UNREACHABLE_CELL;
+            }
         }
         //imposta la cella da verificare per controllare le armi presenti
         if (cc != null)
@@ -130,8 +136,10 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
                     www = w2;
                 }
             }
-            if (!b)
+            if (!b) {
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 return MessageEnum.WEAPON_NOT_FOUND;
+            }
             if (www.getFirstPrice().containsKey(Munitions.RED))
                 cost.put(Munitions.RED, www.getFirstPrice().get(Munitions.RED) - www.munitionsChecker(Munitions.RED));
             if (www.getFirstPrice().containsKey(Munitions.YELLOW))
@@ -147,11 +155,15 @@ public class PickUpState extends UnicastRemoteObject implements State, Serializa
                 cost.put(Munitions.YELLOW, cost.get(Munitions.YELLOW) - powerUp.munitionsChecker(Munitions.YELLOW));
                 cost.put(Munitions.BLUE, cost.get(Munitions.BLUE) - powerUp.munitionsChecker(Munitions.BLUE));
             });
-            if (cost.get(Munitions.RED) < 0 || cost.get(Munitions.YELLOW) < 0 || cost.get(Munitions.BLUE) < 0)
+            if (cost.get(Munitions.RED) < 0 || cost.get(Munitions.YELLOW) < 0 || cost.get(Munitions.BLUE) < 0) {
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 return MessageEnum.TOO_MUCH_POWERUPS;
+            }
             HashMap<Munitions, Integer> mb = allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getMunitionsBox().getMyMunitionsMap();
-            if (mb.get(Munitions.RED) - cost.get(Munitions.RED) < 0 || mb.get(Munitions.YELLOW) - cost.get(Munitions.YELLOW) < 0 || mb.get(Munitions.BLUE) - cost.get(Munitions.BLUE) < 0)
+            if (mb.get(Munitions.RED) - cost.get(Munitions.RED) < 0 || mb.get(Munitions.YELLOW) - cost.get(Munitions.YELLOW) < 0 || mb.get(Munitions.BLUE) - cost.get(Munitions.BLUE) < 0) {
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 return MessageEnum.AMMO_ERROR;
+            }
         }
 
         //fine controlli e inizio modifica del model

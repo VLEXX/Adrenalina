@@ -8,6 +8,7 @@ import model.datapacket.MessageEnum;
 import model.map.Cell;
 import model.map.Room;
 import model.map.SpawnPoint;
+import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.powerups.PowerUpId;
@@ -72,11 +73,13 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                         return messageEnum;
                     }
                     else{
+                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                         return MessageEnum.EMPTY_WEAPON;
                     }
                 }
             }
             if(i==0){
+                allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                 return MessageEnum.WEAPON_NOT_FOUND;
             }
         }
@@ -128,10 +131,12 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                         }
                     }
                     if(cellnull==null){
+                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                         return MessageEnum.UNREACHABLE_CELL;
                     }
                 }
                 else{
+                    allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                     return MessageEnum.SHOOTUP_ERROR;
                 }
             }
@@ -141,6 +146,12 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                     if(weapon.getLoaded()){
                         MessageEnum messageEnum = weapon.firstAttack(dataPacket.getPlayer(), dataPacket.getTargetPlayersFirst(), dataPacket.getPosition(), this.allPlay);
                         if(messageEnum.equals(MessageEnum.OK)){
+                            for(CurrentPlayerState currentPlayerState: allPlay.getCurrentPlayerState().values()){
+                                if(dataPacket.getTargetPlayersFirst().contains(currentPlayerState.getActiveplayer())){
+                                    currentPlayerState.setAttackinprogress(true);
+                                    currentPlayerState.setHit(dataPacket.getPlayer());
+                                }
+                            }
                             weapon.setLoaded(false);
                             if(dataPacket.getPowerUpId()!=null){
                                 PowerUp powerUp1=null;
@@ -200,12 +211,15 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                         return messageEnum;
                     }
                     else{
+                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                         return MessageEnum.EMPTY_WEAPON;
                     }
                 }
             }
+            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
             return MessageEnum.WEAPON_NOT_FOUND;
         }
+        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
         return MessageEnum.ERROR;
     }
 }

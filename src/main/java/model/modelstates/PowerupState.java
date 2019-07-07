@@ -70,10 +70,12 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
                     if(allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().containsKey(dataPacket.getPlayer())) {
                         Integer before = allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().get(dataPacket.getPlayer());
                         allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().replace(dataPacket.getPlayer(),before+1);
+                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setAttackinprogress(false);
                         return MessageEnum.OK;
                     }
                     else{
                         allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().put(dataPacket.getPlayer(),1);
+                        allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setAttackinprogress(false);
                         return MessageEnum.OK;
                     }
                 }
@@ -118,6 +120,7 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
                 if(powerUp.getColor().equals(dataPacket.getPowerUpColor())) {
                     Cell c = allPlay.getCurrentPlayerState().get(dataPacket.getTargetPlayerPowerup()).getPlayerposition().getCurrentcell();
                     if (c == null) {
+                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                         return MessageEnum.PLAYER_NOT_VALID;
                     }
                     ArrayList<Integer> arrayList = createArrayCell(c);
@@ -136,10 +139,12 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
                             }
                         }
                     }
+                    allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                     return MessageEnum.UNREACHABLE_CELL;
                 }
             }
         }
+        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
         return MessageEnum.POWERUP_NOT_FOUND;
     }
 
@@ -154,10 +159,12 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
                     return MessageEnum.OK;
                 }
                 else{
+                    allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                     return MessageEnum.ENOUGH_AMMO;
                 }
             }
         }
+        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
         return MessageEnum.POWERUP_NOT_FOUND;
     }
 
@@ -178,10 +185,12 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
                             }
                         }
                     }
+                    allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
                     return MessageEnum.INEXISTENT_CELL;
                 }
             }
         }
+        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
         return MessageEnum.POWERUP_NOT_FOUND;
     }
 }

@@ -18,9 +18,11 @@ class FinalFrenzyStateTest {
     @Test
     void doAction() throws RemoteException {
             InitializeAllPlay i = new InitializeAllPlay();
+            InitializeAllPlay i2 = new InitializeAllPlay();
         HashMap<StatesEnum,State> mn = new HashMap<>();
         IDClientList asd = new IDClientList();
         FinalFrenzyState ffs = new FinalFrenzyState(i,mn,asd);
+        FinalFrenzyState fft = new FinalFrenzyState(i2,mn,asd);
         DataPacket d = new DataPacket();
         assertEquals(ffs.doAction(d), MessageEnum.TOKEN_ERROR);
         d.setToken(5);
@@ -43,15 +45,12 @@ class FinalFrenzyStateTest {
         i.getPlayerStateTempFrenzy().put(Player.BLUE,ps);
         i.getPlayerStateTempFrenzy().put(Player.BLACK,ps);
         assertEquals(ffs.doAction(d),MessageEnum.OK);
-        asd.getPlayerArrayList().add(Player.BLUE);
-        asd.getPlayerArrayList().add(Player.YELLOW);
-        asd.getPlayerArrayList().add(Player.BLACK);
         d.setFrenzy(false);
-        ffs.doAction(d);
+        fft.doAction(d);
         d.setFrenzy(false);
-        ffs.doAction(d);
+        fft.doAction(d);
         d.setFrenzy(false);
-        assertEquals(ffs.doAction(d),MessageEnum.OK);
+        assertEquals(fft.doAction(d),MessageEnum.OK);
 
 
 

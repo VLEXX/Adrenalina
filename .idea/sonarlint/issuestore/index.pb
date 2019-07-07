@@ -260,3 +260,5 @@ b
 2src/main/java/view/viewstates/ViewPickupState.java,f\5\f5e8ae16d473dff313c4d418a41ad2ee6b634424
 `
 0src/main/java/view/viewstates/ViewMoveState.java,6\0\600570bec98574c2a41c9429be7c6167da194146
+Z
+*src/main/java/model/modelstates/State.java,1\c\1c940427ea88c9a3e848ad02bce6c307890f0534

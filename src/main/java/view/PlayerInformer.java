@@ -240,38 +240,38 @@ public class PlayerInformer {
                 }
             }
         }
-        System.out.println("The ");
+        System.out.print("The ");
         if (dbb.isEndgame())
-            System.out.println("final ");
-        System.out.println("scoreboard:\n");
+            System.out.print("final ");
+        System.out.print("scoreboard:\n");
         if (dbb.isEndgame())
-            System.out.println("The winner is: ");
+            System.out.print("The winner is:\t");
         else
-            System.out.println("1°  ");
+            System.out.print("1°\t");
         int yy = -1;
         for (int xx = 0; xx < dbb.getPositionHashMap().size(); xx++) {
             if (xx > 0) {
-                if (dbb.getViewChartScore().getChartScore().getScore()[xx] == dbb.getViewChartScore().getChartScore().getScore()[xx - 1])
+                if (dbb.getViewChartScore().getChartScore().getScore()[xx] == dbb.getViewChartScore().getChartScore().getScore()[xx - 1]) {
                     if (yy == -1)
-                        yy = xx - 1;
-                System.out.println(yy + "°  ");
-            } else {
-                yy = -1;
-                System.out.println(xx + "°  ");
+                        yy = xx;
+                    System.out.print(yy + "°\t");
+                } else {
+                    yy = -1;
+                    System.out.print((xx + 1) + "°\t");
+                }
             }
-
             if (positions[xx] == 0)
-                System.out.println(Player.YELLOW);
+                System.out.print(Player.YELLOW);
             else if (positions[xx] == 1)
-                System.out.println(Player.PURPLE);
+                System.out.print(Player.PURPLE);
             else if (positions[xx] == 2)
-                System.out.println(Player.GREEN);
+                System.out.print(Player.GREEN);
             else if (positions[xx] == 3)
-                System.out.println(Player.BLUE);
+                System.out.print(Player.BLUE);
             else if (positions[xx] == 4)
-                System.out.println(Player.BLACK);
+                System.out.print(Player.BLACK);
 
-            System.out.println("\n");
+            System.out.print("\n");
 
         }
         System.out.println("\n");

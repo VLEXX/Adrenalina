@@ -99,6 +99,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
         cps.getControlMarks().forEach(((player1, integer) -> {
             cps.getBoard().getMarksBox().setMyMarksMap(player1,integer);
         }));
+        cps.getControlMarks().clear();
         });
     }
     /**

@@ -83,6 +83,9 @@ public class ViewStartGame extends Thread {
                     if(!(viewDatabase.getViewState().get(player)instanceof ViewWaitingState)){
                         ((ViewWaitingState)stateHashMap.get(StatesEnum.WAIT)).resetI();
                     }
+                    if(viewDatabase.isEndgame()){
+                        break;
+                    }
             } catch (IOException e) {
 
             } catch (ClassNotFoundException e) {

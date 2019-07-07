@@ -175,7 +175,6 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                             }
                             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
                                 if(weapon.hasSecondAttack()) {
-
                                     allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_SECOND));
                                     return messageEnum;
                                 }

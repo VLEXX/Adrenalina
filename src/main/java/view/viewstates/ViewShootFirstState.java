@@ -4,6 +4,8 @@ import model.datapacket.DataPacket;
 import model.datapacket.WeaponsMessage;
 import model.gamedata.Mode;
 import model.map.Cell;
+import model.map.Position;
+import model.map.Room;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.powerups.PowerUpId;
@@ -121,25 +123,60 @@ public class ViewShootFirstState implements ViewState {
                     stdin.nextLine();
                     if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell()!=null) {
                         if (id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell().getCellId())) {
-                            dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell());
+                            Position position = new Position();
+                            for(Room room: viewDatabase.getViewMapState().getSelectedMap().getRoomList()){
+                                for(Cell cell: room.getCellsList()){
+                                    if (cell.getCellId() == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getUpCell().getCellId())) {
+                                        position.setCurrentcell(cell);
+                                        position.setCurrentroom(room);
+                                    }
+                                }
+                            }
+                            dataPacket.setPosition(position);
                             break;
                         }
                     }
                     if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell()!=null) {
                         if (id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell().getCellId())) {
-                            dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell());
+                            Position position = new Position();
+                            for(Room room: viewDatabase.getViewMapState().getSelectedMap().getRoomList()){
+                                for(Cell cell: room.getCellsList()){
+                                    if (cell.getCellId() == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getDownCell().getCellId())) {
+                                        position.setCurrentcell(cell);
+                                        position.setCurrentroom(room);
+                                    }
+                                }
+                            }
+                            dataPacket.setPosition(position);
                             break;
                         }
                     }
                     if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell()!=null) {
                         if (id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell().getCellId())) {
-                            dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell());
-                            break;
+                            Position position = new Position();
+                            for(Room room: viewDatabase.getViewMapState().getSelectedMap().getRoomList()){
+                                for(Cell cell: room.getCellsList()){
+                                    if (cell.getCellId() == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getRightCell().getCellId())) {
+                                        position.setCurrentcell(cell);
+                                        position.setCurrentroom(room);
+                                    }
+                                }
+                            }
+                            dataPacket.setPosition(position);                            break;
                         }
                     }
                     if(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell()!=null) {
                         if (id == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell().getCellId())) {
-                            dataPacket.setCell(viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell());
+                            Position position = new Position();
+                            for(Room room: viewDatabase.getViewMapState().getSelectedMap().getRoomList()){
+                                for(Cell cell: room.getCellsList()){
+                                    if (cell.getCellId() == (viewDatabase.getPositionHashMap().get(dataPacket.getTargetPlayersFirst().get(0)).getCurrentcell().getLeftCell().getCellId())) {
+                                        position.setCurrentcell(cell);
+                                        position.setCurrentroom(room);
+                                    }
+                                }
+                            }
+                            dataPacket.setPosition(position);
                             break;
                         }
                     }
@@ -244,7 +281,6 @@ public class ViewShootFirstState implements ViewState {
                 }
             }
         }
-
         else if(dataPacket.getWeapon().getWeaponsMessage().get(0).equals(WeaponsMessage.MAX_THREE_PLAYER)) {
             System.out.println("How many people do you want to shoot? ( 1 | 2 | 3 )\n");
             int n;

@@ -14,6 +14,7 @@ import model.playerdata.Player;
 import servercontroller.StateBoxInterface;
 import servercontroller.UpdaterInterface;
 import view.viewstates.ViewFrenzyState;
+import view.viewstates.ViewPowerupState;
 import view.viewstates.ViewWaitingState;
 
 import java.io.IOException;
@@ -47,7 +48,6 @@ public class ViewStartGameRMI extends Thread {
     }
 
     public synchronized void run(){
-        MessageWriter messageWriter = new MessageWriter();
         ViewUpdater viewUpdater = new ViewUpdater();
         UpdatePacket updatePacket;
         MessageEnum messageEnumOK;

@@ -55,6 +55,13 @@ public class StartGame extends Thread {
                             else{
                                 idClientList.resetIndexArray();
                             }
+                            if(allPlay.getHashMapState().get(idClientList.getPlayerArrayList().get(idClientList.getIndexArray())).getNamestate().equals(StatesEnum.POWERUP)) {
+                                while (true) {
+                                    if(!allPlay.getHashMapState().get(idClientList.getPlayerArrayList().get(idClientList.getIndexArray())).getNamestate().equals(StatesEnum.POWERUP)){
+                                        break;
+                                    }
+                                }
+                            }
                             if (allPlay.getCurrentPlayerState().get(idClientList.getPlayerArrayList().get(idClientList.getIndexArray())).getPlayerposition().getCurrentcell() == null) {
                                 allPlay.getHashMapState().replace(idClientList.getPlayerArrayList().get(idClientList.getIndexArray()), stateHashMap.get(StatesEnum.SPAWN));
                             } else {

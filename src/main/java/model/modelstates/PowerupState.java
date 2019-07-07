@@ -64,18 +64,20 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
     }
 
     private MessageEnum doTagbackGrenade(DataPacket dataPacket){
-        if(dataPacket.getMarksToAdd().isEmpty()==false) {
+        if(!dataPacket.getMarksToAdd().isEmpty()) {
             for (PowerUp powerUp : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getPowerupList()) {
                 if (powerUp.getId().equals(PowerUpId.TAGBACK_GRENADE)) {
                     if(allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().containsKey(dataPacket.getPlayer())) {
                         Integer before = allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().get(dataPacket.getPlayer());
                         allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().replace(dataPacket.getPlayer(),before+1);
                         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setAttackinprogress(false);
+                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.WAIT));
                         return MessageEnum.OK;
                     }
                     else{
                         allPlay.getCurrentPlayerState().get(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getHit()).getControlMarks().put(dataPacket.getPlayer(),1);
                         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setAttackinprogress(false);
+                        allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.WAIT));
                         return MessageEnum.OK;
                     }
                 }

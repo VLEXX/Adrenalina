@@ -90,18 +90,6 @@ class CurrentPlayerStateTest {
     }
 
     @Test
-    void update() {
-        CurrentTurnState c = new CurrentTurnState();
-        CurrentPlayerState s = new CurrentPlayerState(Player.YELLOW);
-        s.setActiveplayer(Player.YELLOW);
-        c.setPlayerturn(Player.YELLOW);
-        assertEquals(s.isActiveturn(), true);
-        s.setActiveturn(false);
-        c.setPlayerturn(Player.BLACK);
-        assertEquals(s.isActiveturn(), false);
-    }
-
-    @Test
     void getControlMarks(){
         CurrentPlayerState c = new CurrentPlayerState(Player.BLACK);
         c.addControlMarks(Player.YELLOW, 3);

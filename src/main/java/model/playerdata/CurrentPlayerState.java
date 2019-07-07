@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * Class with player current state
  */
-public class CurrentPlayerState implements Observer, Serializable {
+public class CurrentPlayerState implements Serializable {
     private Position playerposition;    //Posizione attuale del giocatore
     private boolean activeturn;         //"true" se è il proprio turno "false" altrimenti
     private PlayerBoard board;          //PlanciaGiocatore
@@ -154,18 +154,6 @@ public class CurrentPlayerState implements Observer, Serializable {
      */
     public synchronized void setActiveplayer(Player activeplayer) {
         this.activeplayer = activeplayer;
-    }
-
-    /**
-     * Update activeturn, true if it's this.activeplayer turn
-     *
-     * @param p
-     */
-    @Override
-    public void update(Player p) {
-        if (p == this.activeplayer) {
-            this.setActiveturn(true);
-        }
     }
 
     public HashMap<Player, Integer> getControlMarks() {

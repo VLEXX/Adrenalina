@@ -36,7 +36,7 @@ public class ShootSecondState extends UnicastRemoteObject implements State, Seri
             return MessageEnum.TOKEN_ERROR;
         }
         Weapon weapon;
-        if(dataPacket.isSecondAttack()) {
+        if(dataPacket.isSecondAttack()){
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
                 if (dataPacket.getWeapon().getName().equals(w.getName())){
                     weapon = w;

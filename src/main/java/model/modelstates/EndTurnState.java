@@ -182,7 +182,7 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
             score.put(player,0);
             deathcounter.put(player,0);
             if(i.getStateSelectedMode().getSelectedmode()==Mode.DOMINATION && currentPlayerState.getPlayerposition().getCurrentcell()!=null){
-                if(currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone()!=null) {
+                if(currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone()!=null && currentPlayerState.getActiveplayer().equals(dataPacket.getPlayer())) {
                     currentPlayerState.getBoard().getDamageBox().increaseDamage(1, player);
                     if (currentPlayerState.getPlayerposition().getCurrentcell().getInCellPlayer().size() == 1)
                         currentPlayerState.getPlayerposition().getCurrentcell().getSpawnpointzone().getSPDamage().add(player);

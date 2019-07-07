@@ -3,6 +3,7 @@
  */
 package view;
 
+import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Room;
 import model.munitions.Munitions;
@@ -32,6 +33,7 @@ public class PlayerInformer {
         matchStats();
         mapStats();
         positionsInformer();
+        spawnDamage();
         playerStats();
         scoreCounter();
     }
@@ -280,6 +282,17 @@ public class PlayerInformer {
             System.out.println("Thank you for playing!\n");
     }
 
+    public void spawnDamage(){
+        if(dbb.getSelectedMode().equals(Mode.DOMINATION)) {
+            for (Room room : dbb.getViewMapState().getSelectedMap().getRoomList()) {
+                for (Cell cell : room.getCellsList()) {
+                    if (cell.getSpawnpointzone() != null) {
+                        System.out.println("SpawnPoint " + cell.getSpawnpointzone().getSpawnColor() + ": " + cell.getSpawnpointzone().getSPDamage().size() + " damage.\n");
+                    }
+                }
+            }
+        }
+    }
 
 
 }

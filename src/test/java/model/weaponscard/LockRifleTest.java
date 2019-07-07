@@ -51,7 +51,7 @@ class LockRifleTest {
         allPlay.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
         myPosition.setCurrentcell(allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(1).getCellsList().get(0));
         allPlay.getCurrentPlayerState().get(player).setPlayerposition(myPosition);
-        assertEquals(lockRifle.firstAttack(player, spawnPoint, allPlay), MessageEnum.POSITION_NOT_VALID);
+        assertEquals(lockRifle.firstAttack(player, spawnPoint, allPlay), MessageEnum.OK);
     }
 
     @Test

@@ -57,7 +57,7 @@ class ElectroscytheTest {
         allPlay.getStateSelectedMode().setSelectedmode(Mode.DOMINATION);
         myPosition.setCurrentcell(allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(1).getCellsList().get(0));
         allPlay.getCurrentPlayerState().get(player).setPlayerposition(myPosition);
-        assertEquals(electroscythe.firstAttack(player, spawnPoint, allPlay), MessageEnum.POSITION_NOT_VALID);
+        assertEquals(electroscythe.firstAttack(player, spawnPoint, allPlay), MessageEnum.OK);
     }
 
     @Test

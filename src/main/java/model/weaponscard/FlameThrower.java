@@ -7,6 +7,7 @@ import model.gamedata.InitializeAllPlay;
 import model.gamedata.Mode;
 import model.map.Cell;
 import model.map.Position;
+import model.map.Room;
 import model.map.SpawnPoint;
 import model.munitions.Munitions;
 import model.playerdata.Player;
@@ -44,14 +45,16 @@ public class FlameThrower extends Weapon implements Serializable {
      * @return OK or ATTACK_NOT_PRESENT or POSITION_NOT_VALID
      */
     public MessageEnum firstAttack(Player myPlayer, SpawnPoint spawnPoint, InitializeAllPlay allPlay){
-        Position myPosition = allPlay.getCurrentPlayerState().get(myPlayer).getPlayerposition();
-        int cellID = myPosition.getCurrentcell().getCellId();
-        int roomID = myPosition.getCurrentroom().getRoomId();
         if(allPlay.getStateSelectedMode().getSelectedmode() == Mode.DOMINATION) {
-            if (allPlay.getStateSelectedMap().getSelectedmap().getRoomList().get(roomID-1).getCellsList().get(cellID-1).getSpawnpointzone() == spawnPoint) {
-                spawnPoint.getSPDamage().add(myPlayer);
-            } else
-                return MessageEnum.POSITION_NOT_VALID;
+            for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
+                for(Cell cell: room.getCellsList()){
+                    if(cell.getSpawnpointzone()!=null){
+                        if(spawnPoint.getSpawnColor().equals(cell.getSpawnpointzone().getSpawnColor())){
+                            cell.getSpawnpointzone().getSPDamage().add(myPlayer);
+                        }
+                    }
+                }
+            }
             return MessageEnum.OK;
         } else
             return MessageEnum.ATTACK_NOT_PRESENT;

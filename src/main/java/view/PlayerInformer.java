@@ -126,15 +126,16 @@ public class PlayerInformer {
                 else
                     System.out.println("You got " + integer + " damage points from " + player + ".\n");
             });
-            if (!dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMarksBox().getMyMarksMap().isEmpty()) {
-                dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMarksBox().getMyMarksMap().forEach((player, integer) -> {
-                    System.out.println("You got " + integer + " marks from " + player + " player.\n");
-                    ;
-                });
-            } else
-                System.out.println("You got no marks.");
-            System.out.println("\n");
+
         }
+        if (!dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMarksBox().getMyMarksMap().isEmpty()) {
+            dbb.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMarksBox().getMyMarksMap().forEach((player, integer) -> {
+                System.out.println("You got " + integer + " marks from " + player + " player.\n");
+                ;
+            });
+        } else
+            System.out.println("You got no marks.");
+        System.out.println("\n");
         dbb.getPlayersdamage().forEach((player, players) -> {
             if (player != dbb.getThisplayer()) {
                 if (players[0] == null)
@@ -161,15 +162,16 @@ public class PlayerInformer {
                         else
                             System.out.println(player + " player got " + integer + " damage points from " + pplayer + ".\n");
                     });
-                    if (!dbb.getPlayersmarks().get(player).isEmpty()) {
-                        dbb.getPlayersmarks().get(player).forEach((player2, integer) -> {
-                            System.out.println(player + " got " + integer + " marks from " + player2 + " player.\n");
-                            ;
-                        });
-                    } else
-                        System.out.println(player + " got no marks.\n");
-                    System.out.println("\n");
+
                 }
+                if (!dbb.getPlayersmarks().get(player).isEmpty()) {
+                    dbb.getPlayersmarks().get(player).forEach((player2, integer) -> {
+                        System.out.println(player + " player got " + integer + " marks from " + player2 + " player.\n");
+                        ;
+                    });
+                } else
+                    System.out.println(player + " player got no marks.\n");
+                System.out.println("\n");
             }
         });
     }

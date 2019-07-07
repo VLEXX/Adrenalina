@@ -94,13 +94,10 @@ class CurrentPlayerStateTest {
         CurrentTurnState c = new CurrentTurnState();
         CurrentPlayerState s = new CurrentPlayerState(Player.YELLOW);
         s.setActiveplayer(Player.YELLOW);
-        c.addObserver(s);
         c.setPlayerturn(Player.YELLOW);
-        c.notifyObserver();
         assertEquals(s.isActiveturn(), true);
         s.setActiveturn(false);
         c.setPlayerturn(Player.BLACK);
-        c.notifyObserver();
         assertEquals(s.isActiveturn(), false);
     }
 

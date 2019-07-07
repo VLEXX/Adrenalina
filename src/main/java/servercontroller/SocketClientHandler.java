@@ -71,7 +71,6 @@ public class SocketClientHandler implements Runnable {
 
             String game = (String) objectInputStream.readObject();
             if(game.equals("continue")){
-
                 String nickname = (String) objectInputStream.readObject();
                 if(idClientList.getNicknameList().contains(nickname)) {
                     objectOutputStream.writeObject(true);
@@ -171,6 +170,8 @@ public class SocketClientHandler implements Runnable {
                 }
 
                 Integer token = idClientList.addClient();
+                allPlay.getCurrentPlayerState().get(player).setToken(token);
+
                 objectOutputStream.writeObject(token);
 
                 objectOutputStream.writeObject(true);
@@ -178,6 +179,7 @@ public class SocketClientHandler implements Runnable {
                 while(true) {
                     if(idClientList.getPlayerArrayList().get(0)==this.player){
                         while (true){
+                            objectOutputStream.writeObject(true);
                             allPlay.setWait(true);
                             sleep(10 * 1000);
                             objectOutputStream.writeObject(true);
@@ -190,7 +192,6 @@ public class SocketClientHandler implements Runnable {
                                 objectOutputStream.writeObject(false);
                                 while (true) {
                                     if (idClientList.getPlayerArrayList().size() >= 3) {
-                                        objectOutputStream.writeObject(true);
                                         break;
                                     }
                                 }
@@ -201,13 +202,27 @@ public class SocketClientHandler implements Runnable {
                         }
                     }
                     else{
+                        objectOutputStream.writeObject(false);
+                        if(idClientList.getPlayerArrayList().size() >= 3){
+                            while (true){
+                                if(allPlay.isStarting()){
+                                    objectOutputStream.writeObject(true);
+                                    objectOutputStream.writeObject(true);
+                                    objectOutputStream.writeObject(true);
+                                    break;
+                                }
+                                if(idClientList.getPlayerArrayList().size() < 3){
+                                    break;
+                                }
+                            }
+                        }
                         if(allPlay.isStarting()){
-                            objectOutputStream.writeObject(true);
-                            objectOutputStream.writeObject(true);
                             break;
                         }
                     }
                 }
+
+
 
                 if(idClientList.getPlayerArrayList().get(0)==player) {
                     if (!allPlay.getVoteMap().getInitMap()) {
@@ -243,8 +258,10 @@ public class SocketClientHandler implements Runnable {
         }
         catch (IOException e) {
             try {
-                idClientList.getPlayerArrayList().remove(player);
-                idClientList.getClientlist().remove(allPlay.getCurrentPlayerState().get(player).getToken());
+                if(!allPlay.isStarting()) {
+                    idClientList.getPlayerArrayList().remove(player);
+                    idClientList.getClientlist().remove(allPlay.getCurrentPlayerState().get(player).getToken());
+                }
             } catch (RemoteException e1) {
                 e1.printStackTrace();
             }

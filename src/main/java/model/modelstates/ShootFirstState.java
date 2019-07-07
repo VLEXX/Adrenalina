@@ -8,7 +8,6 @@ import model.datapacket.MessageEnum;
 import model.map.Cell;
 import model.map.Room;
 import model.map.SpawnPoint;
-import model.playerdata.CurrentPlayerState;
 import model.playerdata.Player;
 import model.powerups.PowerUp;
 import model.powerups.PowerUpId;
@@ -43,7 +42,6 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
             return MessageEnum.TOKEN_ERROR;
         }
         if(dataPacket.getSpawnPointToAttack()!=null){
-            System.out.println("ciao spawn");
             int i = 0;
             for (Weapon w : allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getWeaponsList()) {
                 if (dataPacket.getWeapon().getName().equals(w.getName())) {
@@ -86,7 +84,6 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
         Cell celltemp=allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getPlayerposition().getCurrentcell();
         Cell cellnull = null;
         if(dataPacket.isFirstAttack()){
-            System.out.println("isFirst");
             if(allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getBoard().getDamageBox().isShootUp()){
                 if(dataPacket.getCell()!=null){
                     for(Room room: allPlay.getStateSelectedMap().getSelectedmap().getRoomList()){
@@ -178,6 +175,7 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                             }
                             if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
                                 if(weapon.hasSecondAttack()) {
+
                                     allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_SECOND));
                                     return messageEnum;
                                 }
@@ -187,7 +185,7 @@ public class ShootFirstState extends UnicastRemoteObject implements State, Seria
                                     return messageEnum;
                                 }
                             }
-                            else if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
+                            if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
                                 if(weapon.hasSecondAttack()) {
                                     allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT_SECOND));
                                     return messageEnum;

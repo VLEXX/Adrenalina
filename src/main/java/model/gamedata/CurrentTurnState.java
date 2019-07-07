@@ -9,7 +9,7 @@ import model.playerdata.Player;
 import java.util.ArrayList;
 
 //Classe che memorizza lo stato attuale della del turno della partita
-public class CurrentTurnState implements Subject {
+public class CurrentTurnState {
     private Player playerturn;  //colore/personaggio del giocatore di cui è il turno attuale
     private ArrayList<Observer> observers;
 
@@ -31,25 +31,4 @@ public class CurrentTurnState implements Subject {
         playerturn = p;
     }
 
-    @Override
-    public void addObserver(Observer e) {
-        observers.add(e);
-    }
-
-    @Override
-    public void removeObserver(Observer e) {
-        observers.remove(e);
-    }
-
-    @Override
-    public void notifyObserver() {
-        for (Observer observer : this.getObservers()) {
-            observer.update(this.getPlayerturn());
-        }
-    }
-
-    @Override
-    public ArrayList<Observer> getObservers() {
-        return observers;
-    }
 }

@@ -5,7 +5,9 @@ package model.map;
 
 import model.munitions.Munitions;
 
-public class InitializeMap1 implements StrategyMap {
+import java.io.Serializable;
+
+public class InitializeMap1 implements StrategyMap, Serializable {
 
     /**
      * Initialize map 1

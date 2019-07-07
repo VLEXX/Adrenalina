@@ -63,46 +63,39 @@ public class ViewStartGameRMI extends Thread {
 
         while(true){
             try {
-                if (!viewDatabase.isEndgame()) {
-                        if (viewDatabase.getViewState().get(player) instanceof ViewWaitingState) {
-                            if (n == 1) {
-                                DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
-                                messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
-                                messageWriter.writeMessage(messageEnumOK);
-                                n--;
-                            }
-                        }
-                        else if(viewDatabase.getViewState().get(player) instanceof ViewFrenzyState){
-                            if (k == 1) {
-                                DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
-                                messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
-                                messageWriter.writeMessage(messageEnumOK);
-                                k--;
-                            }
-                        }
-                        else {
-                            DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
-                            messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
-                            messageWriter.writeMessage(messageEnumOK);
-                        }
-
-                        if (allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)) {
-                            manageEndTurn.manageEndTurn(player, statebox.getHashMap());
-                        }
-
-                        updatePacket = updaterInterface.updateClient(player);
-                        viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
-                        playerInformer.informer();
-                        if (!(viewDatabase.getViewState().get(player) instanceof ViewWaitingState)) {
-                            ((ViewWaitingState) stateHashMap.get(StatesEnum.WAIT)).resetI();
-                            n = 1;
-                        }
-                        if (!(viewDatabase.getViewState().get(player) instanceof ViewFrenzyState)) {
-                           k = 1;
-                        }
+                if (viewDatabase.getViewState().get(player) instanceof ViewWaitingState) {
+                    if (n == 1) {
+                        DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
+                        messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
+                        messageWriter.writeMessage(messageEnumOK);
+                        n--;
+                    }
+                } else if (viewDatabase.getViewState().get(player) instanceof ViewFrenzyState) {
+                    if (k == 1) {
+                        DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
+                        messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
+                        messageWriter.writeMessage(messageEnumOK);
+                        k--;
+                    }
+                } else {
+                    DataPacket dataPacket = viewDatabase.getViewState().get(player).doAction(stdin, player, viewDatabase);
+                    messageEnumOK = allPlay.getPlayerState(player).doAction(dataPacket);
+                    messageWriter.writeMessage(messageEnumOK);
                 }
-                else {
-                    break;
+
+                if (allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)) {
+                    manageEndTurn.manageEndTurn(player, statebox.getHashMap());
+                }
+
+                updatePacket = updaterInterface.updateClient(player);
+                viewUpdater.updateView(updatePacket, viewDatabase, stateHashMap, player);
+                playerInformer.informer();
+                if (!(viewDatabase.getViewState().get(player) instanceof ViewWaitingState)) {
+                    ((ViewWaitingState) stateHashMap.get(StatesEnum.WAIT)).resetI();
+                    n = 1;
+                }
+                if (!(viewDatabase.getViewState().get(player) instanceof ViewFrenzyState)) {
+                    k = 1;
                 }
             }
             catch (RemoteException e) {

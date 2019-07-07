@@ -41,7 +41,7 @@ public class ActionState extends UnicastRemoteObject implements State, Serializa
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.PICK_UP));
             return MessageEnum.OK;
         }
-        if (dataPacket.getStatesEnum().equals(StatesEnum.SHOOT)) {
+        if (dataPacket.getStatesEnum().equals(StatesEnum.SHOOT)){
             allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.SHOOT));
             return MessageEnum.OK;
         }

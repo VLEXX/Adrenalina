@@ -71,9 +71,11 @@ public class ClientWithSocket implements ClientStrategy{
 
                     objectOutputStream.writeObject(game);
 
+                    String nickname;
                     while(true) {
-                        viewDatabase.setNickname(clientManager.manageNickname(stdin));
-
+                        nickname = clientManager.manageNickname(stdin);
+                        viewDatabase.setNickname(nickname);
+                        objectOutputStream.writeObject(nickname);
                         boolean go;
                         go = (boolean) objectInputStream.readObject();
                         if (go) {
@@ -141,15 +143,17 @@ public class ClientWithSocket implements ClientStrategy{
                     go = (boolean) objectInputStream.readObject();
                     System.out.println("\nFew seconds to start...\n");
 
-
                     while(true) {
+                        while(true){
+                            go = (boolean) objectInputStream.readObject();
+                            if(go){
+                                break;
+                            }
+                        }
                         go = (boolean) objectInputStream.readObject();
                         go = (boolean) objectInputStream.readObject();
                         if(go){
                             break;
-                        }
-                        else{
-                            go = (boolean) objectInputStream.readObject();
                         }
                     }
 

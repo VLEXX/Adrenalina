@@ -50,7 +50,7 @@ public class PowerupState extends UnicastRemoteObject implements State, Serializ
             if (dataPacket.getPowerUpId().equals(PowerUpId.TAGBACK_GRENADE)) {
                 return doTagbackGrenade(dataPacket);
             }
-            if (dataPacket.getPowerUpId().equals(PowerUpId.NEWTON)) {
+            if (dataPacket.getPowerUpId().equals(PowerUpId.NEWTON)){
                 return doNewton(dataPacket);
             }
             if (dataPacket.getPowerUpId().equals(PowerUpId.TARGETING_SCOPE)) {

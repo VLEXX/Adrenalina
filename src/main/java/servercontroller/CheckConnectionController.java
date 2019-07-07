@@ -30,7 +30,7 @@ public class CheckConnectionController extends Thread {
     }
 
     @Override
-    public void run() {
+    public void run(){
         try{
             ArrayList<Player> players = new ArrayList<>();
             while(true){
@@ -44,7 +44,7 @@ public class CheckConnectionController extends Thread {
                                 if (idClientList.getConnection().get(player).equals(true)) {
                                     idClientList.getConnection().replace(player, false);
                                 } else {
-                                    if(allPlay.isStarting()) {
+                                    if (allPlay.isStarting()) {
                                         if (!allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.WAIT)) {
                                             allPlay.getHashMapState().replace(player, stateHashMap.get(StatesEnum.WAIT));
                                             if (idClientList.getIndexArray() < idClientList.getPlayerArrayList().size() - 1) {
@@ -59,10 +59,11 @@ public class CheckConnectionController extends Thread {
                                             }
                                             allPlay.getCurrentPlayerState().get(player).setEndturn(false);
                                         }
+                                        allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().removeInCellPlayer(player);
+                                        allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentroom(null);
+                                        allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentcell(null);
                                     }
-                                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentcell().removeInCellPlayer(player);
-                                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentroom(null);
-                                    allPlay.getCurrentPlayerState().get(player).getPlayerposition().setCurrentcell(null);
+
                                     idClientList.getConnection().remove(player);
                                     players.add(player);
                                     idClientList.getPlayerArrayList().remove(player);

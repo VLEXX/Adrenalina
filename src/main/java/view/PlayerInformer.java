@@ -34,7 +34,6 @@ public class PlayerInformer {
         positionsInformer();
         playerStats();
         scoreCounter();
-
     }
 
 

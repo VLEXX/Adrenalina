@@ -70,6 +70,14 @@ public class ShootSecondState extends UnicastRemoteObject implements State, Seri
             }
             return MessageEnum.WEAPON_NOT_FOUND;
         }
+        if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 2) {
+            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.ACTION));
+        }
+        else if (allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).getActioncounter() == 1) {
+            allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).decreaseActionCounter();
+            allPlay.getHashMapState().replace(dataPacket.getPlayer(), stateHashMap.get(StatesEnum.END));
+        }
         return MessageEnum.OK;
     }
 }

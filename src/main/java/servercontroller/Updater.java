@@ -48,38 +48,7 @@ public class Updater extends UnicastRemoteObject implements UpdaterInterface {
             position.setCurrentroom(allPlay.getCurrentPlayerState().get(player).getPlayerposition().getCurrentroom());
         }
 
-        StatesEnum state = null;
-
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.ACTION)){
-            state = StatesEnum.ACTION;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.SHOOT)){
-            state = StatesEnum.SHOOT;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.SHOOT_SECOND)){
-            state = StatesEnum.SHOOT_SECOND;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.SHOOT_THIRD)){
-            state = StatesEnum.SHOOT_THIRD;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.PICK_UP)){
-            state = StatesEnum.PICK_UP;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.MOVE)){
-            state = StatesEnum.MOVE;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.END)){
-            state = StatesEnum.END;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.WAIT)){
-            state = StatesEnum.WAIT;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.POWERUP)){
-            state = StatesEnum.POWERUP;
-        }
-        if(allPlay.getHashMapState().get(player).getNamestate().equals(StatesEnum.SPAWN)){
-            state = StatesEnum.SPAWN;
-        }
+        StatesEnum state = allPlay.getHashMapState().get(player).getNamestate();
 
         Stack<PowerUp> deck = (Stack<PowerUp>) allPlay.getCurrentDeckState().getPowerupdeck().clone();
         ChartScore chartScore = null;

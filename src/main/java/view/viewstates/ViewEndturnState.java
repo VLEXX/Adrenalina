@@ -40,9 +40,25 @@ public class ViewEndturnState implements ViewState {
                         s.toLowerCase();
                         for (Weapon weapon : viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList()) {
                             if (s.equals(weapon.getName())) {
-                                int blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - weapon.getFirstPrice().get(Munitions.BLUE);
-                                int red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - weapon.getFirstPrice().get(Munitions.RED);
-                                int yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - weapon.getFirstPrice().get(Munitions.YELLOW);
+                                int blue, red, yellow;
+                                if(viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().getSecondPrice().get(Munitions.RED)!=null) {
+                                    red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED) - viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().getSecondPrice().get(Munitions.RED);
+                                }
+                                else{
+                                    red = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.RED);
+                                }
+                                if(viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().getSecondPrice().get(Munitions.BLUE)!=null) {
+                                    blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE) - viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().getSecondPrice().get(Munitions.BLUE);
+                                }
+                                else{
+                                    blue = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.BLUE);
+                                }
+                                if(viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().getSecondPrice().get(Munitions.YELLOW)!=null) {
+                                    yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW) - viewDatabase.getViewCurrentPlayerState().getWeaponMultAttacks().getSecondPrice().get(Munitions.YELLOW);
+                                }
+                                else {
+                                    yellow = viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getMunitionsBox().getMyMunitionsMap().get(Munitions.YELLOW);
+                                }
                                 if ((blue >= 0) && (red >= 0) && (yellow >= 0)) {
                                     dataPacket.getWeaponsToBeRecharged().add(weapon);
                                     return dataPacket;

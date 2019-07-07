@@ -21,7 +21,7 @@ public class ViewActionState implements ViewState {
     @Override
     public DataPacket doAction(Scanner stdin, Player player, ViewDatabase viewDatabase) {
         System.out.println("Chose your action: SHOOT | MOVE | PICKUP | POWERUP | ENDTURN");
-        DataPacket dataPacket = null;
+        DataPacket dataPacket;
         while(true) {
             String s = stdin.nextLine();
             dataPacket = setActionPacket(s, viewDatabase, player);
@@ -45,11 +45,10 @@ public class ViewActionState implements ViewState {
     protected DataPacket setActionPacket(String s, ViewDatabase viewDatabase, Player player){
         DataPacket dataPacket = new DataPacket();
         if (s.equals("SHOOT") || s.equals("shoot") || s.equals("Shoot")) {
-            if(viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList().isEmpty()==false) {
+            if(!viewDatabase.getViewCurrentPlayerState().getCurrentPlayerState().getBoard().getWeaponsList().isEmpty()) {
                 dataPacket.setStatesEnum(StatesEnum.SHOOT);
                 return dataPacket;
             }
-            return null;
         }
         if (s.equals("PICKUP") || s.equals("pickup") || s.equals("Pickup")) {
             dataPacket.setStatesEnum(StatesEnum.PICK_UP);

@@ -119,7 +119,8 @@ class EndTurnStateTest {
         cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.RED, 2);
         cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.YELLOW, 2);
         cps.getBoard().getMunitionsBox().decreaseMyMunitionsBox(Munitions.BLUE, 2);
-        assertEquals(eds.doAction(d), MessageEnum.AMMO_ERROR);
+        cps.getControlMarks().put(Player.GREEN,2);
+        assertEquals(eds.doAction(d),MessageEnum.AMMO_ERROR);
         d.getWeaponsToBeRecharged().clear();
         //verifica della classifica
         CurrentPlayerState cps2 = new CurrentPlayerState(Player.YELLOW);

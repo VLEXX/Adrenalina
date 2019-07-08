@@ -54,13 +54,11 @@ public class EndTurnState extends UnicastRemoteObject implements State, Serializ
             return MessageEnum.TOKEN_ERROR;
         }
         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setEndturn(true);
-        if(!allPlay.isMatchFinished()) {
             this.refillMap(allPlay);
             MessageEnum out1 = this.rechargeWeapons(allPlay, dataPacket);
             if (out1 == MessageEnum.AMMO_ERROR || out1 == MessageEnum.TOO_MUCH_POWERUPS)
                 return out1;
             this.transferMarks(allPlay);
-        }
         this.scoreCounter(allPlay,dataPacket);
         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).setEndturn(true);
         allPlay.getCurrentPlayerState().get(dataPacket.getPlayer()).resetActionCounter();
